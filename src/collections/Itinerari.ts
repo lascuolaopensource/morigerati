@@ -16,24 +16,24 @@ export const Itinerari: CollectionConfig = {
       type: 'textarea',
     },
     {
-      name: 'Immagini',
+      name: 'Itinerario a piedi',
+      type: 'textarea',
+    },
+    {
+      name: 'Media',
       type: 'upload',
       relationTo: 'media',
     },
     {
-      name: 'Video',
+      name: 'Mappa',
       type: 'text',
     },
     {
-      name: 'Tracciato_GPS',
-      type: 'text',
-    },
-    {
-      name: 'Guide',
+      name: 'Link Downlaod Mappa',
       type: 'textarea',
     },
     {
-      name: 'Mobilità_Sostenibile',
+      name: 'Prenotazione',
       type: 'array',
       fields: [
         {

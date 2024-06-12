@@ -16,7 +16,7 @@ export const Stakeholder: CollectionConfig = {
       type: 'textarea',
     },
     {
-      name: 'Tipologia',
+      name: 'Servizi offerti',
       type: 'select',
       options: [
         'Azienda',
@@ -34,6 +34,14 @@ export const Stakeholder: CollectionConfig = {
       type: 'relationship',
       relationTo: 'media',
       hasMany: true,
+    },
+    {
+      name: 'Contatti',
+      type: 'textarea',
+    },
+    {
+      name: 'Link Esterni',
+      type: 'textarea',
     },
   ],
 };

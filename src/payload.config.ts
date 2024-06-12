@@ -6,14 +6,14 @@ import { buildConfig } from 'payload/config'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+import { ArchivioDocumenti } from './collections/ArchivioDocumenti'
 import { Stakeholder } from './collections/Stakeholder' 
 import { Itinerari } from './collections/Itinerari'
-import ArchivioDocumenti from './collections/ArchivioDocumenti'
 import { Attivita } from './collections/Attivita'
-import { Luoghi } from './collections/luoghi'
-import News from './collections/News'
+import { Luoghi } from './collections/Luoghi'
+import { Users } from './collections/Users'
+import { Media } from './collections/Media'
+import { News } from './collections/News'
 
 
 const filename = fileURLToPath(import.meta.url)
