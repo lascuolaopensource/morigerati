@@ -3,38 +3,40 @@ import type { CollectionConfig } from 'payload/types';
 export const Luoghi: CollectionConfig = {
   slug: 'luoghi',
   admin: {
-    useAsTitle: 'Nome',
+    useAsTitle: 'nome',
   },
   fields: [
     {
-      name: 'Nome',
+      name: 'nome',
       type: 'text',
       required: true,
     },
     {
-      name: 'Descrizione',
+      name: 'descrizione',
+      type: 'textarea',
+      required: true,
+    },
+    {
+      name: 'attivita_servizi',
       type: 'textarea',
     },
     {
-      name: 'Tipo',
-      type: 'text',
+      name: 'media',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: false,
     },
     {
-        name: 'media',
-        type: 'relationship',
-        relationTo: 'media',
-        hasMany: true,
-    },
-    {
-      name: 'Itinerario',
+      name: 'collegamento_itinerari',
       type: 'relationship',
       relationTo: 'itinerari',
+      hasMany: true,
     },
     {
-      name: 'Eventi',
-      type: 'relationship',
-      relationTo: 'attivita',
+      name: 'info_contatti',
+      type: 'textarea',
     },
   ],
 };
 
+export default Luoghi;

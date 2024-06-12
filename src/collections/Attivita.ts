@@ -12,8 +12,18 @@ export const Attivita: CollectionConfig = {
       required: true,
     },
     {
-      name: 'Organizzatore',
-      type: 'text',
+      name: 'Organizzatori',
+      type: 'array',
+      fields: [
+        {
+          name: 'Nome',
+          type: 'text',
+        },
+        {
+          name: 'Ruolo',
+          type: 'text',
+        },
+      ],
     },
     {
       name: 'Luogo',
@@ -29,7 +39,7 @@ export const Attivita: CollectionConfig = {
       type: 'date',
     },
     {
-      name: 'Tipo',
+      name: 'Tipo', //capire
       type: 'text',
     },
     {

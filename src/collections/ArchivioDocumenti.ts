@@ -13,7 +13,17 @@ export const ArchivioDocumenti: CollectionConfig = {
     },
     {
       name: 'Autore',
-      type: 'text',
+      type: 'array',
+      fields: [
+        {
+          name: 'nome',
+          type: 'text',
+        },
+        {
+          name: 'cognome',
+          type: 'text',
+        },
+      ],
     },
     {
       name: 'Descrizione',
@@ -24,12 +34,18 @@ export const ArchivioDocumenti: CollectionConfig = {
       type: 'date',
     },
     {
-      name: 'Tipo',
+      name: 'Tipo', //capire 
       type: 'text',
-    },
+    }, 
     {
-      name: 'URL',
-      type: 'text',
+      name: 'links',
+      type: 'array',
+      fields: [
+        {
+          name: 'url',
+          type: 'text',
+        },
+      ],
     },
     {
         name: 'media',
