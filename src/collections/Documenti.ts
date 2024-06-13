@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload/types';
 
-export const ArchivioDocumenti: CollectionConfig = {
-  slug: 'archivio-documenti',
+export const Documenti: CollectionConfig = {
+  slug: 'documenti',
   admin: {
     useAsTitle: 'Nome',
   },
@@ -10,6 +10,10 @@ export const ArchivioDocumenti: CollectionConfig = {
       name: 'Nome',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'Descrizione',
+      type: 'richText',
     },
     {
       name: 'Autore',
@@ -24,10 +28,6 @@ export const ArchivioDocumenti: CollectionConfig = {
           type: 'text',
         },
       ],
-    },
-    {
-      name: 'Descrizione',
-      type: 'textarea',
     },
     {
       name: 'Data',
@@ -56,4 +56,4 @@ export const ArchivioDocumenti: CollectionConfig = {
   ],
 };
 
-export default ArchivioDocumenti;
+export default Documenti;

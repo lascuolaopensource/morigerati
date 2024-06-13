@@ -12,6 +12,10 @@ export const Attivita: CollectionConfig = {
       required: true,
     },
     {
+      name: 'Descrizione',
+      type: 'richText',
+    },
+    {
       name: 'Organizzatori',
       type: 'array',
       fields: [
@@ -31,13 +35,16 @@ export const Attivita: CollectionConfig = {
       relationTo: 'luoghi',
     },
     {
+      type: 'row', // required
+      fields: [
+    {
       name: 'Data_Inizio',
       type: 'date',
     },
     {
       name: 'Data_Fine',
       type: 'date',
-    },
+    }],},
     {
       name: 'Tipo', //capire
       type: 'text',
@@ -60,7 +67,7 @@ export const Attivita: CollectionConfig = {
     {
       name: 'Output_Documenti',
       type: 'relationship',
-      relationTo: 'archivio-documenti',
+      relationTo: 'documenti',
     },
   ],
 };

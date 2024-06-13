@@ -6,10 +6,10 @@ import { buildConfig } from 'payload/config'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-import { ArchivioDocumenti } from './collections/ArchivioDocumenti'
 import { Stakeholder } from './collections/Stakeholder' 
 import { Residenze } from './collections/Residenze'
 import { Itinerari } from './collections/Itinerari'
+import { Documenti } from './collections/Documenti'
 import { Attivita } from './collections/Attivita'
 import { Luoghi } from './collections/Luoghi'
 import { Users } from './collections/Users'
@@ -25,7 +25,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Media, Stakeholder, Itinerari, ArchivioDocumenti, Attivita, Luoghi, News, Call, Residenze],
+  collections: [Users, Media, Stakeholder, Itinerari, Documenti, Attivita, Luoghi, News, Residenze],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

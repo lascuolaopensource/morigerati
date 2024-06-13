@@ -13,15 +13,15 @@ export const Stakeholder: CollectionConfig = {
     },
     {
       name: 'Descrizione',
-      type: 'textarea',
+      type: 'richText',
     },
     {
-      name: 'Servizi offerti',
+      name: 'Tipologia',
       type: 'select',
       options: [
         'Azienda',
         'Ristoratori',
-        'Altro',
+        'etc',
       ],
     },
     {
@@ -36,12 +36,32 @@ export const Stakeholder: CollectionConfig = {
       hasMany: true,
     },
     {
-      name: 'Contatti',
-      type: 'textarea',
+      name: 'contatti',
+      type: 'array',
+      fields: [
+        {
+          name: 'contatto',
+          type: 'text',
+        },
+        {
+          name: 'info-contatto',
+          type: 'text',
+        },
+      ],
     },
     {
       name: 'Link Esterni',
-      type: 'textarea',
+      type: 'array',
+      fields: [
+        {
+          name: 'Nome-link',
+          type: 'text',
+        },
+        {
+          name: 'link',
+          type: 'text',
+        },
+      ],
     },
   ],
 };

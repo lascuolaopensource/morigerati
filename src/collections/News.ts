@@ -12,15 +12,15 @@ export const News: CollectionConfig = {
       required: true,
     },
     {
-      name: 'Contenuto',
-      type: 'textarea',
+      name: 'Programma',
+      type: 'richText',
     },
     {
-      name: 'Data_Pubblicazione',
+      name: 'Data-pubblicazione',
       type: 'date',
     },
     {
-        name: 'media',
+        name: 'Media',
         type: 'relationship',
         relationTo: 'media',
         hasMany: true,

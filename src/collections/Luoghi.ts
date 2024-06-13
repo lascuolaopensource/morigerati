@@ -13,12 +13,32 @@ export const Luoghi: CollectionConfig = {
     },
     {
       name: 'descrizione',
-      type: 'textarea',
-      required: true,
+      type: 'richText',
     },
     {
-      name: 'attivita_servizi',
-      type: 'textarea',
+      name: 'Punti',
+      type: 'array',
+      fields: [
+        {
+
+      name: 'Punti',
+      type: 'point',
+      label: 'Location',
+      },
+    ]},
+    {
+      name: 'attività-servizi',
+      type: 'array',
+      fields: [
+        {
+          name: 'attivià',
+          type: 'text',
+        },
+        {
+          name: 'info-attività',
+          type: 'text',
+        },
+      ],
     },
     {
       name: 'media',
@@ -27,14 +47,18 @@ export const Luoghi: CollectionConfig = {
       hasMany: false,
     },
     {
-      name: 'collegamento_itinerari',
-      type: 'relationship',
-      relationTo: 'itinerari',
-      hasMany: true,
-    },
-    {
-      name: 'info_contatti',
-      type: 'textarea',
+      name: 'info-contatti',
+      type: 'array',
+      fields: [
+        {
+          name: 'contatto',
+          type: 'text',
+        },
+        {
+          name: 'info',
+          type: 'text',
+        },
+      ],
     },
   ],
 };
