@@ -18,13 +18,20 @@ export const Stakeholders: CollectionConfig = {
         {
           label: 'Dati',
           fields: [
-            F.nome,
             {
-              name: 'tipologia',
-              type: 'select',
-              options: ['Azienda', 'Ristoratori', 'etc'],
+              type: 'row',
+              fields: [
+                F.nome,
+                {
+                  name: 'tipologia',
+                  type: 'select',
+                  options: ['Azienda', 'Ristoratori', 'etc'],
+                },
+              ],
             },
+            F.divider,
             F.posizione,
+            F.divider,
             F.contatti,
           ],
         },

@@ -11,6 +11,20 @@ import {
 import { Collections } from '..'
 import { Divider } from './components/divider'
 
+//
+
+export const divider: UIField = {
+  name: 'divider',
+  type: 'ui',
+  admin: {
+    components: {
+      Field: Divider,
+    },
+  },
+}
+
+//
+
 export const nome: TextField = {
   name: 'nome',
   type: 'text',
@@ -70,17 +84,5 @@ export const servizi: ArrayField = {
 
 export const tabContenuto: Tab = {
   label: 'Contenuto',
-  fields: [media, descrizione],
-}
-
-//
-
-export const divider: UIField = {
-  name: 'divider',
-  type: 'ui',
-  admin: {
-    components: {
-      Field: Divider,
-    },
-  },
+  fields: [media, divider, descrizione],
 }
