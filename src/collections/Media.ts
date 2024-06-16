@@ -12,6 +12,7 @@ export const Media: CollectionConfig = {
   },
   upload: true,
   fields: [
+    F.nome,
     {
       name: 'alt',
       label: 'Testo alternativo',
