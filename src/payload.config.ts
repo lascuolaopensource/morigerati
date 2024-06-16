@@ -9,13 +9,13 @@ import sharp from 'sharp'
 import { Stakeholders } from './collections/Stakeholders'
 import { Residenze } from './collections/Residenze'
 import { Itinerari } from './collections/Itinerari'
-import { Documenti } from './collections/Documenti'
-// import { Attivita } from './collections/Attivita'
 import { Luoghi } from './collections/Luoghi'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { News } from './collections/News'
-import { Call } from './collections/Call'
+import { Articoli } from './collections/Articoli'
+// import { Documenti } from './collections/Documenti'
+// import { Attivita } from './collections/Attivita'
+// import { Call } from './collections/Call'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,7 +24,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Media, Stakeholders, Itinerari, Documenti, Luoghi, News, Residenze],
+  collections: [Stakeholders, Itinerari, Luoghi, Residenze, Articoli, Media, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

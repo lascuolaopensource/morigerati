@@ -3,4 +3,6 @@ export enum Collections {
   Stakeholders = 'stakeholders',
   Itinerari = 'itinerari',
   Media = 'media',
+  Residenze = 'residenze',
+  Articoli = 'articoli',
 }

@@ -4,7 +4,10 @@ import * as F from './fields'
 
 export const Luoghi: CollectionConfig = {
   slug: Collections.Luoghi,
-  labels: { singular: 'Luogo', plural: 'Luoghi' },
+  labels: {
+    singular: 'Luogo',
+    plural: 'Luoghi',
+  },
   admin: {
     useAsTitle: F.nome.name,
   },

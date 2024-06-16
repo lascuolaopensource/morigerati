@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload/types'
 import { Collections } from '.'
+import * as F from './fields'
 
 export const Media: CollectionConfig = {
   slug: Collections.Media,
@@ -13,37 +14,11 @@ export const Media: CollectionConfig = {
   fields: [
     {
       name: 'alt',
+      label: 'Testo alternativo',
       type: 'text',
       required: true,
     },
-    {
-      name: 'Keywords',
-      type: 'text',
-    },
-    {
-      name: 'Tipologia',
-      type: 'text',
-    },
-    {
-      name: 'Nome',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'Data_Produzione',
-      type: 'date',
-    },
-    {
-      name: 'URL_Esterno',
-      type: 'text',
-    },
-    {
-      name: 'Credits',
-      type: 'text',
-    },
-    {
-      name: 'Descrizione',
-      type: 'textarea',
-    },
+    F.link,
+    F.descrizione,
   ],
 }

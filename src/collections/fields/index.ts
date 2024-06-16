@@ -3,6 +3,7 @@ import {
   PointField,
   RelationshipField,
   RichTextField,
+  RowField,
   Tab,
   TextField,
 } from 'payload/types'
@@ -54,16 +55,15 @@ export const media: RelationshipField = {
   relationTo: Collections.Media,
 }
 
+export const linkConNome: RowField = {
+  type: 'row',
+  fields: [nome, link],
+}
+
 export const servizi: ArrayField = {
   name: 'servizi',
   type: 'array',
-  fields: [
-    {
-      type: 'row',
-      fields: [nome, link],
-    },
-    descrizione,
-  ],
+  fields: [linkConNome, descrizione],
 }
 
 export const tabContenuto: Tab = {
