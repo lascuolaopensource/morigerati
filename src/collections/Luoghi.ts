@@ -29,6 +29,10 @@ export const Luoghi: CollectionConfig = {
               ],
             },
             F.contatti,
+            {
+              name: 'orari',
+              type: 'richText',
+            },
           ],
         },
         F.tabContenuto,
