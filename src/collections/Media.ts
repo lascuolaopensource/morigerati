@@ -8,7 +8,7 @@ export const Media: CollectionConfig = {
     read: () => true,
   },
   admin: {
-    useAsTitle: 'alt',
+    useAsTitle: F.nome.name,
   },
   upload: true,
   fields: [

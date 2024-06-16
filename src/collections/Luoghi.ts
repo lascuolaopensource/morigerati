@@ -20,8 +20,11 @@ export const Luoghi: CollectionConfig = {
           fields: [
             F.nome,
             F.posizione,
+            F.divider,
             F.servizi,
+            F.divider,
             F.contatti,
+            F.divider,
             {
               name: 'orari',
               type: 'richText',
