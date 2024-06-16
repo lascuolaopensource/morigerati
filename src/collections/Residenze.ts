@@ -34,6 +34,7 @@ export const Residenze: CollectionConfig = {
                 },
               ],
             },
+            F.divider,
             {
               name: 'esperti',
               label: 'Tutor ed esperti',
@@ -65,13 +66,21 @@ export const Residenze: CollectionConfig = {
                 },
               ],
             },
+            F.divider,
             {
               name: 'abstract',
               type: 'richText',
             },
+            F.divider,
             {
               name: 'programma',
               type: 'richText',
+            },
+            F.divider,
+            {
+              name: 'info_logistiche',
+              type: 'richText',
+              label: 'Informazioni logistiche',
             },
           ],
         },

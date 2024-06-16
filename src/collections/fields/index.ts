@@ -6,8 +6,10 @@ import {
   RowField,
   Tab,
   TextField,
+  UIField,
 } from 'payload/types'
 import { Collections } from '..'
+import { Divider } from './components/divider'
 
 export const nome: TextField = {
   name: 'nome',
@@ -69,4 +71,16 @@ export const servizi: ArrayField = {
 export const tabContenuto: Tab = {
   label: 'Contenuto',
   fields: [media, descrizione],
+}
+
+//
+
+export const divider: UIField = {
+  name: 'divider',
+  type: 'ui',
+  admin: {
+    components: {
+      Field: Divider,
+    },
+  },
 }
