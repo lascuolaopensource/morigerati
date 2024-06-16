@@ -1,60 +1,86 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload/types'
+import { Collections } from '.'
+import * as F from './fields'
 
 export const Residenze: CollectionConfig = {
-  slug: 'residenze',
+  slug: Collections.Residenze,
   labels: {
     singular: 'Residenza',
     plural: 'Residenze',
   },
   admin: {
-    useAsTitle: 'Nome',
+    useAsTitle: F.nome.name,
   },
   fields: [
     {
       type: 'tabs',
       tabs: [
         {
-          label: 'Info',
+          label: 'Dati',
           fields: [
-            {
-              name: 'Nome',
-              type: 'text',
-              required: true,
-            },
-            {
-              name: 'abstract',
-              type: 'richText',
-            },
-            {
-              name: 'programma',
-              type: 'richText',
-            },
-            {
-              name: 'tutore-ed-esperti',
-              type: 'array',
-              fields: [
-                {
-                  name: 'nome',
-                  type: 'text',
-                },
-                {
-                  name: 'link',
-                  type: 'text',
-                },
-              ],
-            },
+            F.nome,
             {
               type: 'row',
               fields: [
                 {
-                  name: 'data-inizio',
+                  name: 'data_inizio',
+                  label: 'Data inizio',
                   type: 'date',
                 },
                 {
-                  name: 'data-fine',
+                  name: 'data_fine',
+                  label: 'Data fine',
                   type: 'date',
                 },
               ],
+            },
+            F.divider,
+            {
+              name: 'esperti',
+              label: 'Tutor ed esperti',
+              type: 'array',
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'nome',
+                      type: 'text',
+                    },
+                    {
+                      name: 'foto',
+                      type: 'upload',
+                      relationTo: Collections.Media,
+                    },
+                  ],
+                },
+                {
+                  name: 'progetti',
+                  type: 'array',
+                  fields: [F.linkConNome],
+                },
+                {
+                  name: 'organizzazioni',
+                  type: 'array',
+                  fields: [F.linkConNome],
+                },
+              ],
+            },
+            F.divider,
+            {
+              name: 'abstract',
+              type: 'richText',
+            },
+            F.divider,
+            {
+              name: 'programma',
+              type: 'richText',
+            },
+            F.divider,
+            {
+              name: 'info_logistiche',
+              type: 'richText',
+              label: 'Informazioni logistiche',
             },
           ],
         },
@@ -62,76 +88,52 @@ export const Residenze: CollectionConfig = {
           label: 'Call',
           fields: [
             {
-              name: 'figure-richieste',
-              type: 'array',
+              type: 'row',
               fields: [
                 {
-                  name: 'figura',
-                  type: 'text',
+                  name: 'deadline',
+                  type: 'date',
                 },
                 {
-                  name: 'descrizione-figura',
-                  type: 'textarea',
-                },
-              ],
-            },
-            {
-              name: 'link-iscrizione',
-              type: 'text',
-            },
-            {
-              name: 'deadline',
-              type: 'date',
-            },
-            {
-              name: 'media',
-              type: 'relationship',
-              relationTo: 'media',
-            },
-          ],
-        },
-        {
-          label: 'Processo',
-          fields: [
-            {
-              name: 'descrizione-processo',
-              type: 'richText',
-            },
-          ],
-        },
-        {
-          label: 'Output',
-          fields: [
-            {
-              name: 'descrizione-output',
-              type: 'richText',
-            },
-            {
-              name: 'link-esterni',
-              type: 'array',
-              fields: [
-                {
-                  name: 'link',
+                  name: 'link_iscrizione',
+                  label: 'Link iscrizione',
                   type: 'text',
                 },
               ],
             },
             {
-              name: 'documenti',
-              type: 'array',
-              fields: [
-                {
-                  name: 'file',
-                  type: 'upload',
-                  relationTo: 'media',
-                },
-              ],
+              ...F.media,
+              name: 'call_media',
+              label: 'Media',
+            },
+            {
+              name: 'figure_richieste',
+              label: 'Figure richieste',
+              type: 'richText',
+            },
+          ],
+        },
+        {
+          name: 'Processo',
+          fields: [
+            {
+              type: 'group',
+              name: 'processo',
+              fields: [F.media, F.descrizione],
+            },
+          ],
+        },
+        {
+          name: 'Output',
+          fields: [
+            {
+              type: 'group',
+              name: 'output',
+              fields: [F.media, F.descrizione],
             },
           ],
         },
       ],
     },
   ],
-};
-
-export default Residenze;
+}

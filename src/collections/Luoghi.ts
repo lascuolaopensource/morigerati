@@ -1,66 +1,38 @@
-import type { CollectionConfig } from 'payload/types';
+import type { CollectionConfig } from 'payload/types'
+import { Collections } from '.'
+import * as F from './fields'
 
 export const Luoghi: CollectionConfig = {
-  slug: 'luoghi',
+  slug: Collections.Luoghi,
+  labels: {
+    singular: 'Luogo',
+    plural: 'Luoghi',
+  },
   admin: {
-    useAsTitle: 'nome',
+    useAsTitle: F.nome.name,
   },
   fields: [
     {
-      name: 'nome',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'descrizione',
-      type: 'richText',
-    },
-    {
-      name: 'Punti',
-      type: 'array',
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-
-      name: 'Punti',
-      type: 'point',
-      label: 'Location',
-      },
-    ]},
-    {
-      name: 'attività-servizi',
-      type: 'array',
-      fields: [
-        {
-          name: 'attivià',
-          type: 'text',
+          label: 'Dati',
+          fields: [
+            F.nome,
+            F.posizione,
+            F.divider,
+            F.servizi,
+            F.divider,
+            F.contatti,
+            F.divider,
+            {
+              name: 'orari',
+              type: 'richText',
+            },
+          ],
         },
-        {
-          name: 'info-attività',
-          type: 'text',
-        },
-      ],
-    },
-    {
-      name: 'media',
-      type: 'relationship',
-      relationTo: 'media',
-      hasMany: false,
-    },
-    {
-      name: 'info-contatti',
-      type: 'array',
-      fields: [
-        {
-          name: 'contatto',
-          type: 'text',
-        },
-        {
-          name: 'info',
-          type: 'text',
-        },
+        F.tabContenuto,
       ],
     },
   ],
-};
-
-export default Luoghi;
+}
