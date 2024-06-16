@@ -1,8 +1,9 @@
 import type { CollectionConfig } from 'payload/types'
 import * as F from './fields'
+import { Collections } from '.'
 
-export const Stakeholder: CollectionConfig = {
-  slug: 'stakeholder',
+export const Stakeholders: CollectionConfig = {
+  slug: Collections.Stakeholders,
   labels: {
     singular: 'Stakeholder',
     plural: 'Stakeholders',
@@ -32,5 +33,3 @@ export const Stakeholder: CollectionConfig = {
     },
   ],
 }
-
-export default Stakeholder
