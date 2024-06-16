@@ -1,13 +1,15 @@
-import type { CollectionConfig } from 'payload/types';
+import type { CollectionConfig } from 'payload/types'
+import { Collections } from '.'
 
 export const Media: CollectionConfig = {
-  slug: 'media',
+  slug: Collections.Media,
   access: {
     read: () => true,
   },
   admin: {
     useAsTitle: 'alt',
   },
+  upload: true,
   fields: [
     {
       name: 'alt',
@@ -44,7 +46,4 @@ export const Media: CollectionConfig = {
       type: 'textarea',
     },
   ],
-  upload: true,
-};
-
-export default Media;
+}

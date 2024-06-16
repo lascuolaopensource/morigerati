@@ -1,4 +1,12 @@
-import { ArrayField, PointField, RichTextField, Tab, TextField } from 'payload/types'
+import {
+  ArrayField,
+  PointField,
+  RelationshipField,
+  RichTextField,
+  Tab,
+  TextField,
+} from 'payload/types'
+import { Collections } from '..'
 
 export const nome: TextField = {
   name: 'nome',
@@ -40,17 +48,25 @@ export const contatti: ArrayField = {
   ],
 }
 
-export const tabContenuto: Tab = {
-  label: 'Contenuto',
+export const media: RelationshipField = {
+  name: 'media',
+  type: 'relationship',
+  relationTo: Collections.Media,
+}
+
+export const servizi: ArrayField = {
+  name: 'servizi',
+  type: 'array',
   fields: [
     {
-      name: 'media',
-      type: 'relationship',
-      relationTo: 'media',
+      type: 'row',
+      fields: [nome, link],
     },
-    {
-      name: 'descrizione',
-      type: 'richText',
-    },
+    descrizione,
   ],
+}
+
+export const tabContenuto: Tab = {
+  label: 'Contenuto',
+  fields: [media, descrizione],
 }

@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload/types';
+import type { CollectionConfig } from 'payload/types'
 
 export const News: CollectionConfig = {
   slug: 'news',
@@ -20,12 +20,10 @@ export const News: CollectionConfig = {
       type: 'date',
     },
     {
-        name: 'Media',
-        type: 'relationship',
-        relationTo: 'media',
-        hasMany: true,
+      name: 'Media',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: true,
     },
   ],
-};
-
-export default News;
+}

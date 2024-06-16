@@ -13,7 +13,6 @@ export interface Config {
     stakeholder: Stakeholder;
     itinerari: Itinerari;
     documenti: Documenti;
-    attivita: Attivita;
     luoghi: Luoghi;
     news: News;
     residenze: Residenze;
@@ -75,8 +74,24 @@ export interface Media {
  */
 export interface Stakeholder {
   id: string;
-  Nome: string;
-  Descrizione?: {
+  nome: string;
+  tipologia?: ('Azienda' | 'Ristoratori' | 'etc') | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  posizione?: [number, number] | null;
+  contatti?:
+    | {
+        nome: string;
+        email?: string | null;
+        telefono?: string | null;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  media?: (string | null) | Media;
+  descrizione?: {
     root: {
       type: string;
       children: {
@@ -91,23 +106,6 @@ export interface Stakeholder {
     };
     [k: string]: unknown;
   } | null;
-  Tipologia?: ('Azienda' | 'Ristoratori' | 'etc') | null;
-  Itinerario?: (string | null) | Itinerari;
-  media?: (string | Media)[] | null;
-  contatti?:
-    | {
-        contatto?: string | null;
-        'info-contatto'?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  'Link Esterni'?:
-    | {
-        'Nome-link'?: string | null;
-        link?: string | null;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -201,21 +199,38 @@ export interface Luoghi {
    * @maxItems 2
    */
   posizione?: [number, number] | null;
-  'attività-servizi'?:
+  servizi?:
     | {
-        attivià?: string | null;
-        'info-attività'?: string | null;
+        nome: string;
+        link?: string | null;
+        descrizione?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  contatti?:
+    | {
+        nome: string;
+        email?: string | null;
+        telefono?: string | null;
+        link?: string | null;
         id?: string | null;
       }[]
     | null;
   media?: (string | null) | Media;
-  'info-contatti'?:
-    | {
-        contatto?: string | null;
-        info?: string | null;
-        id?: string | null;
-      }[]
-    | null;
   descrizione?: {
     root: {
       type: string;
@@ -272,46 +287,6 @@ export interface Documenti {
       }[]
     | null;
   media?: (string | Media)[] | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "attivita".
- */
-export interface Attivita {
-  id: string;
-  Nome: string;
-  Descrizione?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  Organizzatori?:
-    | {
-        Nome?: string | null;
-        Ruolo?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  Luogo?: (string | null) | Luoghi;
-  Data_Inizio?: string | null;
-  Data_Fine?: string | null;
-  Tipo?: string | null;
-  Prenotazione_Necessaria?: boolean | null;
-  Itinerario?: (string | null) | Itinerari;
-  media?: (string | Media)[] | null;
-  Output_Documenti?: (string | null) | Documenti;
   updatedAt: string;
   createdAt: string;
 }

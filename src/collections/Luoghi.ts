@@ -17,17 +17,7 @@ export const Luoghi: CollectionConfig = {
           fields: [
             F.nome,
             F.posizione,
-            {
-              name: 'servizi',
-              type: 'array',
-              fields: [
-                {
-                  type: 'row',
-                  fields: [F.nome, F.link],
-                },
-                F.descrizione,
-              ],
-            },
+            F.servizi,
             F.contatti,
             {
               name: 'orari',
