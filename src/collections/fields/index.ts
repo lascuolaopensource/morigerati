@@ -1,4 +1,4 @@
-import { PointField, RichTextField, Tab, TextField } from 'payload/types'
+import { ArrayField, PointField, RichTextField, Tab, TextField } from 'payload/types'
 
 export const nome: TextField = {
   name: 'nome',
@@ -21,6 +21,23 @@ export const descrizione: RichTextField = {
 export const posizione: PointField = {
   name: 'posizione',
   type: 'point',
+}
+
+export const contatti: ArrayField = {
+  name: 'contatti',
+  type: 'array',
+  fields: [
+    nome,
+    {
+      name: 'email',
+      type: 'email',
+    },
+    {
+      name: 'telefono',
+      type: 'text',
+    },
+    link,
+  ],
 }
 
 export const tabContenuto: Tab = {

@@ -6,7 +6,7 @@ export const Luoghi: CollectionConfig = {
   slug: Collections.Luoghi,
   labels: { singular: 'Luogo', plural: 'Luoghi' },
   admin: {
-    useAsTitle: 'nome',
+    useAsTitle: F.nome.name,
   },
   fields: [
     {
@@ -28,22 +28,7 @@ export const Luoghi: CollectionConfig = {
                 F.descrizione,
               ],
             },
-            {
-              name: 'contatti',
-              type: 'array',
-              fields: [
-                F.nome,
-                {
-                  name: 'email',
-                  type: 'email',
-                },
-                {
-                  name: 'telefono',
-                  type: 'text',
-                },
-                F.link,
-              ],
-            },
+            F.contatti,
           ],
         },
         F.tabContenuto,

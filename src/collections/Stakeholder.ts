@@ -1,69 +1,36 @@
-import type { CollectionConfig } from 'payload/types';
+import type { CollectionConfig } from 'payload/types'
+import * as F from './fields'
 
 export const Stakeholder: CollectionConfig = {
   slug: 'stakeholder',
+  labels: {
+    singular: 'Stakeholder',
+    plural: 'Stakeholders',
+  },
   admin: {
-    useAsTitle: 'Nome',
+    useAsTitle: F.nome.name,
   },
   fields: [
     {
-      name: 'Nome',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'Descrizione',
-      type: 'richText',
-    },
-    {
-      name: 'Tipologia',
-      type: 'select',
-      options: [
-        'Azienda',
-        'Ristoratori',
-        'etc',
-      ],
-    },
-    {
-      name: 'Itinerario',
-      type: 'relationship',
-      relationTo: 'itinerari',
-    },
-    {
-      name: 'media',
-      type: 'relationship',
-      relationTo: 'media',
-      hasMany: true,
-    },
-    {
-      name: 'contatti',
-      type: 'array',
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-          name: 'contatto',
-          type: 'text',
+          label: 'Dati',
+          fields: [
+            F.nome,
+            {
+              name: 'tipologia',
+              type: 'select',
+              options: ['Azienda', 'Ristoratori', 'etc'],
+            },
+            F.posizione,
+            F.contatti,
+          ],
         },
-        {
-          name: 'info-contatto',
-          type: 'text',
-        },
-      ],
-    },
-    {
-      name: 'Link Esterni',
-      type: 'array',
-      fields: [
-        {
-          name: 'Nome-link',
-          type: 'text',
-        },
-        {
-          name: 'link',
-          type: 'text',
-        },
+        F.tabContenuto,
       ],
     },
   ],
-};
+}
 
-export default Stakeholder;
+export default Stakeholder
