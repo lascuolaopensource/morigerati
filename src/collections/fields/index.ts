@@ -9,7 +9,9 @@ import {
   UIField,
 } from 'payload/types'
 import { Collections } from '..'
+
 import { Divider } from './components/divider'
+import { Header } from './components/header'
 
 //
 
@@ -21,6 +23,18 @@ export const divider: UIField = {
       Field: Divider,
     },
   },
+}
+
+export function header(text: string): UIField {
+  return {
+    name: 'header',
+    type: 'ui',
+    admin: {
+      components: {
+        Field: () => Header(text),
+      },
+    },
+  }
 }
 
 //
@@ -84,5 +98,5 @@ export const servizi: ArrayField = {
 
 export const tabContenuto: Tab = {
   label: 'Contenuto',
-  fields: [media, divider, descrizione],
+  fields: [header('Immagini e media'), media, divider, header('Testo'), descrizione],
 }

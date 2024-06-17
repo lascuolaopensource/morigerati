@@ -7,7 +7,7 @@ export function Divider() {
         padding: '15px 0 25px 0',
       }}
     >
-      <hr style={{ borderColor: 'var(--theme-elevation-200)' }} />
+      <hr style={{ borderColor: 'var(--theme-elevation-150)' }} />
     </div>
   )
 }
