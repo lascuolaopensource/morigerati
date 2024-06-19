@@ -13,18 +13,26 @@ export const Articoli: CollectionConfig = {
   },
   fields: [
     {
-      name: 'titolo',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'data_pubblicazione',
-      type: 'date',
-    },
-    F.media,
-    {
-      name: 'testo',
-      type: 'richText',
+      type: 'tabs',
+      tabs: [
+        {
+          name: 'Dati',
+          fields: [
+            F.header('Informazioni generali'),
+            {
+              name: 'titolo',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'data_pubblicazione',
+              label: 'Data pubblicazione',
+              type: 'date',
+            },
+          ],
+        },
+        F.tabContenuto,
+      ],
     },
   ],
 }

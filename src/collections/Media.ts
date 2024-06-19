@@ -20,6 +20,6 @@ export const Media: CollectionConfig = {
       required: true,
     },
     F.link,
-    F.descrizione,
+    F.testo,
   ],
 }

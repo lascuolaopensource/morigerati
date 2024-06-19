@@ -18,6 +18,7 @@ export const Luoghi: CollectionConfig = {
         {
           label: 'Dati',
           fields: [
+            F.header('Info generali'),
             F.nome,
             F.posizione,
             F.divider,
@@ -25,9 +26,11 @@ export const Luoghi: CollectionConfig = {
             F.divider,
             F.contatti,
             F.divider,
+            F.header('Orari'),
             {
               name: 'orari',
               type: 'richText',
+              label: 'Orari di attività e date di chiusura',
             },
           ],
         },

@@ -18,6 +18,7 @@ export const Stakeholders: CollectionConfig = {
         {
           label: 'Dati',
           fields: [
+            F.header('Info generali'),
             {
               type: 'row',
               fields: [
@@ -29,7 +30,6 @@ export const Stakeholders: CollectionConfig = {
                 },
               ],
             },
-            F.divider,
             F.posizione,
             F.divider,
             F.contatti,

@@ -51,8 +51,9 @@ export const link: TextField = {
   type: 'text',
 }
 
-export const descrizione: RichTextField = {
-  name: 'descrizione',
+export const testo: RichTextField = {
+  name: 'testo',
+  label: 'Testo',
   type: 'richText',
   localized: true,
 }
@@ -62,20 +63,29 @@ export const posizione: PointField = {
   type: 'point',
 }
 
+export const linkConNome: RowField = {
+  type: 'row',
+  fields: [nome, link],
+}
+
 export const contatti: ArrayField = {
   name: 'contatti',
   type: 'array',
   fields: [
-    nome,
+    linkConNome,
     {
-      name: 'email',
-      type: 'email',
+      type: 'row',
+      fields: [
+        {
+          name: 'email',
+          type: 'email',
+        },
+        {
+          name: 'telefono',
+          type: 'text',
+        },
+      ],
     },
-    {
-      name: 'telefono',
-      type: 'text',
-    },
-    link,
   ],
 }
 
@@ -85,18 +95,21 @@ export const media: RelationshipField = {
   relationTo: Collections.Media,
 }
 
-export const linkConNome: RowField = {
-  type: 'row',
-  fields: [nome, link],
-}
-
 export const servizi: ArrayField = {
   name: 'servizi',
   type: 'array',
-  fields: [linkConNome, descrizione],
+  fields: [linkConNome, testo],
 }
+
+export const contenutoFields = [
+  header('Immagini e media'),
+  media,
+  divider,
+  header('Contenuti testuali'),
+  testo,
+]
 
 export const tabContenuto: Tab = {
   label: 'Contenuto',
-  fields: [header('Immagini e media'), media, divider, header('Testo'), descrizione],
+  fields: contenutoFields,
 }
