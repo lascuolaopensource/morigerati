@@ -53,7 +53,14 @@ export const Residenze: CollectionConfig = {
                       type: 'upload',
                       relationTo: Collections.Media,
                     },
+
                   ],
+                  
+                },
+                {
+                  name: 'Bio',
+                  type: 'richText',
+                  label: 'Biografia',
                 },
                 {
                   name: 'progetti',

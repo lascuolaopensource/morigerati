@@ -95,10 +95,16 @@ export const media: RelationshipField = {
   relationTo: Collections.Media,
 }
 
-export const servizi: ArrayField = {
+export const servizi_con_link: ArrayField = {
   name: 'servizi',
   type: 'array',
   fields: [linkConNome, testo],
+}
+
+export const servizi: ArrayField = {
+  name: 'servizi',
+  type: 'array',
+  fields: [nome, testo],
 }
 
 export const contenutoFields = [

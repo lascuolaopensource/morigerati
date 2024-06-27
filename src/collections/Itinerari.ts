@@ -100,7 +100,7 @@ export const Itinerari: CollectionConfig = {
               ],
             },
             F.divider,
-            F.servizi,
+            F.servizi_con_link,
             F.divider,
             F.header('Contenuti collegati'),
             {
