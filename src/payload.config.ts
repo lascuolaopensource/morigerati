@@ -13,7 +13,13 @@ import { Luoghi } from './collections/Luoghi'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Articoli } from './collections/Articoli'
-// import { Documenti } from './collections/Documenti'
+import { G_Home } from './globals/Global_home'
+import { G_mobilita } from './globals/Global_pagina_mobilita'
+import { G_chi_siamo } from './globals/Global_chi_siamo'
+import { G_luoghi } from './globals/Global_pagina_luoghi'
+import { G_itinerari } from './globals/Global_pagina_itinerari'
+import { G_stakeholders } from './globals/Global_pagina_stakeholders'
+import { G_residenze } from './globals/Global_pagina_residenze'
 // import { Attivita } from './collections/Attivita'
 // import { Call } from './collections/Call'
 
@@ -25,6 +31,7 @@ export default buildConfig({
     user: Users.slug,
   },
   collections: [Stakeholders, Itinerari, Luoghi, Residenze, Articoli, Media, Users],
+  globals: [G_Home, G_mobilita, G_chi_siamo, G_luoghi, G_itinerari, G_stakeholders, G_residenze],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

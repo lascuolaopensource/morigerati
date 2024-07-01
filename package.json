@@ -20,6 +20,7 @@
     "@payloadcms/richtext-lexical": "beta",
     "@swc/core": "^1.6.1",
     "cross-env": "^7.0.3",
+    "fs": "^0.0.1-security",
     "graphql": "^16.8.1",
     "next": "15.0.0-rc.0",
     "payload": "beta",

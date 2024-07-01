@@ -6,3 +6,5 @@ export enum Collections {
   Residenze = 'residenze',
   Articoli = 'articoli',
 }
+
+

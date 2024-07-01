@@ -8,18 +8,25 @@
 
 export interface Config {
   collections: {
-    users: User;
-    media: Media;
-    stakeholder: Stakeholder;
+    stakeholders: Stakeholder;
     itinerari: Itinerari;
-    documenti: Documenti;
     luoghi: Luoghi;
-    news: News;
     residenze: Residenze;
+    articoli: Articoli;
+    media: Media;
+    users: User;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  globals: {};
+  globals: {
+    Home: Home;
+    mobilita: Mobilita;
+    pagina_chi_siamo: PaginaChiSiamo;
+    pagina_luoghi: PaginaLuoghi;
+    Itinerari: Itinerari1;
+    Stakeholders: Stakeholder1;
+    Residenze: Residenze1;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -27,20 +34,44 @@ export interface Config {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "stakeholders".
  */
-export interface User {
+export interface Stakeholder {
   id: string;
+  nome: string;
+  tipologia?: ('Azienda' | 'Ristoratori' | 'etc') | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  posizione?: [number, number] | null;
+  contatti?:
+    | {
+        nome: string;
+        link?: string | null;
+        email?: string | null;
+        telefono?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  media?: (string | null) | Media;
+  testo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -48,14 +79,24 @@ export interface User {
  */
 export interface Media {
   id: string;
+  nome: string;
   alt: string;
-  Keywords?: string | null;
-  Tipologia?: string | null;
-  Nome: string;
-  Data_Produzione?: string | null;
-  URL_Esterno?: string | null;
-  Credits?: string | null;
-  Descrizione?: string | null;
+  link?: string | null;
+  testo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -70,120 +111,68 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "stakeholder".
- */
-export interface Stakeholder {
-  id: string;
-  nome: string;
-  tipologia?: ('Azienda' | 'Ristoratori' | 'etc') | null;
-  /**
-   * @minItems 2
-   * @maxItems 2
-   */
-  posizione?: [number, number] | null;
-  contatti?:
-    | {
-        nome: string;
-        email?: string | null;
-        telefono?: string | null;
-        link?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  media?: (string | null) | Media;
-  descrizione?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "itinerari".
  */
 export interface Itinerari {
   id: string;
-  nome?: string | null;
-  'descrizione-itinerario'?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  Luoghi?: (string | Luoghi)[] | null;
-  Punti?:
-    | {
-        /**
-         * @minItems 2
-         * @maxItems 2
-         */
-        Punti?: [number, number] | null;
-        Luoghi?: (string | Luoghi)[] | null;
-        id?: string | null;
-      }[]
-    | null;
-  'Media-Localizzati'?:
-    | {
-        /**
-         * @minItems 2
-         * @maxItems 2
-         */
-        'punto-media'?: [number, number] | null;
-        media?: (string | Media)[] | null;
-        id?: string | null;
-      }[]
-    | null;
-  'mappa-gpx'?: string | Media | null;
-  'link-prenotazione-guida'?: string | null;
-  media?: (string | Media)[] | null;
-  'info-itinerario'?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  lunghezza?: string | null;
-  tempo?: string | null;
+  nome: string;
+  tracciato_gpx?: string | Media | null;
+  lunghezza?: number | null;
+  tempo?: number | null;
   dislivello?: string | null;
-  Tipo?: ('tipo-0' | 'tipo-1' | 'tipo-2')[] | null;
-  Difficoltà?: ('facile' | 'media' | 'difficile') | null;
-  'servizi-aggiuntivi-integrati'?:
+  tipo?: ('tipo-0' | 'tipo-1' | 'tipo-2')[] | null;
+  difficolta?: ('facile' | 'media' | 'difficile') | null;
+  servizi?:
     | {
-        servizio?: string | null;
-        'url-prenotazione'?: string | null;
+        nome: string;
+        link?: string | null;
+        testo?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
       }[]
     | null;
+  luoghi?: (string | Luoghi)[] | null;
+  stakeholders?: (string | Stakeholder)[] | null;
+  media_geolocalizzati?:
+    | {
+        /**
+         * @minItems 2
+         * @maxItems 2
+         */
+        posizione?: [number, number] | null;
+        media?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  media?: (string | null) | Media;
+  testo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -202,8 +191,7 @@ export interface Luoghi {
   servizi?:
     | {
         nome: string;
-        link?: string | null;
-        descrizione?: {
+        testo?: {
           root: {
             type: string;
             children: {
@@ -224,14 +212,29 @@ export interface Luoghi {
   contatti?:
     | {
         nome: string;
+        link?: string | null;
         email?: string | null;
         telefono?: string | null;
-        link?: string | null;
         id?: string | null;
       }[]
     | null;
+  orari?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   media?: (string | null) | Media;
-  descrizione?: {
+  testo?: {
     root: {
       type: string;
       children: {
@@ -246,74 +249,6 @@ export interface Luoghi {
     };
     [k: string]: unknown;
   } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "documenti".
- */
-export interface Documenti {
-  id: string;
-  Nome: string;
-  Descrizione?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  Autore?:
-    | {
-        nome?: string | null;
-        cognome?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  Data?: string | null;
-  Tipo?: string | null;
-  links?:
-    | {
-        url?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  media?: (string | Media)[] | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "news".
- */
-export interface News {
-  id: string;
-  Titolo: string;
-  Programma?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  'Data-pubblicazione'?: string | null;
-  Media?: (string | Media)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -323,7 +258,45 @@ export interface News {
  */
 export interface Residenze {
   id: string;
-  Nome: string;
+  nome: string;
+  data_inizio?: string | null;
+  data_fine?: string | null;
+  esperti?:
+    | {
+        nome?: string | null;
+        foto?: string | Media | null;
+        Bio?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        progetti?:
+          | {
+              nome: string;
+              link?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        organizzazioni?:
+          | {
+              nome: string;
+              link?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   abstract?: {
     root: {
       type: string;
@@ -354,26 +327,25 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  'tutore-ed-esperti'?:
-    | {
-        nome?: string | null;
-        link?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  'data-inizio'?: string | null;
-  'data-fine'?: string | null;
-  'figure-richieste'?:
-    | {
-        figura?: string | null;
-        'descrizione-figura'?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  'link-iscrizione'?: string | null;
+  info_logistiche?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   deadline?: string | null;
-  media?: (string | null) | Media;
-  'descrizione-processo'?: {
+  link_iscrizione?: string | null;
+  call_media?: (string | null) | Media;
+  figure_richieste?: {
     root: {
       type: string;
       children: {
@@ -388,35 +360,94 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  'descrizione-output'?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
+  Processo?: {
+    processo?: {
+      media?: (string | null) | Media;
+      testo?: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
         [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
+      } | null;
     };
-    [k: string]: unknown;
-  } | null;
-  'link-esterni'?:
-    | {
-        link?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  documenti?:
-    | {
-        file?: string | Media | null;
-        id?: string | null;
-      }[]
-    | null;
+  };
+  Output?: {
+    output?: {
+      media?: (string | null) | Media;
+      testo?: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+    };
+  };
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articoli".
+ */
+export interface Articoli {
+  id: string;
+  Dati: {
+    titolo: string;
+    data_pubblicazione?: string | null;
+  };
+  media?: (string | null) | Media;
+  testo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -451,6 +482,202 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Home".
+ */
+export interface Home {
+  id: string;
+  'Landing banner'?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mobilita".
+ */
+export interface Mobilita {
+  id: string;
+  'Testo in alto'?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  Media?:
+    | {
+        foto?: string | Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  'Testo in basso'?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pagina_chi_siamo".
+ */
+export interface PaginaChiSiamo {
+  id: string;
+  'Testo in alto'?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  Media?:
+    | {
+        foto?: string | Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  'Testo in basso'?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pagina_luoghi".
+ */
+export interface PaginaLuoghi {
+  id: string;
+  Testo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Itinerari".
+ */
+export interface Itinerari1 {
+  id: string;
+  Testo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stakeholders".
+ */
+export interface Stakeholder1 {
+  id: string;
+  Testo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Residenze".
+ */
+export interface Residenze1 {
+  id: string;
+  Testo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 
 
