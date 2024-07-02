@@ -1,5 +1,5 @@
 import type { GlobalConfig } from 'payload/types'
-import { contenutoFields } from '../collections/fields'
+import { contenutoFields } from '@/collections/fields'
 import { Globals } from '.'
 
 export const Testi: GlobalConfig = {

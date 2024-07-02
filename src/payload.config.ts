@@ -16,15 +16,11 @@ import { Media } from './collections/Media'
 import { Articoli } from './collections/Articoli'
 
 //Globals
-import { Home } from './globals/Home'
-import { Chi_Siamo } from './globals/Chi_Siamo'
-import { Mobilita } from './globals/Mobilita'
-import { Testi } from './globals/Testi'
+import { Home } from '@/collections/globals/Home'
+import { Chi_Siamo } from '@/collections/globals/Chi_Siamo'
+import { Mobilita } from '@/collections/globals/Mobilita'
+import { Testi } from '@/collections/globals/Testi'
 
-import { G_luoghi } from './globals/Global_pagina_luoghi'
-import { G_itinerari } from './globals/Global_pagina_itinerari'
-import { G_stakeholders } from './globals/Global_pagina_stakeholders'
-import { G_residenze } from './globals/Global_pagina_residenze'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
