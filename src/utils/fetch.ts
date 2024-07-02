@@ -4,10 +4,17 @@ import { Payload } from 'payload'
 
 //
 
-type FindOptions = Parameters<Payload['find']>[0]
+type Collections = Parameters<Payload['find']>[0]
+type Globals = Parameters<Payload['findGlobal']>[0]
 
-export async function findCollection(options: FindOptions) {
+export async function findCollection(options: Collections) {
   const payload: Payload = await getPayloadHMR({ config })
   const result = await payload.find(options)
+  return result
+}
+
+export async function findGlobals(options: Globals) {
+  const payload: Payload = await getPayloadHMR({ config })
+  const result = await payload.findGlobal(options);
   return result
 }
