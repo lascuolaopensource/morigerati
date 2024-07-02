@@ -1,9 +1,10 @@
 import React from 'react'
 import { findCollection, findGlobals } from '@/utils/fetch'
+import Footer from '../../components/footer'
 
 const LuoghiPage = async () => {
   const collectionLuoghi = await findCollection({ collection: 'stakeholders' })
-  const globalLuoghi = await findGlobals({ slug: 'pagina_luoghi' })
+  const globalLuoghi = await findGlobals({ slug: 'testi' })
 
   return (
     <div>
@@ -11,6 +12,7 @@ const LuoghiPage = async () => {
       <pre>{JSON.stringify(globalLuoghi, null, 2)}</pre>
       <h2>Componente galleria</h2>
       <pre>{JSON.stringify(collectionLuoghi, null, 2)}</pre>
+      <Footer />
     </div>
   )
 }
