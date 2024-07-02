@@ -6,7 +6,7 @@ import { Payload } from 'payload'
 
 type FindOptions = Parameters<Payload['find']>[0]
 
-export const find = async (options: FindOptions) => {
+export async function findCollection(options: FindOptions) {
   const payload: Payload = await getPayloadHMR({ config })
   const result = await payload.find(options)
   return result
