@@ -7,7 +7,7 @@ const LuoghiPage = async () => {
   const globalLuoghi = await findGlobals({ slug: 'testi' })
 
   return (
-    <div>
+    <div className="bg-white">
       <h1>Luoghi</h1>
       <pre>{JSON.stringify(globalLuoghi, null, 2)}</pre>
       <h2>Componente galleria</h2>

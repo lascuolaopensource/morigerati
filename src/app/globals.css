@@ -1,6 +1,115 @@
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-CondensedBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-CondensedMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-CondensedRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-ItalicBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-ItalicMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-ItalicRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-SemiCondensedBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-SemiCondensedItalicBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-SemiCondensedItalicMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-SemiCondensedItalicRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-SemiCondensedMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('/fonts/TransInstrumentSans-SemiCondensedRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: 'TransInstrumentSans', sans-serif;
+}
 
 @layer base {
     h1 {
