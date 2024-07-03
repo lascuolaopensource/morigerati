@@ -4,30 +4,56 @@ import logo from '@/public/logo.png'
 import IG from '@/public/IG.png'
 import YT from '@/public/YT.png'
 
-const Footer: React.FC = () => {
+import { findGlobals } from '@/utils/fetch'
+
+interface InfoGlobal {
+  Title: string
+  Subtitle: string
+  Via_line_1: string
+  Civico_e_cap: string
+  Citta: string
+  Orario_1: string
+  Orario_2: string
+  Orario_3: string
+  Link_instagram: string
+  Link_youtube: string
+  globalType: string
+  createdAt: string
+  updatedAt: string
+  Mail: string
+  id: string
+}
+
+const Footer = async () => {
+  const footer = (await findGlobals({ slug: 'info' })) as InfoGlobal
+
   return (
     <footer className="bg-black text-white px-4 pt-6">
       <div>
         <div className="flex space-x-4 items-center">
           <div className="flex-1">
-            <Image src={logo} alt="Logo" />
+            <Image src={logo} alt="Logo" width={140} height={100} />
           </div>
           <div className="flex-1">
-            <p className="font-bold text-xs leading-3">Transluoghi</p>
-            <p className="font-light text-[12px] w-full block leading-3 text-left whitespace-nowrap">
-              Ecomuseo del Bussento
+            <p className="font-bold text-xs leading-3">{footer.Title}</p>
+            <p className="font-light text-[12px] w-full block leading-3 text-right whitespace-nowrap">
+              {footer.Subtitle.split(' ').slice(0, -1).join(' ')}
             </p>
-            <p className="font-light text-[12px] w-full block leading-3 text-right justify-right">
-              Contemporaneo
+            <p className="font-light text-[12px] w-full block leading-3 text-right whitespace-nowrap">
+              {footer.Subtitle.split(' ').pop()}
             </p>
           </div>
         </div>
 
         <div className="flex space-x-4 items-top pt-6">
           <div className="flex-1">
-            <p className="font-normal leading-3 whitespace-nowrap text-[10px]">Via Santa Croce</p>
-            <p className="font-normal leading-3 whitespace-nowrap text-[10px]">214b 84030</p>
-            <p className="font-normal leading-3 whitespace-nowrap text-[10px]">Morigerati (SA)</p>
+            <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
+              {footer.Via_line_1}
+            </p>
+            <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
+              {footer.Civico_e_cap}
+            </p>
+            <p className="font-normal leading-3 whitespace-nowrap text-[10px]">{footer.Citta}</p>
 
             <p className="pt-1">
               <span className="font-bold leading-3 whitespace-nowrap text-[10px]">email: </span>
@@ -35,7 +61,7 @@ const Footer: React.FC = () => {
                 href="mailto:ciao@transluoghi.it"
                 className="font-normal leading-3 whitespace-nowrap text-[10px]"
               >
-                ciao@transluoghi.it
+                {footer.Mail}
               </a>
             </p>
           </div>
@@ -44,13 +70,13 @@ const Footer: React.FC = () => {
             <p className="font-bold leading-3 whitespace-nowrap text-[10px]">Orari di apertura:</p>
             <div className="leading-tight pt-3">
               <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-                Lunedì - Venerdì: 9:00 - 18:00
+                {footer.Orario_1}
               </p>
               <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-                Sabato: 10:00 - 16:00
+                {footer.Orario_2}
               </p>
               <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-                Domenica: Chiuso
+                {footer.Orario_3}
               </p>
             </div>
           </div>
@@ -58,11 +84,12 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="mt-4 mb-4 flex space-x-4 items-center justify-end">
-        <a>
-          <Image src={YT} alt="Youtube" width={24} height={24} />
+        <a href={footer.Link_youtube} target="_blank" rel="noopener noreferrer">
+          <Image src={YT} alt="Youtube" width={24} />
         </a>
-        <a>
-          <Image src={IG} alt="Instagram" width={24} height={24} />
+
+        <a href={footer.Link_instagram} target="_blank" rel="noopener noreferrer">
+          <Image src={IG} alt="Instagram" width={24} />
         </a>
       </div>
     </footer>

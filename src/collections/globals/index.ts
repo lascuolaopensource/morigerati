@@ -3,4 +3,5 @@ export enum Globals {
   Chi_Siamo = 'Chi siamo',
   Testi = 'testi',
   Mobilita = 'mobilità',
+  Info = 'info',
 }

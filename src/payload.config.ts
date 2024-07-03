@@ -19,6 +19,7 @@ import { Home } from '@/collections/globals/Home';
 import { Chi_Siamo } from '@/collections/globals/Chi_Siamo';
 import { Mobilita } from '@/collections/globals/Mobilita';
 import { Testi } from '@/collections/globals/Testi';
+import { Info } from '@/collections/globals/Info';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -41,6 +42,7 @@ export default buildConfig({
     Chi_Siamo,
     Mobilita,
     Testi,
+    Info
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

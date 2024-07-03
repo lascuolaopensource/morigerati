@@ -23,6 +23,7 @@ export interface Config {
     'Chi siamo': ChiSiamo;
     mobilità: Mobilita;
     testi: Testi;
+    info: Info;
   };
   locale: null;
   user: User & {
@@ -681,6 +682,25 @@ export interface Testi {
     updatedAt?: string | null;
     createdAt?: string | null;
   };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "info".
+ */
+export interface Info {
+  id: string;
+  Title: string;
+  Subtitle: string;
+  Via_line_1: string;
+  Civico_e_cap: string;
+  Citta: string;
+  Orario_1: string;
+  Orario_2: string;
+  Orario_3: string;
+  Link_instagram: string;
+  Link_youtube: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
