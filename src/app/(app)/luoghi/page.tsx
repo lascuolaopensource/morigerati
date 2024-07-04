@@ -36,7 +36,7 @@ const LuoghiPage = async () => {
         <Luogo />
         <pre>{safeStringify(collectionLuoghi)}</pre>
       </div>
-      <div>{/* <Footer /> */}</div>
+      <Footer />
     </div>
   )
 }

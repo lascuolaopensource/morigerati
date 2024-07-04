@@ -3,7 +3,7 @@ import Image from 'next/image'
 import logo from '@/public/logo.png'
 import IG from '@/public/IG.png'
 import YT from '@/public/YT.png'
-import withPayloadData from '@/utils/withPayloadData'
+import { findGlobals } from '@/utils/fetch'
 
 interface InfoGlobal {
   Title: string
@@ -23,12 +23,22 @@ interface InfoGlobal {
   id: string
 }
 
-interface FooterProps {
-  payloadData?: InfoGlobal
-}
+const Footer = async () => {
+  let footer: InfoGlobal | null = null
+  try {
+    footer = (await findGlobals({ slug: 'info' })) as InfoGlobal
+  } catch (error) {
+    console.error('Error fetching footer data:', error)
+  }
 
-const Footer: React.FC<FooterProps> = ({ payloadData: footer }) => {
-  if (!footer) return null
+  const splitSubtitle = (subtitle: string | undefined) => {
+    if (!subtitle) return ['', '']
+    const words = subtitle.split(' ')
+    if (words.length <= 1) return [subtitle, '']
+    return [words.slice(0, -1).join(' '), words[words.length - 1]]
+  }
+
+  const [subtitleFirstPart, subtitleLastWord] = splitSubtitle(footer?.Subtitle)
 
   return (
     <footer className="bg-black text-white px-4 pt-6">
@@ -38,31 +48,33 @@ const Footer: React.FC<FooterProps> = ({ payloadData: footer }) => {
             <Image src={logo} alt="Logo" width={140} height={100} />
           </div>
           <div className="flex-1">
-            <p className="font-bold text-xs leading-3">{footer.Title}</p>
+            <p className="font-bold text-xs leading-3">{footer?.Title || ''}</p>
             <p className="font-light text-[12px] w-full block leading-3 text-right whitespace-nowrap">
-              {footer.Subtitle.split(' ').slice(0, -1).join(' ')}
+              {subtitleFirstPart}
             </p>
             <p className="font-light text-[12px] w-full block leading-3 text-right whitespace-nowrap">
-              {footer.Subtitle.split(' ').pop()}
+              {subtitleLastWord}
             </p>
           </div>
         </div>
         <div className="flex space-x-4 items-top pt-6">
           <div className="flex-1">
             <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-              {footer.Via_line_1}
+              {footer?.Via_line_1 || ''}
             </p>
             <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-              {footer.Civico_e_cap}
+              {footer?.Civico_e_cap || ''}
             </p>
-            <p className="font-normal leading-3 whitespace-nowrap text-[10px]">{footer.Citta}</p>
+            <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
+              {footer?.Citta || ''}
+            </p>
             <p className="pt-1">
               <span className="font-bold leading-3 whitespace-nowrap text-[10px]">email: </span>
               <a
-                href={`mailto:${footer.Mail}`}
+                href={`mailto:${footer?.Mail || ''}`}
                 className="font-normal leading-3 whitespace-nowrap text-[10px]"
               >
-                {footer.Mail}
+                {footer?.Mail || ''}
               </a>
             </p>
           </div>
@@ -70,23 +82,23 @@ const Footer: React.FC<FooterProps> = ({ payloadData: footer }) => {
             <p className="font-bold leading-3 whitespace-nowrap text-[10px]">Orari di apertura:</p>
             <div className="leading-tight pt-3">
               <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-                {footer.Orario_1}
+                {footer?.Orario_1 || ''}
               </p>
               <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-                {footer.Orario_2}
+                {footer?.Orario_2 || ''}
               </p>
               <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-                {footer.Orario_3}
+                {footer?.Orario_3 || ''}
               </p>
             </div>
           </div>
         </div>
       </div>
       <div className="mt-4 mb-4 flex space-x-4 items-center justify-end">
-        <a href={footer.Link_youtube} target="_blank" rel="noopener noreferrer">
+        <a href={footer?.Link_youtube || '#'} target="_blank" rel="noopener noreferrer">
           <Image src={YT} alt="Youtube" width={24} />
         </a>
-        <a href={footer.Link_instagram} target="_blank" rel="noopener noreferrer">
+        <a href={footer?.Link_instagram || '#'} target="_blank" rel="noopener noreferrer">
           <Image src={IG} alt="Instagram" width={24} />
         </a>
       </div>
@@ -94,4 +106,4 @@ const Footer: React.FC<FooterProps> = ({ payloadData: footer }) => {
   )
 }
 
-export default withPayloadData(Footer, { global: { slug: 'info' } })
+export default Footer
