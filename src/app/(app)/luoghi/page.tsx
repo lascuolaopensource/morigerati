@@ -5,24 +5,36 @@ import Luogo from '../../components/luogo'
 
 const LuoghiPage = async () => {
   let collectionLuoghi, globalLuoghi
+
   try {
     collectionLuoghi = await findCollection({ collection: 'stakeholders' })
     globalLuoghi = await findGlobals({ slug: 'testi' })
   } catch (error) {
-    console.error('Errore nel recupero dei dati:', error)
+    console.error('Error fetching data:', error)
+    return <div>Error loading data. Please try again later.</div>
   }
 
   if (!collectionLuoghi || !globalLuoghi) {
-    return <div>Dati non disponibili. Si prega di riprovare più tardi.</div>
+    console.error('Data is missing:', { collectionLuoghi, globalLuoghi })
+    return <div>Data not available. Please try again later.</div>
+  }
+
+  const safeStringify = (data: any) => {
+    try {
+      return JSON.stringify(data, null, 2)
+    } catch (error) {
+      console.error('Error stringifying data:', error)
+      return 'Error: Unable to display data'
+    }
   }
 
   return (
     <div className="bg-white">
       <div className="bg-color-blue pt-9 pl-4 pr-4">
         <h1 className="font-bold text-4xl">Luoghi</h1>
-        {globalLuoghi && <pre>{JSON.stringify(globalLuoghi, null, 2)}</pre>}
+        <pre>{safeStringify(globalLuoghi)}</pre>
         <Luogo />
-        {collectionLuoghi && <pre>{JSON.stringify(collectionLuoghi, null, 2)}</pre>}
+        <pre>{safeStringify(collectionLuoghi)}</pre>
       </div>
       <div>
         <Footer />
