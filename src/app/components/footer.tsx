@@ -24,12 +24,7 @@ interface InfoGlobal {
 }
 
 const Footer = async () => {
-  let footer: InfoGlobal | null = null
-  try {
-    footer = (await findGlobals({ slug: 'info' })) as InfoGlobal
-  } catch (error) {
-    console.error('Error fetching footer data:', error)
-  }
+  let footer = (await findGlobals({ slug: 'info' })) as InfoGlobal
 
   const splitSubtitle = (subtitle: string | undefined) => {
     if (!subtitle) return ['', '']
