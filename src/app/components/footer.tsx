@@ -3,8 +3,7 @@ import Image from 'next/image'
 import logo from '@/public/logo.png'
 import IG from '@/public/IG.png'
 import YT from '@/public/YT.png'
-
-import { findGlobals } from '@/utils/fetch'
+import withPayloadData from '@/utils/withPayloadData'
 
 interface InfoGlobal {
   Title: string
@@ -24,8 +23,12 @@ interface InfoGlobal {
   id: string
 }
 
-const Footer = async () => {
-  const footer = (await findGlobals({ slug: 'info' })) as InfoGlobal
+interface FooterProps {
+  payloadData?: InfoGlobal
+}
+
+const Footer: React.FC<FooterProps> = ({ payloadData: footer }) => {
+  if (!footer) return null
 
   return (
     <footer className="bg-black text-white px-4 pt-6">
@@ -44,7 +47,6 @@ const Footer = async () => {
             </p>
           </div>
         </div>
-
         <div className="flex space-x-4 items-top pt-6">
           <div className="flex-1">
             <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
@@ -54,18 +56,16 @@ const Footer = async () => {
               {footer.Civico_e_cap}
             </p>
             <p className="font-normal leading-3 whitespace-nowrap text-[10px]">{footer.Citta}</p>
-
             <p className="pt-1">
               <span className="font-bold leading-3 whitespace-nowrap text-[10px]">email: </span>
               <a
-                href="mailto:ciao@transluoghi.it"
+                href={`mailto:${footer.Mail}`}
                 className="font-normal leading-3 whitespace-nowrap text-[10px]"
               >
                 {footer.Mail}
               </a>
             </p>
           </div>
-
           <div className="flex-1">
             <p className="font-bold leading-3 whitespace-nowrap text-[10px]">Orari di apertura:</p>
             <div className="leading-tight pt-3">
@@ -82,12 +82,10 @@ const Footer = async () => {
           </div>
         </div>
       </div>
-
       <div className="mt-4 mb-4 flex space-x-4 items-center justify-end">
         <a href={footer.Link_youtube} target="_blank" rel="noopener noreferrer">
           <Image src={YT} alt="Youtube" width={24} />
         </a>
-
         <a href={footer.Link_instagram} target="_blank" rel="noopener noreferrer">
           <Image src={IG} alt="Instagram" width={24} />
         </a>
@@ -95,4 +93,5 @@ const Footer = async () => {
     </footer>
   )
 }
-export default Footer
+
+export default withPayloadData(Footer, { global: { slug: 'info' } })
