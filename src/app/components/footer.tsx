@@ -37,7 +37,6 @@ const Footer = async () => {
 
   return (
     <footer className="bg-black text-white px-4 pt-6">
-      <pre>{JSON.stringify(footer, null, 2)}</pre>
       <div>
         <div className="flex space-x-4 items-center">
           <div className="flex-1">
