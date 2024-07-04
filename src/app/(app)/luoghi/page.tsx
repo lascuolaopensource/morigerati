@@ -11,6 +11,11 @@ const LuoghiPage = async () => {
   } catch (error) {
     console.error('Errore nel recupero dei dati:', error)
   }
+
+  if (!collectionLuoghi || !globalLuoghi) {
+    return <div>Dati non disponibili. Si prega di riprovare più tardi.</div>
+  }
+
   return (
     <div className="bg-white">
       <div className="bg-color-blue pt-9 pl-4 pr-4">
