@@ -14,7 +14,8 @@ module.exports = {
       colors: {
         'luogoColor': '#92CDDE',
         'itinerarioColor' : '#7FCBAE',
-        'stakeholderColor' : '#EEE3A8'
+        'stakeholderColor' : '#EEE3A8',
+        'bannerColor' : 'F69679'
       },
     },
   },

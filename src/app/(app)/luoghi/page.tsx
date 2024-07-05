@@ -1,7 +1,10 @@
 import React, { Suspense } from 'react'
 import { findCollection, findGlobals } from '@/utils/fetch'
-import Footer from '../../components/footer'
+
 import Luogo from '@/app/components/luogo'
+
+import Navbar from '../../components/navbar'
+import Footer from '../../components/footer'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -39,7 +42,8 @@ const LuoghiPage = async () => {
 
   return (
     <main>
-      <div className="bg-white p-3 pt-10">
+      <Navbar />
+      <div className="bg-white p-3 pt-5">
         <h1 className="font-bold text-[40px]">Luoghi</h1>
         {luoghiTesto ? (
           <p className="font-normal text-sm pt-4 pb-4 leading-4">{luoghiTesto}</p>

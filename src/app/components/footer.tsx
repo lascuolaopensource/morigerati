@@ -24,7 +24,7 @@ interface InfoGlobal {
 }
 
 const Footer = async () => {
-  let footer = (await findGlobals({ slug: 'info' })) as InfoGlobal
+  let footer = (await findGlobals({ slug: 'info' })) as unknown as InfoGlobal
 
   const splitSubtitle = (subtitle: string | undefined) => {
     if (!subtitle) return ['', '']
