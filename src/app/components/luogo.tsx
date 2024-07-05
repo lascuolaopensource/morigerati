@@ -3,8 +3,8 @@ import React from 'react'
 const Luogo: React.FC = () => {
   return (
     <div className="w-full max-w-md mx-auto pb-1">
-      <div className="border-2 border-black rounded-lg overflow-hidden">
-        <div className="bg-sky-200 p-2 border-b-2 border-black">
+      <div className="border-2 border-black rounded-s overflow-hidden">
+        <div className="bg-luogoColor p-2 border-b-2 border-black">
           <h2 className="text-sm font-bold text-center leading-3">Luogo</h2>
         </div>
         <div className="grid grid-cols-12 gap-px bg-gray-300">
