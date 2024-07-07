@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { findCollection, findGlobals } from '@/utils/fetch'
 
-import Luogo from '@/app/components/luogo'
+import Colorcard from '@/app/components/colorcard'
 
 import Navbar from '../../components/navbar'
 import Footer from '../../components/footer'
@@ -51,11 +51,11 @@ const LuoghiPage = async () => {
           <p>Error loading Luoghi text data</p>
         )}
         <Suspense fallback={<div>Loading Luogo component...</div>}>
-          <Luogo />
-          <Luogo />
-          <Luogo />
-          <Luogo />
-          <Luogo />
+          <Colorcard color="bg-luogoColor" title="Luogo 1" />
+          <Colorcard color="bg-luogoColor" title="Luogo 2" />
+          <Colorcard color="bg-luogoColor" title="Luogo 3 " />
+          <Colorcard color="bg-luogoColor" title="Luogo 4 " />
+          <Colorcard color="bg-luogoColor" title="Luogo 5" />
         </Suspense>
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
