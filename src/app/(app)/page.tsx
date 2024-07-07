@@ -3,11 +3,15 @@ import Navbar from '../components/navbar'
 import { findCollection, findGlobals } from '@/utils/fetch'
 
 interface Statement {
-  statement: {}
+  Home: {
+    statement: {}
+  }
 }
 
 interface TestoHome {
-  testoHome: {}
+  Home: {
+    testoHome: {}
+  }
 }
 const Home = async () => {
   let statement = null
