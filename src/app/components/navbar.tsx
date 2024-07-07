@@ -6,18 +6,32 @@ import logoBlack from '@/public/logoBlack.png'
 import logo from '@/public/logo.png'
 import hamburger from '@/public/hamburger.png'
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+interface NavbarProps {
+  backgroundColor: string
+  currentPage: string
+}
 
-  const toggleMenu = () => {
+const Navbar: React.FC<NavbarProps> = ({ backgroundColor, currentPage }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+
+  const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const renderPageLink = (href: string, text: string): JSX.Element => {
+    return (
+      <Link href={href} className="flex items-center">
+        {currentPage === href && <span className="mr-2">&rarr;</span>}
+        {text}
+      </Link>
+    )
+  }
+
   return (
-    <nav className="w-full bg-gray-100 relative">
+    <nav className={`w-full ${backgroundColor} relative`}>
       <div className="py-4 px-6">
         <div className="flex justify-between items-center">
-          <div className="w-8">{/* Spazio vuoto a sinistra per bilanciare il layout */}</div>
+          <div className="w-8">{/* Spazio vuoto */}</div>
           <Link href="/" className="flex justify-center">
             <Image src={logoBlack} alt="Logo" width={100} />
           </Link>
@@ -32,7 +46,7 @@ const Navbar = () => {
       </div>
       <div className="absolute bottom-0 left-0 w-full h-0.5 bg-black"></div>
 
-      {/* Menu a scomparsa */}
+      {/* Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black text-white z-40">
           <div className="absolute top-0 left-0 right-0 py-4 px-6 flex justify-between items-center">
@@ -49,32 +63,14 @@ const Navbar = () => {
             </button>
           </div>
           <ul className="flex flex-col items-center pt-24 space-y-6 text-2xl">
-            <li>
-              <Link href="/" className="flex items-center">
-                &rarr; Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
-              <Link href="/mobilita-sostenibile">Mobilità sostenibile</Link>
-            </li>
-            <li>
-              <Link href="/luoghi">Luoghi</Link>
-            </li>
-            <li>
-              <Link href="/itinerari">Itinerari</Link>
-            </li>
-            <li>
-              <Link href="/stakeholders">Stakeholders</Link>
-            </li>
-            <li>
-              <Link href="/residenze">Residenze</Link>
-            </li>
-            <li>
-              <Link href="/articoli">Articoli</Link>
-            </li>
+            <li>{renderPageLink('/', 'Home')}</li>
+            <li>{renderPageLink('/about', 'About')}</li>
+            <li>{renderPageLink('/mobilita-sostenibile', 'Mobilità sostenibile')}</li>
+            <li>{renderPageLink('/luoghi', 'Luoghi')}</li>
+            <li>{renderPageLink('/itinerari', 'Itinerari')}</li>
+            <li>{renderPageLink('/stakeholders', 'Stakeholders')}</li>
+            <li>{renderPageLink('/residenze', 'Residenze')}</li>
+            <li>{renderPageLink('/articoli', 'Articoli')}</li>
           </ul>
         </div>
       )}
