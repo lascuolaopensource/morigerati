@@ -15,6 +15,7 @@ module.exports = {
         'luogoColor': '#92CDDE',
         'itinerarioColor' : '#7FCBAE',
         'stakeholderColor' : '#EEE3A8',
+        'residenzeColor' : '#F69679',
         'bannerColor' : 'F69679'
       },
     },

@@ -1,11 +1,12 @@
 import React, { Suspense } from 'react'
-import { findGlobals } from '@/utils/fetch'
+import { findGlobals, findCollection } from '@/utils/fetch'
 
 import Image from 'next/image'
 
-import Colorcard from '@/app/components/colorcard'
 import Navbar from '@/app/components/navbar'
 import Footer from '@/app/components/footer'
+
+import MySwyper from '@/app/components/mySwiper'
 
 import loremPic from '@/public/loremPic.png'
 
@@ -67,21 +68,41 @@ const renderElement = (element: TextNode, tag: string | undefined) => {
 
 const Home = async () => {
   let statement = null
-  let itinerariText = null
   let testoHome = null
+  let itinerariText = null
+  let luoghiText = null
+  let residenzeText = null
+
+  let collectionItinerari = null
+  let collectionLuoghi = null
+  let collectionResidenze = null
 
   try {
     const globalData = (await findGlobals({ slug: 'home' })) as unknown as GlobalTesti
     statement = globalData.statement
-    itinerariText = globalData.itinerari.root.children
     testoHome = globalData.testoHome.root.children
+    itinerariText = globalData.itinerari.root.children
+    luoghiText = globalData.luoghi.root.children
+    residenzeText = globalData.residenze.root.children
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  }
+
+  try {
+    const [itinerariData, luoghiData, residenzeData] = await Promise.all([
+      findCollection({ collection: 'itinerari' }),
+      findCollection({ collection: 'luoghi' }),
+      findCollection({ collection: 'residenze' }),
+    ])
+    ;(collectionItinerari = itinerariData), (collectionLuoghi = luoghiData)
+    collectionResidenze = residenzeData
   } catch (error) {
     console.error('Error fetching data:', error)
   }
 
   return (
     <main>
-      <Navbar backgroundColor="bg-white" currentPage="/luoghi" />
+      <Navbar backgroundColor="bg-white" currentPage="/" />
       <div className="relative w-full h-screen">
         <Image src={loremPic} alt="Fullscreen Image" fill objectFit="cover" />
 
@@ -108,6 +129,7 @@ const Home = async () => {
         )}
 
         <p className="font-bold pt-4 text-xl text-center">Itinerari</p>
+
         {itinerariText ? (
           itinerariText.map((child, index) => (
             <React.Fragment key={index}>
@@ -120,13 +142,39 @@ const Home = async () => {
           <p>Error loading itinerari text data</p>
         )}
         <div className="pt-4"></div>
-        <Suspense fallback={<div>Loading Luogo component...</div>}>
-          <Colorcard color="bg-luogoColor" title="Luogo 1" />
-          <Colorcard color="bg-luogoColor" title="Luogo 2" />
-          <Colorcard color="bg-luogoColor" title="Luogo 3" />
-          <Colorcard color="bg-luogoColor" title="Luogo 4" />
-          <Colorcard color="bg-luogoColor" title="Luogo 5" />
-        </Suspense>
+        <MySwyper json={JSON.stringify(collectionItinerari)} color="bg-itinerarioColor" />
+
+        <p className="font-bold pt-4 text-xl text-center">Luoghi</p>
+
+        {luoghiText ? (
+          luoghiText.map((child, index) => (
+            <React.Fragment key={index}>
+              {child.children.map((element, subIndex) => (
+                <React.Fragment key={subIndex}>{renderElement(element, child.tag)}</React.Fragment>
+              ))}
+            </React.Fragment>
+          ))
+        ) : (
+          <p>Error loading itinerari text data</p>
+        )}
+        <div className="pt-4"></div>
+        <MySwyper json={JSON.stringify(collectionLuoghi)} color="bg-luogoColor" />
+
+        <p className="font-bold pt-4 text-xl text-center">Residenze</p>
+
+        {residenzeText ? (
+          residenzeText.map((child, index) => (
+            <React.Fragment key={index}>
+              {child.children.map((element, subIndex) => (
+                <React.Fragment key={subIndex}>{renderElement(element, child.tag)}</React.Fragment>
+              ))}
+            </React.Fragment>
+          ))
+        ) : (
+          <p>Error loading itinerari text data</p>
+        )}
+        <div className="pt-4"></div>
+        <MySwyper json={JSON.stringify(collectionResidenze)} color="bg-residenzeColor" />
       </div>
 
       <Suspense fallback={<div>Loading footer...</div>}>
