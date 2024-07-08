@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        transinstrument: ['TransInstrumentSans', 'sans-serif'],
+        transInstrumentSans: ['TransInstrumentSans, sans-serif'],
       },
       colors: {
         'luogoColor': '#92CDDE',
