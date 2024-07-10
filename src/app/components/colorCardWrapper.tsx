@@ -39,7 +39,6 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, jsonString }
           title={doc.nome}
           imageUrl={doc.media.url}
           slugUrl={doc.id}
-          content={JSON.stringify(data)}
         />
       ))}
     </div>
