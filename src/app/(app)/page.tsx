@@ -3,6 +3,8 @@ import { findGlobals, findCollection } from '@/utils/fetch'
 
 import Image from 'next/image'
 
+import { renderElement, RootNode } from '@/utils/renderElement'
+
 import Navbar from '@/app/components/navbar'
 import Footer from '@/app/components/footer'
 
@@ -12,29 +14,6 @@ import loremPic from '@/public/loremPic.png'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
-
-interface TextNode {
-  text: string
-  type: string
-  version: number
-  detail?: number
-  format?: number
-  mode?: string
-  style?: string
-}
-
-interface RootNode {
-  children: Array<{
-    children: Array<TextNode>
-    direction: string | null
-    format: string
-    indent: number
-    type: string
-    version: number
-    textFormat?: number
-    tag?: string
-  }>
-}
 
 interface GlobalTesti {
   statement: string
@@ -49,20 +28,6 @@ interface GlobalTesti {
   }
   residenze: {
     root: RootNode
-  }
-}
-
-const renderElement = (element: TextNode, tag: string | undefined) => {
-  switch (tag) {
-    case 'h1':
-      return <h1 className="font-normal text-3xl pt-4 pb-4 leading-4">{element.text}</h1>
-    case 'h2':
-      return <h2 className="font-normal text-2xl pt-4 pb-4 leading-2">{element.text}</h2>
-    case 'h3':
-      return <h3>{element.text}</h3>
-    case 'p':
-    default:
-      return <p className="font-normal text-sm pt-2 leading-4">{element.text}</p>
   }
 }
 
@@ -101,7 +66,7 @@ const Home = async () => {
   }
 
   return (
-    <main>
+    <main className="mx-auto max-w-xl">
       <Navbar backgroundColor="bg-white" currentPage="/" />
       <div className="relative w-full h-screen">
         <Image src={loremPic} alt="Fullscreen Image" fill objectFit="cover" />

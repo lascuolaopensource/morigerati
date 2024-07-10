@@ -6,6 +6,7 @@ export const Mobilita: GlobalConfig = {
   access: {
     read: () => true,
   },
-  fields: contenutoFields,
+  fields:
+     contenutoFields  ,
   slug: Globals.Mobilita,
 }

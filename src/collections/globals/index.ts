@@ -1,7 +1,7 @@
 export enum Globals {
   Home = 'home',
-  Chi_Siamo = 'Chi siamo',
+  Chi_Siamo = 'chi_siamo',
   Testi = 'testi',
-  Mobilita = 'mobilità',
+  Mobilita = 'mobilita',
   Info = 'info',
 }

@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 interface GlobalTesti {
-  Luoghi: {
+  Stakeholders: {
     testo: {
       root: {
         children: Array<{
@@ -23,37 +23,39 @@ interface GlobalTesti {
   }
 }
 
-const LuoghiPage = async () => {
-  let collectionLuoghi = null
-  let luoghiTesto = null
+const StakeholdersPage = async () => {
+  let collectionStakeholders = null
+  let stakeholdersTesto = null
 
   try {
     const [collectionData, globalData] = await Promise.all([
-      findCollection({ collection: 'luoghi' }),
+      findCollection({ collection: 'stakeholders' }),
       findGlobals({ slug: 'testi' }) as unknown as Promise<GlobalTesti>,
     ])
 
-    collectionLuoghi = collectionData
+    collectionStakeholders = collectionData
 
-    luoghiTesto = globalData.Luoghi.testo.root.children[0].children[0].text
+    stakeholdersTesto = globalData.Stakeholders.testo.root.children[0].children[0].text
   } catch (error) {
     console.error('Error fetching data:', error)
   }
 
   return (
     <main>
-      <Navbar backgroundColor="bg-luogoColor" currentPage="/luoghi" />
-
+      <Navbar backgroundColor="bg-stakeholderColor" currentPage="/stakeholders" />
       <div className="bg-white p-3 pt-5">
-        <h1 className="font-bold text-[40px]">Luoghi</h1>
-        {luoghiTesto ? (
-          <p className="font-normal text-sm pt-4 pb-4 leading-4">{luoghiTesto}</p>
+        <h1 className="font-bold text-[40px]">Stakeholders</h1>
+        {stakeholdersTesto ? (
+          <p className="font-normal text-sm pt-4 pb-4 leading-4">{stakeholdersTesto}</p>
         ) : (
           <p>Error loading Luoghi text data</p>
         )}
 
         <Suspense fallback={<div>Loading Luogo component...</div>}>
-          <ColorCardWrapper color="bg-luogoColor" jsonString={JSON.stringify(collectionLuoghi)} />
+          <ColorCardWrapper
+            color="bg-stakeholderColor"
+            jsonString={JSON.stringify(collectionStakeholders)}
+          />
         </Suspense>
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
@@ -63,4 +65,4 @@ const LuoghiPage = async () => {
   )
 }
 
-export default LuoghiPage
+export default StakeholdersPage

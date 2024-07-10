@@ -13,9 +13,9 @@ export const Home: GlobalConfig = {
     required: true,
   },
   {
-    name: 'media', // required
-    type: 'upload', // required
-    relationTo: 'media', // required
+    name: 'media', 
+    type: 'upload', 
+    relationTo: 'media',
     required: true,
   },
   {
