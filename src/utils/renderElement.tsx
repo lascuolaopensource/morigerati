@@ -1,22 +1,10 @@
 interface TextNode {
   text: string
-  type: string
-  version: number
-  detail?: number
-  format?: number
-  mode?: string
-  style?: string
 }
 
 export interface RootNode {
   children: Array<{
     children: Array<TextNode>
-    direction: string | null
-    format: string
-    indent: number
-    type: string
-    version: number
-    textFormat?: number
     tag?: string
   }>
 }

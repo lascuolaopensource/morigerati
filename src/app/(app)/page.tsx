@@ -68,7 +68,7 @@ const Home = async () => {
   return (
     <main className="mx-auto max-w-xl">
       <Navbar backgroundColor="bg-white" currentPage="/" />
-      <div className="relative w-full h-screen">
+      <div className="relative w-full h-[80vh]">
         <Image src={loremPic} alt="Fullscreen Image" fill objectFit="cover" />
 
         {statement ? (
