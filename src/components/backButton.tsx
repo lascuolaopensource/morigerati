@@ -1,11 +1,11 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+'use client'
+import { useRouter } from 'next/navigation'
 
 const BackButton = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const handleClick = () => {
-    navigate(-1)
+    router.back()
   }
 
   return (

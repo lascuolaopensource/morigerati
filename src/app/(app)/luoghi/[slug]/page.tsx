@@ -1,8 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+
 import { findCollection } from '@/utils/fetch'
-import Navbar from '../../../../components/navbar'
-import Footer from '../../../../components/footer'
+import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
+import BackButton from '@/components/backButton'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -109,8 +111,15 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           className="w-full h-full"
         />
       </div>
-      <div className="pt-4">
-        <h1 className="text-4xl font-bold">{luogoData.nome}</h1>
+
+      <div className="p-4">
+        <BackButton />
+        <div className="pt-4"></div>
+        {luogoData.nome ? (
+          <h1 className="text-4xl font-bold">{luogoData.nome}</h1>
+        ) : (
+          <p>Error loading statement data</p>
+        )}
       </div>
       <Footer />
     </div>
