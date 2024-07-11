@@ -1,4 +1,4 @@
-import { buildConfig } from 'payload/config';
+import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import sharp from 'sharp';

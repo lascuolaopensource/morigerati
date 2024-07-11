@@ -7,7 +7,7 @@ import {
   Tab,
   TextField,
   UIField,
-} from 'payload/types'
+} from 'payload'
 import { Collections } from '..'
 
 import { Divider } from './components/divider'

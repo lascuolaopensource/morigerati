@@ -7,6 +7,9 @@
  */
 
 export interface Config {
+  auth: {
+    users: UserAuthOperations;
+  };
   collections: {
     stakeholders: Stakeholder;
     itinerari: Itinerari;
@@ -20,14 +23,27 @@ export interface Config {
   };
   globals: {
     home: Home;
-    'Chi siamo': ChiSiamo;
-    mobilità: Mobilita;
+    chi_siamo: ChiSiamo;
+    mobilita: Mobilita;
     testi: Testi;
     info: Info;
   };
   locale: null;
   user: User & {
     collection: 'users';
+  };
+}
+export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+  };
+  login: {
+    password: string;
+    email: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
   };
 }
 /**
@@ -487,8 +503,9 @@ export interface PayloadMigration {
  */
 export interface Home {
   id: string;
-  media?: (string | null) | Media;
-  testo?: {
+  statement: string;
+  media: string | Media;
+  testoHome: {
     root: {
       type: string;
       children: {
@@ -502,13 +519,58 @@ export interface Home {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
+  itinerari: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  luoghi: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  residenze: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Chi siamo".
+ * via the `definition` "chi_siamo".
  */
 export interface ChiSiamo {
   id: string;
@@ -533,7 +595,7 @@ export interface ChiSiamo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "mobilità".
+ * via the `definition` "mobilita".
  */
 export interface Mobilita {
   id: string;
@@ -696,6 +758,7 @@ export interface Info {
   Via_line_1: string;
   Civico_e_cap: string;
   Citta: string;
+  Mail: string;
   Orario_1: string;
   Orario_2: string;
   Orario_3: string;
@@ -703,6 +766,13 @@ export interface Info {
   Link_youtube: string;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "auth".
+ */
+export interface Auth {
+  [k: string]: unknown;
 }
 
 

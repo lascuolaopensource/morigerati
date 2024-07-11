@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'payload/types'
+import type { GlobalConfig } from 'payload'
 import { contenutoFields } from '../../collections/fields'
 import { Globals } from '.'
 

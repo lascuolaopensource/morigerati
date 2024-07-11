@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'payload/types'
+import type { GlobalConfig } from 'payload'
 import { Globals } from '.'
 
 export const Info: GlobalConfig = {
