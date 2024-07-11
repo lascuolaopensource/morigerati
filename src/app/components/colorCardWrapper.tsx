@@ -1,5 +1,5 @@
 import React from 'react'
-import Colorcard from './colorCard'
+import Colorcard from '../components/colorCard'
 
 interface Media {
   url: string

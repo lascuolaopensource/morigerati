@@ -42,8 +42,8 @@ type PaginatedDocs<T> = {
   pagingCounter: number
   hasPrevPage: boolean
   hasNextPage: boolean
-  prevPage: null | number
-  nextPage: null | number
+  prevPage?: null | number
+  nextPage?: null | number
 }
 
 function mapToLuogoData(data: Record<string, any>): LuogoData {
