@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
-import Navbar from '../../../components/navbar'
-import Footer from '../../../components/footer'
+import Navbar from '../../../../components/navbar'
+import Footer from '../../../../components/footer'
 import { findCollection } from '@/utils/fetch'
 
 export const dynamic = 'force-dynamic'

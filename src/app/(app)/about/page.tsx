@@ -3,8 +3,8 @@ import { findGlobals, findCollection } from '@/utils/fetch'
 
 import { renderElement, RootNode } from '@/utils/renderElement'
 
-import Navbar from '@/app/components/navbar'
-import Footer from '@/app/components/footer'
+import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

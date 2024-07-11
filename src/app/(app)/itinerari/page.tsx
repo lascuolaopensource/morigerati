@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react'
 import { findCollection, findGlobals } from '@/utils/fetch'
 
-import ColorCardWrapper from '@/app/components/colorCardWrapper'
+import ColorCardWrapper from '@/components/colorCardWrapper'
 
-import Navbar from '../../components/navbar'
-import Footer from '../../components/footer'
+import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

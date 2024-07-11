@@ -5,10 +5,10 @@ import Image from 'next/image'
 
 import { renderElement, RootNode } from '@/utils/renderElement'
 
-import Navbar from '@/app/components/navbar'
-import Footer from '@/app/components/footer'
+import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
 
-import MySwyper from '@/app/components/mySwiper'
+import MySwyper from '@/components/mySwiper'
 
 import loremPic from '@/public/loremPic.png'
 
