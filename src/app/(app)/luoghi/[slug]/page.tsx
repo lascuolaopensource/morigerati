@@ -48,8 +48,6 @@ interface LuogoData {
   servizi: ServizioData[]
   contatti: any[]
   media: MediaData
-  createdAt: string
-  updatedAt: string
 }
 
 type PaginatedDocs<T> = {
@@ -72,8 +70,6 @@ function mapToLuogoData(data: Record<string, any>): LuogoData {
     servizi: data.servizi || [],
     contatti: data.contatti || [],
     media: data.media,
-    createdAt: data.createdAt,
-    updatedAt: data.updatedAt,
   }
 }
 
@@ -118,9 +114,11 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         {luogoData.nome ? (
           <h1 className="text-4xl font-bold">{luogoData.nome}</h1>
         ) : (
-          <p>Error loading statement data</p>
+          <p>Error loading luogo title</p>
         )}
+        <p>{JSON.stringify(luogoData)}</p>
       </div>
+
       <Footer />
     </div>
   )
