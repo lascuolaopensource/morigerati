@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react'
-import { findGlobals, findCollection } from '@/utils/fetch'
-
-import { renderElement, RootNode } from '@/utils/renderElement'
-
+import { findGlobals } from '@/utils/fetch'
+import renderElement, { RootNode } from '@/utils/renderElement'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 
@@ -15,15 +13,22 @@ interface GlobalTesti {
   }
 }
 
-const Home = async () => {
-  let testoAbout = null
+const About = async () => {
+  let testoAbout: RootNode['children'] | null = null
+  let errorMessage: string | null = null
 
   try {
     const globalData = (await findGlobals({ slug: 'chi_siamo' })) as unknown as GlobalTesti
+    console.log('Global Data:', JSON.stringify(globalData, null, 2))
 
-    testoAbout = globalData.testo.root.children
+    if (globalData && globalData.testo && globalData.testo.root) {
+      testoAbout = globalData.testo.root.children
+    } else {
+      errorMessage = 'Missing or invalid data structure'
+    }
   } catch (error) {
     console.error('Error fetching data:', error)
+    errorMessage = 'Error fetching data'
   }
 
   return (
@@ -32,15 +37,9 @@ const Home = async () => {
       <div className="bg-white p-3 pt-5">
         <h1 className="font-normal text-3xl pt-4 pb-4 leading-4">Chi siamo</h1>
         {testoAbout ? (
-          testoAbout.map((child, index) => (
-            <React.Fragment key={index}>
-              {child.children.map((element, subIndex) => (
-                <React.Fragment key={subIndex}>{renderElement(element, child.tag)}</React.Fragment>
-              ))}
-            </React.Fragment>
-          ))
+          renderElement([{ children: testoAbout }])
         ) : (
-          <p>Error loading about text data</p>
+          <p>Error loading about text data: {errorMessage}</p>
         )}
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
@@ -50,4 +49,4 @@ const Home = async () => {
   )
 }
 
-export default Home
+export default About
