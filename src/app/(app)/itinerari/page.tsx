@@ -47,6 +47,7 @@ const ItinerariPage = async () => {
           <ColorCardWrapper
             color="bg-itinerarioColor"
             jsonString={JSON.stringify(collectionItinerari)}
+            previous="itinerari"
           />
         </Suspense>
       </div>

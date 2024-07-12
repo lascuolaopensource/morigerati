@@ -44,7 +44,11 @@ const LuoghiPage = async () => {
           <p>Error loading Luoghi text data</p>
         )}
         <Suspense fallback={<div>Loading Luogo component...</div>}>
-          <ColorCardWrapper color="bg-luogoColor" jsonString={JSON.stringify(collectionLuoghi)} />
+          <ColorCardWrapper
+            color="bg-luogoColor"
+            jsonString={JSON.stringify(collectionLuoghi)}
+            previous="luoghi"
+          />
         </Suspense>
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>

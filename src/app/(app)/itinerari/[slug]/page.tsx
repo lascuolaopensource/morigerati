@@ -4,40 +4,61 @@ import { findCollection } from '@/utils/fetch'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import BackButton from '@/components/backButton'
+import ItinerarioDetailsCard from '@/components/itinerarioDetailsCard'
+import ServiziWrapper from '@/components/servizioCardWrapper'
 import renderElement, { RootNode } from '@/utils/renderElement'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-interface ContactData {
-  nome: string
-  link?: string
-  email?: string
-  telefono?: string
+interface MediaData {
   id: string
+  alt: string
+  filename: string
+  mimeType: string
+  filesize: number
+  width: number
+  height: number
+  focalX: number
+  focalY: number
+  createdAt: string
+  updatedAt: string
+  url: string
+  thumbnailURL: string | null
 }
 
-interface StakeholderData {
+interface Servizio {
   id: string
   nome: string
+  // Add other properties as needed
+}
+
+interface ItinerarioData {
+  id: string
+  nome: string
+  tipo: string[]
+  servizi: Servizio[]
+  media_geolocalizzati: any[]
+  media: MediaData
   testo: {
     root: RootNode
   }
-  contatti: ContactData[]
-  media: {
-    url: string
-    alt: string
-  }
+  difficolta: string
+  dislivello: string
+  lunghezza: number
+  tempo: number
+  createdAt: string
+  updatedAt: string
 }
 
 type CollectionData = {
-  docs: Array<StakeholderData>
+  docs: Array<ItinerarioData>
 }
 
-async function getStakeholderData(slug: string): Promise<StakeholderData | null> {
+async function getItinerarioData(slug: string): Promise<ItinerarioData | null> {
   try {
     const collectionData = (await findCollection({
-      collection: 'stakeholders',
+      collection: 'itinerari',
     })) as unknown as CollectionData
     const matchingDoc = collectionData.docs.find((doc) => doc.id === slug)
     if (matchingDoc) {
@@ -49,20 +70,20 @@ async function getStakeholderData(slug: string): Promise<StakeholderData | null>
   return null
 }
 
-export default async function Stakeholder({ params }: { params: { slug: string } }) {
-  const stakeholderData = await getStakeholderData(params.slug)
-  if (!stakeholderData) {
-    return <div>Stakeholder non trovato</div>
+export default async function Itinerario({ params }: { params: { slug: string } }) {
+  const itinerarioData = await getItinerarioData(params.slug)
+  if (!itinerarioData) {
+    return <div>Itinerario non trovato</div>
   }
 
   return (
     <div className="bg-white">
-      <Navbar backgroundColor="bg-stakeholderColor" currentPage="/stakeholders" />
+      <Navbar backgroundColor="bg-itinerarioColor" currentPage="/itinerari" />
       <div className="w-full h-[70vh] relative">
-        {stakeholderData.media && stakeholderData.media.url && (
+        {itinerarioData.media && itinerarioData.media.url && (
           <Image
-            src={stakeholderData.media.url}
-            alt={stakeholderData.media.alt || 'Stakeholder image'}
+            src={itinerarioData.media.url}
+            alt={itinerarioData.media.alt || 'Immagine itinerario'}
             layout="fill"
             objectFit="cover"
             className="w-full h-full"
@@ -72,39 +93,38 @@ export default async function Stakeholder({ params }: { params: { slug: string }
       <div className="p-4">
         <BackButton />
         <div className="pt-4"></div>
-        {stakeholderData.nome ? (
-          <h1 className="text-4xl font-bold mb-4">{stakeholderData.nome}</h1>
+        {itinerarioData.nome ? (
+          <h1 className="text-4xl font-bold mb-4">{itinerarioData.nome}</h1>
         ) : (
-          <p>Error loading stakeholder name</p>
-        )}
-        {stakeholderData.testo && stakeholderData.testo.root ? (
-          <div className="mb-6">{renderElement([stakeholderData.testo.root])}</div>
-        ) : (
-          <p>Error loading stakeholder description</p>
+          <p>Error loading itinerario name</p>
         )}
 
-        <h2 className="text-2xl font-semibold mb-2">Contatti</h2>
-        {stakeholderData.contatti.length > 0 ? (
-          <ul className="mb-6">
-            {stakeholderData.contatti.map((contatto, index) => (
-              <li key={index} className="mb-2">
-                <strong>{contatto.nome}</strong>
-                {contatto.telefono && <p>Telefono: {contatto.telefono}</p>}
-                {contatto.email && <p>Email: {contatto.email}</p>}
-                {contatto.link && (
-                  <p>
-                    Link:{' '}
-                    <a href={contatto.link} target="_blank" rel="noopener noreferrer">
-                      {contatto.link}
-                    </a>
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mb-6">Nessun contatto disponibile</p>
+        {itinerarioData.testo && itinerarioData.testo.root && (
+          <div className="mb-6">{renderElement([itinerarioData.testo.root])}</div>
         )}
+
+        <ItinerarioDetailsCard
+          lunghezza={itinerarioData.lunghezza}
+          tempo={itinerarioData.tempo}
+          dislivello={parseInt(itinerarioData.dislivello)}
+          difficolta={itinerarioData.difficolta}
+          tipo={itinerarioData.tipo}
+        />
+
+        <ServiziWrapper servizi={itinerarioData.servizi} />
+
+        {itinerarioData.media_geolocalizzati && itinerarioData.media_geolocalizzati.length > 0 && (
+          <div className="mb-4">
+            <h2 className="text-2xl font-semibold mb-2">Media geolocalizzati</h2>
+            <p>Disponibili {itinerarioData.media_geolocalizzati.length} media geolocalizzati</p>
+          </div>
+        )}
+
+        <div className="mb-4">
+          <h2 className="text-2xl font-semibold mb-2">Informazioni aggiuntive</h2>
+          <p>Creato il: {new Date(itinerarioData.createdAt).toLocaleDateString()}</p>
+          <p>Ultimo aggiornamento: {new Date(itinerarioData.updatedAt).toLocaleDateString()}</p>
+        </div>
       </div>
       <Footer />
     </div>

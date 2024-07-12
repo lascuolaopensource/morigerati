@@ -18,9 +18,10 @@ interface JsonData {
 interface ColorCardWrapperProps {
   color: string
   jsonString: string
+  previous: string
 }
 
-const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, jsonString }) => {
+const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, jsonString, previous }) => {
   let data: JsonData
 
   try {
@@ -39,6 +40,7 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, jsonString }
           title={doc.nome}
           imageUrl={doc.media.url}
           slugUrl={doc.id}
+          previous={previous}
         />
       ))}
     </div>

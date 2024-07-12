@@ -47,6 +47,7 @@ const StakeholdersPage = async () => {
           <ColorCardWrapper
             color="bg-stakeholderColor"
             jsonString={JSON.stringify(collectionStakeholders)}
+            previous="stakeholders"
           />
         </Suspense>
       </div>
