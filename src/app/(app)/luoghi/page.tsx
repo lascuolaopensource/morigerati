@@ -32,7 +32,7 @@ const LuoghiPage = async () => {
   }
 
   return (
-    <main>
+    <main className="mx-auto max-w-xl">
       <Navbar backgroundColor="bg-luogoColor" currentPage="/luoghi" />
       <div className="bg-white p-3 pt-5">
         <h1 className="font-bold text-[40px]">Luoghi</h1>

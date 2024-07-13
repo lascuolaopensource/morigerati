@@ -89,7 +89,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white mx-auto max-w-xl">
       <Navbar backgroundColor="bg-luogoColor" currentPage="/luoghi" />
       <div className="w-full h-[70vh] relative">
         {luogoData.media && luogoData.media.url && (

@@ -32,7 +32,7 @@ const StakeholdersPage = async () => {
   }
 
   return (
-    <main>
+    <main className="mx-auto max-w-xl">
       <Navbar backgroundColor="bg-stakeholderColor" currentPage="/stakeholders" />
       <div className="bg-white p-3 pt-5">
         <h1 className="font-bold text-[40px]">Stakeholders</h1>

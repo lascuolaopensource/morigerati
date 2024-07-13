@@ -56,7 +56,7 @@ export default async function Stakeholder({ params }: { params: { slug: string }
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white mx-auto max-w-xl">
       <Navbar backgroundColor="bg-stakeholderColor" currentPage="/stakeholders" />
       <div className="w-full h-[70vh] relative">
         {stakeholderData.media && stakeholderData.media.url && (

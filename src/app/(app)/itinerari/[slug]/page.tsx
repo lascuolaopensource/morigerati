@@ -102,7 +102,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white mx-auto max-w-xl">
       <Navbar backgroundColor="bg-itinerarioColor" currentPage="/itinerari" />
       <div className="w-full h-[70vh] relative">
         {itinerarioData.media && itinerarioData.media.url && (
