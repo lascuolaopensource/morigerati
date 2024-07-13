@@ -22,7 +22,7 @@ function renderTextNode(node: TextNode, tag?: string) {
     case 'h1':
       return <h1 className="font-bold text-3xl pt-4 pb-1 leading-2">{node.text}</h1>
     case 'h2':
-      return <h2 className="font-normal text-2xl pt-4 leading-2">{node.text}</h2>
+      return <h2 className="font-bold text-xl pt-4 pb-2 leading-5">{node.text}</h2>
     case 'h3':
       return <h3>{node.text}</h3>
     case 'p':
