@@ -65,7 +65,7 @@ const Navbar: React.FC<NavbarProps> = ({ backgroundColor, currentPage }) => {
           <ul className="flex flex-col items-center pt-24 space-y-6 text-2xl">
             <li>{renderPageLink('/', 'Home')}</li>
             <li>{renderPageLink('/about', 'About')}</li>
-            <li>{renderPageLink('/mobilita-sostenibile', 'Mobilità sostenibile')}</li>
+            <li>{renderPageLink('/mobilita', 'Mobilità sostenibile')}</li>
             <li>{renderPageLink('/luoghi', 'Luoghi')}</li>
             <li>{renderPageLink('/itinerari', 'Itinerari')}</li>
             <li>{renderPageLink('/stakeholders', 'Stakeholders')}</li>
