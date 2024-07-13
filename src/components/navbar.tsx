@@ -69,8 +69,8 @@ const Navbar: React.FC<NavbarProps> = ({ backgroundColor, currentPage }) => {
             <li>{renderPageLink('/luoghi', 'Luoghi')}</li>
             <li>{renderPageLink('/itinerari', 'Itinerari')}</li>
             <li>{renderPageLink('/stakeholders', 'Stakeholders')}</li>
-            <li>{renderPageLink('/residenze', 'Residenze')}</li>
-            <li>{renderPageLink('/articoli', 'Articoli')}</li>
+            {/* <li>{renderPageLink('/residenze', 'Residenze')}</li> */}
+            {/* <li>{renderPageLink('/articoli', 'Articoli')}</li> */}
           </ul>
         </div>
       )}

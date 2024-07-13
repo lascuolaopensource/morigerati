@@ -33,6 +33,7 @@ export const Stakeholders: CollectionConfig = {
             F.posizione,
             F.divider,
             F.contatti,
+            F.itinerari
           ],
         },
         F.tabContenuto,

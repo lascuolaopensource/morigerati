@@ -95,6 +95,12 @@ export const media: RelationshipField = {
   relationTo: Collections.Media,
 }
 
+export const itinerari: RelationshipField = {
+  name: 'itinerari',
+  type: 'relationship',
+  relationTo: [Collections.Itinerari],
+}
+
 export const servizi_con_link: ArrayField = {
   name: 'servizi',
   type: 'array',

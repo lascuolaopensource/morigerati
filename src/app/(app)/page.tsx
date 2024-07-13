@@ -73,7 +73,7 @@ const Home = async () => {
           <p>Error loading statement data</p>
         )}
       </div>
-      <div className="bg-white p-3 pt-5 w-full">
+      <div className="bg-white font-bold p-3 pt-5 w-full leading-2">
         {testoHome ? renderElement([testoHome]) : <p>Error loading testoHome data</p>}
         <p className="font-bold pt-4 text-xl text-center">Itinerari</p>
         {itinerariText ? renderElement([itinerariText]) : <p>Error loading itinerari text data</p>}

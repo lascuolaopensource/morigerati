@@ -51,7 +51,11 @@ const MySwiper: React.FC<SwiperProps> = ({ json, color }) => {
 
   const documents = data.docs || [data as DocItem]
 
-  return <Swiper>{documents.map(createPolaroid)}</Swiper>
+  return (
+    <Swiper slidesPerView={2} spaceBetween={40}>
+      {documents.map(createPolaroid)}
+    </Swiper>
+  )
 }
 
 export default MySwiper

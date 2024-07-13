@@ -6,6 +6,7 @@ import Footer from '@/components/footer'
 import BackButton from '@/components/backButton'
 import ItinerarioDetailsCard from '@/components/itinerarioDetailsCard'
 import ServiziWrapper from '@/components/servizioCardWrapper'
+import MySwiper from '@/components/mySwiper'
 import renderElement, { RootNode } from '@/utils/renderElement'
 
 export const dynamic = 'force-dynamic'
@@ -49,6 +50,8 @@ interface ItinerarioData {
   tempo: number
   createdAt: string
   updatedAt: string
+  luoghi?: any[]
+  stakeholders?: any[]
 }
 
 type CollectionData = {
@@ -70,8 +73,30 @@ async function getItinerarioData(slug: string): Promise<ItinerarioData | null> {
   return null
 }
 
+async function getLuoghiData(): Promise<any[]> {
+  try {
+    const collectionData = await findCollection({ collection: 'luoghi' })
+    return collectionData.docs || []
+  } catch (error) {
+    console.error('Error fetching luoghi data:', error)
+    return []
+  }
+}
+
+async function getStakeholdersData(): Promise<any[]> {
+  try {
+    const collectionData = await findCollection({ collection: 'stakeholders' })
+    return collectionData.docs || []
+  } catch (error) {
+    console.error('Error fetching stakeholders data:', error)
+    return []
+  }
+}
+
 export default async function Itinerario({ params }: { params: { slug: string } }) {
   const itinerarioData = await getItinerarioData(params.slug)
+  const luoghiData = await getLuoghiData()
+  const stakeholdersData = await getStakeholdersData()
   if (!itinerarioData) {
     return <div>Itinerario non trovato</div>
   }
@@ -113,18 +138,24 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
         <ServiziWrapper servizi={itinerarioData.servizi} />
 
+        {/* Luoghi Carousel */}
+        <div className="my-8">
+          <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
+          <MySwiper json={JSON.stringify({ docs: luoghiData })} color="bg-luogoColor" />
+        </div>
+
+        {/* Stakeholders Carousel */}
+        <div className="my-8">
+          <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders</h2>
+          <MySwiper json={JSON.stringify({ docs: stakeholdersData })} color="bg-stakeholderColor" />
+        </div>
+
         {itinerarioData.media_geolocalizzati && itinerarioData.media_geolocalizzati.length > 0 && (
           <div className="mb-4">
             <h2 className="text-2xl font-semibold mb-2">Media geolocalizzati</h2>
             <p>Disponibili {itinerarioData.media_geolocalizzati.length} media geolocalizzati</p>
           </div>
         )}
-
-        <div className="mb-4">
-          <h2 className="text-2xl font-semibold mb-2">Informazioni aggiuntive</h2>
-          <p>Creato il: {new Date(itinerarioData.createdAt).toLocaleDateString()}</p>
-          <p>Ultimo aggiornamento: {new Date(itinerarioData.updatedAt).toLocaleDateString()}</p>
-        </div>
       </div>
       <Footer />
     </div>

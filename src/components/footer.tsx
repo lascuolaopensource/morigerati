@@ -97,6 +97,7 @@ const Footer = async () => {
           <Image src={IG} alt="Instagram" width={24} />
         </a>
       </div>
+      <div className="pb-5"></div>
     </footer>
   )
 }
