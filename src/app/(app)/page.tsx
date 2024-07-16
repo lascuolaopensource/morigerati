@@ -75,7 +75,7 @@ const Home = async () => {
       </div>
       <div className="bg-white font-bold p-3 pt-4 w-full leading-2">
         {testoHome ? renderElement([testoHome]) : <p>Error loading testoHome data</p>}
-        <p className="font-bold pt-4 text-xl text-center">Itinerari</p>
+        <p className="font-bold pt-4 text-xl text-center">Itinerario</p>
         {itinerariText ? renderElement([itinerariText]) : <p>Error loading itinerari text data</p>}
         <div className="pt-4"></div>
         <MySwyper json={JSON.stringify(collectionItinerari)} color="bg-itinerarioColor" />
