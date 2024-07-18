@@ -58,6 +58,29 @@ export const testo: RichTextField = {
   localized: true,
 }
 
+export function plainText(name: string): TextField {
+  return {
+    name,
+    type: 'text',
+    localized: true,
+  }
+}
+
+export function plainTextRequired(name: string): TextField {
+  return {
+    ...plainText(name),
+    required: true,
+  }
+}
+
+export function richText(name: string): RichTextField {
+  return {
+    name,
+    type: 'richText',
+    localized: true,
+  }
+}
+
 export const posizione: PointField = {
   name: 'posizione',
   type: 'point',
@@ -124,4 +147,17 @@ export const contenutoFields = [
 export const tabContenuto: Tab = {
   label: 'Contenuto',
   fields: contenutoFields,
+}
+
+export function titoloTesto(name: string) {
+  return [
+    divider,
+    header(name),
+    {
+      ...plainText(`${name}_title`),
+      required: true,
+      label: 'Titolo sezione',
+    },
+    { ...richText(name), label: 'Contenuto' },
+  ]
 }

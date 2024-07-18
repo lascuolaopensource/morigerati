@@ -1,6 +1,6 @@
 export function Header(content: string) {
   return (
-    <header className="array-field__header" style={{ marginBottom: '15px' }}>
+    <header className="array-field__header" style={{ marginBottom: '25px' }}>
       <div className="array-field__header-wrap">
         <div className="array-field__header-content">
           <h3 className="array-field__title">

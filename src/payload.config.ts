@@ -14,6 +14,12 @@ import { Residenze } from '@/db/collections/Residenze'
 import { Stakeholders } from '@/db/collections/Stakeholders'
 import { Users } from '@/db/collections/Users'
 
+import { Home } from '@/db/globals/Home'
+import { ChiSiamo } from '@/db/globals/ChiSiamo'
+import { MobilitaSostenibile } from '@/db/globals/MobilitaSostenibile'
+import { Footer } from '@/db/globals/Footer'
+import { Testi } from '@/db/globals/Testi'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -22,6 +28,7 @@ export default buildConfig({
     user: Users.slug,
   },
   collections: [Luoghi, Users, Media, Articoli, Itinerari, Stakeholders, Residenze],
+  globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
