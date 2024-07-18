@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react'
-import { findGlobals, findCollection } from '@/utils/fetch'
 import Image from 'next/image'
 import renderElement, { RootNode } from '@/utils/renderElement'
 import Navbar from '@/components/navbar'

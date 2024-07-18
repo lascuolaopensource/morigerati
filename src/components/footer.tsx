@@ -3,28 +3,11 @@ import Image from 'next/image'
 import logo from '@/public/logo.png'
 import IG from '@/public/IG.png'
 import YT from '@/public/YT.png'
-import { findGlobals } from '@/utils/fetch'
-
-interface InfoGlobal {
-  Title: string
-  Subtitle: string
-  Via_line_1: string
-  Civico_e_cap: string
-  Citta: string
-  Orario_1: string
-  Orario_2: string
-  Orario_3: string
-  Link_instagram: string
-  Link_youtube: string
-  globalType: string
-  createdAt: string
-  updatedAt: string
-  Mail: string
-  id: string
-}
+import { loadDb } from '@/utils/db'
 
 const Footer = async () => {
-  let footer = (await findGlobals({ slug: 'info' })) as unknown as InfoGlobal
+  const db = await loadDb()
+  const footer = await db.findGlobal({ slug: 'footer' })
 
   const splitSubtitle = (subtitle: string | undefined) => {
     if (!subtitle) return ['', '']
@@ -55,21 +38,21 @@ const Footer = async () => {
         <div className="flex space-x-4 items-top pt-6">
           <div className="flex-1">
             <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-              {footer?.Via_line_1 || ''}
+              {footer.via_line_1 || ''}
             </p>
             <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-              {footer?.Civico_e_cap || ''}
+              {footer.civico_e_cap || ''}
             </p>
             <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-              {footer?.Citta || ''}
+              {footer.citta || ''}
             </p>
             <p className="pt-1">
               <span className="font-bold leading-3 whitespace-nowrap text-[10px]">email: </span>
               <a
-                href={`mailto:${footer?.Mail || ''}`}
+                href={`mailto:${footer.mail || ''}`}
                 className="font-normal leading-3 whitespace-nowrap text-[10px]"
               >
-                {footer?.Mail || ''}
+                {footer.mail || ''}
               </a>
             </p>
           </div>
