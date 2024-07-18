@@ -153,11 +153,10 @@ body {
 }
 
 @layer base {
-    hs1 {
-      @apply text-2xl;
-    }
-    h2 {
-      @apply text-xl;
-    }
+  hs1 {
+    @apply text-2xl;
   }
-
+  h2 {
+    @apply text-xl;
+  }
+}
