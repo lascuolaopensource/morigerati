@@ -14,13 +14,17 @@ const Luoghi = async () => {
     slug: 'testi',
   })
 
+  const luoghi = await db.find({
+    collection: 'luoghi',
+  })
+
   const luoghiTitle = testi?.['Corpo pagina "Luoghi"_title']
 
   const luoghiText = testi?.['Corpo pagina "Luoghi"']
 
   return (
     <main className="mx-auto max-w-xl">
-      <Navbar backgroundColor="bg-itinerarioColor" currentPage="/luoghi" />
+      <Navbar backgroundColor="bg-luogoColor" currentPage="/luoghi" />
       <div className="bg-white p-3 pt-5">
         {luoghiTitle ? (
           <div className="font-normal text-sm pt-4 pb-4 leading-4">
@@ -31,18 +35,17 @@ const Luoghi = async () => {
         )}
 
         {luoghiText ? renderContent(luoghiText) : <p>Error loading about text data</p>}
-        {/*         <Suspense fallback={<div>Loading Itinerari component...</div>}>
+        <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper
-            color="bg-itinerarioColor"
-            jsonString={JSON.stringify(collectionItinerari)}
-            previous="itinerari"
+            color="bg-luogoColor"
+            jsonString={JSON.stringify(luoghi)}
+            previous="luoghi"
           />
         </Suspense>
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer />
-      </Suspense> */}
-      </div>
+      </Suspense>
     </main>
   )
 }

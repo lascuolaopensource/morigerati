@@ -20,7 +20,7 @@ const Stakeholders = async () => {
 
   return (
     <main className="mx-auto max-w-xl">
-      <Navbar backgroundColor="bg-itinerarioColor" currentPage="/stakeholders" />
+      <Navbar backgroundColor="bg-stakeholderColor" currentPage="/stakeholders" />
       <div className="bg-white p-3 pt-5">
         {stakeholdersTitle ? (
           <div className="font-normal text-sm pt-4 pb-4 leading-4">
@@ -33,9 +33,9 @@ const Stakeholders = async () => {
         {stakeholdersText ? renderContent(stakeholdersText) : <p>Error loading about text data</p>}
         {/*         <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper
-            color="bg-itinerarioColor"
+            color="bg-stakeholderColor"
             jsonString={JSON.stringify(collectionItinerari)}
-            previous="itinerari"
+            previous="stakeholder"
           />
         </Suspense>
       </div>

@@ -48,7 +48,6 @@ function renderContentNode(node: ContentNode): React.ReactNode {
 }
 
 export default function renderContent(jsonContent: any): React.ReactNode {
-  // Gestisce sia il formato precedente che quello nuovo
   const content = jsonContent.testo?.root || jsonContent.root || jsonContent
 
   if (!content || !content.children) {
