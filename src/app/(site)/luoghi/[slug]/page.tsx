@@ -1,92 +1,28 @@
 import React from 'react'
 import Image from 'next/image'
-import { findCollection } from '@/utils/fetch'
+import { loadDb } from '@/utils/db'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import BackButton from '@/components/backButton'
-import renderElement, { RootNode } from '@/utils/renderElement'
+import renderContent from '@/utils/renderElement'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-interface ContactData {
-  nome: string
-  link?: string
-  email?: string
-  telefono?: string
-  id: string
-}
-
-interface LuogoData {
-  id: string
-  nome: string
-  testo: {
-    root: RootNode
-  }
-  servizi: ServizioData[]
-  contatti: ContactData[]
-  media: { url: string }
-  orari: {
-    root: RootNode
-  }
-}
-
-interface ServizioData {
-  nome: string
-  testo: {
-    root: RootNode
-  }
-}
-
-type CollectionData = {
-  docs: Array<{
-    id: string
-    nome: string
-    testo: {
-      root: RootNode
-    }
-    servizi?: ServizioData[]
-    contatti?: ContactData[]
-    media?: { url: string }
-    orari: {
-      root: RootNode
-    }
-    [key: string]: any
-  }>
-}
-
-function mapToLuogoData(data: CollectionData['docs'][0]): LuogoData {
-  return {
-    id: data.id,
-    nome: data.nome,
-    testo: data.testo,
-    servizi: data.servizi || [],
-    contatti: data.contatti || [],
-    media: data.media || { url: '' },
-    orari: data.orari,
-  }
-}
-
-async function getLuogoData(slug: string): Promise<LuogoData | null> {
-  try {
-    const collectionData = (await findCollection({
-      collection: 'luoghi',
-    })) as unknown as CollectionData
-    const matchingDoc = collectionData.docs.find((doc) => doc.id === slug)
-    if (matchingDoc) {
-      return mapToLuogoData(matchingDoc)
-    }
-  } catch (error) {
-    console.error('Error fetching data:', error)
-  }
-  return null
-}
-
 export default async function Luogo({ params }: { params: { slug: string } }) {
-  const luogoData = await getLuogoData(params.slug)
-  if (!luogoData) {
-    return <div>Luogo non trovato</div>
-  }
+  const db = await loadDb()
+
+  const luogo = await db.find({
+    collection: 'luoghi',
+    where: {
+      id: {
+        equals: params.slug,
+      },
+    },
+    depth: 1,
+  })
+
+  const luogoData = luogo.docs[0]
 
   return (
     <div className="bg-white mx-auto max-w-xl">
@@ -111,7 +47,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           <p>Error loading luogo title</p>
         )}
         {luogoData.testo && luogoData.testo.root ? (
-          <div className="mb-6">{renderElement([luogoData.testo.root])}</div>
+          <div className="mb-6">{renderContent([luogoData.testo.root])}</div>
         ) : (
           <p>Error loading luogo description</p>
         )}
@@ -121,7 +57,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           <div key={index} className="mt-4">
             <h3 className="text-xl font-semibold ">{servizio.nome}</h3>
             {servizio.testo && servizio.testo.root ? (
-              renderElement([servizio.testo.root])
+              renderContent([servizio.testo.root])
             ) : (
               <p>Error loading servizio data</p>
             )}
@@ -153,7 +89,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
 
         <h2 className="text-2xl font-semibold mb-2">Orari</h2>
         {luogoData.orari && luogoData.orari.root ? (
-          <div className="mb-6">{renderElement([luogoData.orari.root])}</div>
+          <div className="mb-6">{renderContent(luogoData.orari.root)}</div>
         ) : (
           <p className="mb-6">Orari non disponibili</p>
         )}

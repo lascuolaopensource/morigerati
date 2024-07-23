@@ -14,7 +14,6 @@ const About = async () => {
   })
 
   const aboutTitle = about['Corpo pagina "chi siamo"_title']
-  const aboutData = typeof about === 'string' ? JSON.parse(about) : about
 
   return (
     <main className="mx-auto max-w-xl">
@@ -28,7 +27,11 @@ const About = async () => {
           <p>Error loading Itinerari text data</p>
         )}
 
-        {aboutData ? renderContent(aboutData) : <p>Error loading about text data</p>}
+        {about['Corpo pagina "chi siamo"_title'] ? (
+          renderContent(about['Corpo pagina "chi siamo"'])
+        ) : (
+          <p>Error loading about text data</p>
+        )}
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer />
