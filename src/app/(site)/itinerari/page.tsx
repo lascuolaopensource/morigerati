@@ -14,6 +14,10 @@ const ItinerariPage = async () => {
     slug: 'testi',
   })
 
+  const itinerari = await db.find({
+    collection: 'itinerari',
+  })
+
   const itinerariTitle = testi?.['Corpo pagina "Itinerari"_title']
 
   const itinerariText = testi['Corpo pagina "Itinerari"']
@@ -31,18 +35,17 @@ const ItinerariPage = async () => {
         )}
 
         {itinerariText ? renderContent(itinerariText) : <p>Error loading about text data</p>}
-        {/*         <Suspense fallback={<div>Loading Itinerari component...</div>}>
+        <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper
             color="bg-itinerarioColor"
-            jsonString={JSON.stringify(collectionItinerari)}
+            jsonString={JSON.stringify(itinerari)}
             previous="itinerari"
           />
         </Suspense>
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer />
-      </Suspense> */}
-      </div>
+      </Suspense>
     </main>
   )
 }

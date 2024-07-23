@@ -14,6 +14,10 @@ const Stakeholders = async () => {
     slug: 'testi',
   })
 
+  const stakeholders = await db.find({
+    collection: 'stakeholders',
+  })
+
   const stakeholdersTitle = testi['Corpo pagina "Stakeholders"_title']
 
   const stakeholdersText = testi?.['Corpo pagina "Stakeholders"']
@@ -30,19 +34,17 @@ const Stakeholders = async () => {
           <p>Error loading Itinerari text data</p>
         )}
 
-        {stakeholdersText ? renderContent(stakeholdersText) : <p>Error loading about text data</p>}
-        {/*         <Suspense fallback={<div>Loading Itinerari component...</div>}>
+        <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper
             color="bg-stakeholderColor"
-            jsonString={JSON.stringify(collectionItinerari)}
+            jsonString={JSON.stringify(stakeholders)}
             previous="stakeholder"
           />
         </Suspense>
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer />
-      </Suspense> */}
-      </div>
+      </Suspense>
     </main>
   )
 }
