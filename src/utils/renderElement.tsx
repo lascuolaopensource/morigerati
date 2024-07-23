@@ -1,47 +1,62 @@
 import React from 'react'
 
-interface GenericNode {
-  children?: GenericNode[]
-  type?: string
-  tag?: string
-  text?: string
+interface TextNode {
+  text: string
+  type: string
   [key: string]: any
 }
 
-function renderTextNode(node: GenericNode) {
-  const text = node.text || ''
+interface ContentNode {
+  children: TextNode[] | ContentNode[]
+  type: string
+  tag?: string
+  [key: string]: any
+}
+
+interface RootNode {
+  children: ContentNode[]
+  type: string
+  [key: string]: any
+}
+
+function renderTextNode(node: TextNode | string): string {
+  return typeof node === 'string' ? node : node.text
+}
+
+function renderContentNode(node: ContentNode): React.ReactNode {
+  const text = node.children
+    .map((child) => (typeof child === 'string' ? child : renderTextNode(child as TextNode)))
+    .join('')
+
   switch (node.type) {
+    case 'paragraph':
+      return <p className="font-normal text-sm pb-2 leading-6">{text}</p>
     case 'heading':
       switch (node.tag) {
         case 'h1':
-          return <h1 className="font-bold text-3xl pt-4 pb-1 leading-2">{text}</h1>
+          return <h1 className="font-bold text-3xl pt-4 pb-2 leading-tight">{text}</h1>
         case 'h2':
-          return <h2 className="font-bold text-xl pt-4 pb-2 leading-5">{text}</h2>
+          return <h2 className="font-semibold text-2xl pt-3 pb-1 leading-tight">{text}</h2>
         case 'h3':
-          return <h3 className="font-semibold text-lg pt-3 pb-1 leading-6">{text}</h3>
+          return <h3 className="font-medium text-xl pt-2 pb-1 leading-snug">{text}</h3>
         default:
-          return <h4 className="font-medium text-base pt-2 pb-1 leading-6">{text}</h4>
+          return <h4 className="font-medium text-lg pt-2 pb-1 leading-snug">{text}</h4>
       }
-    case 'paragraph':
-      return <p className="font-normal text-sm pb-2 leading-4">{text}</p>
     default:
       return <span>{text}</span>
   }
 }
 
-function renderNode(node: GenericNode): React.ReactNode {
-  if (node.children && node.children.length > 0) {
-    return renderTextNode({
-      ...node,
-      text: node.children.map((child) => child.text).join(''),
-    })
-  }
-  return null
-}
-
 export default function renderContent(jsonContent: any): React.ReactNode {
-  const content = jsonContent.testo?.root?.children || []
-  return content.map((node: GenericNode, index: number) => (
-    <React.Fragment key={index}>{renderNode(node)}</React.Fragment>
+  // Gestisce sia il formato precedente che quello nuovo
+  const content = jsonContent.testo?.root || jsonContent.root || jsonContent
+
+  if (!content || !content.children) {
+    console.error('Invalid JSON structure:', jsonContent)
+    return null
+  }
+
+  return content.children.map((node: ContentNode, index: number) => (
+    <React.Fragment key={index}>{renderContentNode(node)}</React.Fragment>
   ))
 }

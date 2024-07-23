@@ -13,13 +13,20 @@ const About = async () => {
     slug: 'chi_siamo',
   })
 
+  const aboutTitle = about['Corpo pagina "chi siamo"_title']
   const aboutData = typeof about === 'string' ? JSON.parse(about) : about
 
   return (
     <main className="mx-auto max-w-xl">
       <Navbar backgroundColor="bg-white" currentPage="/about" />
       <div className="bg-white p-3 pt-5">
-        <h1 className="font-normal text-3xl pt-4 pb-4 leading-4">Chi siamo</h1>
+        {aboutTitle ? (
+          <div className="font-normal text-sm pt-4 pb-4 leading-4">
+            <h1 className="font-bold text-[40px]">{aboutTitle}</h1>
+          </div>
+        ) : (
+          <p>Error loading Itinerari text data</p>
+        )}
 
         {aboutData ? renderContent(aboutData) : <p>Error loading about text data</p>}
       </div>

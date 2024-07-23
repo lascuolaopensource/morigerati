@@ -8,40 +8,43 @@ import renderContent from '@/utils/renderElement'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const StakeholdersPage = async () => {
+const Stakeholders = async () => {
   const db = await loadDb()
-
-  const stakeholder = await db.find({
-    collection: 'stakeholders',
+  const testi = await db.findGlobal({
+    slug: 'testi',
   })
 
-  const stakeholderData = stakeholder.docs[0]
+  const stakeholdersTitle = testi['Corpo pagina "Stakeholders"_title']
+
+  const stakeholdersText = testi?.['Corpo pagina "Stakeholders"']
 
   return (
     <main className="mx-auto max-w-xl">
-      <Navbar backgroundColor="bg-stakeholderColor" currentPage="/stakeholders" />
+      <Navbar backgroundColor="bg-itinerarioColor" currentPage="/stakeholders" />
       <div className="bg-white p-3 pt-5">
-        <h1 className="font-bold text-[40px]">Stakeholders</h1>
-        {/*         {stakeholdersTesto ? (
+        {stakeholdersTitle ? (
           <div className="font-normal text-sm pt-4 pb-4 leading-4">
-            {renderElement([{ children: stakeholdersTesto }])}
+            <h1 className="font-bold text-[40px]">{stakeholdersTitle}</h1>
           </div>
         ) : (
-          <p>Error loading Stakeholders text data</p>
-        )} */}
-        <Suspense fallback={<div>Loading Stakeholders component...</div>}>
-          {/*           <ColorCardWrapper
-            color="bg-stakeholderColor"
-            jsonString={JSON.stringify(collectionStakeholders)}
-            previous="stakeholders"
-          /> */}
+          <p>Error loading Itinerari text data</p>
+        )}
+
+        {stakeholdersText ? renderContent(stakeholdersText) : <p>Error loading about text data</p>}
+        {/*         <Suspense fallback={<div>Loading Itinerari component...</div>}>
+          <ColorCardWrapper
+            color="bg-itinerarioColor"
+            jsonString={JSON.stringify(collectionItinerari)}
+            previous="itinerari"
+          />
         </Suspense>
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer />
-      </Suspense>
+      </Suspense> */}
+      </div>
     </main>
   )
 }
 
-export default StakeholdersPage
+export default Stakeholders

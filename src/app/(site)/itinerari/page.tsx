@@ -1,49 +1,37 @@
 import React, { Suspense } from 'react'
-import { findCollection, findGlobals } from '@/utils/fetch'
+import { loadDb } from '@/utils/db'
 import ColorCardWrapper from '@/components/colorCardWrapper'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
-import renderElement, { RootNode } from '@/utils/renderElement'
+import renderContent from '@/utils/renderElement'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-interface GlobalTesti {
-  Itinerari: {
-    testo: {
-      root: RootNode
-    }
-  }
-}
-
 const ItinerariPage = async () => {
-  let collectionItinerari = null
-  let itinerariTesto: RootNode['children'] | null = null
+  const db = await loadDb()
+  const testi = await db.findGlobal({
+    slug: 'testi',
+  })
 
-  try {
-    const [collectionData, globalData] = await Promise.all([
-      findCollection({ collection: 'itinerari' }),
-      findGlobals({ slug: 'testi' }) as unknown as Promise<GlobalTesti>,
-    ])
-    collectionItinerari = collectionData
-    itinerariTesto = globalData.Itinerari.testo.root.children
-  } catch (error) {
-    console.error('Error fetching data:', error)
-  }
+  const itinerariTitle = testi?.['Corpo pagina "Itinerari"_title']
+
+  const itinerariText = testi['Corpo pagina "Itinerari"']
 
   return (
     <main className="mx-auto max-w-xl">
       <Navbar backgroundColor="bg-itinerarioColor" currentPage="/itinerari" />
       <div className="bg-white p-3 pt-5">
-        <h1 className="font-bold text-[40px]">Itinerari</h1>
-        {itinerariTesto ? (
+        {itinerariTitle ? (
           <div className="font-normal text-sm pt-4 pb-4 leading-4">
-            {renderElement([{ children: itinerariTesto }])}
+            <h1 className="font-bold text-[40px]">{itinerariTitle}</h1>
           </div>
         ) : (
           <p>Error loading Itinerari text data</p>
         )}
-        <Suspense fallback={<div>Loading Itinerari component...</div>}>
+
+        {itinerariText ? renderContent(itinerariText) : <p>Error loading about text data</p>}
+        {/*         <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper
             color="bg-itinerarioColor"
             jsonString={JSON.stringify(collectionItinerari)}
@@ -53,7 +41,8 @@ const ItinerariPage = async () => {
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer />
-      </Suspense>
+      </Suspense> */}
+      </div>
     </main>
   )
 }
