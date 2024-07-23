@@ -582,8 +582,8 @@ export interface Home {
  */
 export interface ChiSiamo {
   id: string;
-  media?: (string | null) | Media;
-  testo?: {
+  'Corpo pagina "chi siamo"_title': string;
+  'Corpo pagina "chi siamo"'?: {
     root: {
       type: string;
       children: {
@@ -607,8 +607,8 @@ export interface ChiSiamo {
  */
 export interface MobilitaSostenibile {
   id: string;
-  media?: (string | null) | Media;
-  testo?: {
+  'Corpo pagina "mobilità sostenibile"_title': string;
+  'Corpo pagina "mobilità sostenibile"'?: {
     root: {
       type: string;
       children: {
@@ -652,8 +652,8 @@ export interface Footer {
  */
 export interface Testi {
   id: string;
-  Luoghi_title: string;
-  Luoghi?: {
+  'Corpo pagina "Luoghi"_title': string;
+  'Corpo pagina "Luoghi"'?: {
     root: {
       type: string;
       children: {
@@ -668,8 +668,8 @@ export interface Testi {
     };
     [k: string]: unknown;
   } | null;
-  Itinerari_title: string;
-  Itinerari?: {
+  'Corpo pagina "Itinerari"_title': string;
+  'Corpo pagina "Itinerari"'?: {
     root: {
       type: string;
       children: {
@@ -684,8 +684,8 @@ export interface Testi {
     };
     [k: string]: unknown;
   } | null;
-  Residenze_title: string;
-  Residenze?: {
+  'Corpo pagina "Residenze"_title': string;
+  'Corpo pagina "Residenze"'?: {
     root: {
       type: string;
       children: {
@@ -700,8 +700,8 @@ export interface Testi {
     };
     [k: string]: unknown;
   } | null;
-  Stakeholders_title: string;
-  Stakeholders?: {
+  'Corpo pagina "Stakeholders"_title': string;
+  'Corpo pagina "Stakeholders"'?: {
     root: {
       type: string;
       children: {
@@ -716,8 +716,8 @@ export interface Testi {
     };
     [k: string]: unknown;
   } | null;
-  Articoli_title: string;
-  Articoli?: {
+  'Corpo pagina "Articoli"_title': string;
+  'Corpo pagina "Articoli"'?: {
     root: {
       type: string;
       children: {
@@ -732,8 +732,8 @@ export interface Testi {
     };
     [k: string]: unknown;
   } | null;
-  'Programma culturale_title': string;
-  'Programma culturale'?: {
+  'Corpo pagina "Programma culturale"_title': string;
+  'Corpo pagina "Programma culturale"'?: {
     root: {
       type: string;
       children: {

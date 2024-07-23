@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
-import { titoloTesto } from '@/db/fields'
+import * as F from '@/db/fields'
 import { Globals } from '.'
+
 
 export const Testi: GlobalConfig = {
   slug: Globals.Testi,
@@ -8,11 +9,11 @@ export const Testi: GlobalConfig = {
     read: () => true,
   },
   fields: [
-    ...titoloTesto('Luoghi'),
-    ...titoloTesto('Itinerari'),
-    ...titoloTesto('Residenze'),
-    ...titoloTesto('Stakeholders'),
-    ...titoloTesto('Articoli'),
-    ...titoloTesto('Programma culturale'),
+    ...F.titoloTesto('Corpo pagina "Luoghi"'),
+    ...F.titoloTesto('Corpo pagina "Itinerari"'),
+    ...F.titoloTesto('Corpo pagina "Residenze"'),
+    ...F.titoloTesto('Corpo pagina "Stakeholders"'),
+    ...F.titoloTesto('Corpo pagina "Articoli"'),
+    ...F.titoloTesto('Corpo pagina "Programma culturale"'),
   ],
 }

@@ -1,5 +1,5 @@
 import type { GlobalConfig } from 'payload'
-import { contenutoFields } from '@/db/fields'
+import * as F from '@/db/fields'
 import { Globals } from '.'
 
 export const ChiSiamo: GlobalConfig = {
@@ -8,5 +8,7 @@ export const ChiSiamo: GlobalConfig = {
   access: {
     read: () => true,
   },
-  fields: contenutoFields,
+  fields: [
+    ...F.titoloTesto('Corpo pagina "chi siamo"')
+]
 }
