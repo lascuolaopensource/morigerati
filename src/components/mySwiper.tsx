@@ -26,7 +26,7 @@ interface DocItem {
 }
 
 interface JsonData {
-  docs?: DocItem[]
+  docs: DocItem[]
 }
 
 const MySwiper: React.FC<SwiperProps> = ({ json, color }) => {

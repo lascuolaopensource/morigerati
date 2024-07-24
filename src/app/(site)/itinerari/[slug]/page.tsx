@@ -9,6 +9,8 @@ import ServiziWrapper from '@/components/servizioCardWrapper'
 import MySwiper from '@/components/mySwiper'
 import renderContent from '@/utils/renderElement'
 
+import { Media } from '@/payload-types'
+
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -22,7 +24,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         equals: params.slug,
       },
     },
-    depth: 1,
+    depth: 2,
   })
 
   const itinerarioData = itinerario.docs[0]
@@ -31,10 +33,10 @@ export default async function Itinerario({ params }: { params: { slug: string } 
     <div className="bg-white mx-auto max-w-xl">
       <Navbar backgroundColor="bg-itinerarioColor" currentPage="/itinerari" />
       <div className="w-full h-[70vh] relative">
-        {itinerarioData.media && itinerarioData.media.url && (
+        {itinerarioData.media && itinerarioData.media && (
           <Image
-            src={itinerarioData.media.url}
-            alt={itinerarioData.media.alt || 'Immagine itinerario'}
+            src={(itinerarioData.media as Media).url as string}
+            alt={(itinerarioData.media as Media).url as string}
             layout="fill"
             objectFit="cover"
             className="w-full h-full"
@@ -74,7 +76,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         <div className="my-8">
           <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders</h2>
           <MySwiper
-            json={JSON.stringify(itinerarioData.stakeholders)}
+            json={JSON.stringify(itinerarioData.stakeholders[0])}
             color="bg-stakeholderColor"
           />
         </div>
@@ -85,7 +87,6 @@ export default async function Itinerario({ params }: { params: { slug: string } 
             <p>Disponibili {itinerarioData.media_geolocalizzati.length} media geolocalizzati</p>
           </div>
         )}
-        <p>{JSON.stringify(itinerarioData.luoghi)}</p>
       </div>
       <Footer />
     </div>
