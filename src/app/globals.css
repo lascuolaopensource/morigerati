@@ -148,6 +148,12 @@
   font-style: normal italic;
 }
 
+html,
+body,
+main {
+  min-height: 100svh;
+}
+
 body {
   font-family: 'TransInstrumentSans', sans-serif;
 }

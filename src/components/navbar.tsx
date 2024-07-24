@@ -28,8 +28,8 @@ const Navbar: React.FC<NavbarProps> = ({ backgroundColor, currentPage }) => {
   }
 
   return (
-    <div className="mx-auto max-w-xl">
-      <nav className={`w-full ${backgroundColor} relative `}>
+    <nav className={`w-full ${backgroundColor} relative`}>
+      <div className="max-w-7xl mx-auto">
         <div className="py-4 px-6">
           <div className="flex justify-between items-center">
             <div className="w-8">{/* Spazio vuoto */}</div>
@@ -49,34 +49,39 @@ const Navbar: React.FC<NavbarProps> = ({ backgroundColor, currentPage }) => {
 
         {/* Menu */}
         {isMenuOpen && (
-          <div className="fixed inset-0 bg-black text-white z-40 mx-auto max-w-xl">
-            <div className="absolute top-0 left-0 right-0 py-4 px-6 flex justify-between items-center">
-              <div className="w-8"></div>
-              <div className="flex justify-center">
-                <Image src={logo} alt="Logo" width={100} />
+          <div className="fixed w-screen h-screen inset-0 bg-black text-white z-40">
+            <div className="">
+              <div className="py-4 px-6 border-b border-b-white">
+                <div className="mx-auto max-w-7xl flex justify-between items-center ">
+                  <div className="w-8"></div>
+                  <div className="flex justify-center">
+                    <Image src={logo} alt="Logo" width={100} />
+                  </div>
+                  <button
+                    onClick={toggleMenu}
+                    className="w-8 h-8 flex items-center justify-center text-3xl text-white"
+                    aria-label="Close menu"
+                  >
+                    &times;
+                  </button>
+                </div>
               </div>
-              <button
-                onClick={toggleMenu}
-                className="w-8 h-8 flex items-center justify-center text-3xl text-white"
-                aria-label="Close menu"
-              >
-                &times;
-              </button>
+
+              <ul className="flex flex-col items-center pt-24 space-y-6 text-2xl">
+                <li>{renderPageLink('/', 'Home')}</li>
+                <li>{renderPageLink('/about', 'About')}</li>
+                <li>{renderPageLink('/mobilita', 'Mobilità sostenibile')}</li>
+                <li>{renderPageLink('/luoghi', 'Luoghi')}</li>
+                <li>{renderPageLink('/itinerari', 'Itinerari')}</li>
+                <li>{renderPageLink('/stakeholders', 'Stakeholders')}</li>
+                {/* <li>{renderPageLink('/residenze', 'Residenze')}</li> */}
+                {/* <li>{renderPageLink('/articoli', 'Articoli')}</li> */}
+              </ul>
             </div>
-            <ul className="flex flex-col items-center pt-24 space-y-6 text-2xl">
-              <li>{renderPageLink('/', 'Home')}</li>
-              <li>{renderPageLink('/about', 'About')}</li>
-              <li>{renderPageLink('/mobilita', 'Mobilità sostenibile')}</li>
-              <li>{renderPageLink('/luoghi', 'Luoghi')}</li>
-              <li>{renderPageLink('/itinerari', 'Itinerari')}</li>
-              <li>{renderPageLink('/stakeholders', 'Stakeholders')}</li>
-              {/* <li>{renderPageLink('/residenze', 'Residenze')}</li> */}
-              {/* <li>{renderPageLink('/articoli', 'Articoli')}</li> */}
-            </ul>
           </div>
         )}
-      </nav>
-    </div>
+      </div>
+    </nav>
   )
 }
 
