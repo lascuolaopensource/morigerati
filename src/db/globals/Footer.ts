@@ -9,15 +9,17 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     F.plainTextRequired('title'),
-    F.plainTextRequired('subtitle'),
-    F.plainTextRequired('via_line_1'),
-    F.plainTextRequired('civico_e_cap'),
-    F.plainTextRequired('citta'),
-    F.plainTextRequired('mail'),
-    F.plainTextRequired('orario_1'),
-    F.plainTextRequired('orario_2'),
-    F.plainTextRequired('orario_3'),
-    F.plainTextRequired('link_instagram'),
-    F.plainTextRequired('link_youtube'),
+    {
+      name: 'testo_sinista',
+      type: 'richText',
+      label: 'testo sinistra',
+    },
+    {
+      name: 'testo_destra',
+      type: 'richText',
+      label: 'testo destra',
+    },
+    F.socialLinksArray,
+
   ],
 }

@@ -12,6 +12,8 @@ import { Collections } from '@/db/collections'
 
 import { Divider } from './components/divider'
 import { Header } from './components/header'
+import { Media } from '@/payload-types'
+import { array } from 'payload/shared'
 
 //
 
@@ -46,9 +48,16 @@ export const nome: TextField = {
   localized: true,
 }
 
+export const unrequiredNome: TextField = {
+  name: 'nome',
+  type: 'text',
+  localized: true,
+}
+
 export const link: TextField = {
   name: 'link',
   type: 'text',
+  localized: true,
 }
 
 export const testo: RichTextField = {
@@ -84,6 +93,7 @@ export function richText(name: string): RichTextField {
 export const posizione: PointField = {
   name: 'posizione',
   type: 'point',
+  localized: true,
 }
 
 export const linkConNome: RowField = {
@@ -91,9 +101,12 @@ export const linkConNome: RowField = {
   fields: [nome, link],
 }
 
+
+
 export const contatti: ArrayField = {
   name: 'contatti',
   type: 'array',
+  localized: true,
   fields: [
     linkConNome,
     {
@@ -102,10 +115,12 @@ export const contatti: ArrayField = {
         {
           name: 'email',
           type: 'email',
+          localized: true,
         },
         {
           name: 'telefono',
           type: 'text',
+          localized: true,
         },
       ],
     },
@@ -114,6 +129,12 @@ export const contatti: ArrayField = {
 
 export const media: RelationshipField = {
   name: 'media',
+  type: 'relationship',
+  relationTo: Collections.Media,
+}
+
+export const icon: RelationshipField = {
+  name: 'icon',
   type: 'relationship',
   relationTo: Collections.Media,
 }
@@ -161,3 +182,17 @@ export function titoloTesto(name: string) {
     { ...richText(name), label: 'Contenuto' },
   ]
 }
+
+export const socialLink: RowField = {
+  type: 'row',
+  fields: [unrequiredNome, link, icon],
+}
+
+export const socialLinksArray: ArrayField = {
+
+  name: 'Link Social',
+  type: 'array',
+  localized: true,
+  fields: [socialLink]
+}
+

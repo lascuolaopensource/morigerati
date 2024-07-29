@@ -633,16 +633,44 @@ export interface MobilitaSostenibile {
 export interface Footer {
   id: string;
   title: string;
-  subtitle: string;
-  via_line_1: string;
-  civico_e_cap: string;
-  citta: string;
-  mail: string;
-  orario_1: string;
-  orario_2: string;
-  orario_3: string;
-  link_instagram: string;
-  link_youtube: string;
+  testo_sinista?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  testo_destra?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  'Link Social'?:
+    | {
+        nome?: string | null;
+        link?: string | null;
+        icon?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
