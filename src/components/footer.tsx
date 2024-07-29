@@ -16,7 +16,7 @@ const Footer = async () => {
     return [words.slice(0, -1).join(' '), words[words.length - 1]]
   }
 
-  const [subtitleFirstPart, subtitleLastWord] = splitSubtitle(footer?.Subtitle)
+  const [subtitleFirstPart, subtitleLastWord] = splitSubtitle(footer?.subtitle)
 
   return (
     <footer className="bg-black text-white ">
@@ -27,7 +27,7 @@ const Footer = async () => {
               <Image src={logo} alt="Logo" width={140} height={100} />
             </div>
             <div className="flex-1">
-              <p className="font-bold text-xs leading-3">{footer?.Title || ''}</p>
+              <p className="font-bold text-xs leading-3">{footer?.title || ''}</p>
               <p className="font-light text-[12px] w-full block leading-3 text-right whitespace-nowrap">
                 {subtitleFirstPart}
               </p>
@@ -63,23 +63,23 @@ const Footer = async () => {
               </p>
               <div className="leading-tight pt-3">
                 <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-                  {footer?.Orario_1 || ''}
+                  {footer?.orario_1 || ''}
                 </p>
                 <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-                  {footer?.Orario_2 || ''}
+                  {footer?.orario_2 || ''}
                 </p>
                 <p className="font-normal leading-3 whitespace-nowrap text-[10px]">
-                  {footer?.Orario_3 || ''}
+                  {footer?.orario_3 || ''}
                 </p>
               </div>
             </div>
           </div>
         </div>
         <div className="mt-4 mb-4 flex space-x-4 items-center justify-end">
-          <a href={footer?.Link_youtube || '#'} target="_blank" rel="noopener noreferrer">
+          <a href={footer?.link_youtube || '#'} target="_blank" rel="noopener noreferrer">
             <Image src={YT} alt="Youtube" width={24} />
           </a>
-          <a href={footer?.Link_instagram || '#'} target="_blank" rel="noopener noreferrer">
+          <a href={footer?.link_instagram || '#'} target="_blank" rel="noopener noreferrer">
             <Image src={IG} alt="Instagram" width={24} />
           </a>
         </div>

@@ -50,15 +50,15 @@ const Home = async () => {
         <p className="font-bold pt-4 text-xl text-center">{home.itinerari_title}</p>
         {home.itinerari ? renderContent(home.itinerari) : <p>Error loading itinerari text data</p>}
         <div className="pt-4"></div>
-        <MySwyper json={JSON.stringify(itinerari)} color="bg-itinerarioColor" />
+        <MySwyper items={itinerari.docs} color="bg-itinerarioColor" />
         <p className="font-bold pt-4 text-xl text-center">{home.luoghi_title}</p>
         {home.luoghi ? renderContent(home.luoghi) : <p>Error loading luoghi text data</p>}
         <div className="pt-4"></div>
-        <MySwyper json={JSON.stringify(luoghi)} color="bg-luogoColor" />
+        <MySwyper items={luoghi.docs} color="bg-luogoColor" />
         <p className="font-bold pt-4 text-xl text-center">{home.residenze_title}</p>
         {home.residenze ? renderContent(home.residenze) : <p>Error loading residenze text data</p>}
         <div className="pt-4"></div>
-        <MySwyper json={JSON.stringify(residenze)} color="bg-residenzeColor" />
+        <MySwyper items={residenze.docs} color="bg-residenzeColor" />
       </div>
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer />

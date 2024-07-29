@@ -1,59 +1,61 @@
 'use client'
+
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import Polaroid from './polaroid'
+import { Itinerari, Luoghi, Stakeholder, Residenze, Media } from '@/payload-types'
 
-interface SwiperProps {
-  json: string
+type SwiperItem = Itinerari | Luoghi | Stakeholder | Residenze | string
+
+interface MySwiperProps {
+  items: SwiperItem[] | null | undefined
   color: string
 }
 
-interface MediaItem {
-  url: string
-}
-
-interface DocItem {
-  id: string
-  nome: string
-  media?: MediaItem
-  call_media?: MediaItem
-  Output?: {
-    output: {
-      media: MediaItem | null
-    }
-  }
-}
-
-interface JsonData {
-  docs: DocItem[]
-}
-
-const MySwiper: React.FC<SwiperProps> = ({ json, color }) => {
-  const data: JsonData = JSON.parse(json)
-
-  const getImageUrl = (doc: DocItem): string => {
-    if (doc.media?.url) {
-      return doc.media.url
-    } else if (doc.call_media?.url) {
-      return doc.call_media.url
-    } else if (doc.Output?.output.media?.url) {
-      return doc.Output.output.media.url
-    }
-    return ''
+const MySwiper: React.FC<MySwiperProps> = ({ items, color }) => {
+  if (!items || items.length === 0) {
+    return null
   }
 
-  const createPolaroid = (doc: DocItem) => (
-    <SwiperSlide key={doc.id}>
-      <Polaroid color={color} title={doc.nome} imageUrl={getImageUrl(doc)} />
+  const getImageUrl = (item: SwiperItem): string => {
+    if (typeof item === 'string') {
+      return '/path/to/stock-image.jpg'
+    }
+
+    if ('media' in item && item.media) {
+      return getMediaUrl(item.media)
+    }
+    if ('call_media' in item && item.call_media) {
+      return getMediaUrl(item.call_media)
+    }
+
+    return '/path/to/stock-image.jpg'
+  }
+
+  const getMediaUrl = (media: string | Media | null): string => {
+    if (typeof media === 'string') {
+      return media
+    }
+    if (media && 'url' in media && media.url) {
+      return media.url
+    }
+    return '/path/to/stock-image.jpg'
+  }
+
+  const createPolaroid = (item: SwiperItem, index: number) => (
+    <SwiperSlide key={typeof item === 'string' ? item : item.id || index}>
+      <Polaroid
+        color={color}
+        title={typeof item === 'string' ? 'Unknown' : item.nome}
+        imageUrl={getImageUrl(item)}
+      />
     </SwiperSlide>
   )
 
-  const documents = data.docs || [data as DocItem]
-
   return (
     <Swiper slidesPerView={2} spaceBetween={40}>
-      {documents.map(createPolaroid)}
+      {items.map(createPolaroid)}
     </Swiper>
   )
 }

@@ -5,13 +5,13 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import BackButton from '@/components/backButton'
 import renderContent from '@/utils/renderElement'
+import { getMediaURL } from '@/utils/getMediaUrl'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function Luogo({ params }: { params: { slug: string } }) {
   const db = await loadDb()
-
   const luogo = await db.find({
     collection: 'luoghi',
     where: {
@@ -21,16 +21,15 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
     },
     depth: 1,
   })
-
   const luogoData = luogo.docs[0]
 
   return (
     <div className="bg-white mx-auto max-w-xl">
       <Navbar backgroundColor="bg-luogoColor" currentPage="/luoghi" />
       <div className="w-full h-[70vh] relative">
-        {luogoData.media && luogoData.media.url && (
+        {luogoData.media && (
           <Image
-            src={luogoData.media.url}
+            src={getMediaURL(luogoData.media)}
             alt="Fullscreen Image"
             layout="fill"
             objectFit="cover"
@@ -53,19 +52,24 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         )}
 
         <h2 className="text-2xl font-semibold">Servizi</h2>
-        {luogoData.servizi.map((servizio, index) => (
-          <div key={index} className="mt-4">
-            <h3 className="text-xl font-semibold ">{servizio.nome}</h3>
-            {servizio.testo && servizio.testo.root ? (
-              renderContent([servizio.testo.root])
-            ) : (
-              <p>Error loading servizio data</p>
-            )}
-          </div>
-        ))}
+        {luogoData.servizi && luogoData.servizi.length > 0 ? (
+          luogoData.servizi.map((servizio, index) => (
+            <div key={index} className="mt-4">
+              <h3 className="text-xl font-semibold ">{servizio.nome}</h3>
+              {servizio.testo && servizio.testo.root ? (
+                renderContent([servizio.testo.root])
+              ) : (
+                <p>Error loading servizio data</p>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>Nessun servizio disponibile</p>
+        )}
+
         <div className="pb-4"></div>
         <h2 className="text-2xl font-semibold mb-2">Contatti</h2>
-        {luogoData.contatti.length > 0 ? (
+        {luogoData.contatti && luogoData.contatti.length > 0 ? (
           <ul className="mb-6">
             {luogoData.contatti.map((contatto, index) => (
               <li key={index} className="mb-2">

@@ -5,11 +5,11 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import BackButton from '@/components/backButton'
 import ItinerarioDetailsCard from '@/components/itinerarioDetailsCard'
-import ServiziWrapper from '@/components/servizioCardWrapper'
+import { ServiziCardWrapper } from '@/components/servizioCardWrapper'
 import MySwiper from '@/components/mySwiper'
-import renderContent from '@/utils/renderElement'
 
-import { Media } from '@/payload-types'
+import renderContent from '@/utils/renderElement'
+import { getMediaURL } from '@/utils/getMediaUrl'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -35,8 +35,8 @@ export default async function Itinerario({ params }: { params: { slug: string } 
       <div className="w-full h-[70vh] relative">
         {itinerarioData.media && itinerarioData.media && (
           <Image
-            src={(itinerarioData.media as Media).url as string}
-            alt={(itinerarioData.media as Media).url as string}
+            src={getMediaURL(itinerarioData.media)}
+            alt={getMediaURL(itinerarioData.media)}
             layout="fill"
             objectFit="cover"
             className="w-full h-full"
@@ -59,26 +59,21 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         <ItinerarioDetailsCard
           lunghezza={itinerarioData.lunghezza}
           tempo={itinerarioData.tempo}
-          dislivello={parseInt(itinerarioData.dislivello)}
+          dislivello={itinerarioData.dislivello}
           difficolta={itinerarioData.difficolta}
           tipo={itinerarioData.tipo}
         />
 
-        <ServiziWrapper servizi={itinerarioData.servizi} />
+        <ServiziCardWrapper servizi={itinerarioData.servizi} />
 
-        {/* Luoghi Carousel */}
         <div className="my-8">
           <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
-          <MySwiper json={JSON.stringify(itinerarioData.luoghi)} color="bg-luogoColor" />
+          <MySwiper items={itinerarioData.luoghi} color="bg-luogoColor" />
         </div>
 
-        {/* Stakeholders Carousel */}
         <div className="my-8">
           <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders</h2>
-          <MySwiper
-            json={JSON.stringify(itinerarioData.stakeholders[0])}
-            color="bg-stakeholderColor"
-          />
+          <MySwiper items={itinerarioData.stakeholders} color="bg-stakeholderColor" />
         </div>
 
         {itinerarioData.media_geolocalizzati && itinerarioData.media_geolocalizzati.length > 0 && (

@@ -5,13 +5,14 @@ import Footer from '@/components/footer'
 import BackButton from '@/components/backButton'
 import { loadDb } from '@/utils/db'
 import renderContent from '@/utils/renderElement'
+import { getMediaURL } from '@/utils/getMediaUrl'
+import { Stakeholder as StakeholderType } from '@/payload-types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function Stakeholder({ params }: { params: { slug: string } }) {
   const db = await loadDb()
-
   const stakeholders = await db.find({
     collection: 'stakeholders',
     where: {
@@ -21,17 +22,16 @@ export default async function Stakeholder({ params }: { params: { slug: string }
     },
     depth: 1,
   })
-
-  const stakeholderData = stakeholders.docs[0]
+  const stakeholderData = stakeholders.docs[0] as StakeholderType
 
   return (
     <div className="bg-white mx-auto max-w-xl">
       <Navbar backgroundColor="bg-stakeholderColor" currentPage="/stakeholders" />
       <div className="w-full h-[70vh] relative">
-        {stakeholderData.media && stakeholderData.media.link && (
+        {stakeholderData.media && (
           <Image
-            src={stakeholderData.media.url}
-            alt={stakeholderData.media.alt || 'Stakeholder image'}
+            src={getMediaURL(stakeholderData.media)}
+            alt={stakeholderData.nome || 'Stakeholder image'}
             layout="fill"
             objectFit="cover"
             className="w-full h-full"
@@ -46,16 +46,15 @@ export default async function Stakeholder({ params }: { params: { slug: string }
         ) : (
           <p>Error loading stakeholder name</p>
         )}
-        {stakeholderData.testo ? (
-          <div className="mb-6">{renderContent(stakeholderData.testo)}</div>
+        {stakeholderData.testo && stakeholderData.testo.root ? (
+          <div className="mb-6">{renderContent([stakeholderData.testo.root])}</div>
         ) : (
           <p>Error loading stakeholder description</p>
         )}
-
         <h2 className="text-2xl font-semibold mb-2">Contatti</h2>
-        {stakeholderData.contatti?.length > 0 ? (
+        {stakeholderData.contatti && stakeholderData.contatti.length > 0 ? (
           <ul className="mb-6">
-            {stakeholderData.contatti?.map((contatto, index) => (
+            {stakeholderData.contatti.map((contatto, index) => (
               <li key={index} className="mb-2">
                 <strong>{contatto.nome}</strong>
                 {contatto.telefono && <p>Telefono: {contatto.telefono}</p>}

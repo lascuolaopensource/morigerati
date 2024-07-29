@@ -1,17 +1,11 @@
 import React from 'react'
-import ServizioCard from '@/components/servizioCard'
-import { RootNode } from '@/utils/renderElement'
+import { Itinerari } from '@/payload-types'
+import renderElement from '@/utils/renderElement'
 
-interface Servizio {
-  nome: string
-  testo: {
-    root: RootNode
-  }
-  link: string
-}
+type Servizio = NonNullable<Itinerari['servizi']>[number]
 
 interface ServiziWrapperProps {
-  servizi: Servizio[] | any[]
+  servizi: Itinerari['servizi']
 }
 
 const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
@@ -25,7 +19,7 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
       <div className="space-y-4">
         {servizi.map((servizio, index) => (
           <ServizioCard
-            key={index}
+            key={servizio.id || index}
             nome={servizio.nome}
             testo={servizio.testo}
             link={servizio.link}
@@ -36,4 +30,36 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
   )
 }
 
-export default ServiziCardWrapper
+// ServizioCard component
+interface ServizioCardProps {
+  nome: Servizio['nome']
+  testo: Servizio['testo']
+  link: Servizio['link']
+}
+
+const ServizioCard: React.FC<ServizioCardProps> = ({ nome, testo, link }) => {
+  return (
+    <div className="border-2 border-black rounded-lg overflow-hidden flex">
+      <div className="w-3/4 p-4">
+        <h3 className="text-xl font-bold mb-2">{nome}</h3>
+        <div className="text-xs mb-4">
+          {testo && testo.root ? renderElement([testo.root]) : 'Nessuna descrizione disponibile'}
+        </div>
+        {link && (
+          <a
+            href={link}
+            className="border-2 border-black inline-block bg-itinerarioColor text-black px-4 py-2 rounded-md"
+          >
+            prenota
+          </a>
+        )}
+      </div>
+      <div className="w-1/4 bg-gray-200">
+        {/* Immagine stock fissa */}
+        <img src="/path/to/stock-image.jpg" alt={nome} className="w-full h-full object-cover" />
+      </div>
+    </div>
+  )
+}
+
+export { ServiziCardWrapper, ServizioCard }

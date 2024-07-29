@@ -7,3 +7,5 @@ export function getMediaUrl(media: string | Media | None): string | None {
     return media.url
   }
 }
+
+
