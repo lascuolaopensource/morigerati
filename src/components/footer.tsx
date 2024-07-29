@@ -1,4 +1,11 @@
 import React from 'react'
+
+export default function Footer() {
+  return <p>Footer</p>
+}
+
+{
+  /* import React from 'react'
 import Image from 'next/image'
 import logo from '@/public/logo.png'
 import IG from '@/public/IG.png'
@@ -90,3 +97,5 @@ const Footer = async () => {
 }
 
 export default Footer
+ */
+}
