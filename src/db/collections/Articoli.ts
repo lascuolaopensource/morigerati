@@ -18,7 +18,7 @@ export const Articoli: CollectionConfig = {
         {
           name: 'Dati',
           fields: [
-            F.header('Informazioni generali'),
+            F.title('Informazioni generali'),
             {
               name: 'titolo',
               type: 'text',

@@ -8,7 +8,7 @@ export const Home: GlobalConfig = {
     read: () => true,
   },
   fields: [
-    F.header('Landing'),
+    F.title('Landing'),
     {
       ...F.plainText('statement'),
       required: true,

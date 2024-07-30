@@ -18,7 +18,7 @@ export const Stakeholders: CollectionConfig = {
         {
           label: 'Dati',
           fields: [
-            F.header('Info generali'),
+            F.title('Info generali'),
             {
               type: 'row',
               fields: [

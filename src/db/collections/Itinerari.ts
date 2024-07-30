@@ -18,7 +18,7 @@ export const Itinerari: CollectionConfig = {
         {
           label: 'Dati',
           fields: [
-            F.header('Generale'),
+            F.title('Generale'),
             F.nome,
             {
               name: 'tracciato_gpx',
@@ -27,7 +27,7 @@ export const Itinerari: CollectionConfig = {
               relationTo: Collections.Media,
             },
             F.divider,
-            F.header('Informazioni tecniche'),
+            F.title('Informazioni tecniche'),
             {
               type: 'row',
               fields: [
@@ -102,7 +102,7 @@ export const Itinerari: CollectionConfig = {
             F.divider,
             F.servizi_con_link,
             F.divider,
-            F.header('Contenuti collegati'),
+            F.title('Contenuti collegati'),
             {
               name: 'luoghi',
               type: 'relationship',

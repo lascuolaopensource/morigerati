@@ -18,7 +18,7 @@ export const Residenze: CollectionConfig = {
         {
           label: 'Dati',
           fields: [
-            F.header('Informazioni generali'),
+            F.title('Informazioni generali'),
             F.nome,
             {
               type: 'row',
@@ -73,7 +73,7 @@ export const Residenze: CollectionConfig = {
               ],
             },
             F.divider,
-            F.header('Testi'),
+            F.title('Testi'),
             F.divider,
             {
               name: 'abstract',
@@ -95,7 +95,7 @@ export const Residenze: CollectionConfig = {
         {
           label: 'Call',
           fields: [
-            F.header('Informazioni generali'),
+            F.title('Informazioni generali'),
             {
               type: 'row',
               fields: [
@@ -111,14 +111,14 @@ export const Residenze: CollectionConfig = {
               ],
             },
             F.divider,
-            F.header('Immagini e media'),
+            F.title('Immagini e media'),
             {
               ...F.media,
               name: 'call_media',
               label: 'Media',
             },
             F.divider,
-            F.header('Testo'),
+            F.title('Testo'),
             {
               name: 'figure_richieste',
               label: 'Figure richieste',

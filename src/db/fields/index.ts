@@ -27,7 +27,7 @@ export const divider: UIField = {
   },
 }
 
-export function header(text: string): UIField {
+export function title(text: string): UIField {
   return {
     name: 'header',
     type: 'ui',
@@ -101,8 +101,6 @@ export const linkConNome: RowField = {
   fields: [nome, link],
 }
 
-
-
 export const contatti: ArrayField = {
   name: 'contatti',
   type: 'array',
@@ -158,10 +156,10 @@ export const servizi: ArrayField = {
 }
 
 export const contenutoFields = [
-  header('Immagini e media'),
+  title('Immagini e media'),
   media,
   divider,
-  header('Contenuti testuali'),
+  title('Contenuti testuali'),
   testo,
 ]
 
@@ -173,7 +171,7 @@ export const tabContenuto: Tab = {
 export function titoloTesto(name: string) {
   return [
     divider,
-    header(name),
+    title(name),
     {
       ...plainText(`${name}_title`),
       required: true,
@@ -189,10 +187,8 @@ export const socialLink: RowField = {
 }
 
 export const socialLinksArray: ArrayField = {
-
   name: 'Link Social',
   type: 'array',
   localized: true,
-  fields: [socialLink]
+  fields: [socialLink],
 }
-
