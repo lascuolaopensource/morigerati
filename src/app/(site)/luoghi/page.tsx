@@ -18,23 +18,23 @@ const Luoghi = async () => {
     collection: 'luoghi',
   })
 
-  const luoghiTitle = testi?.['Corpo pagina "Luoghi"_title']
-
-  const luoghiText = testi?.['Corpo pagina "Luoghi"']
-
   return (
     <main className="mx-auto max-w-xl">
       <Navbar backgroundColor="bg-luogoColor" currentPage="/luoghi" />
       <div className="bg-white p-3 pt-5">
-        {luoghiTitle ? (
+        {testi.luoghi.title ? (
           <div className="font-normal text-sm pt-4 pb-4 leading-4">
-            <h1 className="font-bold text-[40px]">{luoghiTitle}</h1>
+            <h1 className="font-bold text-[40px]">{testi.luoghi.title}</h1>
           </div>
         ) : (
           <p>Error loading Itinerari text data</p>
         )}
 
-        {luoghiText ? renderContent(luoghiText) : <p>Error loading about text data</p>}
+        {testi.luoghi.text ? (
+          renderContent(testi.luoghi.text)
+        ) : (
+          <p>Error loading about text data</p>
+        )}
         <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper
             color="bg-luogoColor"
