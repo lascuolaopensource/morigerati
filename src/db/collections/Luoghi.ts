@@ -4,13 +4,16 @@ import * as F from '@/db/fields'
 
 export const Luoghi: CollectionConfig = {
   slug: Collections.Luoghi,
+
   labels: {
     singular: 'Luogo',
     plural: 'Luoghi',
   },
+
   admin: {
     useAsTitle: F.nome.name,
   },
+
   fields: [
     {
       type: 'tabs',

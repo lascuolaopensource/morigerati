@@ -98,7 +98,6 @@ export const linkConNome: RowField = {
 export const contatti: ArrayField = {
   name: 'contatti',
   type: 'array',
-  localized: true,
   fields: [
     linkConNome,
     {
@@ -107,12 +106,10 @@ export const contatti: ArrayField = {
         {
           name: 'email',
           type: 'email',
-          localized: true,
         },
         {
           name: 'telefono',
           type: 'text',
-          localized: true,
         },
       ],
     },
@@ -123,18 +120,6 @@ export const media: RelationshipField = {
   name: 'media',
   type: 'relationship',
   relationTo: Collections.Media,
-}
-
-export const itinerari: RelationshipField = {
-  name: 'itinerari',
-  type: 'relationship',
-  relationTo: [Collections.Itinerari],
-}
-
-export const servizi_con_link: ArrayField = {
-  name: 'servizi',
-  type: 'array',
-  fields: [linkConNome, testo],
 }
 
 export const servizi: ArrayField = {

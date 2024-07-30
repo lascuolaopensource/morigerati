@@ -11,6 +11,7 @@ export const Residenze: CollectionConfig = {
   admin: {
     useAsTitle: F.nome.name,
   },
+
   fields: [
     {
       type: 'tabs',
@@ -35,7 +36,9 @@ export const Residenze: CollectionConfig = {
                 },
               ],
             },
+
             F.divider,
+
             {
               name: 'esperti',
               label: 'Tutor ed esperti',
@@ -44,20 +47,16 @@ export const Residenze: CollectionConfig = {
                 {
                   type: 'row',
                   fields: [
+                    F.nome,
                     {
-                      name: 'nome',
-                      type: 'text',
-                    },
-                    {
+                      ...F.media,
                       name: 'foto',
-                      type: 'upload',
-                      relationTo: Collections.Media,
                     },
                   ],
                 },
                 {
-                  name: 'Bio',
-                  type: 'richText',
+                  ...F.testo,
+                  name: 'bio',
                   label: 'Biografia',
                 },
                 {
@@ -74,24 +73,34 @@ export const Residenze: CollectionConfig = {
             },
             F.divider,
             F.title('Testi'),
-            F.divider,
+          ],
+        },
+
+        /* -- Testi -- */
+
+        {
+          label: 'Testi',
+          fields: [
             {
+              ...F.testo,
               name: 'abstract',
-              type: 'richText',
             },
             F.divider,
             {
+              ...F.testo,
               name: 'programma',
-              type: 'richText',
             },
             F.divider,
             {
+              ...F.testo,
               name: 'info_logistiche',
-              type: 'richText',
               label: 'Informazioni logistiche',
             },
           ],
         },
+
+        /* -- Call -- */
+
         {
           label: 'Call',
           fields: [
@@ -100,7 +109,8 @@ export const Residenze: CollectionConfig = {
               type: 'row',
               fields: [
                 {
-                  name: 'deadline',
+                  name: 'deadline_iscrizione',
+                  label: 'Scadenza iscrizioni',
                   type: 'date',
                 },
                 {
@@ -110,22 +120,29 @@ export const Residenze: CollectionConfig = {
                 },
               ],
             },
+
             F.divider,
+
             F.title('Immagini e media'),
             {
               ...F.media,
               name: 'call_media',
               label: 'Media',
             },
+
             F.divider,
+
             F.title('Testo'),
             {
+              ...F.testo,
               name: 'figure_richieste',
               label: 'Figure richieste',
-              type: 'richText',
             },
           ],
         },
+
+        /* -- Processo -- */
+
         {
           name: 'Processo',
           fields: [
@@ -136,6 +153,9 @@ export const Residenze: CollectionConfig = {
             },
           ],
         },
+
+        /* -- Output -- */
+
         {
           name: 'Output',
           fields: [

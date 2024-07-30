@@ -11,6 +11,7 @@ export const Itinerari: CollectionConfig = {
   admin: {
     useAsTitle: F.nome.name,
   },
+
   fields: [
     {
       type: 'tabs',
@@ -21,12 +22,13 @@ export const Itinerari: CollectionConfig = {
             F.title('Generale'),
             F.nome,
             {
+              ...F.media,
               name: 'tracciato_gpx',
               label: 'Tracciato GPX',
-              type: 'upload',
-              relationTo: Collections.Media,
             },
+
             F.divider,
+
             F.title('Informazioni tecniche'),
             {
               type: 'row',
@@ -80,28 +82,35 @@ export const Itinerari: CollectionConfig = {
                   type: 'select',
                   admin: {
                     isClearable: true,
-                    isSortable: true,
                   },
                   options: [
                     {
-                      label: 'facile',
+                      label: 'Facile',
                       value: 'facile',
                     },
                     {
-                      label: 'media',
+                      label: 'Media',
                       value: 'media',
                     },
                     {
-                      label: 'difficile',
+                      label: 'Difficile',
                       value: 'difficile',
                     },
                   ],
                 },
               ],
             },
+
             F.divider,
-            F.servizi_con_link,
+
+            {
+              name: 'servizi',
+              type: 'array',
+              fields: [F.linkConNome, F.testo],
+            },
+
             F.divider,
+
             F.title('Contenuti collegati'),
             {
               name: 'luoghi',
@@ -115,7 +124,9 @@ export const Itinerari: CollectionConfig = {
               relationTo: Collections.Stakeholders,
               hasMany: true,
             },
+
             F.divider,
+
             {
               name: 'media_geolocalizzati',
               label: 'Media geolocalizzati',
@@ -124,6 +135,7 @@ export const Itinerari: CollectionConfig = {
             },
           ],
         },
+
         F.tabContenuto,
       ],
     },

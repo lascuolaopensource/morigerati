@@ -11,6 +11,7 @@ export const Articoli: CollectionConfig = {
   admin: {
     useAsTitle: 'titolo',
   },
+
   fields: [
     {
       type: 'tabs',
@@ -20,8 +21,7 @@ export const Articoli: CollectionConfig = {
           fields: [
             F.title('Informazioni generali'),
             {
-              name: 'titolo',
-              type: 'text',
+              ...F.plainText('titolo'),
               required: true,
             },
             {

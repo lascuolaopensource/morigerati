@@ -211,7 +211,7 @@ export interface Articoli {
 export interface Itinerari {
   id: string;
   nome: string;
-  tracciato_gpx?: string | Media | null;
+  tracciato_gpx?: (string | null) | Media;
   lunghezza?: number | null;
   tempo?: number | null;
   dislivello?: string | null;
@@ -284,6 +284,7 @@ export interface Stakeholder {
    * @maxItems 2
    */
   posizione?: [number, number] | null;
+  indirizzo?: string | null;
   contatti?:
     | {
         nome: string;
@@ -293,10 +294,6 @@ export interface Stakeholder {
         id?: string | null;
       }[]
     | null;
-  itinerari?: {
-    relationTo: 'itinerari';
-    value: string | Itinerari;
-  } | null;
   media?: (string | null) | Media;
   testo?: {
     root: {
@@ -327,9 +324,9 @@ export interface Residenze {
   data_fine?: string | null;
   esperti?:
     | {
-        nome?: string | null;
-        foto?: string | Media | null;
-        Bio?: {
+        nome: string;
+        foto?: (string | null) | Media;
+        bio?: {
           root: {
             type: string;
             children: {
@@ -406,7 +403,7 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  deadline?: string | null;
+  deadline_iscrizione?: string | null;
   link_iscrizione?: string | null;
   call_media?: (string | null) | Media;
   figure_richieste?: {
