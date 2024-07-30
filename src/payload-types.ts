@@ -582,8 +582,8 @@ export interface Home {
  */
 export interface ChiSiamo {
   id: string;
-  'Corpo pagina "chi siamo"_title': string;
-  'Corpo pagina "chi siamo"'?: {
+  media?: (string | null) | Media;
+  testo?: {
     root: {
       type: string;
       children: {
@@ -607,8 +607,8 @@ export interface ChiSiamo {
  */
 export interface MobilitaSostenibile {
   id: string;
-  'Corpo pagina "mobilità sostenibile"_title': string;
-  'Corpo pagina "mobilità sostenibile"'?: {
+  media?: (string | null) | Media;
+  testo?: {
     root: {
       type: string;
       children: {

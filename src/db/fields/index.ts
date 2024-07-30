@@ -12,8 +12,7 @@ import { Collections } from '@/db/collections'
 
 import { Divider } from './components/divider'
 import { Header } from './components/header'
-import { Media } from '@/payload-types'
-import { array } from 'payload/shared'
+import { capitalizeFirstLetter } from '@/utils/strings'
 
 //
 
@@ -170,8 +169,7 @@ export const tabContenuto: Tab = {
 
 export function titoloTesto(name: string) {
   return [
-    divider,
-    title(name),
+    title(capitalizeFirstLetter(name)),
     {
       ...plainText(`${name}_title`),
       required: true,

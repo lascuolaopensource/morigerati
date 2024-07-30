@@ -4,11 +4,13 @@ import { Globals } from '.'
 
 export const Home: GlobalConfig = {
   slug: Globals.Home,
+
   access: {
     read: () => true,
   },
+
   fields: [
-    F.title('Landing'),
+    F.title('Copertina'),
     {
       ...F.plainText('statement'),
       required: true,
@@ -16,11 +18,19 @@ export const Home: GlobalConfig = {
     {
       ...F.media,
       name: 'cover',
+      label: 'Immagine di copertina',
     },
 
+    F.divider,
     ...F.titoloTesto('intro'),
+
+    F.divider,
     ...F.titoloTesto('itinerari'),
+
+    F.divider,
     ...F.titoloTesto('luoghi'),
+
+    F.divider,
     ...F.titoloTesto('residenze'),
   ],
 }
