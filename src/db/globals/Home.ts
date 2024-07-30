@@ -21,16 +21,9 @@ export const Home: GlobalConfig = {
       label: 'Immagine di copertina',
     },
 
-    F.divider,
-    ...F.titoloTesto('intro'),
-
-    F.divider,
-    ...F.titoloTesto('itinerari'),
-
-    F.divider,
-    ...F.titoloTesto('luoghi'),
-
-    F.divider,
-    ...F.titoloTesto('residenze'),
+    F.titleAndText('intro'),
+    F.titleAndText('itinerari'),
+    F.titleAndText('luoghi'),
+    F.titleAndText('residenze'),
   ],
 }

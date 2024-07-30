@@ -1,5 +1,6 @@
 import {
   ArrayField,
+  GroupField,
   PointField,
   RelationshipField,
   RichTextField,
@@ -44,12 +45,6 @@ export const nome: TextField = {
   name: 'nome',
   type: 'text',
   required: true,
-  localized: true,
-}
-
-export const unrequiredNome: TextField = {
-  name: 'nome',
-  type: 'text',
   localized: true,
 }
 
@@ -130,12 +125,6 @@ export const media: RelationshipField = {
   relationTo: Collections.Media,
 }
 
-export const icon: RelationshipField = {
-  name: 'icon',
-  type: 'relationship',
-  relationTo: Collections.Media,
-}
-
 export const itinerari: RelationshipField = {
   name: 'itinerari',
   type: 'relationship',
@@ -167,26 +156,30 @@ export const tabContenuto: Tab = {
   fields: contenutoFields,
 }
 
-export function titoloTesto(name: string) {
-  return [
-    title(capitalizeFirstLetter(name)),
-    {
-      ...plainText(`${name}_title`),
-      required: true,
-      label: 'Titolo sezione',
-    },
-    { ...richText(name), label: 'Contenuto' },
-  ]
+export function titleAndText(name: string, label?: string): GroupField {
+  return {
+    name,
+    type: 'group',
+    label: label ?? capitalizeFirstLetter(name),
+    fields: [
+      {
+        ...plainText(`title`),
+        required: true,
+        label: 'Titolo',
+      },
+      { ...richText('text'), label: 'Contenuto' },
+    ],
+  }
 }
 
-export const socialLink: RowField = {
+export const socialNetworkLink: RowField = {
   type: 'row',
-  fields: [unrequiredNome, link, icon],
+  fields: [nome, { ...link, required: true }],
 }
 
-export const socialLinksArray: ArrayField = {
+export const socialNetworkLinks: ArrayField = {
   name: 'Link Social',
   type: 'array',
   localized: true,
-  fields: [socialLink],
+  fields: [socialNetworkLink],
 }

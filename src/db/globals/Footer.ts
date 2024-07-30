@@ -4,22 +4,37 @@ import * as F from '@/db/fields'
 
 export const Footer: GlobalConfig = {
   slug: Globals.Footer,
+
   access: {
     read: () => true,
   },
+
   fields: [
-    F.plainTextRequired('title'),
     {
-      name: 'testo_sinista',
-      type: 'richText',
-      label: 'testo sinistra',
+      ...F.plainTextRequired('title'),
+      label: 'Titolo',
     },
+
+    F.divider,
+
+    {
+      name: 'testo_sinistra',
+      type: 'richText',
+      label: 'Testo a sinistra',
+      required: true,
+      localized: true,
+    },
+
     {
       name: 'testo_destra',
       type: 'richText',
-      label: 'testo destra',
+      label: 'Testo a destra',
+      required: true,
+      localized: true,
     },
-    F.socialLinksArray,
 
+    F.divider,
+
+    F.socialNetworkLinks,
   ],
 }
