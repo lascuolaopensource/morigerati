@@ -1,5 +1,6 @@
 import {
   ArrayField,
+  Field,
   GroupField,
   PointField,
   RelationshipField,
@@ -13,6 +14,8 @@ import { Collections } from '@/db/collections'
 
 import { Divider } from './components/divider'
 import { Header } from './components/header'
+import { Gap } from './components/gap'
+
 import { capitalizeFirstLetter } from '@/utils/strings'
 
 //
@@ -39,6 +42,18 @@ export function title(text: string): UIField {
   }
 }
 
+export function gap(size: number): UIField {
+  return {
+    name: 'gap',
+    type: 'ui',
+    admin: {
+      components: {
+        Field: () => Gap({ size }),
+      },
+    },
+  }
+}
+
 //
 
 export const nome: TextField = {
@@ -51,7 +66,6 @@ export const nome: TextField = {
 export const link: TextField = {
   name: 'link',
   type: 'text',
-  localized: true,
 }
 
 export const testo: RichTextField = {
@@ -87,12 +101,18 @@ export function richText(name: string): RichTextField {
 export const posizione: PointField = {
   name: 'posizione',
   type: 'point',
-  localized: true,
 }
 
 export const linkConNome: RowField = {
   type: 'row',
   fields: [nome, link],
+}
+
+export const linkArray: ArrayField = {
+  label: 'Link',
+  name: 'links',
+  type: 'array',
+  fields: linkConNome.fields,
 }
 
 export const contatti: ArrayField = {
@@ -128,9 +148,11 @@ export const servizi: ArrayField = {
   fields: [nome, testo],
 }
 
-export const contenutoFields = [
+export const contenutoFields: Field[] = [
   title('Immagini e media'),
   media,
+  gap(20),
+  linkArray,
   divider,
   title('Contenuti testuali'),
   testo,

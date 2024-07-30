@@ -131,7 +131,7 @@ export const Itinerari: CollectionConfig = {
               name: 'media_geolocalizzati',
               label: 'Media geolocalizzati',
               type: 'array',
-              fields: [F.posizione, F.media],
+              fields: [{ ...F.posizione, required: true }, F.media],
             },
           ],
         },
