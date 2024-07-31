@@ -39,7 +39,6 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
       modules={[Navigation, Pagination]}
       spaceBetween={20}
       slidesPerView={'auto'}
-      pagination={{ clickable: true }}
       className="mySwiper"
     >
       {items.map((item, index) => (

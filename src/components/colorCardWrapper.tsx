@@ -12,7 +12,7 @@ interface Doc {
 }
 
 interface JsonData {
-  docs: Doc[]
+  docs?: Doc[]
 }
 
 interface ColorCardWrapperProps {
@@ -22,7 +22,7 @@ interface ColorCardWrapperProps {
 }
 
 const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, jsonString, previous }) => {
-  let data: JsonData
+  let data: JsonData = { docs: [] }
 
   try {
     data = JSON.parse(jsonString)
@@ -31,14 +31,18 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, jsonString, 
     return <div>Errore nel caricamento dei dati</div>
   }
 
+  if (!data || !Array.isArray(data.docs) || data.docs.length === 0) {
+    return <div></div>
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {data.docs.map((doc) => (
         <Colorcard
-          key={doc.nome}
+          key={doc.id}
           color={color}
           title={doc.nome}
-          imageUrl={doc.media.url}
+          imageUrl={doc.media?.url}
           slugUrl={doc.id}
           previous={previous}
         />

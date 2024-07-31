@@ -33,7 +33,7 @@ const Luoghi = async () => {
         ) : (
           <p>Error loading about text data</p>
         )}
-        <Suspense fallback={<div>Loading Itinerari component...</div>}>
+        <Suspense fallback={<div>Loading Cards...</div>}>
           <ColorCardWrapper
             color="bg-luogoColor"
             jsonString={JSON.stringify(luoghi)}

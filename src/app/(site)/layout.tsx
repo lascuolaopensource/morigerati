@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import React, { Suspense } from 'react'
-
 import '../globals.css'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-
 import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
 
@@ -17,10 +15,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it">
-      <body>
+      <body className="flex flex-col min-h-screen">
         <Navbar />
-        <main>
-          <div className="mx-auto max-w-xl">{children}</div>
+        <main className="flex-grow">
+          <div className="mx-auto max-w-xl flex flex-col min-h-screen">{children}</div>
         </main>
         <Suspense fallback={<div>Loading footer...</div>}>
           <Footer />
