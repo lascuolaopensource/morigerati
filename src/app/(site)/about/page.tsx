@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import renderContent from '@/utils/renderElement'
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

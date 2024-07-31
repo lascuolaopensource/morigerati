@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
+
 import BackButton from '@/components/backButton'
 import { loadDb } from '@/utils/db'
 import renderContent from '@/utils/renderElement'

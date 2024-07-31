@@ -1,8 +1,7 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import ColorCardWrapper from '@/components/colorCardWrapper'
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
+
 import renderContent from '@/utils/renderElement'
 
 export const dynamic = 'force-dynamic'

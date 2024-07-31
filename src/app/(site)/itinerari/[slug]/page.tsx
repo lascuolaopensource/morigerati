@@ -1,8 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
+
 import BackButton from '@/components/backButton'
 import ItinerarioDetailsCard from '@/components/itinerarioDetailsCard'
 import { ServiziCardWrapper } from '@/components/servizioCardWrapper'
