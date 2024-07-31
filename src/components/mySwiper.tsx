@@ -2,60 +2,55 @@
 
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
-import Polaroid from './polaroid'
-import { Itinerari, Luoghi, Stakeholder, Residenze, Media } from '@/payload-types'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
-type SwiperItem = Itinerari | Luoghi | Stakeholder | Residenze | string
+import Polaroid from './polaroid'
+import { Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
+
+type SwiperItem = Itinerari | Luoghi | Stakeholder | Residenze
 
 interface MySwiperProps {
-  items: SwiperItem[] | null | undefined
+  items: SwiperItem[]
   color: string
+  type: 'itinerari' | 'luoghi' | 'stakeholders' | 'residenze'
 }
 
-const MySwiper: React.FC<MySwiperProps> = ({ items, color }) => {
+const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
   if (!items || items.length === 0) {
     return null
   }
 
   const getImageUrl = (item: SwiperItem): string => {
-    if (typeof item === 'string') {
-      return '/path/to/stock-image.jpg'
-    }
-
     if ('media' in item && item.media) {
-      return getMediaUrl(item.media)
+      return typeof item.media === 'string' ? item.media : item.media.url || ''
     }
     if ('call_media' in item && item.call_media) {
-      return getMediaUrl(item.call_media)
+      return typeof item.call_media === 'string' ? item.call_media : item.call_media.url || ''
     }
-
-    return '/path/to/stock-image.jpg'
+    return '/loermPic.png'
   }
-
-  const getMediaUrl = (media: string | Media | null): string => {
-    if (typeof media === 'string') {
-      return media
-    }
-    if (media && 'url' in media && media.url) {
-      return media.url
-    }
-    return '/path/to/stock-image.jpg'
-  }
-
-  const createPolaroid = (item: SwiperItem, index: number) => (
-    <SwiperSlide key={typeof item === 'string' ? item : item.id || index}>
-      <Polaroid
-        color={color}
-        title={typeof item === 'string' ? 'Unknown' : item.nome}
-        imageUrl={getImageUrl(item)}
-      />
-    </SwiperSlide>
-  )
 
   return (
-    <Swiper slidesPerView={2} spaceBetween={40}>
-      {items.map(createPolaroid)}
+    <Swiper
+      modules={[Navigation, Pagination]}
+      spaceBetween={20}
+      slidesPerView={'auto'}
+      pagination={{ clickable: true }}
+      className="mySwiper"
+    >
+      {items.map((item) => (
+        <SwiperSlide style={{ width: 'auto' }} key={item.id}>
+          <Polaroid
+            imageUrl={getImageUrl(item)}
+            title={item.nome}
+            color={color}
+            link={`/${type}/${item.id}`}
+          />
+        </SwiperSlide>
+      ))}
     </Swiper>
   )
 }

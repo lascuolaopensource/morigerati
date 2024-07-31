@@ -56,7 +56,6 @@ export default function renderContent(jsonContent: any): React.ReactNode | null 
     !Array.isArray(content.children) ||
     content.children.length === 0
   ) {
-    console.warn('No valid content found:', jsonContent)
     return null
   }
 
@@ -64,7 +63,7 @@ export default function renderContent(jsonContent: any): React.ReactNode | null 
     .map((node: ContentNode, index: number) => (
       <React.Fragment key={index}>{renderContentNode(node)}</React.Fragment>
     ))
-    .filter(Boolean) // Rimuove eventuali elementi null o undefined
+    .filter(Boolean)
 
   return renderedContent.length > 0 ? renderedContent : null
 }

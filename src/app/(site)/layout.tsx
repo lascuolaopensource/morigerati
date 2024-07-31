@@ -19,7 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="it">
       <body>
         <Navbar />
-        <main>{children}</main>
+        <main>
+          <div className="mx-auto max-w-xl">{children}</div>
+        </main>
         <Suspense fallback={<div>Loading footer...</div>}>
           <Footer />
         </Suspense>
