@@ -7,6 +7,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Polaroid from './polaroid'
 import { Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
+import loremPic from '@/public/loremPic.png'
 
 type SwiperItem = Itinerari | Luoghi | Stakeholder | Residenze
 
@@ -21,7 +22,7 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
     return null
   }
 
-  const getImageUrl = (item: SwiperItem | string): string => {
+  const getImageUrl = (item: SwiperItem | string): string | undefined => {
     if (typeof item === 'string') {
       return item
     }
@@ -31,7 +32,7 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
     if ('call_media' in item && item.call_media) {
       return typeof item.call_media === 'string' ? item.call_media : item.call_media.url || ''
     }
-    return '/loermPic.png'
+    return undefined
   }
 
   return (
@@ -44,7 +45,7 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
       {items.map((item, index) => (
         <SwiperSlide style={{ width: 'auto' }} key={typeof item === 'string' ? index : item.id}>
           <Polaroid
-            imageUrl={getImageUrl(item)}
+            imageUrl={getImageUrl(item) || loremPic}
             title={typeof item === 'string' ? `Item ${index + 1}` : item.nome}
             color={color}
             link={typeof item === 'string' ? '#' : `/${type}/${item.id}`}

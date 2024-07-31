@@ -1,9 +1,9 @@
 import React from 'react'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
 interface PolaroidProps {
-  imageUrl: string
+  imageUrl: string | StaticImageData
   title: string
   color: string
   link: string

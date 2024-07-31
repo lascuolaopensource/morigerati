@@ -1,6 +1,7 @@
 import React from 'react'
 import Colorcard from '@/components/colorCard'
 import { Luoghi, Itinerari, Stakeholder } from '@/payload-types'
+import loremPic from '@/public/loremPic.png'
 
 type SupportedDoc = Luoghi | Itinerari | Stakeholder
 
@@ -24,7 +25,7 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, docs, previo
             key={doc.id}
             color={color}
             title={doc.nome}
-            imageUrl={imageUrl || ''}
+            imageUrl={imageUrl || loremPic}
             slugUrl={doc.id}
             previous={previous}
           />

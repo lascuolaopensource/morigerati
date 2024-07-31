@@ -1,10 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
+import Image, { StaticImageData } from 'next/image'
 
 interface ColorcardProps {
   color: string
   title: string
-  imageUrl: string
+  imageUrl: string | StaticImageData
   slugUrl: string
   previous: string
 }
@@ -16,8 +17,14 @@ const Colorcard: React.FC<ColorcardProps> = ({ color, title, imageUrl, previous,
         <div className={`${color} p-2 border-b-2 border-black`}>
           <h2 className="text-sm font-bold text-center leading-3">{title}</h2>
         </div>
-        <div className="flex-grow overflow-hidden">
-          <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
+        <div className="flex-grow overflow-hidden relative">
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover"
+          />
         </div>
       </div>
     </Link>
