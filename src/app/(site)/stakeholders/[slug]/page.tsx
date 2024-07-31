@@ -26,7 +26,6 @@ export default async function Stakeholder({ params }: { params: { slug: string }
 
   return (
     <div className="bg-white mx-auto max-w-xl">
-      <Navbar backgroundColor="bg-stakeholderColor" currentPage="/stakeholders" />
       <div className="w-full h-[70vh] relative">
         {stakeholderData.media && (
           <Image
@@ -74,7 +73,6 @@ export default async function Stakeholder({ params }: { params: { slug: string }
           <p className="mb-6">Nessun contatto disponibile</p>
         )}
       </div>
-      <Footer />
     </div>
   )
 }

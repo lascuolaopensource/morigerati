@@ -24,7 +24,6 @@ const Luoghi = async () => {
 
   return (
     <main className="mx-auto max-w-xl">
-      <Navbar backgroundColor="bg-luogoColor" currentPage="/luoghi" />
       <div className="bg-white p-3 pt-5">
         {luoghiTitle ? (
           <div className="font-normal text-sm pt-4 pb-4 leading-4">
@@ -43,9 +42,6 @@ const Luoghi = async () => {
           />
         </Suspense>
       </div>
-      <Suspense fallback={<div>Loading footer...</div>}>
-        <Footer />
-      </Suspense>
     </main>
   )
 }

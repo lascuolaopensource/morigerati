@@ -35,8 +35,6 @@ const Home = async () => {
 
   return (
     <main>
-      <Navbar backgroundColor="bg-white" currentPage="/" />
-
       <div className="relative w-full h-[80vh]">
         {coverUrl && <Image src={coverUrl} alt="Fullscreen Image" fill objectFit="cover" />}
         <p className="absolute font-transInstrumentSans text-center font-bold top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl">
@@ -60,9 +58,7 @@ const Home = async () => {
         <div className="pt-4"></div>
         <MySwyper items={residenze.docs} color="bg-residenzeColor" />
       </div>
-      <Suspense fallback={<div>Loading footer...</div>}>
-        <Footer />
-      </Suspense>
+      <Suspense fallback={<div>Loading footer...</div>}></Suspense>
     </main>
   )
 }

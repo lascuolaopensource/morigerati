@@ -17,7 +17,6 @@ const About = async () => {
 
   return (
     <main className="mx-auto max-w-xl">
-      <Navbar backgroundColor="bg-white" currentPage="/about" />
       <div className="bg-white p-3 pt-5">
         {aboutTitle ? (
           <div className="font-normal text-sm pt-4 pb-4 leading-4">
@@ -33,9 +32,6 @@ const About = async () => {
           <p>Error loading about text data</p>
         )}
       </div>
-      <Suspense fallback={<div>Loading footer...</div>}>
-        <Footer />
-      </Suspense>
     </main>
   )
 }

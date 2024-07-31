@@ -25,7 +25,6 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
 
   return (
     <div className="bg-white mx-auto max-w-xl">
-      <Navbar backgroundColor="bg-luogoColor" currentPage="/luoghi" />
       <div className="w-full h-[70vh] relative">
         {luogoData.media && (
           <Image
@@ -98,7 +97,6 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           <p className="mb-6">Orari non disponibili</p>
         )}
       </div>
-      <Footer />
     </div>
   )
 }
