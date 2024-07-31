@@ -2,18 +2,19 @@ import type { GlobalConfig } from 'payload'
 import * as F from '@/db/fields'
 import { Globals } from '.'
 
-
 export const Testi: GlobalConfig = {
   slug: Globals.Testi,
+
   access: {
     read: () => true,
   },
+
   fields: [
-    ...F.titoloTesto('Corpo pagina "Luoghi"'),
-    ...F.titoloTesto('Corpo pagina "Itinerari"'),
-    ...F.titoloTesto('Corpo pagina "Residenze"'),
-    ...F.titoloTesto('Corpo pagina "Stakeholders"'),
-    ...F.titoloTesto('Corpo pagina "Articoli"'),
-    ...F.titoloTesto('Corpo pagina "Programma culturale"'),
+    F.titleAndText('luoghi', 'Introduzione pagina "Luoghi"'),
+    F.titleAndText('itinerari', 'Introduzione pagina "Itinerari"'),
+    F.titleAndText('residenze', 'Introduzione pagina "Residenze"'),
+    F.titleAndText('stakeholders', 'Introduzione pagina "Stakeholders"'),
+    F.titleAndText('articoli', 'Introduzione pagina "Articoli"'),
+    F.titleAndText('programma_culturale', 'Introduzione pagina "Programma culturale"'),
   ],
 }

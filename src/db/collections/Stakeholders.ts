@@ -11,6 +11,7 @@ export const Stakeholders: CollectionConfig = {
   admin: {
     useAsTitle: F.nome.name,
   },
+
   fields: [
     {
       type: 'tabs',
@@ -18,7 +19,7 @@ export const Stakeholders: CollectionConfig = {
         {
           label: 'Dati',
           fields: [
-            F.header('Info generali'),
+            F.title('Info generali'),
             {
               type: 'row',
               fields: [
@@ -31,9 +32,9 @@ export const Stakeholders: CollectionConfig = {
               ],
             },
             F.posizione,
+            F.plainText('indirizzo'),
             F.divider,
             F.contatti,
-            F.itinerari,
           ],
         },
         F.tabContenuto,

@@ -5,10 +5,10 @@ import { Globals } from '.'
 export const ChiSiamo: GlobalConfig = {
   slug: Globals.ChiSiamo,
   label: 'Chi siamo',
+
   access: {
     read: () => true,
   },
-  fields: [
-    ...F.titoloTesto('Corpo pagina "chi siamo"')
-]
+
+  fields: [...F.contenutoFields],
 }

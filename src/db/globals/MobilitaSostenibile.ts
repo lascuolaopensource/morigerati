@@ -5,10 +5,10 @@ import { Globals } from '.'
 export const MobilitaSostenibile: GlobalConfig = {
   slug: Globals.MobilitaSostenibile,
   label: 'Mobilità sostenibile',
+
   access: {
     read: () => true,
   },
-  fields: [
-    ...F.titoloTesto('Corpo pagina "mobilità sostenibile"')
-  ]
+
+  fields: [...F.contenutoFields],
 }

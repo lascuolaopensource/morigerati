@@ -83,9 +83,9 @@ export interface Luoghi {
     | {
         nome: string;
         link?: string | null;
+        id?: string | null;
         email?: string | null;
         telefono?: string | null;
-        id?: string | null;
       }[]
     | null;
   orari?: {
@@ -104,6 +104,13 @@ export interface Luoghi {
     [k: string]: unknown;
   } | null;
   media?: (string | null) | Media;
+  links?:
+    | {
+        nome: string;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   testo?: {
     root: {
       type: string;
@@ -186,6 +193,13 @@ export interface Articoli {
     data_pubblicazione?: string | null;
   };
   media?: (string | null) | Media;
+  links?:
+    | {
+        nome: string;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   testo?: {
     root: {
       type: string;
@@ -211,7 +225,7 @@ export interface Articoli {
 export interface Itinerari {
   id: string;
   nome: string;
-  tracciato_gpx?: string | Media | null;
+  tracciato_gpx?: (string | null) | Media;
   lunghezza?: number | null;
   tempo?: number | null;
   dislivello?: string | null;
@@ -221,6 +235,7 @@ export interface Itinerari {
     | {
         nome: string;
         link?: string | null;
+        id?: string | null;
         testo?: {
           root: {
             type: string;
@@ -236,7 +251,6 @@ export interface Itinerari {
           };
           [k: string]: unknown;
         } | null;
-        id?: string | null;
       }[]
     | null;
   luoghi?: (string | Luoghi)[] | null;
@@ -247,12 +261,19 @@ export interface Itinerari {
          * @minItems 2
          * @maxItems 2
          */
-        posizione?: [number, number] | null;
+        posizione: [number, number];
         media?: (string | null) | Media;
         id?: string | null;
       }[]
     | null;
   media?: (string | null) | Media;
+  links?:
+    | {
+        nome: string;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   testo?: {
     root: {
       type: string;
@@ -284,20 +305,24 @@ export interface Stakeholder {
    * @maxItems 2
    */
   posizione?: [number, number] | null;
+  indirizzo?: string | null;
   contatti?:
     | {
         nome: string;
         link?: string | null;
+        id?: string | null;
         email?: string | null;
         telefono?: string | null;
+      }[]
+    | null;
+  media?: (string | null) | Media;
+  links?:
+    | {
+        nome: string;
+        link?: string | null;
         id?: string | null;
       }[]
     | null;
-  itinerari?: {
-    relationTo: 'itinerari';
-    value: string | Itinerari;
-  } | null;
-  media?: (string | null) | Media;
   testo?: {
     root: {
       type: string;
@@ -327,9 +352,9 @@ export interface Residenze {
   data_fine?: string | null;
   esperti?:
     | {
-        nome?: string | null;
-        foto?: string | Media | null;
-        Bio?: {
+        nome: string;
+        foto?: (string | null) | Media;
+        bio?: {
           root: {
             type: string;
             children: {
@@ -406,7 +431,7 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  deadline?: string | null;
+  deadline_iscrizione?: string | null;
   link_iscrizione?: string | null;
   call_media?: (string | null) | Media;
   figure_richieste?: {
@@ -427,6 +452,13 @@ export interface Residenze {
   Processo?: {
     processo?: {
       media?: (string | null) | Media;
+      links?:
+        | {
+            nome: string;
+            link?: string | null;
+            id?: string | null;
+          }[]
+        | null;
       testo?: {
         root: {
           type: string;
@@ -447,6 +479,13 @@ export interface Residenze {
   Output?: {
     output?: {
       media?: (string | null) | Media;
+      links?:
+        | {
+            nome: string;
+            link?: string | null;
+            id?: string | null;
+          }[]
+        | null;
       testo?: {
         root: {
           type: string;
@@ -509,70 +548,78 @@ export interface Home {
   id: string;
   statement: string;
   cover?: (string | null) | Media;
-  intro_title: string;
-  intro?: {
-    root: {
-      type: string;
-      children: {
+  intro: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  itinerari_title: string;
-  itinerari?: {
-    root: {
-      type: string;
-      children: {
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  itinerari: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  luoghi_title: string;
-  luoghi?: {
-    root: {
-      type: string;
-      children: {
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  luoghi: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  residenze_title: string;
-  residenze?: {
-    root: {
-      type: string;
-      children: {
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  residenze: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -582,8 +629,15 @@ export interface Home {
  */
 export interface ChiSiamo {
   id: string;
-  'Corpo pagina "chi siamo"_title': string;
-  'Corpo pagina "chi siamo"'?: {
+  media?: (string | null) | Media;
+  links?:
+    | {
+        nome: string;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  testo?: {
     root: {
       type: string;
       children: {
@@ -607,8 +661,15 @@ export interface ChiSiamo {
  */
 export interface MobilitaSostenibile {
   id: string;
-  'Corpo pagina "mobilità sostenibile"_title': string;
-  'Corpo pagina "mobilità sostenibile"'?: {
+  media?: (string | null) | Media;
+  links?:
+    | {
+        nome: string;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  testo?: {
     root: {
       type: string;
       children: {
@@ -633,7 +694,7 @@ export interface MobilitaSostenibile {
 export interface Footer {
   id: string;
   title: string;
-  testo_sinista?: {
+  testo_sinistra: {
     root: {
       type: string;
       children: {
@@ -647,8 +708,8 @@ export interface Footer {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
-  testo_destra?: {
+  };
+  testo_destra: {
     root: {
       type: string;
       children: {
@@ -662,12 +723,11 @@ export interface Footer {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   'Link Social'?:
     | {
-        nome?: string | null;
-        link?: string | null;
-        icon?: (string | null) | Media;
+        nome: string;
+        link: string;
         id?: string | null;
       }[]
     | null;
@@ -680,102 +740,114 @@ export interface Footer {
  */
 export interface Testi {
   id: string;
-  'Corpo pagina "Luoghi"_title': string;
-  'Corpo pagina "Luoghi"'?: {
-    root: {
-      type: string;
-      children: {
+  luoghi: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  'Corpo pagina "Itinerari"_title': string;
-  'Corpo pagina "Itinerari"'?: {
-    root: {
-      type: string;
-      children: {
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  itinerari: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  'Corpo pagina "Residenze"_title': string;
-  'Corpo pagina "Residenze"'?: {
-    root: {
-      type: string;
-      children: {
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  residenze: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  'Corpo pagina "Stakeholders"_title': string;
-  'Corpo pagina "Stakeholders"'?: {
-    root: {
-      type: string;
-      children: {
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  stakeholders: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  'Corpo pagina "Articoli"_title': string;
-  'Corpo pagina "Articoli"'?: {
-    root: {
-      type: string;
-      children: {
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  articoli: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  'Corpo pagina "Programma culturale"_title': string;
-  'Corpo pagina "Programma culturale"'?: {
-    root: {
-      type: string;
-      children: {
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  programma_culturale: {
+    title: string;
+    text?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }

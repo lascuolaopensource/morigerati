@@ -4,13 +4,16 @@ import * as F from '@/db/fields'
 
 export const Luoghi: CollectionConfig = {
   slug: Collections.Luoghi,
+
   labels: {
     singular: 'Luogo',
     plural: 'Luoghi',
   },
+
   admin: {
     useAsTitle: F.nome.name,
   },
+
   fields: [
     {
       type: 'tabs',
@@ -18,7 +21,7 @@ export const Luoghi: CollectionConfig = {
         {
           label: 'Dati',
           fields: [
-            F.header('Info generali'),
+            F.title('Info generali'),
             F.nome,
             F.posizione,
             F.divider,
@@ -26,7 +29,7 @@ export const Luoghi: CollectionConfig = {
             F.divider,
             F.contatti,
             F.divider,
-            F.header('Orari'),
+            F.title('Orari'),
             {
               name: 'orari',
               type: 'richText',

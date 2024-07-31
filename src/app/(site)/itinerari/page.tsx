@@ -18,22 +18,14 @@ const ItinerariPage = async () => {
     collection: 'itinerari',
   })
 
-  const itinerariTitle = testi?.['Corpo pagina "Itinerari"_title']
-
-  const itinerariText = testi['Corpo pagina "Itinerari"']
-
   return (
     <main className="mx-auto max-w-xl">
       <div className="bg-white p-3 pt-5">
-        {itinerariTitle ? (
-          <div className="font-normal text-sm pt-4 pb-4 leading-4">
-            <h1 className="font-bold text-[40px]">{itinerariTitle}</h1>
-          </div>
-        ) : (
-          <p>Error loading Itinerari text data</p>
-        )}
+        <div className="font-normal text-sm pt-4 pb-4 leading-4">
+          <h1 className="font-bold text-[40px]">{testi.itinerari.title}</h1>
+        </div>
 
-        {itinerariText ? renderContent(itinerariText) : <p>Error loading about text data</p>}
+        {testi.itinerari ? renderContent(testi.itinerari) : <p>Error loading about text data</p>}
         <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper
             color="bg-itinerarioColor"

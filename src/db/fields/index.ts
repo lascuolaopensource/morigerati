@@ -1,5 +1,7 @@
 import {
   ArrayField,
+  Field,
+  GroupField,
   PointField,
   RelationshipField,
   RichTextField,
@@ -12,8 +14,9 @@ import { Collections } from '@/db/collections'
 
 import { Divider } from './components/divider'
 import { Header } from './components/header'
-import { Media } from '@/payload-types'
-import { array } from 'payload/shared'
+import { Gap } from './components/gap'
+
+import { capitalizeFirstLetter } from '@/utils/strings'
 
 //
 
@@ -27,13 +30,25 @@ export const divider: UIField = {
   },
 }
 
-export function header(text: string): UIField {
+export function title(text: string): UIField {
   return {
     name: 'header',
     type: 'ui',
     admin: {
       components: {
         Field: () => Header(text),
+      },
+    },
+  }
+}
+
+export function gap(size: number): UIField {
+  return {
+    name: 'gap',
+    type: 'ui',
+    admin: {
+      components: {
+        Field: () => Gap({ size }),
       },
     },
   }
@@ -48,16 +63,9 @@ export const nome: TextField = {
   localized: true,
 }
 
-export const unrequiredNome: TextField = {
-  name: 'nome',
-  type: 'text',
-  localized: true,
-}
-
 export const link: TextField = {
   name: 'link',
   type: 'text',
-  localized: true,
 }
 
 export const testo: RichTextField = {
@@ -93,7 +101,6 @@ export function richText(name: string): RichTextField {
 export const posizione: PointField = {
   name: 'posizione',
   type: 'point',
-  localized: true,
 }
 
 export const linkConNome: RowField = {
@@ -101,12 +108,16 @@ export const linkConNome: RowField = {
   fields: [nome, link],
 }
 
-
+export const linkArray: ArrayField = {
+  label: 'Link',
+  name: 'links',
+  type: 'array',
+  fields: linkConNome.fields,
+}
 
 export const contatti: ArrayField = {
   name: 'contatti',
   type: 'array',
-  localized: true,
   fields: [
     linkConNome,
     {
@@ -115,12 +126,10 @@ export const contatti: ArrayField = {
         {
           name: 'email',
           type: 'email',
-          localized: true,
         },
         {
           name: 'telefono',
           type: 'text',
-          localized: true,
         },
       ],
     },
@@ -133,35 +142,19 @@ export const media: RelationshipField = {
   relationTo: Collections.Media,
 }
 
-export const icon: RelationshipField = {
-  name: 'icon',
-  type: 'relationship',
-  relationTo: Collections.Media,
-}
-
-export const itinerari: RelationshipField = {
-  name: 'itinerari',
-  type: 'relationship',
-  relationTo: [Collections.Itinerari],
-}
-
-export const servizi_con_link: ArrayField = {
-  name: 'servizi',
-  type: 'array',
-  fields: [linkConNome, testo],
-}
-
 export const servizi: ArrayField = {
   name: 'servizi',
   type: 'array',
   fields: [nome, testo],
 }
 
-export const contenutoFields = [
-  header('Immagini e media'),
+export const contenutoFields: Field[] = [
+  title('Immagini e media'),
   media,
+  gap(20),
+  linkArray,
   divider,
-  header('Contenuti testuali'),
+  title('Contenuti testuali'),
   testo,
 ]
 
@@ -170,29 +163,30 @@ export const tabContenuto: Tab = {
   fields: contenutoFields,
 }
 
-export function titoloTesto(name: string) {
-  return [
-    divider,
-    header(name),
-    {
-      ...plainText(`${name}_title`),
-      required: true,
-      label: 'Titolo sezione',
-    },
-    { ...richText(name), label: 'Contenuto' },
-  ]
+export function titleAndText(name: string, label?: string): GroupField {
+  return {
+    name,
+    type: 'group',
+    label: label ?? capitalizeFirstLetter(name),
+    fields: [
+      {
+        ...plainText(`title`),
+        required: true,
+        label: 'Titolo',
+      },
+      { ...richText('text'), label: 'Contenuto' },
+    ],
+  }
 }
 
-export const socialLink: RowField = {
+export const socialNetworkLink: RowField = {
   type: 'row',
-  fields: [unrequiredNome, link, icon],
+  fields: [nome, { ...link, required: true }],
 }
 
-export const socialLinksArray: ArrayField = {
-
+export const socialNetworkLinks: ArrayField = {
   name: 'Link Social',
   type: 'array',
   localized: true,
-  fields: [socialLink]
+  fields: [socialNetworkLink],
 }
-

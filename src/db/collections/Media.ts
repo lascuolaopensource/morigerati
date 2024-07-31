@@ -10,7 +10,9 @@ export const Media: CollectionConfig = {
   admin: {
     useAsTitle: F.nome.name,
   },
+
   upload: true,
+
   fields: [
     F.nome,
     {
@@ -18,6 +20,7 @@ export const Media: CollectionConfig = {
       label: 'Testo alternativo',
       type: 'text',
       required: true,
+      localized: true,
     },
     F.link,
     F.testo,

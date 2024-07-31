@@ -12,25 +12,10 @@ const About = async () => {
   const about = await db.findGlobal({
     slug: 'chi_siamo',
   })
-
-  const aboutTitle = about['Corpo pagina "chi siamo"_title']
-
   return (
     <main className="mx-auto max-w-xl">
       <div className="bg-white p-3 pt-5">
-        {aboutTitle ? (
-          <div className="font-normal text-sm pt-4 pb-4 leading-4">
-            <h1 className="font-bold text-[40px]">{aboutTitle}</h1>
-          </div>
-        ) : (
-          <p>Error loading Itinerari text data</p>
-        )}
-
-        {about['Corpo pagina "chi siamo"_title'] ? (
-          renderContent(about['Corpo pagina "chi siamo"'])
-        ) : (
-          <p>Error loading about text data</p>
-        )}
+        {about.testo ? renderContent(about.testo) : <p>Error loading about text data</p>}
       </div>
     </main>
   )
