@@ -1,12 +1,9 @@
 import React, { Suspense } from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
+
 import MySwyper from '@/components/mySwiper'
-import loremPic from '@/public/loremPic.png'
 import renderContent from '@/utils/renderElement'
-import { Media } from '@/payload-types'
 import { getMediaUrl } from '@/utils/media'
 
 export const dynamic = 'force-dynamic'
@@ -43,17 +40,17 @@ const Home = async () => {
       </div>
 
       <div className="bg-white font-bold p-3 pt-4 w-full leading-2">
-        <p className="font-bold pt-4 text-xl ">{home.intro_title}</p>
-        {home.intro ? renderContent(home.intro) : <p>Error loading testoHome data</p>}
-        <p className="font-bold pt-4 text-xl text-center">{home.itinerari_title}</p>
+        <p className="font-bold pt-4 text-xl ">{home.intro.title}</p>
+        {home.intro ? renderContent(home.intro.text) : <p>Error loading testoHome data</p>}
+        <p className="font-bold pt-4 text-xl text-center">{home.itinerari.title}</p>
         {home.itinerari ? renderContent(home.itinerari) : <p>Error loading itinerari text data</p>}
         <div className="pt-4"></div>
         <MySwyper items={itinerari.docs} color="bg-itinerarioColor" />
-        <p className="font-bold pt-4 text-xl text-center">{home.luoghi_title}</p>
+        <p className="font-bold pt-4 text-xl text-center">{home.luoghi.title}</p>
         {home.luoghi ? renderContent(home.luoghi) : <p>Error loading luoghi text data</p>}
         <div className="pt-4"></div>
         <MySwyper items={luoghi.docs} color="bg-luogoColor" />
-        <p className="font-bold pt-4 text-xl text-center">{home.residenze_title}</p>
+        <p className="font-bold pt-4 text-xl text-center">{home.residenze.title}</p>
         {home.residenze ? renderContent(home.residenze) : <p>Error loading residenze text data</p>}
         <div className="pt-4"></div>
         <MySwyper items={residenze.docs} color="bg-residenzeColor" />

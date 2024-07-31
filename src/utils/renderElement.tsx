@@ -47,15 +47,24 @@ function renderContentNode(node: ContentNode): React.ReactNode {
   }
 }
 
-export default function renderContent(jsonContent: any): React.ReactNode {
-  const content = jsonContent.testo?.root || jsonContent.root || jsonContent
+export default function renderContent(jsonContent: any): React.ReactNode | null {
+  const content = jsonContent?.testo?.root || jsonContent?.root || jsonContent
 
-  if (!content || !content.children) {
-    console.error('Invalid JSON structure:', jsonContent)
+  if (
+    !content ||
+    !content.children ||
+    !Array.isArray(content.children) ||
+    content.children.length === 0
+  ) {
+    console.warn('No valid content found:', jsonContent)
     return null
   }
 
-  return content.children.map((node: ContentNode, index: number) => (
-    <React.Fragment key={index}>{renderContentNode(node)}</React.Fragment>
-  ))
+  const renderedContent = content.children
+    .map((node: ContentNode, index: number) => (
+      <React.Fragment key={index}>{renderContentNode(node)}</React.Fragment>
+    ))
+    .filter(Boolean) // Rimuove eventuali elementi null o undefined
+
+  return renderedContent.length > 0 ? renderedContent : null
 }

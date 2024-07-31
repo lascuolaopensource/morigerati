@@ -25,7 +25,11 @@ const ItinerariPage = async () => {
           <h1 className="font-bold text-[40px]">{testi.itinerari.title}</h1>
         </div>
 
-        {testi.itinerari ? renderContent(testi.itinerari) : <p>Error loading about text data</p>}
+        {testi.itinerari ? (
+          renderContent(testi.itinerari.text)
+        ) : (
+          <p>Error loading about text data</p>
+        )}
         <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper
             color="bg-itinerarioColor"

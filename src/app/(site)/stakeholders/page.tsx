@@ -18,21 +18,21 @@ const Stakeholders = async () => {
     collection: 'stakeholders',
   })
 
-  const stakeholdersTitle = testi['Corpo pagina "Stakeholders"_title']
-
-  const stakeholdersText = testi?.['Corpo pagina "Stakeholders"']
-
   return (
     <main className="mx-auto max-w-xl">
       <div className="bg-white p-3 pt-5">
-        {stakeholdersTitle ? (
+        {testi.stakeholders.title ? (
           <div className="font-normal text-sm pt-4 pb-4 leading-4">
-            <h1 className="font-bold text-[40px]">{stakeholdersTitle}</h1>
+            <h1 className="font-bold text-[40px]">{testi.stakeholders.title}</h1>
           </div>
         ) : (
           <p>Error loading Itinerari text data</p>
         )}
-
+        {testi.stakeholders ? (
+          renderContent(testi?.stakeholders.text)
+        ) : (
+          <p>Error loading luoghi text data</p>
+        )}
         <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper
             color="bg-stakeholderColor"
