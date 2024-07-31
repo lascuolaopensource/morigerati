@@ -29,11 +29,7 @@ const ItinerariPage = async () => {
           <p>Error loading about text data</p>
         )}
         <Suspense fallback={<div>Loading Itinerari component...</div>}>
-          <ColorCardWrapper
-            color="bg-itinerarioColor"
-            jsonString={JSON.stringify(itinerari)}
-            previous="itinerari"
-          />
+          <ColorCardWrapper color="bg-itinerarioColor" docs={itinerari.docs} previous="itinerari" />
         </Suspense>
       </div>
     </main>

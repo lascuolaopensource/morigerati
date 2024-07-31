@@ -34,11 +34,7 @@ const Luoghi = async () => {
           <p>Error loading about text data</p>
         )}
         <Suspense fallback={<div>Loading Cards...</div>}>
-          <ColorCardWrapper
-            color="bg-luogoColor"
-            jsonString={JSON.stringify(luoghi)}
-            previous="luoghi"
-          />
+          <ColorCardWrapper color="bg-luogoColor" docs={luoghi.docs} previous="luoghi" />
         </Suspense>
       </div>
     </main>

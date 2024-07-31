@@ -32,10 +32,10 @@ const Stakeholders = async () => {
         ) : (
           <p>Error loading luoghi text data</p>
         )}
-        <Suspense fallback={<div>Loading Itinerari component...</div>}>
+        <Suspense fallback={<div>Loading cards...</div>}>
           <ColorCardWrapper
             color="bg-stakeholderColor"
-            jsonString={JSON.stringify(stakeholders)}
+            docs={stakeholders.docs}
             previous="stakeholders"
           />
         </Suspense>
