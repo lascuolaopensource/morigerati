@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it">
-      <body className="flex flex-col min-h-screen">
+      <body>
         <Navbar />
-        <main className="flex-grow">
-          <div className="mx-auto max-w-xl flex flex-col min-h-screen">{children}</div>
+        <main>
+          <div className="mx-auto bg-white max-w-xl flex flex-col min-h-screen">{children}</div>
         </main>
         <Suspense fallback={<div>Loading footer...</div>}>
           <Footer />

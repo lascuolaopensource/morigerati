@@ -15,7 +15,7 @@ const Stakeholders = async () => {
 
   const stakeholders = await db.find({
     collection: 'stakeholders',
-  })
+  }) //
 
   return (
     <main className="mx-auto max-w-xl">
