@@ -66,12 +66,16 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
         <div className="my-8">
           <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
-          <MySwiper items={itinerarioData.luoghi} color="bg-luogoColor" />
+          <MySwiper items={itinerarioData.luoghi} color="bg-luogoColor" type="luoghi" />
         </div>
 
         <div className="my-8">
           <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders</h2>
-          <MySwiper items={itinerarioData.stakeholders} color="bg-stakeholderColor" />
+          <MySwiper
+            items={itinerarioData.stakeholders}
+            color="bg-stakeholderColor"
+            type="stakeholders"
+          />
         </div>
 
         {itinerarioData.media_geolocalizzati && itinerarioData.media_geolocalizzati.length > 0 && (
