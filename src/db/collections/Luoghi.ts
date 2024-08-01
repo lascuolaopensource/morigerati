@@ -1,6 +1,12 @@
 import type { CollectionConfig } from 'payload'
 import { Collections } from '.'
 import * as F from '@/db/fields'
+import {
+  lexicalEditor,
+  BoldFeature,
+  InlineToolbarFeature,
+  ParagraphFeature,
+} from '@payloadcms/richtext-lexical'
 
 export const Luoghi: CollectionConfig = {
   slug: Collections.Luoghi,
@@ -35,6 +41,9 @@ export const Luoghi: CollectionConfig = {
               type: 'richText',
               label: 'Orari di attività e date di chiusura',
               localized: true,
+              editor: lexicalEditor({
+                features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
+              }),
             },
           ],
         },
@@ -43,3 +52,5 @@ export const Luoghi: CollectionConfig = {
     },
   ],
 }
+
+

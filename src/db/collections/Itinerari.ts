@@ -1,6 +1,12 @@
 import type { CollectionConfig } from 'payload'
 import * as F from '@/db/fields'
 import { Collections } from '.'
+import {
+  lexicalEditor,
+  BoldFeature,
+  InlineToolbarFeature,
+  ParagraphFeature,
+} from '@payloadcms/richtext-lexical'
 
 export const Itinerari: CollectionConfig = {
   slug: Collections.Itinerari,
@@ -106,7 +112,15 @@ export const Itinerari: CollectionConfig = {
             {
               name: 'servizi',
               type: 'array',
-              fields: [F.linkConNome, F.testo],
+              fields: [F.linkConNome,{ //da sistemare
+                name: 'testo',
+                type: 'richText',
+                label: 'Testo',
+                localized: true,
+                editor: lexicalEditor({
+                  features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
+                }),
+              }],
             },
 
             F.divider,
