@@ -38,22 +38,21 @@ interface ServizioCardProps {
 
 const ServizioCard: React.FC<ServizioCardProps> = ({ nome, testo, link }) => {
   return (
-    <div className="border-2 border-black rounded-lg overflow-hidden flex">
-      <div className="w-3/4 p-4">
-        <h3 className="text-xl font-bold mb-2">{nome}</h3>
-        <div className="text-xs mb-4">
-          {testo && testo.root ? renderElement([testo.root]) : 'Nessuna descrizione disponibile'}
+    <div className="border-2 border-black rounded-lg overflow-hidden p-4">
+      <div className="flex justify-between items-start">
+        <div className="flex-grow">
+          <h3 className="text-xl font-bold mb-2">{nome}</h3>
+          <div className="text-xs mb-4">{testo && testo.root ? renderElement(testo.root) : ''}</div>
         </div>
         {link && (
           <a
             href={link}
-            className="border-2 border-black inline-block bg-itinerarioColor text-black px-4 py-2 rounded-md"
+            className="border-2 border-black inline-block bg-itinerarioColor text-black px-4 py-2 rounded-md ml-4"
           >
             prenota
           </a>
         )}
       </div>
-      <div className="w-1/4 bg-gray-200">{/* Immagine stock fissa */}</div>
     </div>
   )
 }

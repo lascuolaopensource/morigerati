@@ -25,31 +25,38 @@ export default async function Stakeholder({ params }: { params: { slug: string }
 
   return (
     <div className="">
-      <div className="w-full h-[70vh] relative">
-        {stakeholderData.media && (
+      {stakeholderData.media && (
+        <div className="w-full h-[70vh] relative">
           <Image
             src={getMediaURL(stakeholderData.media)}
-            alt={stakeholderData.nome || 'Stakeholder image'}
+            alt="Fullscreen Image"
             layout="fill"
             objectFit="cover"
             className="w-full h-full"
           />
-        )}
-      </div>
+          <div className="absolute inset-0 "></div>
+        </div>
+      )}
+
       <div className="p-4">
         <BackButton />
         <div className="pt-4"></div>
         {stakeholderData.nome ? (
           <h1 className="text-4xl font-bold mb-4">{stakeholderData.nome}</h1>
         ) : (
-          <p>Error loading stakeholder name</p>
+          <p></p>
         )}
         {stakeholderData.testo && stakeholderData.testo.root ? (
-          <div className="mb-6">{renderContent([stakeholderData.testo.root])}</div>
+          <div className="mb-6">{renderContent(stakeholderData.testo)}</div>
         ) : (
-          <p>Error loading stakeholder description</p>
+          <p></p>
         )}
-        <h2 className="text-2xl font-semibold mb-2">Contatti</h2>
+
+        {stakeholderData.contatti && stakeholderData.contatti.length > 0 ? (
+          <h2 className="text-2xl font-semibold mb-2">Contatti</h2>
+        ) : (
+          <div></div>
+        )}
         {stakeholderData.contatti && stakeholderData.contatti.length > 0 ? (
           <ul className="mb-6">
             {stakeholderData.contatti.map((contatto, index) => (
@@ -69,7 +76,7 @@ export default async function Stakeholder({ params }: { params: { slug: string }
             ))}
           </ul>
         ) : (
-          <p className="mb-6">Nessun contatto disponibile</p>
+          <p className="mb-6"></p>
         )}
       </div>
     </div>

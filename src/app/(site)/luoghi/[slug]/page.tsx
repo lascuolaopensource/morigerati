@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/backButton'
 import renderContent from '@/utils/renderElement'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import { getMediaURL } from '@/utils/getMediaUrl'
+import MySwyper from '@/components/mySwiper'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -33,22 +34,28 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
             objectFit="cover"
             className="w-full h-full"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="absolute inset-0"></div>
         </div>
       )}
       <div className="p-4">
         <BackButton />
         <div className="pt-4"></div>
-        {luogoData.nome ? (
-          <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1>
-        ) : (
-          <p>Error loading luogo title</p>
-        )}
+        {luogoData.nome ? <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1> : <p></p>}
         {luogoData.testo && luogoData.testo.root ? (
           <div className="mb-6">{renderContent(luogoData.testo)}</div>
         ) : (
           <p></p>
         )}
+        {/*         {
+          <Suspense fallback={<div>Loading slides...</div>}>
+            <MySwyper
+              items={luogoData['Itinerari in cui si trovai il luogo']}
+              color="bg-luogoColor"
+              type="luoghi"
+            />
+          </Suspense>
+        } */}
+
         {luogoData.servizi && luogoData.servizi.length > 0 ? (
           <h2 className="text-2xl font-semibold text-center">Servizi</h2>
         ) : (

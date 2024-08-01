@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -18,16 +16,16 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, onClose, currentP
     } else {
       document.body.style.overflow = 'unset'
     }
-
     return () => {
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
 
   const renderPageLink = (href: string, text: string): JSX.Element => {
+    const isActive = currentPath.startsWith(href) && (href === '/' ? currentPath === '/' : true)
     return (
       <Link href={href} className="flex items-center" onClick={onClose}>
-        {currentPath === href && <span className="mr-2">&rarr;</span>}
+        {isActive && <span className="mr-2">&rarr;</span>}
         {text}
       </Link>
     )
@@ -46,7 +44,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, onClose, currentP
             </div>
             <button
               onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center text-3xl text-white"
+              className="w-8 h-8 pr-10 prflex items-left justify-left text-3xl text-white"
               aria-label="Close menu"
             >
               &times;

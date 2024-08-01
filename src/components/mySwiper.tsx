@@ -8,6 +8,7 @@ import 'swiper/css/pagination'
 import Polaroid from './polaroid'
 import { Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
 import loremPic from '@/public/loremPic.png'
+import { StaticImageData } from 'next/image'
 
 type SwiperItem = Itinerari | Luoghi | Stakeholder | Residenze
 
@@ -22,17 +23,17 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
     return null
   }
 
-  const getImageUrl = (item: SwiperItem | string): string | undefined => {
+  const getImageUrl = (item: SwiperItem | string): string | StaticImageData | undefined => {
     if (typeof item === 'string') {
       return item
     }
     if ('media' in item && item.media) {
-      return typeof item.media === 'string' ? item.media : item.media.url || ''
+      return typeof item.media === 'string' ? item.media : item.media.url || loremPic
     }
     if ('call_media' in item && item.call_media) {
-      return typeof item.call_media === 'string' ? item.call_media : item.call_media.url || ''
+      return typeof item.call_media === 'string' ? item.call_media : item.call_media.url || loremPic
     }
-    return undefined
+    return loremPic
   }
 
   return (

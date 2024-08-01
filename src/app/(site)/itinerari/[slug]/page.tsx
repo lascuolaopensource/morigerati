@@ -30,24 +30,26 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
   return (
     <div className="bg-white">
-      <div className="w-full h-[70vh] relative">
-        {itinerarioData.media && itinerarioData.media && (
+      {itinerarioData.media && itinerarioData.media && (
+        <div className="w-full h-[70vh] relative">
           <Image
             src={getMediaURL(itinerarioData.media)}
-            alt={getMediaURL(itinerarioData.media)}
+            alt="Fullscreen Image"
             layout="fill"
             objectFit="cover"
             className="w-full h-full"
           />
-        )}
-      </div>
+          <div className="absolute inset-0 "></div>
+        </div>
+      )}
+
       <div className="p-4">
         <BackButton />
         <div className="pt-4"></div>
         {itinerarioData.nome ? (
           <h1 className="text-4xl font-bold mb-4">{itinerarioData.nome}</h1>
         ) : (
-          <p>Error loading itinerario name</p>
+          <p></p>
         )}
 
         {itinerarioData.testo && itinerarioData.testo.root && (
@@ -64,19 +66,23 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
         <ServiziCardWrapper servizi={itinerarioData.servizi} />
 
-        <div className="my-8">
-          <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
-          <MySwiper items={itinerarioData.luoghi} color="bg-luogoColor" type="luoghi" />
-        </div>
+        {itinerarioData.luoghi && itinerarioData.luoghi.length > 0 && (
+          <div className="my-8">
+            <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
+            <MySwiper items={itinerarioData.luoghi} color="bg-luogoColor" type="luoghi" />
+          </div>
+        )}
 
-        <div className="my-8">
-          <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders che troverai</h2>
-          <MySwiper
-            items={itinerarioData.stakeholders}
-            color="bg-stakeholderColor"
-            type="stakeholders"
-          />
-        </div>
+        {itinerarioData.stakeholders && itinerarioData.stakeholders.length > 0 && (
+          <div className="my-8">
+            <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders che troverai</h2>
+            <MySwiper
+              items={itinerarioData.stakeholders}
+              color="bg-stakeholderColor"
+              type="stakeholders"
+            />
+          </div>
+        )}
 
         {itinerarioData.media_geolocalizzati && itinerarioData.media_geolocalizzati.length > 0 && (
           <div className="mb-4">

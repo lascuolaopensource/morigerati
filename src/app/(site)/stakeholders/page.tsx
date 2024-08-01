@@ -21,7 +21,7 @@ const Stakeholders = async () => {
     <main className="">
       <div className="bg-white p-3 pt-5">
         {testi.stakeholders.title ? (
-          <div className="font-normal text-sm pt-4 pb-4 leading-4">
+          <div className="font-normal text-sm pt-4 pb-10 leading-4">
             <h1 className="font-bold text-[40px]">{testi.stakeholders.title}</h1>
           </div>
         ) : (

@@ -15,23 +15,21 @@ const Navbar: React.FC = () => {
   const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen)
   }
-
   const getBackgroundColor = (): string => {
-    switch (pathname) {
-      case '/':
-        return 'bg-white'
-      case '/about':
-        return 'bg-white'
-      case '/mobilita':
-        return 'bg-white'
-      case '/luoghi':
-        return 'bg-luogoColor'
-      case '/itinerari':
-        return 'bg-itinerarioColor'
-      case '/stakeholders':
-        return 'bg-stakeholderColor'
-      default:
-        return 'bg-white'
+    if (pathname.startsWith('/luoghi')) {
+      return 'bg-luogoColor'
+    } else if (pathname.startsWith('/itinerari')) {
+      return 'bg-itinerarioColor'
+    } else if (pathname.startsWith('/stakeholders')) {
+      return 'bg-stakeholderColor'
+    } else if (
+      pathname === '/' ||
+      pathname.startsWith('/about') ||
+      pathname.startsWith('/mobilita')
+    ) {
+      return 'bg-white'
+    } else {
+      return 'bg-white' // Default color
     }
   }
 
@@ -50,7 +48,7 @@ const Navbar: React.FC = () => {
                 onClick={toggleMenu}
                 aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               >
-                {!isMenuOpen && <Image src={hamburger} alt="Menu" width={20} />}
+                {!isMenuOpen && <Image src={hamburger} alt="Menu" width={20} height={20} />}
               </button>
             </div>
           </div>
