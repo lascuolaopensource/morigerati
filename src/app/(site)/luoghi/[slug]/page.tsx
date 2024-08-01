@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
-
 import BackButton from '@/components/backButton'
 import renderContent from '@/utils/renderElement'
+import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import { getMediaURL } from '@/utils/getMediaUrl'
 
 export const dynamic = 'force-dynamic'
@@ -23,9 +23,9 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
   const luogoData = luogo.docs[0]
 
   return (
-    <div className="bg-white mx-auto max-w-xl">
-      <div className="w-full h-[70vh] relative">
-        {luogoData.media && (
+    <div className="bg-white">
+      {luogoData.media?.link && (
+        <div className="w-full h-[70vh] relative">
           <Image
             src={getMediaURL(luogoData.media)}
             alt="Fullscreen Image"
@@ -33,8 +33,9 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
             objectFit="cover"
             className="w-full h-full"
           />
-        )}
-      </div>
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
+      )}
       <div className="p-4">
         <BackButton />
         <div className="pt-4"></div>
@@ -46,38 +47,48 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         {luogoData.testo && luogoData.testo.root ? (
           <div className="mb-6">{renderContent([luogoData.testo.root])}</div>
         ) : (
-          <p>Error loading luogo description</p>
+          <p></p>
+        )}
+        {luogoData.servizi && luogoData.servizi.length > 0 ? (
+          <h2 className="text-2xl font-semibold text-center">Servizi</h2>
+        ) : (
+          <div></div>
         )}
 
-        <h2 className="text-2xl font-semibold">Servizi</h2>
         {luogoData.servizi && luogoData.servizi.length > 0 ? (
           luogoData.servizi.map((servizio, index) => (
             <div key={index} className="mt-4">
               <h3 className="text-xl font-semibold ">{servizio.nome}</h3>
-              {servizio.testo && servizio.testo.root ? (
-                renderContent([servizio.testo.root])
-              ) : (
-                <p>Error loading servizio data</p>
-              )}
+              {servizio.testo && servizio.testo.root ? renderContent(servizio.testo) : <p></p>}
             </div>
           ))
         ) : (
-          <p>Nessun servizio disponibile</p>
+          <p></p>
+        )}
+        <div className="pb-8"></div>
+
+        {luogoData.contatti && luogoData.contatti.length > 0 ? (
+          <h2 className="text-l font-semibold mb-2 ">Contatti:</h2>
+        ) : (
+          <div></div>
         )}
 
-        <div className="pb-4"></div>
-        <h2 className="text-2xl font-semibold mb-2">Contatti</h2>
         {luogoData.contatti && luogoData.contatti.length > 0 ? (
           <ul className="mb-6">
             {luogoData.contatti.map((contatto, index) => (
               <li key={index} className="mb-2">
                 <strong>{contatto.nome}</strong>
-                {contatto.telefono && <p>Telefono: {contatto.telefono}</p>}
-                {contatto.email && <p>Email: {contatto.email}</p>}
+                {contatto.telefono && <p className="text-xs">Telefono: {contatto.telefono}</p>}
+                {contatto.email && <p className="text-xs">Email: {contatto.email}</p>}
                 {contatto.link && (
                   <p>
                     Link:{' '}
-                    <a href={contatto.link} target="_blank" rel="noopener noreferrer">
+                    <a
+                      className="text-xs"
+                      href={contatto.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {contatto.link}
                     </a>
                   </p>
@@ -86,14 +97,19 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
             ))}
           </ul>
         ) : (
-          <p className="mb-6">Nessun contatto disponibile</p>
+          <p className="mb-6"></p>
         )}
 
-        <h2 className="text-2xl font-semibold mb-2">Orari</h2>
-        {luogoData.orari && luogoData.orari.root ? (
-          <div className="mb-6">{renderContent(luogoData.orari.root)}</div>
+        {isRichTextEmpty(luogoData.orari) ? (
+          <div></div>
         ) : (
-          <p className="mb-6">Orari non disponibili</p>
+          <h2 className="text-l font-semibold">Orari di Apertura:</h2>
+        )}
+
+        {luogoData.orari && luogoData.orari.root ? (
+          <div className="mb-6">{renderContent(luogoData.orari)}</div>
+        ) : (
+          <p className="mb-6"> zetta</p>
         )}
       </div>
     </div>

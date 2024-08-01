@@ -29,7 +29,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
   const itinerarioData = itinerario.docs[0]
 
   return (
-    <div className="bg-white mx-auto max-w-xl">
+    <div className="bg-white">
       <div className="w-full h-[70vh] relative">
         {itinerarioData.media && itinerarioData.media && (
           <Image
@@ -51,7 +51,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         )}
 
         {itinerarioData.testo && itinerarioData.testo.root && (
-          <div className="mb-6">{renderContent([itinerarioData.testo.root])}</div>
+          <div className="mb-6">{renderContent(itinerarioData.testo)}</div>
         )}
 
         <ItinerarioDetailsCard
@@ -70,7 +70,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         </div>
 
         <div className="my-8">
-          <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders</h2>
+          <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders che troverai</h2>
           <MySwiper
             items={itinerarioData.stakeholders}
             color="bg-stakeholderColor"
