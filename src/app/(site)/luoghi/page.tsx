@@ -18,7 +18,7 @@ const Luoghi = async () => {
   })
 
   return (
-    <main className="mx-auto max-w-xl">
+    <main className="">
       <div className="bg-white p-3 pt-5">
         {testi.luoghi.title ? (
           <div className="font-normal text-sm pt-4 pb-4 leading-4">
@@ -28,11 +28,7 @@ const Luoghi = async () => {
           <p>Error loading Itinerari text data</p>
         )}
 
-        {testi.luoghi.text ? (
-          renderContent(testi.luoghi.text)
-        ) : (
-          <p>Error loading about text data</p>
-        )}
+        {testi.luoghi.text ? renderContent(testi.luoghi.text) : <p></p>}
         <Suspense fallback={<div>Loading Cards...</div>}>
           <ColorCardWrapper color="bg-luogoColor" docs={luoghi.docs} previous="luoghi" />
         </Suspense>

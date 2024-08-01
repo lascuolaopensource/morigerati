@@ -45,7 +45,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           <p>Error loading luogo title</p>
         )}
         {luogoData.testo && luogoData.testo.root ? (
-          <div className="mb-6">{renderContent([luogoData.testo.root])}</div>
+          <div className="mb-6">{renderContent(luogoData.testo)}</div>
         ) : (
           <p></p>
         )}
@@ -81,7 +81,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
                 {contatto.telefono && <p className="text-xs">Telefono: {contatto.telefono}</p>}
                 {contatto.email && <p className="text-xs">Email: {contatto.email}</p>}
                 {contatto.link && (
-                  <p>
+                  <p className="text-xs">
                     Link:{' '}
                     <a
                       className="text-xs"
@@ -109,7 +109,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         {luogoData.orari && luogoData.orari.root ? (
           <div className="mb-6">{renderContent(luogoData.orari)}</div>
         ) : (
-          <p className="mb-6"> zetta</p>
+          <p className="mb-6"> </p>
         )}
       </div>
     </div>

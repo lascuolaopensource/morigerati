@@ -12,7 +12,7 @@ const Mobilita = async () => {
   })
 
   return (
-    <main className="mx-auto max-w-xl">
+    <main className="">
       <div className="bg-white p-3 pt-5">
         {mobilita.testo ? renderContent(mobilita.testo) : <p></p>}
       </div>

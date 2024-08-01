@@ -11,7 +11,7 @@ const About = async () => {
     slug: 'chi_siamo',
   })
   return (
-    <main className="mx-auto max-w-xl">
+    <main className="">
       <div className="bg-white p-3 pt-5">
         {about.testo ? renderContent(about.testo) : <p>Error loading about text data</p>}
       </div>
