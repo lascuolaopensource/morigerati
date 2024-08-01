@@ -32,12 +32,16 @@ const Home = async () => {
 
   return (
     <main>
-      <div className="relative w-full h-[80vh]">
-        {coverUrl && <Image src={coverUrl} alt="Fullscreen Image" fill objectFit="cover" />}
+      <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
+        {coverUrl && (
+          <Image src={coverUrl} alt="Fullscreen Image" fill style={{ objectFit: 'cover' }} />
+        )}
         <div className="absolute inset-0 bg-black opacity-30"></div>
-        <p className="absolute font-transInstrumentSans text-center font-bold top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl z-10">
-          {home.statement}
-        </p>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="font-transInstrumentSans text-center font-bold text-white text-3xl z-10 max-w-xl px-4">
+            {home.statement}
+          </p>
+        </div>
       </div>
 
       <div className="bg-white font-bold p-3 pt-4 w-full leading-2">
