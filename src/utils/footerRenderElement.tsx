@@ -1,61 +1,43 @@
 import React from 'react'
 
-interface TextNode {
-  text: string
-  type: string
+type ContentNode = {
   [key: string]: any
-  format: number
+  children?: ContentNode[]
+  text?: string
+  format?: number
 }
 
-interface ContentNode {
-  children: TextNode[] | ContentNode[]
-  type: string
-  tag?: string
-  [key: string]: any
-}
-
-interface RootNode {
-  children: ContentNode[]
-  type: string
-  [key: string]: any
-}
-
-function renderTextNode(node: TextNode | string): string {
-  return typeof node === 'string' ? node : node.text
-}
-
-function renderContentNode(node: ContentNode): React.ReactNode {
-  const text = node.children
-    .map((child) => (typeof child === 'string' ? child : renderTextNode(child as TextNode)))
-    .join('')
-
-  switch (node.format) {
-    case 0:
-      return <p className="font-normal text-xl  leading-2">{text}</p>
-    case 1:
-      return <p className="font-bold text-xl  leading-2">{text}</p>
-    default:
-      return <span>{text}</span>
+function renderNode(node: ContentNode): React.ReactNode {
+  if (typeof node.text === 'string') {
+    return node.format === 1 ? (
+      <div>
+        {' '}
+        <strong className="text-xs">{node.text}</strong>
+        <br></br>{' '}
+      </div>
+    ) : (
+      <div className="text-xs">
+        {node.text}
+        <br></br>{' '}
+      </div>
+    )
   }
+
+  if (Array.isArray(node.children)) {
+    return node.children.map((child, index) => (
+      <React.Fragment key={index}>{renderNode(child)}</React.Fragment>
+    ))
+  }
+
+  return null
 }
 
-export default function renderContent(jsonContent: any): React.ReactNode | null {
-  const content = jsonContent?.testo?.root || jsonContent?.root || jsonContent
-
-  if (
-    !content ||
-    !content.children ||
-    !Array.isArray(content.children) ||
-    content.children.length === 0
-  ) {
+export function renderFooterContent(content: any): React.ReactNode {
+  if (!content || typeof content !== 'object') {
     return null
   }
 
-  const renderedContent = content.children
-    .map((node: ContentNode, index: number) => (
-      <React.Fragment key={index}>{renderContentNode(node)}</React.Fragment>
-    ))
-    .filter(Boolean)
+  const root = content.root || content
 
-  return renderedContent.length > 0 ? renderedContent : null
+  return <div>{renderNode(root)}</div>
 }
