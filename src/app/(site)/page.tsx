@@ -34,7 +34,8 @@ const Home = async () => {
     <main>
       <div className="relative w-full h-[80vh]">
         {coverUrl && <Image src={coverUrl} alt="Fullscreen Image" fill objectFit="cover" />}
-        <p className="absolute font-transInstrumentSans text-center font-bold top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl">
+        <div className="absolute inset-0 bg-black opacity-30"></div>
+        <p className="absolute font-transInstrumentSans text-center font-bold top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl z-10">
           {home.statement}
         </p>
       </div>
