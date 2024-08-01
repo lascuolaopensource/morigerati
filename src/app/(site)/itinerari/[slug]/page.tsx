@@ -31,11 +31,13 @@ export default async function Itinerario({ params }: { params: { slug: string } 
   return (
     <div className="bg-white">
       {itinerarioData.media && itinerarioData.media && (
-        <div className="w-full h-[70vh] relative">
+        <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
           <Image
             src={getMediaURL(itinerarioData.media)}
             alt="Fullscreen Image"
             layout="fill"
+            fill
+            style={{ objectFit: 'cover' }}
             objectFit="cover"
             className="w-full h-full"
           />

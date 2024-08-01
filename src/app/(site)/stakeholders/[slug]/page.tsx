@@ -26,11 +26,13 @@ export default async function Stakeholder({ params }: { params: { slug: string }
   return (
     <div className="">
       {stakeholderData.media && (
-        <div className="w-full h-[70vh] relative">
+        <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
           <Image
             src={getMediaURL(stakeholderData.media)}
             alt="Fullscreen Image"
             layout="fill"
+            fill
+            style={{ objectFit: 'cover' }}
             objectFit="cover"
             className="w-full h-full"
           />

@@ -46,30 +46,22 @@ const Home = async () => {
 
       <div className="bg-white font-bold p-3 pt-4 w-full leading-2">
         <p className="font-bold pt-4 text-xl ">{home.intro.title}</p>
-        {home.intro ? renderContent(home.intro.text) : <p>Error loading testoHome data</p>}
+        {home.intro ? renderContent(home.intro.text) : <p></p>}
         <p className="font-bold pt-4 text-xl text-center">{home.itinerari.title}</p>
-        {home.itinerari ? (
-          renderContent(home.itinerari.text)
-        ) : (
-          <p>Error loading itinerari text data</p>
-        )}
+        {home.itinerari ? renderContent(home.itinerari.text) : <p></p>}
         <div className="pt-4"></div>
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={itinerari.docs} color="bg-itinerarioColor" type="itinerari" />
         </Suspense>
         <p className="font-bold pt-4 text-xl text-center">{home.luoghi.title}</p>
 
-        {home.luoghi ? renderContent(home.luoghi.text) : <p>Error loading luoghi text data</p>}
+        {home.luoghi ? renderContent(home.luoghi.text) : <p></p>}
         <div className="pt-4"></div>
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={luoghi.docs} color="bg-luogoColor" type="luoghi" />
         </Suspense>
         <p className="font-bold pt-4 text-xl text-center">{home.residenze.title}</p>
-        {home.residenze ? (
-          renderContent(home.residenze.text)
-        ) : (
-          <p>Error loading residenze text data</p>
-        )}
+        {home.residenze ? renderContent(home.residenze.text) : <p></p>}
         <div className="pt-4"></div>
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={residenze.docs} color="bg-residenzeColor" type="residenze" />

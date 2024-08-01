@@ -25,13 +25,9 @@ const Stakeholders = async () => {
             <h1 className="font-bold text-[40px]">{testi.stakeholders.title}</h1>
           </div>
         ) : (
-          <p>Error loading Itinerari text data</p>
+          <p></p>
         )}
-        {testi.stakeholders ? (
-          renderContent(testi?.stakeholders.text)
-        ) : (
-          <p>Error loading luoghi text data</p>
-        )}
+        {testi.stakeholders ? renderContent(testi?.stakeholders.text) : <p></p>}
         <Suspense fallback={<div>Loading cards...</div>}>
           <ColorCardWrapper
             color="bg-stakeholderColor"

@@ -25,7 +25,7 @@ const Luoghi = async () => {
             <h1 className="font-bold text-[40px]">{testi.luoghi.title}</h1>
           </div>
         ) : (
-          <p>Error loading Itinerari text data</p>
+          <p></p>
         )}
 
         {testi.luoghi.text ? renderContent(testi.luoghi.text) : <p></p>}
