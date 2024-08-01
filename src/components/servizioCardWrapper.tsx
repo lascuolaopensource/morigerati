@@ -30,7 +30,6 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
   )
 }
 
-// ServizioCard component
 interface ServizioCardProps {
   nome: Servizio['nome']
   testo: Servizio['testo']
@@ -54,10 +53,7 @@ const ServizioCard: React.FC<ServizioCardProps> = ({ nome, testo, link }) => {
           </a>
         )}
       </div>
-      <div className="w-1/4 bg-gray-200">
-        {/* Immagine stock fissa */}
-        <img src="/path/to/stock-image.jpg" alt={nome} className="w-full h-full object-cover" />
-      </div>
+      <div className="w-1/4 bg-gray-200">{/* Immagine stock fissa */}</div>
     </div>
   )
 }
