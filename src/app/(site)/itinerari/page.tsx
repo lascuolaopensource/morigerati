@@ -17,7 +17,7 @@ const ItinerariPage = async () => {
   })
 
   return (
-    <main className="mx-auto max-w-xl">
+    <main className="">
       <div className="bg-white p-3 pt-5">
         <div className="font-normal text-sm pt-4 pb-4 leading-4">
           <h1 className="font-bold text-[40px]">{testi.itinerari.title}</h1>

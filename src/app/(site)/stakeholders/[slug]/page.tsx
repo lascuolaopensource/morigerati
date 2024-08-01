@@ -24,7 +24,7 @@ export default async function Stakeholder({ params }: { params: { slug: string }
   const stakeholderData = stakeholders.docs[0] as StakeholderType
 
   return (
-    <div className="bg-white mx-auto max-w-xl">
+    <div className="">
       <div className="w-full h-[70vh] relative">
         {stakeholderData.media && (
           <Image

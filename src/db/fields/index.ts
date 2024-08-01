@@ -73,6 +73,7 @@ export const testo: RichTextField = {
   label: 'Testo',
   type: 'richText',
   localized: true,
+  
 }
 
 export function plainText(name: string): TextField {
