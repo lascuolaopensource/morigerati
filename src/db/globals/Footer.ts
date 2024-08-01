@@ -1,16 +1,12 @@
-import type { GlobalConfig } from 'payload'
+import type { GlobalConfig, RichTextField } from 'payload'
 import { Globals } from '.'
 import * as F from '@/db/fields'
 import {
   lexicalEditor,
-  lexicalHTML,
   BoldFeature,
   InlineToolbarFeature,
   ParagraphFeature,
-  HTMLConverterFeature
 } from '@payloadcms/richtext-lexical'
-
-
 
 export const Footer: GlobalConfig = {
   slug: Globals.Footer,
@@ -28,32 +24,29 @@ export const Footer: GlobalConfig = {
     F.divider,
 
     {
-      name: 'testo_sinistra',
-      type: 'richText',
+      ...baseRichText('testo_sinistra'),
       label: 'Testo a sinistra',
-      required: true,
-      localized: true,
-      editor: lexicalEditor({
-        features: ()  => [
-          InlineToolbarFeature(),
-          ParagraphFeature(),
-          BoldFeature(),
-        ],
-        
-      }),
-      
     },
 
     {
-      name: 'testo_destra',
-      type: 'richText',
+      ...baseRichText('testo_destra'),
       label: 'Testo a destra',
-      required: true,
-      localized: true,
     },
 
     F.divider,
 
     F.socialNetworkLinks,
   ],
+}
+
+function baseRichText(name: string): RichTextField {
+  return {
+    name,
+    type: 'richText',
+    required: true,
+    localized: true,
+    editor: lexicalEditor({
+      features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
+    }),
+  }
 }

@@ -61,7 +61,7 @@ export interface Luoghi {
   servizi?:
     | {
         nome: string;
-        testo?: {
+        testo: {
           root: {
             type: string;
             children: {
@@ -75,17 +75,17 @@ export interface Luoghi {
             version: number;
           };
           [k: string]: unknown;
-        } | null;
+        };
         id?: string | null;
       }[]
     | null;
   contatti?:
     | {
         nome: string;
-        link: string;
-        id?: string | null;
+        link?: string | null;
         email?: string | null;
         telefono?: string | null;
+        id?: string | null;
       }[]
     | null;
   orari?: {
@@ -138,7 +138,7 @@ export interface Media {
   nome: string;
   alt: string;
   link?: string | null;
-  testo?: {
+  descrizione?: {
     root: {
       type: string;
       children: {
@@ -188,10 +188,8 @@ export interface User {
  */
 export interface Articoli {
   id: string;
-  Dati: {
-    titolo: string;
-    data_pubblicazione?: string | null;
-  };
+  titolo: string;
+  data_pubblicazione?: string | null;
   media?: (string | null) | Media;
   links?:
     | {
@@ -262,7 +260,7 @@ export interface Itinerari {
          * @maxItems 2
          */
         posizione: [number, number];
-        media?: (string | null) | Media;
+        media: string | Media;
         id?: string | null;
       }[]
     | null;
@@ -309,10 +307,10 @@ export interface Stakeholder {
   contatti?:
     | {
         nome: string;
-        link: string;
-        id?: string | null;
+        link?: string | null;
         email?: string | null;
         telefono?: string | null;
+        id?: string | null;
       }[]
     | null;
   media?: (string | null) | Media;

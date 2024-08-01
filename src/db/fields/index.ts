@@ -119,7 +119,10 @@ export const contatti: ArrayField = {
   name: 'contatti',
   type: 'array',
   fields: [
-    linkConNome,
+    {
+      type: 'row',
+      fields: [nome, link],
+    },
     {
       type: 'row',
       fields: [
@@ -145,7 +148,7 @@ export const media: RelationshipField = {
 export const servizi: ArrayField = {
   name: 'servizi',
   type: 'array',
-  fields: [nome, testo],
+  fields: [nome, { ...testo, required: true }],
 }
 
 export const contenutoFields: Field[] = [

@@ -23,6 +23,6 @@ export const Media: CollectionConfig = {
       localized: true,
     },
     F.link,
-    F.testo,
+    { ...F.testo, name: 'descrizione', label: 'Descrizione' },
   ],
 }

@@ -34,6 +34,7 @@ export const Luoghi: CollectionConfig = {
               name: 'orari',
               type: 'richText',
               label: 'Orari di attività e date di chiusura',
+              localized: true,
             },
           ],
         },

@@ -13,26 +13,17 @@ export const Articoli: CollectionConfig = {
   },
 
   fields: [
+    F.title('Informazioni generali'),
     {
-      type: 'tabs',
-      tabs: [
-        {
-          name: 'Dati',
-          fields: [
-            F.title('Informazioni generali'),
-            {
-              ...F.plainText('titolo'),
-              required: true,
-            },
-            {
-              name: 'data_pubblicazione',
-              label: 'Data pubblicazione',
-              type: 'date',
-            },
-          ],
-        },
-        F.tabContenuto,
-      ],
+      ...F.plainText('titolo'),
+      required: true,
     },
+    {
+      name: 'data_pubblicazione',
+      label: 'Data pubblicazione',
+      type: 'date',
+    },
+    F.divider,
+    ...F.contenutoFields,
   ],
 }
