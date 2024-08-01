@@ -1,17 +1,11 @@
 import React from 'react'
-import ServizioCard from '@/components/servizioCard'
-import { RootNode } from '@/utils/renderElement'
+import { Itinerari } from '@/payload-types'
+import renderElement from '@/utils/renderElement'
 
-interface Servizio {
-  nome: string
-  testo: {
-    root: RootNode
-  }
-  link: string
-}
+type Servizio = NonNullable<Itinerari['servizi']>[number]
 
 interface ServiziWrapperProps {
-  servizi: Servizio[] | any[]
+  servizi: Itinerari['servizi']
 }
 
 const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
@@ -25,7 +19,7 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
       <div className="space-y-4">
         {servizi.map((servizio, index) => (
           <ServizioCard
-            key={index}
+            key={servizio.id || index}
             nome={servizio.nome}
             testo={servizio.testo}
             link={servizio.link}
@@ -36,4 +30,31 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
   )
 }
 
-export default ServiziCardWrapper
+interface ServizioCardProps {
+  nome: Servizio['nome']
+  testo: Servizio['testo']
+  link: Servizio['link']
+}
+
+const ServizioCard: React.FC<ServizioCardProps> = ({ nome, testo, link }) => {
+  return (
+    <div className="border-2 border-black rounded-lg overflow-hidden p-4">
+      <div className="flex justify-between items-start">
+        <div className="flex-grow">
+          <h3 className="text-xl font-bold mb-2">{nome}</h3>
+          <div className="text-xs mb-4">{testo && testo.root ? renderElement(testo.root) : ''}</div>
+        </div>
+        {link && (
+          <a
+            href={link}
+            className="border-2 border-black inline-block bg-itinerarioColor text-black px-4 py-2 rounded-md ml-4"
+          >
+            prenota
+          </a>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export { ServiziCardWrapper, ServizioCard }

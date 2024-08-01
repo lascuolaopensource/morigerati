@@ -1,50 +1,40 @@
-import { buildConfig } from 'payload';
-import { fileURLToPath } from 'url';
-import path from 'path';
-import sharp from 'sharp';
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+// storage-adapter-import-placeholder
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import path from 'path'
+import { buildConfig } from 'payload'
+import { fileURLToPath } from 'url'
+import sharp from 'sharp'
 
-// Collections
-import { Stakeholders } from './collections/Stakeholders';
-import { Residenze } from './collections/Residenze';
-import { Itinerari } from './collections/Itinerari';
-import { Luoghi } from './collections/Luoghi';
-import { Users } from './collections/Users';
-import { Media } from './collections/Media';
-import { Articoli } from './collections/Articoli';
+import { Articoli } from '@/db/collections/Articoli'
+import { Itinerari } from '@/db/collections/Itinerari'
+import { Luoghi } from '@/db/collections/Luoghi'
+import { Media } from '@/db/collections/Media'
+import { Residenze } from '@/db/collections/Residenze'
+import { Stakeholders } from '@/db/collections/Stakeholders'
+import { Users } from '@/db/collections/Users'
 
-// Globals
-import { Home } from '@/collections/globals/Home';
-import { Chi_Siamo } from '@/collections/globals/Chi_Siamo';
-import { Mobilita } from '@/collections/globals/Mobilita';
-import { Testi } from '@/collections/globals/Testi';
-import { Info } from '@/collections/globals/Info';
+import { Home } from '@/db/globals/Home'
+import { ChiSiamo } from '@/db/globals/ChiSiamo'
+import { MobilitaSostenibile } from '@/db/globals/MobilitaSostenibile'
+import { Footer } from '@/db/globals/Footer'
+import { Testi } from '@/db/globals/Testi'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [
-    Stakeholders,
-    Itinerari,
-    Luoghi,
-    Residenze,
-    Articoli,
-    Media,
-    Users,
-  ],
-  globals: [
-    Home,
-    Chi_Siamo,
-    Mobilita,
-    Testi,
-    Info
-  ],
+  collections: [Luoghi, Users, Media, Articoli, Itinerari, Stakeholders, Residenze],
+  globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
   editor: lexicalEditor(),
+  localization: {
+    locales: ['it', 'en'],
+    defaultLocale: 'it',
+    fallback: true,
+  },
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -56,4 +46,4 @@ export default buildConfig({
   plugins: [
     // storage-adapter-placeholder
   ],
-});
+})

@@ -148,16 +148,21 @@
   font-style: normal italic;
 }
 
+html,
+body,
+main {
+  min-height: 100svh;
+}
+
 body {
   font-family: 'TransInstrumentSans', sans-serif;
 }
 
 @layer base {
-    hs1 {
-      @apply text-2xl;
-    }
-    h2 {
-      @apply text-xl;
-    }
+  hs1 {
+    @apply text-2xl;
   }
-
+  h2 {
+    @apply text-xl;
+  }
+}

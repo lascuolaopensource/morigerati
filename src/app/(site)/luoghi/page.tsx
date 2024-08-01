@@ -1,0 +1,40 @@
+import React, { Suspense } from 'react'
+import { loadDb } from '@/utils/db'
+import ColorCardWrapper from '@/components/colorCardWrapper'
+
+import renderContent from '@/utils/renderElement'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+const Luoghi = async () => {
+  const db = await loadDb()
+  const testi = await db.findGlobal({
+    slug: 'testi',
+  })
+
+  const luoghi = await db.find({
+    collection: 'luoghi',
+  })
+
+  return (
+    <main className="">
+      <div className="bg-white p-3 pt-5">
+        {testi.luoghi.title ? (
+          <div className="font-normal text-sm pt-4 pb-10 leading-4">
+            <h1 className="font-bold text-[40px]">{testi.luoghi.title}</h1>
+          </div>
+        ) : (
+          <p></p>
+        )}
+
+        {testi.luoghi.text ? renderContent(testi.luoghi.text) : <p></p>}
+        <Suspense fallback={<div>Loading Cards...</div>}>
+          <ColorCardWrapper color="bg-luogoColor" docs={luoghi.docs} previous="luoghi" />
+        </Suspense>
+      </div>
+    </main>
+  )
+}
+
+export default Luoghi
