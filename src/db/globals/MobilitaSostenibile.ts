@@ -10,5 +10,5 @@ export const MobilitaSostenibile: GlobalConfig = {
     read: () => true,
   },
 
-  fields: [...F.contenutoFields],
+  fields: F.contenutoFields,
 }

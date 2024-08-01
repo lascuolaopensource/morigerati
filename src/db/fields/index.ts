@@ -105,7 +105,7 @@ export const posizione: PointField = {
 
 export const linkConNome: RowField = {
   type: 'row',
-  fields: [nome, link],
+  fields: [nome, { ...link, required: true }],
 }
 
 export const linkArray: ArrayField = {
@@ -151,11 +151,10 @@ export const servizi: ArrayField = {
 export const contenutoFields: Field[] = [
   title('Immagini e media'),
   media,
-  gap(20),
   linkArray,
   divider,
   title('Contenuti testuali'),
-  testo,
+  { ...testo, required: true },
 ]
 
 export const tabContenuto: Tab = {

@@ -28,7 +28,7 @@ export interface Config {
     footer: Footer;
     testi: Testi;
   };
-  locale: null;
+  locale: 'it' | 'en';
   user: User & {
     collection: 'users';
   };
@@ -82,7 +82,7 @@ export interface Luoghi {
   contatti?:
     | {
         nome: string;
-        link?: string | null;
+        link: string;
         id?: string | null;
         email?: string | null;
         telefono?: string | null;
@@ -107,11 +107,11 @@ export interface Luoghi {
   links?:
     | {
         nome: string;
-        link?: string | null;
+        link: string;
         id?: string | null;
       }[]
     | null;
-  testo?: {
+  testo: {
     root: {
       type: string;
       children: {
@@ -125,7 +125,7 @@ export interface Luoghi {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -196,11 +196,11 @@ export interface Articoli {
   links?:
     | {
         nome: string;
-        link?: string | null;
+        link: string;
         id?: string | null;
       }[]
     | null;
-  testo?: {
+  testo: {
     root: {
       type: string;
       children: {
@@ -214,7 +214,7 @@ export interface Articoli {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -234,7 +234,7 @@ export interface Itinerari {
   servizi?:
     | {
         nome: string;
-        link?: string | null;
+        link: string;
         id?: string | null;
         testo?: {
           root: {
@@ -270,11 +270,11 @@ export interface Itinerari {
   links?:
     | {
         nome: string;
-        link?: string | null;
+        link: string;
         id?: string | null;
       }[]
     | null;
-  testo?: {
+  testo: {
     root: {
       type: string;
       children: {
@@ -288,7 +288,7 @@ export interface Itinerari {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -309,7 +309,7 @@ export interface Stakeholder {
   contatti?:
     | {
         nome: string;
-        link?: string | null;
+        link: string;
         id?: string | null;
         email?: string | null;
         telefono?: string | null;
@@ -319,11 +319,11 @@ export interface Stakeholder {
   links?:
     | {
         nome: string;
-        link?: string | null;
+        link: string;
         id?: string | null;
       }[]
     | null;
-  testo?: {
+  testo: {
     root: {
       type: string;
       children: {
@@ -337,7 +337,7 @@ export interface Stakeholder {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -372,14 +372,14 @@ export interface Residenze {
         progetti?:
           | {
               nome: string;
-              link?: string | null;
+              link: string;
               id?: string | null;
             }[]
           | null;
         organizzazioni?:
           | {
               nome: string;
-              link?: string | null;
+              link: string;
               id?: string | null;
             }[]
           | null;
@@ -449,17 +449,17 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  Processo?: {
-    processo?: {
+  Processo: {
+    processo: {
       media?: (string | null) | Media;
       links?:
         | {
             nome: string;
-            link?: string | null;
+            link: string;
             id?: string | null;
           }[]
         | null;
-      testo?: {
+      testo: {
         root: {
           type: string;
           children: {
@@ -473,20 +473,20 @@ export interface Residenze {
           version: number;
         };
         [k: string]: unknown;
-      } | null;
+      };
     };
   };
-  Output?: {
-    output?: {
+  Output: {
+    output: {
       media?: (string | null) | Media;
       links?:
         | {
             nome: string;
-            link?: string | null;
+            link: string;
             id?: string | null;
           }[]
         | null;
-      testo?: {
+      testo: {
         root: {
           type: string;
           children: {
@@ -500,7 +500,7 @@ export interface Residenze {
           version: number;
         };
         [k: string]: unknown;
-      } | null;
+      };
     };
   };
   updatedAt: string;
@@ -633,11 +633,11 @@ export interface ChiSiamo {
   links?:
     | {
         nome: string;
-        link?: string | null;
+        link: string;
         id?: string | null;
       }[]
     | null;
-  testo?: {
+  testo: {
     root: {
       type: string;
       children: {
@@ -651,7 +651,7 @@ export interface ChiSiamo {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -665,11 +665,11 @@ export interface MobilitaSostenibile {
   links?:
     | {
         nome: string;
-        link?: string | null;
+        link: string;
         id?: string | null;
       }[]
     | null;
-  testo?: {
+  testo: {
     root: {
       type: string;
       children: {
@@ -683,7 +683,7 @@ export interface MobilitaSostenibile {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
