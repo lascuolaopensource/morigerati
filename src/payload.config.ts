@@ -18,14 +18,7 @@ import { ChiSiamo } from '@/db/globals/ChiSiamo'
 import { MobilitaSostenibile } from '@/db/globals/MobilitaSostenibile'
 import { Footer } from '@/db/globals/Footer'
 import { Testi } from '@/db/globals/Testi'
-
-import {
-  lexicalEditor,
-  HeadingFeature,
-  InlineToolbarFeature,
-  ParagraphFeature,
-  HTMLConverterFeature
-} from '@payloadcms/richtext-lexical'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -36,13 +29,12 @@ export default buildConfig({
   },
   collections: [Luoghi, Users, Media, Articoli, Itinerari, Stakeholders, Residenze],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
-  editor: lexicalEditor({
-    features: ()  => [
-      HeadingFeature(),
-      ParagraphFeature(),
-    ],
-    
-  }),
+  editor: lexicalEditor(),
+  localization: {
+    locales: ['it', 'en'],
+    defaultLocale: 'it',
+    fallback: true,
+  },
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
