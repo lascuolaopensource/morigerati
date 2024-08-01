@@ -1,6 +1,16 @@
 import type { GlobalConfig } from 'payload'
 import { Globals } from '.'
 import * as F from '@/db/fields'
+import {
+  lexicalEditor,
+  lexicalHTML,
+  BoldFeature,
+  InlineToolbarFeature,
+  ParagraphFeature,
+  HTMLConverterFeature
+} from '@payloadcms/richtext-lexical'
+
+
 
 export const Footer: GlobalConfig = {
   slug: Globals.Footer,
@@ -23,6 +33,15 @@ export const Footer: GlobalConfig = {
       label: 'Testo a sinistra',
       required: true,
       localized: true,
+      editor: lexicalEditor({
+        features: ()  => [
+          InlineToolbarFeature(),
+          ParagraphFeature(),
+          BoldFeature(),
+        ],
+        
+      }),
+      
     },
 
     {
