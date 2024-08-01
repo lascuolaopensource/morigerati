@@ -1,6 +1,5 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -20,6 +19,14 @@ import { MobilitaSostenibile } from '@/db/globals/MobilitaSostenibile'
 import { Footer } from '@/db/globals/Footer'
 import { Testi } from '@/db/globals/Testi'
 
+import {
+  lexicalEditor,
+  HeadingFeature,
+  InlineToolbarFeature,
+  ParagraphFeature,
+  HTMLConverterFeature
+} from '@payloadcms/richtext-lexical'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -29,7 +36,13 @@ export default buildConfig({
   },
   collections: [Luoghi, Users, Media, Articoli, Itinerari, Stakeholders, Residenze],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ()  => [
+      HeadingFeature(),
+      ParagraphFeature(),
+    ],
+    
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
