@@ -22,7 +22,7 @@ const Colorcard: React.FC<ColorcardProps> = ({ color, title, imageUrl, previous,
             src={imageUrl}
             alt={title}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) s"
             className="object-cover"
           />
         </div>

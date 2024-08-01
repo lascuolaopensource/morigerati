@@ -17,7 +17,7 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, docs, previo
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1">
       {docs.map((doc) => {
         const imageUrl = getImageUrl(doc)
         return (
