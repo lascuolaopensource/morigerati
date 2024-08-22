@@ -1,6 +1,6 @@
 import React from 'react'
 import Colorcard from '@/components/colorCard'
-import { Luoghi, Itinerari, Stakeholder } from '@/payload-types'
+import { Luoghi, Itinerari, Stakeholder, Articoli } from '@/payload-types'
 import loremPic from '@/public/loremPic.png'
 
 type SupportedDoc = Luoghi | Itinerari | Stakeholder
