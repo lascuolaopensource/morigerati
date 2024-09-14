@@ -535,7 +535,7 @@ export interface PayloadMigration {
  */
 export interface Home {
   id: string;
-  statement: string;
+  statement?: string | null;
   cover?: (string | null) | Media;
   intro: {
     title: string;

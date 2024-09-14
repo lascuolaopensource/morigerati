@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+main {
+  min-height: 100svh;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+@layer base {
+  hs1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}
