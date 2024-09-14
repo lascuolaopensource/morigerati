@@ -5,7 +5,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-//
+
 import { Users } from './db/collections/Users'
 import { Media } from './db/collections/Media'
 import { Articoli } from './db/collections/Articoli'  
@@ -19,7 +19,7 @@ import { ChiSiamo } from './db/globals/ChiSiamo'
 import { MobilitaSostenibile } from './db/globals/MobilitaSostenibile'
 import { Footer } from './db/globals/Footer'
 import { Testi } from './db/globals/Testi'
-//
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
