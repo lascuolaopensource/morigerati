@@ -1,6 +1,6 @@
 import React from 'react'
 import { Articoli } from '@/payload-types'
-import loremPic from '@/public/loremPic.png'
+import ArticoliGrid from '@/components/articoli/articoliGrid'
 
 type SupportedDoc = Articoli
 
@@ -13,8 +13,7 @@ const ArticoliCardWrapper: React.FC<articoliCardWrapperProps> = ({ docs }) => {
   if (!Array.isArray(docs) || docs.length === 0) {
     return null
   }
-
-  return <p>ciao</p>
+  return <ArticoliGrid articoli={docs} />
 }
 
 export default ArticoliCardWrapper

@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
-import ArticoliCardWrapper from '@/components/articoliCardWrapper'
+import ArticoliCardWrapper from '@/components/articoli/articoliGridWrapper'
 
 import renderContent from '@/utils/renderElement'
 
