@@ -43,7 +43,7 @@ const Home = async () => {
           </p>
         </div>
       </div>
-      {/* 
+
       <div className="bg-white font-bold p-3 pt-4 w-full leading-2">
         <p className="font-bold pt-4 text-xl ">{home.intro.title}</p>
         {home.intro ? renderContent(home.intro.text) : <p></p>}
@@ -65,8 +65,8 @@ const Home = async () => {
         <div className="pt-4"></div>
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={residenze.docs} color="bg-residenzeColor" type="residenze" />
-        </Suspense> 
-      </div>*/}
+        </Suspense>
+      </div>
     </main>
   )
 }
