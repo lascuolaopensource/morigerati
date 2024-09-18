@@ -51,7 +51,7 @@ const Home = async () => {
           <p className="font-bold pt-4 text-xl ">{home.intro.title}</p>
           {home.intro ? renderContent(home.intro.text) : <p></p>}
           <div className="absolute inset-0 flex justify-end">
-            <HomePixel className="absolute right-0" />
+            <HomePixel width={200} className="absolute right-0" />
           </div>
         </div>
 
