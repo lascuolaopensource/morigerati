@@ -3,6 +3,8 @@ import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
 import LuogoPixel from '@/public/pixels/cards/luoghi.svg'
+import ResidenzePixel from '@/public/pixels/cards/residenze.svg'
+import ItinerariPixel from '@/public/pixels/cards/itinerari.svg'
 
 interface PolaroidProps {
   imageUrl: string | StaticImageData
@@ -21,7 +23,9 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
           </div>
           <div className={`${color} p-2 border-t-2 border-black flex flex-col relative`}>
             <div className="absolute top-0 left-0">
-              <LuogoPixel width={42} />
+              {color == 'bg-luogoColor' ? <LuogoPixel width={42} /> : null}
+              {color == 'bg-residenzeColor' ? <ResidenzePixel width={42} /> : null}
+              {color == 'bg-itinerarioColor' ? <ItinerariPixel width={42} /> : null}
             </div>
             <h2 className="text-sm font-bold text-center leading-3">{title}</h2>
           </div>
