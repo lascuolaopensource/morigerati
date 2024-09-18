@@ -1,9 +1,9 @@
 import React from 'react'
 import Colorcard from '@/components/colorCard'
-import { Luoghi, Itinerari, Stakeholder, Articoli } from '@/payload-types'
+import { Luoghi, Itinerari, Stakeholder, Articoli, Residenze } from '@/payload-types'
 import loremPic from '@/public/loremPic.png'
 
-type SupportedDoc = Luoghi | Itinerari | Stakeholder
+type SupportedDoc = Luoghi | Itinerari | Stakeholder | Residenze
 
 interface ColorCardWrapperProps {
   color: string

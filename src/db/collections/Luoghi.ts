@@ -8,6 +8,7 @@ import {
   ParagraphFeature,
 } from '@payloadcms/richtext-lexical'
 
+
 export const Luoghi: CollectionConfig = {
   slug: Collections.Luoghi,
 
@@ -17,11 +18,12 @@ export const Luoghi: CollectionConfig = {
   },
 
   admin: {
-    useAsTitle: F.nome.name,
+    //useAsTitle: F.nome.name,
   },
 
   fields: [
     {
+      
       type: 'tabs',
       tabs: [
         {
@@ -30,13 +32,13 @@ export const Luoghi: CollectionConfig = {
             F.title('Info generali'),
             F.nome,
             F.posizione,
-            F.divider,
-            {
-              name: 'Itinerari in cui si trovai il luogo',
-              type: 'relationship',
-              relationTo: Collections.Itinerari,
-              hasMany: true,
-            },
+            // {
+            // name: 'Itinerari in cui si trovai il luogo',
+            //  type: 'relationship',
+            //  relationTo: Collections.Itinerari,
+            //  hasMany: true,
+            //},
+          
             F.divider,
             F.servizi,
             F.divider,

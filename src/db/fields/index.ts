@@ -12,20 +12,14 @@ import {
 } from 'payload'
 import { Collections } from '@/db/collections'
 
-import { Divider } from './components/divider'
-import { Header } from './components/header'
-import { Gap } from './components/gap'
-
 import { capitalizeFirstLetter } from '@/utils/strings'
-
-//
 
 export const divider: UIField = {
   name: 'divider',
   type: 'ui',
   admin: {
     components: {
-      Field: Divider,
+      Field: '/db/fields/components/divider.tsx',
     },
   },
 }
@@ -36,7 +30,12 @@ export function title(text: string): UIField {
     type: 'ui',
     admin: {
       components: {
-        Field: () => Header(text),
+        Field: {
+          path: "/db/fields/components/header.tsx",
+          clientProps: {
+            content: text
+          }
+        }  
       },
     },
   }
@@ -48,7 +47,12 @@ export function gap(size: number): UIField {
     type: 'ui',
     admin: {
       components: {
-        Field: () => Gap({ size }),
+        Field:{
+          path: "/db/fields/components/gap.tsx",
+          clientProps: {
+            size: size
+          }
+        }
       },
     },
   }

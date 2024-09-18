@@ -38,7 +38,7 @@ function renderContentNode(node: ContentNode): React.ReactNode {
 
   switch (node.type) {
     case 'paragraph':
-      return <p className="font-normal text-sm pb-2 leading-6">{text}</p>
+      return <p className="font-normal text-sm pb-2 leading-5">{text}</p>
     case 'heading':
       switch (node.tag) {
         case 'h1':

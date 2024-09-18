@@ -13,7 +13,6 @@ export const Home: GlobalConfig = {
     F.title('Copertina'),
     {
       ...F.plainText('statement'),
-      required: true,
     },
     {
       ...F.media,

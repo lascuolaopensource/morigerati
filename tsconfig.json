@@ -37,7 +37,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/components/articoli/articoliCards"  ],
   "exclude": [
     "node_modules"
   ]

@@ -6,6 +6,8 @@ import MySwyper from '@/components/mySwiper'
 import renderContent from '@/utils/renderElement'
 import { getMediaUrl } from '@/utils/media'
 
+import HomePixel from '@/public/pixels/home.svg'
+
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -45,10 +47,18 @@ const Home = async () => {
       </div>
 
       <div className="bg-white font-bold p-3 pt-4 w-full leading-2">
-        <p className="font-bold pt-4 text-xl ">{home.intro.title}</p>
-        {home.intro ? renderContent(home.intro.text) : <p></p>}
+        <div className="relative">
+          <p className="font-bold pt-4 text-xl ">{home.intro.title}</p>
+          {home.intro ? renderContent(home.intro.text) : <p></p>}
+          <div className="absolute inset-0 flex justify-end">
+            <HomePixel className="absolute right-0" />
+          </div>
+        </div>
+
         <p className="font-bold pt-4 text-xl text-center">{home.itinerari.title}</p>
+
         {home.itinerari ? renderContent(home.itinerari.text) : <p></p>}
+
         <div className="pt-4"></div>
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={itinerari.docs} color="bg-itinerarioColor" type="itinerari" />
@@ -56,7 +66,7 @@ const Home = async () => {
         <p className="font-bold pt-4 text-xl text-center">{home.luoghi.title}</p>
 
         {home.luoghi ? renderContent(home.luoghi.text) : <p></p>}
-        <div className="pt-4"></div>
+        <div className="pt-4 "></div>
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={luoghi.docs} color="bg-luogoColor" type="luoghi" />
         </Suspense>

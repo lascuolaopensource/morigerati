@@ -1,11 +1,15 @@
-// import {} from '@payloadcms/ui/scss'
+import exp from 'constants'
 
-export function Gap(props: { size: number }) {
+// import {} from '@payloadcms/ui/scss'
+const Gap = ({ size }: { size: number }) => {
+  //export function Gap(props: { size: number }) {
   return (
     <div
       style={{
-        paddingTop: `${props.size}px`,
+        paddingTop: `${size}px`,
       }}
     ></div>
   )
 }
+
+export default Gap

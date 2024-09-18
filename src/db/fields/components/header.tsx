@@ -1,4 +1,5 @@
-export function Header(content: string) {
+'use client'
+const Header = ({ content }: { content: string }) => {
   return (
     <header className="array-field__header" style={{ marginBottom: '25px' }}>
       <div className="array-field__header-wrap">
@@ -11,3 +12,5 @@ export function Header(content: string) {
     </header>
   )
 }
+
+export default Header

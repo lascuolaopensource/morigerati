@@ -84,11 +84,13 @@ export const Residenze: CollectionConfig = {
             {
               ...F.testo,
               name: 'abstract',
+              label: 'Abstract',
             },
             F.divider,
             {
               ...F.testo,
               name: 'programma',
+              label: 'Programma',
             },
             F.divider,
             {
