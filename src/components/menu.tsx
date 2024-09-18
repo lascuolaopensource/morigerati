@@ -34,10 +34,10 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, onClose, currentP
   if (!isOpen) return null
 
   return (
-    <div className="fixed w-screen h-screen inset-0 bg-black text-white z-40">
-      <div className="">
-        <div className="py-4 px-6 border-b border-b-white">
-          <div className="mx-auto max-w-7xl flex justify-between items-center ">
+    <div className="fixed w-screen h-screen inset-0 bg-black text-white z-40 overflow-hidden">
+      <div className="flex flex-col h-full">
+        <div className="py-4 px-6 border-b border-b-white flex-shrink-0">
+          <div className="mx-auto max-w-7xl flex justify-between items-center">
             <div className="w-8"></div>
             <div className="flex justify-center">
               <Image src={logo} alt="Logo" width={100} />
@@ -51,7 +51,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, onClose, currentP
             </button>
           </div>
         </div>
-        <ul className="flex flex-col items-center pt-24 space-y-6 text-2xl">
+        <ul className="flex flex-col items-center pt-12 space-y-6 text-2xl overflow-y-auto flex-grow">
           <li>{renderPageLink('/', 'Home')}</li>
           <li>{renderPageLink('/about', 'About')}</li>
           <li>{renderPageLink('/mobilita', 'Mobilità sostenibile')}</li>
@@ -60,6 +60,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, onClose, currentP
           <li>{renderPageLink('/stakeholders', 'Stakeholders')}</li>
           <li>{renderPageLink('/residenze', 'Residenze')}</li>
           <li>{renderPageLink('/articoli', 'Articoli')}</li>
+          <div className="py-4"></div>
         </ul>
       </div>
     </div>

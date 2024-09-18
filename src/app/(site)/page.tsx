@@ -48,7 +48,18 @@ const Home = async () => {
         <p className="font-bold pt-4 text-xl ">{home.intro.title}</p>
         {home.intro ? renderContent(home.intro.text) : <p></p>}
         <p className="font-bold pt-4 text-xl text-center">{home.itinerari.title}</p>
-        {home.itinerari ? renderContent(home.itinerari.text) : <p></p>}
+        <div className="relative">
+          {home.itinerari ? renderContent(home.itinerari.text) : <p></p>}
+          <div className="absolute inset-0 flex justify-end">
+            <Image
+              src="/pixels/home.svg"
+              alt="Identità"
+              width={100}
+              height={100}
+              className="h-full w-full opacity-50"
+            />
+          </div>
+        </div>
         <div className="pt-4"></div>
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={itinerari.docs} color="bg-itinerarioColor" type="itinerari" />
