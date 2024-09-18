@@ -6,7 +6,7 @@ import MySwyper from '@/components/mySwiper'
 import renderContent from '@/utils/renderElement'
 import { getMediaUrl } from '@/utils/media'
 
-import HomePixel from '@/public/pixels/home.svg'
+import HomePixel from '../../public/pixels/home.svg'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import renderContent from '@/utils/renderElement'
 
-import ChiSiamoPixel from '@/public/pixels/chiSiamo.svg'
+import ChiSiamoPixel from '../../public/pixels/chiSiamo.svg'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
