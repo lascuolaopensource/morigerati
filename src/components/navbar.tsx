@@ -22,6 +22,8 @@ const Navbar: React.FC = () => {
       return 'bg-itinerarioColor'
     } else if (pathname.startsWith('/stakeholders')) {
       return 'bg-stakeholderColor'
+    } else if (pathname.startsWith('/residenze')) {
+      return 'bg-residenzeColor'
     } else if (
       pathname === '/' ||
       pathname.startsWith('/about') ||
