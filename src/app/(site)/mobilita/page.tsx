@@ -12,7 +12,7 @@ const Mobilita = async () => {
   const mobilita = await db.findGlobal({
     slug: 'mobilita_sostenibile',
   })
-
+  //
   return (
     <main>
       <div className="relative bg-white p-3 pt-5">
