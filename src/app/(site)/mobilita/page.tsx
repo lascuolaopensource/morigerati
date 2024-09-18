@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import renderContent from '@/utils/renderElement'
 
-import MobilitaPixel from '../../public/pixels/mobilita.svg'
+import MobilitaPixel from '@/public/pixels/mobilita.svg'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
