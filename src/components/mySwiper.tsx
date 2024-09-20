@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper/modules'
+import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -38,9 +38,10 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
 
   return (
     <Swiper
-      modules={[Navigation, Pagination]}
+      modules={[Navigation, Pagination, Mousewheel]}
       spaceBetween={20}
       slidesPerView={'auto'}
+      mousewheel={true}
       className="mySwiper"
     >
       {items.map((item, index) => (
