@@ -4,11 +4,12 @@ interface Articolo {
   title: string
   subtitle: string
   imageUrl: string
+  slugUrl: string
 }
 
-const SmallCard: React.FC<Articolo> = ({ title, subtitle, imageUrl }) => {
+const SmallCard: React.FC<Articolo> = ({ title, subtitle, imageUrl, slugUrl }) => {
   return (
-    <div className="bg-transparent border border-black rounded-lg flex flex-col h-full">
+    <div className="bg-transparent border-2 border-black rounded-lg flex flex-col h-full">
       <div className="p-4 flex flex-col h-full">
         <h1 className="font-bold text-xs">{title}</h1>
 
