@@ -21,6 +21,7 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
       'bg-itinerarioColor': 'border-itinerarioColor-scuro',
     }[color] || 'border-gray-700'
   return (
+    // <div style={{ transform: `rotate(${Math.random() * 4 - 2}deg)` }} className="pt-2 pb-2 pl-2">
     <div className="w-40 pb-1 ">
       <Link href={link}>
         <div
@@ -40,6 +41,7 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
         </div>
       </Link>
     </div>
+    // </div>
   )
 }
 

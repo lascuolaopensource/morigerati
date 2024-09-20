@@ -155,6 +155,7 @@ export interface Luoghi {
         id?: string | null;
       }[]
     | null;
+  galleria?: (string | Media)[] | null;
   testo: {
     root: {
       type: string;
@@ -229,6 +230,7 @@ export interface Itinerari {
         id?: string | null;
       }[]
     | null;
+  galleria?: (string | Media)[] | null;
   testo: {
     root: {
       type: string;
@@ -278,6 +280,7 @@ export interface Stakeholder {
         id?: string | null;
       }[]
     | null;
+  galleria?: (string | Media)[] | null;
   testo: {
     root: {
       type: string;
@@ -414,6 +417,7 @@ export interface Residenze {
             id?: string | null;
           }[]
         | null;
+      galleria?: (string | Media)[] | null;
       testo: {
         root: {
           type: string;
@@ -441,6 +445,7 @@ export interface Residenze {
             id?: string | null;
           }[]
         | null;
+      galleria?: (string | Media)[] | null;
       testo: {
         root: {
           type: string;
@@ -483,6 +488,7 @@ export interface Articoli {
         id?: string | null;
       }[]
     | null;
+  galleria?: (string | Media)[] | null;
   testo: {
     root: {
       type: string;
@@ -632,6 +638,7 @@ export interface ChiSiamo {
         id?: string | null;
       }[]
     | null;
+  galleria?: (string | Media)[] | null;
   testo: {
     root: {
       type: string;
@@ -664,6 +671,7 @@ export interface MobilitaSostenibile {
         id?: string | null;
       }[]
     | null;
+  galleria?: (string | Media)[] | null;
   testo: {
     root: {
       type: string;

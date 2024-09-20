@@ -146,7 +146,16 @@ export const contatti: ArrayField = {
 
 export const media: RelationshipField = {
   name: 'media',
+  label: 'copertina',
   type: 'relationship',
+  relationTo: Collections.Media,
+}
+
+export const galleria: RelationshipField = {
+  name: 'galleria',
+  label: 'galleria',
+  type: 'relationship',
+  hasMany: true,
   relationTo: Collections.Media,
 }
 
@@ -160,6 +169,7 @@ export const contenutoFields: Field[] = [
   title('Immagini e media'),
   media,
   linkArray,
+  galleria,
   divider,
   title('Contenuti testuali'),
   { ...testo, required: true },
