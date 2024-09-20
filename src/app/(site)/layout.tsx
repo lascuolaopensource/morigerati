@@ -8,8 +8,8 @@ import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
 
 export const metadata: Metadata = {
-  title: 'Morigerati',
-  description: 'Morigerati',
+  title: 'Transluoghi - Ecomuseo del Bussento Contemporaneo',
+  description: 'Transluoghi - Ecomuseo del Bussento Contemporaneo',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

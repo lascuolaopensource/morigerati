@@ -92,7 +92,7 @@ const GridOverlay: React.FC<GridOverlayProps> = ({
           const relativeRow = i
           const baseThreshold = (relativeRow / effectRows) * bottomDensity
           row.forEach((cell, j) => {
-            if (Math.random() < 0.05) {
+            if (Math.random() < 0.02) {
               const randomFactor = Math.random() * 0.1 - 0.05
               const threshold = baseThreshold + randomFactor
               newGrid[newGrid.length - effectRows + i][j] = Math.random() < threshold
