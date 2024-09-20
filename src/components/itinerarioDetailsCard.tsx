@@ -35,7 +35,7 @@ const ItinerarioDetailsCard: React.FC<ItinerarioDetailsProps> = ({
         </div>
       </div>
       {renderDetail('lunghezza', lunghezza ? `${lunghezza} km` : 'N/A')}
-      {renderDetail('durata', tempo ?? 'N/A')}
+      {renderDetail('durata', `${tempo} ore` ?? 'N/A')}
       {renderDetail('dislivello', dislivello ? `${dislivello} mt` : 'N/A')}
       {renderDetail('difficoltà', difficolta ?? 'N/A')}
     </div>

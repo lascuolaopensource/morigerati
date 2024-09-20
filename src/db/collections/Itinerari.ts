@@ -46,7 +46,7 @@ export const Itinerari: CollectionConfig = {
                 },
                 {
                   name: 'tempo',
-                  label: 'Durata (minuti)',
+                  label: 'Durata (ore)',
                   type: 'number',
                 },
                 {
