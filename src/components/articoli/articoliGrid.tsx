@@ -36,7 +36,7 @@ const ArticoliGrid: React.FC<ArticoliGridProps> = ({ articoli }): JSX.Element =>
                     title={title}
                     subtitle={subtitle}
                     imageUrl={imageUrl}
-                    slugUrl={slugUrl}
+                    slugUrl={`/articoli/${slugUrl}`}
                   />
                 </div>
                 <div className="w-1/2 flex flex-col pl-2">
@@ -46,7 +46,7 @@ const ArticoliGrid: React.FC<ArticoliGridProps> = ({ articoli }): JSX.Element =>
                         title={articoliUnpacker(articoli[index + 1]).title}
                         subtitle={articoliUnpacker(articoli[index + 1]).subtitle}
                         imageUrl={articoliUnpacker(articoli[index + 1]).imageUrl}
-                        slugUrl={articoliUnpacker(articoli[index + 1]).slugUrl}
+                        slugUrl={`/articoli/${articoliUnpacker(articoli[index + 1]).slugUrl}`}
                       />
                     </div>
                   ) : (
@@ -58,7 +58,7 @@ const ArticoliGrid: React.FC<ArticoliGridProps> = ({ articoli }): JSX.Element =>
                         title={articoliUnpacker(articoli[index + 2]).title}
                         subtitle={articoliUnpacker(articoli[index + 2]).subtitle}
                         imageUrl={articoliUnpacker(articoli[index + 2]).imageUrl}
-                        slugUrl={articoliUnpacker(articoli[index + 2]).slugUrl}
+                        slugUrl={`/articoli/${articoliUnpacker(articoli[index + 2]).slugUrl}`}
                       />
                     </div>
                   ) : (
