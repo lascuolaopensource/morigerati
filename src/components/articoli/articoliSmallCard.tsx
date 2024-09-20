@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 interface Articolo {
@@ -9,13 +10,15 @@ interface Articolo {
 
 const SmallCard: React.FC<Articolo> = ({ title, subtitle, imageUrl, slugUrl }) => {
   return (
-    <div className="bg-transparent border-2 border-black rounded-lg flex flex-col h-full">
-      <div className="p-4 flex flex-col h-full">
-        <h1 className="font-bold text-xs">{title}</h1>
+    <Link href={slugUrl || ''}>
+      <div className="bg-transparent border-2 border-black rounded-lg flex flex-col h-full">
+        <div className="p-4 flex flex-col h-full">
+          <h1 className="font-bold text-xs">{title}</h1>
 
-        <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

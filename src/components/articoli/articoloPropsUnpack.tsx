@@ -7,7 +7,8 @@ const articoliUnpacker = (articolo: Articoli) => {
     typeof articolo.media === 'string'
       ? articolo.media
       : articolo.media?.url || 'METTERE QUI IL PLACEHOLDER'
-  return { title, subtitle, imageUrl }
+  const slugUrl = articolo.id
+  return { title, subtitle, imageUrl, slugUrl }
 }
 
 export default articoliUnpacker
