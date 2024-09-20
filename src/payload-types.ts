@@ -468,6 +468,12 @@ export interface Residenze {
 export interface Articoli {
   id: string;
   titolo: string;
+  tags?:
+    | {
+        tag?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   data_pubblicazione?: string | null;
   media?: (string | null) | Media;
   links?:

@@ -19,6 +19,17 @@ export const Articoli: CollectionConfig = {
       required: true,
     },
     {
+      name: 'tags',
+      type: 'array',
+      label: 'Tags',
+      fields: [
+        {
+          name: 'tag',
+          type: 'text',
+        },
+      ],
+    },
+    {
       name: 'data_pubblicazione',
       label: 'Data pubblicazione',
       type: 'date',
