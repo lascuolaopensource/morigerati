@@ -21,9 +21,11 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
       'bg-itinerarioColor': 'border-itinerarioColor-scuro',
     }[color] || 'border-gray-700'
   return (
-    <div className="w-40 pb-1">
+    <div className="w-40 pb-1 ">
       <Link href={link}>
-        <div className={`border-[1.5px] ${borderColor} rounded overflow-hidden`}>
+        <div
+          className={`border-[1.5px] ${borderColor} rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95`}
+        >
           <div className="relative w-full h-32">
             <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
           </div>
