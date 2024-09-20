@@ -15,6 +15,5 @@ export const Testi: GlobalConfig = {
     F.titleAndText('residenze', 'Introduzione pagina "Residenze"'),
     F.titleAndText('stakeholders', 'Introduzione pagina "Stakeholders"'),
     F.titleAndText('articoli', 'Introduzione pagina "Articoli"'),
-    F.titleAndText('programma_culturale', 'Introduzione pagina "Programma culturale"'),
   ],
 }
