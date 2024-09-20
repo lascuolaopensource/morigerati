@@ -15,7 +15,12 @@ export default {
         'itinerarioColor' : '#7FCBAE',
         'stakeholderColor' : '#EEE3A8',
         'residenzeColor' : '#F69679',
-        'bannerColor' : '#F69679'
+        'bannerColor' : '#F69679',
+        'luogoColor-scuro': '#4d7985',
+        'itinerarioColor-scuro' : '#2c5948',
+        'stakeholderColor-scuro' : '#3e7a63',
+        'residenzeColor-scuro' : '#754637',
+        'bannerColor-scuro' : '#754637'
     },},
   },
   plugins: [],

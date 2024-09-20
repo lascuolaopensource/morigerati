@@ -14,14 +14,20 @@ interface PolaroidProps {
 }
 
 const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => {
+  const borderColor =
+    {
+      'bg-luogoColor': 'border-luogoColor-scuro',
+      'bg-residenzeColor': 'border-residenzeColor-scuro',
+      'bg-itinerarioColor': 'border-itinerarioColor-scuro',
+    }[color] || 'border-gray-700'
   return (
     <div className="w-40 pb-1">
       <Link href={link}>
-        <div className="border-2 border-black rounded overflow-hidden">
+        <div className={`border-[1.5px] ${borderColor} rounded overflow-hidden`}>
           <div className="relative w-full h-32">
             <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
           </div>
-          <div className={`${color} p-2 border-t-2 border-black flex flex-col relative`}>
+          <div className={`${color} p-2 border-t-2 ${borderColor} flex flex-col relative`}>
             <div className="absolute top-0 left-0">
               {color == 'bg-luogoColor' ? <LuogoPixel width={42} /> : null}
               {color == 'bg-residenzeColor' ? <ResidenzePixel width={42} /> : null}

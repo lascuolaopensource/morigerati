@@ -7,6 +7,7 @@ import renderContent from '@/utils/renderElement'
 import { getMediaUrl } from '@/utils/media'
 
 import HomePixel from '@/public/pixels/home.svg'
+import GridOverlay from '@/components/gridOverlay'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -38,12 +39,14 @@ const Home = async () => {
         {coverUrl && (
           <Image src={coverUrl} alt="Fullscreen Image" fill style={{ objectFit: 'cover' }} />
         )}
+
         <div className="absolute inset-0 bg-black opacity-30"></div>
         <div className="absolute inset-0 flex items-center justify-center">
           <p className="font-transInstrumentSans text-center font-bold text-white text-3xl z-10 max-w-xl px-4">
             {home.statement}
           </p>
         </div>
+        <GridOverlay targetSquareSize={20} bottomDensity={1} effectRows={8} />
       </div>
 
       <div className="bg-white font-bold p-3 pt-4 w-full leading-2">
