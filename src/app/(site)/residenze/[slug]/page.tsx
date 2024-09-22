@@ -31,6 +31,7 @@ const Stakeholders = async () => {
         <Suspense fallback={<div>Loading cards...</div>}>
           <ColorCardWrapper
             color="bg-stakeholderColor"
+            colorScuro="stakeholderColorScuro"
             docs={stakeholders.docs}
             previous="stakeholders"
           />
