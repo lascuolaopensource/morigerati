@@ -7,11 +7,17 @@ type SupportedDoc = Luoghi | Itinerari | Stakeholder | Residenze
 
 interface ColorCardWrapperProps {
   color: string
+  colorScuro: string
   docs: SupportedDoc[]
   previous: string
 }
 
-const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, docs, previous }) => {
+const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({
+  color,
+  colorScuro,
+  docs,
+  previous,
+}) => {
   if (!Array.isArray(docs) || docs.length === 0) {
     return null
   }
@@ -24,6 +30,7 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ color, docs, previo
           <Colorcard
             key={doc.id}
             color={color}
+            colorScuro={colorScuro}
             title={doc.nome}
             imageUrl={imageUrl || loremPic}
             slugUrl={doc.id}

@@ -16,9 +16,9 @@ interface PolaroidProps {
 const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => {
   const borderColor =
     {
-      'bg-luogoColor': 'border-luogoColor-scuro',
-      'bg-residenzeColor': 'border-residenzeColor-scuro',
-      'bg-itinerarioColor': 'border-itinerarioColor-scuro',
+      luogoColor: 'border-luogoColorScuro',
+      residenzeColor: 'border-residenzeColorScuro',
+      itinerarioColor: 'border-itinerarioColorScuro',
     }[color] || 'border-gray-700'
   return (
     // <div style={{ transform: `rotate(${Math.random() * 4 - 2}deg)` }} className="pt-2 pb-2 pl-2">
@@ -30,13 +30,16 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
           <div className="relative w-full h-32">
             <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
           </div>
-          <div className={`${color} p-2 border-t-2 ${borderColor} flex flex-col relative`}>
-            <div className="absolute top-0 left-0">
-              {color == 'bg-luogoColor' ? <LuogoPixel width={42} /> : null}
-              {color == 'bg-residenzeColor' ? <ResidenzePixel width={42} /> : null}
-              {color == 'bg-itinerarioColor' ? <ItinerariPixel width={42} /> : null}
+          <div
+            className={`${color} p-1 border-t-2 ${borderColor} flex flex-col items-center justify-center relative`}
+            style={{ height: '2rem', paddingTop: '0rem' }} // Reduced paddingTop to move text up
+          >
+            <div className="absolute top-0 left-0 flex">
+              {color == 'bg-luogoColor' ? <LuogoPixel width={45} /> : null}
+              {color == 'bg-residenzeColor' ? <ResidenzePixel width={45} /> : null}
+              {color == 'bg-itinerarioColor' ? <ItinerariPixel width={45} /> : null}
             </div>
-            <h2 className="text-sm font-bold text-center leading-3">{title}</h2>
+            <h2 className="text-sm font-bold text-center pb-2">{title}</h2>
           </div>
         </div>
       </Link>

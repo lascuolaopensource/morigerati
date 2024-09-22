@@ -19,9 +19,9 @@ const Stakeholders = async () => {
 
   return (
     <main className="">
-      <div className="bg-white p-3 pt-5">
+      <div className="bg-white p-3">
         {testi.residenze.title ? (
-          <div className="font-normal text-sm pt-4 pb-10 leading-4">
+          <div className="font-normal text-sm pt-4  leading-4">
             <h1 className="font-bold text-[40px]">{testi.residenze.title}</h1>
           </div>
         ) : (

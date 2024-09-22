@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import ArticoliCardWrapper from '@/components/articoli/articoliGridWrapper'
 
-import renderContent from '@/utils/renderElement'
+import StringToHTML from '@/components/serializer/stringToHTML'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -21,14 +21,14 @@ const Luoghi = async () => {
     <main className="">
       <div className="bg-white p-3 pt-5">
         {testi.luoghi.title ? (
-          <div className="font-normal text-sm pt-4 pb-10 leading-4">
+          <div className="font-normal text-sm  pb-4 leading-4">
             <h1 className="font-bold text-[40px]">{testi.articoli.title}</h1>
           </div>
         ) : (
           <p></p>
         )}
 
-        {testi.articoli.text ? renderContent(testi.articoli.text) : <p></p>}
+        <StringToHTML htmlString={testi.articoli.text_html ?? ''} />
         <Suspense fallback={<div>Loading Cards...</div>}>
           <ArticoliCardWrapper docs={articoli.docs} previous="articoli" />
         </Suspense>

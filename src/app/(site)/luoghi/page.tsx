@@ -19,9 +19,9 @@ const Luoghi = async () => {
 
   return (
     <main className="">
-      <div className="bg-white p-3 pt-5">
+      <div className="bg-white p-3 ">
         {testi.luoghi.title ? (
-          <div className="font-normal text-sm pt-4 pb-10 leading-4">
+          <div className="font-normal text-sm p  leading-4">
             <h1 className="font-bold text-[40px]">{testi.luoghi.title}</h1>
           </div>
         ) : (
@@ -30,7 +30,12 @@ const Luoghi = async () => {
 
         <StringToHTML htmlString={testi.luoghi.text_html ?? ''} />
         <Suspense fallback={<div>Loading Cards...</div>}>
-          <ColorCardWrapper color="bg-luogoColor" docs={luoghi.docs} previous="luoghi" />
+          <ColorCardWrapper
+            color="luogoColor"
+            colorScuro="luogoColorScuro"
+            docs={luoghi.docs}
+            previous="luoghi"
+          />
         </Suspense>
       </div>
     </main>

@@ -11,7 +11,7 @@ interface Articolo {
 const MediumCard: React.FC<Articolo> = ({ title, subtitle, imageUrl, slugUrl }) => {
   return (
     <Link href={slugUrl || ''}>
-      <div className="border-2 border-black rounded-lg overflow-hidden bg-white h-full flex flex-col">
+      <div className="border-2 border-black rounded-lg overflow-hidden bg-white h-full flex flex-col transition-transform duration-300 ease-in-out hover:scale-95">
         <div className="flex-grow">
           {imageUrl ? (
             <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
@@ -20,7 +20,7 @@ const MediumCard: React.FC<Articolo> = ({ title, subtitle, imageUrl, slugUrl }) 
           )}
         </div>
         <div className="p-2">
-          <p className="text-center font-bold text-l text-base/tight">{title || ' '}</p>
+          <p className="text-center font-bold text-xs ">{title || ' '}</p>
         </div>
       </div>
     </Link>

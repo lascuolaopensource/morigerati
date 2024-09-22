@@ -19,15 +19,20 @@ const ItinerariPage = async () => {
 
   return (
     <main className="">
-      <div className="bg-white p-3 pt-5">
-        <div className="font-normal text-sm pt-4 pb-10 leading-4">
+      <div className="bg-white p-3 ">
+        <div className="font-normal text-sm  leading-4">
           <h1 className="font-bold text-[40px]">{testi.itinerari.title}</h1>
         </div>
 
         <StringToHTML htmlString={testi.itinerari.text_html ?? ''} />
         <p></p>
         <Suspense fallback={<div>Loading Itinerari component...</div>}>
-          <ColorCardWrapper color="bg-itinerarioColor" docs={itinerari.docs} previous="itinerari" />
+          <ColorCardWrapper
+            color="itinerarioColor"
+            colorScuro="itinerarioColorScuro"
+            docs={itinerari.docs}
+            previous="itinerari"
+          />
         </Suspense>
       </div>
     </main>
