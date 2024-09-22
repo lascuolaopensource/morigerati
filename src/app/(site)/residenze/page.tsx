@@ -29,7 +29,12 @@ const Stakeholders = async () => {
         )}
         <StringToHTML htmlString={testi.residenze.text_html ?? ''} />
         <Suspense fallback={<div>Loading cards...</div>}>
-          <ColorCardWrapper color="bg-residenzeColor" docs={residenze.docs} previous="residenze" />
+          <ColorCardWrapper
+            color="bg-residenzeColor"
+            colorScuro="r"
+            docs={residenze.docs}
+            previous="residenze"
+          />
         </Suspense>
       </div>
     </main>
