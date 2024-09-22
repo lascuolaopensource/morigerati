@@ -29,7 +29,7 @@ const Stakeholders = async () => {
         )}
         <StringToHTML htmlString={testi.stakeholders.text_html ?? ''} />
         <Suspense fallback={<div>Loading cards...</div>}>
-          <
+          <ColorCardWrapper
             color="stakeholderColor"
             colorScuro="stakeholderColorScuro"
             docs={stakeholders.docs}
