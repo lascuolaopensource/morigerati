@@ -7,7 +7,8 @@ import ItinerarioDetailsCard from '@/components/itinerarioDetailsCard'
 import { ServiziCardWrapper } from '@/components/servizioCardWrapper'
 import MySwiper from '@/components/mySwiper'
 
-import renderContent from '@/utils/renderElement'
+import StringToHTML from '@/components/serializer/stringToHTML'
+
 import { getMediaURL } from '@/utils/getMediaUrl'
 
 export const dynamic = 'force-dynamic'
@@ -54,9 +55,9 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           <p></p>
         )}
 
-        {itinerarioData.testo && itinerarioData.testo.root && (
-          <div className="mb-6">{renderContent(itinerarioData.testo)}</div>
-        )}
+        <div className="mb-6">
+          <StringToHTML htmlString={itinerarioData.testo_html ?? ''} />
+        </div>
 
         <ItinerarioDetailsCard
           lunghezza={itinerarioData.lunghezza}

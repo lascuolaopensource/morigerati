@@ -3,11 +3,12 @@ import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 
 import MySwyper from '@/components/mySwiper'
-import renderContent from '@/utils/renderElement'
 import { getMediaUrl } from '@/utils/media'
 
 import HomePixel from '@/public/pixels/home.svg'
 import GridOverlay from '@/components/gridOverlay'
+
+import StringToHTML from '@/components/serializer/stringToHTML'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -52,7 +53,7 @@ const Home = async () => {
       <div className="bg-white font-bold p-3 pt-4 w-full leading-2">
         <div className="relative">
           <p className="font-bold pt-4 text-xl ">{home.intro.title}</p>
-          {home.intro ? renderContent(home.intro.text) : <p></p>}
+          <StringToHTML htmlString={home.intro.text_html ?? ''} />
           <div className="absolute inset-0 flex justify-end">
             <HomePixel width={200} className="absolute right-0" />
           </div>
@@ -60,7 +61,7 @@ const Home = async () => {
 
         <p className="font-bold pt-4 text-xl text-center">{home.itinerari.title}</p>
 
-        {home.itinerari ? renderContent(home.itinerari.text) : <p></p>}
+        <StringToHTML htmlString={home.itinerari.text_html ?? ''} />
 
         <div className="pt-4"></div>
         <Suspense fallback={<div>Loading slides...</div>}>
@@ -68,13 +69,14 @@ const Home = async () => {
         </Suspense>
         <p className="font-bold pt-4 text-xl text-center">{home.luoghi.title}</p>
 
-        {home.luoghi ? renderContent(home.luoghi.text) : <p></p>}
+        <StringToHTML htmlString={home.luoghi.text_html ?? ''} />
+
         <div className="pt-4 "></div>
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={luoghi.docs} color="bg-luogoColor" type="luoghi" />
         </Suspense>
         <p className="font-bold pt-4 text-xl text-center">{home.residenze.title}</p>
-        {home.residenze ? renderContent(home.residenze.text) : <p></p>}
+        <StringToHTML htmlString={home.residenze.text_html ?? ''} />
         <div className="pt-4"></div>
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={residenze.docs} color="bg-residenzeColor" type="residenze" />

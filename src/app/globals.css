@@ -13,10 +13,31 @@ body {
 }
 
 @layer base {
-  hs1 {
-    @apply text-2xl;
+  h1 {
+    @apply font-bold;
+    @apply text-3xl;
+    @apply pt-4;
+    @apply pb-2;
+    @apply leading-tight;
   }
   h2 {
+    @apply font-semibold;
+    @apply text-2xl;
+    @apply pt-3;
+    @apply pb-1;
+    @apply leading-tight;
+  }
+  h3 {
+    @apply font-medium;
     @apply text-xl;
+    @apply pt-2;
+    @apply pb-1;
+    @apply leading-snug;
+  }
+  p {
+    @apply font-normal;
+    @apply text-sm;
+    @apply pb-2;
+    @apply leading-5;
   }
 }

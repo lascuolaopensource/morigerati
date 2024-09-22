@@ -2,10 +2,11 @@ import React, { Suspense } from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/backButton'
-import renderContent from '@/utils/renderElement'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import { getMediaURL } from '@/utils/getMediaUrl'
 import MySwyper from '@/components/mySwiper'
+
+import StringToHTML from '@/components/serializer/stringToHTML'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -43,11 +44,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         <BackButton />
         <div className="pt-4"></div>
         {luogoData.nome ? <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1> : <p></p>}
-        {luogoData.testo && luogoData.testo.root ? (
-          <div className="mb-6">{renderContent(luogoData.testo)}</div>
-        ) : (
-          <p></p>
-        )}
+        <StringToHTML htmlString={luogoData.testo_html ?? ''} />
         {/*         {
           <Suspense fallback={<div>Loading slides...</div>}>
             <MySwyper
@@ -68,7 +65,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           luogoData.servizi.map((servizio, index) => (
             <div key={index} className="mt-4">
               <h3 className="text-xl font-semibold ">{servizio.nome}</h3>
-              {servizio.testo && servizio.testo.root ? renderContent(servizio.testo) : <p></p>}
+              <StringToHTML htmlString={servizio.testo_html ?? ''} />
             </div>
           ))
         ) : (
@@ -116,7 +113,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         )}
 
         {luogoData.orari && luogoData.orari.root ? (
-          <div className="mb-6">{renderContent(luogoData.orari)}</div>
+          <StringToHTML htmlString={luogoData.orari_html ?? ''} />
         ) : (
           <p className="mb-6"> </p>
         )}

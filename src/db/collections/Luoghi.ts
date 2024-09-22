@@ -6,8 +6,9 @@ import {
   BoldFeature,
   InlineToolbarFeature,
   ParagraphFeature,
+  lexicalHTML,
+  HTMLConverterFeature,
 } from '@payloadcms/richtext-lexical'
-
 
 export const Luoghi: CollectionConfig = {
   slug: Collections.Luoghi,
@@ -23,7 +24,6 @@ export const Luoghi: CollectionConfig = {
 
   fields: [
     {
-      
       type: 'tabs',
       tabs: [
         {
@@ -38,7 +38,7 @@ export const Luoghi: CollectionConfig = {
             //  relationTo: Collections.Itinerari,
             //  hasMany: true,
             //},
-          
+
             F.divider,
             F.servizi,
             F.divider,
@@ -51,9 +51,15 @@ export const Luoghi: CollectionConfig = {
               label: 'Orari di attività e date di chiusura',
               localized: true,
               editor: lexicalEditor({
-                features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
+                features: () => [
+                  InlineToolbarFeature(),
+                  ParagraphFeature(),
+                  BoldFeature(),
+                  HTMLConverterFeature({}),
+                ],
               }),
             },
+            lexicalHTML('orari', { name: 'orari_html' }),
           ],
         },
         F.tabContenuto,
@@ -61,5 +67,3 @@ export const Luoghi: CollectionConfig = {
     },
   ],
 }
-
-

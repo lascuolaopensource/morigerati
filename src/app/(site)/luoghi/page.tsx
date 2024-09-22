@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import ColorCardWrapper from '@/components/colorCardWrapper'
 
-import renderContent from '@/utils/renderElement'
+import StringToHTML from '@/components/serializer/stringToHTML'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -28,7 +28,7 @@ const Luoghi = async () => {
           <p></p>
         )}
 
-        {testi.luoghi.text ? renderContent(testi.luoghi.text) : <p></p>}
+        <StringToHTML htmlString={testi.luoghi.text_html ?? ''} />
         <Suspense fallback={<div>Loading Cards...</div>}>
           <ColorCardWrapper color="bg-luogoColor" docs={luoghi.docs} previous="luoghi" />
         </Suspense>

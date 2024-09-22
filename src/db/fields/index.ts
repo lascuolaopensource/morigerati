@@ -12,6 +12,8 @@ import {
 } from 'payload'
 import { Collections } from '@/db/collections'
 
+import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
+
 import { capitalizeFirstLetter } from '@/utils/strings'
 
 export const divider: UIField = {
@@ -31,11 +33,11 @@ export function title(text: string): UIField {
     admin: {
       components: {
         Field: {
-          path: "/db/fields/components/header.tsx",
+          path: '/db/fields/components/header.tsx',
           clientProps: {
-            content: text
-          }
-        }  
+            content: text,
+          },
+        },
       },
     },
   }
@@ -47,12 +49,12 @@ export function gap(size: number): UIField {
     type: 'ui',
     admin: {
       components: {
-        Field:{
-          path: "/db/fields/components/gap.tsx",
+        Field: {
+          path: '/db/fields/components/gap.tsx',
           clientProps: {
-            size: size
-          }
-        }
+            size: size,
+          },
+        },
       },
     },
   }
@@ -77,7 +79,9 @@ export const testo: RichTextField = {
   label: 'Testo',
   type: 'richText',
   localized: true,
-  
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
+  }),
 }
 
 export function plainText(name: string): TextField {
@@ -100,6 +104,9 @@ export function richText(name: string): RichTextField {
     name,
     type: 'richText',
     localized: true,
+    editor: lexicalEditor({
+      features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
+    }),
   }
 }
 
@@ -162,7 +169,7 @@ export const galleria: RelationshipField = {
 export const servizi: ArrayField = {
   name: 'servizi',
   type: 'array',
-  fields: [nome, { ...testo, required: true }],
+  fields: [nome, { ...testo, required: true }, lexicalHTML('testo', { name: 'testo_html' })],
 }
 
 export const contenutoFields: Field[] = [
@@ -173,6 +180,7 @@ export const contenutoFields: Field[] = [
   divider,
   title('Contenuti testuali'),
   { ...testo, required: true },
+  lexicalHTML('testo', { name: 'testo_html' }),
 ]
 
 export const tabContenuto: Tab = {
@@ -192,6 +200,7 @@ export function titleAndText(name: string, label?: string): GroupField {
         label: 'Titolo',
       },
       { ...richText('text'), label: 'Contenuto' },
+      lexicalHTML('text', { name: 'text_html' }),
     ],
   }
 }

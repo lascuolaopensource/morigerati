@@ -2,6 +2,8 @@ import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import renderContent from '@/utils/renderElement'
 
+import StringToHTML from '@/components/serializer/stringToHTML'
+
 import ChiSiamoPixel from '@/public/pixels/chiSiamo.svg'
 
 export const dynamic = 'force-dynamic'
@@ -15,9 +17,9 @@ const About = async () => {
   return (
     <main className="relative bg-white p-3 pt-5">
       <div className="absolute inset-0 flex justify-end">
-        <ChiSiamoPixel className=" right-0" />
+        <ChiSiamoPixel width={200} className="absolute right-0 " />
       </div>
-      <div className="bg-white p-3 pt-5">{about.testo ? renderContent(about.testo) : <p></p>}</div>
+      <StringToHTML htmlString={about.testo_html ?? ''} />
     </main>
   )
 }

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import BackButton from '@/components/backButton'
 import { loadDb } from '@/utils/db'
-import renderContent from '@/utils/renderElement'
+import StringToHTML from '@/components/serializer/stringToHTML'
 import { getMediaURL } from '@/utils/getMediaUrl'
 import { Stakeholder as StakeholderType } from '@/payload-types'
 
@@ -49,7 +49,10 @@ export default async function Stakeholder({ params }: { params: { slug: string }
           <p></p>
         )}
         {stakeholderData.testo && stakeholderData.testo.root ? (
-          <div className="mb-6">{renderContent(stakeholderData.testo)}</div>
+          <div className="mb-6">
+            {' '}
+            <StringToHTML htmlString={stakeholderData.testo_html ?? ''} />
+          </div>
         ) : (
           <p></p>
         )}

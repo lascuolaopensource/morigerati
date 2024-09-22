@@ -104,7 +104,7 @@ const GridOverlay: React.FC<GridOverlayProps> = ({
       })
     }
 
-    const animationInterval = setInterval(animatePixels, 250)
+    const animationInterval = setInterval(animatePixels, 200)
     return () => clearInterval(animationInterval)
   }, [isScrolling, effectRows, bottomDensity])
 
@@ -127,7 +127,7 @@ const GridOverlay: React.FC<GridOverlayProps> = ({
             style={{
               width: `${squareSize}px`,
               height: `${squareSize}px`,
-              transition: 'background-color 0.01s ease',
+              transition: 'background-color 0.4s ease',
             }}
           />
         )),

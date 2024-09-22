@@ -120,6 +120,7 @@ export interface Luoghi {
           };
           [k: string]: unknown;
         };
+        testo_html?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -147,6 +148,7 @@ export interface Luoghi {
     };
     [k: string]: unknown;
   } | null;
+  orari_html?: string | null;
   media?: (string | null) | Media;
   links?:
     | {
@@ -171,6 +173,7 @@ export interface Luoghi {
     };
     [k: string]: unknown;
   };
+  testo_html?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -246,6 +249,7 @@ export interface Itinerari {
     };
     [k: string]: unknown;
   };
+  testo_html?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -296,6 +300,7 @@ export interface Stakeholder {
     };
     [k: string]: unknown;
   };
+  testo_html?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -433,6 +438,7 @@ export interface Residenze {
         };
         [k: string]: unknown;
       };
+      testo_html?: string | null;
     };
   };
   Output: {
@@ -461,6 +467,7 @@ export interface Residenze {
         };
         [k: string]: unknown;
       };
+      testo_html?: string | null;
     };
   };
   updatedAt: string;
@@ -504,6 +511,7 @@ export interface Articoli {
     };
     [k: string]: unknown;
   };
+  testo_html?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -566,6 +574,7 @@ export interface Home {
       };
       [k: string]: unknown;
     } | null;
+    text_html?: string | null;
   };
   itinerari: {
     title: string;
@@ -584,6 +593,7 @@ export interface Home {
       };
       [k: string]: unknown;
     } | null;
+    text_html?: string | null;
   };
   luoghi: {
     title: string;
@@ -602,6 +612,7 @@ export interface Home {
       };
       [k: string]: unknown;
     } | null;
+    text_html?: string | null;
   };
   residenze: {
     title: string;
@@ -620,6 +631,7 @@ export interface Home {
       };
       [k: string]: unknown;
     } | null;
+    text_html?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -654,6 +666,7 @@ export interface ChiSiamo {
     };
     [k: string]: unknown;
   };
+  testo_html?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -687,6 +700,7 @@ export interface MobilitaSostenibile {
     };
     [k: string]: unknown;
   };
+  testo_html?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -760,6 +774,7 @@ export interface Testi {
       };
       [k: string]: unknown;
     } | null;
+    text_html?: string | null;
   };
   itinerari: {
     title: string;
@@ -778,6 +793,7 @@ export interface Testi {
       };
       [k: string]: unknown;
     } | null;
+    text_html?: string | null;
   };
   residenze: {
     title: string;
@@ -796,6 +812,7 @@ export interface Testi {
       };
       [k: string]: unknown;
     } | null;
+    text_html?: string | null;
   };
   stakeholders: {
     title: string;
@@ -814,6 +831,7 @@ export interface Testi {
       };
       [k: string]: unknown;
     } | null;
+    text_html?: string | null;
   };
   articoli: {
     title: string;
@@ -832,6 +850,7 @@ export interface Testi {
       };
       [k: string]: unknown;
     } | null;
+    text_html?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;

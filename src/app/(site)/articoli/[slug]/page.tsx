@@ -6,6 +6,8 @@ import renderContent from '@/utils/renderElement'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import { getMediaURL } from '@/utils/getMediaUrl'
 
+import StringToHTML from '@/components/serializer/stringToHTML'
+
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -46,20 +48,9 @@ export default async function Articolo({ params }: { params: { slug: string } })
         ) : (
           <p></p>
         )}
-        {articoloData.testo && articoloData.testo.root ? (
-          <div className="mb-6">{renderContent(articoloData.testo)}</div>
-        ) : (
-          <p></p>
-        )}
-        {/*         {
-          <Suspense fallback={<div>Loading slides...</div>}>
-            <MySwyper
-              items={luogoData['Itinerari in cui si trovai il luogo']}
-              color="bg-luogoColor"
-              type="luoghi"
-            />
-          </Suspense>
-        } */}
+      </div>
+      <div className="container mx-auto p-4">
+        <StringToHTML htmlString={articoloData.testo_html ?? ''} />
       </div>
     </div>
   )

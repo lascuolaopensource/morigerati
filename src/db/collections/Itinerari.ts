@@ -112,15 +112,19 @@ export const Itinerari: CollectionConfig = {
             {
               name: 'servizi',
               type: 'array',
-              fields: [F.linkConNome,{ //da sistemare
-                name: 'testo',
-                type: 'richText',
-                label: 'Testo',
-                localized: true,
-                editor: lexicalEditor({
-                  features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
-                }),
-              }],
+              fields: [
+                F.linkConNome,
+                {
+                  //da sistemare
+                  name: 'testo',
+                  type: 'richText',
+                  label: 'Testo',
+                  localized: true,
+                  editor: lexicalEditor({
+                    features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
+                  }),
+                },
+              ],
             },
 
             F.divider,

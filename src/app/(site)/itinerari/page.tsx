@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import ColorCardWrapper from '@/components/colorCardWrapper'
-import renderContent from '@/utils/renderElement'
+
+import StringToHTML from '@/components/serializer/stringToHTML'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -23,7 +24,8 @@ const ItinerariPage = async () => {
           <h1 className="font-bold text-[40px]">{testi.itinerari.title}</h1>
         </div>
 
-        {testi.itinerari ? renderContent(testi.itinerari.text) : <p></p>}
+        <StringToHTML htmlString={testi.itinerari.text_html ?? ''} />
+        <p></p>
         <Suspense fallback={<div>Loading Itinerari component...</div>}>
           <ColorCardWrapper color="bg-itinerarioColor" docs={itinerari.docs} previous="itinerari" />
         </Suspense>

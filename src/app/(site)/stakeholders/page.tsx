@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import ColorCardWrapper from '@/components/colorCardWrapper'
 
-import renderContent from '@/utils/renderElement'
+import StringToHTML from '@/components/serializer/stringToHTML'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -27,7 +27,7 @@ const Stakeholders = async () => {
         ) : (
           <p></p>
         )}
-        {testi.stakeholders ? renderContent(testi?.stakeholders.text) : <p></p>}
+        <StringToHTML htmlString={testi.stakeholders.text_html ?? ''} />
         <Suspense fallback={<div>Loading cards...</div>}>
           <ColorCardWrapper
             color="bg-stakeholderColor"

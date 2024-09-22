@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
-import renderContent from '@/utils/renderElement'
+
+import StringToHTML from '@/components/serializer/stringToHTML'
 
 import MobilitaPixel from '@/public/pixels/mobilitas.svg'
 
@@ -17,9 +18,9 @@ const Mobilita = async () => {
     <main>
       <div className="relative bg-white p-3 pt-5">
         <div className="absolute inset-0 flex justify-end">
-          <MobilitaPixel className="absolute right-0" />
+          <MobilitaPixel width={200} className="absolute right-0" />
         </div>
-        {mobilita.testo ? renderContent(mobilita.testo) : <p></p>}
+        <StringToHTML htmlString={mobilita.testo_html ?? ''} />
       </div>
     </main>
   )

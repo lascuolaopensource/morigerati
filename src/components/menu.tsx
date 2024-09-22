@@ -58,7 +58,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, onClose, currentP
           <li>{renderPageLink('/luoghi', 'Luoghi')}</li>
           <li>{renderPageLink('/itinerari', 'Itinerari')}</li>
           <li>{renderPageLink('/stakeholders', 'Stakeholders')}</li>
-          <li>{renderPageLink('/residenze', 'Residenze')}</li>
+          {/* <li>{renderPageLink('/residenze', 'Residenze')}</li> */}
           <li>{renderPageLink('/articoli', 'Articoli')}</li>
           <div className="py-4"></div>
         </ul>
