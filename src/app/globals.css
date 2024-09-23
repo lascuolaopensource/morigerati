@@ -27,6 +27,7 @@ body {
     @apply pb-1;
     @apply leading-tight;
   }
+
   h3 {
     @apply font-medium;
     @apply text-xl;

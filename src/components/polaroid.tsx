@@ -22,7 +22,7 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
     }[color] || 'border-gray-700'
   return (
     // <div style={{ transform: `rotate(${Math.random() * 4 - 2}deg)` }} className="pt-2 pb-2 pl-2">
-    <div className="w-40 pb-1 ">
+    <div className="w-40 pb-1">
       <Link href={link}>
         <div
           className={`border-[1.5px] ${borderColor} rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95`}
@@ -31,19 +31,37 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
             <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
           </div>
           <div
-            className={`${color} p-1 border-t-2 ${borderColor} flex flex-col items-center justify-center relative`}
-            style={{ height: '2rem', paddingTop: '0rem' }} // Reduced paddingTop to move text up
+            className={`${color} p-1 border-t-2 ${borderColor} flex items-center justify-center relative`}
+            style={{ minHeight: '2rem' }}
           >
-            <div className="absolute top-0 left-0 flex">
-              {color == 'bg-luogoColor' ? <LuogoPixel width={45} /> : null}
-              {color == 'bg-residenzeColor' ? <ResidenzePixel width={45} /> : null}
-              {color == 'bg-itinerarioColor' ? <ItinerariPixel width={45} /> : null}
-            </div>
-            <h2 className="text-sm font-bold text-center pb-2">{title}</h2>
+            {/* Componenti Pixel posizionati dietro al testo */}
+            {color === 'bg-luogoColor' && (
+              <LuogoPixel
+                width={45}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 z-0"
+              />
+            )}
+            {color === 'bg-residenzeColor' && (
+              <ResidenzePixel
+                width={45}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 z-0"
+              />
+            )}
+            {color === 'bg-itinerarioColor' && (
+              <ItinerariPixel
+                width={45}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 z-0"
+              />
+            )}
+            {/* Testo con z-index più alto rispetto ai Pixel */}
+            <h2 className="text-sm pt-1 font-bold text-center break-words relative z-10">
+              {title}
+            </h2>
           </div>
         </div>
       </Link>
     </div>
+
     // </div>
   )
 }

@@ -6,9 +6,11 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+import { s3Storage } from '@payloadcms/storage-s3'
+
 import { Users } from './db/collections/Users'
 import { Media } from './db/collections/Media'
-import { Articoli } from './db/collections/Articoli'  
+import { Articoli } from './db/collections/Articoli'
 import { Itinerari } from './db/collections/Itinerari'
 import { Luoghi } from './db/collections/Luoghi'
 import { Residenze } from './db/collections/Residenze'
@@ -42,6 +44,24 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
+    s3Storage({
+      collections: {
+        [Media.slug]: {
+          disableLocalStorage: true,
+        },
+      },
+      disableLocalStorage: true,
+      bucket: process.env.S3_BUCKET || '',
+      config: {
+        forcePathStyle: true,
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY || '',
+          secretAccessKey: process.env.S3_SECRET_KEY || '',
+        },
+        endpoint: process.env.S3_ENDPOINT || '',
+        region: process.env.S3_REGION || '',
+      },
+    }),
     // storage-adapter-placeholder
-  ]}
-)
+  ],
+})
