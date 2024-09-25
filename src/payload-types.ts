@@ -18,6 +18,7 @@ export interface Config {
     residenze: Residenze;
     stakeholders: Stakeholder;
     articoli: Articoli;
+    'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -512,6 +513,49 @@ export interface Articoli {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents".
+ */
+export interface PayloadLockedDocument {
+  id: string;
+  document?:
+    | ({
+        relationTo: 'users';
+        value: string | User;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'luoghi';
+        value: string | Luoghi;
+      } | null)
+    | ({
+        relationTo: 'itinerari';
+        value: string | Itinerari;
+      } | null)
+    | ({
+        relationTo: 'residenze';
+        value: string | Residenze;
+      } | null)
+    | ({
+        relationTo: 'stakeholders';
+        value: string | Stakeholder;
+      } | null)
+    | ({
+        relationTo: 'articoli';
+        value: string | Articoli;
+      } | null);
+  globalSlug?: string | null;
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
   updatedAt: string;
   createdAt: string;
 }
