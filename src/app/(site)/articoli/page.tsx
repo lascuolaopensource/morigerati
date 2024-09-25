@@ -1,13 +1,15 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
+
 import ArticoliCardWrapper from '@/components/articoli/articoliGridWrapper'
+import TagsList from '@/components/articoli/tagsList'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const Luoghi = async () => {
+const ArticoliPage = async () => {
   const db = await loadDb()
   const testi = await db.findGlobal({
     slug: 'testi',
@@ -16,6 +18,11 @@ const Luoghi = async () => {
   const articoli = await db.find({
     collection: 'articoli',
   })
+
+  const tags = articoli.docs.flatMap((doc) => doc.tags?.map((tag) => tag.tag) ?? [])
+  const uniqueTags = [...new Set(tags)]
+
+  console.log(uniqueTags)
 
   return (
     <main className="">
@@ -29,6 +36,10 @@ const Luoghi = async () => {
         )}
 
         <StringToHTML htmlString={testi.articoli.text_html ?? ''} />
+        <div className="pb-4">
+          <TagsList tags={uniqueTags} />
+        </div>
+
         <Suspense fallback={<div>Loading Cards...</div>}>
           <ArticoliCardWrapper docs={articoli.docs} previous="articoli" />
         </Suspense>
@@ -37,4 +48,4 @@ const Luoghi = async () => {
   )
 }
 
-export default Luoghi
+export default ArticoliPage

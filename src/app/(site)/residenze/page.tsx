@@ -7,7 +7,7 @@ import StringToHTML from '@/components/serializer/stringToHTML'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const Stakeholders = async () => {
+const Residenze = async () => {
   const db = await loadDb()
   const testi = await db.findGlobal({
     slug: 'testi',
@@ -41,4 +41,4 @@ const Stakeholders = async () => {
   )
 }
 
-export default Stakeholders
+export default Residenze
