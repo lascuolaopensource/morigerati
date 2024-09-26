@@ -1,44 +1,51 @@
 import React, { Suspense } from 'react'
+
 import { loadDb } from '@/utils/db'
-import ColorCardWrapper from '@/components/colorCardWrapper'
+import BackButton from '@/components/backButton'
+
+import { isArrayEmpty } from '@/utils/isArrayEmpty'
+import ProgrammaList from '@/components/residenze/programmaList'
+import DateDaDefinireBanner from '@/components/residenze/annuncio'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const Stakeholders = async () => {
+export default async function ResidenzaSlug({ params }: { params: { slug: string } }) {
   const db = await loadDb()
-  const testi = await db.findGlobal({
-    slug: 'testi',
+  const residenza = await db.find({
+    collection: 'residenze',
+    where: {
+      id: {
+        equals: params.slug,
+      },
+    },
+    depth: 1,
   })
-
-  const stakeholders = await db.find({
-    collection: 'stakeholders',
-  }) //
+  const residenzaData = residenza.docs[0]
 
   return (
-    <main className="">
-      <div className="bg-white p-3 pt-5">
-        {testi.stakeholders.title ? (
-          <div className="font-normal text-sm pt-4 pb-10 leading-4">
-            <h1 className="font-bold text-[40px]">{testi.stakeholders.title}</h1>
-          </div>
-        ) : (
-          <p></p>
-        )}
-        <StringToHTML htmlString={testi.stakeholders.text_html ?? ''} />
-        <Suspense fallback={<div>Loading cards...</div>}>
-          <ColorCardWrapper
-            color="bg-stakeholderColor"
-            colorScuro="stakeholderColorScuro"
-            docs={stakeholders.docs}
-            previous="stakeholders"
-          />
-        </Suspense>
-      </div>
-    </main>
+    <div className="bg-white p-4">
+      <BackButton />
+      <div className="pt-4"></div>
+      {residenzaData.nome ? (
+        <h1 className="text-4xl font-bold mb-4">{residenzaData.nome}</h1>
+      ) : (
+        <p></p>
+      )}
+
+      <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
+      <DateDaDefinireBanner linkText="questa pagina!" linkUrl={'www.google.com'} />
+      {!isArrayEmpty(residenzaData.programma) ? (
+        <div>
+          <line className="border-t-2 my-4"></line>
+          <h2>Programma</h2>
+        </div>
+      ) : (
+        ''
+      )}
+      <ProgrammaList residenza={residenzaData} />
+    </div>
   )
 }
-
-export default Stakeholders

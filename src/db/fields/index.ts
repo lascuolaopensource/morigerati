@@ -127,6 +127,22 @@ export const linkArray: ArrayField = {
   fields: linkConNome.fields,
 }
 
+export const programmaArray: ArrayField = {
+  label: 'Programma',
+  name: 'programma',
+  type: 'array',
+
+  fields: [
+    {
+      name: 'programma',
+      label: 'giorno / momento',
+      type: 'text',
+    },
+    richText('testo'),
+    lexicalHTML('testo', { name: 'testo_html' }),
+  ],
+}
+
 export const contatti: ArrayField = {
   name: 'contatti',
   type: 'array',
@@ -180,6 +196,17 @@ export const contenutoFields: Field[] = [
   divider,
   title('Contenuti testuali'),
   { ...testo, required: true },
+  lexicalHTML('testo', { name: 'testo_html' }),
+]
+
+export const contenutoFieldsUnrequired: Field[] = [
+  title('Immagini e media'),
+  media,
+  linkArray,
+  galleria,
+  divider,
+  title('Contenuti testuali'),
+  { ...testo, required: false },
   lexicalHTML('testo', { name: 'testo_html' }),
 ]
 

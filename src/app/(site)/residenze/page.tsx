@@ -21,7 +21,7 @@ const Residenze = async () => {
     <main className="">
       <div className="bg-white p-3">
         {testi.residenze.title ? (
-          <div className="font-normal text-sm pt-4  leading-4">
+          <div className="font-normal text-sm pt-4 leading-4">
             <h1 className="font-bold text-[40px]">{testi.residenze.title}</h1>
           </div>
         ) : (
@@ -30,8 +30,8 @@ const Residenze = async () => {
         <StringToHTML htmlString={testi.residenze.text_html ?? ''} />
         <Suspense fallback={<div>Loading cards...</div>}>
           <ColorCardWrapper
-            color="bg-residenzeColor"
-            colorScuro="r"
+            color="residenzeColor"
+            colorScuro="residenzeColorScuro"
             docs={residenze.docs}
             previous="residenze"
           />

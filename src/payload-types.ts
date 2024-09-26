@@ -365,21 +365,29 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  programma?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  abstract_html?: string | null;
+  programma?:
+    | {
+        programma?: string | null;
+        testo?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        testo_html?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   info_logistiche?: {
     root: {
       type: string;
@@ -395,6 +403,7 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
+  info_html?: string | null;
   deadline_iscrizione?: string | null;
   link_iscrizione?: string | null;
   call_media?: (string | null) | Media;
@@ -413,8 +422,8 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  Processo: {
-    processo: {
+  Processo?: {
+    processo?: {
       media?: (string | null) | Media;
       links?:
         | {
@@ -424,7 +433,7 @@ export interface Residenze {
           }[]
         | null;
       galleria?: (string | Media)[] | null;
-      testo: {
+      testo?: {
         root: {
           type: string;
           children: {
@@ -438,12 +447,12 @@ export interface Residenze {
           version: number;
         };
         [k: string]: unknown;
-      };
+      } | null;
       testo_html?: string | null;
     };
   };
-  Output: {
-    output: {
+  Output?: {
+    output?: {
       media?: (string | null) | Media;
       links?:
         | {
@@ -453,7 +462,7 @@ export interface Residenze {
           }[]
         | null;
       galleria?: (string | Media)[] | null;
-      testo: {
+      testo?: {
         root: {
           type: string;
           children: {
@@ -467,7 +476,7 @@ export interface Residenze {
           version: number;
         };
         [k: string]: unknown;
-      };
+      } | null;
       testo_html?: string | null;
     };
   };
