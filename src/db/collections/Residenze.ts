@@ -63,6 +63,7 @@ export const Residenze: CollectionConfig = {
         {
           label: 'Testi',
           fields: [
+            F.title('Testi'),
             {
               ...F.testo,
               name: 'abstract',
@@ -79,7 +80,7 @@ export const Residenze: CollectionConfig = {
             lexicalHTML('info_logistiche', { name: 'info_html' }),
           ],
         },
-        { label: 'Galleria', fields: [F.galleria] },
+        { label: 'Galleria', fields: [F.title('Galleria'), F.galleria] },
         /* -- Porgramma -- */
         { label: 'Programma', fields: [F.programmaArray] },
         /* -- Call -- */
