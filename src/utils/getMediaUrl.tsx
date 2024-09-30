@@ -16,6 +16,3 @@ export const getMediaURL = (
   }
   return defaultURL
 }
-
-// const imageUrl = getMediaURL(itinerarioData.media, '/custom-default.jpg');
-// <img src={imageUrl} alt="Itinerario media" />

@@ -25,10 +25,10 @@ export default async function Stakeholder({ params }: { params: { slug: string }
 
   return (
     <div className="">
-      {stakeholderData.media && (
+      {stakeholderData.copertina && (
         <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
           <Image
-            src={getMediaURL(stakeholderData.media)}
+            src={getMediaURL(stakeholderData.copertina)}
             alt="Fullscreen Image"
             layout="fill"
             fill

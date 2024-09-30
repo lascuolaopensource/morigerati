@@ -10,6 +10,7 @@ import MySwiper from '@/components/mySwiper'
 import StringToHTML from '@/components/serializer/stringToHTML'
 
 import { getMediaURL } from '@/utils/getMediaUrl'
+import { Luoghi, Stakeholder } from '@/payload-types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -31,10 +32,10 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
   return (
     <div className="bg-white">
-      {itinerarioData.media && itinerarioData.media && (
+      {itinerarioData.copertina && (
         <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
           <Image
-            src={getMediaURL(itinerarioData.media)}
+            src={getMediaURL(itinerarioData.copertina)}
             alt="Fullscreen Image"
             layout="fill"
             fill
@@ -72,7 +73,11 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         {itinerarioData.luoghi && itinerarioData.luoghi.length > 0 && (
           <div className="my-8">
             <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
-            <MySwiper items={itinerarioData.luoghi} color="bg-luogoColor" type="luoghi" />
+            <MySwiper
+              items={itinerarioData.luoghi as Luoghi[]}
+              color="bg-luogoColor"
+              type="luoghi"
+            />
           </div>
         )}
 
@@ -80,7 +85,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           <div className="my-8">
             <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders che troverai</h2>
             <MySwiper
-              items={itinerarioData.stakeholders}
+              items={itinerarioData.stakeholders as Stakeholder[]}
               color="bg-stakeholderColor"
               type="stakeholders"
             />

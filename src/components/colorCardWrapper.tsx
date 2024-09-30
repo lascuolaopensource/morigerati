@@ -2,6 +2,7 @@ import React from 'react'
 import Colorcard from '@/components/colorCard'
 import { Luoghi, Itinerari, Stakeholder, Articoli, Residenze } from '@/payload-types'
 import loremPic from '@/public/loremPic.png'
+import { getMediaURL } from '@/utils/getMediaUrl'
 
 type SupportedDoc = Luoghi | Itinerari | Stakeholder | Residenze
 
@@ -25,7 +26,7 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({
   return (
     <div className="grid grid-cols-1">
       {docs.map((doc) => {
-        const imageUrl = getImageUrl(doc)
+        const imageUrl = getMediaURL(doc.copertina)
         return (
           <Colorcard
             key={doc.id}
@@ -40,13 +41,6 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({
       })}
     </div>
   )
-}
-
-function getImageUrl(doc: SupportedDoc): string | undefined {
-  if ('media' in doc && doc.media && typeof doc.media !== 'string') {
-    return doc.media.url ?? undefined
-  }
-  return undefined
 }
 
 export default ColorCardWrapper

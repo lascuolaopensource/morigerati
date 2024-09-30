@@ -26,10 +26,10 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
 
   return (
     <div className="bg-white">
-      {luogoData.media && (
+      {luogoData.copertina && (
         <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
           <Image
-            src={getMediaURL(luogoData.media)}
+            src={getMediaURL(luogoData.copertina)}
             alt="Fullscreen Image"
             layout="fill"
             fill
