@@ -150,7 +150,7 @@ export interface Luoghi {
     [k: string]: unknown;
   } | null;
   orari_html?: string | null;
-  media?: (string | null) | Media;
+  copertina?: (string | null) | Media;
   links?:
     | {
         nome: string;
@@ -222,11 +222,11 @@ export interface Itinerari {
          * @maxItems 2
          */
         posizione: [number, number];
-        media: string | Media;
+        copertina: string | Media;
         id?: string | null;
       }[]
     | null;
-  media?: (string | null) | Media;
+  copertina?: (string | null) | Media;
   links?:
     | {
         nome: string;
@@ -277,7 +277,7 @@ export interface Stakeholder {
         id?: string | null;
       }[]
     | null;
-  media?: (string | null) | Media;
+  copertina?: (string | null) | Media;
   links?:
     | {
         nome: string;
@@ -351,6 +351,7 @@ export interface Residenze {
     [k: string]: unknown;
   } | null;
   info_html?: string | null;
+  copertina?: (string | null) | Media;
   galleria?: (string | Media)[] | null;
   programma?:
     | {
@@ -413,7 +414,7 @@ export interface Articoli {
       }[]
     | null;
   data_pubblicazione?: string | null;
-  media?: (string | null) | Media;
+  copertina?: (string | null) | Media;
   links?:
     | {
         nome: string;
@@ -611,7 +612,7 @@ export interface Home {
  */
 export interface ChiSiamo {
   id: string;
-  media?: (string | null) | Media;
+  copertina?: (string | null) | Media;
   links?:
     | {
         nome: string;
@@ -645,7 +646,7 @@ export interface ChiSiamo {
  */
 export interface MobilitaSostenibile {
   id: string;
-  media?: (string | null) | Media;
+  copertina?: (string | null) | Media;
   links?:
     | {
         nome: string;

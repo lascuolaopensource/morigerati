@@ -168,7 +168,7 @@ export const contatti: ArrayField = {
 }
 
 export const media: RelationshipField = {
-  name: 'media',
+  name: 'copertina',
   label: 'copertina',
   type: 'relationship',
   relationTo: Collections.Media,

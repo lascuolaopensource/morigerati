@@ -93,10 +93,11 @@ export const Residenze: CollectionConfig = {
             lexicalHTML('descrizione', { name: 'info_html' }),
           ],
         },
-        { label: 'Galleria', fields: [F.title('Galleria'), F.galleria] },
-        /* -- Porgramma -- */
+
+        { label: 'Galleria', fields: [F.title('Galleria'), F.media, F.galleria] },
+
         { label: 'Programma', fields: [F.programmaArray] },
-        /* -- Call -- */
+
         {
           label: 'Tutor ed esperti',
           fields: [
