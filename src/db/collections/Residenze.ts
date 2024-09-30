@@ -55,11 +55,8 @@ export const Residenze: CollectionConfig = {
                     },
                   ],
                 },
-                {
-                  ...F.testo,
-                  name: 'bio',
-                  label: 'Biografia',
-                },
+                F.plainText('biografia'),
+
                 {
                   name: 'progetti',
                   type: 'array',

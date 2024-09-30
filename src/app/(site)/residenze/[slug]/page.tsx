@@ -1,13 +1,12 @@
 import React, { Suspense } from 'react'
-
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/backButton'
-
 import { isArrayEmpty } from '@/utils/isArrayEmpty'
 import ProgrammaList from '@/components/residenze/programmaList'
 import DateDaDefinireBanner from '@/components/residenze/annuncio'
-
 import StringToHTML from '@/components/serializer/stringToHTML'
+import TutorCard from '@/components/residenze/espertiCard' // Add this import
+import { Residenze } from '@/payload-types' // Add this import
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -23,7 +22,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
     },
     depth: 1,
   })
-  const residenzaData = residenza.docs[0]
+  const residenzaData = residenza.docs[0] as Residenze // Add type assertion here
 
   return (
     <div className="bg-white p-4">
@@ -34,17 +33,25 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
       ) : (
         <p></p>
       )}
-
       <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
-      <DateDaDefinireBanner linkText="questa pagina!" linkUrl={'www.google.com'} />
+      <div className="pb-2">
+        <DateDaDefinireBanner linkText="questa pagina!" linkUrl={'www.google.com'} />
+      </div>
+      {residenzaData.esperti && residenzaData.esperti.length > 0 && (
+        <h2 className="text-center"> Esperti </h2>
+      )}
+      <div className="grid  gap-6">
+        {residenzaData.esperti &&
+          residenzaData.esperti.map((esperto, index) => (
+            <TutorCard key={index} esperto={esperto} />
+          ))}
+      </div>
       {!isArrayEmpty(residenzaData.programma) ? (
         <div>
-          <line className="border-t-2 my-4"></line>
+          <hr className="border-t-2 my-4" />
           <h2>Programma</h2>
         </div>
-      ) : (
-        ''
-      )}
+      ) : null}
       <ProgrammaList residenza={residenzaData} />
     </div>
   )
