@@ -23,8 +23,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
     },
     depth: 1,
   })
-  const residenzaData = residenza.docs[0] as Residenze // Add type assertion here
-
+  const residenzaData = residenza.docs[0] as Residenze
   return (
     <div className="bg-white p-4">
       <BackButton />
@@ -36,7 +35,6 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
       )}
       <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
 
-      <ProgrammaList residenza={residenzaData} />
       <div className="pb-2">
         {residenzaData.mostra_dettagli ? (
           <InfoResidenza
@@ -61,6 +59,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
           <h2>Programma</h2>
         </div>
       ) : null}
+      <ProgrammaList residenza={residenzaData} />
       {residenzaData.info_html ? (
         <div>
           <StringToHTML htmlString={residenzaData.info_html ?? ''} />{' '}
