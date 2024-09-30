@@ -35,9 +35,14 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
         <p></p>
       )}
       <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
+
+      <ProgrammaList residenza={residenzaData} />
       <div className="pb-2">
-        {residenzaData.data_inizio || residenzaData.data_fine ? (
-          <InfoResidenza residenza={residenzaData} />
+        {residenzaData.mostra_dettagli ? (
+          <InfoResidenza
+            residenza={residenzaData}
+            onlyDate={residenzaData.mostra_solo_data as Boolean}
+          />
         ) : (
           <DateDaDefinireBanner linkText="questa pagina!" linkUrl={'www.google.com'} />
         )}
@@ -45,7 +50,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
       {residenzaData.esperti && residenzaData.esperti.length > 0 && (
         <h2 className="text-center"> Esperti </h2>
       )}
-      <div className="grid  gap-6">
+      <div className="grid gap-6">
         {residenzaData.esperti &&
           residenzaData.esperti.map((esperto, index) => (
             <TutorCard key={index} esperto={esperto} />
@@ -56,7 +61,13 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
           <h2>Programma</h2>
         </div>
       ) : null}
-      <ProgrammaList residenza={residenzaData} />
+      {residenzaData.info_html ? (
+        <div>
+          <StringToHTML htmlString={residenzaData.info_html ?? ''} />{' '}
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   )
 }
