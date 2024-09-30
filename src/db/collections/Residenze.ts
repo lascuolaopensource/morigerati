@@ -18,7 +18,7 @@ export const Residenze: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: 'Dati',
+          label: 'Informazioni',
           fields: [
             F.title('Informazioni generali'),
             F.nome,
@@ -35,11 +35,57 @@ export const Residenze: CollectionConfig = {
                   label: 'Data fine',
                   type: 'date',
                 },
+
+                F.divider,
+                {
+                  name: 'deadline_iscrizione',
+                  label: 'Scadenza iscrizioni',
+                  type: 'date',
+                },
+                {
+                  name: 'link_iscrizione',
+                  label: 'Link iscrizione',
+                  type: 'text',
+                },
+                F.divider,
+                {
+                  name: 'indirizzo',
+                  label: 'Indirizzo / luogo',
+                  type: 'text',
+                },
               ],
             },
+          ],
+        },
 
+        /* -- Testi -- */
+
+        {
+          label: 'Testi',
+          fields: [
+            {
+              ...F.testo,
+              name: 'abstract',
+              label: 'Abstract',
+            },
+            lexicalHTML('abstract', { name: 'abstract_html' }),
             F.divider,
 
+            {
+              ...F.testo,
+              name: 'descrizione',
+              label: 'Descrizione',
+            },
+            lexicalHTML('info_logistiche', { name: 'info_html' }),
+          ],
+        },
+        { label: 'Galleria', fields: [F.galleria] },
+        /* -- Porgramma -- */
+        { label: 'Programma', fields: [F.programmaArray] },
+        /* -- Call -- */
+        {
+          label: 'Tutor ed esperti',
+          fields: [
             {
               name: 'esperti',
               label: 'Tutor ed esperti',
@@ -69,101 +115,11 @@ export const Residenze: CollectionConfig = {
                 },
               ],
             },
-            F.divider,
-            F.title('Testi'),
           ],
         },
-
-        /* -- Testi -- */
-
-        {
-          label: 'Testi',
-          fields: [
-            {
-              ...F.testo,
-              name: 'abstract',
-              label: 'Abstract',
-            },
-            lexicalHTML('abstract', { name: 'abstract_html' }),
-            F.divider,
-            F.programmaArray,
-            F.divider,
-            {
-              ...F.testo,
-              name: 'info_logistiche',
-              label: 'Informazioni logistiche',
-            },
-            lexicalHTML('info_logistiche', { name: 'info_html' }),
-          ],
-        },
-
-        /* -- Call -- */
-
-        {
-          label: 'Call',
-          fields: [
-            F.title('Informazioni generali'),
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'deadline_iscrizione',
-                  label: 'Scadenza iscrizioni',
-                  type: 'date',
-                },
-                {
-                  name: 'link_iscrizione',
-                  label: 'Link iscrizione',
-                  type: 'text',
-                },
-              ],
-            },
-
-            F.divider,
-
-            F.title('Immagini e media'),
-            {
-              ...F.media,
-              name: 'call_media',
-              label: 'Media',
-            },
-
-            F.divider,
-
-            F.title('Testo'),
-            {
-              ...F.testo,
-              name: 'figure_richieste',
-              label: 'Figure richieste',
-            },
-          ],
-        },
-
         /* -- Processo -- */
 
-        {
-          name: 'Processo',
-          fields: [
-            {
-              type: 'group',
-              name: 'processo',
-              fields: [F.divider, ...F.contenutoFieldsUnrequired],
-            },
-          ],
-        },
-
         /* -- Output -- */
-
-        {
-          name: 'Output',
-          fields: [
-            {
-              type: 'group',
-              name: 'output',
-              fields: [F.divider, ...F.contenutoFieldsUnrequired],
-            },
-          ],
-        },
       ],
     },
   ],

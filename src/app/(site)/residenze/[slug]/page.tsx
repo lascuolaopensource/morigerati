@@ -5,8 +5,9 @@ import { isArrayEmpty } from '@/utils/isArrayEmpty'
 import ProgrammaList from '@/components/residenze/programmaList'
 import DateDaDefinireBanner from '@/components/residenze/annuncio'
 import StringToHTML from '@/components/serializer/stringToHTML'
-import TutorCard from '@/components/residenze/espertiCard' // Add this import
-import { Residenze } from '@/payload-types' // Add this import
+import TutorCard from '@/components/residenze/espertiCard'
+import { Residenze } from '@/payload-types'
+import InfoResidenza from '@/components/residenze/infoResidenza'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -35,7 +36,11 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
       )}
       <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
       <div className="pb-2">
-        <DateDaDefinireBanner linkText="questa pagina!" linkUrl={'www.google.com'} />
+        {residenzaData.data_inizio || residenzaData.data_fine ? (
+          <InfoResidenza residenza={residenzaData} />
+        ) : (
+          <DateDaDefinireBanner linkText="questa pagina!" linkUrl={'www.google.com'} />
+        )}
       </div>
       {residenzaData.esperti && residenzaData.esperti.length > 0 && (
         <h2 className="text-center"> Esperti </h2>
@@ -48,7 +53,6 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
       </div>
       {!isArrayEmpty(residenzaData.programma) ? (
         <div>
-          <hr className="border-t-2 my-4" />
           <h2>Programma</h2>
         </div>
       ) : null}

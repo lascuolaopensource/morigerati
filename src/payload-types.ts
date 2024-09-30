@@ -314,28 +314,9 @@ export interface Residenze {
   nome: string;
   data_inizio?: string | null;
   data_fine?: string | null;
-  esperti?:
-    | {
-        nome: string;
-        foto?: (string | null) | Media;
-        biografia?: string | null;
-        progetti?:
-          | {
-              nome: string;
-              link: string;
-              id?: string | null;
-            }[]
-          | null;
-        organizzazioni?:
-          | {
-              nome: string;
-              link: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
+  deadline_iscrizione?: string | null;
+  link_iscrizione?: string | null;
+  indirizzo?: string | null;
   abstract?: {
     root: {
       type: string;
@@ -352,6 +333,23 @@ export interface Residenze {
     [k: string]: unknown;
   } | null;
   abstract_html?: string | null;
+  descrizione?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  info_html?: string | null;
+  galleria?: (string | Media)[] | null;
   programma?:
     | {
         programma?: string | null;
@@ -374,98 +372,28 @@ export interface Residenze {
         id?: string | null;
       }[]
     | null;
-  info_logistiche?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  info_html?: string | null;
-  deadline_iscrizione?: string | null;
-  link_iscrizione?: string | null;
-  call_media?: (string | null) | Media;
-  figure_richieste?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  Processo?: {
-    processo?: {
-      media?: (string | null) | Media;
-      links?:
-        | {
-            nome: string;
-            link: string;
-            id?: string | null;
-          }[]
-        | null;
-      galleria?: (string | Media)[] | null;
-      testo?: {
-        root: {
-          type: string;
-          children: {
-            type: string;
-            version: number;
-            [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
-        };
-        [k: string]: unknown;
-      } | null;
-      testo_html?: string | null;
-    };
-  };
-  Output?: {
-    output?: {
-      media?: (string | null) | Media;
-      links?:
-        | {
-            nome: string;
-            link: string;
-            id?: string | null;
-          }[]
-        | null;
-      galleria?: (string | Media)[] | null;
-      testo?: {
-        root: {
-          type: string;
-          children: {
-            type: string;
-            version: number;
-            [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
-        };
-        [k: string]: unknown;
-      } | null;
-      testo_html?: string | null;
-    };
-  };
+  esperti?:
+    | {
+        nome: string;
+        foto?: (string | null) | Media;
+        biografia?: string | null;
+        progetti?:
+          | {
+              nome: string;
+              link: string;
+              id?: string | null;
+            }[]
+          | null;
+        organizzazioni?:
+          | {
+              nome: string;
+              link: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
