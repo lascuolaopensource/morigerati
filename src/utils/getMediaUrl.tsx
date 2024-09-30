@@ -1,4 +1,5 @@
 import { Media } from '@/payload-types'
+import loremPic from '@/public/loremPic.png'
 
 const isMedia = (obj: any): obj is Media => {
   return obj && typeof obj === 'object' && 'url' in obj
@@ -6,7 +7,7 @@ const isMedia = (obj: any): obj is Media => {
 
 export const getMediaURL = (
   media: string | Media | null | undefined,
-  defaultURL: string = '/path/to/default/image.jpg',
+  defaultURL: string = loremPic.src,
 ): string => {
   if (typeof media === 'string') {
     return media
