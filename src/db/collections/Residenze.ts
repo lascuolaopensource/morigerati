@@ -118,9 +118,6 @@ export const Residenze: CollectionConfig = {
             },
           ],
         },
-        /* -- Processo -- */
-
-        /* -- Output -- */
       ],
     },
   ],
