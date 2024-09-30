@@ -31,7 +31,7 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
       return typeof item.media === 'string' ? item.media : item.media.url || loremPic
     }
     if ('call_media' in item && item.call_media) {
-      return typeof item.call_media === 'string' ? item.call_media : item.call_media.url || loremPic
+      return typeof item.call_media === 'string' ? item.call_media : loremPic
     }
     return loremPic
   }
