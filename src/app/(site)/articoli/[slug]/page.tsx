@@ -7,6 +7,7 @@ import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import { getMediaURL } from '@/utils/getMediaUrl'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
+import datePharser from '@/utils/datePharser'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -48,6 +49,7 @@ export default async function Articolo({ params }: { params: { slug: string } })
         ) : (
           <p></p>
         )}
+        <p>{datePharser(articoloData.data_pubblicazione, '', true)}</p>
       </div>
       <div className="container mx-auto p-4">
         <StringToHTML htmlString={articoloData.testo_html ?? ''} />

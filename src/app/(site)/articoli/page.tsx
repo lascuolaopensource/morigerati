@@ -2,7 +2,6 @@ import React, { Suspense, useState } from 'react'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import config from '@payload-config'
 import ArticoliCardWrapper from '@/components/articoli/articoliGridWrapper'
-import TagsList from '@/components/articoli/tagsList'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Articoli } from '@/payload-types'
 
