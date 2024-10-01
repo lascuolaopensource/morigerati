@@ -43,7 +43,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
             onlyDate={residenzaData.mostra_solo_data as Boolean}
           />
         ) : (
-          <DateDaDefinireBanner linkText="questa pagina!" linkUrl={'www.google.com'} />
+          <DateDaDefinireBanner />
         )}
       </div>
       {residenzaData.esperti && residenzaData.esperti.length > 0 && (
