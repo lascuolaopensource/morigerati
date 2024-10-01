@@ -5,7 +5,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Footer from '@/components/footer'
-import Navbar from '@/components/navbar'
+import Navbar from '@/components/navbar/navbar'
 
 export const metadata: Metadata = {
   title: 'Transluoghi - Ecomuseo del Bussento Contemporaneo',
