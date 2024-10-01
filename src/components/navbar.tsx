@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="py-4 px-6">
             <div className="flex justify-between items-center">
-              <div className="w-8">{/* Spazio vuoto */}</div>
+              <div className="w-8">{}</div>
               <Link href="/" className="flex justify-center">
                 <Image src={logoBlack} alt="Logo" width={100} />
               </Link>
@@ -57,7 +57,12 @@ const Navbar: React.FC = () => {
           <div className="absolute bottom-0 left-0 w-full h-0.5 bg-black"></div>
         </div>
       </nav>
-      <HamburgerMenu isOpen={isMenuOpen} onClose={toggleMenu} currentPath={pathname} />
+      <HamburgerMenu
+        isOpen={isMenuOpen}
+        onClose={toggleMenu}
+        currentPath={pathname}
+        color={getBackgroundColor()}
+      />
     </>
   )
 }
