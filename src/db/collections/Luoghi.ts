@@ -32,13 +32,13 @@ export const Luoghi: CollectionConfig = {
             F.title('Info generali'),
             F.nome,
             F.posizione,
-            // {
-            // name: 'Itinerari in cui si trovai il luogo',
-            //  type: 'relationship',
-            //  relationTo: Collections.Itinerari,
-            //  hasMany: true,
-            //},
-
+            {
+              name: 'Itinerari_relation',
+              label: 'Itinerari in cui si trova il luogo',
+              type: 'relationship',
+              relationTo: Collections.Itinerari,
+              hasMany: true,
+            },
             F.divider,
             F.servizi,
             F.divider,

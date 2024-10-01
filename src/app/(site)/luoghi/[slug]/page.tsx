@@ -7,6 +7,7 @@ import { getMediaURL } from '@/utils/getMediaUrl'
 import MySwyper from '@/components/mySwiper'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
+import { Itinerari, Luoghi } from '@/payload-types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -20,43 +21,50 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         equals: params.slug,
       },
     },
-    depth: 1,
   })
   const luogoData = luogo.docs[0]
-
+  {
+    console.log(luogo.docs[0].copertina)
+  }
   return (
     <div className="bg-white">
-      {luogoData.copertina && (
-        <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
-          <Image
-            src={getMediaURL(luogoData.copertina)}
-            alt="Fullscreen Image"
-            layout="fill"
-            fill
-            style={{ objectFit: 'cover' }}
-            objectFit="cover"
-            className="w-full h-full"
-          />
-          <div className="absolute inset-0"></div>
-        </div>
-      )}
+      <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
+        <Image
+          src={getMediaURL(luogoData.copertina)}
+          alt="Fullscreen Image"
+          layout="fill"
+          fill
+          style={{ objectFit: 'cover' }}
+          objectFit="cover"
+          className="w-full h-full"
+        />
+        <div className="absolute inset-0"></div>
+      </div>
+
       <div className="p-4">
         <BackButton />
         <div className="pt-4"></div>
         {luogoData.nome ? <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1> : <p></p>}
         <StringToHTML htmlString={luogoData.testo_html ?? ''} />
-        {/*         {
+        {luogoData.Itinerari_relation ? (
+          <h3 className="text-2xl font-semibold text-center">
+            In quale itinerario potrai trovarci
+          </h3>
+        ) : (
+          ''
+        )}
+        {
           <Suspense fallback={<div>Loading slides...</div>}>
             <MySwyper
-              items={luogoData['Itinerari in cui si trovai il luogo']}
-              color="bg-luogoColor"
-              type="luoghi"
+              items={luogoData.Itinerari_relation as Itinerari[]}
+              color="bg-itinerarioColor"
+              type="itinerari"
             />
           </Suspense>
-        } */}
+        }
 
         {luogoData.servizi && luogoData.servizi.length > 0 ? (
-          <h2 className="text-2xl font-semibold text-center">Servizi</h2>
+          <h2 className="text-2xl font-semibold text-center pt-6">Servizi</h2>
         ) : (
           <div></div>
         )}

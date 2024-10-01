@@ -103,6 +103,7 @@ export interface Luoghi {
    * @maxItems 2
    */
   posizione?: [number, number] | null;
+  Itinerari_relation?: (string | Itinerari)[] | null;
   servizi?:
     | {
         nome: string;
