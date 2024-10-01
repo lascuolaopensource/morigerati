@@ -8,6 +8,7 @@ import StringToHTML from '@/components/serializer/stringToHTML'
 import TutorCard from '@/components/residenze/espertiCard'
 import { Residenze } from '@/payload-types'
 import InfoResidenza from '@/components/residenze/infoResidenza'
+import PulsanteIscrizione from '@/components/residenze/pulsanteIscrizione'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -48,6 +49,10 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
       {residenzaData.esperti && residenzaData.esperti.length > 0 && (
         <h2 className="text-center"> Esperti </h2>
       )}
+      <PulsanteIscrizione
+        link={residenzaData.link_iscrizione ?? ''}
+        show={residenzaData.mostra_pulsante_iscrizione ?? false}
+      />
       <div className="grid gap-6">
         {residenzaData.esperti &&
           residenzaData.esperti.map((esperto, index) => (
@@ -67,6 +72,10 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
       ) : (
         ''
       )}
+      <PulsanteIscrizione
+        link={residenzaData.link_iscrizione ?? ''}
+        show={residenzaData.mostra_pulsante_iscrizione ?? false}
+      />
     </div>
   )
 }

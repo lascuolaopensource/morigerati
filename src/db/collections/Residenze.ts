@@ -22,51 +22,72 @@ export const Residenze: CollectionConfig = {
           fields: [
             F.title('Informazioni generali'),
             F.nome,
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'data_inizio',
-                  label: 'Data inizio',
-                  type: 'date',
-                },
-                {
-                  name: 'data_fine',
-                  label: 'Data fine',
-                  type: 'date',
-                },
 
-                F.divider,
+            {
+              name: 'data_inizio',
+              label: 'Data inizio',
+              type: 'date',
+            },
+            {
+              name: 'data_fine',
+              label: 'Data fine',
+              type: 'date',
+            },
+
+            F.divider,
+            {
+              name: 'deadline_iscrizione',
+              label: 'Scadenza iscrizioni',
+              type: 'date',
+            },
+            {
+              name: 'link_iscrizione',
+              label: 'Link iscrizione',
+              type: 'text',
+            },
+            F.divider,
+            {
+              name: 'indirizzo',
+              label: 'Indirizzo / luogo',
+              type: 'text',
+            },
+            F.divider,
+            {
+              name: 'mostra_dettagli',
+              type: 'checkbox',
+              label: 'Mostra dettagli sulla pagina',
+              defaultValue: false,
+            },
+            {
+              name: 'mostra_solo_data',
+              type: 'checkbox',
+              label: 'Mostra solo data',
+              defaultValue: false,
+            },
+            {
+              name: 'mostra_pulsante_iscrizione',
+              type: 'checkbox',
+              label: 'Mostra pulsante iscrizione',
+              defaultValue: false,
+            },
+            {
+              name: 'passata_futura',
+              label: 'Passata o futura',
+              type: 'radio',
+              options: [
                 {
-                  name: 'deadline_iscrizione',
-                  label: 'Scadenza iscrizioni',
-                  type: 'date',
+                  label: 'Passata',
+                  value: 'passata',
                 },
                 {
-                  name: 'link_iscrizione',
-                  label: 'Link iscrizione',
-                  type: 'text',
-                },
-                F.divider,
-                {
-                  name: 'indirizzo',
-                  label: 'Indirizzo / luogo',
-                  type: 'text',
-                },
-                F.divider,
-                {
-                  name: 'mostra_dettagli',
-                  type: 'checkbox',
-                  label: 'Mostra dettagli sulla pagina',
-                  defaultValue: false,
-                },
-                {
-                  name: 'mostra_solo_data',
-                  type: 'checkbox',
-                  label: 'Mostra solo data',
-                  defaultValue: false,
+                  label: 'Futura',
+                  value: 'futura',
                 },
               ],
+              defaultValue: 'futura',
+              admin: {
+                layout: 'horizontal',
+              },
             },
           ],
         },
