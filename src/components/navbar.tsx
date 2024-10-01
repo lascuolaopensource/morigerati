@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
@@ -15,6 +14,7 @@ const Navbar: React.FC = () => {
   const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen)
   }
+
   const getBackgroundColor = (): string => {
     if (pathname.startsWith('/luoghi')) {
       return 'bg-luogoColor'
@@ -38,10 +38,14 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav className={`w-full ${getBackgroundColor()} relative`}>
+        <div
+          className="absolute inset-0 top-[-100vh] -z-10"
+          style={{ backgroundColor: 'inherit' }}
+        ></div>
         <div className="max-w-7xl mx-auto">
           <div className="py-4 px-6">
             <div className="flex justify-between items-center">
-              <div className="w-8">{}</div>
+              <div className="w-8">{/* Spazio vuoto */}</div>
               <Link href="/" className="flex justify-center">
                 <Image src={logoBlack} alt="Logo" width={100} />
               </Link>
