@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import Image, { StaticImageData } from 'next/image'
 
+import { getMediaURL } from '@/utils/getMediaUrl'
+
 interface ColorcardProps {
   color: string
   colorScuro: string
