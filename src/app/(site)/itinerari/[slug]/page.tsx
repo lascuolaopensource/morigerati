@@ -2,17 +2,22 @@ import React from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 
+import { Suspense } from 'react'
+
 import BackButton from '@/components/backButton'
 import ItinerarioDetailsCard from '@/components/itinerarioDetailsCard'
 import { ServiziCardWrapper } from '@/components/servizioCardWrapper'
 import MySwiper from '@/components/mySwiper'
+import Galleria from '@/components/galleria/galleria'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
 
 import { getMediaURL } from '@/utils/getMediaUrl'
 import { Luoghi, Stakeholder } from '@/payload-types'
 
-export const dynamic = 'force-dynamic'
+import Mappa from '@/components/mappa/map'
+
+//export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function Itinerario({ params }: { params: { slug: string } }) {
@@ -59,7 +64,11 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         <div className="mb-6">
           <StringToHTML htmlString={itinerarioData.testo_html ?? ''} />
         </div>
-
+        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[480px]">
+          <Suspense fallback={<div>Loading slides...</div>}>
+            <Mappa posix={[4.79029, -75.69003]} />
+          </Suspense>
+        </div>
         <ItinerarioDetailsCard
           lunghezza={itinerarioData.lunghezza}
           tempo={itinerarioData.tempo}
@@ -67,6 +76,8 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           difficolta={itinerarioData.difficolta}
           tipo={itinerarioData.tipo}
         />
+        <div className="pb-2" />
+        <Galleria items={itinerarioData.galleria} />
 
         <ServiziCardWrapper servizi={itinerarioData.servizi} />
 

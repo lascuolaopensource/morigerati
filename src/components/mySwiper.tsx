@@ -7,8 +7,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Polaroid from './polaroid'
 import { Itinerari, Luoghi, Stakeholder, Residenze, Media } from '@/payload-types'
-import loremPic from '@/public/loremPic.png'
-import { StaticImageData } from 'next/image'
+
 import { getMediaURL } from '@/utils/getMediaUrl'
 
 interface MySwiperProps {
@@ -33,7 +32,7 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
       {items.map((item, index) => (
         <SwiperSlide style={{ width: 'auto' }} key={typeof item === 'string' ? index : item.id}>
           <Polaroid
-            imageUrl={getMediaURL(item.copertina as Media)}
+            imageUrl={getMediaURL(item.copertina)}
             title={typeof item === 'string' ? `Item ${index + 1}` : item.nome}
             color={color}
             link={typeof item === 'string' ? '#' : `/${type}/${item.id}`}
