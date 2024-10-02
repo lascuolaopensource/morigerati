@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 
-import { Suspense } from 'react'
+import { LatLngTuple } from 'leaflet'
 
 import BackButton from '@/components/backButton'
 import ItinerarioDetailsCard from '@/components/itinerarioDetailsCard'
@@ -15,13 +15,15 @@ import StringToHTML from '@/components/serializer/stringToHTML'
 import { getMediaURL } from '@/utils/getMediaUrl'
 import { Luoghi, Stakeholder } from '@/payload-types'
 
-import Mappa from '@/components/mappa/map'
+import DynamicMappa from '@/components/mappa/mapLoader'
 
-//export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function Itinerario({ params }: { params: { slug: string } }) {
   const db = await loadDb()
+
+  const position: LatLngTuple = [40.139949, 15.555182]
 
   const itinerario = await db.find({
     collection: 'itinerari',
@@ -65,9 +67,11 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           <StringToHTML htmlString={itinerarioData.testo_html ?? ''} />
         </div>
         <div className="bg-white-700 mx-auto my-5 w-[98%] h-[480px]">
-          <Suspense fallback={<div>Loading slides...</div>}>
-            <Mappa posix={[4.79029, -75.69003]} />
-          </Suspense>
+          <DynamicMappa
+            posix={position}
+            zoom={17}
+            gpxUrl={getMediaURL(itinerarioData.tracciato_gpx)}
+          />
         </div>
         <ItinerarioDetailsCard
           lunghezza={itinerarioData.lunghezza}
