@@ -36,7 +36,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
   })
 
   const itinerarioData = itinerario.docs[0]
-
+  console.log(getMediaURL(itinerarioData.tracciato_gpx))
   return (
     <div className="bg-white">
       {itinerarioData.copertina && (
@@ -70,7 +70,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           <DynamicMappa
             posix={position}
             zoom={17}
-            gpxUrl={getMediaURL(itinerarioData.tracciato_gpx)}
+            gpxUrl={itinerarioData.tracciato_gpx as string}
           />
         </div>
         <ItinerarioDetailsCard

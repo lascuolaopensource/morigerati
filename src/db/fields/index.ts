@@ -174,6 +174,13 @@ export const media: RelationshipField = {
   relationTo: Collections.Media,
 }
 
+export const tracciati: RelationshipField = {
+  name: 'tracciato',
+  label: 'tracciato',
+  type: 'relationship',
+  relationTo: Collections.Tracciati,
+}
+
 export const galleria: RelationshipField = {
   name: 'galleria',
   label: 'galleria',

@@ -5,6 +5,5 @@ export enum Collections {
   Media = 'media',
   Residenze = 'residenze',
   Articoli = 'articoli',
+  Tracciati = 'tracciati',
 }
-
-

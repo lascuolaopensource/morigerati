@@ -15,6 +15,7 @@ import { Itinerari } from './db/collections/Itinerari'
 import { Luoghi } from './db/collections/Luoghi'
 import { Residenze } from './db/collections/Residenze'
 import { Stakeholders } from './db/collections/Stakeholders'
+import { Tracciati } from './db/collections/Tracciati'
 
 import { Home } from './db/globals/Home'
 import { ChiSiamo } from './db/globals/ChiSiamo'
@@ -32,7 +33,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Luoghi, Itinerari, Residenze, Stakeholders, Articoli],
+  collections: [Users, Media, Luoghi, Itinerari, Residenze, Stakeholders, Articoli, Tracciati],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

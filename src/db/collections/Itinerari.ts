@@ -28,7 +28,7 @@ export const Itinerari: CollectionConfig = {
             F.title('Generale'),
             F.nome,
             {
-              ...F.media,
+              ...F.tracciati,
               name: 'tracciato_gpx',
               label: 'Tracciato GPX',
             },

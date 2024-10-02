@@ -18,6 +18,7 @@ export interface Config {
     residenze: Residenze;
     stakeholders: Stakeholder;
     articoli: Articoli;
+    tracciati: Tracciati;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -186,7 +187,7 @@ export interface Luoghi {
 export interface Itinerari {
   id: string;
   nome: string;
-  tracciato_gpx?: (string | null) | Media;
+  tracciato_gpx?: (string | null) | Tracciati;
   lunghezza?: number | null;
   tempo?: number | null;
   dislivello?: string | null;
@@ -254,6 +255,25 @@ export interface Itinerari {
   testo_html?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tracciati".
+ */
+export interface Tracciati {
+  id: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -479,6 +499,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'articoli';
         value: string | Articoli;
+      } | null)
+    | ({
+        relationTo: 'tracciati';
+        value: string | Tracciati;
       } | null);
   globalSlug?: string | null;
   user: {
