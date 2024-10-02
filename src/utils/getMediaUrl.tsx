@@ -18,5 +18,9 @@ export const getMediaURL = (
   } else {
     url = defaultURL
   }
-  return loremPic.src
+  if (!url.startsWith('/')) {
+    url = loremPic.src
+  }
+
+  return url
 }

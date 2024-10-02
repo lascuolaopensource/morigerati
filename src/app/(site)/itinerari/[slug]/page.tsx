@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 
 import { LatLngTuple } from 'leaflet'
@@ -13,6 +14,7 @@ import Galleria from '@/components/galleria/galleria'
 import StringToHTML from '@/components/serializer/stringToHTML'
 
 import { getMediaURL } from '@/utils/getMediaUrl'
+import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 import { Luoghi, Stakeholder } from '@/payload-types'
 
 import DynamicMappa from '@/components/mappa/mapLoader'
@@ -36,23 +38,21 @@ export default async function Itinerario({ params }: { params: { slug: string } 
   })
 
   const itinerarioData = itinerario.docs[0]
-  console.log(getMediaURL(itinerarioData.tracciato_gpx))
   return (
     <div className="bg-white">
-      {itinerarioData.copertina && (
-        <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
-          <Image
-            src={getMediaURL(itinerarioData.copertina)}
-            alt="Fullscreen Image"
-            layout="fill"
-            fill
-            style={{ objectFit: 'cover' }}
-            objectFit="cover"
-            className="w-full h-full"
-          />
-          <div className="absolute inset-0 "></div>
-        </div>
-      )}
+      <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
+        <Image
+          src={getMediaURL(itinerarioData.copertina)}
+          alt="Fullscreen Image"
+          layout="fill"
+          fill
+          style={{ objectFit: 'cover' }}
+          objectFit="cover"
+          className="w-full h-full"
+        />
+
+        <div className="absolute inset-0 "></div>
+      </div>
 
       <div className="p-4">
         <BackButton />
@@ -66,11 +66,11 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         <div className="mb-6">
           <StringToHTML htmlString={itinerarioData.testo_html ?? ''} />
         </div>
-        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[480px]">
+        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[200px]">
           <DynamicMappa
-            posix={position}
-            zoom={17}
-            gpxUrl={itinerarioData.tracciato_gpx as string}
+            initialPosition={position}
+            initialZoom={14}
+            gpxUrl={getTracciatoUrl(itinerarioData.tracciato_gpx)}
           />
         </div>
         <ItinerarioDetailsCard

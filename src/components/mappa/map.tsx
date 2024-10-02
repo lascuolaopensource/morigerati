@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
 import { LatLngExpression } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -8,8 +8,8 @@ import 'leaflet-defaulticon-compatibility'
 import 'leaflet-gpx'
 
 interface MapProps {
-  posix: LatLngExpression
-  zoom?: number
+  initialPosition: LatLngExpression
+  initialZoom?: number
   gpxUrl?: string
 }
 
@@ -17,13 +17,18 @@ const defaults = {
   zoom: 13,
 }
 
-export const Mappa: React.FC<MapProps> = ({ posix, zoom = defaults.zoom, gpxUrl }) => {
+export const Mappa: React.FC<MapProps> = ({
+  initialPosition,
+  initialZoom = defaults.zoom,
+  gpxUrl,
+}) => {
   const mapRef = useRef<L.Map | null>(null)
   const mapContainerRef = useRef<HTMLDivElement>(null)
+  const [gpxBounds, setGpxBounds] = useState<L.LatLngBounds | null>(null)
 
   useEffect(() => {
     if (typeof window !== 'undefined' && mapContainerRef.current && !mapRef.current) {
-      mapRef.current = L.map(mapContainerRef.current).setView(posix, zoom)
+      mapRef.current = L.map(mapContainerRef.current).setView(initialPosition, initialZoom)
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution:
@@ -42,7 +47,8 @@ export const Mappa: React.FC<MapProps> = ({ posix, zoom = defaults.zoom, gpxUrl 
           },
         })
           .on('loaded', function (e: { target: L.GPX }) {
-            mapRef.current?.fitBounds(e.target.getBounds())
+            const bounds = e.target.getBounds()
+            setGpxBounds(bounds)
           })
           .addTo(mapRef.current)
       }
@@ -54,7 +60,13 @@ export const Mappa: React.FC<MapProps> = ({ posix, zoom = defaults.zoom, gpxUrl 
         mapRef.current = null
       }
     }
-  }, [posix, zoom, gpxUrl])
+  }, [initialPosition, initialZoom, gpxUrl])
+
+  useEffect(() => {
+    if (mapRef.current && gpxBounds) {
+      mapRef.current.fitBounds(gpxBounds)
+    }
+  }, [gpxBounds])
 
   return <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
 }
