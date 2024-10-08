@@ -1,29 +1,28 @@
-import React, { Suspense, useState } from 'react'
+import React from 'react'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import config from '@payload-config'
-import ArticoliCardWrapper from '@/components/articoli/articoliGridWrapper'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Articoli } from '@/payload-types'
-import PulsanteVediTutti from '@/components/articoli/pulsanteVediTutti'
+import ArchiveCard from '@/components/articoli/articoliArchiveCard'
+import articoliUnpacker from '@/components/articoli/articoloPropsUnpack'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const ArticoliPage = async () => {
+const TuttiArticoliPage = async () => {
   const payload = await getPayloadHMR({ config })
 
+  // Recupera i dati globali per la pagina (titoli, testo, ecc.)
   const testi = await payload.findGlobal({
     slug: 'testi',
   })
 
+  // Recupera gli articoli
   const articoliData = await payload.find({
     collection: 'articoli',
   })
 
   const articoli: Articoli[] = articoliData.docs
-
-  const tags = articoli.flatMap((doc) => doc.tags?.map((tag) => tag.tag) ?? [])
-  const uniqueTags = [...new Set(tags)]
 
   return (
     <main className="">
@@ -36,13 +35,25 @@ const ArticoliPage = async () => {
 
         <StringToHTML htmlString={testi.articoli.text_html ?? ''} />
 
-        <Suspense fallback={<div>Loading Cards...</div>}>
-          <ArticoliCardWrapper docs={articoli} previous="articoli" />
-        </Suspense>
-        <PulsanteVediTutti />
+        <div className="">
+          {articoli.map((articolo, index) => {
+            const { title, subtitle, imageUrl, slugUrl, tags } = articoliUnpacker(articolo)
+            return (
+              <div key={index} className="pb-4">
+                <ArchiveCard
+                  title={title}
+                  subtitle={subtitle}
+                  imageUrl={imageUrl}
+                  slugUrl={slugUrl}
+                  tags={tags}
+                />
+              </div>
+            )
+          })}
+        </div>
       </div>
     </main>
   )
 }
 
-export default ArticoliPage
+export default TuttiArticoliPage

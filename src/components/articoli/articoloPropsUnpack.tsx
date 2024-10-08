@@ -8,7 +8,8 @@ const articoliUnpacker = (articolo: Articoli) => {
       ? articolo.copertina
       : articolo.copertina?.url || 'METTERE QUI IL PLACEHOLDER'
   const slugUrl = articolo.id
-  return { title, subtitle, imageUrl, slugUrl }
+  const tags = articolo.tags?.map((tag) => tag.tag) ?? []
+  return { title, subtitle, imageUrl, slugUrl, tags }
 }
 
 export default articoliUnpacker

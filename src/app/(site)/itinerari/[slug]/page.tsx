@@ -38,6 +38,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
   })
 
   const itinerarioData = itinerario.docs[0]
+
   return (
     <div className="bg-white">
       <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
@@ -71,6 +72,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
             initialPosition={position}
             initialZoom={14}
             gpxUrl={getTracciatoUrl(itinerarioData.tracciato_gpx)}
+            localizedMedia={itinerarioData.media_geolocalizzati}
           />
         </div>
         <ItinerarioDetailsCard
