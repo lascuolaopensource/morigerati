@@ -8,7 +8,7 @@ const BackButton = () => {
   const handleClick = () => {
     router.back()
   }
-  const getPath = () => {
+  const GetPath = () => {
     const pathname = usePathname()
     if (pathname.startsWith('/luoghi')) return 'tutti i luoghi'
     if (pathname.startsWith('/itinerari')) return 'tutti gli itinerari'
@@ -17,7 +17,7 @@ const BackButton = () => {
     if (pathname.startsWith('/articoli')) return 'tutti gli articoli'
   }
 
-  const pathName = getPath()
+  const pathName = GetPath()
   return (
     <button
       onClick={handleClick}
