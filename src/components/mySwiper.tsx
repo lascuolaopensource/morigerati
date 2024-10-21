@@ -1,13 +1,14 @@
 'use client'
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
+import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules'
+import type { SwiperOptions } from 'swiper/types'
+import type SwiperCore from 'swiper'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Polaroid from './polaroid'
-import { Itinerari, Luoghi, Stakeholder, Residenze, Media } from '@/payload-types'
-
+import { Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
 import { getMediaURL } from '@/utils/getMediaUrl'
 
 interface MySwiperProps {
@@ -17,17 +18,46 @@ interface MySwiperProps {
 }
 
 const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
+  const swiperRef = useRef<SwiperCore | null>(null)
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      const swiperInstance = swiperRef.current
+      if (swiperInstance) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          swiperInstance.mousewheel.disable()
+        } else {
+          swiperInstance.mousewheel.enable()
+        }
+      }
+    }
+
+    window.addEventListener('wheel', handleWheel)
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel)
+    }
+  }, [])
+
   if (!items || items.length === 0) {
     return null
   }
 
+  const swiperParams: SwiperOptions = {
+    modules: [Navigation, Pagination, Keyboard, Mousewheel],
+    mousewheel: true,
+    keyboard: true,
+    spaceBetween: 20,
+    slidesPerView: 'auto',
+    freeMode: true,
+    touchReleaseOnEdges: true,
+  }
+
   return (
     <Swiper
-      modules={[Navigation, Pagination, Mousewheel]}
-      spaceBetween={20}
-      slidesPerView={'auto'}
-      mousewheel={true}
+      {...swiperParams}
       className="mySwiper"
+      onSwiper={(swiper) => (swiperRef.current = swiper)}
     >
       {items.map((item, index) => (
         <SwiperSlide style={{ width: 'auto' }} key={typeof item === 'string' ? index : item.id}>

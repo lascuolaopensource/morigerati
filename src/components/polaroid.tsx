@@ -22,7 +22,7 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
     }[color] || 'border-gray-700'
   return (
     // <div style={{ transform: `rotate(${Math.random() * 4 - 2}deg)` }} className="pt-2 pb-2 pl-2">
-    <div className="w-40 pb-1">
+    <div className="w-40 pb-1 ">
       <Link href={link}>
         <div
           className={`border-[1.5px] ${borderColor} rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95`}
