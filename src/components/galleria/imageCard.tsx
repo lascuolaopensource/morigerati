@@ -1,5 +1,6 @@
 import React from 'react'
 import Image, { StaticImageData } from 'next/image'
+import ReactPlayer from 'react-player/lazy'
 
 interface PolaroidProps {
   imageUrl: string | StaticImageData
@@ -11,7 +12,8 @@ const ImageCard: React.FC<PolaroidProps> = ({ imageUrl }) => {
     <div className="w-40  pb-1">
       <div className="border-2 border-black rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95">
         <div className="relative w-full h-60">
-          <Image src={imageUrl} alt="s" layout="fill" objectFit="cover" />
+          <Image src={imageUrl} alt="" layout="fill" objectFit="cover" />
+          <ReactPlayer url={imageUrl as string} controls={true} />
         </div>
       </div>
     </div>

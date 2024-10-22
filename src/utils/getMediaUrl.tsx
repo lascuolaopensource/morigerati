@@ -9,7 +9,7 @@ export const getMediaURL = (
   media: string | Media | null | undefined,
   defaultURL: string = loremPic.src,
 ): string => {
-  let url: string
+  let url: string = defaultURL
 
   if (typeof media === 'string') {
     url = media
@@ -21,6 +21,5 @@ export const getMediaURL = (
   if (!url.startsWith('/')) {
     url = loremPic.src
   }
-
   return url
 }

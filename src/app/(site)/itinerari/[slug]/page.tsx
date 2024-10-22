@@ -11,6 +11,8 @@ import { ServiziCardWrapper } from '@/components/servizioCardWrapper'
 import MySwiper from '@/components/mySwiper'
 import Galleria from '@/components/galleria/galleria'
 
+import loremPic from '@/public/loremPic.png'
+
 import StringToHTML from '@/components/serializer/stringToHTML'
 
 import { getMediaURL } from '@/utils/getMediaUrl'
@@ -39,11 +41,16 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
   const itinerarioData = itinerario.docs[0]
 
+  const copertina = getMediaURL(itinerarioData.copertina)
+
+  console.log(copertina)
+  console.log('weeee')
+
   return (
     <div className="bg-white">
       <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
         <Image
-          src={getMediaURL(itinerarioData.copertina)}
+          src={copertina}
           alt="Fullscreen Image"
           layout="fill"
           fill
