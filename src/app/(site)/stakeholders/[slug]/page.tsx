@@ -30,10 +30,8 @@ export default async function Stakeholder({ params }: { params: { slug: string }
           <Image
             src={getMediaURL(stakeholderData.copertina)}
             alt="Fullscreen Image"
-            layout="fill"
             fill
             style={{ objectFit: 'cover' }}
-            objectFit="cover"
             className="w-full h-full"
           />
           <div className="absolute inset-0 "></div>

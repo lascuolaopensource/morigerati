@@ -50,8 +50,8 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
             <Image
               src={getMediaURL(esperto.foto) || '/placeholder-image.jpg'}
               alt={esperto.nome || 'Tutor'}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: 'cover' }}
             />
           </div>
         )}

@@ -73,8 +73,6 @@ export const Mappa: React.FC<MapProps> = ({
 
             const copertinaUrl = getMediaURL(media.copertina)
 
-            console.log(copertinaUrl)
-
             // Aggiungi popup al marker con l'immagine di copertina (se disponibile)
             if (copertinaUrl) {
               const popupContent = `<img src="${copertinaUrl}" alt="Media" style="max-width: 100px; max-height: 100px;" />`

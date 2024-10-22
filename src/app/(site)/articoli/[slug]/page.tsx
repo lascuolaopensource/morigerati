@@ -32,10 +32,8 @@ export default async function Articolo({ params }: { params: { slug: string } })
           <Image
             src={getMediaURL(articoloData.copertina)}
             alt="Fullscreen Image"
-            layout="fill"
             fill
             style={{ objectFit: 'cover' }}
-            objectFit="cover"
             className="w-full h-full"
           />
           <div className="absolute inset-0"></div>

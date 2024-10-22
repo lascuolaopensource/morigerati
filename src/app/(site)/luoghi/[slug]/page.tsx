@@ -23,19 +23,15 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
     },
   })
   const luogoData = luogo.docs[0]
-  {
-    console.log(luogo.docs[0].copertina)
-  }
+
   return (
     <div className="bg-white">
       <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
         <Image
           src={getMediaURL(luogoData.copertina)}
           alt="Fullscreen Image"
-          layout="fill"
           fill
           style={{ objectFit: 'cover' }}
-          objectFit="cover"
           className="w-full h-full"
         />
         <div className="absolute inset-0"></div>

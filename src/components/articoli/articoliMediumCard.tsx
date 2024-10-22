@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import Image from 'next/image'
 
 interface Articolo {
   title: string
@@ -14,7 +15,7 @@ const MediumCard: React.FC<Articolo> = ({ title, subtitle, imageUrl, slugUrl }) 
       <div className="border-2 border-black rounded-lg overflow-hidden bg-white h-full flex flex-col transition-transform duration-300 ease-in-out hover:scale-95">
         <div className="flex-grow">
           {imageUrl ? (
-            <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
+            <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
           ) : (
             <div className="w-full h-full bg-gray-200 border-b border-black">&nbsp;</div>
           )}

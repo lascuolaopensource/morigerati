@@ -11,7 +11,9 @@ export const getMediaURL = (
 ): string => {
   let url: string = defaultURL
 
-  if (typeof media === 'string') {
+  if (media == undefined) {
+    return url
+  } else if (typeof media === 'string') {
     url = media
   } else if (isMedia(media) && media.url) {
     url = media.url

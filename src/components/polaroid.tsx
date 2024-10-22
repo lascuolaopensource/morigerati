@@ -28,7 +28,7 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
           className={`border-[1.5px] ${borderColor} rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95`}
         >
           <div className="relative w-full h-32">
-            <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
+            <Image src={imageUrl} alt={title} fill style={{ objectFit: 'cover' }} />
           </div>
           <div
             className={`${color} p-1 border-t-2 ${borderColor} flex items-center justify-center relative`}
