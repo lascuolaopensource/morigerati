@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { Media } from '@/payload-types'
 import { getMediaURL } from '@/utils/getMediaUrl'
+import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa'
 
 interface GalleriaProps {
   items: (string | Media)[] | null | undefined
@@ -39,17 +40,17 @@ const MediaGallery: React.FC<GalleriaProps> = ({ items, initialIndex = 0, onClos
         onClick={handlePrevious}
         className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 text-white"
       >
-        Previous
+        <FaChevronLeft size={30} />
       </button>
       <div className="relative w-4/5 h-4/5">{renderMedia(items[currentIndex])}</div>
       <button
         onClick={handleNext}
         className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 text-white"
       >
-        Next
+        <FaChevronRight size={30} />
       </button>
       <button onClick={onClose} className="absolute top-4 right-4 z-10 text-white">
-        X
+        <FaTimes size={30} />
       </button>
     </div>
   )
