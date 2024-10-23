@@ -27,7 +27,11 @@ const MediaGallery: React.FC<GalleriaProps> = ({ items, initialIndex = 0, onClos
   const renderMedia = (item: string | Media) => {
     const mediaUrl = getMediaURL(item)
     if (typeof item === 'string' || mediaUrl.match(/\.(jpeg|jpg|gif|png)$/)) {
-      return <Image src={mediaUrl} alt="Gallery Image" layout="fill" objectFit="contain" />
+      return (
+        <div className="z-50">
+          <Image src={mediaUrl} alt="Gallery Image" layout="fill" objectFit="contain" />
+        </div>
+      )
     } else if (mediaUrl.match(/\.(mp4|webm|ogg)$/)) {
       return <video src={mediaUrl} controls style={{ width: '100%', height: '100%' }} />
     } else {

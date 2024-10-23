@@ -97,5 +97,5 @@ export const Mappa: React.FC<MapProps> = ({
     }
   }, [gpxBounds])
 
-  return <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
+  return <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} className="z-0" />
 }
