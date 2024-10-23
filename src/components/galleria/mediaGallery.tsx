@@ -12,9 +12,9 @@ interface GalleriaProps {
 }
 
 const MediaGallery: React.FC<GalleriaProps> = ({ items, initialIndex = 0, onClose }) => {
-  if (items === null || items === undefined) return null
-
   const [currentIndex, setCurrentIndex] = useState(initialIndex)
+
+  if (items === null || items === undefined) return null
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)
