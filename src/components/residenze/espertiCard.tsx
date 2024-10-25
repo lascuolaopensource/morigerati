@@ -56,7 +56,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
           </div>
         )}
         <div className={`${esperto.foto ? 'w-2/3' : 'w-full'} h-full flex flex-col p-2`}>
-          <h3 className="font-bold">{esperto.nome}</h3>
+          <h3 className="font-medium">{esperto.nome}</h3>
           <div className="flex-grow overflow-hidden">
             <p className="text-xs leading-normal">
               {isExpanded ? esperto.biografia : truncateText(esperto.biografia || '', 300)}
@@ -64,7 +64,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
             {esperto.biografia && esperto.biografia.length > 300 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="text-xs text-black font-bold underline mt-1"
+                className="text-xs text-black font-medium underline mt-1"
               >
                 {isExpanded ? 'Comprimi' : 'Espandi'}
               </button>
@@ -76,7 +76,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
         <div className={`flex-1 flex flex-col p-2 ${!hasProjectsOrOrganizations ? 'h-0' : ''}`}>
           {leftProjects.length > 0 || rightProjects.length > 0 ? (
             <div className="mb-2">
-              <h3 className="font-bold mb-1">Progetti</h3>
+              <h3 className="font-medium mb-1">Progetti</h3>
               <div className="flex">
                 {renderColumn(leftProjects)}
                 {renderColumn(rightProjects)}
@@ -85,7 +85,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
           ) : null}
           {leftOrganizations.length > 0 || rightOrganizations.length > 0 ? (
             <div>
-              <h3 className="font-bold mb-1">Organizzazioni</h3>
+              <h3 className="font-medium mb-1">Organizzazioni</h3>
               <div className="flex">
                 {renderColumn(leftOrganizations)}
                 {renderColumn(rightOrganizations)}

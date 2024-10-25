@@ -24,7 +24,7 @@ body {
     @apply leading-tight;
   }
   h2 {
-    @apply font-medium;
+    @apply font-bold;
     @apply text-2xl;
     @apply pt-3;
     @apply pb-1;

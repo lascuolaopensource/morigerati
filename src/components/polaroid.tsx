@@ -54,9 +54,9 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, title, color, link }) => 
               />
             )}
             {/* Testo con z-index più alto rispetto ai Pixel */}
-            <h2 className="text-sm pt-1 font-bold text-center break-words relative z-10">
+            <h3 className="pt-1 font-semibold text-xs text-center break-words relative z-10">
               {title}
-            </h2>
+            </h3>
           </div>
         </div>
       </Link>

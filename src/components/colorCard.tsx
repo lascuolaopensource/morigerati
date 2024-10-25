@@ -27,7 +27,7 @@ const Colorcard: React.FC<ColorcardProps> = ({
         className={`border-2 border-${colorScuro} rounded overflow-hidden h-40 flex flex-col transition-transform duration-300 ease-in-out hover:scale-95`}
       >
         <div className={`bg-${color} border-b-2 border-${colorScuro} `}>
-          <h2 className="text-sm font-bold pb-3 text-center leading-3">{title}</h2>
+          <h3 className="text-xs font-semibold pb-3 pt-3 text-center leading-3">{title}</h3>
         </div>
         <div className="flex-grow overflow-hidden relative">
           <Image

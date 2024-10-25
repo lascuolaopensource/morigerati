@@ -18,7 +18,7 @@ const ProgrammaList: React.FC<{ residenza: Residenze }> = ({ residenza }) => {
                 <StringToHTML htmlString={giorno.testo_html ?? ''} />
               </div>
             ) : (
-              <p>Nessun dettaglio disponibile per questa giornata.</p>
+              <p>Nessun dettaglio disponibile.</p>
             )}
           </div>
         </div>

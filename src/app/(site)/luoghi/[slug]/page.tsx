@@ -6,6 +6,9 @@ import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import { getMediaURL } from '@/utils/getMediaUrl'
 import MySwyper from '@/components/mySwiper'
 
+import DynamicMappa from '@/components/mappa/mapLoader'
+import { LatLngTuple } from 'leaflet'
+
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Itinerari, Luoghi } from '@/payload-types'
 
@@ -23,6 +26,8 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
     },
   })
   const luogoData = luogo.docs[0]
+
+  const position: LatLngTuple = luogoData.posizione ?? [40.139949, 15.555182]
 
   return (
     <div className="bg-white">
@@ -42,6 +47,9 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         <div className="pt-4"></div>
         {luogoData.nome ? <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1> : <p></p>}
         <StringToHTML htmlString={luogoData.testo_html ?? ''} />
+        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[200px] z-0">
+          <DynamicMappa initialPosition={position} initialZoom={40} showPositionPin={true} />
+        </div>
         {luogoData.Itinerari_relation ? (
           <h2 className="text-center">In quale itinerario potrai trovarci</h2>
         ) : (

@@ -3,15 +3,11 @@ import Image from 'next/image'
 import { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 
-import { LatLngTuple } from 'leaflet'
-
 import BackButton from '@/components/backButton'
 import ItinerarioDetailsCard from '@/components/itinerarioDetailsCard'
 import { ServiziCardWrapper } from '@/components/servizioCardWrapper'
 import MySwiper from '@/components/mySwiper'
 import Galleria from '@/components/galleria/galleria'
-
-import loremPic from '@/public/loremPic.png'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
 
@@ -20,6 +16,7 @@ import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 import { Luoghi, Stakeholder } from '@/payload-types'
 
 import DynamicMappa from '@/components/mappa/mapLoader'
+import { LatLngTuple } from 'leaflet'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

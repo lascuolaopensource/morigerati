@@ -7,7 +7,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility'
 import 'leaflet-gpx'
 import { Media } from '@/payload-types'
-import { getMediaURL } from '@/utils/getMediaUrl' // Import della tua funzione
+import { getMediaURL } from '@/utils/getMediaUrl'
 
 interface MapProps {
   initialPosition: LatLngExpression
@@ -17,6 +17,7 @@ interface MapProps {
     | { posizione: [number, number]; copertina: string | Media; id?: string | null }[]
     | null
     | undefined
+  showPositionPin?: boolean // Nuovo prop per controllare la visualizzazione del pin
 }
 
 const defaults = {
@@ -28,10 +29,12 @@ export const Mappa: React.FC<MapProps> = ({
   initialZoom = defaults.zoom,
   gpxUrl,
   localizedMedia,
+  showPositionPin = false, // Valore di default false
 }) => {
   const mapRef = useRef<L.Map | null>(null)
   const mapContainerRef = useRef<HTMLDivElement>(null)
   const [gpxBounds, setGpxBounds] = useState<L.LatLngBounds | null>(null)
+  const positionMarkerRef = useRef<L.Marker | null>(null)
 
   useEffect(() => {
     if (typeof window !== 'undefined' && mapContainerRef.current && !mapRef.current) {
@@ -42,6 +45,11 @@ export const Mappa: React.FC<MapProps> = ({
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(mapRef.current)
+
+      // Aggiungi il marker della posizione iniziale se showPositionPin è true
+      if (showPositionPin) {
+        positionMarkerRef.current = L.marker(initialPosition).addTo(mapRef.current)
+      }
 
       // Aggiungi il percorso GPX se esiste
       if (gpxUrl) {
@@ -70,9 +78,7 @@ export const Mappa: React.FC<MapProps> = ({
             if (mapRef.current) {
               marker.addTo(mapRef.current)
             }
-
             const copertinaUrl = getMediaURL(media.copertina)
-
             // Aggiungi popup al marker con l'immagine di copertina (se disponibile)
             if (copertinaUrl) {
               const popupContent = `<img src="${copertinaUrl}" alt="Media" style="max-width: 100px; max-height: 100px;" />`
@@ -88,8 +94,11 @@ export const Mappa: React.FC<MapProps> = ({
         mapRef.current.remove()
         mapRef.current = null
       }
+      if (positionMarkerRef.current) {
+        positionMarkerRef.current = null
+      }
     }
-  }, [initialPosition, initialZoom, gpxUrl, localizedMedia])
+  }, [initialPosition, initialZoom, gpxUrl, localizedMedia, showPositionPin])
 
   useEffect(() => {
     if (mapRef.current && gpxBounds) {

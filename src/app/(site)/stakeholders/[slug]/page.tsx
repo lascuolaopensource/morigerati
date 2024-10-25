@@ -7,6 +7,9 @@ import StringToHTML from '@/components/serializer/stringToHTML'
 import { getMediaURL } from '@/utils/getMediaUrl'
 import { Stakeholder as StakeholderType } from '@/payload-types'
 
+import DynamicMappa from '@/components/mappa/mapLoader'
+import { LatLngTuple } from 'leaflet'
+
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -22,6 +25,8 @@ export default async function Stakeholder({ params }: { params: { slug: string }
     depth: 1,
   })
   const stakeholderData = stakeholders.docs[0] as StakeholderType
+
+  const position: LatLngTuple = stakeholderData.posizione ?? [40.139949, 15.555182]
 
   return (
     <div className="">
@@ -54,7 +59,9 @@ export default async function Stakeholder({ params }: { params: { slug: string }
         ) : (
           <p></p>
         )}
-
+        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[200px] z-0">
+          <DynamicMappa initialPosition={position} initialZoom={40} showPositionPin={true} />
+        </div>
         {stakeholderData.contatti && stakeholderData.contatti.length > 0 ? (
           <h2 className="text-2xl font-semibold mb-2">Contatti</h2>
         ) : (
