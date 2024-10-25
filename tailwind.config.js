@@ -9,6 +9,9 @@ export default {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      transInstrumentSans: ['TransInstrumentSans', 'sans-serif'],
+    },
     extend: {
       colors: {
         luogoColor: '#92CDDE',

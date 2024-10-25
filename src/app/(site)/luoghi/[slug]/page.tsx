@@ -43,9 +43,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         {luogoData.nome ? <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1> : <p></p>}
         <StringToHTML htmlString={luogoData.testo_html ?? ''} />
         {luogoData.Itinerari_relation ? (
-          <h3 className="text-2xl font-semibold text-center">
-            In quale itinerario potrai trovarci
-          </h3>
+          <h2 className="text-center">In quale itinerario potrai trovarci</h2>
         ) : (
           ''
         )}
@@ -60,7 +58,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         }
 
         {luogoData.servizi && luogoData.servizi.length > 0 ? (
-          <h2 className="text-2xl font-semibold text-center pt-6">Servizi</h2>
+          <h2 className="text-center pt-6">Servizi</h2>
         ) : (
           <div></div>
         )}
@@ -68,7 +66,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         {luogoData.servizi && luogoData.servizi.length > 0 ? (
           luogoData.servizi.map((servizio, index) => (
             <div key={index} className="mt-4">
-              <h3 className="text-xl font-semibold ">{servizio.nome}</h3>
+              <h4 className="text-xl">{servizio.nome}</h4>
               <StringToHTML htmlString={servizio.testo_html ?? ''} />
             </div>
           ))
@@ -78,7 +76,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         <div className="pb-8"></div>
 
         {luogoData.contatti && luogoData.contatti.length > 0 ? (
-          <h2 className="text-l font-semibold mb-2 ">Contatti:</h2>
+          <h2 className="mb-2 ">Contatti:</h2>
         ) : (
           <div></div>
         )}
@@ -87,7 +85,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           <ul className="mb-6">
             {luogoData.contatti.map((contatto, index) => (
               <li key={index} className="mb-2">
-                <strong>{contatto.nome}</strong>
+                <p>{contatto.nome}</p>
                 {contatto.telefono && <p className="text-xs">Telefono: {contatto.telefono}</p>}
                 {contatto.email && <p className="text-xs">Email: {contatto.email}</p>}
                 {contatto.link && (
@@ -110,11 +108,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           <p className="mb-6"></p>
         )}
 
-        {isRichTextEmpty(luogoData.orari) ? (
-          <div></div>
-        ) : (
-          <h2 className="text-l font-semibold">Orari di Apertura:</h2>
-        )}
+        {isRichTextEmpty(luogoData.orari) ? <div></div> : <h2>Orari di Apertura:</h2>}
 
         {luogoData.orari && luogoData.orari.root ? (
           <StringToHTML htmlString={luogoData.orari_html ?? ''} />

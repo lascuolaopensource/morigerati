@@ -50,16 +50,16 @@ const Home = async () => {
         <GridOverlay targetSquareSize={20} bottomDensity={1} effectRows={8} />
       </div>
 
-      <div className="bg-white font-bold p-3 pt-4 w-full leading-2">
+      <div className="bg-white font-normal p-3 pt-4 w-full">
         <div className="relative">
-          <p className="font-bold pt-4 text-xl ">{home.intro.title}</p>
+          <h2 className=" pt-4 text-xl ">{home.intro.title}</h2>
           <StringToHTML htmlString={home.intro.text_html ?? ''} />
           <div className="absolute inset-0 flex justify-end">
             <HomePixel width={200} className="absolute right-0" />
           </div>
         </div>
 
-        <p className="font-bold pt-4 text-xl text-center">{home.itinerari.title}</p>
+        <h2 className="pt-4 text-xl text-center">{home.itinerari.title}</h2>
 
         <StringToHTML htmlString={home.itinerari.text_html ?? ''} />
 
@@ -67,7 +67,7 @@ const Home = async () => {
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={itinerari.docs} color="bg-itinerarioColor" type="itinerari" />
         </Suspense>
-        <p className="font-bold pt-4 text-xl text-center">{home.luoghi.title}</p>
+        <h2 className="pt-4 text-xl text-center">{home.luoghi.title}</h2>
 
         <StringToHTML htmlString={home.luoghi.text_html ?? ''} />
 
@@ -75,7 +75,7 @@ const Home = async () => {
         <Suspense fallback={<div>Loading slides...</div>}>
           <MySwyper items={luoghi.docs} color="bg-luogoColor" type="luoghi" />
         </Suspense>
-        <p className="font-bold pt-4 text-xl text-center">{home.residenze.title}</p>
+        <h2 className="pt-4 text-xl text-center">{home.residenze.title}</h2>
         <StringToHTML htmlString={home.residenze.text_html ?? ''} />
         <div className="pt-4"></div>
         <Suspense fallback={<div>Loading slides...</div>}>

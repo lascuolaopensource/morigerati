@@ -110,14 +110,6 @@ export default async function Itinerario({ params }: { params: { slug: string } 
             />
           </div>
         )}
-
-        {itinerarioData?.media_geolocalizzati &&
-          itinerarioData?.media_geolocalizzati.length > 0 && (
-            <div className="mb-4">
-              <h2 className="text-2xl font-semibold mb-2">Media geolocalizzati</h2>
-              <p>Disponibili {itinerarioData?.media_geolocalizzati.length} media geolocalizzati</p>
-            </div>
-          )}
       </div>
     </div>
   )

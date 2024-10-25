@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'TransInstrumentSans';
+  src: url('../public//fonts/TransInstrumentSansVF.ttf');
+}
+
 main {
   min-height: 100svh;
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'TransInstrumentSans';
 }
 
 @layer base {
@@ -19,7 +24,7 @@ body {
     @apply leading-tight;
   }
   h2 {
-    @apply font-semibold;
+    @apply font-medium;
     @apply text-2xl;
     @apply pt-3;
     @apply pb-1;
