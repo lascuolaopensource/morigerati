@@ -82,10 +82,10 @@ const Navbar: React.FC = () => {
           className={`fixed w-screen h-screen inset-0 ${bgColor} text-black z-40 overflow-hidden`}
         >
           <div className="flex flex-col h-full">
-            <div className="py-4 px-6 flex-shrink-0">
+            <div className="py-2 px-6 flex-shrink-0">
               <div className="mx-auto max-w-7xl flex justify-between items-center">
                 <div className="w-8"></div>
-                <div className="flex pl-2 justify-center">
+                <div className="flex justify-center">
                   <LogoGenerator />
                 </div>
                 <button
