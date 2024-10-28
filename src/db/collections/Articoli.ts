@@ -20,6 +20,9 @@ export const Articoli: CollectionConfig = {
       required: true,
     },
     {
+      ...F.plainText('sottotitolo'),
+    },
+    {
       name: 'tags',
       type: 'array',
       label: 'Tags',

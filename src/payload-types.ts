@@ -429,6 +429,7 @@ export interface Residenze {
 export interface Articoli {
   id: string;
   titolo: string;
+  sottotitolo?: string | null;
   tags?:
     | {
         tag?: string | null;

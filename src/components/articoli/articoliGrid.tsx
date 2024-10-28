@@ -1,78 +1,127 @@
-import React from 'react'
-import BigCard from './articoliBigCard'
-import MediumCard from './articoliMediumCard'
-import SmallCard from './articoliSmallCard'
+import { type Articoli, Media } from '@/payload-types'
+import ArticoliCard from './articoliCard'
 import articoliUnpacker from './articoloPropsUnpack'
-import { Articoli } from '@/payload-types'
+
+interface ArticleGroupProps {
+  mainArticle: Articoli
+  remainingArticles: Articoli[]
+}
+
+interface SmallCardsGroupProps {
+  articles: Articoli[]
+  startIndex: number
+}
 
 interface ArticoliGridProps {
   articoli: Articoli[]
+  maxGroups?: number
 }
 
-const ArticoliGrid: React.FC<ArticoliGridProps> = ({ articoli }): JSX.Element => {
-  return (
-    <div className="flex flex-col h-full">
-      {articoli.map((articolo, index) => {
-        const { title, subtitle, imageUrl, slugUrl } = articoliUnpacker(articolo)
+const SmallCardsGroup = ({ articles, startIndex }: SmallCardsGroupProps) => {
+  const cards = [0, 1].map((offset) => {
+    const article = articles[startIndex + offset]
+    if (!article) return null
 
-        if (index === 0) {
-          return (
-            <div key={articolo.id} className="mb-4 flex-shrink-0">
-              <BigCard
-                title={title}
-                subtitle={subtitle}
-                imageUrl={imageUrl}
-                slugUrl={`/articoli/${slugUrl}`}
-              />
-            </div>
-          )
-        } else {
-          const groupIndex = (index - 1) % 3
-          if (groupIndex === 0) {
-            return (
-              <div key={articolo.id} className="flex mb-4">
-                <div className="w-1/2 pr-2">
-                  <MediumCard
-                    title={title}
-                    subtitle={subtitle}
-                    imageUrl={imageUrl}
-                    slugUrl={`/articoli/${slugUrl}`}
-                  />
-                </div>
-                <div className="w-1/2 flex flex-col pl-2">
-                  {articoli[index + 1] ? (
-                    <div className="flex-1 mb-2">
-                      <SmallCard
-                        title={articoliUnpacker(articoli[index + 1]).title}
-                        subtitle={articoliUnpacker(articoli[index + 1]).subtitle}
-                        imageUrl={articoliUnpacker(articoli[index + 1]).imageUrl}
-                        slugUrl={`/articoli/${articoliUnpacker(articoli[index + 1]).slugUrl}`}
-                      />
-                    </div>
-                  ) : (
-                    <div className="flex-1 mb-2" />
-                  )}
-                  {articoli[index + 2] ? (
-                    <div className="flex-1 mt-2">
-                      <SmallCard
-                        title={articoliUnpacker(articoli[index + 2]).title}
-                        subtitle={articoliUnpacker(articoli[index + 2]).subtitle}
-                        imageUrl={articoliUnpacker(articoli[index + 2]).imageUrl}
-                        slugUrl={`/articoli/${articoliUnpacker(articoli[index + 2]).slugUrl}`}
-                      />
-                    </div>
-                  ) : (
-                    <div className="flex-1 mt-2" />
-                  )}
-                </div>
-              </div>
-            )
-          }
-        }
-        return null
-      })}
+    const { title, subtitle, media, slugUrl } = articoliUnpacker(article)
+
+    return (
+      <div
+        key={article.id}
+        className={`flex-1 transition-transform duration-200 hover:scale-[1.02] ${
+          offset === 0 ? 'mb-2' : 'mt-2'
+        }`}
+      >
+        <ArticoliCard
+          title={title}
+          subtitle={subtitle as string}
+          media={media as Media | undefined}
+          slugUrl={`/articoli/${slugUrl}`}
+          size="small"
+        />
+      </div>
+    )
+  })
+
+  return (
+    <div className="w-1/2 flex flex-col pl-2">
+      {cards.map(
+        (card, index) =>
+          card || (
+            <div key={`empty-${index}`} className={`flex-1 ${index === 0 ? 'mb-2' : 'mt-2'}`} />
+          ),
+      )}
     </div>
   )
 }
 
-export default ArticoliGrid
+const ArticleGroup = ({ mainArticle, remainingArticles }: ArticleGroupProps) => {
+  const { title, subtitle, media, slugUrl } = articoliUnpacker(mainArticle)
+
+  return (
+    <div className="flex mb-4 w-full">
+      <div className="w-1/2 pr-2 transition-transform duration-200 hover:scale-[1.02]">
+        <ArticoliCard
+          title={title}
+          subtitle={subtitle as string}
+          media={media}
+          slugUrl={`/articoli/${slugUrl}`}
+          size="medium"
+        />
+      </div>
+      <SmallCardsGroup articles={remainingArticles} startIndex={0} />
+    </div>
+  )
+}
+
+const FeaturedArticle = ({ article }: { article: Articoli }) => {
+  const { title, subtitle, media, slugUrl } = articoliUnpacker(article)
+
+  return (
+    <div className="mb-6 transition-transform duration-200 hover:scale-[1.01]">
+      <ArticoliCard
+        title={title}
+        subtitle={subtitle as string}
+        media={media}
+        slugUrl={`/articoli/${slugUrl}`}
+        size="big"
+      />
+    </div>
+  )
+}
+
+export default function ArticoliGrid({ articoli, maxGroups = 2 }: ArticoliGridProps) {
+  if (!articoli?.length) {
+    return null
+  }
+
+  const totalGroupsArticles = maxGroups * 3
+  const remainingArticles = articoli.slice(1, totalGroupsArticles + 1)
+
+  const articleGroups = []
+  for (let i = 0; i < remainingArticles.length; i += 3) {
+    if (i / 3 >= maxGroups) break
+
+    const mainArticle = remainingArticles[i]
+    const groupRemainingArticles = remainingArticles.slice(i + 1, i + 3)
+
+    if (mainArticle && groupRemainingArticles.length === 2) {
+      articleGroups.push(
+        <ArticleGroup
+          key={mainArticle.id}
+          mainArticle={mainArticle}
+          remainingArticles={groupRemainingArticles}
+        />,
+      )
+    }
+  }
+
+  return (
+    <div className="w-full">
+      {/* Featured Article */}
+      {articoli[0] && <FeaturedArticle article={articoli[0]} />}
+
+      {/* Article Groups */}
+      <div className="w-full">{articleGroups}</div>
+    </div>
+  )
+}
