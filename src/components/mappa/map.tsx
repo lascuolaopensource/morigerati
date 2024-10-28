@@ -6,6 +6,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility'
 import 'leaflet-gpx'
 import { Media } from '@/payload-types'
+import { X } from 'lucide-react'
 
 interface MapProps {
   initialPosition: LatLngExpression
@@ -22,30 +23,88 @@ const defaults = {
   zoom: 13,
 }
 
-const createPopupContent = (media: Media | string) => {
-  if (typeof media === 'string') {
-    return `<img src="${media}" alt="Media" style="max-width: 100px; max-height: 100px;" />`
-  }
+// Componente per la visualizzazione a schermo intero
+const FullscreenMedia = ({ media, onClose }: { media: Media | string; onClose: () => void }) => {
+  const isString = typeof media === 'string'
+  const isVideo = !isString && media.mimeType?.startsWith('video/')
 
-  const isVideo = media.mimeType?.startsWith('video/')
-
-  if (isVideo) {
-    return `
-      <video 
-        src="${media.url}"
-        style="max-width: 100px; max-height: 100px; object-fit: cover;"
-        autoplay 
-        muted 
-        loop 
-        playsinline
-        onclick="this.paused ? this.play() : this.pause()"
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 p-2 text-white hover:text-gray-300 transition-colors"
+        aria-label="Close fullscreen view"
       >
-        Your browser does not support video playback.
-      </video>
+        <X size={24} />
+      </button>
+
+      {isVideo ? (
+        <video
+          src={(media as Media).url || ''}
+          className="max-w-[90vw] max-h-[90vh] object-contain"
+          controls
+          autoPlay
+          loop
+          playsInline
+        >
+          Your browser does not support video playback.
+        </video>
+      ) : (
+        <img
+          src={(media as Media).url || ''}
+          alt={isString ? 'Media' : (media as Media).alt || 'Media'}
+          className="max-w-[90vw] max-h-[90vh] object-contain"
+        />
+      )}
+    </div>
+  )
+}
+
+const createPopupContent = (
+  media: Media | string,
+  onMediaClick: (media: Media | string) => void,
+) => {
+  if (typeof media === 'string') {
+    return `
+      <div class="cursor-pointer" onclick='window.openFullscreenMedia("${media}")'>
+        <img src="${media}" alt="Media" style="max-width: 100px; max-height: 100px;" />
+        <div style="text-align: center; font-size: 12px; color: #666; margin-top: 4px;">
+          clicca per espandere
+        </div>
+      </div>
     `
   }
 
-  return `<img src="${media.url}" alt="${media.alt || 'Media'}" style="max-width: 100px; max-height: 100px;" />`
+  const isVideo = media.mimeType?.startsWith('video/')
+  const mediaUrl = media.url || ''
+
+  if (isVideo) {
+    return `
+      <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(media)})'>
+        <video 
+          src="${mediaUrl}"
+          style="max-width: 100px; max-height: 100px; object-fit: cover;"
+          muted 
+          loop 
+          playsinline
+        >
+          Your browser does not support video playback.
+        </video>
+        <div style="text-align: center; font-size: 12px; color: #666; margin-top: 4px;">
+          clicca per espandere
+        </div>
+      </div>
+    `
+  }
+
+  return `
+    <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(media)})'>
+      <img src="${mediaUrl}" alt="${media.alt || 'Media'}" style="max-width: 100px; max-height: 100px;" />
+      <div style="text-align: center; font-size: 12px; color: #666; margin-top: 4px;">
+        clicca per espandere
+      </div>
+    </div>
+  `
 }
 
 export const Mappa: React.FC<MapProps> = ({
@@ -59,6 +118,18 @@ export const Mappa: React.FC<MapProps> = ({
   const mapContainerRef = useRef<HTMLDivElement>(null)
   const [gpxBounds, setGpxBounds] = useState<L.LatLngBounds | null>(null)
   const positionMarkerRef = useRef<L.Marker | null>(null)
+  const [selectedMedia, setSelectedMedia] = useState<Media | string | null>(null)
+
+  // Aggiungi la funzione al window object per essere accessibile dal popup
+  useEffect(() => {
+    ;(window as any).openFullscreenMedia = (media: Media | string) => {
+      setSelectedMedia(media)
+    }
+
+    return () => {
+      delete (window as any).openFullscreenMedia
+    }
+  }, [])
 
   useEffect(() => {
     if (typeof window !== 'undefined' && mapContainerRef.current && !mapRef.current) {
@@ -70,12 +141,10 @@ export const Mappa: React.FC<MapProps> = ({
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(mapRef.current)
 
-      // Add initial position marker if showPositionPin is true
       if (showPositionPin) {
         positionMarkerRef.current = L.marker(initialPosition).addTo(mapRef.current)
       }
 
-      // Add GPX track if exists
       if (gpxUrl) {
         new L.GPX(gpxUrl, {
           async: true,
@@ -94,7 +163,6 @@ export const Mappa: React.FC<MapProps> = ({
           .addTo(mapRef.current)
       }
 
-      // Add geolocalized media markers
       if (localizedMedia) {
         localizedMedia.forEach((media) => {
           if (media.posizione) {
@@ -103,8 +171,7 @@ export const Mappa: React.FC<MapProps> = ({
               marker.addTo(mapRef.current)
             }
 
-            // Create popup with media content
-            const popupContent = createPopupContent(media.copertina)
+            const popupContent = createPopupContent(media.copertina, setSelectedMedia)
             marker.bindPopup(popupContent, {
               maxWidth: 120,
               maxHeight: 120,
@@ -131,5 +198,12 @@ export const Mappa: React.FC<MapProps> = ({
     }
   }, [gpxBounds])
 
-  return <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} className="z-0" />
+  return (
+    <>
+      <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} className="z-0" />
+      {selectedMedia && (
+        <FullscreenMedia media={selectedMedia} onClose={() => setSelectedMedia(null)} />
+      )}
+    </>
+  )
 }

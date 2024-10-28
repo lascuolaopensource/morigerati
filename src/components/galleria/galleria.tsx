@@ -4,7 +4,7 @@ import { Media } from '@/payload-types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 import MediaGallery from '@/components/galleria/mediaGallery'
-import ImageCard from './imageCard'
+import GalleryCard from './galleryCard'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -39,7 +39,7 @@ const Galleria: React.FC<GalleriaProps> = ({ items }) => {
             key={item.id}
             onClick={() => handleSlideClick(index)}
           >
-            <ImageCard imageUrl={item.url || ''} />
+            <GalleryCard media={item as Media} />
           </SwiperSlide>
         ))}
       </Swiper>
