@@ -29,7 +29,6 @@ function useTruncatedText(
     let result = ''
     let testDiv = document.createElement('div')
 
-    // Copy styles from the original element
     testDiv.style.cssText = window.getComputedStyle(element).cssText
     testDiv.style.width = element.offsetWidth + 'px'
     testDiv.style.height = 'auto'

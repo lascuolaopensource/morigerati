@@ -23,7 +23,7 @@ const LogoGenerator = () => {
     const normalInterval = setInterval(generateLetters, 3000)
     let hoverInterval: NodeJS.Timeout | null = null
 
-    if (isHovering) {
+    if (isHovering && window.innerWidth >= 1024) {
       hoverInterval = setInterval(generateLetters, 50)
     }
 
