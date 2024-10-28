@@ -17,6 +17,9 @@ import { Luoghi, Stakeholder } from '@/payload-types'
 
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
+import Copertina from '@/components/copertina'
+
+import { type Media } from '@/payload-types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -38,21 +41,9 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
   const itinerarioData = itinerario.docs[0]
 
-  const copertina = getMediaURL(itinerarioData?.copertina)
-
   return (
     <div className="bg-white">
-      <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
-        <Image
-          src={copertina}
-          alt="Fullscreen Image"
-          fill
-          style={{ objectFit: 'cover' }}
-          className="w-full h-full"
-        />
-
-        <div className="absolute inset-0 "></div>
-      </div>
+      <Copertina copertina={itinerarioData?.copertina as Media | undefined} />
 
       <div className="p-4">
         <BackButton />
