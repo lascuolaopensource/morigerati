@@ -89,7 +89,7 @@ const FeaturedArticle = ({ article }: { article: Articoli }) => {
   )
 }
 
-export default function ArticoliGrid({ articoli, maxGroups = 2 }: ArticoliGridProps) {
+export default function ArticoliGrid({ articoli, maxGroups = 0 }: ArticoliGridProps) {
   if (!articoli?.length) {
     return null
   }
@@ -117,10 +117,8 @@ export default function ArticoliGrid({ articoli, maxGroups = 2 }: ArticoliGridPr
 
   return (
     <div className="w-full">
-      {/* Featured Article */}
       {articoli[0] && <FeaturedArticle article={articoli[0]} />}
 
-      {/* Article Groups */}
       <div className="w-full">{articleGroups}</div>
     </div>
   )

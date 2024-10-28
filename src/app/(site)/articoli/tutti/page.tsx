@@ -2,7 +2,7 @@ import React from 'react'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import config from '@payload-config'
 import StringToHTML from '@/components/serializer/stringToHTML'
-import { Articoli } from '@/payload-types'
+import { Articoli, Media } from '@/payload-types'
 import ArchiveCard from '@/components/articoli/articoliArchiveCard'
 import articoliUnpacker from '@/components/articoli/articoloPropsUnpack'
 
@@ -12,12 +12,10 @@ export const revalidate = 0
 const TuttiArticoliPage = async () => {
   const payload = await getPayloadHMR({ config })
 
-  // Recupera i dati globali per la pagina (titoli, testo, ecc.)
   const testi = await payload.findGlobal({
     slug: 'testi',
   })
 
-  // Recupera gli articoli
   const articoliData = await payload.find({
     collection: 'articoli',
   })
@@ -37,13 +35,13 @@ const TuttiArticoliPage = async () => {
 
         <div className="">
           {articoli.map((articolo, index) => {
-            const { title, subtitle, imageUrl, slugUrl, tags } = articoliUnpacker(articolo)
+            const { title, subtitle, media, slugUrl, tags } = articoliUnpacker(articolo)
             return (
               <div key={index} className="pb-4">
                 <ArchiveCard
                   title={title}
                   subtitle={subtitle}
-                  imageUrl={imageUrl}
+                  media={media as Media | undefined}
                   slugUrl={slugUrl}
                   tags={tags}
                 />

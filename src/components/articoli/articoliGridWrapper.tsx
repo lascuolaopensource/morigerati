@@ -1,9 +1,10 @@
 'use client'
-
 import React, { useState } from 'react'
 import { Articoli } from '@/payload-types'
 import ArticoliGrid from '@/components/articoli/articoliGrid'
 import TagsList from '@/components/articoli/tagsList'
+import ArticoliCard from '@/components/articoli/articoliCard'
+import { Media } from '@/payload-types'
 
 type SupportedDoc = Articoli
 
@@ -32,10 +33,26 @@ const ArticoliCardWrapper: React.FC<ArticoliCardWrapperProps> = ({ docs }) => {
 
   return (
     <div>
-      <div className="pb-4">
+      <div className="">
         <TagsList tags={uniqueTags} onTagClick={handleTagClick} selectedTag={selectedTag} />
       </div>
-      <ArticoliGrid articoli={filteredArticoli} />
+
+      {selectedTag ? (
+        <div className="space-y-4">
+          {filteredArticoli.map((articolo) => (
+            <ArticoliCard
+              key={articolo.id}
+              title={articolo.titolo}
+              subtitle={articolo.sottotitolo || ''}
+              media={articolo.copertina as Media | undefined}
+              slugUrl={`/articoli/${articolo.id}`}
+              size="big"
+            />
+          ))}
+        </div>
+      ) : (
+        <ArticoliGrid articoli={filteredArticoli} />
+      )}
     </div>
   )
 }
