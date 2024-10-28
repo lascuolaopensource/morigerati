@@ -7,6 +7,8 @@ import logoBlack from '@/public/logoBlack.png'
 import menuIcon from '@/public/hamburger.png'
 import x from '@/public/x.png'
 
+import LogoGenerator from '@/components/logoGenerator/logo'
+
 const NAV_ITEMS = [
   { href: '/', text: 'Home' },
   { href: '/about', text: 'About' },
@@ -51,11 +53,11 @@ const Navbar: React.FC = () => {
           style={{ backgroundColor: 'inherit' }}
         ></div>
         <div className="max-w-7xl mx-auto">
-          <div className="py-4 px-6">
+          <div className="py-2 px-6">
             <div className="flex justify-between items-center">
               <div className="w-8"></div>
-              <Link href="/" className="flex justify-center">
-                <Image src={logoBlack} alt="Logo" width={100} />
+              <Link href="/" className=" ">
+                <LogoGenerator />
               </Link>
               <button
                 className="w-8 h-8 flex items-center justify-center z-50"
@@ -84,7 +86,7 @@ const Navbar: React.FC = () => {
               <div className="mx-auto max-w-7xl flex justify-between items-center">
                 <div className="w-8"></div>
                 <div className="flex pl-2 justify-center">
-                  <Image src={logoBlack} alt="Logo" width={100} />
+                  <LogoGenerator />
                 </div>
                 <button
                   onClick={toggleMenu}
