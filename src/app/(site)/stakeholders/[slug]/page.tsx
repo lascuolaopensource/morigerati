@@ -1,14 +1,15 @@
 import React from 'react'
-import Image from 'next/image'
 
 import BackButton from '@/components/backButton'
 import { loadDb } from '@/utils/db'
 import StringToHTML from '@/components/serializer/stringToHTML'
-import { getMediaURL } from '@/utils/getMediaUrl'
 import { Stakeholder as StakeholderType } from '@/payload-types'
 
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
+import Copertina from '@/components/copertina'
+
+import { Media } from '@/payload-types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -31,16 +32,7 @@ export default async function Stakeholder({ params }: { params: { slug: string }
   return (
     <div className="">
       {stakeholderData.copertina && (
-        <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
-          <Image
-            src={getMediaURL(stakeholderData.copertina)}
-            alt="Fullscreen Image"
-            fill
-            style={{ objectFit: 'cover' }}
-            className="w-full h-full"
-          />
-          <div className="absolute inset-0 "></div>
-        </div>
+        <Copertina copertina={stakeholderData.copertina as Media | undefined} />
       )}
 
       <div className="p-4">

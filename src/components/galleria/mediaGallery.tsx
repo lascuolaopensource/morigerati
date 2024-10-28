@@ -2,11 +2,10 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { Media } from '@/payload-types'
-import { getMediaURL } from '@/utils/getMediaUrl'
 import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa'
 
 interface GalleriaProps {
-  items: (string | Media)[] | null | undefined
+  items: Media[] | null | undefined
   initialIndex?: number
   onClose: () => void
 }
@@ -24,18 +23,22 @@ const MediaGallery: React.FC<GalleriaProps> = ({ items, initialIndex = 0, onClos
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1))
   }
 
-  const renderMedia = (item: string | Media) => {
-    const mediaUrl = getMediaURL(item)
-    if (typeof item === 'string' || mediaUrl.match(/\.(jpeg|jpg|gif|png)$/)) {
+  const renderMedia = (item: Media) => {
+    const isVideo = item.mimeType?.startsWith('video/')
+
+    if (!isVideo) {
       return (
         <div className="z-50">
-          <Image src={mediaUrl} alt="Gallery Image" layout="fill" objectFit="contain" />
+          <Image
+            src={item.url || ''}
+            alt={item.alt || 'Gallery Image'}
+            layout="fill"
+            objectFit="contain"
+          />
         </div>
       )
-    } else if (mediaUrl.match(/\.(mp4|webm|ogg)$/)) {
-      return <video src={mediaUrl} controls style={{ width: '100%', height: '100%' }} />
     } else {
-      return null
+      return <video src={item?.url || ''} controls style={{ width: '100%', height: '100%' }} />
     }
   }
 

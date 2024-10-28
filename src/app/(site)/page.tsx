@@ -3,12 +3,14 @@ import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 
 import MySwyper from '@/components/mySwiper'
-import { getMediaUrl } from '@/utils/media'
 
 import HomePixel from '@/public/pixels/home.svg'
 import GridOverlay from '@/components/gridOverlay'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
+import Copertina from '@/components/copertina'
+
+import { Media } from '@/payload-types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -32,14 +34,10 @@ const Home = async () => {
     collection: 'residenze',
   })
 
-  let coverUrl = getMediaUrl(home.cover)
-
   return (
     <main>
       <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
-        {coverUrl && (
-          <Image src={coverUrl} alt="Fullscreen Image" fill style={{ objectFit: 'cover' }} />
-        )}
+        {home.cover && <Copertina copertina={home.cover as Media | undefined} />}
 
         <div className="absolute inset-0 bg-black opacity-30"></div>
         <div className="absolute inset-0 flex items-center justify-center">

@@ -3,14 +3,16 @@ import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/backButton'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
-import { getMediaURL } from '@/utils/getMediaUrl'
 import MySwyper from '@/components/mySwiper'
+
+import Copertina from '@/components/copertina'
 
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
-import { Itinerari, Luoghi } from '@/payload-types'
+import { Itinerari, Media } from '@/payload-types'
+import Stakeholder from '../../stakeholders/[slug]/page'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -31,16 +33,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
 
   return (
     <div className="bg-white">
-      <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
-        <Image
-          src={getMediaURL(luogoData.copertina)}
-          alt="Fullscreen Image"
-          fill
-          style={{ objectFit: 'cover' }}
-          className="w-full h-full"
-        />
-        <div className="absolute inset-0"></div>
-      </div>
+      <Copertina copertina={luogoData?.copertina as Media | undefined} />
 
       <div className="p-4">
         <BackButton />

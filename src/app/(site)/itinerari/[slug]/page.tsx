@@ -1,6 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
-import { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 
 import BackButton from '@/components/backButton'
@@ -11,7 +9,6 @@ import Galleria from '@/components/galleria/galleria'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
 
-import { getMediaURL } from '@/utils/getMediaUrl'
 import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 import { Luoghi, Stakeholder } from '@/payload-types'
 
@@ -73,7 +70,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           tipo={itinerarioData?.tipo}
         />
         <div className="pb-2" />
-        <Galleria items={itinerarioData?.galleria} />
+        <Galleria items={itinerarioData?.galleria as Media[] | undefined} />
 
         <ServiziCardWrapper servizi={itinerarioData?.servizi} />
 

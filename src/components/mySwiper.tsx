@@ -8,8 +8,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Polaroid from './polaroid'
-import { Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
-import { getMediaURL } from '@/utils/getMediaUrl'
+import { Itinerari, Luoghi, Stakeholder, Residenze, Media } from '@/payload-types'
 
 interface MySwiperProps {
   items: Itinerari[] | Luoghi[] | Stakeholder[] | Residenze[]
@@ -62,7 +61,7 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
       {items.map((item, index) => (
         <SwiperSlide style={{ width: 'auto' }} key={typeof item === 'string' ? index : item.id}>
           <Polaroid
-            imageUrl={getMediaURL(item.copertina)}
+            media={item.copertina as Media | undefined}
             title={typeof item === 'string' ? `Item ${index + 1}` : item.nome}
             color={color}
             link={typeof item === 'string' ? '#' : `/${type}/${item.id}`}

@@ -1,18 +1,16 @@
 'use client'
 import React, { useState } from 'react'
 import { Media } from '@/payload-types'
-import { getMediaURL } from '@/utils/getMediaUrl'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 import MediaGallery from '@/components/galleria/mediaGallery'
 import ImageCard from './imageCard'
-
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 interface GalleriaProps {
-  items: (string | Media)[] | null | undefined
+  items: Media[] | undefined
 }
 
 const Galleria: React.FC<GalleriaProps> = ({ items }) => {
@@ -38,10 +36,10 @@ const Galleria: React.FC<GalleriaProps> = ({ items }) => {
         {items.map((item, index) => (
           <SwiperSlide
             style={{ width: 'auto' }}
-            key={typeof item === 'string' ? index : item.id}
+            key={item.id}
             onClick={() => handleSlideClick(index)}
           >
-            <ImageCard imageUrl={getMediaURL(item)} />
+            <ImageCard imageUrl={item.url || ''} />
           </SwiperSlide>
         ))}
       </Swiper>

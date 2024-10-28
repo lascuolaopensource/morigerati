@@ -1,4 +1,3 @@
-'use client'
 import { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
 import { LatLngExpression } from 'leaflet'
@@ -7,7 +6,6 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility'
 import 'leaflet-gpx'
 import { Media } from '@/payload-types'
-import { getMediaURL } from '@/utils/getMediaUrl'
 
 interface MapProps {
   initialPosition: LatLngExpression
@@ -17,11 +15,37 @@ interface MapProps {
     | { posizione: [number, number]; copertina: string | Media; id?: string | null }[]
     | null
     | undefined
-  showPositionPin?: boolean // Nuovo prop per controllare la visualizzazione del pin
+  showPositionPin?: boolean
 }
 
 const defaults = {
   zoom: 13,
+}
+
+const createPopupContent = (media: Media | string) => {
+  if (typeof media === 'string') {
+    return `<img src="${media}" alt="Media" style="max-width: 100px; max-height: 100px;" />`
+  }
+
+  const isVideo = media.mimeType?.startsWith('video/')
+
+  if (isVideo) {
+    return `
+      <video 
+        src="${media.url}"
+        style="max-width: 100px; max-height: 100px; object-fit: cover;"
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        onclick="this.paused ? this.play() : this.pause()"
+      >
+        Your browser does not support video playback.
+      </video>
+    `
+  }
+
+  return `<img src="${media.url}" alt="${media.alt || 'Media'}" style="max-width: 100px; max-height: 100px;" />`
 }
 
 export const Mappa: React.FC<MapProps> = ({
@@ -29,7 +53,7 @@ export const Mappa: React.FC<MapProps> = ({
   initialZoom = defaults.zoom,
   gpxUrl,
   localizedMedia,
-  showPositionPin = false, // Valore di default false
+  showPositionPin = false,
 }) => {
   const mapRef = useRef<L.Map | null>(null)
   const mapContainerRef = useRef<HTMLDivElement>(null)
@@ -38,7 +62,7 @@ export const Mappa: React.FC<MapProps> = ({
 
   useEffect(() => {
     if (typeof window !== 'undefined' && mapContainerRef.current && !mapRef.current) {
-      // Creazione della mappa
+      // Create map
       mapRef.current = L.map(mapContainerRef.current).setView(initialPosition, initialZoom)
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -46,12 +70,12 @@ export const Mappa: React.FC<MapProps> = ({
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(mapRef.current)
 
-      // Aggiungi il marker della posizione iniziale se showPositionPin è true
+      // Add initial position marker if showPositionPin is true
       if (showPositionPin) {
         positionMarkerRef.current = L.marker(initialPosition).addTo(mapRef.current)
       }
 
-      // Aggiungi il percorso GPX se esiste
+      // Add GPX track if exists
       if (gpxUrl) {
         new L.GPX(gpxUrl, {
           async: true,
@@ -70,7 +94,7 @@ export const Mappa: React.FC<MapProps> = ({
           .addTo(mapRef.current)
       }
 
-      // Aggiungi i media geolocalizzati sulla mappa
+      // Add geolocalized media markers
       if (localizedMedia) {
         localizedMedia.forEach((media) => {
           if (media.posizione) {
@@ -78,12 +102,13 @@ export const Mappa: React.FC<MapProps> = ({
             if (mapRef.current) {
               marker.addTo(mapRef.current)
             }
-            const copertinaUrl = getMediaURL(media.copertina)
-            // Aggiungi popup al marker con l'immagine di copertina (se disponibile)
-            if (copertinaUrl) {
-              const popupContent = `<img src="${copertinaUrl}" alt="Media" style="max-width: 100px; max-height: 100px;" />`
-              marker.bindPopup(popupContent)
-            }
+
+            // Create popup with media content
+            const popupContent = createPopupContent(media.copertina)
+            marker.bindPopup(popupContent, {
+              maxWidth: 120,
+              maxHeight: 120,
+            })
           }
         })
       }

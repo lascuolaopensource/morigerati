@@ -2,8 +2,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getMediaURL } from '@/utils/getMediaUrl'
-import { Residenze } from '@/payload-types'
+import { Residenze, Media } from '@/payload-types'
 
 type Esperto = NonNullable<Residenze['esperti']>[number]
 
@@ -40,20 +39,41 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
     return text.slice(0, maxLength) + '...'
   }
 
+  const renderMedia = (media: Media) => {
+    const isVideo = media.mimeType?.startsWith('video/')
+
+    if (isVideo) {
+      return (
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+        >
+          <source src={media.url || ''} type={media.mimeType || ''} />
+        </video>
+      )
+    }
+
+    return (
+      <Image
+        src={media.url || '/placeholder-image.jpg'}
+        alt={esperto.nome || 'Tutor'}
+        fill
+        style={{ objectFit: 'cover' }}
+      />
+    )
+  }
+
   return (
     <div className="w-full border-2 border-black rounded-lg flex flex-col">
       <div
         className={`flex flex-1 ${hasProjectsOrOrganizations ? 'border-b-2' : ''} border-black ${!esperto.foto ? 'flex-col' : ''}`}
       >
         {esperto.foto && (
-          <div className="w-40 h-full min-h-36 relative">
-            <Image
-              src={getMediaURL(esperto.foto) || '/placeholder-image.jpg'}
-              alt={esperto.nome || 'Tutor'}
-              fill
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
+          <div className="w-40 h-full min-h-36 relative">{renderMedia(esperto.foto as Media)}</div>
         )}
         <div className={`${esperto.foto ? 'w-2/3' : 'w-full'} h-full flex flex-col p-2`}>
           <h3 className="font-medium">{esperto.nome}</h3>
