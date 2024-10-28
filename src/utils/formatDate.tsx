@@ -1,6 +1,4 @@
-import React from 'react'
-
-export default function datePharser(
+export default function formatDate(
   date: string | null | undefined,
   seAssente: string,
   anno?: boolean,

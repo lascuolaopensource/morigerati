@@ -1,42 +1,60 @@
-import React from 'react'
-import { Residenze } from '@/payload-types'
-import datePharser from '@/utils/datePharser'
+import { type Residenze } from '@/payload-types'
+import formatDate from '@/utils/formatDate'
 
-const InfoResidenza: React.FC<{ residenza: Residenze; onlyDate: Boolean }> = ({
-  residenza,
-  onlyDate,
-}) => {
+interface InfoResidenzaProps {
+  residenza: Residenze
+  onlyDate?: boolean
+}
+
+const DateSection = ({ label, date }: { label: string; date: string | null }) => (
+  <div className="mb-1 ">
+    <span className="pl-2 text-sm text-black">{label} </span>
+    <span className="pl-1 font-bold text-sm">{formatDate(date, 'Da definire')}</span>
+  </div>
+)
+
+const DateRangeBox = ({ residenza }: { residenza: Residenze }) => (
+  <div className="flex pt-1 flex-1 flex-col justify-end border-2 border-residenzeColorScuro bg-residenzeColor ">
+    <div>
+      <DateSection label="Dal" date={residenza.data_inizio ?? null} />
+      <DateSection label="al" date={residenza.data_fine ?? null} />
+    </div>
+  </div>
+)
+
+const DeadlineBox = ({ deadline }: { deadline: string | null }) => (
+  <div className="pb-1 flex flex-1 flex-col justify-end border-2 border-residenzeColorScuro bg-residenzeColor ">
+    <div>
+      <div className="mb-1 pl-2 ">
+        <span className="text-sm text-black">Deadline iscrizioni</span>
+      </div>
+      <div>
+        <span className="font-bold text-sm pl-2">{formatDate(deadline, 'Da definire')}</span>
+      </div>
+    </div>
+  </div>
+)
+
+const AddressBox = ({ address }: { address: string | undefined }) => (
+  <div className="mt-1 flex h-24 flex-col justify-center border-2 border-residenzeColorScuro bg-residenzeColor">
+    <h4 className="p-0 text-center font-bold">{address}</h4>
+  </div>
+)
+
+export default function InfoResidenza({ residenza, onlyDate = false }: InfoResidenzaProps) {
   return (
     <div className="flex flex-col">
-      {!onlyDate && (
-        <div className="flex h-24">
-          <div className="flex justify-between flex-col flex-1 border-residenzeColorScuro border-2 bg-residenzeColor w-full mr-1">
-            <div>
-              <p className="p-0 pl-2">Inizio</p>
-              <h4 className="p-0 pl-2 font-bold">
-                {datePharser(residenza.data_inizio, 'Da definire')}
-              </h4>
-            </div>
-            <div>
-              <p className="p-0 pl-2">Fine</p>
-              <h4 className="p-0 pl-2 font-bold">
-                {datePharser(residenza.data_fine, 'Da definire')}
-              </h4>
-            </div>
+      {!onlyDate ? (
+        <>
+          <div className="flex h-24 gap-1">
+            <DateRangeBox residenza={residenza} />
+            <DeadlineBox deadline={residenza.deadline_iscrizione ?? null} />
           </div>
-          <div className="flex justify-center flex-col flex-1 border-residenzeColorScuro border-2 bg-residenzeColor w-full">
-            <p className="p-0 pl-2">Deadline iscrizioni</p>
-            <h4 className="p-0 pl-2 font-bold">
-              {datePharser(residenza.deadline_iscrizione, 'Da definire')}
-            </h4>
-          </div>
-        </div>
+          <AddressBox address={residenza.indirizzo ?? undefined} />
+        </>
+      ) : (
+        <DateRangeBox residenza={residenza} />
       )}
-      <div className="flex flex-col h-24 border-residenzeColorScuro border-2 bg-residenzeColor justify-center mt-1">
-        <h4 className="text-center p-0 font-bold">{residenza.indirizzo}</h4>
-      </div>
     </div>
   )
 }
-
-export default InfoResidenza

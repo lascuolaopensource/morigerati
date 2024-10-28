@@ -9,6 +9,8 @@ import TutorCard from '@/components/residenze/espertiCard'
 import { Residenze } from '@/payload-types'
 import InfoResidenza from '@/components/residenze/infoResidenza'
 import PulsanteIscrizione from '@/components/residenze/pulsanteIscrizione'
+import Copertina from '@/components/copertina'
+import { Media } from '@/payload-types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -25,57 +27,70 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
     depth: 1,
   })
   const residenzaData = residenza.docs[0] as Residenze
-  return (
-    <div className="bg-white p-4">
-      <BackButton />
-      <div className="pt-4"></div>
-      {residenzaData.nome ? (
-        <h1 className="text-4xl font-bold mb-4">{residenzaData.nome}</h1>
-      ) : (
-        <p></p>
-      )}
-      <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
 
-      <div className="pb-2">
-        {residenzaData.mostra_dettagli ? (
-          <InfoResidenza
-            residenza={residenzaData}
-            onlyDate={residenzaData.mostra_solo_data as Boolean}
-          />
+  const isAfterCurrentDate = (dateString: string): boolean => {
+    const currentDate = new Date()
+    const startDate = new Date(dateString)
+    return currentDate > startDate
+  }
+
+  console.log(isAfterCurrentDate(residenzaData?.data_inizio ?? ''))
+
+  return (
+    <div className="bg-white ">
+      <Copertina copertina={residenzaData.copertina as Media | undefined} />
+      <div className="p-4">
+        <BackButton />
+        <div className="pt-4"></div>
+        {residenzaData.nome ? (
+          <h1 className="text-4xl font-bold mb-4">{residenzaData.nome}</h1>
         ) : (
-          <DateDaDefinireBanner />
+          <p></p>
         )}
-      </div>
-      {residenzaData.esperti && residenzaData.esperti.length > 0 && (
-        <h2 className="text-center"> Esperti </h2>
-      )}
-      <PulsanteIscrizione
-        link={residenzaData.link_iscrizione ?? ''}
-        show={residenzaData.mostra_pulsante_iscrizione ?? false}
-      />
-      <div className="grid gap-6">
-        {residenzaData.esperti &&
-          residenzaData.esperti.map((esperto, index) => (
-            <TutorCard key={index} esperto={esperto} />
-          ))}
-      </div>
-      {!isArrayEmpty(residenzaData.programma) ? (
-        <div>
-          <h2>Programma</h2>
+        <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
+
+        <div className="pb-2">
+          {residenzaData.mostra_dettagli ? (
+            <InfoResidenza
+              residenza={residenzaData}
+              onlyDate={isAfterCurrentDate(residenzaData?.data_inizio ?? '')}
+            />
+          ) : (
+            <DateDaDefinireBanner />
+          )}
         </div>
-      ) : null}
-      <ProgrammaList residenza={residenzaData} />
-      {residenzaData.info_html ? (
-        <div>
-          <StringToHTML htmlString={residenzaData.info_html ?? ''} />{' '}
+        <PulsanteIscrizione
+          link={residenzaData.link_iscrizione ?? ''}
+          show={residenzaData.mostra_pulsante_iscrizione ?? false}
+        />
+        {residenzaData.esperti && residenzaData.esperti.length > 0 && (
+          <h2 className="text-center"> Esperti </h2>
+        )}
+
+        <div className="grid gap-6">
+          {residenzaData.esperti &&
+            residenzaData.esperti.map((esperto, index) => (
+              <TutorCard key={index} esperto={esperto} />
+            ))}
         </div>
-      ) : (
-        ''
-      )}
-      <PulsanteIscrizione
-        link={residenzaData.link_iscrizione ?? ''}
-        show={residenzaData.mostra_pulsante_iscrizione ?? false}
-      />
+        {!isArrayEmpty(residenzaData.programma) ? (
+          <div>
+            <h2>Programma</h2>
+          </div>
+        ) : null}
+        <ProgrammaList residenza={residenzaData} />
+        {residenzaData.info_html ? (
+          <div>
+            <StringToHTML htmlString={residenzaData.info_html ?? ''} />{' '}
+          </div>
+        ) : (
+          ''
+        )}
+        <PulsanteIscrizione
+          link={residenzaData.link_iscrizione ?? ''}
+          show={residenzaData.mostra_pulsante_iscrizione ?? false}
+        />
+      </div>
     </div>
   )
 }

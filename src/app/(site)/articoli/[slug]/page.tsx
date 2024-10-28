@@ -5,7 +5,7 @@ import BackButton from '@/components/backButton'
 import { Media } from '@/payload-types'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
-import datePharser from '@/utils/datePharser'
+import datePharser from '@/utils/formatDate'
 import Copertina from '@/components/copertina'
 
 export const dynamic = 'force-dynamic'

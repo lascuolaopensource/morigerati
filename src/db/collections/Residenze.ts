@@ -18,7 +18,7 @@ export const Residenze: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: 'Informazioni',
+          label: 'Generali',
           fields: [
             F.title('Informazioni generali'),
             F.nome,
@@ -58,12 +58,7 @@ export const Residenze: CollectionConfig = {
               label: 'Mostra dettagli sulla pagina',
               defaultValue: false,
             },
-            {
-              name: 'mostra_solo_data',
-              type: 'checkbox',
-              label: 'Mostra solo data',
-              defaultValue: false,
-            },
+
             {
               name: 'mostra_pulsante_iscrizione',
               type: 'checkbox',
@@ -115,7 +110,7 @@ export const Residenze: CollectionConfig = {
           ],
         },
 
-        { label: 'Galleria', fields: [F.title('Galleria'), F.media, F.galleria] },
+        { label: 'Media', fields: [F.title('Media'), F.media, F.galleria] },
 
         { label: 'Programma', fields: [F.programmaArray] },
 
