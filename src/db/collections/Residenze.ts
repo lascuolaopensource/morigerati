@@ -65,25 +65,6 @@ export const Residenze: CollectionConfig = {
               label: 'Mostra pulsante iscrizione',
               defaultValue: false,
             },
-            {
-              name: 'passata_futura',
-              label: 'Passata o futura',
-              type: 'radio',
-              options: [
-                {
-                  label: 'Passata',
-                  value: 'passata',
-                },
-                {
-                  label: 'Futura',
-                  value: 'futura',
-                },
-              ],
-              defaultValue: 'futura',
-              admin: {
-                layout: 'horizontal',
-              },
-            },
           ],
         },
 

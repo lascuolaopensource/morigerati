@@ -34,8 +34,6 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
     return currentDate > startDate
   }
 
-  console.log(isAfterCurrentDate(residenzaData?.data_inizio ?? ''))
-
   return (
     <div className="bg-white ">
       <Copertina copertina={residenzaData.copertina as Media | undefined} />
@@ -73,11 +71,13 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
               <TutorCard key={index} esperto={esperto} />
             ))}
         </div>
+        <div className="p-4" />
         {!isArrayEmpty(residenzaData.programma) ? (
           <div>
             <h2>Programma</h2>
           </div>
         ) : null}
+
         <ProgrammaList residenza={residenzaData} />
         {residenzaData.info_html ? (
           <div>

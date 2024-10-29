@@ -24,8 +24,6 @@ const Colorcard: React.FC<ColorcardProps> = ({
 }) => {
   const isVideo = media?.mimeType?.startsWith('video/')
 
-  console.log(isVideo)
-
   return (
     <Link href={`/${previous}/${slugUrl}`} className="block w-full max-w-md mx-auto pb-1">
       <div

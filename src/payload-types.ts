@@ -340,7 +340,6 @@ export interface Residenze {
   indirizzo?: string | null;
   mostra_dettagli?: boolean | null;
   mostra_pulsante_iscrizione?: boolean | null;
-  passata_futura?: ('passata' | 'futura') | null;
   abstract?: {
     root: {
       type: string;
