@@ -11,7 +11,7 @@ interface DetailSectionProps {
 }
 
 const DetailSection = ({ label, value }: DetailSectionProps) => (
-  <div className="h-24 border-r-4 border-y-4 border-white bg-black p-2 text-white">
+  <div className="h-24 border-2  border-itinerarioColorScuro bg-itinerarioColor p-2 text-black">
     <div className="flex h-full flex-col justify-between">
       <div className="h-6" />
       <span className=" text-sm">{label}</span>
@@ -27,7 +27,7 @@ const TipoSection = ({ tipo }: { tipo: ItinerarioDetailsProps['tipo'] }) => {
   }
 
   return (
-    <div className="col-span-2 border-b-4 border-white bg-black p-2 text-white">
+    <div className="col-span-2 border-2 border-itinerarioColorScuro bg-itinerarioColor p-2 text-black">
       <div className="flex h-full justify-center">
         <span className="text-xl font-bold">{formatTipo(tipo)}</span>
       </div>
