@@ -191,8 +191,8 @@ export interface Itinerari {
   lunghezza?: number | null;
   tempo?: number | null;
   dislivello?: string | null;
-  tipo?: ('tipo-0' | 'tipo-1' | 'tipo-2')[] | null;
-  difficolta?: ('facile' | 'media' | 'difficile') | null;
+  tipo?: ('Itinerario ad anello' | 'Andata e ritorno')[] | null;
+  difficolta?: ('T - Turistico' | 'E - Escursionistico' | 'EE - Escursionisti Esperti') | null;
   servizi?:
     | {
         nome: string;

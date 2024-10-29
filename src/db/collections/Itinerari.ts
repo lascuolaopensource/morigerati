@@ -69,16 +69,12 @@ export const Itinerari: CollectionConfig = {
                   },
                   options: [
                     {
-                      label: 'tipo-0',
-                      value: 'tipo-0',
+                      label: 'Itinerario ad anello',
+                      value: 'Itinerario ad anello',
                     },
                     {
-                      label: 'tipo-1',
-                      value: 'tipo-1',
-                    },
-                    {
-                      label: 'tipo-2',
-                      value: 'tipo-2',
+                      label: 'Andata e ritorno',
+                      value: 'Andata e ritorno',
                     },
                   ],
                 },
@@ -91,16 +87,16 @@ export const Itinerari: CollectionConfig = {
                   },
                   options: [
                     {
-                      label: 'Facile',
-                      value: 'facile',
+                      label: 'T - Turistico',
+                      value: 'T - Turistico',
                     },
                     {
-                      label: 'Media',
-                      value: 'media',
+                      label: 'E - Escursionistico',
+                      value: 'E - Escursionistico',
                     },
                     {
-                      label: 'Difficile',
-                      value: 'difficile',
+                      label: 'EE - Escursionisti Esperti',
+                      value: 'EE - Escursionisti Esperti',
                     },
                   ],
                 },
