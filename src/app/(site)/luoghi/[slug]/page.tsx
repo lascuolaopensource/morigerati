@@ -12,7 +12,6 @@ import { LatLngTuple } from 'leaflet'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Itinerari, Media } from '@/payload-types'
-import Stakeholder from '../../stakeholders/[slug]/page'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -40,7 +39,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         <div className="pt-4"></div>
         {luogoData.nome ? <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1> : <p></p>}
         <StringToHTML htmlString={luogoData.testo_html ?? ''} />
-        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[200px] z-0">
+        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[300px] z-0">
           <DynamicMappa initialPosition={position} initialZoom={40} showPositionPin={true} />
         </div>
         {luogoData.Itinerari_relation && luogoData.Itinerari_relation.length > 0 ? (

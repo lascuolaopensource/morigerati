@@ -79,6 +79,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
         ) : null}
 
         <ProgrammaList residenza={residenzaData} />
+        <p className="pt-4"></p>
         {residenzaData.info_html ? (
           <div>
             <StringToHTML htmlString={residenzaData.info_html ?? ''} />{' '}

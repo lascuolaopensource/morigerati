@@ -51,7 +51,7 @@ export default async function Stakeholder({ params }: { params: { slug: string }
         ) : (
           <p></p>
         )}
-        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[200px] z-0">
+        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[300px] z-0">
           <DynamicMappa initialPosition={position} initialZoom={40} showPositionPin={true} />
         </div>
         {stakeholderData.contatti && stakeholderData.contatti.length > 0 ? (
