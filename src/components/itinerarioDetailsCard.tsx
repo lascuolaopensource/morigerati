@@ -75,7 +75,7 @@ export default function ItinerarioDetailsCard({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-2 bg-white">
+    <div className="pt-5 grid grid-cols-2 gap-2 bg-white">
       <TipoSection tipo={tipo} />
       <DetailSection label="lunghezza" value={formatValue(lunghezza, 'km')} icon="distance" />
       <DetailSection label="durata" value={formatValue(tempo, 'ore')} icon="time" />

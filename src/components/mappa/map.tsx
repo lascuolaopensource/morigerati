@@ -7,6 +7,7 @@ import 'leaflet-defaulticon-compatibility'
 import 'leaflet-gpx'
 import { Media } from '@/payload-types'
 import { X } from 'lucide-react'
+import { MdOutlineFileDownload } from 'react-icons/md'
 
 interface MapProps {
   initialPosition: LatLngExpression
@@ -203,6 +204,18 @@ export const Mappa: React.FC<MapProps> = ({
       <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} className="z-0" />
       {selectedMedia && (
         <FullscreenMedia media={selectedMedia} onClose={() => setSelectedMedia(null)} />
+      )}
+      {gpxUrl && (
+        <div className="flex items-center ">
+          <MdOutlineFileDownload size={18} />
+          <a
+            href={gpxUrl}
+            download
+            className=" text-xs right-4 pt-2 py-2 bg-white text-black rounded "
+          >
+            Scarica tracciato GPX
+          </a>
+        </div>
       )}
     </>
   )

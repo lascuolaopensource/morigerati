@@ -25,32 +25,36 @@ const Galleria: React.FC<GalleriaProps> = ({ items }) => {
   }
 
   return (
-    <>
-      <Swiper
-        modules={[Navigation, Pagination, Mousewheel]}
-        spaceBetween={10}
-        slidesPerView={'auto'}
-        mousewheel={true}
-        className="mySwiper"
-      >
-        {items.map((item, index) => (
-          <SwiperSlide
-            style={{ width: 'auto' }}
-            key={item.id}
-            onClick={() => handleSlideClick(index)}
-          >
-            <GalleryCard media={item as Media} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      {showGallery && (
-        <MediaGallery
-          items={items}
-          initialIndex={selectedIndex}
-          onClose={() => setShowGallery(false)}
-        />
-      )}
-    </>
+    <div>
+      {' '}
+      <h2 className="text-center pt-8">Galleria</h2>
+      <>
+        <Swiper
+          modules={[Navigation, Pagination, Mousewheel]}
+          spaceBetween={10}
+          slidesPerView={'auto'}
+          mousewheel={true}
+          className="mySwiper"
+        >
+          {items.map((item, index) => (
+            <SwiperSlide
+              style={{ width: 'auto' }}
+              key={item.id}
+              onClick={() => handleSlideClick(index)}
+            >
+              <GalleryCard media={item as Media} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        {showGallery && (
+          <MediaGallery
+            items={items}
+            initialIndex={selectedIndex}
+            onClose={() => setShowGallery(false)}
+          />
+        )}
+      </>
+    </div>
   )
 }
 
