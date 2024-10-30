@@ -43,7 +43,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         <div className="bg-white-700 mx-auto my-5 w-[98%] h-[200px] z-0">
           <DynamicMappa initialPosition={position} initialZoom={40} showPositionPin={true} />
         </div>
-        {luogoData.Itinerari_relation ? (
+        {luogoData.Itinerari_relation && luogoData.Itinerari_relation.length > 0 ? (
           <h2 className="text-center">In quale itinerario potrai trovarci</h2>
         ) : (
           ''
