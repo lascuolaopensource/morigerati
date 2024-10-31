@@ -27,12 +27,6 @@ const swiperParams: SwiperOptions = {
 }
 
 const Galleria: React.FC<GalleriaProps> = ({ items }) => {
-  const [showGallery, setShowGallery] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const swiperRef = useRef<SwiperCore | null>(null)
-
-  if (items === null || items === undefined) return null
-
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       const swiperInstance = swiperRef.current
@@ -51,6 +45,12 @@ const Galleria: React.FC<GalleriaProps> = ({ items }) => {
       window.removeEventListener('wheel', handleWheel)
     }
   }, [])
+
+  const [showGallery, setShowGallery] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const swiperRef = useRef<SwiperCore | null>(null)
+
+  if (items === null || items === undefined) return null
 
   const handleSlideClick = (index: number) => {
     setSelectedIndex(index)
