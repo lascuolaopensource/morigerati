@@ -4,6 +4,7 @@ import IG from '@/public/IG.png'
 import { loadDb } from '@/utils/db'
 import { renderFooterContent } from '@/utils/footerRenderElement'
 import LogoGenerator from './logoGenerator/logo'
+import { SocialIcon } from 'react-social-icons'
 
 const Footer = async () => {
   const db = await loadDb()
@@ -20,9 +21,10 @@ const Footer = async () => {
             <div className="flex justify-end">
               {footer['Link Social']?.map((social, index) => (
                 <div key={index} className="px-2">
-                  <a href={social.link} target="_blank" rel="noopener noreferrer">
-                    <Image src={IG} alt={social.nome} width={24} height={24} />
-                  </a>
+                  <SocialIcon
+                    url={social.link}
+                    style={{ height: 23, width: 23, filter: 'grayscale(100%)' }}
+                  />
                 </div>
               ))}
             </div>
