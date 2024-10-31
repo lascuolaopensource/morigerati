@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 
 interface LogoGeneratorProps {
-  textColor: string
+  textColor?: string
 }
 
 const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) => {
