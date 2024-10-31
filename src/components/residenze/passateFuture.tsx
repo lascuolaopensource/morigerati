@@ -13,23 +13,23 @@ const PassateFuture: React.FC = () => {
   }
 
   return (
-    <div className="flex justify-center pb-2">
+    <div className="flex justify-between pb-2">
       <div
-        className={`flex flex-col justify-center h-7 w-20 rounded-md border-2 border-black transition-transform duration-300 ease-in-out hover:scale-110 ${
+        className={`flex flex-col justify-center h-7 w-1/6 rounded-md border-2 border-black transition-transform duration-300 ease-in-out hover:scale-95 ${
           filter === 'passata' ? 'bg-residenzeColor' : 'bg-[#f5c8ba]'
         }`}
         onClick={() => handleFilterChange('passata')}
       >
-        <p className="text-center p-2 font-bold">passate</p>
+        <p className="text-center p-2 font-bold">Archivio</p>
       </div>
       <div className="w-2"></div>
       <div
-        className={`flex flex-col justify-center h-7 w-20 rounded-md border-2 border-black transition-transform duration-300 ease-in-out hover:scale-110 ${
+        className={`flex flex-col justify-center h-7 w-5/6 rounded-md border-2 border-black transition-transform duration-300 ease-in-out hover:scale-95 ${
           filter === 'futura' ? 'bg-residenzeColor' : 'bg-[#f5c8ba]'
         }`}
         onClick={() => handleFilterChange('futura')}
       >
-        <p className="text-center p-2 font-bold">future</p>
+        <p className="text-center p-2 font-bold">Agenda</p>
       </div>
     </div>
   )
