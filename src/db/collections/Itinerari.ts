@@ -109,7 +109,6 @@ export const Itinerari: CollectionConfig = {
               name: 'servizi',
               type: 'array',
               fields: [
-                F.linkConNome,
                 {
                   //da sistemare
                   name: 'testo',
@@ -153,7 +152,7 @@ export const Itinerari: CollectionConfig = {
           ],
         },
 
-        F.tabContenuto,
+        F.tabContenutoItinerario,
       ],
     },
   ],

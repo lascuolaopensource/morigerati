@@ -169,7 +169,7 @@ export const contatti: ArrayField = {
 
 export const media: RelationshipField = {
   name: 'copertina',
-  label: 'copertina',
+  label: 'Copertina',
   type: 'relationship',
   relationTo: Collections.Media,
 }
@@ -183,7 +183,7 @@ export const tracciati: RelationshipField = {
 
 export const galleria: RelationshipField = {
   name: 'galleria',
-  label: 'galleria',
+  label: 'Galleria',
   type: 'relationship',
   hasMany: true,
   relationTo: Collections.Media,
@@ -198,7 +198,22 @@ export const servizi: ArrayField = {
 export const contenutoFields: Field[] = [
   title('Immagini e media'),
   media,
-  linkArray,
+  galleria,
+  divider,
+  title('Contenuti testuali'),
+  { ...testo, required: true },
+  lexicalHTML('testo', { name: 'testo_html' }),
+]
+
+export const contenutoFieldsMedia: Field[] = [
+  title('Immagini e media'),
+  media,
+  {
+    name: 'Video',
+    type: 'relationship',
+    relationTo: Collections.Media,
+    required: false,
+  },
   galleria,
   divider,
   title('Contenuti testuali'),
@@ -220,6 +235,11 @@ export const contenutoFieldsUnrequired: Field[] = [
 export const tabContenuto: Tab = {
   label: 'Contenuto',
   fields: contenutoFields,
+}
+
+export const tabContenutoItinerario: Tab = {
+  label: 'Contenuto',
+  fields: contenutoFieldsMedia,
 }
 
 export function titleAndText(name: string, label?: string): GroupField {

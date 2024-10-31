@@ -153,13 +153,6 @@ export interface Luoghi {
   } | null;
   orari_html?: string | null;
   copertina?: (string | null) | Media;
-  links?:
-    | {
-        nome: string;
-        link: string;
-        id?: string | null;
-      }[]
-    | null;
   galleria?: (string | Media)[] | null;
   testo: {
     root: {
@@ -195,8 +188,6 @@ export interface Itinerari {
   difficolta?: ('T - Turistico' | 'E - Escursionistico' | 'EE - Escursionisti Esperti') | null;
   servizi?:
     | {
-        nome: string;
-        link: string;
         testo?: {
           root: {
             type: string;
@@ -229,13 +220,7 @@ export interface Itinerari {
       }[]
     | null;
   copertina?: (string | null) | Media;
-  links?:
-    | {
-        nome: string;
-        link: string;
-        id?: string | null;
-      }[]
-    | null;
+  Video?: (string | null) | Media;
   galleria?: (string | Media)[] | null;
   testo: {
     root: {
@@ -299,13 +284,6 @@ export interface Stakeholder {
       }[]
     | null;
   copertina?: (string | null) | Media;
-  links?:
-    | {
-        nome: string;
-        link: string;
-        id?: string | null;
-      }[]
-    | null;
   galleria?: (string | Media)[] | null;
   testo: {
     root: {
@@ -437,13 +415,6 @@ export interface Articoli {
     | null;
   data_pubblicazione?: string | null;
   copertina?: (string | null) | Media;
-  links?:
-    | {
-        nome: string;
-        link: string;
-        id?: string | null;
-      }[]
-    | null;
   galleria?: (string | Media)[] | null;
   testo: {
     root: {
@@ -639,13 +610,6 @@ export interface Home {
 export interface ChiSiamo {
   id: string;
   copertina?: (string | null) | Media;
-  links?:
-    | {
-        nome: string;
-        link: string;
-        id?: string | null;
-      }[]
-    | null;
   galleria?: (string | Media)[] | null;
   testo: {
     root: {
@@ -673,13 +637,6 @@ export interface ChiSiamo {
 export interface MobilitaSostenibile {
   id: string;
   copertina?: (string | null) | Media;
-  links?:
-    | {
-        nome: string;
-        link: string;
-        id?: string | null;
-      }[]
-    | null;
   galleria?: (string | Media)[] | null;
   testo: {
     root: {

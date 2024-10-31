@@ -15,6 +15,7 @@ import { Luoghi, Stakeholder } from '@/payload-types'
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
 import Copertina from '@/components/copertina'
+import MediaViewer from '@/components/mediaViewer'
 
 import { type Media } from '@/payload-types'
 
@@ -62,6 +63,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
             localizedMedia={itinerarioData?.media_geolocalizzati}
           />
         </div>
+
         <ItinerarioDetailsCard
           lunghezza={itinerarioData?.lunghezza}
           tempo={itinerarioData?.tempo}
@@ -69,6 +71,10 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           difficolta={itinerarioData?.difficolta}
           tipo={itinerarioData?.tipo}
         />
+
+        <div className="">
+          <MediaViewer media={(itinerarioData?.Video as Media) || undefined} />
+        </div>
         <div className="pb-2" />
         <Galleria items={itinerarioData?.galleria as Media[] | undefined} />
 
