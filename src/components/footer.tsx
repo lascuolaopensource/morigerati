@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import logo from '@/public/logo.png'
 import IG from '@/public/IG.png'
 import { loadDb } from '@/utils/db'
 import { renderFooterContent } from '@/utils/footerRenderElement'
@@ -20,8 +19,8 @@ const Footer = async () => {
             </div>
             <div className="flex justify-end">
               {footer['Link Social']?.map((social, index) => (
-                <div className="px-2">
-                  <a key={index} href={social.link} target="_blank" rel="noopener noreferrer">
+                <div key={index} className="px-2">
+                  <a href={social.link} target="_blank" rel="noopener noreferrer">
                     <Image src={IG} alt={social.nome} width={24} height={24} />
                   </a>
                 </div>
