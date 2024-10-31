@@ -126,7 +126,7 @@ const Navbar = () => {
           <div className="py-2 px-6">
             <div className="flex justify-between items-center">
               <div className="w-8" aria-hidden="true" />
-              <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-black rounded">
+              <Link href="/" className="">
                 <LogoGenerator />
               </Link>
               <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />

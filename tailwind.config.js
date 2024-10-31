@@ -21,7 +21,7 @@ export default {
         bannerColor: '#F69679',
         luogoColorScuro: '#335963',
         itinerarioColorScuro: '#2c5948',
-        stakeScuro: '#696136',
+        stakeholderColorScuro: '#696136',
         residenzeColorScuro: '#754637',
         bannerColorScuro: '#754637',
       },

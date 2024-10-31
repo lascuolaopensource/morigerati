@@ -17,16 +17,34 @@ const BackButton = () => {
     if (pathname.startsWith('/articoli')) return 'tutti gli articoli'
   }
 
+  const GetColor = () => {
+    const pathname = usePathname()
+    if (pathname.startsWith('/luoghi')) return 'bg-luogoColor'
+    else if (pathname.startsWith('/itinerari')) return 'bg-itinerarioColor'
+    else if (pathname.startsWith('/stakeholders')) return 'bg-stakeholderColor'
+    else if (pathname.startsWith('/residenze')) return 'bg-residenzeColor'
+    else return 'bg-white'
+  }
+
+  const GetColorScuro = () => {
+    const pathname = usePathname()
+    if (pathname.startsWith('/luoghi')) return 'border-luogoColorScuro'
+    else if (pathname.startsWith('/itinerari')) return 'border-itinerarioColorScuro'
+    else if (pathname.startsWith('/stakeholders')) return 'border-stakeholderColorScuro'
+    else if (pathname.startsWith('/residenze')) return 'border-residenzeColorScuro'
+    else return 'bg-white'
+  }
+
   const pathName = GetPath()
   return (
     <button
       onClick={handleClick}
-      className=" items-center justify-center  relative"
+      className={`border-2 ${GetColorScuro()} ${GetColor()} rounded-lg   `}
       aria-label="Go back"
     >
-      <p className="underline">← {pathName}</p>
+      <p className="px-1 py-1  font-bold">← {pathName}</p>
     </button>
   )
 }
-// ij
+
 export default BackButton

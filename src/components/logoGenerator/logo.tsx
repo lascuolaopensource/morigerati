@@ -1,7 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 
-const LogoGenerator = () => {
+interface LogoGeneratorProps {
+  textColor: string
+}
+
+const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) => {
   const [letters, setLetters] = useState({ first: '', second: '' })
   const [isHovering, setIsHovering] = useState(false)
 
@@ -34,9 +38,9 @@ const LogoGenerator = () => {
   }, [isHovering])
 
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center">
       <div
-        className="flex h-7 justify-center items-center text-center w-full"
+        className="flex h-7 justify-center items-center text-center w-full text-red-400"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -46,6 +50,7 @@ const LogoGenerator = () => {
           preserveAspectRatio="xMidYMid meet"
           shapeRendering="geometricPrecision"
           textRendering="geometricPrecision"
+          fill={textColor}
         >
           <text
             x="50%"
@@ -57,6 +62,7 @@ const LogoGenerator = () => {
               fontFamily: 'Transluoghi',
               WebkitFontSmoothing: 'antialiased',
               MozOsxFontSmoothing: 'grayscale',
+              color: 'white',
             }}
           >
             {letters.first}
