@@ -25,9 +25,9 @@ const Colorcard: React.FC<ColorcardProps> = ({
   const isVideo = media?.mimeType?.startsWith('video/')
 
   return (
-    <Link href={`/${previous}/${slugUrl}`} className="block w-full max-w-md mx-auto pb-1">
+    <Link href={`/${previous}/${slugUrl}`} className="block w-full max-w-[100%] mx-auto pb-2">
       <div
-        className={`border-2 border-${colorScuro} rounded overflow-hidden h-40 flex flex-col transition-transform duration-300 ease-in-out hover:scale-95`}
+        className={`border-2 border-${colorScuro} rounded overflow-hidden h-[160px] flex flex-col transition-transform duration-300 ease-in-out hover:scale-105`}
       >
         <div className={`bg-${color} border-b-2 border-${colorScuro}`}>
           <h3 className="text-xs font-semibold pb-3 pt-3 text-center leading-3">{title}</h3>

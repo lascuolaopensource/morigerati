@@ -34,28 +34,27 @@ const LogoGenerator = () => {
   }, [isHovering])
 
   return (
-    <div className="">
+    <div className="flex flex-col items-center ">
       <div
-        className="relative"
+        className="flex h-7 justify-center items-center text-center w-full"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
         <svg
           viewBox="0 0 100 50"
-          className="h-10 w-32"
+          className="h-10 w-full"
           preserveAspectRatio="xMidYMid meet"
           shapeRendering="geometricPrecision"
           textRendering="geometricPrecision"
         >
           <text
-            x="50"
-            y="25"
-            dominantBaseline="central"
+            x="50%"
+            y="50%"
+            dominantBaseline="middle"
             textAnchor="middle"
-            className="text-4xl font-bold"
+            className="text-[30px] font-bold"
             style={{
               fontFamily: 'Transluoghi',
-
               WebkitFontSmoothing: 'antialiased',
               MozOsxFontSmoothing: 'grayscale',
             }}
@@ -64,6 +63,11 @@ const LogoGenerator = () => {
             {letters.second}
           </text>
         </svg>
+      </div>
+      <div className="flex flex-col text-left -space-y-1">
+        <span className="text-[9px] font-semibold">Transluoghi</span>
+        <span className="text-[9px]">Ecomuseo del Bussento</span>
+        <span className="text-[9px] text-right">Contemporaneo</span>
       </div>
     </div>
   )
