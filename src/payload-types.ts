@@ -108,6 +108,7 @@ export interface Luoghi {
   servizi?:
     | {
         nome: string;
+        link?: string | null;
         testo: {
           root: {
             type: string;
@@ -188,6 +189,8 @@ export interface Itinerari {
   difficolta?: ('T - Turistico' | 'E - Escursionistico' | 'EE - Escursionisti Esperti') | null;
   servizi?:
     | {
+        nome: string;
+        link?: string | null;
         testo?: {
           root: {
             type: string;

@@ -109,6 +109,8 @@ export const Itinerari: CollectionConfig = {
               name: 'servizi',
               type: 'array',
               fields: [
+                F.nome,
+                F.link,
                 {
                   //da sistemare
                   name: 'testo',

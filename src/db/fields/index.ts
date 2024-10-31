@@ -192,7 +192,7 @@ export const galleria: RelationshipField = {
 export const servizi: ArrayField = {
   name: 'servizi',
   type: 'array',
-  fields: [nome, { ...testo, required: true }, lexicalHTML('testo', { name: 'testo_html' })],
+  fields: [nome, link, { ...testo, required: true }, lexicalHTML('testo', { name: 'testo_html' })],
 }
 
 export const contenutoFields: Field[] = [
