@@ -38,9 +38,9 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) =>
   }, [isHovering])
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex w-[100px] flex-col items-center">
       <div
-        className="flex h-7 justify-center items-center text-center w-full text-red-400"
+        className="flex h-7 justify-center items-center text-center"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
