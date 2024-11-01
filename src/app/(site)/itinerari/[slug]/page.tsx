@@ -1,10 +1,10 @@
 import React from 'react'
 import { loadDb } from '@/utils/db'
 
-import BackButton from '@/components/backButton'
-import ItinerarioDetailsCard from '@/components/itinerarioDetailsCard'
-import { ServiziCardWrapper } from '@/components/servizioCardWrapper'
-import MySwiper from '@/components/mySwiper'
+import BackButton from '@/components/uiElements/backButton'
+import ItinerarioDetailsCard from '@/components/itinerari/itinerarioDetailsCard'
+import { ServiziCardWrapper } from '@/components/itinerari/servizioCardWrapper'
+import MySwiper from '@/components/polaroid/mySwiper'
 import Galleria from '@/components/galleria/galleria'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
@@ -14,8 +14,8 @@ import { Luoghi, Stakeholder } from '@/payload-types'
 
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
-import Copertina from '@/components/copertina'
-import MediaViewer from '@/components/mediaViewer'
+import Copertina from '@/components/uiElements/copertina'
+import MediaViewer from '@/components/uiElements/mediaViewer'
 
 import { type Media } from '@/payload-types'
 

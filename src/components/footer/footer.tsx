@@ -3,7 +3,7 @@ import Image from 'next/image'
 import IG from '@/public/IG.png'
 import { loadDb } from '@/utils/db'
 import { renderFooterContent } from '@/utils/footerRenderElement'
-import LogoGenerator from './logoGenerator/logo'
+import LogoGenerator from '@/components/logoGenerator/logo'
 import { SocialIcon } from 'react-social-icons'
 
 const Footer = async () => {

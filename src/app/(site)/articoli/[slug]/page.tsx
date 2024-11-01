@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
-import BackButton from '@/components/backButton'
+import BackButton from '@/components/uiElements/backButton'
 
 import { Media } from '@/payload-types'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
 import datePharser from '@/utils/formatDate'
-import Copertina from '@/components/copertina'
+import Copertina from '@/components/uiElements/copertina'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

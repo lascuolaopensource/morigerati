@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
-import BackButton from '@/components/backButton'
+import BackButton from '@/components/uiElements/backButton'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
-import MySwyper from '@/components/mySwiper'
+import MySwyper from '@/components/polaroid/mySwiper'
 
-import Copertina from '@/components/copertina'
+import Copertina from '@/components/uiElements/copertina'
 
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'

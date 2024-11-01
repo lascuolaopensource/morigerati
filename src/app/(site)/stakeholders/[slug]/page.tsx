@@ -1,13 +1,13 @@
 import React from 'react'
 
-import BackButton from '@/components/backButton'
+import BackButton from '@/components/uiElements/backButton'
 import { loadDb } from '@/utils/db'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Stakeholder as StakeholderType } from '@/payload-types'
 
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
-import Copertina from '@/components/copertina'
+import Copertina from '@/components/uiElements/copertina'
 
 import { Media } from '@/payload-types'
 

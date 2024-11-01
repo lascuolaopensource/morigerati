@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
-import ColorCardWrapper from '@/components/colorCardWrapper'
+import ColorCardWrapper from '@/components/colorCard/colorCardWrapper'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
 

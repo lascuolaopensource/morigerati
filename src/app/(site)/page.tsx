@@ -2,13 +2,13 @@ import React, { Suspense } from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 
-import MySwyper from '@/components/mySwiper'
+import MySwyper from '@/components/polaroid/mySwiper'
 
 import HomePixel from '@/public/pixels/home.svg'
-import GridOverlay from '@/components/gridOverlay'
+import GridOverlay from '@/components/uiElements/gridOverlay'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
-import Copertina from '@/components/copertina'
+import Copertina from '@/components/uiElements/copertina'
 
 import { Media } from '@/payload-types'
 

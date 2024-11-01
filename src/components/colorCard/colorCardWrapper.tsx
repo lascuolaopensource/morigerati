@@ -1,5 +1,5 @@
 import React from 'react'
-import Colorcard from '@/components/colorCard'
+import Colorcard from '@/components/colorCard/colorCard'
 import { Luoghi, Itinerari, Stakeholder, Residenze, Media } from '@/payload-types'
 
 type SupportedDoc = Luoghi | Itinerari | Stakeholder | Residenze

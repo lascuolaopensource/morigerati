@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { type Media } from '@/payload-types'
+import AutoPlaySilentVideo from './autoPlaySilentVideo'
 
 interface CopertinaProps {
   copertina: Media | undefined
@@ -16,16 +17,7 @@ const Copertina: React.FC<CopertinaProps> = ({ copertina }) => {
   return (
     <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
       {isVideo ? (
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          controls={false}
-        >
-          <source src={copertina.url || ''} type={copertina.mimeType || ''} />
-        </video>
+        <AutoPlaySilentVideo video={copertina.url || ''} className="w-full h-full object-cover" />
       ) : (
         <Image
           src={copertina.url || ''}

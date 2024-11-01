@@ -4,7 +4,7 @@ import '../globals.css'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import Footer from '@/components/footer'
+import Footer from '@/components/footer/footer'
 import Navbar from '@/components/navbar/navbar'
 
 export const metadata: Metadata = {
