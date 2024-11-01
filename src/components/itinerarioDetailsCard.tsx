@@ -20,29 +20,27 @@ interface IconsProps {
 }
 const Icons = ({ icon }: IconsProps) => {
   if (icon == 'distance') {
-    return <GiPathDistance size={30} />
+    return <GiPathDistance size={40} />
   }
   if (icon == 'time') {
-    return <LuTimer size={30} />
+    return <LuTimer size={40} />
   }
   if (icon == 'dislivello') {
-    return <SiLevelsdotfyi size={30} />
+    return <SiLevelsdotfyi size={40} />
   }
   if (icon == 'difficolta') {
-    return <IoSpeedometerOutline size={30} />
+    return <IoSpeedometerOutline size={40} />
   }
 }
 
 const DetailSection = ({ label, value, icon }: DetailSectionProps) => (
-  <div className="h-24 border-2 rounded-xl border-itinerarioColorScuro bg-itinerarioColor p-2 text-black">
-    <div className="flex h-full flex-col justify-between">
-      <div>
-        <Icons icon={icon} />
+  <div className="h-min border-2 rounded-xl border-itinerarioColorScuro bg-itinerarioColor p-2 text-black">
+    <div className="flex h-full gap-2">
+      <Icons icon={icon} />
+      <div className="flex flex-col">
+        <span className=" text-sm">{label}</span>
+        <span className="text-sm font-bold ">{value ?? 'Non disponibile'}</span>
       </div>
-      <div className="h-6" />
-
-      <span className=" text-sm">{label}</span>
-      <span className=" text-sm font-bold ">{value ?? 'Non disponibile'}</span>
     </div>
   </div>
 )
