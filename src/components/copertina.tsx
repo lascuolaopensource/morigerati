@@ -17,7 +17,7 @@ const Copertina: React.FC<CopertinaProps> = ({ copertina }) => {
     <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
       {isVideo ? (
         <video
-          className="w-full h-full object-cover"
+          className="app__backgroundVideo w-full h-full object-cover playsinline"
           autoPlay
           muted
           loop
