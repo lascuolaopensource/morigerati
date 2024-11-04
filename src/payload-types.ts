@@ -666,7 +666,6 @@ export interface MobilitaSostenibile {
  */
 export interface Footer {
   id: string;
-  title: string;
   testo_sinistra: {
     root: {
       type: string;

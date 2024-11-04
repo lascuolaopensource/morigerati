@@ -17,13 +17,6 @@ export const Footer: GlobalConfig = {
 
   fields: [
     {
-      ...F.plainTextRequired('title'),
-      label: 'Titolo',
-    },
-
-    F.divider,
-
-    {
       ...baseRichText('testo_sinistra'),
       label: 'Testo a sinistra',
     },

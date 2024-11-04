@@ -8,6 +8,7 @@ import P4 from '@/public/pixels/p3.svg'
 
 interface RandomPixelProps {
   p?: number
+  size?: number
 }
 
 const pixelComponents: { [key: string]: JSX.Element } = {
@@ -18,7 +19,7 @@ const pixelComponents: { [key: string]: JSX.Element } = {
   P4: <P4 />,
 }
 
-const RandomPixel: React.FC<RandomPixelProps> = ({ p }) => {
+const RandomPixel: React.FC<RandomPixelProps> = ({ p, size }) => {
   let randomPixelKey: string
   if (p == undefined) {
     randomPixelKey = 'P' + Math.floor(Math.random() * 5)
@@ -27,8 +28,8 @@ const RandomPixel: React.FC<RandomPixelProps> = ({ p }) => {
   }
   const RandomPixelComponent = pixelComponents[randomPixelKey as keyof typeof pixelComponents]
   return (
-    <div className="relative w-full h-full" style={{ pointerEvents: 'none', zIndex: 0 }}>
-      <div className="absolute right-0 w-1/2 h-full">{RandomPixelComponent}</div>
+    <div className="relative" style={{ pointerEvents: 'none', zIndex: 0 }}>
+      <div className={`absolute right-0 w-1/2 md:w-1/4 h-[${size}]`}>{RandomPixelComponent}</div>
     </div>
   )
 }

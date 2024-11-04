@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 interface LogoGeneratorProps {
   textColor?: string
@@ -39,42 +40,44 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) =>
 
   return (
     <div className="flex w-[100px] flex-col items-center">
-      <div
-        className="flex h-7 justify-center items-center text-center"
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
-        <svg
-          viewBox="0 0 100 50"
-          className="h-10 w-full"
-          preserveAspectRatio="xMidYMid meet"
-          shapeRendering="geometricPrecision"
-          textRendering="geometricPrecision"
-          fill={textColor}
+      <Link href="/">
+        <div
+          className="flex h-7 justify-center items-center text-center"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
         >
-          <text
-            x="50%"
-            y="50%"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            className="text-[30px] font-bold"
-            style={{
-              fontFamily: 'Transluoghi',
-              WebkitFontSmoothing: 'antialiased',
-              MozOsxFontSmoothing: 'grayscale',
-              color: 'white',
-            }}
+          <svg
+            viewBox="0 0 100 50"
+            className="h-10 w-full"
+            preserveAspectRatio="xMidYMid meet"
+            shapeRendering="geometricPrecision"
+            textRendering="geometricPrecision"
+            fill={textColor}
           >
-            {letters.first}
-            {letters.second}
-          </text>
-        </svg>
-      </div>
-      <div className="flex flex-col text-left -space-y-1">
-        <span className="text-[9px] font-semibold">Transluoghi</span>
-        <span className="text-[9px]">Ecomuseo del Bussento</span>
-        <span className="text-[9px] text-right">Contemporaneo</span>
-      </div>
+            <text
+              x="50%"
+              y="50%"
+              dominantBaseline="middle"
+              textAnchor="middle"
+              className="text-[30px] font-bold"
+              style={{
+                fontFamily: 'Transluoghi',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
+                color: 'white',
+              }}
+            >
+              {letters.first}
+              {letters.second}
+            </text>
+          </svg>
+        </div>
+        <div className="flex flex-col text-left -space-y-1">
+          <span className="text-[9px] font-semibold">Transluoghi</span>
+          <span className="text-[9px]">Ecomuseo del Bussento</span>
+          <span className="text-[9px] text-right">Contemporaneo</span>
+        </div>
+      </Link>
     </div>
   )
 }

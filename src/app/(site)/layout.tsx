@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow bg-white">
-          <div className="mx-auto max-w-xl">{children}</div>
+          <div>{children}</div>
         </main>
         <Suspense fallback={<div>Loading footer...</div>}>
           <Footer />

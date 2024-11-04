@@ -115,25 +115,35 @@ const Navbar = () => {
   }, [isMenuOpen])
 
   return (
-    <>
+    <div style={{ zIndex: 99999 }}>
       <nav className={`w-full ${bgColor} relative z-50`} role="navigation">
         <div
           className="absolute inset-0 top-[-100vh] -z-10"
           style={{ backgroundColor: 'inherit' }}
           aria-hidden="true"
         />
-        <div className="max-w-7xl mx-auto">
-          <div className="py-2 px-6">
-            <div className="flex justify-between items-center">
-              <div className="w-8" aria-hidden="true" />
-              <Link href="/" className="">
-                <LogoGenerator />
-              </Link>
-              <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
-            </div>
+
+        {/*mobile*/}
+        <div className="sm:hidden mx-auto py-2 flex justify-between items-center">
+          <div className="flex-grow flex justify-center relative">
+            <LogoGenerator />
           </div>
-          <div className="absolute bottom-0 left-0 w-full h-0.5 bg-black" aria-hidden="true" />
+          <div className="absolute right-6">
+            <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
+          </div>
         </div>
+
+        {/*desktop*/}
+        <div className="hidden mx-auto py-2 sm:flex justify-between items-center">
+          <div className="left-6 justify-center relative">
+            <LogoGenerator />
+          </div>
+          <div className="absolute right-6">
+            <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-black" aria-hidden="true" />
       </nav>
 
       {isMenuOpen && (
@@ -144,33 +154,22 @@ const Navbar = () => {
           aria-modal="true"
           aria-label="Navigation menu"
         >
-          <div className="flex flex-col h-full">
-            <div className="invisible py-2 px-6 flex-shrink-0">
-              <div className="mx-auto max-w-7xl flex justify-between items-center">
-                <div className="w-8" aria-hidden="true" />
-                <div className="flex justify-center">
-                  <LogoGenerator />
-                </div>
-                <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
-              </div>
-            </div>
-            <nav className="flex-grow">
-              <ul className="flex flex-col items-center pt-12 space-y-6 overflow-y-auto">
-                {NAV_ITEMS.map(({ href, text }) => (
-                  <NavigationItem
-                    key={href}
-                    href={href}
-                    text={text}
-                    isActive={pathname.startsWith(href) && (href === '/' ? pathname === '/' : true)}
-                    onClick={toggleMenu}
-                  />
-                ))}
-              </ul>
-            </nav>
-          </div>
+          <nav className="flex-grow pt-12">
+            <ul className="flex flex-col items-center space-y-6 overflow-y-auto">
+              {NAV_ITEMS.map(({ href, text }) => (
+                <NavigationItem
+                  key={href}
+                  href={href}
+                  text={text}
+                  isActive={pathname.startsWith(href) && (href === '/' ? pathname === '/' : true)}
+                  onClick={toggleMenu}
+                />
+              ))}
+            </ul>
+          </nav>
         </div>
       )}
-    </>
+    </div>
   )
 }
 
