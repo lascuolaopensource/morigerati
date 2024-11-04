@@ -33,6 +33,14 @@ body {
   font-family: 'TransInstrumentSans';
 }
 
+.prose-custom {
+  @apply prose max-w-none;
+  @apply prose-h1:my-1 prose-h2:my-1 prose-h3:my-1 prose-h4:my-1 prose-p:my-1;
+  @apply sm:prose-p:text-center sm:prose-headings:text-center;
+  @apply sm:prose-ul:text-center sm:prose-ol:text-center sm:prose-li:text-center sm:prose-blockquote:text-center;
+  @apply sm:px-40;
+}
+
 @layer base {
   h1 {
     @apply font-bold;

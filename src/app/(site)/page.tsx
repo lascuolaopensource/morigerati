@@ -1,16 +1,10 @@
 import React, { Suspense } from 'react'
-
 import { loadDb } from '@/utils/db'
-
 import MySwyper from '@/components/polaroid/mySwiper'
-
 import GridOverlay from '@/components/uiElements/gridOverlay'
-
 import StringToHTML from '@/components/serializer/stringToHTML'
 import Copertina from '@/components/uiElements/copertina'
-
 import { Media } from '@/payload-types'
-
 import { RandomPixel } from '@/components/uiElements/pixels'
 
 export const dynamic = 'force-dynamic'
@@ -48,34 +42,45 @@ const Home = async () => {
         <GridOverlay targetSquareSize={20} bottomDensity={1} effectRows={8} />
       </div>
 
-      <div className="bg-white font-normal p-3 pt-4 w-full">
-        <div className="relative">
-          <h2 className=" pt-4 text-xl ">{home.intro.title}</h2>
+      <div className="bg-white font-normal p-3 pt-4 w-full ">
+        {/* desktop */}
+        <div className="relative hidden justify-between items-center sm:flex px-36">
+          <h2 className="w-auto min-w-60 pt-4 text-xl">{home.intro.title}</h2>
+
+          <div className="pt-10 sm:text-center">
+            <StringToHTML htmlString={home.intro.text_html ?? ''} />
+          </div>
+        </div>
+        {/* mobile */}
+        <div className="relative sm:hidden">
+          <h2 className="pt-4 text-xl">{home.intro.title}</h2>
           <StringToHTML htmlString={home.intro.text_html ?? ''} />
         </div>
         <RandomPixel />
-        <h2 className="pt-4 text-xl text-center">{home.itinerari.title}</h2>
 
-        <StringToHTML htmlString={home.itinerari.text_html ?? ''} />
+        <section className="pt-4 ">
+          <h2 className="text-xl text-center">{home.itinerari.title}</h2>
+          <StringToHTML htmlString={home.itinerari.text_html ?? ''} classs="prose-custom" />
+          <Suspense fallback={<div>Loading slides...</div>}>
+            <MySwyper items={itinerari.docs} color="bg-itinerarioColor" type="itinerari" />
+          </Suspense>
+        </section>
 
-        <div className="pt-4"></div>
-        <Suspense fallback={<div>Loading slides...</div>}>
-          <MySwyper items={itinerari.docs} color="bg-itinerarioColor" type="itinerari" />
-        </Suspense>
-        <h2 className="pt-4 text-xl text-center">{home.luoghi.title}</h2>
+        <section className="pt-4">
+          <h2 className="text-xl text-center">{home.luoghi.title}</h2>
+          <StringToHTML htmlString={home.luoghi.text_html ?? ''} classs="prose-custom" />
+          <Suspense fallback={<div>Loading slides...</div>}>
+            <MySwyper items={luoghi.docs} color="bg-luogoColor" type="luoghi" />
+          </Suspense>
+        </section>
 
-        <StringToHTML htmlString={home.luoghi.text_html ?? ''} />
-
-        <div className="pt-4 "></div>
-        <Suspense fallback={<div>Loading slides...</div>}>
-          <MySwyper items={luoghi.docs} color="bg-luogoColor" type="luoghi" />
-        </Suspense>
-        <h2 className="pt-4 text-xl text-center">{home.residenze.title}</h2>
-        <StringToHTML htmlString={home.residenze.text_html ?? ''} />
-        <div className="pt-4"></div>
-        <Suspense fallback={<div>Loading slides...</div>}>
-          <MySwyper items={residenze.docs} color="bg-residenzeColor" type="residenze" />
-        </Suspense>
+        <section className="pt-4">
+          <h2 className="text-xl text-center">{home.residenze.title}</h2>
+          <StringToHTML htmlString={home.residenze.text_html ?? ''} classs="prose-custom" />
+          <Suspense fallback={<div>Loading slides...</div>}>
+            <MySwyper items={residenze.docs} color="bg-residenzeColor" type="residenze" />
+          </Suspense>
+        </section>
       </div>
     </main>
   )
