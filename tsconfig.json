@@ -30,7 +30,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/articoli/articoliCards",
-    "src/components/mappa/leaflet-gpx.d,ts"
+    "src/components/mappa/leaflet-gpx.d,ts",
+    "src/components/uiElements/autoPlaySilentVideo.tsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,10 +1,8 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
-import renderContent from '@/utils/renderElement'
+import { RandomPixel } from '@/components/uiElements/pixels'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
-
-import ChiSiamoPixel from '@/public/pixels/chiSiamo.svg'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -16,9 +14,7 @@ const About = async () => {
   })
   return (
     <main className="relative bg-white p-3 pt-5">
-      <div className="absolute inset-0 flex justify-end">
-        <ChiSiamoPixel width={200} className="absolute right-0 " />
-      </div>
+      <RandomPixel />
       <StringToHTML htmlString={about.testo_html ?? ''} />
     </main>
   )

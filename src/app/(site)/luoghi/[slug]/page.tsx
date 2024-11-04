@@ -4,6 +4,7 @@ import { loadDb } from '@/utils/db'
 import BackButton from '@/components/uiElements/backButton'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import MySwyper from '@/components/polaroid/mySwiper'
+import { RandomPixel } from '@/components/uiElements/pixels'
 
 import Copertina from '@/components/uiElements/copertina'
 
@@ -36,6 +37,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
 
       <div className="p-4">
         <BackButton />
+        <RandomPixel p={3} />
         <div className="pt-4"></div>
         {luogoData.nome ? <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1> : <p></p>}
         <StringToHTML htmlString={luogoData.testo_html ?? ''} />

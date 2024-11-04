@@ -11,7 +11,7 @@ const Footer = async () => {
   const footer = await db.findGlobal({ slug: 'footer' })
 
   return (
-    <footer className="bg-black text-white py-2 px-2">
+    <footer className="bg-black text-white py-2 px-2 z-2">
       <div className=" max-w-7xl mx-auto">
         <div className="mx-auto max-w-xl">
           <div className="flex justify-between items-center">

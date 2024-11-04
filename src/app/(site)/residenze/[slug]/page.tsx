@@ -11,6 +11,7 @@ import InfoResidenza from '@/components/residenze/infoResidenza'
 import PulsanteIscrizione from '@/components/residenze/pulsanteIscrizione'
 import Copertina from '@/components/uiElements/copertina'
 import { Media } from '@/payload-types'
+import { RandomPixel } from '@/components/uiElements/pixels'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -39,6 +40,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
       <Copertina copertina={residenzaData.copertina as Media | undefined} />
       <div className="p-4">
         <BackButton />
+        <RandomPixel p={1} />
         <div className="pt-4"></div>
         {residenzaData.nome ? (
           <h1 className="text-4xl font-bold mb-4">{residenzaData.nome}</h1>

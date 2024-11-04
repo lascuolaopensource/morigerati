@@ -2,7 +2,6 @@ import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import ColorCardWrapper from '@/components/colorCard/colorCardWrapper'
 import StringToHTML from '@/components/serializer/stringToHTML'
-import LuoghiPixel from '@/public/pixels/luoghi.svg'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -20,14 +19,7 @@ const Luoghi = async () => {
     <main>
       <div className="bg-white p-3 relative">
         {/* SVG Wrapper - posizionato sopra il contenuto ma sotto il footer */}
-        <div className="fixed bottom-[var(--footer-height)] left-0 right-0 pointer-events-none">
-          <div className="relative w-full">
-            <LuoghiPixel
-              className="absolute bottom-0 w-full"
-              preserveAspectRatio="xMinYMax slice"
-            />
-          </div>
-        </div>
+        <div className="fixed bottom-[var(--footer-height)] left-0 right-0 pointer-events-none"></div>
 
         {/* Contenuto principale */}
         <div className="relative z-10">

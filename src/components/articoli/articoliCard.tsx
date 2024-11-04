@@ -138,7 +138,8 @@ function BigCardContent({
 
 const cardStyles = {
   small: 'bg-transparent border-2 border-black rounded-lg flex flex-col h-full overflow-hidden',
-  medium: 'border-2 border-black rounded-lg overflow-hidden bg-white h-full flex flex-col',
+  medium:
+    'border-2 bg-transparent border-black rounded-lg overflow-hidden bg-white h-full flex flex-col',
   big: 'h-[150px] bg-transparent border-2 border-black rounded-lg flex overflow-hidden',
 } as const
 

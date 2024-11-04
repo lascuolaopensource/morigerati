@@ -19,6 +19,8 @@ import MediaViewer from '@/components/uiElements/mediaViewer'
 
 import { type Media } from '@/payload-types'
 
+import { RandomPixel } from '@/components/uiElements/pixels'
+
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -45,6 +47,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
       <div className="p-4">
         <BackButton />
+        <RandomPixel p={2} />
         <div className="pt-4"></div>
         {itinerarioData?.nome ? (
           <h1 className="text-4xl font-bold mb-4">{itinerarioData?.nome}</h1>
