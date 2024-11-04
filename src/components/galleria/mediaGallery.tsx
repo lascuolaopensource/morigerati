@@ -42,22 +42,45 @@ const MediaGallery: React.FC<GalleriaProps> = ({ items, initialIndex = 0, onClos
     }
   }
 
+  const handleContainerClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose()
+    }
+  }
+
   return (
-    <div className="fixed inset-0 w-full h-full bg-black bg-opacity-80 flex justify-center items-center z-50">
+    <div
+      className="fixed inset-0 w-full h-full bg-black bg-opacity-80 flex justify-center items-center z-50"
+      onClick={handleContainerClick}
+    >
       <button
-        onClick={handlePrevious}
         className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 text-white"
+        onClick={(e) => {
+          e.stopPropagation()
+          handlePrevious()
+        }}
       >
         <FaChevronLeft size={30} />
       </button>
-      <div className="relative w-4/5 h-4/5">{renderMedia(items[currentIndex])}</div>
+      <div className="relative w-4/5 h-4/5" onClick={(e) => e.stopPropagation()}>
+        {renderMedia(items[currentIndex])}
+      </div>
       <button
-        onClick={handleNext}
         className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 text-white"
+        onClick={(e) => {
+          e.stopPropagation()
+          handleNext()
+        }}
       >
         <FaChevronRight size={30} />
       </button>
-      <button onClick={onClose} className="absolute top-4 right-4 z-10 text-white">
+      <button
+        onClick={(e) => {
+          e.stopPropagation()
+          onClose()
+        }}
+        className="absolute top-4 right-4 z-10 text-white"
+      >
         <FaTimes size={30} />
       </button>
     </div>
