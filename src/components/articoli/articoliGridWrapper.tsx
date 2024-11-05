@@ -51,7 +51,7 @@ const ArticoliCardWrapper: React.FC<ArticoliCardWrapperProps> = ({ docs }) => {
           ))}
         </div>
       ) : (
-        <ArticoliGrid articoli={filteredArticoli} />
+        <ArticoliGrid articoli={filteredArticoli} maxGroups={3} />
       )}
     </div>
   )

@@ -26,7 +26,7 @@ const ArticoliPage = async () => {
   const uniqueTags = [...new Set(tags)]
 
   return (
-    <main className="h-full">
+    <main className="h-full  sm:px-36">
       <div className="bg-white p-3 pt-5 w-full relative h-full">
         <div className="relative z-10">
           {testi.articoli.title && (

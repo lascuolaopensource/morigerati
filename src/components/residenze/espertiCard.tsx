@@ -45,7 +45,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
     if (isVideo) {
       return (
         <video
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover "
           autoPlay
           muted
           loop
@@ -68,7 +68,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
   }
 
   return (
-    <div className="w-full border-2 border-black rounded-lg flex flex-col">
+    <div className="w-full border-2 border-black rounded-lg flex flex-col overflow-hidden">
       <div
         className={`flex flex-1 ${hasProjectsOrOrganizations ? 'border-b-2' : ''} border-black ${!esperto.foto ? 'flex-col' : ''}`}
       >

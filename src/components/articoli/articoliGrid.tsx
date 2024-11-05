@@ -89,36 +89,33 @@ const FeaturedArticle = ({ article }: { article: Articoli }) => {
   )
 }
 
-export default function ArticoliGrid({ articoli, maxGroups = 0 }: ArticoliGridProps) {
+export default function ArticoliGrid({ articoli, maxGroups = 2 }: ArticoliGridProps) {
   if (!articoli?.length) {
     return null
   }
 
-  const totalGroupsArticles = maxGroups * 3
-  const remainingArticles = articoli.slice(1, totalGroupsArticles + 1)
+  const totalArticles = articoli.length
+  const groupSize = 3
+  const maxArticleGroups = Math.min(maxGroups, Math.floor(totalArticles / groupSize))
 
   const articleGroups = []
-  for (let i = 0; i < remainingArticles.length; i += 3) {
-    if (i / 3 >= maxGroups) break
+  for (let i = 0; i < maxArticleGroups; i++) {
+    const startIndex = i * groupSize + 1
+    const mainArticle = articoli[i * groupSize]
+    const remainingArticles = articoli.slice(startIndex, startIndex + 2)
 
-    const mainArticle = remainingArticles[i]
-    const groupRemainingArticles = remainingArticles.slice(i + 1, i + 3)
-
-    if (mainArticle && groupRemainingArticles.length === 2) {
-      articleGroups.push(
-        <ArticleGroup
-          key={mainArticle.id}
-          mainArticle={mainArticle}
-          remainingArticles={groupRemainingArticles}
-        />,
-      )
-    }
+    articleGroups.push(
+      <ArticleGroup
+        key={mainArticle.id}
+        mainArticle={mainArticle}
+        remainingArticles={remainingArticles}
+      />,
+    )
   }
 
   return (
     <div className="w-full">
       {articoli[0] && <FeaturedArticle article={articoli[0]} />}
-
       <div className="w-full">{articleGroups}</div>
     </div>
   )

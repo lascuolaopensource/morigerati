@@ -12,6 +12,7 @@ import PulsanteIscrizione from '@/components/residenze/pulsanteIscrizione'
 import Copertina from '@/components/uiElements/copertina'
 import { Media } from '@/payload-types'
 import { RandomPixel } from '@/components/uiElements/pixels'
+import Galleria from '@/components/galleria/galleria'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -38,7 +39,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
   return (
     <div className="bg-white ">
       <Copertina copertina={residenzaData.copertina as Media | undefined} />
-      <div className="p-4">
+      <div className="p-4 sm:px-36">
         <BackButton />
         <RandomPixel p={1} />
         <div className="pt-4"></div>
@@ -67,12 +68,13 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
           <h2 className="text-center"> Esperti </h2>
         )}
 
-        <div className="grid gap-6">
+        <div className="grid gap-6 md:grid-cols-2">
           {residenzaData.esperti &&
             residenzaData.esperti.map((esperto, index) => (
               <TutorCard key={index} esperto={esperto} />
             ))}
         </div>
+        <Galleria items={residenzaData.galleria as Media[] | undefined} />
         <div className="p-4" />
         {!isArrayEmpty(residenzaData.programma) ? (
           <div>

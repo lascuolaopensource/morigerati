@@ -19,7 +19,7 @@ const Stakeholders = async () => {
 
   return (
     <main className="">
-      <div className="bg-white p-3">
+      <div className="bg-white p-3 ">
         {testi.stakeholders.title ? (
           <div className="font-normal text-sm leading-4">
             <h1 className="font-bold sm:text-center text-[40px]">{testi.stakeholders.title}</h1>

@@ -5,6 +5,7 @@ import StringToHTML from '@/components/serializer/stringToHTML'
 import { Articoli, Media } from '@/payload-types'
 import ArchiveCard from '@/components/articoli/articoliArchiveCard'
 import articoliUnpacker from '@/components/articoli/articoloPropsUnpack'
+import BackButton from '@/components/uiElements/backButton'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -23,8 +24,9 @@ const TuttiArticoliPage = async () => {
   const articoli: Articoli[] = articoliData.docs
 
   return (
-    <main className="">
+    <main className=" sm:px-36">
       <div className="bg-white p-3 pt-5">
+        <BackButton />
         {testi.articoli.title && (
           <div className="font-normal text-sm pb-4 leading-4">
             <h1 className="font-bold text-[40px]">{testi.articoli.title}</h1>

@@ -13,7 +13,7 @@ const PassateFuture: React.FC = () => {
   }
 
   return (
-    <div className="flex justify-between pb-2">
+    <div className="flex justify-center items-center pb-2 pt-10 md:max-w-[700px] mx-auto">
       <div
         className={`flex flex-col justify-center h-7 w-1/6 rounded-md border-2 border-black transition-transform duration-300 ease-in-out hover:scale-95 ${
           filter === 'passata' ? 'bg-residenzeColor' : 'bg-[#f5c8ba]'

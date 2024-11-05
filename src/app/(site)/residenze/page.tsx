@@ -18,7 +18,6 @@ const sortResidenze = (residenze: ResidenzaType[]): SortedResidenze => {
 
   return residenze.reduce(
     (acc: SortedResidenze, residenza) => {
-      // If there's no end date, use start date for comparison
       const comparisonDate = residenza.data_fine
         ? new Date(residenza.data_fine)
         : residenza.data_inizio
@@ -26,7 +25,6 @@ const sortResidenze = (residenze: ResidenzaType[]): SortedResidenze => {
           : null
 
       if (!comparisonDate) {
-        // If no dates are available, consider it as past
         acc.past.push(residenza)
       } else {
         if (comparisonDate < now) {
@@ -88,7 +86,6 @@ const Residenze = async ({ searchParams }: { searchParams: { filter?: string } }
     slug: 'testi',
   })
 
-  // Default to 'passata' if no filter is specified
   const filter = (searchParams.filter as 'passata' | 'futura') || 'passata'
 
   return (
@@ -96,7 +93,7 @@ const Residenze = async ({ searchParams }: { searchParams: { filter?: string } }
       <div className="bg-white p-3">
         {testi.residenze.title && (
           <div className="font-normal text-sm pt-4 leading-4">
-            <h1 className="font-bold text-[40px]">{testi.residenze.title}</h1>
+            <h1 className="font-bold text-[40px] sm:text-center">{testi.residenze.title}</h1>
           </div>
         )}
         <StringToHTML htmlString={testi.residenze.text_html ?? ''} />

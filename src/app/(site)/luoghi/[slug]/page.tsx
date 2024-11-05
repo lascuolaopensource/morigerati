@@ -13,6 +13,7 @@ import { LatLngTuple } from 'leaflet'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Itinerari, Media } from '@/payload-types'
+import Galleria from '@/components/galleria/galleria'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -35,7 +36,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
     <div className="bg-white">
       <Copertina copertina={luogoData?.copertina as Media | undefined} />
 
-      <div className="p-4">
+      <div className="p-4 sm:px-36">
         <BackButton />
         <RandomPixel p={3} />
         <div className="pt-4"></div>
@@ -75,48 +76,53 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         ) : (
           <p></p>
         )}
+        <Galleria items={(luogoData.galleria as Media[]) || undefined} />
         <div className="pb-8"></div>
+        <div className="sm:grid sm:grid-cols-2">
+          <div>
+            {luogoData.contatti && luogoData.contatti.length > 0 ? (
+              <h2 className="mb-2 ">Contatti:</h2>
+            ) : (
+              <div></div>
+            )}
 
-        {luogoData.contatti && luogoData.contatti.length > 0 ? (
-          <h2 className="mb-2 ">Contatti:</h2>
-        ) : (
-          <div></div>
-        )}
+            {luogoData.contatti && luogoData.contatti.length > 0 ? (
+              <ul className="mb-6">
+                {luogoData.contatti.map((contatto, index) => (
+                  <li key={index} className="mb-2">
+                    <p>{contatto.nome}</p>
+                    {contatto.telefono && <p className="text-xs">Telefono: {contatto.telefono}</p>}
+                    {contatto.email && <p className="text-xs">Email: {contatto.email}</p>}
+                    {contatto.link && (
+                      <p className="text-xs">
+                        Link:{' '}
+                        <a
+                          className="text-xs"
+                          href={contatto.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {contatto.link}
+                        </a>
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mb-6"></p>
+            )}
+          </div>
+          <div>
+            {isRichTextEmpty(luogoData.orari) ? <div></div> : <h2>Orari di Apertura:</h2>}
 
-        {luogoData.contatti && luogoData.contatti.length > 0 ? (
-          <ul className="mb-6">
-            {luogoData.contatti.map((contatto, index) => (
-              <li key={index} className="mb-2">
-                <p>{contatto.nome}</p>
-                {contatto.telefono && <p className="text-xs">Telefono: {contatto.telefono}</p>}
-                {contatto.email && <p className="text-xs">Email: {contatto.email}</p>}
-                {contatto.link && (
-                  <p className="text-xs">
-                    Link:{' '}
-                    <a
-                      className="text-xs"
-                      href={contatto.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {contatto.link}
-                    </a>
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mb-6"></p>
-        )}
-
-        {isRichTextEmpty(luogoData.orari) ? <div></div> : <h2>Orari di Apertura:</h2>}
-
-        {luogoData.orari && luogoData.orari.root ? (
-          <StringToHTML htmlString={luogoData.orari_html ?? ''} />
-        ) : (
-          <p className="mb-6"> </p>
-        )}
+            {luogoData.orari && luogoData.orari.root ? (
+              <StringToHTML htmlString={luogoData.orari_html ?? ''} />
+            ) : (
+              <p className="mb-6"> </p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )

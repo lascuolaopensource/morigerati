@@ -10,6 +10,9 @@ import { LatLngTuple } from 'leaflet'
 import Copertina from '@/components/uiElements/copertina'
 
 import { Media } from '@/payload-types'
+import Galleria from '@/components/galleria/galleria'
+
+import ArticoliTagsList from '@/components/articoli/tagsList'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -35,7 +38,7 @@ export default async function Stakeholder({ params }: { params: { slug: string }
         <Copertina copertina={stakeholderData.copertina as Media | undefined} />
       )}
 
-      <div className="p-4">
+      <div className="p-4 sm:px-36">
         <BackButton />
         <div className="pt-4"></div>
         {stakeholderData.nome ? (
@@ -46,6 +49,10 @@ export default async function Stakeholder({ params }: { params: { slug: string }
         {stakeholderData.testo && stakeholderData.testo.root ? (
           <div className="mb-6">
             {' '}
+            {stakeholderData.tipologia ? (
+              <p className="inline border-2 border-black pt-2 px-2">{stakeholderData.tipologia}</p>
+            ) : null}
+            <div className="pt-4" />
             <StringToHTML htmlString={stakeholderData.testo_html ?? ''} />
           </div>
         ) : (
@@ -54,8 +61,9 @@ export default async function Stakeholder({ params }: { params: { slug: string }
         <div className="bg-white-700 mx-auto my-5 w-[98%] h-[300px] z-0">
           <DynamicMappa initialPosition={position} initialZoom={40} showPositionPin={true} />
         </div>
+        <Galleria items={stakeholderData.galleria as Media[] | undefined} />
         {stakeholderData.contatti && stakeholderData.contatti.length > 0 ? (
-          <h2 className="text-2xl font-semibold mb-2">Contatti</h2>
+          <h2 className="text-2xl font-semibold mb-2 pt-20 sm:text-center">Contatti</h2>
         ) : (
           <div></div>
         )}
