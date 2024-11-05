@@ -154,7 +154,7 @@ const Navbar = () => {
           aria-modal="true"
           aria-label="Navigation menu"
         >
-          <nav className="flex-grow pt-12">
+          <nav className="flex-grow pt-28">
             <ul className="flex flex-col items-center space-y-6 overflow-y-auto">
               {NAV_ITEMS.map(({ href, text }) => (
                 <NavigationItem

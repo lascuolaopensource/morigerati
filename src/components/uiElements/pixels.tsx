@@ -29,7 +29,7 @@ const RandomPixel: React.FC<RandomPixelProps> = ({ p, size }) => {
   const RandomPixelComponent = pixelComponents[randomPixelKey as keyof typeof pixelComponents]
   return (
     <div className="relative" style={{ pointerEvents: 'none', zIndex: 0 }}>
-      <div className={`absolute right-0 w-1/2 md:w-1/4 h-[${size}]`}>{RandomPixelComponent}</div>
+      <div className={`absolute right-0 w-1/2 md:w-1/6 h-[${size}px]`}>{RandomPixelComponent}</div>
     </div>
   )
 }

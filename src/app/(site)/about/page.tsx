@@ -14,7 +14,7 @@ const About = async () => {
   })
   return (
     <main className="relative bg-white p-3 pt-5">
-      <RandomPixel />
+      <RandomPixel size={10} />
       <StringToHTML htmlString={about.testo_html ?? ''} />
     </main>
   )
