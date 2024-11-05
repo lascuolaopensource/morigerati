@@ -48,13 +48,13 @@ const Home = async () => {
           <h2 className="w-auto min-w-60 pt-4 text-xl">{home.intro.title}</h2>
 
           <div className="pt-10 sm:text-center">
-            <StringToHTML htmlString={home.intro.text_html ?? ''} />
+            <StringToHTML htmlString={home.intro.text_html ?? ''} classs="prose-custom-no-center" />
           </div>
         </div>
         {/* mobile */}
         <div className="relative sm:hidden">
           <h2 className="pt-4 text-xl">{home.intro.title}</h2>
-          <StringToHTML htmlString={home.intro.text_html ?? ''} />
+          <StringToHTML htmlString={home.intro.text_html ?? ''} classs="prose-custom-no-center" />
         </div>
         <RandomPixel />
 
