@@ -14,9 +14,9 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
   }
 
   return (
-    <div className="mt-6">
-      <h2 className="text-2xl font-semibold mb-4">Servizi</h2>
-      <div className="space-y-4">
+    <div className="mt-6 pt-10">
+      <h2 className="text-2xl font-semibold mb-4 sm:text-center">Servizi</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {servizi.map((servizio, index) => (
           <ServizioCard
             key={servizio.id || index}
@@ -42,14 +42,14 @@ const ServizioCard: React.FC<ServizioCardProps> = ({ nome, testo, link }) => {
       <div className="flex justify-between items-start">
         <div className="flex-grow">
           <h3 className="text-xl font-bold mb-2">{nome}</h3>
-          <div className="text-xs mb-4">{testo && testo.root ? renderElement(testo.root) : ''}</div>
+          <div className="text-xs mb-4">{testo?.root ? renderElement(testo.root) : ''}</div>
         </div>
         {link && (
           <a
             href={link}
             className="border-2 border-black inline-block bg-itinerarioColor text-black px-4 py-2 rounded-md ml-4"
           >
-            prenota
+            Prenota
           </a>
         )}
       </div>

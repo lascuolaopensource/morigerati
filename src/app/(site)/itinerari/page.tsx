@@ -21,7 +21,7 @@ const ItinerariPage = async () => {
     <main className="">
       <div className="bg-white p-3 ">
         <div className="font-normal text-sm  leading-4">
-          <h1 className="font-bold text-[40px]">{testi.itinerari.title}</h1>
+          <h1 className="font-bold sm:text-center text-[40px]">{testi.itinerari.title}</h1>
         </div>
 
         <StringToHTML htmlString={testi.itinerari.text_html ?? ''} />

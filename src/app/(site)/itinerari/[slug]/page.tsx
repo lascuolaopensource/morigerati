@@ -45,7 +45,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
     <div className="bg-white">
       <Copertina copertina={itinerarioData?.copertina as Media | undefined} />
 
-      <div className="p-4">
+      <div className="p-4 sm:px-36">
         <BackButton />
         <RandomPixel p={2} />
         <div className="pt-4"></div>

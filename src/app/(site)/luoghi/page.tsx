@@ -18,14 +18,12 @@ const Luoghi = async () => {
   return (
     <main>
       <div className="bg-white p-3 relative">
-        {/* SVG Wrapper - posizionato sopra il contenuto ma sotto il footer */}
         <div className="fixed bottom-[var(--footer-height)] left-0 right-0 pointer-events-none"></div>
 
-        {/* Contenuto principale */}
         <div className="relative z-10">
           {testi.luoghi.title ? (
             <div className="font-normal text-sm leading-4">
-              <h1 className="font-bold text-[40px]">{testi.luoghi.title}</h1>
+              <h1 className="font-bold sm:text-center text-[40px]">{testi.luoghi.title}</h1>
             </div>
           ) : (
             <p></p>

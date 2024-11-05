@@ -22,7 +22,7 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({
   }
 
   return (
-    <div className="grid grid-cols-1">
+    <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-5 sm:px-4">
       {docs.map((doc) => {
         const media = doc.copertina as Media | undefined
         return (
