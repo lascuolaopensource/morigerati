@@ -4,6 +4,7 @@ import ColorCardWrapper from '@/components/colorCard/colorCardWrapper'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Residenze as ResidenzaType } from '@/payload-types'
 import PassateFuture from '@/components/residenze/passateFuture'
+import MySwiper from '@/components/card/wrappers/cardsSwiper'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -49,15 +50,14 @@ async function FilteredResidenze({ filter }: { filter: 'passata' | 'futura' }) {
 
   const { past, future } = sortResidenze(residenzeData.docs)
 
-  // Show only the section that matches the current filter
   return (
     <div className="space-y-8">
       {filter === 'futura' && future.length > 0 && (
-        <ColorCardWrapper docs={future} category="residenze" />
+        <MySwiper items={future} category="residenze" cardTitlePosition="top" />
       )}
 
       {filter === 'passata' && past.length > 0 && (
-        <ColorCardWrapper docs={past} category="residenze" />
+        <MySwiper items={past} category="residenze" cardTitlePosition="top" />
       )}
 
       {((filter === 'futura' && future.length === 0) ||

@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import React, { useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
-import TagsList from './tagsList'
 import { Media } from '@/payload-types'
 
 interface Articolo {
@@ -53,15 +52,10 @@ function useTruncatedText(
 
 const MediaContent: React.FC<{ media: Media | undefined; title: string }> = ({ media, title }) => {
   if (!media || typeof media === 'string') {
-    return (
-      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-        <span className="text-gray-400 text-sm">No media</span>
-      </div>
-    )
+    return <div className="w-full h-full bg-white flex items-center justify-center"></div>
   }
 
   const isVideo = media.mimeType?.startsWith('video/')
-
   if (isVideo) {
     return (
       <div className="relative h-full">
@@ -93,6 +87,18 @@ const MediaContent: React.FC<{ media: Media | undefined; title: string }> = ({ m
   )
 }
 
+const TagsList: React.FC<{ tags: string[] }> = ({ tags }) => {
+  return (
+    <div className="flex gap-2 flex-wrap">
+      {tags.map((tag, index) => (
+        <span key={index} className="text-xs px-2 py-1 bg-white border border-black">
+          {tag}
+        </span>
+      ))}
+    </div>
+  )
+}
+
 const ArchiveCard: React.FC<Articolo> = ({ title, subtitle, media, slugUrl, tags }) => {
   const titleRef = useRef<HTMLDivElement>(null)
   const subtitleRef = useRef<HTMLDivElement>(null)
@@ -107,7 +113,7 @@ const ArchiveCard: React.FC<Articolo> = ({ title, subtitle, media, slugUrl, tags
         </div>
         <div className="w-2/3 flex flex-col p-3 h-full">
           <div className="mb-2">
-            <TagsList tags={tags.filter(Boolean) as string[]} scroll={true} />
+            <TagsList tags={tags.filter(Boolean) as string[]} />
           </div>
           <div ref={titleRef} className="text-sm font-bold leading-6">
             {displayTitle}

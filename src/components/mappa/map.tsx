@@ -200,23 +200,23 @@ export const Mappa: React.FC<MapProps> = ({
   }, [gpxBounds])
 
   return (
-    <>
-      <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} className="z-0" />
+    <div className="w-full rounded-lg border-2 border-gray-800 overflow-hidden">
+      <div ref={mapContainerRef} className="h-[400px] w-full z-0" />
       {selectedMedia && (
         <FullscreenMedia media={selectedMedia} onClose={() => setSelectedMedia(null)} />
       )}
       {gpxUrl && (
-        <div className="flex items-center ">
-          <MdOutlineFileDownload size={18} />
+        <div className="w-full bg-white hover:bg-gray-100 transition-colors">
           <a
             href={gpxUrl}
             download
-            className=" text-xs right-4 pt-2 py-2 bg-white text-black rounded "
+            className="flex items-center justify-center gap-2 px-4 py-3 text-black"
           >
-            Scarica tracciato GPX
+            <MdOutlineFileDownload size={24} />
+            <span className="text-base">Scarica tracciato GPX</span>
           </a>
         </div>
       )}
-    </>
+    </div>
   )
 }

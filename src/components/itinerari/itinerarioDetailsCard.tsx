@@ -34,7 +34,7 @@ const Icons = ({ icon }: IconsProps) => {
 }
 
 const DetailSection = ({ label, value, icon }: DetailSectionProps) => (
-  <div className="h-min border-2 rounded-xl border-itinerarioColorScuro bg-itinerarioColor p-2 text-black">
+  <div className="h-min rounded-xl bg-itinerariColor p-2 text-black">
     <div className="flex h-full gap-2">
       <Icons icon={icon} />
       <div className="flex flex-col">
@@ -52,7 +52,7 @@ const TipoSection = ({ tipo }: { tipo: ItinerarioDetailsProps['tipo'] }) => {
   }
 
   return (
-    <div className="col-span-2 border-2 rounded-xl border-itinerarioColorScuro bg-itinerarioColor p-2 text-black">
+    <div className="col-span-2 2 rounded-xl bg-itinerariColor p-2 text-black">
       <div className="flex h-full justify-center">
         <span className="text-xl font-bold">{formatTipo(tipo)}</span>
       </div>

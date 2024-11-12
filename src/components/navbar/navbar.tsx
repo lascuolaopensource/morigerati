@@ -17,9 +17,9 @@ const NAV_ITEMS = [
 ] as const
 
 const BACKGROUND_COLORS = {
-  luoghi: 'bg-luogoColor',
-  itinerari: 'bg-itinerarioColor',
-  stakeholders: 'bg-stakeholderColor',
+  luoghi: 'bg-luoghiColor',
+  itinerari: 'bg-itinerariColor',
+  stakeholders: 'bg-stakeholdersColor',
   residenze: 'bg-residenzeColor',
   default: 'bg-white',
 } as const

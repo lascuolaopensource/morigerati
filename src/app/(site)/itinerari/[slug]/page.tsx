@@ -58,7 +58,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         <div className="mb-6">
           <StringToHTML htmlString={itinerarioData?.testo_html ?? ''} />
         </div>
-        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[300px] z-0">
+        <div className="bg-white-700 mx-auto my-5 w-[98%] z-0">
           <DynamicMappa
             initialPosition={position}
             initialZoom={14}

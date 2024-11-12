@@ -1,38 +1,78 @@
 'use client'
-
 import React from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { ArrowRightLeft } from 'lucide-react'
 
-const PassateFuture: React.FC = () => {
+const ToggleButton = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const filter = (searchParams.get('filter') as 'passata' | 'futura') || 'futura'
 
-  const handleFilterChange = (newFilter: 'passata' | 'futura') => {
+  const handleFilterChange = () => {
+    const newFilter = filter === 'futura' ? 'passata' : 'futura'
     router.push(`/residenze?filter=${newFilter}`, { scroll: false })
   }
 
   return (
     <div className="flex justify-center items-center pb-2 pt-10 md:max-w-[700px] mx-auto">
-      <div
-        className={`flex flex-col justify-center h-7 w-1/6 rounded-md border-2 border-black transition-transform duration-300 ease-in-out hover:scale-95 ${
-          filter === 'passata' ? 'bg-residenzeColor' : 'bg-[#f5c8ba]'
-        }`}
-        onClick={() => handleFilterChange('passata')}
+      <button
+        onClick={handleFilterChange}
+        className="group relative w-full max-w-xs h-12 rounded-md overflow-hidden transition-all duration-300 ease-in-out hover:scale-105"
       >
-        <p className="text-center p-2 font-bold">Archivio</p>
-      </div>
-      <div className="w-2"></div>
-      <div
-        className={`flex flex-col justify-center h-7 w-5/6 rounded-md border-2 border-black transition-transform duration-300 ease-in-out hover:scale-95 ${
-          filter === 'futura' ? 'bg-residenzeColor' : 'bg-[#f5c8ba]'
-        }`}
-        onClick={() => handleFilterChange('futura')}
-      >
-        <p className="text-center p-2 font-bold">Agenda</p>
-      </div>
+        {/* Background layers with transition */}
+        <div
+          className={`absolute inset-0 transition-transform duration-500 ease-in-out ${
+            filter === 'futura' ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div className="absolute inset-0 bg-residenzeColor" />
+          <div className="absolute inset-0 bg-[#f5c8ba] translate-x-full" />
+        </div>
+
+        {/* Text layer - shows only current state with enhanced transition */}
+        <div className="relative flex items-center justify-center w-full h-full overflow-hidden">
+          <span
+            className={`flex items-center gap-2 font-bold transition-all duration-500 ease-in-out transform group-hover:-translate-y-px ${
+              filter === 'futura' ? 'animate-slideInDown' : 'animate-slideInUp'
+            }`}
+          >
+            {filter === 'futura' ? 'Agenda' : 'Archivio'}
+          </span>
+
+          {/* Icon */}
+          <ArrowRightLeft
+            className={`absolute right-4 w-5 h-5 transform transition-all duration-500 group-hover:scale-125 group-hover:rotate-12 ${
+              filter === 'futura' ? 'rotate-0' : 'rotate-180'
+            }`}
+          />
+        </div>
+      </button>
+
+      <style jsx global>{`
+        @keyframes slideInDown {
+          from {
+            transform: translateY(-100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideInUp {
+          from {
+            transform: translateY(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+      `}</style>
     </div>
   )
 }
 
-export default PassateFuture
+export default ToggleButton

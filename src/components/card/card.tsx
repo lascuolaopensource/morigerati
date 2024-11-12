@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { Media, Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
 import loremPic from '@/public/loremPic.png'
+import Link from 'next/link'
+import { url } from 'inspector'
 
 type CategoryType = 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
 
@@ -71,7 +73,7 @@ const MediaContent: React.FC<{ media: Media | undefined; title: string; isVideo:
   )
 }
 
-const Card: React.FC<CardProps> = ({ title, media, category, titlePosition }) => {
+const Card: React.FC<CardProps> = ({ title, media, category, titlePosition, slugUrl }) => {
   const [randomLetter, setRandomLetter] = useState<string>('')
   const isVideo = media?.mimeType?.startsWith('video/')
   const titleRef = useRef<HTMLDivElement>(null)
@@ -102,34 +104,34 @@ const Card: React.FC<CardProps> = ({ title, media, category, titlePosition }) =>
 
   return (
     <div className="py-4 pl-4">
-      <div
-        className={`flex flex-col border-[3px] w-60 ${styleVariants[category].border}
-          rounded-lg overflow-hidden  duration-300
-          hover:scale-105 relative`}
-      >
+      <Link href={slugUrl}>
         <div
-          style={{ top: letterTopPosition }}
-          className={`absolute z-20 -right-2 ${styleVariants[category].text}
-            p-2 text-5xl font-bold font-transluoghi`}
+          className={`flex flex-col border-[3px] w-60 ${styleVariants[category].border} rounded-lg overflow-hidden duration-300 hover:scale-105 relative cursor-pointer`}
         >
-          {randomLetter}
-        </div>{' '}
-        <div className="justify-center">
-          {titlePosition === 'top' ? (
-            <div ref={titleRef} className="pl-2 min-h-[1rem]">
-              <p className="pt-1 font-semibold text-xs leading-tight pr-1 ">{title}</p>
+          <div
+            style={{ top: letterTopPosition }}
+            className={`absolute z-20 -right-2 ${styleVariants[category].text}
+            p-2 text-5xl font-bold font-transluoghi`}
+          >
+            {randomLetter}
+          </div>{' '}
+          <div className="justify-center">
+            {titlePosition === 'top' ? (
+              <div ref={titleRef} className="pl-2 min-h-[1rem]">
+                <p className="pt-1 font-semibold text-xs leading-tight pr-1 ">{title}</p>
+              </div>
+            ) : null}
+            <div className="rounded-lg border-lg">
+              <MediaContent media={media} title={title} isVideo={isVideo ?? false} />
+            </div>
+          </div>
+          {titlePosition === 'bottom' ? (
+            <div ref={titleRef} className="pl-2">
+              <p className="pt-1 font-medium text-xs leading-tight pr-1 ">{title}</p>
             </div>
           ) : null}
-          <div className="rounded-lg border-lg">
-            <MediaContent media={media} title={title} isVideo={isVideo ?? false} />
-          </div>
         </div>
-        {titlePosition === 'bottom' ? (
-          <div ref={titleRef} className="pl-2">
-            <p className="pt-1 font-medium text-xs leading-tight pr-1 ">{title}</p>
-          </div>
-        ) : null}
-      </div>
+      </Link>
     </div>
   )
 }

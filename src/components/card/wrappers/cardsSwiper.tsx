@@ -62,7 +62,7 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, category, cardTitlePosition 
             collection={item}
             title={item.nome}
             media={item.copertina as Media | undefined}
-            slugUrl={`/${item}/${item.id}`}
+            slugUrl={`/${category}/${item.id}`}
             category={category}
             titlePosition={cardTitlePosition ?? 'top'}
           />

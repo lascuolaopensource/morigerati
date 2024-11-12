@@ -1,15 +1,16 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import config from '@payload-config'
-import ArticoliCardWrapper from '@/components/articoli/articoliGridWrapper'
 import StringToHTML from '@/components/serializer/stringToHTML'
-import { Articoli } from '@/payload-types'
-import PulsanteVediTutti from '@/components/articoli/pulsanteVediTutti'
+import { Articoli, Media } from '@/payload-types'
+import ArchiveCard from '@/components/articoli/articoliArchiveCard'
+import articoliUnpacker from '@/components/articoli/articoloPropsUnpack'
+import BackButton from '@/components/uiElements/backButton'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const ArticoliPage = async () => {
+const TuttiArticoliPage = async () => {
   const payload = await getPayloadHMR({ config })
 
   const testi = await payload.findGlobal({
@@ -22,29 +23,36 @@ const ArticoliPage = async () => {
 
   const articoli: Articoli[] = articoliData.docs
 
-  const tags = articoli.flatMap((doc) => doc.tags?.map((tag) => tag.tag) ?? [])
-  const uniqueTags = [...new Set(tags)]
-
   return (
-    <main className="h-full  sm:px-36">
-      <div className="bg-white p-3 pt-5 max-w-screen-xl mx-auto relative h-full">
-        <div className="relative z-10">
-          {testi.articoli.title && (
-            <div className="font-normal text-sm pb-4 leading-4">
-              <h1 className="font-bold text-[40px]">{testi.articoli.title}</h1>
-            </div>
-          )}
+    <main className=" sm:px-36">
+      <div className="bg-white p-3 pt-5 max-w-screen-xl mx-auto">
+        {testi.articoli.title && (
+          <div className="font-normal text-sm pb-4 leading-4">
+            <h1 className="font-bold text-[40px]">{testi.articoli.title}</h1>
+          </div>
+        )}
 
-          <StringToHTML htmlString={testi.articoli.text_html ?? ''} />
+        <StringToHTML htmlString={testi.articoli.text_html ?? ''} />
 
-          <Suspense fallback={<div>Loading Cards...</div>}>
-            <ArticoliCardWrapper docs={articoli} previous="articoli" />
-          </Suspense>
-          <PulsanteVediTutti />
+        <div className="">
+          {articoli.map((articolo, index) => {
+            const { title, subtitle, media, slugUrl, tags } = articoliUnpacker(articolo)
+            return (
+              <div key={index} className="pb-4">
+                <ArchiveCard
+                  title={title}
+                  subtitle={subtitle}
+                  media={media as Media | undefined}
+                  slugUrl={`/articoli/${slugUrl}`}
+                  tags={tags}
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
     </main>
   )
 }
 
-export default ArticoliPage
+export default TuttiArticoliPage

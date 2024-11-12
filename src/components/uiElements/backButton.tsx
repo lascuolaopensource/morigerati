@@ -41,10 +41,10 @@ const BackButton = () => {
   return (
     <button
       onClick={handleClick}
-      className={`border-2 ${GetColorScuro()} ${GetColor()} rounded-lg   `}
+      className={`${GetColorScuro()} ${GetColor()} rounded-lg transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110`}
       aria-label="Go back"
     >
-      <p className="px-1 py-1  font-bold">← {pathName}</p>
+      <p className="px-2 py-1  font-bold">← {pathName}</p>
     </button>
   )
 }

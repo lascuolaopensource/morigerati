@@ -13,7 +13,7 @@ const GalleryCard: React.FC<GalleryCardProps> = ({ media }) => {
 
   return (
     <div className="w-40 pb-1">
-      <div className="border-2 border-black rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95">
+      <div className="border-2 border-black rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95 cursor-pointer">
         <div className="relative w-full h-60">
           {isVideo ? (
             <video
