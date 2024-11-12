@@ -13,9 +13,11 @@ const About = async () => {
     slug: 'chi_siamo',
   })
   return (
-    <main className="max-w-screen-xl mx-auto relative bg-white p-3 pt-5">
-      <RandomPixel size={10} />
-      <StringToHTML htmlString={about.testo_html ?? ''} />
+    <main>
+      <div className="relative bg-white p-3 pt-5 max-w-screen-xl mx-auto">
+        <RandomPixel />
+        <StringToHTML htmlString={about.testo_html ?? ''} />
+      </div>
     </main>
   )
 }

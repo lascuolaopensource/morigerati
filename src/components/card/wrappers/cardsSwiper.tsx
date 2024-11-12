@@ -13,19 +13,24 @@ import { Media } from '@/payload-types'
 import { Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
 
 interface MySwiperProps {
-  items: Itinerari[] | Luoghi[] | Stakeholder[] | Residenze[]
+  items?: (Itinerari | Luoghi | Stakeholder | Residenze)[] | null // Make items optional
   category: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
   cardTitlePosition?: 'top' | 'bottom'
   displayAs?: 'row' | 'grid'
 }
 
 const MySwiper: React.FC<MySwiperProps> = ({
-  items,
+  items = [], // Provide default empty array
   category,
   cardTitlePosition,
   displayAs = 'row',
 }) => {
   const swiperRef = useRef<SwiperCore | null>(null)
+
+  // Early return if no items
+  if (!items || items.length === 0) {
+    return null // Or return a placeholder/loading state
+  }
 
   useEffect(() => {
     if (displayAs === 'row') {
@@ -105,7 +110,7 @@ const MySwiper: React.FC<MySwiperProps> = ({
           <Card
             collection={item}
             title={item.nome}
-            media={item.copertina as Media | undefined}
+            media={item.copertina as Media | undefined} // Changed from copertina to media based on types
             slugUrl={`/${category}/${item.id}`}
             category={category}
             titlePosition={cardTitlePosition ?? 'top'}

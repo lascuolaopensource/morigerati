@@ -6,6 +6,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Footer from '@/components/footer/footer'
 import Navbar from '@/components/navbar/navbar'
+import DynamicFavicon from '@/components/uiElements/favicon'
 
 export const metadata: Metadata = {
   title: 'Transluoghi - Ecomuseo del Bussento Contemporaneo',
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow bg-white">
+          <DynamicFavicon />
           <div>{children}</div>
         </main>
         <Suspense fallback={<div>Loading footer...</div>}>

@@ -39,16 +39,16 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) =>
   }, [isHovering])
 
   return (
-    <div className="flex w-[100px] flex-col items-center">
-      <Link href="/">
+    <Link href="/">
+      <div className="flex items-center gap-1 ">
         <div
-          className="flex h-7 justify-center items-center text-center"
+          className="flex h-7 justify-center items-center pb-1 text-center"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
           <svg
-            viewBox="0 0 100 50"
-            className="h-10 w-full"
+            viewBox="0 0 100 100"
+            className="h-[83px] w-[100px]"
             preserveAspectRatio="xMidYMid meet"
             shapeRendering="geometricPrecision"
             textRendering="geometricPrecision"
@@ -77,8 +77,8 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) =>
           <span className="text-[9px]">Ecomuseo del Bussento</span>
           <span className="text-[9px] text-right">Contemporaneo</span>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   )
 }
 
