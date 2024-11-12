@@ -150,11 +150,9 @@ export const Mappa: React.FC<MapProps> = ({
         new L.GPX(gpxUrl, {
           async: true,
           marker_options: {
-            startIconUrl:
-              'https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/pin-icon-start.png',
-            endIconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/pin-icon-end.png',
-            wptIconUrls:
-              'https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/pin-icon-wpt.png',
+            startIconUrl: '', // Rimuovi l'icona di start
+            endIconUrl: '', // Rimuovi l'icona di end
+            wptIconUrls: '', // Rimuovi l'icona dei waypoints
           },
         })
           .on('loaded', function (e: { target: L.GPX }) {
