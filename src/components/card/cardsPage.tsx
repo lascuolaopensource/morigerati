@@ -11,9 +11,14 @@ export const revalidate = 0
 interface cardsPageProps {
   collectionQuery: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
   cardTitlePosition?: 'top' | 'bottom'
+  displayAs?: 'row' | 'grid'
 }
 
-const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery, cardTitlePosition }) => {
+const CardsPage: React.FC<cardsPageProps> = async ({
+  collectionQuery,
+  cardTitlePosition,
+  displayAs,
+}) => {
   const db = await loadDb()
   const testi = await db.findGlobal({
     slug: 'testi',
@@ -38,7 +43,12 @@ const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery, cardTitleP
         <StringToHTML htmlString={testi[collectionQuery].text_html ?? ''} />
 
         <Suspense>
-          <MySwiper items={docs} category={collectionQuery} cardTitlePosition={cardTitlePosition} />
+          <MySwiper
+            items={docs}
+            category={collectionQuery}
+            cardTitlePosition={cardTitlePosition}
+            displayAs={displayAs}
+          />
         </Suspense>
       </div>
     </main>

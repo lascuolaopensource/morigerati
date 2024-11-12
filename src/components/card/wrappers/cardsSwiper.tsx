@@ -1,10 +1,10 @@
 'use client'
-
 import React, { useRef, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules'
 import type { SwiperOptions } from 'swiper/types'
 import type SwiperCore from 'swiper'
+import Masonry from 'react-masonry-css'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -16,38 +16,82 @@ interface MySwiperProps {
   items: Itinerari[] | Luoghi[] | Stakeholder[] | Residenze[]
   category: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
   cardTitlePosition?: 'top' | 'bottom'
+  displayAs?: 'row' | 'grid'
 }
 
-const MySwiper: React.FC<MySwiperProps> = ({ items, category, cardTitlePosition }) => {
+const MySwiper: React.FC<MySwiperProps> = ({
+  items,
+  category,
+  cardTitlePosition,
+  displayAs = 'row',
+}) => {
   const swiperRef = useRef<SwiperCore | null>(null)
 
   useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      const swiperInstance = swiperRef.current
-      if (swiperInstance) {
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-          swiperInstance.mousewheel.disable()
-        } else {
-          swiperInstance.mousewheel.enable()
+    if (displayAs === 'row') {
+      const handleWheel = (e: WheelEvent) => {
+        const swiperInstance = swiperRef.current
+        if (swiperInstance) {
+          if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            swiperInstance.mousewheel.disable()
+          } else {
+            swiperInstance.mousewheel.enable()
+          }
         }
       }
+      window.addEventListener('wheel', handleWheel)
+      return () => {
+        window.removeEventListener('wheel', handleWheel)
+      }
     }
-
-    window.addEventListener('wheel', handleWheel)
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel)
-    }
-  }, [])
+  }, [displayAs])
 
   const swiperParams: SwiperOptions = {
     modules: [Navigation, Pagination, Keyboard, Mousewheel],
     mousewheel: true,
     keyboard: true,
-    spaceBetween: 20,
+    spaceBetween: 12,
     slidesPerView: 'auto',
     freeMode: true,
     touchReleaseOnEdges: true,
+  }
+
+  const breakpointColumns = {
+    default: 6,
+    1536: 4,
+    1280: 4,
+    1024: 3,
+    768: 2,
+    640: 1,
+  }
+
+  if (displayAs === 'grid') {
+    return (
+      <div className="px-3 sm:px-4">
+        <div className="flex justify-center sm:justify-start">
+          <div className="w-60 sm:w-full">
+            <Masonry
+              breakpointCols={breakpointColumns}
+              className="flex -ml-7"
+              columnClassName="pl-3"
+            >
+              {items.map((item) => (
+                <div key={item.id} className="mb-3">
+                  <Card
+                    collection={item}
+                    title={item.nome}
+                    media={item.copertina as Media | undefined}
+                    slugUrl={`/${category}/${item.id}`}
+                    category={category}
+                    titlePosition={cardTitlePosition ?? 'top'}
+                  />
+                </div>
+              ))}
+            </Masonry>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
