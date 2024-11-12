@@ -39,7 +39,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
   return (
     <div className="bg-white ">
       <Copertina copertina={residenzaData.copertina as Media | undefined} />
-      <div className="p-4 sm:px-36">
+      <div className="p-4 sm:px-36 max-w-screen-xl mx-auto">
         <BackButton />
         <RandomPixel p={1} />
         <div className="pt-4"></div>

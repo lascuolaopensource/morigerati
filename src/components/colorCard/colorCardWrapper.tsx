@@ -1,22 +1,14 @@
 import React from 'react'
 import Colorcard from '@/components/colorCard/colorCard'
 import { Luoghi, Itinerari, Stakeholder, Residenze, Media } from '@/payload-types'
-
-type SupportedDoc = Luoghi | Itinerari | Stakeholder | Residenze
+import Card from '@/components/card/card'
 
 interface ColorCardWrapperProps {
-  color: string
-  colorScuro: string
-  docs: SupportedDoc[]
-  previous: string
+  docs: Itinerari[] | Luoghi[] | Stakeholder[] | Residenze[]
+  category: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
 }
 
-const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({
-  color,
-  colorScuro,
-  docs,
-  previous,
-}) => {
+const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({ docs, category }) => {
   if (!Array.isArray(docs) || docs.length === 0) {
     return null
   }
@@ -24,16 +16,14 @@ const ColorCardWrapper: React.FC<ColorCardWrapperProps> = ({
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-5 sm:px-4">
       {docs.map((doc) => {
-        const media = doc.copertina as Media | undefined
         return (
-          <Colorcard
+          <Card
             key={doc.id}
-            color={color}
-            colorScuro={colorScuro}
+            collection={doc}
             title={doc.nome}
-            media={media}
-            slugUrl={doc.id}
-            previous={previous}
+            media={doc.copertina as Media | undefined}
+            slugUrl={`/${doc}/${doc.id}`}
+            category={category}
           />
         )
       })}

@@ -53,21 +53,11 @@ async function FilteredResidenze({ filter }: { filter: 'passata' | 'futura' }) {
   return (
     <div className="space-y-8">
       {filter === 'futura' && future.length > 0 && (
-        <ColorCardWrapper
-          color="residenzeColor"
-          colorScuro="residenzeColorScuro"
-          docs={future}
-          previous="residenze"
-        />
+        <ColorCardWrapper docs={future} category="residenze" />
       )}
 
       {filter === 'passata' && past.length > 0 && (
-        <ColorCardWrapper
-          color="residenzeColor"
-          colorScuro="residenzeColorScuro"
-          docs={past}
-          previous="residenze"
-        />
+        <ColorCardWrapper docs={past} category="residenze" />
       )}
 
       {((filter === 'futura' && future.length === 0) ||
@@ -86,11 +76,11 @@ const Residenze = async ({ searchParams }: { searchParams: { filter?: string } }
     slug: 'testi',
   })
 
-  const filter = (searchParams.filter as 'passata' | 'futura') || 'passata'
+  const filter = (searchParams.filter as 'passata' | 'futura') || 'futura'
 
   return (
     <main className="min-h-screen">
-      <div className="bg-white p-3">
+      <div className="bg-white p-3 max-w-screen-xl mx-auto ">
         {testi.residenze.title && (
           <div className="font-normal text-sm pt-4 leading-4">
             <h1 className="font-bold text-[40px] sm:text-center">{testi.residenze.title}</h1>

@@ -25,7 +25,7 @@ const TuttiArticoliPage = async () => {
 
   return (
     <main className=" sm:px-36">
-      <div className="bg-white p-3 pt-5">
+      <div className="bg-white p-3 pt-5 max-w-screen-xl mx-auto">
         <BackButton />
         {testi.articoli.title && (
           <div className="font-normal text-sm pb-4 leading-4">

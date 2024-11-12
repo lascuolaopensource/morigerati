@@ -11,10 +11,10 @@ const Footer = async () => {
   const footer = await db.findGlobal({ slug: 'footer' })
 
   return (
-    <footer className="bg-black text-white py-2 px-2" style={{ zIndex: 99999 }}>
+    <footer className="bg-black text-white px-2 py-4" style={{ zIndex: 99999 }}>
       {/* mobile */}
-      <div className="sm:hidden max-w-7xl mx-auto flex flex-col items-center space-y-4">
-        <div className="flex justify-between items-center w-full max-w-xl">
+      <div className="sm:hidden max-w-screen-xl mx-auto flex flex-col items-left gap-y-4">
+        <div className="flex justify-between">
           <LogoGenerator textColor="white" />
           <div className="flex space-x-2">
             {footer['Link Social']?.map((social, index) => (
@@ -26,13 +26,12 @@ const Footer = async () => {
             ))}
           </div>
         </div>
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full max-w-xl">
-          <div className="flex-1">{renderFooterContent(footer.testo_sinistra)}</div>
-          <div className="flex-1">{renderFooterContent(footer.testo_destra)}</div>
-        </div>
+
+        <div className="flex-1">{renderFooterContent(footer.testo_sinistra)}</div>
+        <div className="flex-1">{renderFooterContent(footer.testo_destra)}</div>
       </div>
       {/* desktop */}
-      <div className="hidden sm:flex justify-between items-start w-full space-y-4">
+      <div className="hidden sm:flex max-w-screen-xl mx-auto justify-between">
         <LogoGenerator textColor="white" />
         <div className="w-1/4">{renderFooterContent(footer.testo_sinistra)}</div>
         <div className="w-1/4">{renderFooterContent(footer.testo_destra)}</div>

@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 const PassateFuture: React.FC = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const filter = (searchParams.get('filter') as 'passata' | 'futura') || 'passata'
+  const filter = (searchParams.get('filter') as 'passata' | 'futura') || 'futura'
 
   const handleFilterChange = (newFilter: 'passata' | 'futura') => {
     router.push(`/residenze?filter=${newFilter}`, { scroll: false })

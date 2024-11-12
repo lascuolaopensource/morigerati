@@ -4,7 +4,7 @@ import { loadDb } from '@/utils/db'
 import BackButton from '@/components/uiElements/backButton'
 import ItinerarioDetailsCard from '@/components/itinerari/itinerarioDetailsCard'
 import { ServiziCardWrapper } from '@/components/itinerari/servizioCardWrapper'
-import MySwiper from '@/components/polaroid/mySwiper'
+import MySwiper from '@/components/card/wrappers/cardsSwiper'
 import Galleria from '@/components/galleria/galleria'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
@@ -45,7 +45,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
     <div className="bg-white">
       <Copertina copertina={itinerarioData?.copertina as Media | undefined} />
 
-      <div className="p-4 sm:px-36">
+      <div className="p-4 sm:px-36 max-w-screen-xl mx-auto">
         <BackButton />
         <RandomPixel p={2} />
         <div className="pt-4"></div>
@@ -86,11 +86,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
         {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
           <div className="my-8">
             <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
-            <MySwiper
-              items={itinerarioData?.luoghi as Luoghi[]}
-              color="bg-luogoColor"
-              type="luoghi"
-            />
+            <MySwiper items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" />
           </div>
         )}
 
@@ -99,8 +95,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
             <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders che troverai</h2>
             <MySwiper
               items={itinerarioData?.stakeholders as Stakeholder[]}
-              color="bg-stakeholderColor"
-              type="stakeholders"
+              category="stakeholders"
             />
           </div>
         )}

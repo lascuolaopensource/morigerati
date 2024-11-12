@@ -15,7 +15,7 @@ const Mobilita = async () => {
   //
   return (
     <main>
-      <div className="relative bg-white p-3 pt-5">
+      <div className="relative bg-white p-3 pt-5 max-w-screen-xl mx-auto">
         <RandomPixel />
         <StringToHTML htmlString={mobilita.testo_html ?? ''} />
       </div>

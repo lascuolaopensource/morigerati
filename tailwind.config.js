@@ -11,12 +11,13 @@ export default {
   theme: {
     fontFamily: {
       transInstrumentSans: ['TransInstrumentSans', 'sans-serif'],
+      transluoghi: ['TransLuoghi', 'sans-serif'],
     },
     extend: {
       colors: {
-        luogoColor: '#92CDDE',
-        itinerarioColor: '#7FCBAE',
-        stakeholderColor: '#EEE3A8',
+        luoghiColor: '#92CDDE',
+        itinerariColor: '#7FCBAE',
+        stakeholdersColor: '#EEE3A8',
         residenzeColor: '#F69679',
         bannerColor: '#F69679',
         luogoColorScuro: '#335963',

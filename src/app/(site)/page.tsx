@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
-import MySwyper from '@/components/polaroid/mySwiper'
+import MySwyper from '@/components/card/wrappers/cardsSwiper'
 import GridOverlay from '@/components/uiElements/gridOverlay'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import Copertina from '@/components/uiElements/copertina'
@@ -44,11 +44,11 @@ const Home = async () => {
 
       <div className="bg-white font-normal p-3 pt-4 w-full ">
         {/* desktop */}
-        <div className="relative hidden justify-between items-center sm:flex px-36">
-          <h2 className="w-auto min-w-60 pt-4 text-xl">{home.intro.title}</h2>
+        <div className="hidden  allign-bottom  gap-10 sm:flex px-36">
+          <h2 className="text-xl w-2/5 align-middle">{home.intro.title}</h2>
 
-          <div className="pt-10 sm:text-center">
-            <StringToHTML htmlString={home.intro.text_html ?? ''} classs="prose-custom-no-center" />
+          <div className="">
+            <StringToHTML htmlString={home.intro.text_html ?? ''} classs="" />
           </div>
         </div>
         {/* mobile */}
@@ -62,7 +62,7 @@ const Home = async () => {
           <h2 className="text-xl text-center">{home.itinerari.title}</h2>
           <StringToHTML htmlString={home.itinerari.text_html ?? ''} classs="prose-custom" />
           <Suspense fallback={<div>Loading slides...</div>}>
-            <MySwyper items={itinerari.docs} color="bg-itinerarioColor" type="itinerari" />
+            <MySwyper items={itinerari.docs} category="itinerari" />
           </Suspense>
         </section>
 
@@ -70,7 +70,7 @@ const Home = async () => {
           <h2 className="text-xl text-center">{home.luoghi.title}</h2>
           <StringToHTML htmlString={home.luoghi.text_html ?? ''} classs="prose-custom" />
           <Suspense fallback={<div>Loading slides...</div>}>
-            <MySwyper items={luoghi.docs} color="bg-luogoColor" type="luoghi" />
+            <MySwyper items={luoghi.docs} category="luoghi" />
           </Suspense>
         </section>
 
@@ -78,7 +78,7 @@ const Home = async () => {
           <h2 className="text-xl text-center">{home.residenze.title}</h2>
           <StringToHTML htmlString={home.residenze.text_html ?? ''} classs="prose-custom" />
           <Suspense fallback={<div>Loading slides...</div>}>
-            <MySwyper items={residenze.docs} color="bg-residenzeColor" type="residenze" />
+            <MySwyper items={residenze.docs} category="residenze" />
           </Suspense>
         </section>
       </div>

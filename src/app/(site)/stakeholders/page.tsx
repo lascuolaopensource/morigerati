@@ -19,7 +19,7 @@ const Stakeholders = async () => {
 
   return (
     <main className="">
-      <div className="bg-white p-3 ">
+      <div className="bg-white p-3 max-w-screen-xl mx-auto">
         {testi.stakeholders.title ? (
           <div className="font-normal text-sm leading-4">
             <h1 className="font-bold sm:text-center text-[40px]">{testi.stakeholders.title}</h1>
@@ -29,12 +29,7 @@ const Stakeholders = async () => {
         )}
         <StringToHTML htmlString={testi.stakeholders.text_html ?? ''} />
         <Suspense fallback={<div>Loading cards...</div>}>
-          <ColorCardWrapper
-            color="stakeholderColor"
-            colorScuro="stakeholderColorScuro"
-            docs={stakeholders.docs}
-            previous="stakeholders"
-          />
+          <ColorCardWrapper docs={stakeholders.docs} category="stakeholders" />
         </Suspense>
       </div>
     </main>

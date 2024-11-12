@@ -19,7 +19,7 @@ const ItinerariPage = async () => {
 
   return (
     <main className="">
-      <div className="bg-white p-3 ">
+      <div className="bg-white p-3 max-w-screen-xl mx-auto">
         <div className="font-normal text-sm  leading-4">
           <h1 className="font-bold sm:text-center text-[40px]">{testi.itinerari.title}</h1>
         </div>
@@ -27,12 +27,7 @@ const ItinerariPage = async () => {
         <StringToHTML htmlString={testi.itinerari.text_html ?? ''} />
         <p></p>
         <Suspense fallback={<div>Loading Itinerari component...</div>}>
-          <ColorCardWrapper
-            color="itinerarioColor"
-            colorScuro="itinerarioColorScuro"
-            docs={itinerari.docs}
-            previous="itinerari"
-          />
+          <ColorCardWrapper docs={itinerari.docs} category="itinerari" />
         </Suspense>
       </div>
     </main>

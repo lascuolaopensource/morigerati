@@ -134,13 +134,9 @@ const Navbar = () => {
         </div>
 
         {/*desktop*/}
-        <div className="hidden mx-auto py-2 sm:flex justify-between items-center">
-          <div className="left-6 justify-center relative">
-            <LogoGenerator />
-          </div>
-          <div className="absolute right-6">
-            <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
-          </div>
+        <div className="hidden sm:flex max-w-screen-xl mx-auto py-2 justify-between items-center px-2">
+          <LogoGenerator />
+          <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
         </div>
 
         <div className="absolute bottom-0 left-0 w-full h-0.5 bg-black" aria-hidden="true" />

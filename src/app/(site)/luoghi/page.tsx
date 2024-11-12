@@ -18,9 +18,9 @@ const Luoghi = async () => {
   return (
     <main>
       <div className="bg-white p-3 relative">
-        <div className="fixed bottom-[var(--footer-height)] left-0 right-0 pointer-events-none"></div>
+        <div className="fixed bottom-[var(--footer-height)] left-0 right-0 pointer-events-none "></div>
 
-        <div className="relative z-10">
+        <div className="relative z-10 max-w-screen-xl mx-auto">
           {testi.luoghi.title ? (
             <div className="font-normal text-sm leading-4">
               <h1 className="font-bold sm:text-center text-[40px]">{testi.luoghi.title}</h1>
@@ -32,12 +32,7 @@ const Luoghi = async () => {
           <StringToHTML htmlString={testi.luoghi.text_html ?? ''} />
 
           <Suspense fallback={<div>Loading Cards...</div>}>
-            <ColorCardWrapper
-              color="luogoColor"
-              colorScuro="luogoColorScuro"
-              docs={luoghi.docs}
-              previous="luoghi"
-            />
+            <ColorCardWrapper docs={luoghi.docs} category="luoghi" />
           </Suspense>
         </div>
       </div>

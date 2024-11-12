@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useRef, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules'
@@ -7,16 +8,17 @@ import type SwiperCore from 'swiper'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import Polaroid from './polaroid'
-import { Itinerari, Luoghi, Stakeholder, Residenze, Media } from '@/payload-types'
+import Card from '../card'
+import { Media } from '@/payload-types'
+import { Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
 
 interface MySwiperProps {
   items: Itinerari[] | Luoghi[] | Stakeholder[] | Residenze[]
-  color: string
-  type: string
+  category: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
+  cardTitlePosition?: 'top' | 'bottom'
 }
 
-const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
+const MySwiper: React.FC<MySwiperProps> = ({ items, category, cardTitlePosition }) => {
   const swiperRef = useRef<SwiperCore | null>(null)
 
   useEffect(() => {
@@ -38,10 +40,6 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
     }
   }, [])
 
-  if (!items || items.length === 0) {
-    return null
-  }
-
   const swiperParams: SwiperOptions = {
     modules: [Navigation, Pagination, Keyboard, Mousewheel],
     mousewheel: true,
@@ -58,13 +56,15 @@ const MySwiper: React.FC<MySwiperProps> = ({ items, color, type }) => {
       className="mySwiper"
       onSwiper={(swiper) => (swiperRef.current = swiper)}
     >
-      {items.map((item, index) => (
-        <SwiperSlide style={{ width: 'auto' }} key={typeof item === 'string' ? index : item.id}>
-          <Polaroid
+      {items.map((item) => (
+        <SwiperSlide style={{ width: 'auto' }} key={item.id}>
+          <Card
+            collection={item}
+            title={item.nome}
             media={item.copertina as Media | undefined}
-            title={typeof item === 'string' ? `Item ${index + 1}` : item.nome}
-            color={color}
-            link={typeof item === 'string' ? '#' : `/${type}/${item.id}`}
+            slugUrl={`/${item}/${item.id}`}
+            category={category}
+            titlePosition={cardTitlePosition ?? 'top'}
           />
         </SwiperSlide>
       ))}

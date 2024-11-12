@@ -38,7 +38,7 @@ export default async function Stakeholder({ params }: { params: { slug: string }
         <Copertina copertina={stakeholderData.copertina as Media | undefined} />
       )}
 
-      <div className="p-4 sm:px-36">
+      <div className="p-4 sm:px-36 max-w-screen-xl mx-auto">
         <BackButton />
         <div className="pt-4"></div>
         {stakeholderData.nome ? (

@@ -26,6 +26,7 @@ export const Articoli: CollectionConfig = {
       name: 'tags',
       type: 'array',
       label: 'Tags',
+      maxRows: 3,
       fields: [
         {
           name: 'tag',

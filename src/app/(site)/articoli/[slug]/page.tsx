@@ -28,25 +28,27 @@ export default async function Articolo({ params }: { params: { slug: string } })
 
   return (
     <div className="bg-white pb-10">
-      {articoloData.copertina && (
-        <Copertina copertina={articoloData.copertina as Media | undefined} />
-      )}
-      <div className="p-4 sm:px-36">
-        <BackButton />
-        <div className="pt-4"></div>
-        {articoloData.titolo ? (
-          <h1 className="text-4xl font-bold mb-4">{articoloData.titolo}</h1>
-        ) : (
-          <p></p>
+      <div className="max-w-screen-xl mx-auto">
+        {articoloData.copertina && (
+          <Copertina copertina={articoloData.copertina as Media | undefined} />
         )}
-        <TagsList tags={articoloData.tags?.map((tagObj) => tagObj.tag) ?? []} />
-        <p>{datePharser(articoloData.data_pubblicazione, '', true)}</p>
-      </div>
-      <div className="container mx-auto p-4">
-        <StringToHTML htmlString={articoloData.testo_html ?? ''} />
-      </div>
-      <div className="pt-4 sm:px-36">
-        <Galleria items={articoloData.galleria as Media[] | undefined} />
+        <div className="p-4 sm:px-36">
+          <BackButton />
+          <div className="pt-4"></div>
+          {articoloData.titolo ? (
+            <h1 className="text-4xl font-bold mb-4">{articoloData.titolo}</h1>
+          ) : (
+            <p></p>
+          )}
+          <TagsList tags={articoloData.tags?.map((tagObj) => tagObj.tag) ?? []} />
+          <p>{datePharser(articoloData.data_pubblicazione, '', true)}</p>
+        </div>
+        <div className="container mx-auto p-4">
+          <StringToHTML htmlString={articoloData.testo_html ?? ''} />
+        </div>
+        <div className="pt-4 sm:px-36">
+          <Galleria items={articoloData.galleria as Media[] | undefined} />
+        </div>
       </div>
     </div>
   )

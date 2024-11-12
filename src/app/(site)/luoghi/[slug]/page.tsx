@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/uiElements/backButton'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
-import MySwyper from '@/components/polaroid/mySwiper'
+import MySwyper from '@/components/card/wrappers/cardsSwiper'
 import { RandomPixel } from '@/components/uiElements/pixels'
 
 import Copertina from '@/components/uiElements/copertina'
@@ -36,7 +36,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
     <div className="bg-white">
       <Copertina copertina={luogoData?.copertina as Media | undefined} />
 
-      <div className="p-4 sm:px-36">
+      <div className="p-4 sm:px-36 max-w-screen-xl mx-auto">
         <BackButton />
         <RandomPixel p={3} />
         <div className="pt-4"></div>
@@ -52,11 +52,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         )}
         {
           <Suspense fallback={<div>Loading slides...</div>}>
-            <MySwyper
-              items={luogoData.Itinerari_relation as Itinerari[]}
-              color="bg-itinerarioColor"
-              type="itinerari"
-            />
+            <MySwyper items={luogoData.Itinerari_relation as Itinerari[]} category="itinerari" />
           </Suspense>
         }
 

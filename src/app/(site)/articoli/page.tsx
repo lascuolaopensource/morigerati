@@ -27,7 +27,7 @@ const ArticoliPage = async () => {
 
   return (
     <main className="h-full  sm:px-36">
-      <div className="bg-white p-3 pt-5 w-full relative h-full">
+      <div className="bg-white p-3 pt-5 max-w-screen-xl mx-auto relative h-full">
         <div className="relative z-10">
           {testi.articoli.title && (
             <div className="font-normal text-sm pb-4 leading-4">
