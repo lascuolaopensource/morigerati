@@ -23,12 +23,24 @@ const CardsPage: React.FC<cardsPageProps> = async ({
   const testi = await db.findGlobal({
     slug: 'testi',
   })
+  const home = await db.findGlobal({
+    slug: 'home',
+  })
   const doc = await db.find({
     collection: collectionQuery,
     depth: 2,
   })
 
   const docs = doc.docs
+
+  const alternativeText = {
+    luoghi: home.luoghi.text_html,
+    itinerari: home.itinerari.text_html,
+    residenze: home.residenze.text_html,
+    stakeholders: '',
+  }
+
+  console.log(testi[collectionQuery].text_html == '<p></p>')
 
   return (
     <main>
@@ -40,7 +52,13 @@ const CardsPage: React.FC<cardsPageProps> = async ({
         ) : (
           <p></p>
         )}
-        <StringToHTML htmlString={testi[collectionQuery].text_html ?? ''} />
+        <StringToHTML
+          htmlString={
+            (testi[collectionQuery].text_html === '<p></p>'
+              ? alternativeText[collectionQuery]
+              : testi[collectionQuery].text_html) ?? ''
+          }
+        />
 
         <Suspense>
           <MySwiper
