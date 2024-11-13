@@ -45,7 +45,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({ collection, layou
             <div className="text-center md:text-right">
               <StringToHTML
                 htmlString={home[collection].text_html ?? ''}
-                classs="max-w-1/4 mx-auto md:ml-auto md:mr-0"
+                classs=" max-w-1/4 mx-auto md:ml-auto md:mr-0"
               />
             </div>
           </>
@@ -54,10 +54,11 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({ collection, layou
             <h2 className={`text-2xl ${color[collection]} text-center md:text-left`}>
               {home[collection].title}
             </h2>
+
             <div className="text-center md:text-left">
               <StringToHTML
                 htmlString={home[collection].text_html ?? ''}
-                classs="max-w-1/4 mx-auto md:ml-0"
+                classs=" max-w-1/4 mx-auto md:ml-0"
               />
             </div>
           </>

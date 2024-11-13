@@ -35,7 +35,7 @@ const Home = async () => {
         {/* desktop */}
         <div className="hidden gap-3 sm:flex flex-col">
           <div className="flex justify-center">
-            <h2 className="text-3xl item-center content-center">{home.intro.title}</h2>
+            <h2 className="text-3xl text-center item-center content-center">{home.intro.title}</h2>
           </div>
 
           <div className="">
@@ -43,7 +43,7 @@ const Home = async () => {
           </div>
         </div>
         {/* mobile */}
-        <div className="relative sm:hidden">
+        <div className="text-center relative sm:hidden">
           <h2 className="pt-4 text-xl">{home.intro.title}</h2>
           <StringToHTML htmlString={home.intro.text_html ?? ''} classs="prose-custom-no-center" />
         </div>
