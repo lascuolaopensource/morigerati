@@ -1,124 +1,69 @@
 'use client'
-import React, { useRef, useEffect } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules'
-import type { SwiperOptions } from 'swiper/types'
-import type SwiperCore from 'swiper'
-import Masonry from 'react-masonry-css'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
+import React, { useEffect, useRef, useState } from 'react'
 import Card from '../card'
 import { Media } from '@/payload-types'
 import { Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
 
-interface MySwiperProps {
-  items?: (Itinerari | Luoghi | Stakeholder | Residenze)[] | null // Make items optional
+interface CardGridProps {
+  items?: (Itinerari | Luoghi | Stakeholder | Residenze)[] | null
   category: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
   cardTitlePosition?: 'top' | 'bottom'
-  displayAs?: 'row' | 'grid'
+  singleRow?: boolean
 }
 
-const MySwiper: React.FC<MySwiperProps> = ({
-  items = [], // Provide default empty array
+const CardGrid: React.FC<CardGridProps> = ({
+  items = [],
   category,
   cardTitlePosition,
-  displayAs = 'row',
+  singleRow = false,
 }) => {
-  const swiperRef = useRef<SwiperCore | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [visibleItems, setVisibleItems] = useState<typeof items>(items || [])
+  const CARD_WIDTH = 235
+  const CARD_GAP = 0
 
   useEffect(() => {
-    if (displayAs === 'row') {
-      const handleWheel = (e: WheelEvent) => {
-        const swiperInstance = swiperRef.current
-        if (swiperInstance) {
-          if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-            swiperInstance.mousewheel.disable()
-          } else {
-            swiperInstance.mousewheel.enable()
-          }
+    const updateVisibleItems = () => {
+      if (containerRef.current && items) {
+        const containerWidth = containerRef.current.offsetWidth
+        const maxCards = Math.floor((containerWidth + CARD_GAP) / (CARD_WIDTH + CARD_GAP))
+
+        if (singleRow) {
+          setVisibleItems(items.slice(0, maxCards))
+        } else {
+          setVisibleItems(items)
         }
       }
-      window.addEventListener('wheel', handleWheel)
-      return () => {
-        window.removeEventListener('wheel', handleWheel)
-      }
     }
-  }, [displayAs])
 
-  // Early return if no items
+    updateVisibleItems()
+    window.addEventListener('resize', updateVisibleItems)
+    return () => window.removeEventListener('resize', updateVisibleItems)
+  }, [items, singleRow])
+
   if (!items || items.length === 0) {
-    return null // Or return a placeholder/loading state
-  }
-
-  const swiperParams: SwiperOptions = {
-    modules: [Navigation, Pagination, Keyboard, Mousewheel],
-    mousewheel: true,
-    keyboard: true,
-    spaceBetween: 12,
-    slidesPerView: 'auto',
-    freeMode: true,
-    touchReleaseOnEdges: true,
-  }
-
-  const breakpointColumns = {
-    default: 6,
-    1536: 4,
-    1280: 4,
-    1024: 3,
-    768: 2,
-    640: 1,
-  }
-
-  if (displayAs === 'grid') {
-    return (
-      <div className="px-3 sm:px-4">
-        <div className="flex justify-center sm:justify-start">
-          <div className="w-60 sm:w-full">
-            <Masonry
-              breakpointCols={breakpointColumns}
-              className="flex -ml-7"
-              columnClassName="pl-3"
-            >
-              {items.map((item) => (
-                <div key={item.id} className="mb-3">
-                  <Card
-                    collection={item}
-                    title={item.nome}
-                    media={item.copertina as Media | undefined}
-                    slugUrl={`/${category}/${item.id}`}
-                    category={category}
-                    titlePosition={cardTitlePosition ?? 'top'}
-                  />
-                </div>
-              ))}
-            </Masonry>
-          </div>
-        </div>
-      </div>
-    )
+    return null
   }
 
   return (
-    <Swiper
-      {...swiperParams}
-      className="mySwiper"
-      onSwiper={(swiper) => (swiperRef.current = swiper)}
-    >
-      {items.map((item) => (
-        <SwiperSlide style={{ width: 'auto' }} key={item.id}>
-          <Card
-            collection={item}
-            title={item.nome}
-            media={item.copertina as Media | undefined} // Changed from copertina to media based on types
-            slugUrl={`/${category}/${item.id}`}
-            category={category}
-            titlePosition={cardTitlePosition ?? 'top'}
-          />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div ref={containerRef} className="w-full px-3 sm:px-4">
+      <div className={`flex justify-center gap-3 ${singleRow ? 'flex-nowrap' : 'flex-wrap'}`}>
+        {visibleItems &&
+          visibleItems.map((item) => (
+            <div key={item.id} className="w-[235px] flex-shrink-0">
+              <Card
+                collection={item}
+                title={item.nome}
+                media={item.copertina as Media | undefined}
+                slugUrl={`/${category}/${item.id}`}
+                category={category}
+                titlePosition={cardTitlePosition ?? 'top'}
+              />
+            </div>
+          ))}
+      </div>
+    </div>
   )
 }
 
-export default MySwiper
+export default CardGrid

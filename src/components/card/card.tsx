@@ -103,36 +103,34 @@ const Card: React.FC<CardProps> = ({ title, media, category, titlePosition, slug
   }, [title])
 
   return (
-    <div className="py-4 pl-4">
-      <Link href={slugUrl}>
+    <Link href={slugUrl}>
+      <div
+        className={`flex flex-col border-[3px] w-60 ${styleVariants[category].border} rounded-lg overflow-hidden duration-300 hover:scale-105 relative cursor-pointer`}
+      >
         <div
-          className={`flex flex-col border-[3px] w-60 ${styleVariants[category].border} rounded-lg overflow-hidden duration-300 hover:scale-105 relative cursor-pointer`}
-        >
-          <div
-            style={{ top: letterTopPosition }}
-            className={`absolute z-20 -right-2 ${styleVariants[category].text}
+          style={{ top: letterTopPosition }}
+          className={`absolute z-20 -right-2 ${styleVariants[category].text}
             p-2 text-5xl font-bold font-transluoghi`}
-          >
-            {randomLetter}
-          </div>{' '}
-          <div className="justify-center">
-            {titlePosition === 'top' ? (
-              <div ref={titleRef} className="pl-2 min-h-[1rem]">
-                <p className="pt-1 font-semibold text-xs leading-tight pr-1 ">{title}</p>
-              </div>
-            ) : null}
-            <div className="rounded-lg border-lg">
-              <MediaContent media={media} title={title} isVideo={isVideo ?? false} />
-            </div>
-          </div>
-          {titlePosition === 'bottom' ? (
-            <div ref={titleRef} className="pl-2">
-              <p className="pt-1 font-medium text-xs leading-tight pr-1 ">{title}</p>
+        >
+          {randomLetter}
+        </div>{' '}
+        <div className="justify-center">
+          {titlePosition === 'top' ? (
+            <div ref={titleRef} className="pl-2 min-h-[1rem]">
+              <p className="pt-1 font-semibold text-xs leading-tight pr-1 ">{title}</p>
             </div>
           ) : null}
+          <div className="rounded-lg border-lg">
+            <MediaContent media={media} title={title} isVideo={isVideo ?? false} />
+          </div>
         </div>
-      </Link>
-    </div>
+        {titlePosition === 'bottom' ? (
+          <div ref={titleRef} className="pl-2">
+            <p className="pt-1 font-medium text-xs leading-tight pr-1 ">{title}</p>
+          </div>
+        ) : null}
+      </div>
+    </Link>
   )
 }
 
