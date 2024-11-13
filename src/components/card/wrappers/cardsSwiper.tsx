@@ -27,11 +27,6 @@ const MySwiper: React.FC<MySwiperProps> = ({
 }) => {
   const swiperRef = useRef<SwiperCore | null>(null)
 
-  // Early return if no items
-  if (!items || items.length === 0) {
-    return null // Or return a placeholder/loading state
-  }
-
   useEffect(() => {
     if (displayAs === 'row') {
       const handleWheel = (e: WheelEvent) => {
@@ -50,6 +45,11 @@ const MySwiper: React.FC<MySwiperProps> = ({
       }
     }
   }, [displayAs])
+
+  // Early return if no items
+  if (!items || items.length === 0) {
+    return null // Or return a placeholder/loading state
+  }
 
   const swiperParams: SwiperOptions = {
     modules: [Navigation, Pagination, Keyboard, Mousewheel],
