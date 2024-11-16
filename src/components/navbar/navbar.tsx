@@ -124,17 +124,17 @@ const Navbar = () => {
         />
 
         {/*mobile*/}
-        <div className="sm:hidden mx-auto py-2 flex justify-between items-center">
+        {/* <div className="sm:hidden mx-auto py-2 flex justify-between items-center">
           <div className="flex-grow flex justify-center relative">
             <LogoGenerator />
           </div>
           <div className="absolute right-6">
             <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
           </div>
-        </div>
+        </div> */}
 
         {/*desktop*/}
-        <div className="hidden sm:flex max-w-screen-xl mx-auto py-2 justify-between items-center px-2">
+        <div className="flex max-w-screen-xl mx-auto py-2 justify-between items-center px-2">
           <LogoGenerator />
           <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
         </div>

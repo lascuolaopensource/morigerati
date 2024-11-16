@@ -17,7 +17,7 @@ const ToggleButton = () => {
     <div className="flex justify-center items-center pb-2 pt-10 md:max-w-[700px] mx-auto">
       <button
         onClick={handleFilterChange}
-        className="group relative w-full max-w-xs h-12 rounded-md overflow-hidden transition-all duration-300 ease-in-out hover:scale-105"
+        className="group relative w-full max-w-xs h-12 rounded-full overflow-hidden transition-all duration-300 ease-in-out hover:scale-105"
       >
         {/* Background layers with transition */}
         <div

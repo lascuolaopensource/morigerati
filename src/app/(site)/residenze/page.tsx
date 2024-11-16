@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
-import ColorCardWrapper from '@/components/colorCard/colorCardWrapper'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Residenze as ResidenzaType } from '@/payload-types'
 import PassateFuture from '@/components/residenze/passateFuture'

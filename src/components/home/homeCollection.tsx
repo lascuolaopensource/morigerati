@@ -36,7 +36,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({ collection, layou
   return (
     <section className="relative pb-20">
       <RandomLetter color={collection} position={layout == 'left' ? 'right' : 'left'} />
-      <div className="text-center md:text-left md:w-full">
+      <div className="text-center md:text-left md:w-full md:px-40 mb-4">
         {layout === 'right' ? (
           <>
             <h2 className={`text-2xl ${color[collection]} text-center md:text-right`}>
@@ -55,7 +55,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({ collection, layou
               {home[collection].title}
             </h2>
 
-            <div className="text-center md:text-left">
+            <div className="text-center md:text-left ">
               <StringToHTML
                 htmlString={home[collection].text_html ?? ''}
                 classs=" max-w-1/4 mx-auto md:ml-0"

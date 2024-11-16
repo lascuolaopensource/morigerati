@@ -43,6 +43,7 @@ const RandomLetter: React.FC<RandomLetterProps> = ({ position = 'right', color =
             font-transluoghi 
             block 
             select-none
+
           `}
           style={{
             fontSize: 'min(40vw, 300px)',

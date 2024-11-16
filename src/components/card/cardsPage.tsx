@@ -4,6 +4,7 @@ import { loadDb } from '@/utils/db'
 import StringToHTML from '../serializer/stringToHTML'
 import MySwiper from './wrappers/cardsSwiper'
 import { Stakeholder } from '@/payload-types'
+import { RandomLetter } from '../home/randomLetter'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -58,16 +59,14 @@ const CardsPage: React.FC<cardsPageProps> = async ({
               ? alternativeText[collectionQuery]
               : testi[collectionQuery].text_html) ?? ''
           }
+          classs="prose-custom"
         />
 
         <Suspense>
-          <MySwiper
-            items={docs}
-            category={collectionQuery}
-            cardTitlePosition={cardTitlePosition}
-            displayAs={displayAs}
-          />
+          <MySwiper items={docs} category={collectionQuery} cardTitlePosition={cardTitlePosition} />
         </Suspense>
+
+        <RandomLetter color={collectionQuery} position={'left'} />
       </div>
     </main>
   )

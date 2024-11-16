@@ -105,7 +105,7 @@ const Card: React.FC<CardProps> = ({ title, media, category, titlePosition, slug
   return (
     <Link href={slugUrl}>
       <div
-        className={`flex flex-col border-[3px] w-60 ${styleVariants[category].border} rounded-lg overflow-hidden duration-300 hover:scale-105 relative cursor-pointer`}
+        className={`flex z-10 lex-col border-[3px] w-60 ${styleVariants[category].border} rounded-lg overflow-hidden duration-300 hover:scale-105 relative cursor-pointer`}
       >
         <div
           style={{ top: letterTopPosition }}
