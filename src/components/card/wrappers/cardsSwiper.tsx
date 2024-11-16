@@ -19,7 +19,7 @@ const CardGrid: React.FC<CardGridProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [visibleItems, setVisibleItems] = useState<typeof items>(items || [])
-  const CARD_WIDTH = 235
+  const CARD_WIDTH = 240
   const CARD_GAP = 0
 
   useEffect(() => {

@@ -48,28 +48,31 @@ const MediaContent: React.FC<{ media: Media | undefined; title: string; isVideo:
 }) => {
   if (isVideo) {
     return (
-      <video
-        className="w-full h-full object-cover rounded-lg"
-        autoPlay
-        muted
-        loop
-        playsInline
-        controls={false}
-      >
-        <source src={media?.url || ''} type={media?.mimeType || ''} />
-      </video>
+      <div className="w-full h-full">
+        <video
+          className="w-full h-full object-cover rounded-lg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+        >
+          <source src={media?.url || ''} type={media?.mimeType || ''} />
+        </video>
+      </div>
     )
   }
 
   return (
-    <Image
-      src={media?.url || loremPic}
-      alt={title}
-      width={250}
-      height={200}
-      sizes="(max-width: 768px)"
-      className="rounded-lg"
-    />
+    <div className="w-full h-full">
+      <Image
+        src={media?.url || loremPic}
+        alt={title}
+        width={240}
+        height={180}
+        className="w-full h-full object-cover rounded-lg"
+      />
+    </div>
   )
 }
 
@@ -105,28 +108,26 @@ const Card: React.FC<CardProps> = ({ title, media, category, titlePosition, slug
   return (
     <Link href={slugUrl}>
       <div
-        className={`flex z-10 lex-col border-[3px] w-60 ${styleVariants[category].border} rounded-lg overflow-hidden duration-300 hover:scale-105 relative cursor-pointer`}
+        className={`flex z-10 flex-col border-[3px] w-[240px] ${styleVariants[category].border} rounded-lg overflow-hidden duration-300 hover:scale-105 relative cursor-pointer`}
       >
         <div
           style={{ top: letterTopPosition }}
           className={`absolute z-20 -right-2 ${styleVariants[category].text}
-            p-2 text-5xl font-bold font-transluoghi`}
+            p-2 text-3xl font-bold font-transluoghi`}
         >
           {randomLetter}
-        </div>{' '}
-        <div className="justify-center">
-          {titlePosition === 'top' ? (
-            <div ref={titleRef} className="pl-2 min-h-[1rem]">
-              <p className="pt-1 font-semibold text-xs leading-tight pr-1 ">{title}</p>
-            </div>
-          ) : null}
-          <div className="rounded-lg border-lg">
-            <MediaContent media={media} title={title} isVideo={isVideo ?? false} />
+        </div>
+        {titlePosition === 'top' ? (
+          <div ref={titleRef} className="pl-2 min-h-[1rem]">
+            <p className="pt-1 font-semibold text-xs leading-tight pr-1">{title}</p>
           </div>
+        ) : null}
+        <div className="h-[180px]">
+          <MediaContent media={media} title={title} isVideo={isVideo ?? false} />
         </div>
         {titlePosition === 'bottom' ? (
           <div ref={titleRef} className="pl-2">
-            <p className="pt-1 font-medium text-xs leading-tight pr-1 ">{title}</p>
+            <p className="pt-1 font-medium text-xs leading-tight pr-1">{title}</p>
           </div>
         ) : null}
       </div>
