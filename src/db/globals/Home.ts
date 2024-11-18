@@ -24,5 +24,6 @@ export const Home: GlobalConfig = {
     F.titleAndText('itinerari'),
     F.titleAndText('luoghi'),
     F.titleAndText('residenze'),
+    F.titleAndText('mappa'),
   ],
 }

@@ -5,11 +5,23 @@ import GridOverlay from '@/components/uiElements/gridOverlay'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import Copertina from '@/components/uiElements/copertina'
 import { Media } from '@/payload-types'
+import { Tracciati as TracciatiType } from '@/payload-types'
 import { RandomPixel } from '@/components/uiElements/pixels'
 import HomeCollection from '@/components/home/homeCollection'
+import TracksMap from '@/components/mappa/tracksMap'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+
+async function AllTracksMapSection() {
+  const db = await loadDb()
+  const tracciatiData = await db.find({
+    collection: 'tracciati',
+  })
+  const tracciati = tracciatiData.docs as TracciatiType[]
+
+  return <TracksMap tracciati={tracciati} />
+}
 
 const Home = async () => {
   const db = await loadDb()
@@ -49,6 +61,15 @@ const Home = async () => {
         </div>
 
         <HomeCollection collection="itinerari" />
+        <div className="py-8">
+          <h2 className="text-2xl text-center mb-4">{home.mappa.title}</h2>
+          <div className="text-center mb-4">
+            <StringToHTML htmlString={home.mappa.text_html ?? ''} classs="prose-custom" />
+          </div>
+          <Suspense fallback={<div>Caricamento mappa...</div>}>
+            <AllTracksMapSection />
+          </Suspense>
+        </div>
         <HomeCollection collection="luoghi" layout="right" />
         <HomeCollection collection="residenze" />
       </div>

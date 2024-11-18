@@ -603,6 +603,25 @@ export interface Home {
     } | null;
     text_html?: string | null;
   };
+  mappa: {
+    title: string;
+    text?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    text_html?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
