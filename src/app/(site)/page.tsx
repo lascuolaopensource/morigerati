@@ -8,20 +8,11 @@ import { Media } from '@/payload-types'
 import { Tracciati as TracciatiType } from '@/payload-types'
 import { RandomPixel } from '@/components/uiElements/pixels'
 import HomeCollection from '@/components/home/homeCollection'
-import TracksMap from '@/components/mappa/tracksMap'
+import HomeTracksSection from '@/components/home/homeTracksSection'
+import { getHomeTracksData } from '@/utils/getHomeData'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
-
-async function AllTracksMapSection() {
-  const db = await loadDb()
-  const tracciatiData = await db.find({
-    collection: 'tracciati',
-  })
-  const tracciati = tracciatiData.docs as TracciatiType[]
-
-  return <TracksMap tracciati={tracciati} />
-}
 
 const Home = async () => {
   const db = await loadDb()
@@ -29,6 +20,8 @@ const Home = async () => {
   const home = await db.findGlobal({
     slug: 'home',
   })
+
+  const { tracciati, mappaTitle, mappaText } = await getHomeTracksData()
 
   return (
     <main className=" max-w-screen-xl mx-auto">
@@ -62,13 +55,11 @@ const Home = async () => {
 
         <HomeCollection collection="itinerari" />
         <div className="py-8">
-          <h2 className="text-2xl text-center mb-4">{home.mappa.title}</h2>
-          <div className="text-center mb-4">
-            <StringToHTML htmlString={home.mappa.text_html ?? ''} classs="prose-custom" />
-          </div>
-          <Suspense fallback={<div>Caricamento mappa...</div>}>
-            <AllTracksMapSection />
-          </Suspense>
+          <HomeTracksSection 
+            title={mappaTitle}
+            text_html={mappaText}
+            tracciati={tracciati as TracciatiType[]}
+          />
         </div>
         <HomeCollection collection="luoghi" layout="right" />
         <HomeCollection collection="residenze" />

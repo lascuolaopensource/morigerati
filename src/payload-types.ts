@@ -622,6 +622,7 @@ export interface Home {
     } | null;
     text_html?: string | null;
   };
+  tracciati_mappa?: (string | Tracciati)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
