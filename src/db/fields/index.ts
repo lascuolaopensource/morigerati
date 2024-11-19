@@ -253,7 +253,7 @@ export function titleAndText(name: string, label?: string): GroupField {
         required: true,
         label: 'Titolo',
       },
-      { ...richText('text'), label: 'Contenuto' },
+      { ...richText('text'), label: 'Contenuto', required: true },
       lexicalHTML('text', { name: 'text_html' }),
     ],
   }

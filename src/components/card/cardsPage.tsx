@@ -3,7 +3,6 @@ import { loadDb } from '@/utils/db'
 
 import StringToHTML from '../serializer/stringToHTML'
 import MySwiper from './wrappers/cardsSwiper'
-import { Stakeholder } from '@/payload-types'
 import { RandomLetter } from '../home/randomLetter'
 
 export const dynamic = 'force-dynamic'
@@ -15,11 +14,7 @@ interface cardsPageProps {
   displayAs?: 'row' | 'grid'
 }
 
-const CardsPage: React.FC<cardsPageProps> = async ({
-  collectionQuery,
-  cardTitlePosition,
-  displayAs,
-}) => {
+const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery, cardTitlePosition }) => {
   const db = await loadDb()
   const testi = await db.findGlobal({
     slug: 'testi',
@@ -34,13 +29,6 @@ const CardsPage: React.FC<cardsPageProps> = async ({
 
   const docs = doc.docs
 
-  const alternativeText = {
-    luoghi: home.luoghi.text_html,
-    itinerari: home.itinerari.text_html,
-    residenze: home.residenze.text_html,
-    stakeholders: '',
-  }
-
   console.log(testi[collectionQuery].text_html == '<p></p>')
 
   return (
@@ -53,19 +41,10 @@ const CardsPage: React.FC<cardsPageProps> = async ({
         ) : (
           <p></p>
         )}
-        <StringToHTML
-          htmlString={
-            (testi[collectionQuery].text_html === '<p></p>'
-              ? alternativeText[collectionQuery]
-              : testi[collectionQuery].text_html) ?? ''
-          }
-          classs="prose-custom"
-        />
-
+        <StringToHTML htmlString={testi[collectionQuery].text_html ?? ''} classs="prose-custom" />
         <Suspense>
           <MySwiper items={docs} category={collectionQuery} cardTitlePosition={cardTitlePosition} />
         </Suspense>
-
         <RandomLetter color={collectionQuery} position={'left'} />
       </div>
     </main>

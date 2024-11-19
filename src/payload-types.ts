@@ -529,7 +529,7 @@ export interface Home {
   cover?: (string | null) | Media;
   intro: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -543,12 +543,12 @@ export interface Home {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   itinerari: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -562,12 +562,12 @@ export interface Home {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   luoghi: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -581,12 +581,12 @@ export interface Home {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   residenze: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -600,12 +600,12 @@ export interface Home {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   mappa: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -619,7 +619,7 @@ export interface Home {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   tracciati_mappa?: (string | Tracciati)[] | null;
@@ -734,7 +734,7 @@ export interface Testi {
   id: string;
   luoghi: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -748,12 +748,12 @@ export interface Testi {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   itinerari: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -767,12 +767,12 @@ export interface Testi {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   residenze: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -786,12 +786,12 @@ export interface Testi {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   stakeholders: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -805,12 +805,12 @@ export interface Testi {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   articoli: {
     title: string;
-    text?: {
+    text: {
       root: {
         type: string;
         children: {
@@ -824,7 +824,7 @@ export interface Testi {
         version: number;
       };
       [k: string]: unknown;
-    } | null;
+    };
     text_html?: string | null;
   };
   updatedAt?: string | null;

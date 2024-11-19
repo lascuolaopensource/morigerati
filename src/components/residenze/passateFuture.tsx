@@ -3,7 +3,7 @@ import React from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ArrowRightLeft } from 'lucide-react'
 
-const ToggleButton = () => {
+const ToggleButton: React.FC = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const filter = (searchParams.get('filter') as 'passata' | 'futura') || 'futura'
@@ -17,9 +17,9 @@ const ToggleButton = () => {
     <div className="flex justify-center items-center pb-2 pt-10 md:max-w-[700px] mx-auto">
       <button
         onClick={handleFilterChange}
-        className="group relative w-full max-w-xs h-12 rounded-full overflow-hidden transition-all duration-300 ease-in-out hover:scale-105"
+        className="group relative w-full max-w-xs h-12 rounded-full overflow-hidden transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-residenzeColor"
+        aria-label={filter === 'futura' ? "Vai all'archivio" : "Scopri l'agenda"}
       >
-        {/* Background layers with transition */}
         <div
           className={`absolute inset-0 transition-transform duration-500 ease-in-out ${
             filter === 'futura' ? 'translate-x-0' : '-translate-x-full'
@@ -29,17 +29,15 @@ const ToggleButton = () => {
           <div className="absolute inset-0 bg-[#f5c8ba] translate-x-full" />
         </div>
 
-        {/* Text layer - shows only current state with enhanced transition */}
         <div className="relative flex items-center justify-center w-full h-full overflow-hidden">
           <span
             className={`flex items-center gap-2 font-bold transition-all duration-500 ease-in-out transform group-hover:-translate-y-px ${
               filter === 'futura' ? 'animate-slideInDown' : 'animate-slideInUp'
             }`}
           >
-            {filter === 'futura' ? 'Agenda' : 'Archivio'}
+            {filter === 'futura' ? "Vai all'archivio" : "Scopri l'agenda"}
           </span>
 
-          {/* Icon */}
           <ArrowRightLeft
             className={`absolute right-4 w-5 h-5 transform transition-all duration-500 group-hover:scale-125 group-hover:rotate-12 ${
               filter === 'futura' ? 'rotate-0' : 'rotate-180'
@@ -59,7 +57,6 @@ const ToggleButton = () => {
             opacity: 1;
           }
         }
-
         @keyframes slideInUp {
           from {
             transform: translateY(100%);
