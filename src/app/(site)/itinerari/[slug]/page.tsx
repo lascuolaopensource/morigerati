@@ -93,13 +93,12 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           </div>
         )}
 
-{itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
+        {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
           <div className="my-8">
             <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
             <MySwiper items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" />
           </div>
         )}
-        
       </div>
     </div>
   )
