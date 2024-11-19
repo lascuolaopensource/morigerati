@@ -4,12 +4,22 @@ import { usePathname } from 'next/navigation'
 
 const BackButton = () => {
   const router = useRouter()
+  const pathname = usePathname()
+
+  const getParentRoute = () => {
+    if (pathname.startsWith('/luoghi')) return '/luoghi'
+    if (pathname.startsWith('/itinerari')) return '/itinerari'
+    if (pathname.startsWith('/stakeholders')) return '/stakeholders'
+    if (pathname.startsWith('/residenze')) return '/residenze'
+    if (pathname.startsWith('/articoli')) return '/articoli'
+    return '/'
+  }
 
   const handleClick = () => {
-    router.back()
+    router.push(getParentRoute())
   }
+
   const GetPath = () => {
-    const pathname = usePathname()
     if (pathname.startsWith('/luoghi')) return 'tutti i luoghi'
     if (pathname.startsWith('/itinerari')) return 'tutti gli itinerari'
     if (pathname.startsWith('/stakeholders')) return 'tutti gli stakeholder'
@@ -18,7 +28,6 @@ const BackButton = () => {
   }
 
   const GetColor = () => {
-    const pathname = usePathname()
     if (pathname.startsWith('/luoghi')) return 'bg-luogoColor'
     else if (pathname.startsWith('/itinerari')) return 'bg-itinerarioColor'
     else if (pathname.startsWith('/stakeholders')) return 'bg-stakeholderColor'
@@ -28,7 +37,6 @@ const BackButton = () => {
   }
 
   const GetColorScuro = () => {
-    const pathname = usePathname()
     if (pathname.startsWith('/luoghi')) return 'border-luogoColorScuro'
     else if (pathname.startsWith('/itinerari')) return 'border-itinerarioColorScuro'
     else if (pathname.startsWith('/stakeholders')) return 'border-stakeholderColorScuro'
