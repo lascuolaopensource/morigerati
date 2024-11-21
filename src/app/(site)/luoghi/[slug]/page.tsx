@@ -14,6 +14,7 @@ import { LatLngTuple } from 'leaflet'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Itinerari, Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
+import LuogoInfoRow from '@/components/luoghi/luogoInfoRow'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -36,89 +37,64 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
     <div className="bg-white">
       <Copertina copertina={luogoData?.copertina as Media | undefined} />
 
-      <div className="p-4 sm:px-36 max-w-screen-xl mx-auto">
+      <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
         <BackButton />
         <RandomPixel p={3} />
         <div className="pt-4"></div>
-        {luogoData.nome ? <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1> : <p></p>}
-        <StringToHTML htmlString={luogoData.testo_html ?? ''} />
-        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[300px] z-0">
-          <DynamicMappa initialPosition={position} initialZoom={40} showPositionPin={true} />
-        </div>
-        {luogoData.Itinerari_relation && luogoData.Itinerari_relation.length > 0 ? (
-          <h2 className="text-center">In quale itinerario potrai trovarci</h2>
-        ) : (
-          ''
-        )}
-        {
-          <Suspense fallback={<div>Loading slides...</div>}>
-            <MySwyper items={luogoData.Itinerari_relation as Itinerari[]} category="itinerari" />
-          </Suspense>
-        }
 
-        {luogoData.servizi && luogoData.servizi.length > 0 ? (
-          <h2 className="text-center pt-6">Servizi</h2>
-        ) : (
-          <div></div>
-        )}
-
-        {luogoData.servizi && luogoData.servizi.length > 0 ? (
-          luogoData.servizi.map((servizio, index) => (
-            <div key={index} className="mt-4">
-              <h4 className="text-xl">{servizio.nome}</h4>
-              <StringToHTML htmlString={servizio.testo_html ?? ''} />
+        {/* Grid container for desktop layout */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-8 mb-8">
+          {/* Left column: Content */}
+          <div>
+            {luogoData.nome ? (
+              <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1>
+            ) : (
+              <p></p>
+            )}
+            <div className="mb-6">
+              <StringToHTML htmlString={luogoData.testo_html ?? ''} />
             </div>
-          ))
-        ) : (
-          <p></p>
-        )}
-        <Galleria items={(luogoData.galleria as Media[]) || undefined} />
-        <div className="pb-8"></div>
-        <div className="sm:grid sm:grid-cols-2">
-          <div>
-            {luogoData.contatti && luogoData.contatti.length > 0 ? (
-              <h2 className="mb-2 ">Contatti:</h2>
-            ) : (
-              <div></div>
-            )}
-
-            {luogoData.contatti && luogoData.contatti.length > 0 ? (
-              <ul className="mb-6">
-                {luogoData.contatti.map((contatto, index) => (
-                  <li key={index} className="mb-2">
-                    <p>{contatto.nome}</p>
-                    {contatto.telefono && <p className="text-xs">Telefono: {contatto.telefono}</p>}
-                    {contatto.email && <p className="text-xs">Email: {contatto.email}</p>}
-                    {contatto.link && (
-                      <p className="text-xs">
-                        Link:{' '}
-                        <a
-                          className="text-xs"
-                          href={contatto.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {contatto.link}
-                        </a>
-                      </p>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="mb-6"></p>
-            )}
           </div>
-          <div>
-            {isRichTextEmpty(luogoData.orari) ? <div></div> : <h2>Orari di Apertura:</h2>}
 
-            {luogoData.orari && luogoData.orari.root ? (
-              <StringToHTML htmlString={luogoData.orari_html ?? ''} />
-            ) : (
-              <p className="mb-6"> </p>
-            )}
+          {/* Right column: Map */}
+          <div>
+            <div className="h-[500px]">
+              <DynamicMappa
+                initialPosition={position}
+                initialZoom={40}
+                showPositionPin={true}
+              />
+            </div>
           </div>
         </div>
+
+        {/* Info row component */}
+        <LuogoInfoRow
+          servizi={luogoData.servizi}
+          contatti={luogoData.contatti}
+          orari_html={luogoData.orari_html}
+          orari={luogoData.orari}
+        />
+
+        {/* Galleria section */}
+        <div className="mb-8">
+          <Galleria items={(luogoData.galleria as Media[]) || undefined} />
+        </div>
+
+        {/* Itinerari correlati section */}
+        {luogoData.Itinerari_relation && luogoData.Itinerari_relation.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4 text-center">
+              In quale itinerario potrai trovarci
+            </h2>
+            <Suspense fallback={<div>Loading slides...</div>}>
+              <MySwyper
+                items={luogoData.Itinerari_relation as Itinerari[]}
+                category="itinerari"
+              />
+            </Suspense>
+          </div>
+        )}
       </div>
     </div>
   )

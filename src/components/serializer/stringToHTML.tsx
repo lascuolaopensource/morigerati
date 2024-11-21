@@ -7,7 +7,7 @@ interface HtmlContentProps {
 
 const StringToHTML: React.FC<HtmlContentProps> = ({ htmlString, classs }) => {
   return (
-    <div className="z-50" style={{ zIndex: 8000, position: 'relative' }}>
+    <div>
       <article
         className={`prose max-w-prose ${classs} `}
         dangerouslySetInnerHTML={{ __html: htmlString }}

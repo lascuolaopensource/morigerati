@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Media } from '@/payload-types'
 import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa'
@@ -12,6 +12,16 @@ interface GalleriaProps {
 
 const MediaGallery: React.FC<GalleriaProps> = ({ items, initialIndex = 0, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex)
+
+  useEffect(() => {
+    // Blocca lo scroll quando il componente viene montato
+    document.body.style.overflow = 'hidden'
+    
+    // Ripristina lo scroll quando il componente viene smontato
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [])
 
   if (items === null || items === undefined) return null
 
@@ -28,17 +38,18 @@ const MediaGallery: React.FC<GalleriaProps> = ({ items, initialIndex = 0, onClos
 
     if (!isVideo) {
       return (
-        <div className="z-50">
+        <div className="relative w-full h-full">
           <Image
             src={item.url || ''}
             alt={item.alt || 'Gallery Image'}
             layout="fill"
             objectFit="contain"
+            priority
           />
         </div>
       )
     } else {
-      return <video src={item?.url || ''} controls style={{ width: '100%', height: '100%' }} />
+      return <video src={item?.url || ''} controls className="w-full h-full object-contain" />
     }
   }
 
@@ -50,7 +61,7 @@ const MediaGallery: React.FC<GalleriaProps> = ({ items, initialIndex = 0, onClos
 
   return (
     <div
-      className="fixed inset-0 w-full h-full bg-black bg-opacity-80 flex justify-center items-center z-50"
+      className="fixed inset-0 w-full h-full bg-black bg-opacity-80 flex justify-center items-center z-[999]"
       onClick={handleContainerClick}
     >
       <button

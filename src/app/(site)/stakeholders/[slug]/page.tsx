@@ -1,7 +1,8 @@
 import React from 'react'
+import { loadDb } from '@/utils/db'
+import { notFound } from 'next/navigation'
 
 import BackButton from '@/components/uiElements/backButton'
-import { loadDb } from '@/utils/db'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Stakeholder as StakeholderType } from '@/payload-types'
 
@@ -11,24 +12,39 @@ import Copertina from '@/components/uiElements/copertina'
 
 import { Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
-
 import ArticoliTagsList from '@/components/articoli/tagsList'
+import CardGrid from '@/components/card/wrappers/cardsSwiper'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function Stakeholder({ params }: { params: { slug: string } }) {
   const db = await loadDb()
+
+  // Get stakeholder
   const stakeholders = await db.find({
     collection: 'stakeholders',
-    where: {
-      id: {
-        equals: params.slug,
-      },
-    },
-    depth: 1,
+    depth: 2,
   })
-  const stakeholderData = stakeholders.docs[0] as StakeholderType
+
+  const stakeholderData = stakeholders.docs.find((s) => s.id === params.slug)
+
+  if (!stakeholderData) {
+    notFound()
+  }
+
+  // Get all itinerari
+  const allItinerari = await db.find({
+    collection: 'itinerari',
+    depth: 2,
+  })
+
+  // Filter itinerari that have this stakeholder
+  const itinerariCorrelati = allItinerari.docs.filter((itinerario) =>
+    itinerario.stakeholders?.some((s) =>
+      typeof s === 'string' ? s === stakeholderData.id : s.id === stakeholderData.id,
+    ),
+  )
 
   const position: LatLngTuple = stakeholderData.posizione ?? [40.139949, 15.555182]
 
@@ -38,55 +54,113 @@ export default async function Stakeholder({ params }: { params: { slug: string }
         <Copertina copertina={stakeholderData.copertina as Media | undefined} />
       )}
 
-      <div className="p-4 sm:px-36 max-w-screen-xl mx-auto">
+      <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
         <BackButton />
         <div className="pt-4"></div>
-        {stakeholderData.nome ? (
-          <h1 className="text-4xl font-bold mb-4">{stakeholderData.nome}</h1>
-        ) : (
-          <p></p>
-        )}
-        {stakeholderData.testo && stakeholderData.testo.root ? (
-          <div className="mb-6">
-            {' '}
-            {stakeholderData.tipologia ? (
-              <p className="inline border-2 border-black pt-2 px-2">{stakeholderData.tipologia}</p>
-            ) : null}
-            <div className="pt-4" />
-            <StringToHTML htmlString={stakeholderData.testo_html ?? ''} />
+
+        {/* Grid container for desktop layout */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-8 mb-8">
+          {/* Left column: Content */}
+          <div>
+            {/* Nome e tipologia */}
+            <div className="mb-6">
+              {stakeholderData.nome && (
+                <h1 className="text-4xl font-bold mb-4">{stakeholderData.nome}</h1>
+              )}
+
+              {stakeholderData.tipologia && (
+                <div className="mb-4">
+                  <span className="inline-block border-2 border-black px-3 py-1 text-sm font-medium">
+                    {stakeholderData.tipologia}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Testo descrittivo */}
+            {stakeholderData.testo && stakeholderData.testo.root && (
+              <div className="mb-6">
+                <StringToHTML htmlString={stakeholderData.testo_html ?? ''} />
+              </div>
+            )}
+
+            {/* Tags */}
+            {stakeholderData.tipologia && (
+              <div className="mb-6">
+                <ArticoliTagsList
+                  tags={
+                    Array.isArray(stakeholderData.tipologia)
+                      ? stakeholderData.tipologia
+                      : [stakeholderData.tipologia]
+                  }
+                />
+              </div>
+            )}
+
+            {/* Contatti */}
+            {stakeholderData.contatti && stakeholderData.contatti.length > 0 && (
+              <div className="w-full bg-gray-50 p-6 rounded-lg">
+                <h2 className="text-2xl font-semibold mb-4">Contatti</h2>
+                <ul className="space-y-4">
+                  {stakeholderData.contatti.map((contatto, index) => (
+                    <li
+                      key={index}
+                      className="border-b border-gray-200 last:border-0 pb-4 last:pb-0"
+                    >
+                      <p className="font-medium text-lg mb-2">{contatto.nome}</p>
+                      {contatto.telefono && (
+                        <p className="text-sm mb-1">
+                          <span className="font-medium">Telefono:</span> {contatto.telefono}
+                        </p>
+                      )}
+                      {contatto.email && (
+                        <p className="text-sm mb-1">
+                          <span className="font-medium">Email:</span> {contatto.email}
+                        </p>
+                      )}
+                      {contatto.link && (
+                        <p className="text-sm">
+                          <span className="font-medium">Link:</span>{' '}
+                          <a
+                            href={contatto.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:underline"
+                          >
+                            {contatto.link}
+                          </a>
+                        </p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
-        ) : (
-          <p></p>
-        )}
-        <div className="bg-white-700 mx-auto my-5 w-[98%] h-[300px] z-0">
-          <DynamicMappa initialPosition={position} initialZoom={40} showPositionPin={true} />
+
+          {/* Right column: Map */}
+          <div>
+            <div className="h-[500px]">
+              <DynamicMappa initialPosition={position} initialZoom={13} showPositionPin={true} />
+            </div>
+          </div>
         </div>
-        <Galleria items={stakeholderData.galleria as Media[] | undefined} />
-        {stakeholderData.contatti && stakeholderData.contatti.length > 0 ? (
-          <h2 className="text-2xl font-semibold mb-2 pt-20 sm:text-center">Contatti</h2>
-        ) : (
-          <div></div>
+
+        {/* Galleria */}
+        {stakeholderData.galleria && stakeholderData.galleria.length > 0 && (
+          <div className="mt-8">
+            <Galleria items={stakeholderData.galleria as Media[] | undefined} />
+          </div>
         )}
-        {stakeholderData.contatti && stakeholderData.contatti.length > 0 ? (
-          <ul className="mb-6">
-            {stakeholderData.contatti.map((contatto, index) => (
-              <li key={index} className="mb-2">
-                <strong>{contatto.nome}</strong>
-                {contatto.telefono && <p>Telefono: {contatto.telefono}</p>}
-                {contatto.email && <p>Email: {contatto.email}</p>}
-                {contatto.link && (
-                  <p>
-                    Link:{' '}
-                    <a href={contatto.link} target="_blank" rel="noopener noreferrer">
-                      {contatto.link}
-                    </a>
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mb-6"></p>
+
+        {/* Itinerari correlati */}
+        {itinerariCorrelati && itinerariCorrelati.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl text-center font-semibold mb-6">
+              In quale itinerario potrai trovarci
+            </h2>
+            <CardGrid items={itinerariCorrelati} category="itinerari" />
+          </div>
         )}
       </div>
     </div>

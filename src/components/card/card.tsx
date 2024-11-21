@@ -14,7 +14,6 @@ interface CardProps {
   media: Media | undefined
   slugUrl: string
   category: CategoryType
-  titlePosition?: 'top' | 'bottom'
 }
 
 const styleVariants = {
@@ -76,7 +75,7 @@ const MediaContent: React.FC<{ media: Media | undefined; title: string; isVideo:
   )
 }
 
-const Card: React.FC<CardProps> = ({ title, media, category, titlePosition, slugUrl }) => {
+const Card: React.FC<CardProps> = ({ title, media, category, slugUrl }) => {
   const [randomLetter, setRandomLetter] = useState<string>('')
   const isVideo = media?.mimeType?.startsWith('video/')
   const titleRef = useRef<HTMLDivElement>(null)
@@ -117,19 +116,14 @@ const Card: React.FC<CardProps> = ({ title, media, category, titlePosition, slug
         >
           {randomLetter}
         </div>
-        {titlePosition === 'top' ? (
-          <div ref={titleRef} className="pl-2 min-h-[1rem]">
-            <p className="pt-1 font-semibold text-xs leading-tight pr-1">{title}</p>
-          </div>
-        ) : null}
+
+        <div ref={titleRef} className="pl-2 min-h-[1rem]">
+          <p className="pt-1 font-semibold text-xs leading-tight pr-1">{title}</p>
+        </div>
+
         <div className="h-[180px]">
           <MediaContent media={media} title={title} isVideo={isVideo ?? false} />
         </div>
-        {titlePosition === 'bottom' ? (
-          <div ref={titleRef} className="pl-2">
-            <p className="pt-1 font-medium text-xs leading-tight pr-1">{title}</p>
-          </div>
-        ) : null}
       </div>
     </Link>
   )

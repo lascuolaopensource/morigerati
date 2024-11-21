@@ -45,60 +45,75 @@ export default async function Itinerario({ params }: { params: { slug: string } 
     <div className="bg-white">
       <Copertina copertina={itinerarioData?.copertina as Media | undefined} />
 
-      <div className="p-4 sm:px-36 max-w-screen-xl mx-auto">
+      <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
         <BackButton />
         <RandomPixel p={2} />
         <div className="pt-4"></div>
-        {itinerarioData?.nome ? (
-          <h1 className="text-4xl font-bold mb-4">{itinerarioData?.nome}</h1>
-        ) : (
-          <p></p>
-        )}
 
-        <div className="mb-6">
-          <StringToHTML htmlString={itinerarioData?.testo_html ?? ''} />
-        </div>
-        <div className="bg-white-700 mx-auto my-5 w-[98%] z-0">
-          <DynamicMappa
-            initialPosition={position}
-            initialZoom={14}
-            gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
-            localizedMedia={itinerarioData?.media_geolocalizzati}
-          />
-        </div>
+        {/* Grid container for desktop layout */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+          {/* Left column: Title, text, and details */}
+          <div className="lg:order-1">
+            {itinerarioData?.nome ? (
+              <h1 className="text-4xl font-bold mb-4">{itinerarioData?.nome}</h1>
+            ) : (
+              <p></p>
+            )}
 
-        <ItinerarioDetailsCard
-          lunghezza={itinerarioData?.lunghezza}
-          tempo={itinerarioData?.tempo}
-          dislivello={itinerarioData?.dislivello}
-          difficolta={itinerarioData?.difficolta}
-          tipo={itinerarioData?.tipo}
-        />
-
-        <div className="">
-          <MediaViewer media={(itinerarioData?.Video as Media) || undefined} />
-        </div>
-        <div className="pb-2" />
-        <Galleria items={itinerarioData?.galleria as Media[] | undefined} />
-
-        <ServiziCardWrapper servizi={itinerarioData?.servizi} />
-
-        {itinerarioData?.stakeholders && itinerarioData?.stakeholders.length > 0 && (
-          <div className="my-8">
-            <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders che troverai</h2>
-            <MySwiper
-              items={itinerarioData?.stakeholders as Stakeholder[]}
-              category="stakeholders"
+            <ItinerarioDetailsCard
+              lunghezza={itinerarioData?.lunghezza}
+              tempo={itinerarioData?.tempo}
+              dislivello={itinerarioData?.dislivello}
+              difficolta={itinerarioData?.difficolta}
+              tipo={itinerarioData?.tipo}
             />
-          </div>
-        )}
 
-        {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
-          <div className="my-8">
-            <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
-            <MySwiper items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" />
+            <div className="mb-6 mt-6">
+              <StringToHTML htmlString={itinerarioData?.testo_html ?? ''} />
+            </div>
           </div>
-        )}
+
+          {/* Right column: Map */}
+          <div className="lg:order-2">
+            <div className="h-[500px] lg:sticky lg:top-4">
+              <DynamicMappa
+                initialPosition={position}
+                initialZoom={14}
+                gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
+                localizedMedia={itinerarioData?.media_geolocalizzati}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Content below the two columns */}
+        <div className="">
+          {itinerarioData?.Video && (
+            <div className="mb-4">
+              <MediaViewer media={(itinerarioData?.Video as Media) || undefined} />
+            </div>
+          )}
+          <Galleria items={itinerarioData?.galleria as Media[] | undefined} />
+
+          <ServiziCardWrapper servizi={itinerarioData?.servizi} />
+
+          {itinerarioData?.stakeholders && itinerarioData?.stakeholders.length > 0 && (
+            <div className="my-8">
+              <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders che troverai</h2>
+              <MySwiper
+                items={itinerarioData?.stakeholders as Stakeholder[]}
+                category="stakeholders"
+              />
+            </div>
+          )}
+
+          {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
+            <div className="my-8">
+              <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
+              <MySwiper items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

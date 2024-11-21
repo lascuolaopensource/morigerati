@@ -60,7 +60,7 @@ const Galleria: React.FC<GalleriaProps> = ({ items }) => {
   return (
     <div>
       {' '}
-      <h2 className="text-center pt-8">Galleria</h2>
+      <h2 className="text-center  pb-8">Galleria</h2>
       <>
         <Swiper
           {...swiperParams}

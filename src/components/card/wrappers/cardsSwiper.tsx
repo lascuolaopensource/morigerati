@@ -7,14 +7,14 @@ import { Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
 interface CardGridProps {
   items?: (Itinerari | Luoghi | Stakeholder | Residenze)[] | null
   category: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
-  cardTitlePosition?: 'top' | 'bottom'
+
   singleRow?: boolean
 }
 
 const CardGrid: React.FC<CardGridProps> = ({
   items = [],
   category,
-  cardTitlePosition,
+
   singleRow = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -57,7 +57,6 @@ const CardGrid: React.FC<CardGridProps> = ({
                 media={item.copertina as Media | undefined}
                 slugUrl={`/${category}/${item.id}`}
                 category={category}
-                titlePosition={cardTitlePosition ?? 'top'}
               />
             </div>
           ))}

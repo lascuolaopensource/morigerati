@@ -14,7 +14,7 @@ const MediaViewer: React.FC<mediaProps> = ({ media }) => {
   const isVideo = media.mimeType?.startsWith('video/')
 
   return (
-    <div className=" h-max left-1/2 right-1/2 pt-4">
+    <div className="h-max left-1/2 right-1/2">
       {isVideo ? (
         <video className="w-full h-full r" playsInline controls={true}>
           <source src={media.url || ''} type={media.mimeType || ''} />
@@ -28,7 +28,6 @@ const MediaViewer: React.FC<mediaProps> = ({ media }) => {
           height={100}
         />
       )}
-      <div className=""></div>
     </div>
   )
 }
