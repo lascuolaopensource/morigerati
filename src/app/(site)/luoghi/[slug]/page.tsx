@@ -1,10 +1,11 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/uiElements/backButton'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
-import MySwyper from '@/components/card/wrappers/cardsSwiper'
+import CardGrid from '@/components/card/wrappers/cardsSwiper'
 import { RandomPixel } from '@/components/uiElements/pixels'
+import { notFound } from 'next/navigation'
 
 import Copertina from '@/components/uiElements/copertina'
 
@@ -21,15 +22,31 @@ export const revalidate = 0
 
 export default async function Luogo({ params }: { params: { slug: string } }) {
   const db = await loadDb()
-  const luogo = await db.find({
+  
+  // Get luogo
+  const luoghi = await db.find({
     collection: 'luoghi',
-    where: {
-      id: {
-        equals: params.slug,
-      },
-    },
+    depth: 2,
   })
-  const luogoData = luogo.docs[0]
+
+  const luogoData = luoghi.docs.find((l) => l.id === params.slug)
+
+  if (!luogoData) {
+    notFound()
+  }
+
+  // Get all itinerari
+  const allItinerari = await db.find({
+    collection: 'itinerari',
+    depth: 2,
+  })
+
+  // Filter itinerari that have this luogo
+  const itinerariCorrelati = allItinerari.docs.filter((itinerario) =>
+    itinerario.luoghi?.some((l) => 
+      typeof l === 'string' ? l === luogoData.id : l.id === luogoData.id
+    ),
+  )
 
   const position: LatLngTuple = luogoData.posizione ?? [40.139949, 15.555182]
 
@@ -61,7 +78,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
             <div className="h-[500px]">
               <DynamicMappa
                 initialPosition={position}
-                initialZoom={40}
+                initialZoom={13}
                 showPositionPin={true}
               />
             </div>
@@ -77,22 +94,22 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         />
 
         {/* Galleria section */}
-        <div className="mb-8">
-          <Galleria items={(luogoData.galleria as Media[]) || undefined} />
-        </div>
+        {luogoData.galleria && luogoData.galleria.length > 0 && (
+          <div className="mt-8">
+            <Galleria items={luogoData.galleria as Media[] | undefined} />
+          </div>
+        )}
 
         {/* Itinerari correlati section */}
-        {luogoData.Itinerari_relation && luogoData.Itinerari_relation.length > 0 && (
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 text-center">
+        {itinerariCorrelati && itinerariCorrelati.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-semibold mb-6 text-center">
               In quale itinerario potrai trovarci
             </h2>
-            <Suspense fallback={<div>Loading slides...</div>}>
-              <MySwyper
-                items={luogoData.Itinerari_relation as Itinerari[]}
-                category="itinerari"
-              />
-            </Suspense>
+            <CardGrid
+              items={itinerariCorrelati}
+              category="itinerari"
+            />
           </div>
         )}
       </div>
