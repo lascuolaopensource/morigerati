@@ -35,11 +35,11 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) =>
   return (
     <Link href="/">
       <div
-        className="w-[300px]"
+        className="w-[250px]"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <svg viewBox="0 0 700 100" className="w-full" preserveAspectRatio="xMinYMid meet">
+        <svg viewBox="0 0 600 100" className="w-full" preserveAspectRatio="xMinYMid meet">
           {/* Random Letters */}
           <text
             x="20"

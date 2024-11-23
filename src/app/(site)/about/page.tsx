@@ -15,15 +15,15 @@ const About = async () => {
     slug: 'chi_siamo',
   })
   return (
-    <main className='max-w-screen-xl mx-auto pb-4'>
+    <main className="max-w-screen-xl mx-auto pb-4">
       {about.copertina && <Copertina copertina={about.copertina as Media | undefined} />}
       <div className="relative bg-white p-3 pt-5 max-w-screen-xl mx-auto">
         <RandomPixel />
         <StringToHTML htmlString={about.testo_html ?? ''} />
       </div>
-
-      <Galleria items={about.galleria as Media[] | undefined} />
-
+      <div className="p-4">
+        <Galleria items={about.galleria as Media[] | undefined} />
+      </div>
     </main>
   )
 }

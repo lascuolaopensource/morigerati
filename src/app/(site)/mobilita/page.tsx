@@ -15,15 +15,15 @@ const Mobilita = async () => {
     slug: 'mobilita_sostenibile',
   })
   return (
-    <main className='max-w-screen-xl mx-auto pb-4'>
+    <main className="max-w-screen-xl mx-auto pb-4">
       {mobilita.copertina && <Copertina copertina={mobilita.copertina as Media | undefined} />}
       <div className="relative bg-white p-3 pt-5 max-w-screen-xl mx-auto">
         <RandomPixel />
         <StringToHTML htmlString={mobilita.testo_html ?? ''} />
       </div>
-    
-      <Galleria items={mobilita.galleria as Media[] | undefined} />
-
+      <div className="p-4">
+        <Galleria items={mobilita.galleria as Media[] | undefined} />
+      </div>
     </main>
   )
 }
