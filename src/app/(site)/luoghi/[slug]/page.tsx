@@ -74,12 +74,13 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           </div>
 
           {/* Right column: Map */}
-          <div>
-            <div className="h-[500px]">
+          <div className="lg:order-2">
+            <div className="h-[500px] lg:sticky lg:top-4 flex items-center justify-center">
               <DynamicMappa
                 initialPosition={position}
-                initialZoom={13}
-                showPositionPin={true}
+                initialZoom={14}
+                localizedMedia={luogoData?.media_geolocalizzati}
+                luogoMarker={luogoData}
               />
             </div>
           </div>

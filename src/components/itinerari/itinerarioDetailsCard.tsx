@@ -1,9 +1,12 @@
+'use client'
 import { type Itinerari } from '@/payload-types'
+import { useState, useEffect } from 'react'
 
-import { GiPathDistance } from 'react-icons/gi'
-import { LuTimer } from 'react-icons/lu'
-import { SiLevelsdotfyi } from 'react-icons/si'
-import { IoSpeedometerOutline } from 'react-icons/io5'
+const generateRandomLetter = (usedLetters: string[]): string => {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
+  const availableLetters = alphabet.filter(letter => !usedLetters.includes(letter))
+  return availableLetters[Math.floor(Math.random() * availableLetters.length)]
+}
 
 type ItinerarioDetailsProps = Pick<
   Itinerari,
@@ -13,49 +16,41 @@ type ItinerarioDetailsProps = Pick<
 interface DetailSectionProps {
   label: string
   value: string | number | null | undefined
-  icon?: string
-}
-interface IconsProps {
-  icon?: string
-}
-const Icons = ({ icon }: IconsProps) => {
-  if (icon == 'distance') {
-    return <GiPathDistance size={40} />
-  }
-  if (icon == 'time') {
-    return <LuTimer size={40} />
-  }
-  if (icon == 'dislivello') {
-    return <SiLevelsdotfyi size={40} />
-  }
-  if (icon == 'difficolta') {
-    return <IoSpeedometerOutline size={40} />
-  }
+  letter: string
 }
 
-const DetailSection = ({ label, value, icon }: DetailSectionProps) => (
-  <div className="h-min rounded-xl bg-itinerariColor p-2 text-black">
-    <div className="flex h-full gap-2">
-      <Icons icon={icon} />
-      <div className="flex flex-col">
-        <span className=" text-sm">{label}</span>
-        <span className="text-sm font-bold ">{value ?? 'Non disponibile'}</span>
+const DetailSection = ({ label, value, letter }: DetailSectionProps) => {
+  return (
+    <div className="h-full bg-itinerariColor/20 p-2 text-black relative overflow-hidden">
+      <span className="absolute -top-4 -right-1 text-7xl text-itinerariColor/15 font-bold font-transluoghi z-0">
+        {letter}
+      </span>
+      <div className="flex flex-col relative z-1">
+        <span className="text-xs uppercase">{label}</span>
+        <span className="text-2xl">{value ?? 'Non disponibile'}</span>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
-const TipoSection = ({ tipo }: { tipo: ItinerarioDetailsProps['tipo'] }) => {
+interface TipoSectionProps {
+  tipo: ItinerarioDetailsProps['tipo']
+  letter: string
+}
+
+const TipoSection = ({ tipo, letter }: TipoSectionProps) => {
   const formatTipo = (tipoValue: typeof tipo) => {
     if (!tipoValue?.length) return 'Tipo non disponibile'
     return tipoValue.join(', ')
   }
 
   return (
-    <div className="col-span-2 2 rounded-xl bg-itinerariColor p-2 text-black">
-      <div className="flex h-full justify-center">
-        <span className="text-xl font-bold">{formatTipo(tipo)}</span>
-      </div>
+    <div className="w-full bg-itinerariColor/20 p-2 text-black relative min-h-[60px] flex items-center justify-center overflow-hidden">
+      <span className="absolute -top-4 -right-1 text-7xl text-itinerariColor/15 font-bold font-transluoghi z-0">
+        {letter}
+      </span>
+      <span className="text-xs uppercase absolute top-2 left-2 z-1">Tipo</span>
+      <span className="text-3xl relative z-1">{formatTipo(tipo)}</span>
     </div>
   )
 }
@@ -67,18 +62,46 @@ export default function ItinerarioDetailsCard({
   difficolta,
   tipo,
 }: ItinerarioDetailsProps) {
+  const [letters, setLetters] = useState<string[]>([])
+
+  useEffect(() => {
+    const newLetters: string[] = []
+    for (let i = 0; i < 5; i++) {
+      newLetters.push(generateRandomLetter(newLetters))
+    }
+    setLetters(newLetters)
+  }, [])
+
   const formatValue = (value: string | number | null | undefined, unit?: string) => {
     if (!value) return 'Non disponibile'
     return unit ? `${value} ${unit}` : value
   }
 
   return (
-    <div className="pt-5 grid grid-cols-2 gap-2 bg-white">
-      <TipoSection tipo={tipo} />
-      <DetailSection label="lunghezza" value={formatValue(lunghezza, 'km')} icon="distance" />
-      <DetailSection label="durata" value={formatValue(tempo, 'ore')} icon="time" />
-      <DetailSection label="dislivello" value={formatValue(dislivello, 'mt')} icon="dislivello" />
-      <DetailSection label="difficoltà" value={formatValue(difficolta)} icon="difficolta" />
+    <div className="pt-5 grid gap-2 bg-white w-full">
+      <TipoSection tipo={tipo} letter={letters[0] || ''} />
+      <div className="grid grid-cols-2 gap-2 w-full">
+        <DetailSection
+          label="lunghezza"
+          value={formatValue(lunghezza, 'km')}
+          letter={letters[1] || ''}
+        />
+        <DetailSection
+          label="durata"
+          value={formatValue(tempo, 'ore')}
+          letter={letters[2] || ''}
+        />
+        <DetailSection
+          label="dislivello"
+          value={formatValue(dislivello, 'mt')}
+          letter={letters[3] || ''}
+        />
+        <DetailSection
+          label="difficoltà"
+          value={formatValue(difficolta)}
+          letter={letters[4] || ''}
+        />
+      </div>
     </div>
   )
 }

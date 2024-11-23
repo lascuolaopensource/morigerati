@@ -47,7 +47,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
       <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
         <BackButton />
-        <RandomPixel p={2} />
+
         <div className="pt-4"></div>
 
         {/* Grid container for desktop layout */}
@@ -75,7 +75,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
           {/* Right column: Map */}
           <div className="lg:order-2">
-            <div className="h-[500px] lg:sticky lg:top-4">
+            <div className="h-[500px] lg:sticky lg:top-4 flex items-center justify-center">
               <DynamicMappa
                 initialPosition={position}
                 initialZoom={14}

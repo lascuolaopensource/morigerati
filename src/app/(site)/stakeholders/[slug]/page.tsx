@@ -139,9 +139,9 @@ export default async function Stakeholder({ params }: { params: { slug: string }
           </div>
 
           {/* Right column: Map */}
-          <div>
-            <div className="h-[500px]">
-              <DynamicMappa initialPosition={position} initialZoom={13} showPositionPin={true} />
+          <div className="lg:order-2">
+            <div className="h-[500px] lg:sticky lg:top-4 flex items-center justify-center">
+              <DynamicMappa initialPosition={position} initialZoom={14} showPositionPin={true} />
             </div>
           </div>
         </div>
