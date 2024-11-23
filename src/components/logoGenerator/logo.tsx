@@ -11,7 +11,7 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) =>
   const [isHovering, setIsHovering] = useState(false)
 
   const generateLetters = () => {
-    const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    const alphabet = 'abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ'
     let letter1, letter2
     do {
       letter1 = alphabet[Math.floor(Math.random() * alphabet.length)]
@@ -25,58 +25,69 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) =>
 
   useEffect(() => {
     generateLetters()
-    const normalInterval = setInterval(generateLetters, 3000)
-    let hoverInterval: NodeJS.Timeout | null = null
-
-    if (isHovering && window.innerWidth >= 1024) {
-      hoverInterval = setInterval(generateLetters, 50)
-    }
-
-    return () => {
-      clearInterval(normalInterval)
-      if (hoverInterval) clearInterval(hoverInterval)
-    }
+    const interval = setInterval(
+      generateLetters,
+      isHovering && window.innerWidth >= 1024 ? 50 : 3000,
+    )
+    return () => clearInterval(interval)
   }, [isHovering])
 
   return (
     <Link href="/">
-      <div className="flex items-center gap-1 ">
-        <div
-          className="flex h-7 justify-center items-center pb-1 text-center"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
-          <svg
-            viewBox="0 0 100 100"
-            className="h-[83px] w-[100px]"
-            preserveAspectRatio="xMidYMid meet"
-            shapeRendering="geometricPrecision"
-            textRendering="geometricPrecision"
-            fill={textColor}
+      <div
+        className="w-[300px]"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
+        <svg viewBox="0 0 700 100" className="w-full" preserveAspectRatio="xMinYMid meet">
+          {/* Random Letters */}
+          <text
+            x="20"
+            y="75"
+            className="text-[70px] font-bold"
+            style={{
+              fontFamily: 'Transluoghi',
+              fill: textColor,
+            }}
           >
+            {letters.first}
+            {letters.second}
+          </text>
+
+          {/* Text Block */}
+          <g transform="translate(310, 28)">
             <text
-              x="50%"
-              y="50%"
-              dominantBaseline="middle"
-              textAnchor="middle"
-              className="text-[30px] font-bold"
+              className="text-[24px] font-semibold"
               style={{
-                fontFamily: 'Transluoghi',
-                WebkitFontSmoothing: 'antialiased',
-                MozOsxFontSmoothing: 'grayscale',
-                color: 'white',
+                fontFamily: 'sans-serif',
+                fill: textColor,
               }}
             >
-              {letters.first}
-              {letters.second}
+              Transluoghi
             </text>
-          </svg>
-        </div>
-        <div className="flex flex-col text-left -space-y-1">
-          <span className="text-[9px] font-semibold">Transluoghi</span>
-          <span className="text-[9px]">Ecomuseo del Bussento</span>
-          <span className="text-[9px] text-right">Contemporaneo</span>
-        </div>
+            <text
+              y="26"
+              className="text-[24px]"
+              style={{
+                fontFamily: 'sans-serif',
+                fill: textColor,
+              }}
+            >
+              Ecomuseo del Bussento
+            </text>
+            <text
+              x="87"
+              y="51"
+              className="text-[24px]"
+              style={{
+                fontFamily: 'sans-serif',
+                fill: textColor,
+              }}
+            >
+              Contemporaneo
+            </text>
+          </g>
+        </svg>
       </div>
     </Link>
   )
