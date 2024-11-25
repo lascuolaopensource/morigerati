@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 const generateRandomLetter = (usedLetters: string[]): string => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
-  const availableLetters = alphabet.filter(letter => !usedLetters.includes(letter))
+  const availableLetters = alphabet.filter((letter) => !usedLetters.includes(letter))
   return availableLetters[Math.floor(Math.random() * availableLetters.length)]
 }
 
@@ -27,7 +27,7 @@ const DetailSection = ({ label, value, letter }: DetailSectionProps) => {
       </span>
       <div className="flex flex-col relative z-1">
         <span className="text-xs uppercase">{label}</span>
-        <span className="text-2xl">{value ?? 'Non disponibile'}</span>
+        <span className="text-lg">{value ?? 'Non disponibile'}</span>
       </div>
     </div>
   )
@@ -50,7 +50,7 @@ const TipoSection = ({ tipo, letter }: TipoSectionProps) => {
         {letter}
       </span>
       <span className="text-xs uppercase absolute top-2 left-2 z-1">Tipo</span>
-      <span className="text-3xl relative z-1">{formatTipo(tipo)}</span>
+      <span className="text-2xl relative z-1">{formatTipo(tipo)}</span>
     </div>
   )
 }
@@ -86,11 +86,7 @@ export default function ItinerarioDetailsCard({
           value={formatValue(lunghezza, 'km')}
           letter={letters[1] || ''}
         />
-        <DetailSection
-          label="durata"
-          value={formatValue(tempo, 'ore')}
-          letter={letters[2] || ''}
-        />
+        <DetailSection label="durata" value={formatValue(tempo, 'ore')} letter={letters[2] || ''} />
         <DetailSection
           label="dislivello"
           value={formatValue(dislivello, 'mt')}
