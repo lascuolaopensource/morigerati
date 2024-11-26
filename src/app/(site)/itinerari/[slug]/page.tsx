@@ -55,7 +55,9 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           {/* Left column: Title, text, and details */}
           <div className="lg:order-1">
             {itinerarioData?.nome ? (
-              <h1 className="text-4xl font-bold mb-4">{itinerarioData?.nome}</h1>
+              <h1 className="text-4xl text-itinerariColor font-bold mb-4">
+                {itinerarioData?.nome}
+              </h1>
             ) : (
               <p></p>
             )}
@@ -75,7 +77,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
 
           {/* Right column: Map */}
           <div className="lg:order-2">
-            <div className="h-[500px] lg:sticky lg:top-4 flex items-center justify-center">
+            <div className="h-[500px]">
               <DynamicMappa
                 initialPosition={position}
                 initialZoom={14}

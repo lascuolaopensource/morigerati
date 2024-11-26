@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Itinerari } from '@/payload-types'
 import renderElement from '@/utils/renderElement'
 
@@ -21,15 +21,23 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
   }
 
   return (
-    <div className="relative overflow-visible">
-      <div className="relative pt-5">
-        <div className="max-w-[1000px] mx-auto relative z-10 pb-20">
-          <h2 className="text-3xl font-semibold mb-4 bt-1 text-center">Servizi</h2>
-          <div className="flex flex-wrap justify-center gap-4 px-8">
+    <div className="relative overflow-hidden">
+      <div className="relative pt-3">
+        {/* Background letter */}
+
+        <div className="absolute inset-0">
+          <span className="absolute inset-0 flex items-center justify-center text-[10rem] sm:text-[20rem] text-itinerariColor/5 font-bold font-transluoghi pointer-events-none select-none">
+            {bgLetter}
+          </span>
+        </div>
+
+        <div className="max-w-[1400px] mx-auto relative z-10 pb-16">
+          <h2 className="text-2xl font-semibold mb-3 text-center">Servizi</h2>
+          <div className="flex flex-wrap justify-center gap-4 px-6">
             {servizi.map((servizio, index) => (
               <div
                 key={servizio.id || index}
-                className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-md h-[280px] [&:has(.expanded)]:h-auto"
+                className="w-full sm:w-[calc(45%-1rem)] md:w-[calc(30%-1rem)] lg:w-[calc(23%-1rem)] max-w-sm relative"
               >
                 <ServizioCard nome={servizio.nome} testo={servizio.testo} link={servizio.link} />
               </div>
@@ -48,69 +56,86 @@ interface ServizioCardProps {
 }
 
 const generateRandomLetter = (usedLetters: string[]): string => {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   const availableLetters = alphabet.filter((letter) => !usedLetters.includes(letter))
   return availableLetters[Math.floor(Math.random() * availableLetters.length)]
 }
 
 const ServizioCard: React.FC<ServizioCardProps> = ({ nome, testo, link }) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [isOverflowing, setIsOverflowing] = useState(false)
   const [letter, setLetter] = useState('')
-  const textContent = testo?.root ? renderElement(testo.root) : ''
+  const [hasOverflow, setHasOverflow] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
+  const textContent = useMemo(() => (testo?.root ? renderElement(testo.root) : ''), [testo])
 
   useEffect(() => {
     setLetter(generateRandomLetter([]))
   }, [])
 
   useEffect(() => {
-    if (contentRef.current) {
-      setIsOverflowing(contentRef.current.scrollHeight > 150)
+    const checkOverflow = () => {
+      if (contentRef.current) {
+        const hasOverflow = contentRef.current.scrollHeight > contentRef.current.clientHeight
+        setHasOverflow(hasOverflow)
+      }
     }
+
+    checkOverflow()
+    window.addEventListener('load', checkOverflow)
+    return () => window.removeEventListener('load', checkOverflow)
   }, [textContent])
 
   return (
     <div
-      className={`bg-white rounded-lg overflow-hidden p-4 relative h-full ${isExpanded ? 'expanded' : ''}`}
+      className={`bg-white rounded-lg p-3 relative transition-all duration-300 ease-in-out overflow-hidden ${
+        isExpanded ? 'absolute inset-x-0 min-h-[200px] z-10 shadow-lg' : 'h-[200px]'
+      }`}
     >
-      <span className="absolute -top-4 -right-1 text-7xl text-itinerariColor/15 font-bold font-transluoghi z-0">
-        {letter}
-      </span>
-      <div className="relative z-1 h-full flex flex-col">
-        <div className={`${isExpanded ? '' : 'flex-1 overflow-hidden'}`}>
-          <h3 className="text-xl font-bold mb-2">{nome}</h3>
+      <div className="absolute inset-0">
+        <span className="absolute -top-4 -right-1 text-7xl text-itinerariColor/15 font-bold font-transluoghi">
+          {letter}
+        </span>
+      </div>
+
+      <div className="relative h-full flex flex-col">
+        <h3 className="text-lg font-bold mb-2">{nome}</h3>
+
+        <div className="flex-1 overflow-hidden">
           <div
-            className={`relative ${!isExpanded && isOverflowing ? 'max-h-[150px] overflow-hidden' : ''}`}
+            ref={contentRef}
+            className={`text-[10px] transition-all duration-300 ${
+              !isExpanded ? 'line-clamp-6' : ''
+            }`}
           >
-            <div ref={contentRef} className="text-xs">
-              {textContent}
-            </div>
+            {textContent}
           </div>
+
+          {!isExpanded && hasOverflow && (
+            <div className="absolute bottom-8 inset-x-0 h-8 bg-gradient-to-t from-white to-transparent" />
+          )}
         </div>
-        <div className="flex justify-between items-center h-8 mt-4">
+
+        <div className="flex justify-between items-center mt-auto pt-2">
           <div>
-            {isOverflowing && (
+            {hasOverflow && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="text-xs text-black font-medium underline"
+                className="text-[10px] text-gray-600 hover:text-gray-800 underline transition-colors"
               >
-                {isExpanded ? 'Comprimi' : 'Espandi'}
+                {isExpanded ? 'Mostra meno' : 'Mostra tutto'}
               </button>
             )}
           </div>
-          <div>
-            {link && (
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center h-8 w-20 text-xs font-semibold bg-itinerariColor text-black rounded-full transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-itinerariColor"
-              >
-                Prenota
-              </a>
-            )}
-          </div>
+          {link && (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-6 w-16 text-[10px] font-semibold bg-itinerariColor text-black rounded-full transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-itinerariColor"
+            >
+              Prenota
+            </a>
+          )}
         </div>
       </div>
     </div>
