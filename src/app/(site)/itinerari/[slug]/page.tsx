@@ -42,7 +42,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
   const itinerarioData = itinerario.docs[0]
 
   return (
-    <div className="bg-white">
+    <div className="">
       <Copertina copertina={itinerarioData?.copertina as Media | undefined} />
 
       <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">

@@ -71,7 +71,7 @@ const Residenze = async ({ searchParams }: { searchParams: { filter?: string } }
 
   return (
     <main className="min-h-screen">
-      <div className="bg-white p-3 max-w-screen-xl mx-auto ">
+      <div className=" p-3 max-w-screen-xl mx-auto ">
         {testi.residenze.title && (
           <div className="font-normal text-sm pt-4 leading-4">
             <h1 className="font-bold text-[40px] sm:text-center">{testi.residenze.title}</h1>

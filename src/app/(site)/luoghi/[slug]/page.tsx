@@ -51,7 +51,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
   const position: LatLngTuple = luogoData.posizione ?? [40.139949, 15.555182]
 
   return (
-    <div className="bg-white">
+    <div className="">
       <Copertina copertina={luogoData?.copertina as Media | undefined} />
 
       <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">

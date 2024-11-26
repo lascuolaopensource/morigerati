@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it" className="overscroll-none">
-      <body className="min-h-screen overscroll-none">
+      <body className="min-h-screen overscroll-none ">
         <Navbar />
-        <main className="bg-white">
+        <main className=" bg-[#F6F6F6]">
           <DynamicFavicon />
           <div>{children}</div>
         </main>

@@ -37,7 +37,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
   }
 
   return (
-    <div className="bg-white ">
+    <div className="">
       <Copertina copertina={residenzaData.copertina as Media | undefined} />
       <div className="p-4 sm:px-36 max-w-screen-xl mx-auto">
         <BackButton />

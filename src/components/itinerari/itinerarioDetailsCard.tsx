@@ -78,7 +78,7 @@ export default function ItinerarioDetailsCard({
   }
 
   return (
-    <div className="pt-5 grid gap-2 bg-white w-full">
+    <div className="pt-5 grid gap-2 w-full">
       <TipoSection tipo={tipo} letter={letters[0] || ''} />
       <div className="grid grid-cols-2 gap-2 w-full">
         <DetailSection

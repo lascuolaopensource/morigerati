@@ -36,7 +36,7 @@ const Home = async () => {
         <GridOverlay targetSquareSize={20} bottomDensity={1} effectRows={8} />
       </div>
 
-      <div className="bg-white font-normal p-3 pt-4 w-full ">
+      <div className=" font-normal p-3 pt-4 w-full ">
         {/* desktop */}
         <div className="hidden gap-3 sm:flex flex-col">
           <div className="flex justify-center">
@@ -55,7 +55,7 @@ const Home = async () => {
 
         <HomeCollection collection="itinerari" />
         <div className="py-8">
-          <HomeTracksSection 
+          <HomeTracksSection
             title={mappaTitle}
             text_html={mappaText}
             tracciati={tracciati as TracciatiType[]}

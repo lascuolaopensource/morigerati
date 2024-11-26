@@ -17,7 +17,7 @@ const Mobilita = async () => {
   return (
     <main className="max-w-screen-xl mx-auto pb-4">
       {mobilita.copertina && <Copertina copertina={mobilita.copertina as Media | undefined} />}
-      <div className="relative bg-white p-3 pt-5 max-w-screen-xl mx-auto">
+      <div className="relative p-3 pt-5 max-w-screen-xl mx-auto">
         <RandomPixel />
         <StringToHTML htmlString={mobilita.testo_html ?? ''} />
       </div>
