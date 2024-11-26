@@ -1,8 +1,8 @@
 import React from 'react'
-import Image from 'next/image'
+
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/uiElements/backButton'
-import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
+
 import CardGrid from '@/components/card/wrappers/cardsSwiper'
 import { RandomPixel } from '@/components/uiElements/pixels'
 import { notFound } from 'next/navigation'
@@ -13,7 +13,7 @@ import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
 
 import StringToHTML from '@/components/serializer/stringToHTML'
-import { Itinerari, Media } from '@/payload-types'
+import { Luoghi, Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
 import LuogoInfoRow from '@/components/luoghi/luogoInfoRow'
 
@@ -22,7 +22,7 @@ export const revalidate = 0
 
 export default async function Luogo({ params }: { params: { slug: string } }) {
   const db = await loadDb()
-  
+
   // Get luogo
   const luoghi = await db.find({
     collection: 'luoghi',
@@ -43,8 +43,8 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
 
   // Filter itinerari that have this luogo
   const itinerariCorrelati = allItinerari.docs.filter((itinerario) =>
-    itinerario.luoghi?.some((l) => 
-      typeof l === 'string' ? l === luogoData.id : l.id === luogoData.id
+    itinerario.luoghi?.some((l) =>
+      typeof l === 'string' ? l === luogoData.id : l.id === luogoData.id,
     ),
   )
 
@@ -76,22 +76,17 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           {/* Right column: Map */}
           <div className="lg:order-2">
             <div className="h-[500px] lg:sticky lg:top-4 flex items-center justify-center">
-              <DynamicMappa
-                initialPosition={position}
-                initialZoom={14}
-                localizedMedia={luogoData?.media_geolocalizzati}
-                luogoMarker={luogoData}
-              />
+              <DynamicMappa initialPosition={position} initialZoom={14} />
             </div>
           </div>
         </div>
 
         {/* Info row component */}
         <LuogoInfoRow
-          servizi={luogoData.servizi}
-          contatti={luogoData.contatti}
+          servizi={(luogoData.servizi as []) ?? undefined}
+          contatti={(luogoData.contatti as []) ?? undefined}
           orari_html={luogoData.orari_html}
-          orari={luogoData.orari}
+          orari={luogoData.orari as any | undefined}
         />
 
         {/* Galleria section */}
@@ -107,10 +102,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
             <h2 className="text-2xl font-semibold mb-6 text-center">
               In quale itinerario potrai trovarci
             </h2>
-            <CardGrid
-              items={itinerariCorrelati}
-              category="itinerari"
-            />
+            <CardGrid items={itinerariCorrelati} category="itinerari" />
           </div>
         )}
       </div>

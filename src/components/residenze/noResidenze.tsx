@@ -20,7 +20,7 @@ const NoResidenze = () => {
           Per il momento, non ci sono residenze in programma!
         </h2>
         <p className="text-lg text-gray-600">
-          Ti invitiamo a consultare l'archivio delle residenze passate!
+          Ti invitiamo a consultare l&apos;archivio delle residenze passate!
         </p>
       </div>
     </div>

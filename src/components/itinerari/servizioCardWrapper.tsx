@@ -27,23 +27,26 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
         {/* Top fade */}
         <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white via-white/90 to-transparent z-10" />
         {/* Content section with background */}
-        <div className="relative pt-4">
+        <div className="relative pt-5">
           <div className="bg-itinerariColor/20 w-full">
             {/* Side fades */}
             <div className="absolute left-0 inset-y-0 w-10 sm:w-12 bg-gradient-to-r from-white to-transparent" />
             <div className="absolute right-0 inset-y-0 w-10 sm:w-12 bg-gradient-to-l from-white to-transparent" />
 
             {/* Background letter */}
-            <span className="absolute inset-0 flex items-center justify-center text-[10rem] sm:text-[20rem] text-itinerariColor/5 font-bold font-transluoghi pointer-events-none select-none">
+            {/*             <span className="absolute inset-0 flex items-center justify-center text-[10rem] sm:text-[20rem] text-itinerariColor/5 font-bold font-transluoghi pointer-events-none select-none">
               {bgLetter}
-            </span>
+            </span> */}
 
             {/* Main content */}
-            <div className="max-w-[1000px] mx-auto relative z-10 pb-36">
-              <h2 className="text-3xl font-semibold mb-4 text-center">Servizi</h2>
+            <div className="max-w-[1000px] mx-auto relative z-10 pb-20">
+              <h2 className="text-3xl font-semibold mb-4 bt-1 text-center">Servizi</h2>
               <div className="flex flex-wrap justify-center gap-4 px-8">
                 {servizi.map((servizio, index) => (
-                  <div key={servizio.id || index} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-md h-[280px] [&:has(.expanded)]:h-auto">
+                  <div
+                    key={servizio.id || index}
+                    className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-md h-[280px] [&:has(.expanded)]:h-auto"
+                  >
                     <ServizioCard
                       nome={servizio.nome}
                       testo={servizio.testo}
@@ -57,7 +60,7 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
         </div>
 
         {/* Bottom fade */}
-        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white via-white to-transparent z-10" />
+        <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-white via-white to-transparent z-10" />
       </div>
     </div>
   )
@@ -93,7 +96,9 @@ const ServizioCard: React.FC<ServizioCardProps> = ({ nome, testo, link }) => {
   }, [textContent])
 
   return (
-    <div className={`bg-white rounded-lg overflow-hidden p-4 relative h-full ${isExpanded ? 'expanded' : ''}`}>
+    <div
+      className={`bg-white rounded-lg overflow-hidden p-4 relative h-full ${isExpanded ? 'expanded' : ''}`}
+    >
       <span className="absolute -top-4 -right-1 text-7xl text-itinerariColor/15 font-bold font-transluoghi z-0">
         {letter}
       </span>

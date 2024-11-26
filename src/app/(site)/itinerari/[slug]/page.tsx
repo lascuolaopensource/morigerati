@@ -98,8 +98,8 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           <ServiziCardWrapper servizi={itinerarioData?.servizi} />
 
           {itinerarioData?.stakeholders && itinerarioData?.stakeholders.length > 0 && (
-            <div className="my-8">
-              <h2 className="font-bold pt-4 text-xl text-center pb-4">Stakeholders che troverai</h2>
+            <div className="">
+              <h2 className="font-bold text-xl text-center pb-4">Stakeholders che troverai</h2>
               <MySwiper
                 items={itinerarioData?.stakeholders as Stakeholder[]}
                 category="stakeholders"
@@ -108,7 +108,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           )}
 
           {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
-            <div className="my-8">
+            <div className="">
               <h2 className="font-bold pt-4 text-xl text-center pb-4">Luoghi che incontrerai</h2>
               <MySwiper items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" />
             </div>
