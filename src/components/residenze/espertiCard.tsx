@@ -9,82 +9,89 @@ type Esperto = NonNullable<Residenze['esperti']>[number]
 const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const splitArray = <T extends unknown>(arr: T[] | null | undefined): [T[], T[]] => {
-    if (!arr) return [[], []]
-    const midpoint = Math.ceil(arr.length / 2)
-    return [arr.slice(0, midpoint), arr.slice(midpoint)]
-  }
-
-  const [leftProjects, rightProjects] = splitArray(esperto.progetti)
-  const [leftOrganizations, rightOrganizations] = splitArray(esperto.organizzazioni)
-
-  const renderColumn = (items: typeof leftProjects) => (
-    <div className="w-1/2 pr-1">
-      {items.map((item, index) => (
-        <div key={index} className="text-sm truncate underline">
-          <Link href={item.link}>{item.nome}</Link>
-        </div>
-      ))}
-    </div>
-  )
-
-  const hasProjectsOrOrganizations =
-    leftProjects.length > 0 ||
-    rightProjects.length > 0 ||
-    leftOrganizations.length > 0 ||
-    rightOrganizations.length > 0
-
-  const truncateText = (text: string, maxLength: number) => {
-    if (text.length <= maxLength) return text
-    return text.slice(0, maxLength) + '...'
-  }
-
   const renderMedia = (media: Media) => {
-    const isVideo = media.mimeType?.startsWith('video/')
-
-    if (isVideo) {
-      return (
-        <video
-          className="w-full h-full object-cover "
-          autoPlay
-          muted
-          loop
-          playsInline
-          controls={false}
-        >
-          <source src={media.url || ''} type={media.mimeType || ''} />
-        </video>
-      )
-    }
-
     return (
       <Image
-        src={media.url || '/placeholder-image.jpg'}
-        alt={esperto.nome || 'Tutor'}
+        src={media.url}
+        alt={media.alternativeText || ''}
         fill
-        style={{ objectFit: 'cover' }}
+        className="object-cover w-full h-full"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
     )
   }
 
   return (
-    <div className="w-full border-2 border-black rounded-lg flex flex-col overflow-hidden">
-      <div
-        className={`flex flex-1 ${hasProjectsOrOrganizations ? 'border-b-2' : ''} border-black ${!esperto.foto ? 'flex-col' : ''}`}
-      >
-        {esperto.foto && (
-          <div className="w-40 h-full min-h-36 relative">{renderMedia(esperto.foto as Media)}</div>
-        )}
-        <div className={`${esperto.foto ? 'w-2/3' : 'w-full'} h-full flex flex-col p-2`}>
-          <h3 className="font-medium">{esperto.nome}</h3>
-          <div className="flex-grow overflow-hidden">
-            <p className="text-xs leading-normal">
-              {isExpanded ? esperto.biografia : truncateText(esperto.biografia || '', 300)}
+    <div className="w-full bg-residenzeColor/20 overflow-hidden">
+      <div className="flex p-4 gap-4">
+        {/* Left column - Image */}
+        <div className="w-1/3 max-w-[240px]">
+          <div className="aspect-square relative overflow-hidden border-2 border-residenzeColor rounded-md">
+            <div className="absolute inset-0">
+              {esperto.foto ? (
+                renderMedia(esperto.foto as Media)
+              ) : (
+                <div className="w-full h-full bg-residenzeColor/30" />
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Right column - Content */}
+        <div className="w-2/3 flex flex-col -mt-2.5">
+          <h3 className="font-bold text-lg">{esperto.nome}</h3>
+          <div className="flex-grow mt-2">
+            <p className="text-sm leading-normal">
+              {isExpanded ? (
+                <>
+                  {esperto.biografia}
+                  
+                  {/* Projects and Organizations */}
+                  {esperto.progetti && esperto.progetti.length > 0 && (
+                    <div className="mt-2">
+                      <h4 className="font-medium text-sm mb-1">Progetti</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {esperto.progetti.map((project, index) => (
+                          <Link
+                            key={index}
+                            href={project.link}
+                            className="underline hover:text-residenzeColor transition-colors text-sm"
+                          >
+                            {project.nome}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {esperto.organizzazioni && esperto.organizzazioni.length > 0 && (
+                    <div className="mt-2">
+                      <h4 className="font-medium text-sm mb-1">Organizzazioni</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {esperto.organizzazioni.map((org, index) => (
+                          <Link
+                            key={index}
+                            href={org.link}
+                            className="underline hover:text-residenzeColor transition-colors text-sm"
+                          >
+                            {org.nome}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {esperto.biografia?.slice(0, 200)}
+                  {esperto.biografia && esperto.biografia.length > 200 && '...'}
+                </>
+              )}
             </p>
-            {esperto.biografia && esperto.biografia.length > 300 && (
+            {esperto.biografia && esperto.biografia.length > 200 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="text-xs text-black font-medium underline mt-1"
+                className="text-xs text-residenzeColor font-medium underline mt-2"
               >
                 {isExpanded ? 'Comprimi' : 'Espandi'}
               </button>
@@ -92,28 +99,6 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
           </div>
         </div>
       </div>
-      {hasProjectsOrOrganizations && (
-        <div className={`flex-1 flex flex-col p-2 ${!hasProjectsOrOrganizations ? 'h-0' : ''}`}>
-          {leftProjects.length > 0 || rightProjects.length > 0 ? (
-            <div className="mb-2">
-              <h3 className="font-medium mb-1">Progetti</h3>
-              <div className="flex">
-                {renderColumn(leftProjects)}
-                {renderColumn(rightProjects)}
-              </div>
-            </div>
-          ) : null}
-          {leftOrganizations.length > 0 || rightOrganizations.length > 0 ? (
-            <div>
-              <h3 className="font-medium mb-1">Organizzazioni</h3>
-              <div className="flex">
-                {renderColumn(leftOrganizations)}
-                {renderColumn(rightOrganizations)}
-              </div>
-            </div>
-          ) : null}
-        </div>
-      )}
     </div>
   )
 }

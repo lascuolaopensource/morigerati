@@ -39,58 +39,71 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
   return (
     <div className="">
       <Copertina copertina={residenzaData.copertina as Media | undefined} />
-      <div className="p-4 sm:px-36 max-w-screen-xl mx-auto">
+      <div className="p-4 sm:px-6 lg:px-24 xl:px-36 max-w-[1600px] mx-auto">
         <BackButton />
-        <RandomPixel p={1} />
-        <div className="pt-4"></div>
-        {residenzaData.nome ? (
-          <h1 className="text-4xl font-bold mb-4">{residenzaData.nome}</h1>
-        ) : (
-          <p></p>
-        )}
-        <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
 
-        <div className="pb-2">
-          {residenzaData.mostra_dettagli ? (
-            <InfoResidenza
-              residenza={residenzaData}
-              onlyDate={isAfterCurrentDate(residenzaData?.data_inizio ?? '')}
-            />
-          ) : (
-            <DateDaDefinireBanner />
-          )}
+        <div className="pt-4"></div>
+
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="lg:w-1/2 min-w-[500px]">
+            {residenzaData.nome ? (
+              <h1 className="text-4xl font-bold text-residenzeColor mb-4">{residenzaData.nome}</h1>
+            ) : (
+              <p></p>
+            )}
+            <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
+          </div>
+          <div className="lg:w-1/2 min-w-[500px]">
+            {residenzaData.mostra_dettagli ? (
+              <InfoResidenza
+                residenza={residenzaData}
+                onlyDate={isAfterCurrentDate(residenzaData?.data_inizio ?? '')}
+              />
+            ) : (
+              <DateDaDefinireBanner />
+            )}
+          </div>
         </div>
-        <PulsanteIscrizione
-          link={residenzaData.link_iscrizione ?? ''}
-          show={residenzaData.mostra_pulsante_iscrizione ?? false}
+
+        <div className="mt-4">
+          <PulsanteIscrizione
+            link={residenzaData.link_iscrizione ?? ''}
+            show={residenzaData.mostra_pulsante_iscrizione ?? false}
+          />
+        </div>
+        {residenzaData.info_html ? (
+          <div className="max-w-[1200px] mx-auto px-0 sm:px-4">
+            <h2 className="text-center text-residenzeColor">Descrizione</h2>
+            <StringToHTML
+              htmlString={residenzaData.info_html ?? ''}
+              classs="prose-custom-justify"
+            />
+          </div>
+        ) : (
+          ''
+        )}
+        {!isArrayEmpty(residenzaData.programma) ? (
+          <div>
+            <h2 className="text-center text-residenzeColor ">Programma</h2>
+            <ProgrammaList residenza={residenzaData} />
+          </div>
+        ) : null}
+        <div className="pt-8" />
+        <Galleria
+          items={residenzaData.galleria as Media[] | undefined}
+          titleColor="text-residenzeColor"
         />
         {residenzaData.esperti && residenzaData.esperti.length > 0 && (
-          <h2 className="text-center"> Esperti </h2>
+          <h2 className="text-center pt-12 text-residenzeColor"> Tutor </h2>
         )}
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2">
           {residenzaData.esperti &&
             residenzaData.esperti.map((esperto, index) => (
               <TutorCard key={index} esperto={esperto} />
             ))}
         </div>
-        <Galleria items={residenzaData.galleria as Media[] | undefined} />
-        <div className="p-4" />
-        {!isArrayEmpty(residenzaData.programma) ? (
-          <div>
-            <h2>Programma</h2>
-          </div>
-        ) : null}
 
-        <ProgrammaList residenza={residenzaData} />
-        <p className="pt-4"></p>
-        {residenzaData.info_html ? (
-          <div>
-            <StringToHTML htmlString={residenzaData.info_html ?? ''} />{' '}
-          </div>
-        ) : (
-          ''
-        )}
         <PulsanteIscrizione
           link={residenzaData.link_iscrizione ?? ''}
           show={residenzaData.mostra_pulsante_iscrizione ?? false}

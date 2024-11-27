@@ -62,31 +62,9 @@ export default async function Stakeholder({ params }: { params: { slug: string }
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 mb-8">
           {/* Left column: Content */}
           <div>
-            {/* Nome e tipologia */}
-            <div className="mb-6">
-              {stakeholderData.nome && (
-                <h1 className="text-4xl font-bold mb-4">{stakeholderData.nome}</h1>
-              )}
-
-              {stakeholderData.tipologia && (
-                <div className="mb-4">
-                  <span className="inline-block border-2 border-black px-3 py-1 text-sm font-medium">
-                    {stakeholderData.tipologia}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* Testo descrittivo */}
-            {stakeholderData.testo && stakeholderData.testo.root && (
-              <div className="mb-6">
-                <StringToHTML htmlString={stakeholderData.testo_html ?? ''} />
-              </div>
-            )}
-
             {/* Tags */}
             {stakeholderData.tipologia && (
-              <div className="mb-6">
+              <div className="pt-4">
                 <ArticoliTagsList
                   tags={
                     Array.isArray(stakeholderData.tipologia)
@@ -94,6 +72,22 @@ export default async function Stakeholder({ params }: { params: { slug: string }
                       : [stakeholderData.tipologia]
                   }
                 />
+              </div>
+            )}
+
+            {/* Nome e tipologia */}
+            <div className="mb-6">
+              {stakeholderData.nome && (
+                <h1 className="text-4xl text-stakeholderColorScuro font-bold mb-4">
+                  {stakeholderData.nome}
+                </h1>
+              )}
+            </div>
+
+            {/* Testo descrittivo */}
+            {stakeholderData.testo && stakeholderData.testo.root && (
+              <div className="mb-6">
+                <StringToHTML htmlString={stakeholderData.testo_html ?? ''} />
               </div>
             )}
 

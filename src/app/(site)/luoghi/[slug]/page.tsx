@@ -16,6 +16,7 @@ import StringToHTML from '@/components/serializer/stringToHTML'
 import { Luoghi, Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
 import LuogoInfoRow from '@/components/luoghi/luogoInfoRow'
+import { ServiziCardWrapper } from '@/components/itinerari/servizioCardWrapper'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -64,7 +65,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
           {/* Left column: Content */}
           <div>
             {luogoData.nome ? (
-              <h1 className="text-4xl font-bold mb-4">{luogoData.nome}</h1>
+              <h1 className="text-4xl text-luogoColorScuro font-bold mb-4">{luogoData.nome}</h1>
             ) : (
               <p></p>
             )}
@@ -82,12 +83,14 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
         </div>
 
         {/* Info row component */}
-        <LuogoInfoRow
-          servizi={(luogoData.servizi as []) ?? undefined}
-          contatti={(luogoData.contatti as []) ?? undefined}
-          orari_html={luogoData.orari_html}
-          orari={luogoData.orari as any | undefined}
-        />
+        <div>
+          <ServiziCardWrapper servizi={luogoData.servizi as any} />
+          <LuogoInfoRow
+            contatti={(luogoData.contatti as []) ?? undefined}
+            orari_html={luogoData.orari_html}
+            orari={luogoData.orari as any | undefined}
+          />
+        </div>
 
         {/* Galleria section */}
         {luogoData.galleria && luogoData.galleria.length > 0 && (

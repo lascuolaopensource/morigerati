@@ -47,6 +47,12 @@ body {
   @apply sm:px-40;
 }
 
+.prose-custom-justify {
+  @apply prose max-w-none;
+  @apply prose-h1:my-1 prose-h2:my-1 prose-h3:my-1 prose-h4:my-1 prose-p:my-1;
+  @apply sm:px-40 text-justify;
+}
+
 @layer base {
   h1 {
     @apply font-bold;

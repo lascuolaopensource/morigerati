@@ -14,6 +14,7 @@ import { useRef, useEffect } from 'react'
 
 interface GalleriaProps {
   items: Media[] | undefined
+  titleColor?: string
 }
 
 const swiperParams: SwiperOptions = {
@@ -26,7 +27,7 @@ const swiperParams: SwiperOptions = {
   touchReleaseOnEdges: true,
 }
 
-const Galleria: React.FC<GalleriaProps> = ({ items }) => {
+const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       const swiperInstance = swiperRef.current
@@ -60,7 +61,7 @@ const Galleria: React.FC<GalleriaProps> = ({ items }) => {
   return (
     <div>
       {' '}
-      <h2 className="text-center  pb-4">Galleria</h2>
+      <h2 className={`text-center  pb-4 ${titleColor}`}>Galleria</h2>
       <>
         <Swiper
           {...swiperParams}

@@ -55,7 +55,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
           {/* Left column: Title, text, and details */}
           <div className="lg:order-1">
             {itinerarioData?.nome ? (
-              <h1 className="text-4xl text-itinerariColor font-bold mb-4">
+              <h1 className="text-4xl text-itinerarioColorScuro font-bold mb-4">
                 {itinerarioData?.nome}
               </h1>
             ) : (
