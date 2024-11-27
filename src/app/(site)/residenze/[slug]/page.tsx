@@ -51,7 +51,9 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
             ) : (
               <p></p>
             )}
-            <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
+            {!isAfterCurrentDate(residenzaData?.data_inizio ?? '') && (
+              <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
+            )}
           </div>
           <div className="lg:w-1/2 min-w-[500px]">
             {residenzaData.mostra_dettagli ? (
@@ -59,11 +61,20 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
                 residenza={residenzaData}
                 onlyDate={isAfterCurrentDate(residenzaData?.data_inizio ?? '')}
               />
-            ) : (
+            ) : residenzaData.data_inizio && residenzaData.data_fine ? (
               <DateDaDefinireBanner />
-            )}
+            ) : null}
           </div>
         </div>
+
+        {isAfterCurrentDate(residenzaData?.data_inizio ?? '') && (
+          <div className="max-w-[1200px] mx-auto px-0 sm:px-4 mt-8">
+            <StringToHTML
+              htmlString={residenzaData.abstract_html ?? ''}
+              classs="prose-custom-justify"
+            />
+          </div>
+        )}
 
         <div className="mt-4">
           <PulsanteIscrizione

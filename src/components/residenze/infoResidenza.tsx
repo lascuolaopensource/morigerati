@@ -51,7 +51,7 @@ const AddressSection = ({ address, letter }: AddressSectionProps) => {
   )
 }
 
-export default function InfoResidenza({ residenza, onlyDate = false }: InfoResidenzaProps) {
+const InfoResidenza = ({ residenza, onlyDate = false }: InfoResidenzaProps) => {
   const [letters, setLetters] = useState<string[]>([])
 
   useEffect(() => {
@@ -62,41 +62,36 @@ export default function InfoResidenza({ residenza, onlyDate = false }: InfoResid
     setLetters(newLetters)
   }, [])
 
-  if (onlyDate) {
+  if (onlyDate && residenza.data_inizio && residenza.data_fine) {
     return (
-      <div className="pt-2">
-        <DetailSection
-          label="Periodo"
-          value={`${formatDate(residenza.data_inizio, 'Data da definire')} - ${formatDate(
-            residenza.data_fine,
-            'Data da definire'
-          )}`}
-          letter={letters[0] || ''}
-        />
-      </div>
+      <h3 className="text-residenzeColor text-lg text-right">
+        {formatDate(residenza.data_inizio)} → {formatDate(residenza.data_fine)}
+      </h3>
     )
   }
 
   return (
     <div className="grid gap-2 w-full">
-      <AddressSection address={residenza.indirizzo} letter={letters[0] || ''} />
+      <AddressSection address={residenza.indirizzo} letter={letters[0] || 'a'} />
       <div className="grid grid-cols-2 gap-2 w-full">
         <DetailSection
           label="Data inizio"
           value={formatDate(residenza.data_inizio, 'Data da definire')}
-          letter={letters[1] || ''}
+          letter={letters[1] || 'b'}
         />
         <DetailSection
           label="Data fine"
           value={formatDate(residenza.data_fine, 'Data da definire')}
-          letter={letters[2] || ''}
+          letter={letters[2] || 'c'}
         />
       </div>
       <DetailSection
         label="Deadline iscrizioni"
         value={formatDate(residenza.deadline_iscrizione, 'Data da definire')}
-        letter={letters[3] || ''}
+        letter={letters[3] || 'd'}
       />
     </div>
   )
 }
+
+export default InfoResidenza
