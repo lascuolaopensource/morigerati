@@ -38,19 +38,17 @@ body {
   @apply prose-h1:my-1 prose-h2:my-1 prose-h3:my-1 prose-h4:my-1 prose-p:my-1;
   @apply sm:prose-p:text-center sm:prose-headings:text-center;
   @apply sm:prose-ul:text-center sm:prose-ol:text-center sm:prose-li:text-center sm:prose-blockquote:text-center;
-  @apply sm:px-40;
 }
 
 .prose-custom-no-center {
   @apply prose max-w-none;
   @apply prose-h1:my-1 prose-h2:my-1 prose-h3:my-1 prose-h4:my-1 prose-p:my-1;
-  @apply sm:px-40;
 }
 
 .prose-custom-justify {
   @apply prose max-w-none;
   @apply prose-h1:my-1 prose-h2:my-1 prose-h3:my-1 prose-h4:my-1 prose-p:my-1;
-  @apply sm:px-40 text-justify;
+  @apply text-justify;
 }
 
 @layer base {
@@ -82,4 +80,20 @@ body {
     @apply pb-2;
     @apply leading-5;
   }
+}
+
+.bullet-active {
+  background: black !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet {
+  width: 16px !important;
+  height: 16px !important;
+  margin: 0 6px !important;
+}
+
+.swiper-pagination {
+  bottom: 8px !important;
+  position: absolute !important;
 }

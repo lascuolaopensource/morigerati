@@ -14,7 +14,7 @@ const ToggleButton: React.FC = () => {
   }
 
   return (
-    <div className="flex justify-center items-center pb-2 pt-10 md:max-w-[700px] mx-auto">
+    <div className="flex justify-center items-center pb-20 pt-12 md:max-w-[700px] mx-auto ">
       <button
         onClick={handleFilterChange}
         className="group relative w-full max-w-xs h-12 rounded-full overflow-hidden transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-residenzeColor"

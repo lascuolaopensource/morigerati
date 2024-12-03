@@ -12,8 +12,8 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
   const renderMedia = (media: Media) => {
     return (
       <Image
-        src={media.url}
-        alt={media.alternativeText || ''}
+        src={(media.url as string) || ''}
+        alt={(media.url as string) || ''}
         fill
         className="object-cover w-full h-full"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -22,7 +22,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
   }
 
   return (
-    <div className="w-full bg-residenzeColor/20 overflow-hidden">
+    <div className="w-full sm:w-[500px] bg-residenzeColor/20 overflow-hidden rounded-md">
       <div className="flex p-4 gap-4">
         {/* Left column - Image */}
         <div className="w-1/3 max-w-[240px]">
@@ -45,7 +45,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
               {isExpanded ? (
                 <>
                   {esperto.biografia}
-                  
+
                   {/* Projects and Organizations */}
                   {esperto.progetti && esperto.progetti.length > 0 && (
                     <div className="mt-2">

@@ -23,11 +23,11 @@ interface DetailSectionProps {
 const DetailSection = ({ label, value, letter }: DetailSectionProps) => {
   return (
     <div className="h-full bg-residenzeColor/20 p-2 text-black relative overflow-hidden">
-      <span className="absolute -top-4 -right-1 text-7xl text-residenzeColorScuro/15 font-bold font-transluoghi z-0">
+      <span className="absolute -top-4 -right-1 text-7xl text-[#f1bca5] font-bold font-transluoghi z-0 select-none">
         {letter}
       </span>
       <div className="flex flex-col relative z-1">
-        <span className="text-xs uppercase font-medium">{label}</span>
+        <span className="text-xs  font-medium">{label}</span>
         <span className="text-base break-words overflow-hidden">{value}</span>
       </div>
     </div>
@@ -35,17 +35,17 @@ const DetailSection = ({ label, value, letter }: DetailSectionProps) => {
 }
 
 interface AddressSectionProps {
-  address: string | undefined
+  address: string | undefined | null
   letter: string
 }
 
 const AddressSection = ({ address, letter }: AddressSectionProps) => {
   return (
     <div className="w-full bg-residenzeColor/20 p-2 text-black relative min-h-[60px] flex flex-col justify-center overflow-hidden">
-      <span className="absolute -top-4 -right-1 text-7xl text-residenzeColorScuro/15 font-bold font-transluoghi z-0">
+      <span className="absolute -top-4 -right-1 text-7xl text-[#f1bca5] font-bold font-transluoghi z-0 select-none">
         {letter}
       </span>
-      <span className="text-xs uppercase font-medium mb-1">Indirizzo</span>
+      <span className="text-xs  font-thin mb-1">Indirizzo</span>
       <span className="text-lg break-words overflow-hidden">{address ?? 'Non disponibile'}</span>
     </div>
   )
@@ -64,9 +64,12 @@ const InfoResidenza = ({ residenza, onlyDate = false }: InfoResidenzaProps) => {
 
   if (onlyDate && residenza.data_inizio && residenza.data_fine) {
     return (
-      <h3 className="text-residenzeColor text-lg text-right">
-        {formatDate(residenza.data_inizio)} → {formatDate(residenza.data_fine)}
-      </h3>
+      <div className="w-full overflow-hidden">
+        <h3 className="text-residenzeColor text-lg text-right break-words">
+          {formatDate(residenza.data_inizio, 'Data da definire')} →{' '}
+          {formatDate(residenza.data_fine, 'Data da definire')}
+        </h3>
+      </div>
     )
   }
 

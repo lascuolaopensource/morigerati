@@ -31,6 +31,7 @@ const swiperParams: SwiperOptions = {
     el: '.swiper-pagination',
     clickable: true,
     dynamicBullets: true,
+    bulletActiveClass: 'bullet-active',
   },
 }
 
@@ -69,23 +70,25 @@ const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
     <div className="w-full">
       <h2 className={`text-center pb-4 ${titleColor}`}>Galleria</h2>
       <div className="flex justify-center w-full px-4">
-        <div className="w-full max-w-7xl relative pb-20">
-          <Swiper
-            {...swiperParams}
-            className="!flex justify-center items-center"
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-          >
-            {items.map((item, index) => (
-              <SwiperSlide
-                key={item.id}
-                onClick={() => handleSlideClick(index)}
-                className="!w-auto flex justify-center"
-              >
-                <GalleryCard media={item as Media} />
-              </SwiperSlide>
-            ))}
-            <div className="swiper-pagination !bottom-4"></div>
-          </Swiper>
+        <div className="w-full max-w-7xl">
+          <div className="relative pb-12">
+            <Swiper
+              {...swiperParams}
+              className="!flex justify-center items-center"
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+            >
+              {items.map((item, index) => (
+                <SwiperSlide
+                  key={item.id}
+                  onClick={() => handleSlideClick(index)}
+                  className="!w-auto flex justify-center"
+                >
+                  <GalleryCard media={item as Media} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className="swiper-pagination absolute bottom-8"></div>
+          </div>
         </div>
       </div>
       {showGallery && (

@@ -123,7 +123,7 @@ const GridOverlay: React.FC<GridOverlayProps> = ({
         row.map((cell, j) => (
           <div
             key={`${i}-${j}`}
-            className={`${cell ? ' bg-[#F6F6F6]' : ''}`}
+            className={`${cell ? ' bg-white' : ''}`}
             style={{
               width: `${squareSize}px`,
               height: `${squareSize}px`,
