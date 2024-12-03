@@ -24,10 +24,24 @@ const BACKGROUND_COLORS = {
   default: 'bg-white',
 } as const
 
+const BORDER_COLORS = {
+  luoghi: 'bg-luogoColorScuro',
+  itinerari: 'bg-itinerarioColorScuro',
+  stakeholders: 'bg-stakeholderColorScuro',
+  residenze: 'bg-residenzeColorScuro',
+  default: 'bg-black',
+} as const
+
 const useBackgroundColor = () => {
   const pathname = usePathname()
   const path = pathname.split('/')[1]
   return BACKGROUND_COLORS[path as keyof typeof BACKGROUND_COLORS] || BACKGROUND_COLORS.default
+}
+
+const useBorderColor = () => {
+  const pathname = usePathname()
+  const path = pathname.split('/')[1]
+  return BORDER_COLORS[path as keyof typeof BORDER_COLORS] || BORDER_COLORS.default
 }
 
 const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
@@ -91,6 +105,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
   const bgColor = useBackgroundColor()
+  const borderColor = useBorderColor()
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev)
@@ -139,7 +154,10 @@ const Navbar = () => {
           <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-black" aria-hidden="true" />
+        <div
+          className={`absolute bottom-0 left-0 w-full h-0.5 ${borderColor}`}
+          aria-hidden="true"
+        />
       </nav>
 
       {isMenuOpen && (

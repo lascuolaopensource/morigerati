@@ -21,10 +21,17 @@ const swiperParams: SwiperOptions = {
   modules: [Navigation, Pagination, Keyboard, Mousewheel],
   mousewheel: true,
   keyboard: true,
-  spaceBetween: 10,
+  spaceBetween: 20,
   slidesPerView: 'auto',
-  freeMode: true,
-  touchReleaseOnEdges: true,
+  centeredSlides: true,
+  initialSlide: 0,
+  slideToClickedSlide: true,
+  watchSlidesProgress: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    dynamicBullets: true,
+  },
 }
 
 const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
@@ -59,33 +66,35 @@ const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
   }
 
   return (
-    <div>
-      {' '}
-      <h2 className={`text-center  pb-4 ${titleColor}`}>Galleria</h2>
-      <>
-        <Swiper
-          {...swiperParams}
-          className="mySwiper"
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
-        >
-          {items.map((item, index) => (
-            <SwiperSlide
-              style={{ width: 'auto' }}
-              key={item.id}
-              onClick={() => handleSlideClick(index)}
-            >
-              <GalleryCard media={item as Media} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        {showGallery && (
-          <MediaGallery
-            items={items}
-            initialIndex={selectedIndex}
-            onClose={() => setShowGallery(false)}
-          />
-        )}
-      </>
+    <div className="w-full">
+      <h2 className={`text-center pb-4 ${titleColor}`}>Galleria</h2>
+      <div className="flex justify-center w-full px-4">
+        <div className="w-full max-w-7xl relative pb-20">
+          <Swiper
+            {...swiperParams}
+            className="!flex justify-center items-center"
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+          >
+            {items.map((item, index) => (
+              <SwiperSlide
+                key={item.id}
+                onClick={() => handleSlideClick(index)}
+                className="!w-auto flex justify-center"
+              >
+                <GalleryCard media={item as Media} />
+              </SwiperSlide>
+            ))}
+            <div className="swiper-pagination !bottom-4"></div>
+          </Swiper>
+        </div>
+      </div>
+      {showGallery && (
+        <MediaGallery
+          items={items}
+          initialIndex={selectedIndex}
+          onClose={() => setShowGallery(false)}
+        />
+      )}
     </div>
   )
 }

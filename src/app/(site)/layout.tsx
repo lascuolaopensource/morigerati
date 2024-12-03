@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="it" className="overscroll-none">
       <body className="min-h-screen overscroll-none ">
         <Navbar />
-        <main className=" bg-[#F6F6F6]">
+        <main className=" bg-white">
           <DynamicFavicon />
           <div>{children}</div>
         </main>

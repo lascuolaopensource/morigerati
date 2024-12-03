@@ -53,14 +53,20 @@ const Home = async () => {
           <StringToHTML htmlString={home.intro.text_html ?? ''} classs="prose-custom-no-center" />
         </div>
 
-        <HomeCollection collection="itinerari" />
-        <div className="py-8">
+        <HomeCollection
+          collection="itinerari"
+          hasMap={true}
+          tracciati={home.tracciati_mappa as TracciatiType[]}
+          mappaTitle={mappaTitle}
+          mappaText={mappaText}
+        />
+        {/*         <div className="py-8">
           <HomeTracksSection
             title={mappaTitle}
             text_html={mappaText}
             tracciati={tracciati as TracciatiType[]}
           />
-        </div>
+        </div> */}
         <HomeCollection collection="luoghi" layout="right" />
         <HomeCollection collection="residenze" />
       </div>

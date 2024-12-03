@@ -259,6 +259,23 @@ export function titleAndText(name: string, label?: string): GroupField {
   }
 }
 
+export function titleAndTextOptional(name: string, label?: string): GroupField {
+  return {
+    name,
+    type: 'group',
+    label: label ?? capitalizeFirstLetter(name),
+    fields: [
+      {
+        ...plainText(`title`),
+        required: false,
+        label: 'Titolo',
+      },
+      { ...richText('text'), label: 'Contenuto', required: false },
+      lexicalHTML('text', { name: 'text_html' }),
+    ],
+  }
+}
+
 export const socialNetworkLink: RowField = {
   type: 'row',
   fields: [nome, { ...link, required: true }],

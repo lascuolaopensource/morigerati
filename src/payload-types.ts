@@ -603,9 +603,9 @@ export interface Home {
     };
     text_html?: string | null;
   };
-  mappa: {
-    title: string;
-    text: {
+  mappa?: {
+    title?: string | null;
+    text?: {
       root: {
         type: string;
         children: {
@@ -619,7 +619,7 @@ export interface Home {
         version: number;
       };
       [k: string]: unknown;
-    };
+    } | null;
     text_html?: string | null;
   };
   tracciati_mappa?: (string | Tracciati)[] | null;
