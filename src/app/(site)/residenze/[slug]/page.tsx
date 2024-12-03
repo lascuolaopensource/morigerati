@@ -42,9 +42,9 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
 
       <div className="p-4 sm:px-6 lg:px-12 xl:px-16 max-w-[1400px] mx-auto">
         <BackButton />
-        <div className="pt-4" />
+        <div className="pt-8" />
 
-        <div className="w-full max-w-[1200px] mx-auto">
+        <div className="w-full max-w-[1200px] mx-auto space-y-12">
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="lg:w-1/2 min-w-[500px]">
               <div className="prose-custom-no-center">
@@ -73,7 +73,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
           </div>
 
           {isAfterCurrentDate(residenzaData?.data_inizio ?? '') && (
-            <div className="mt-8 max-w-[800px] mx-auto">
+            <div className="mt-12 max-w-[800px] mx-auto">
               <StringToHTML
                 htmlString={residenzaData.abstract_html ?? ''}
                 classs="prose-custom-justify"
@@ -81,7 +81,7 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
             </div>
           )}
 
-          <div className="mt-4 max-w-[800px] mx-auto">
+          <div className="mt-12 max-w-[800px] mx-auto">
             <PulsanteIscrizione
               link={residenzaData.link_iscrizione ?? ''}
               show={residenzaData.mostra_pulsante_iscrizione ?? false}
@@ -89,23 +89,25 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
           </div>
 
           {residenzaData.info_html && (
-            <div className="max-w-[800px] mx-auto">
-              <h2 className="text-center text-residenzeColor">Descrizione</h2>
+            <div className="max-w-[800px] mx-auto mt-16">
+              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6">
+                Descrizione
+              </h2>
               <StringToHTML htmlString={residenzaData.info_html} classs="prose-custom-justify" />
             </div>
           )}
 
           {!isArrayEmpty(residenzaData.programma) && (
-            <div className="max-w-[800px] mx-auto">
-              <h2 className="text-center text-residenzeColor">Programma</h2>
+            <div className="max-w-[800px] mx-auto mt-16">
+              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6">Programma</h2>
               <ProgrammaList residenza={residenzaData} />
             </div>
           )}
 
           {!isArrayEmpty(residenzaData.esperti) && (
-            <div className="mt-8 max-w-[1024px] mx-auto">
-              <h2 className="text-center text-residenzeColor">Esperti</h2>
-              <div className="flex flex-wrap justify-center gap-4 mt-4">
+            <div className="mt-16 w-full mx-auto">
+              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6">Esperti</h2>
+              <div className="flex flex-wrap justify-center gap-8 mt-8">
                 {residenzaData.esperti?.map((esperto, index) => (
                   <TutorCard key={index} esperto={esperto} />
                 ))}
@@ -114,9 +116,11 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
           )}
 
           {residenzaData.galleria && (
-            <div className="mt-8 max-w-[800px] mx-auto">
-              <h2 className="text-center text-residenzeColor">Galleria</h2>
-              <Galleria items={residenzaData.galleria as Media[]} />
+            <div className="mt-16 max-w-[800px] mx-auto">
+              <Galleria
+                items={residenzaData.galleria as Media[]}
+                titleColor=" text-residenzeColor"
+              />
             </div>
           )}
         </div>

@@ -4,7 +4,6 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
 import 'leaflet-defaulticon-compatibility'
-import 'leaflet-gpx'
 import { Tracciati } from '@/payload-types'
 import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 
@@ -33,6 +32,25 @@ const trackColors = [
   '#FF3333', // Rosso
 ]
 
+function parseGPX(gpxStr: string): [number, number][] {
+  const parser = new DOMParser();
+  const gpx = parser.parseFromString(gpxStr, "text/xml");
+  const points: [number, number][] = [];
+  
+  // Get all track points
+  const trackpoints = gpx.getElementsByTagName('trkpt');
+  for (let i = 0; i < trackpoints.length; i++) {
+    const point = trackpoints[i];
+    const lat = parseFloat(point.getAttribute('lat') || '0');
+    const lon = parseFloat(point.getAttribute('lon') || '0');
+    if (lat && lon) {
+      points.push([lat, lon]);
+    }
+  }
+  
+  return points;
+}
+
 export const TracksMap: React.FC<TracksMapProps> = ({
   tracciati,
   initialPosition = defaults.position,
@@ -52,23 +70,25 @@ export const TracksMap: React.FC<TracksMapProps> = ({
       }).addTo(mapRef.current)
 
       // Add all tracks to the map
-      tracciati.forEach((tracciato, index) => {
+      tracciati.forEach(async (tracciato, index) => {
         const gpxUrl = getTracciatoUrl(tracciato)
         if (gpxUrl) {
-          const color = trackColors[index % trackColors.length]
-          new L.GPX(gpxUrl, {
-            async: true,
-            marker_options: {
-              startIconUrl: '', // Remove start icon
-              endIconUrl: '', // Remove end icon
-              wptIconUrls: '', // Remove waypoint icons
-            },
-            polyline_options: {
-              color: color,
-              weight: 3,
-              opacity: 0.8
+          try {
+            const response = await fetch(gpxUrl);
+            const gpxText = await response.text();
+            const points = parseGPX(gpxText);
+            
+            if (points.length > 0) {
+              const color = trackColors[index % trackColors.length];
+              L.polyline(points, {
+                color: color,
+                weight: 3,
+                opacity: 0.8,
+              }).addTo(mapRef.current!);
             }
-          }).addTo(mapRef.current!)
+          } catch (error) {
+            console.error('Error loading GPX:', error);
+          }
         }
       })
     }

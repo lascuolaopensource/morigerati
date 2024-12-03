@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Media, Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
 import loremPic from '@/public/loremPic.png'
 import Link from 'next/link'
-import { url } from 'inspector'
 
 type CategoryType = 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
 
@@ -40,24 +39,20 @@ const generateRandomLetter = (): string => {
   return Math.random() > 0.5 ? letter.toLowerCase() : letter
 }
 
-const MediaContent: React.FC<{ media: Media | undefined; title: string; isVideo: boolean }> = ({
+const MediaContent: React.FC<{ media: Media | undefined; title: string }> = ({
   media,
   title,
-  isVideo,
 }) => {
-  if (isVideo) {
+  if (!media || typeof media === 'string' || media.mimeType?.startsWith('video/')) {
     return (
       <div className="w-full h-full">
-        <video
+        <Image
+          src={loremPic}
+          alt={title}
+          width={240}
+          height={180}
           className="w-full h-full object-cover rounded-lg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          controls={false}
-        >
-          <source src={media?.url || ''} type={media?.mimeType || ''} />
-        </video>
+        />
       </div>
     )
   }
@@ -65,7 +60,7 @@ const MediaContent: React.FC<{ media: Media | undefined; title: string; isVideo:
   return (
     <div className="w-full h-full">
       <Image
-        src={media?.url || loremPic}
+        src={media.url || loremPic}
         alt={title}
         width={240}
         height={180}
@@ -77,7 +72,6 @@ const MediaContent: React.FC<{ media: Media | undefined; title: string; isVideo:
 
 const Card: React.FC<CardProps> = ({ title, media, category, slugUrl }) => {
   const [randomLetter, setRandomLetter] = useState<string>('')
-  const isVideo = media?.mimeType?.startsWith('video/')
   const titleRef = useRef<HTMLDivElement>(null)
   const [letterTopPosition, setLetterTopPosition] = useState('0.5rem')
 
@@ -122,7 +116,7 @@ const Card: React.FC<CardProps> = ({ title, media, category, slugUrl }) => {
         </div>
 
         <div className="h-[180px]">
-          <MediaContent media={media} title={title} isVideo={isVideo ?? false} />
+          <MediaContent media={media} title={title} />
         </div>
       </div>
     </Link>

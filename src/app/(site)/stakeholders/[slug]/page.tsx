@@ -93,13 +93,13 @@ export default async function Stakeholder({ params }: { params: { slug: string }
 
             {/* Contatti */}
             {stakeholderData.contatti && stakeholderData.contatti.length > 0 && (
-              <div className="w-full bg-gray-50 p-6 rounded-lg">
+              <div className="mt-8">
                 <h2 className="text-2xl font-semibold mb-4">Contatti</h2>
                 <ul className="space-y-4">
                   {stakeholderData.contatti.map((contatto, index) => (
                     <li
                       key={index}
-                      className="border-b border-gray-200 last:border-0 pb-4 last:pb-0"
+                      className="pb-4 last:pb-0"
                     >
                       <p className="font-medium text-lg mb-2">{contatto.nome}</p>
                       {contatto.telefono && (

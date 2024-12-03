@@ -22,7 +22,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
   }
 
   return (
-    <div className="w-full sm:w-[500px] bg-residenzeColor/20 overflow-hidden rounded-md">
+    <div className="w-full md:w-[48%] bg-residenzeColor/20 overflow-hidden rounded-md">
       <div className="flex p-4 gap-4">
         {/* Left column - Image */}
         <div className="w-1/3 max-w-[240px]">

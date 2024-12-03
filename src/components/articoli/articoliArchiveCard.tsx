@@ -51,26 +51,8 @@ function useTruncatedText(
 }
 
 const MediaContent: React.FC<{ media: Media | undefined; title: string }> = ({ media, title }) => {
-  if (!media || typeof media === 'string') {
+  if (!media || typeof media === 'string' || media.mimeType?.startsWith('video/')) {
     return <div className="w-full h-full bg-white flex items-center justify-center"></div>
-  }
-
-  const isVideo = media.mimeType?.startsWith('video/')
-  if (isVideo) {
-    return (
-      <div className="relative h-full">
-        <video
-          className="h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          controls={false}
-        >
-          <source src={media.url || ''} type={media.mimeType || ''} />
-        </video>
-      </div>
-    )
   }
 
   return (
@@ -107,18 +89,18 @@ const ArchiveCard: React.FC<Articolo> = ({ title, subtitle, media, slugUrl, tags
 
   return (
     <Link href={slugUrl} className="block">
-      <article className="h-[150px] border-2 border-black rounded-lg flex overflow-hidden transition-transform duration-300 ease-in-out hover:scale-[0.98]">
-        <div className="relative w-1/3 border-r border-black">
+      <article className="h-[200px] sm:h-[220px] border-2 border-black rounded-lg flex overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95">
+        <div className="relative w-2/5 border-r border-black">
           <MediaContent media={media} title={title} />
         </div>
-        <div className="w-2/3 flex flex-col p-3 h-full">
-          <div className="mb-2">
+        <div className="w-3/5 flex flex-col p-4 h-full">
+          <div className="mb-3">
             <TagsList tags={tags.filter(Boolean) as string[]} />
           </div>
-          <div ref={titleRef} className="text-sm font-bold leading-6">
+          <div ref={titleRef} className="text-base font-bold leading-6">
             {displayTitle}
           </div>
-          <div ref={subtitleRef} className="text-xs leading-6 mt-1">
+          <div ref={subtitleRef} className="text-sm leading-6 mt-2">
             {displaySubtitle}
           </div>
         </div>

@@ -24,7 +24,7 @@ const TuttiArticoliPage = async () => {
   const articoli: Articoli[] = articoliData.docs
 
   return (
-    <main className=" sm:px-36">
+    <main className="sm:px-8 md:px-12 lg:px-24">
       <div className="bg-white p-3 pt-5 max-w-screen-xl mx-auto">
         {testi.articoli.title && (
           <div className="font-normal text-sm pb-4 leading-4">
@@ -34,11 +34,11 @@ const TuttiArticoliPage = async () => {
 
         <StringToHTML htmlString={testi.articoli.text_html ?? ''} />
 
-        <div className="">
+        <div className="flex flex-wrap -mx-2">
           {articoli.map((articolo, index) => {
             const { title, subtitle, media, slugUrl, tags } = articoliUnpacker(articolo)
             return (
-              <div key={index} className="pb-4">
+              <div key={index} className="w-full md:w-1/2 p-2">
                 <ArchiveCard
                   title={title}
                   subtitle={subtitle}

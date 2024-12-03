@@ -72,24 +72,26 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
             <div className="mb-6">
               <StringToHTML htmlString={luogoData.testo_html ?? ''} />
             </div>
+            
+            {/* Contacts and Hours */}
+            <LuogoInfoRow
+              contatti={(luogoData.contatti as []) ?? undefined}
+              orari_html={luogoData.orari_html}
+              orari={luogoData.orari as any | undefined}
+            />
           </div>
 
           {/* Right column: Map */}
           <div className="lg:order-2">
-            <div className="h-[500px] lg:sticky lg:top-4 flex items-center justify-center">
+            <div className="h-[500px] flex items-center justify-center">
               <DynamicMappa initialPosition={position} initialZoom={14} />
             </div>
           </div>
         </div>
 
-        {/* Info row component */}
+        {/* Services section */}
         <div>
           <ServiziCardWrapper servizi={luogoData.servizi as any} />
-          <LuogoInfoRow
-            contatti={(luogoData.contatti as []) ?? undefined}
-            orari_html={luogoData.orari_html}
-            orari={luogoData.orari as any | undefined}
-          />
         </div>
 
         {/* Galleria section */}

@@ -62,7 +62,7 @@ const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({
 
       {/* Contatti section */}
       {hasContatti && (
-        <div className="bg-gray-50 p-6 rounded-lg">
+        <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Contatti</h2>
           <ul>
             {contatti.map((contatto, index) => (
@@ -93,7 +93,7 @@ const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({
 
       {/* Orari section */}
       {hasOrari && (
-        <div className="bg-gray-50 p-6 rounded-lg">
+        <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Orari di Apertura</h2>
           <StringToHTML htmlString={orari_html ?? ''} />
         </div>
