@@ -26,12 +26,12 @@ const RandomLetter: React.FC<RandomLetterProps> = ({ position = 'right', color =
   }
 
   return (
-    <div className="absolute inset-0 flex items-top overflow-hidden pointer-events-none select-none">
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none">
       <div
         className={`
-          ${position === 'left' ? 'left-0' : 'right-0'} 
           absolute 
           whitespace-nowrap
+          ${position === 'left' ? '-translate-x-1/4' : 'translate-x-1/4'}
         `}
         style={{ userSelect: 'none' }}
         aria-hidden="true"

@@ -5,6 +5,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 
 import { s3Storage } from '@payloadcms/storage-s3'
 
@@ -45,6 +46,12 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
+    seoPlugin({
+      collections: ['Itinerari', 'Luoghi', 'Stakeholders', 'Residenze', 'Articoli'],
+      uploadsCollection: 'media',
+      generateTitle: ({ doc }) => `Website.com — ${doc.title}`,
+      generateDescription: ({ doc }) => doc.excerpt,
+    }),
     s3Storage({
       collections: {
         [Media.slug]: {

@@ -3106,6 +3106,14 @@
     nodemailer "6.9.10"
     resend "^0.17.2"
 
+"@payloadcms/plugin-seo@3.0.0-beta.108":
+  version "3.0.0-beta.108"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-3.0.0-beta.108.tgz#23c52f52b1bec00c9db4e217d68600e4e93ae1ea"
+  integrity sha512-WyLcvfnviBlQ+Z7cBMPocvxi4U+Wfn8vlCFEUNE1pq4qWy4dehhx8Epg8F3wwndSvHbko+NOVbna630F2z/O3g==
+  dependencies:
+    "@payloadcms/translations" "3.0.0-beta.108"
+    "@payloadcms/ui" "3.0.0-beta.108"
+
 "@payloadcms/richtext-lexical@3.0.0-beta.108":
   version "3.0.0-beta.108"
   resolved "https://registry.yarnpkg.com/@payloadcms/richtext-lexical/-/richtext-lexical-3.0.0-beta.108.tgz#f2958c647fcb6250569b5b01473b46c13436deb8"
