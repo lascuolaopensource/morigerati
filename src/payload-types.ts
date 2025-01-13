@@ -171,6 +171,11 @@ export interface Luoghi {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -241,6 +246,11 @@ export interface Itinerari {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -304,6 +314,11 @@ export interface Stakeholder {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -399,6 +414,11 @@ export interface Residenze {
         id?: string | null;
       }[]
     | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -435,6 +455,11 @@ export interface Articoli {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -623,6 +648,11 @@ export interface Home {
     text_html?: string | null;
   };
   tracciati_mappa?: (string | Tracciati)[] | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -650,6 +680,11 @@ export interface ChiSiamo {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -677,6 +712,11 @@ export interface MobilitaSostenibile {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }

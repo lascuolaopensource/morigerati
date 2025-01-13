@@ -62,7 +62,7 @@ export const Luoghi: CollectionConfig = {
             lexicalHTML('orari', { name: 'orari_html' }),
           ],
         },
-        F.tabContenuto,
+        F.tabContenuto
       ],
     },
   ],

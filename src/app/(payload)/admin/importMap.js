@@ -23,6 +23,11 @@ import { BlockquoteFeatureClient as BlockquoteFeatureClient_21 } from '@payloadc
 import { UploadFeatureClient as UploadFeatureClient_22 } from '@payloadcms/richtext-lexical/client'
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_23 } from '@payloadcms/richtext-lexical/client'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_24 } from '@payloadcms/richtext-lexical/client'
+import { OverviewComponent as OverviewComponent_25 } from '@payloadcms/plugin-seo/client'
+import { MetaTitleComponent as MetaTitleComponent_26 } from '@payloadcms/plugin-seo/client'
+import { MetaDescriptionComponent as MetaDescriptionComponent_27 } from '@payloadcms/plugin-seo/client'
+import { MetaImageComponent as MetaImageComponent_28 } from '@payloadcms/plugin-seo/client'
+import { PreviewComponent as PreviewComponent_29 } from '@payloadcms/plugin-seo/client'
 
 export const importMap = {
   "/db/fields/components/header.tsx#default": default_0,
@@ -49,5 +54,10 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#BlockquoteFeatureClient": BlockquoteFeatureClient_21,
   "@payloadcms/richtext-lexical/client#UploadFeatureClient": UploadFeatureClient_22,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_23,
-  "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_24
+  "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_24,
+  "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_25,
+  "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_26,
+  "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_27,
+  "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_28,
+  "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_29
 }

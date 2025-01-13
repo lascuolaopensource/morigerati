@@ -23,6 +23,8 @@ import { ChiSiamo } from './db/globals/ChiSiamo'
 import { MobilitaSostenibile } from './db/globals/MobilitaSostenibile'
 import { Footer } from './db/globals/Footer'
 import { Testi } from './db/globals/Testi'
+import { Collections } from './db/collections'
+import { Globals } from './db/globals'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -47,10 +49,36 @@ export default buildConfig({
   sharp,
   plugins: [
     seoPlugin({
-      collections: ['Itinerari', 'Luoghi', 'Stakeholders', 'Residenze', 'Articoli'],
-      uploadsCollection: 'media',
-      generateTitle: ({ doc }) => `Website.com — ${doc.title}`,
-      generateDescription: ({ doc }) => doc.excerpt,
+      collections: [
+        Collections.Luoghi,
+        Collections.Stakeholders,
+        Collections.Itinerari,
+        Collections.Residenze,
+        Collections.Articoli,
+      ],
+      globals: [
+        Globals.Home,
+        Globals.ChiSiamo,
+        Globals.MobilitaSostenibile,
+      ],
+      uploadsCollection: Collections.Media,
+      generateTitle: ({ doc }) => {
+        const title = doc?.nome || doc?.titolo || ''
+        return title ? `${title} | Morigerati` : 'Morigerati'
+      },
+      generateDescription: ({ doc }) => {
+        if (doc?.testo_html) {
+          return doc.testo_html.replace(/<[^>]*>/g, '').substring(0, 155)
+        }
+        return ''
+      },
+      generateURL: ({ doc, collectionSlug, globalSlug }) => {
+        if (globalSlug) {
+          return `https://morigerati.it/${globalSlug === Globals.Home ? '' : globalSlug.replace('_', '-')}`
+        }
+        return `https://morigerati.it/${collectionSlug}/${doc?.slug || ''}`
+      },
+      tabbedUI: true,
     }),
     s3Storage({
       collections: {

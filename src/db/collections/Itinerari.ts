@@ -154,7 +154,7 @@ export const Itinerari: CollectionConfig = {
           ],
         },
 
-        F.tabContenutoItinerario,
+        F.tabContenutoItinerario
       ],
     },
   ],

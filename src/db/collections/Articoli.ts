@@ -14,32 +14,42 @@ export const Articoli: CollectionConfig = {
   },
 
   fields: [
-    F.title('Informazioni generali'),
     {
-      ...F.plainText('titolo'),
-      required: true,
-    },
-    {
-      ...F.plainText('sottotitolo'),
-    },
-    {
-      name: 'tags',
-      type: 'array',
-      label: 'Tags',
-      maxRows: 3,
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-          name: 'tag',
-          type: 'text',
-        },
+          label: 'Contenuto',
+          fields: [
+            F.title('Informazioni generali'),
+            {
+              ...F.plainText('titolo'),
+              required: true,
+            },
+            {
+              ...F.plainText('sottotitolo'),
+            },
+            {
+              name: 'tags',
+              type: 'array',
+              label: 'Tags',
+              maxRows: 3,
+              fields: [
+                {
+                  name: 'tag',
+                  type: 'text',
+                },
+              ],
+            },
+            {
+              name: 'data_pubblicazione',
+              label: 'Data pubblicazione',
+              type: 'date',
+            },
+            F.divider,
+            ...F.contenutoFields,
+          ],
+        }
       ],
     },
-    {
-      name: 'data_pubblicazione',
-      label: 'Data pubblicazione',
-      type: 'date',
-    },
-    F.divider,
-    ...F.contenutoFields,
   ],
 }

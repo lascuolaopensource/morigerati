@@ -37,7 +37,7 @@ export const Stakeholders: CollectionConfig = {
             F.contatti,
           ],
         },
-        F.tabContenuto,
+        F.tabContenuto
       ],
     },
   ],
