@@ -1,6 +1,7 @@
 import React from 'react'
 import { loadDb } from '@/utils/db'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 
 import BackButton from '@/components/uiElements/backButton'
 import StringToHTML from '@/components/serializer/stringToHTML'
@@ -14,6 +15,49 @@ import { Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
 import ArticoliTagsList from '@/components/articoli/tagsList'
 import CardGrid from '@/components/card/wrappers/cardsSwiper'
+
+interface Props {
+  params: {
+    slug: string
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const db = await loadDb()
+  const stakeholders = await db.find({
+    collection: 'stakeholders',
+    depth: 2,
+  })
+
+  const stakeholderData = stakeholders.docs.find((s) => s.id === params.slug)
+
+  if (!stakeholderData) {
+    return {
+      title: 'Stakeholder non trovato | Morigerati',
+    }
+  }
+
+  const metaImage = stakeholderData?.meta?.image
+  const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
+  return {
+    title: stakeholderData?.meta?.title ?? stakeholderData.nome ?? 'Morigerati',
+    description: stakeholderData?.meta?.description || undefined,
+    openGraph: {
+      title: stakeholderData?.meta?.title ?? stakeholderData.nome ?? 'Morigerati',
+      description: stakeholderData?.meta?.description || undefined,
+      images: imageUrl ? [{ url: imageUrl }] : undefined,
+      url: `${baseUrl}/stakeholders/${params.slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: stakeholderData?.meta?.title ?? stakeholderData.nome ?? 'Morigerati',
+      description: stakeholderData?.meta?.description || undefined,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+    metadataBase: new URL(baseUrl),
+  }
+}
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

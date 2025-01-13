@@ -1,4 +1,5 @@
 import React from 'react'
+import { Metadata } from 'next'
 
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/uiElements/backButton'
@@ -17,6 +18,49 @@ import { Luoghi, Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
 import LuogoInfoRow from '@/components/luoghi/luogoInfoRow'
 import { ServiziCardWrapper } from '@/components/itinerari/servizioCardWrapper'
+
+interface Props {
+  params: {
+    slug: string
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const db = await loadDb()
+  const luoghi = await db.find({
+    collection: 'luoghi',
+    depth: 2,
+  })
+
+  const luogoData = luoghi.docs.find((l) => l.id === params.slug)
+
+  if (!luogoData) {
+    return {
+      title: 'Luogo non trovato | Morigerati',
+    }
+  }
+
+  const metaImage = luogoData?.meta?.image
+  const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
+  return {
+    title: luogoData?.meta?.title ?? luogoData.nome ?? 'Morigerati',
+    description: luogoData?.meta?.description || undefined,
+    openGraph: {
+      title: luogoData?.meta?.title ?? luogoData.nome ?? 'Morigerati',
+      description: luogoData?.meta?.description || undefined,
+      images: imageUrl ? [{ url: imageUrl }] : undefined,
+      url: `${baseUrl}/luoghi/${params.slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: luogoData?.meta?.title ?? luogoData.nome ?? 'Morigerati',
+      description: luogoData?.meta?.description || undefined,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+    metadataBase: new URL(baseUrl),
+  }
+}
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

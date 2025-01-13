@@ -10,9 +10,37 @@ import { RandomPixel } from '@/components/uiElements/pixels'
 import HomeCollection from '@/components/home/homeCollection'
 import HomeTracksSection from '@/components/home/homeTracksSection'
 import { getHomeTracksData } from '@/utils/getHomeData'
+import { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+
+export async function generateMetadata(): Promise<Metadata> {
+  const db = await loadDb()
+  const home = await db.findGlobal({
+    slug: 'home',
+  })
+
+  const metaImage = home?.meta?.image
+  const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
+  return {
+    title: home?.meta?.title ?? 'Morigerati',
+    description: home?.meta?.description || undefined,
+    openGraph: {
+      title: home?.meta?.title ?? 'Morigerati',
+      description: home?.meta?.description || undefined,
+      images: imageUrl ? [{ url: imageUrl }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: home?.meta?.title ?? 'Morigerati',
+      description: home?.meta?.description || undefined,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+    metadataBase: new URL(baseUrl),
+  }
+}
 
 const Home = async () => {
   const db = await loadDb()

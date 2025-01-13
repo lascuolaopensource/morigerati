@@ -13,9 +13,53 @@ import Copertina from '@/components/uiElements/copertina'
 import { Media } from '@/payload-types'
 import { RandomPixel } from '@/components/uiElements/pixels'
 import Galleria from '@/components/galleria/galleria'
+import { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+
+interface Props {
+  params: {
+    slug: string
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const db = await loadDb()
+  const residenze = await db.find({
+    collection: 'residenze',
+    depth: 2,
+  })
+
+  const residenzaData = residenze.docs.find((r) => r.id === params.slug)
+
+  if (!residenzaData) {
+    return {
+      title: 'Residenza non trovata | Morigerati',
+    }
+  }
+
+  const metaImage = residenzaData?.meta?.image
+  const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
+  return {
+    title: residenzaData?.meta?.title ?? residenzaData.nome ?? 'Morigerati',
+    description: residenzaData?.meta?.description || undefined,
+    openGraph: {
+      title: residenzaData?.meta?.title ?? residenzaData.nome ?? 'Morigerati',
+      description: residenzaData?.meta?.description || undefined,
+      images: imageUrl ? [{ url: imageUrl }] : undefined,
+      url: `${baseUrl}/residenze/${params.slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: residenzaData?.meta?.title ?? residenzaData.nome ?? 'Morigerati',
+      description: residenzaData?.meta?.description || undefined,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+    metadataBase: new URL(baseUrl),
+  }
+}
 
 export default async function ResidenzaSlug({ params }: { params: { slug: string } }) {
   const db = await loadDb()
