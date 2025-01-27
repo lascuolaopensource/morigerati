@@ -1,5 +1,5 @@
 import React from 'react'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import config from '@payload-config'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Articoli, Media } from '@/payload-types'
@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const TuttiArticoliPage = async () => {
-  const payload = await getPayloadHMR({ config })
+  const payload = await getPayload({ config })
 
   const testi = await payload.findGlobal({
     slug: 'testi',

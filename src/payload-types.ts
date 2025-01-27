@@ -23,6 +23,20 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
+  collectionsJoins: {};
+  collectionsSelect: {
+    users: UsersSelect<false> | UsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    luoghi: LuoghiSelect<false> | LuoghiSelect<true>;
+    itinerari: ItinerariSelect<false> | ItinerariSelect<true>;
+    residenze: ResidenzeSelect<false> | ResidenzeSelect<true>;
+    stakeholders: StakeholdersSelect<false> | StakeholdersSelect<true>;
+    articoli: ArticoliSelect<false> | ArticoliSelect<true>;
+    tracciati: TracciatiSelect<false> | TracciatiSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
     defaultIDType: string;
   };
@@ -33,9 +47,20 @@ export interface Config {
     footer: Footer;
     testi: Testi;
   };
+  globalsSelect: {
+    home: HomeSelect<false> | HomeSelect<true>;
+    chi_siamo: ChiSiamoSelect<false> | ChiSiamoSelect<true>;
+    mobilita_sostenibile: MobilitaSostenibileSelect<false> | MobilitaSostenibileSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    testi: TestiSelect<false> | TestiSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
+  };
+  jobs: {
+    tasks: unknown;
+    workflows: unknown;
   };
 }
 export interface UserAuthOperations {
@@ -171,9 +196,14 @@ export interface Luoghi {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   updatedAt: string;
@@ -246,9 +276,14 @@ export interface Itinerari {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   updatedAt: string;
@@ -314,9 +349,14 @@ export interface Stakeholder {
     [k: string]: unknown;
   };
   testo_html?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   updatedAt: string;
@@ -414,9 +454,14 @@ export interface Residenze {
         id?: string | null;
       }[]
     | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   updatedAt: string;
@@ -458,6 +503,9 @@ export interface Articoli {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   updatedAt: string;
@@ -543,6 +591,302 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "luoghi_select".
+ */
+export interface LuoghiSelect<T extends boolean = true> {
+  nome?: T;
+  posizione?: T;
+  Itinerari_relation?: T;
+  servizi?:
+    | T
+    | {
+        nome?: T;
+        link?: T;
+        testo?: T;
+        testo_html?: T;
+        id?: T;
+      };
+  contatti?:
+    | T
+    | {
+        nome?: T;
+        link?: T;
+        email?: T;
+        telefono?: T;
+        id?: T;
+      };
+  orari?: T;
+  orari_html?: T;
+  copertina?: T;
+  galleria?: T;
+  testo?: T;
+  testo_html?: T;
+  slug?: T;
+  slugLock?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "itinerari_select".
+ */
+export interface ItinerariSelect<T extends boolean = true> {
+  nome?: T;
+  tracciato_gpx?: T;
+  lunghezza?: T;
+  tempo?: T;
+  dislivello?: T;
+  tipo?: T;
+  difficolta?: T;
+  servizi?:
+    | T
+    | {
+        nome?: T;
+        link?: T;
+        testo?: T;
+        id?: T;
+      };
+  luoghi?: T;
+  stakeholders?: T;
+  media_geolocalizzati?:
+    | T
+    | {
+        posizione?: T;
+        copertina?: T;
+        id?: T;
+      };
+  copertina?: T;
+  Video?: T;
+  galleria?: T;
+  testo?: T;
+  testo_html?: T;
+  slug?: T;
+  slugLock?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "residenze_select".
+ */
+export interface ResidenzeSelect<T extends boolean = true> {
+  nome?: T;
+  data_inizio?: T;
+  data_fine?: T;
+  deadline_iscrizione?: T;
+  link_iscrizione?: T;
+  indirizzo?: T;
+  mostra_dettagli?: T;
+  mostra_pulsante_iscrizione?: T;
+  abstract?: T;
+  abstract_html?: T;
+  descrizione?: T;
+  info_html?: T;
+  copertina?: T;
+  galleria?: T;
+  programma?:
+    | T
+    | {
+        programma?: T;
+        testo?: T;
+        testo_html?: T;
+        id?: T;
+      };
+  esperti?:
+    | T
+    | {
+        nome?: T;
+        foto?: T;
+        biografia?: T;
+        progetti?:
+          | T
+          | {
+              nome?: T;
+              link?: T;
+              id?: T;
+            };
+        organizzazioni?:
+          | T
+          | {
+              nome?: T;
+              link?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stakeholders_select".
+ */
+export interface StakeholdersSelect<T extends boolean = true> {
+  nome?: T;
+  tipologia?: T;
+  posizione?: T;
+  indirizzo?: T;
+  contatti?:
+    | T
+    | {
+        nome?: T;
+        link?: T;
+        email?: T;
+        telefono?: T;
+        id?: T;
+      };
+  copertina?: T;
+  galleria?: T;
+  testo?: T;
+  testo_html?: T;
+  slug?: T;
+  slugLock?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articoli_select".
+ */
+export interface ArticoliSelect<T extends boolean = true> {
+  titolo?: T;
+  sottotitolo?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  data_pubblicazione?: T;
+  copertina?: T;
+  galleria?: T;
+  testo?: T;
+  testo_html?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tracciati_select".
+ */
+export interface TracciatiSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents_select".
+ */
+export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences_select".
+ */
+export interface PayloadPreferencesSelect<T extends boolean = true> {
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations_select".
+ */
+export interface PayloadMigrationsSelect<T extends boolean = true> {
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -651,6 +995,9 @@ export interface Home {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   updatedAt?: string | null;
@@ -683,6 +1030,9 @@ export interface ChiSiamo {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   updatedAt?: string | null;
@@ -715,6 +1065,9 @@ export interface MobilitaSostenibile {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   updatedAt?: string | null;
@@ -869,6 +1222,162 @@ export interface Testi {
   };
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  statement?: T;
+  cover?: T;
+  intro?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  itinerari?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  luoghi?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  residenze?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  mappa?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  tracciati_mappa?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "chi_siamo_select".
+ */
+export interface ChiSiamoSelect<T extends boolean = true> {
+  copertina?: T;
+  galleria?: T;
+  testo?: T;
+  testo_html?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mobilita_sostenibile_select".
+ */
+export interface MobilitaSostenibileSelect<T extends boolean = true> {
+  copertina?: T;
+  galleria?: T;
+  testo?: T;
+  testo_html?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  testo_sinistra?: T;
+  testo_destra?: T;
+  'Link Social'?:
+    | T
+    | {
+        nome?: T;
+        link?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testi_select".
+ */
+export interface TestiSelect<T extends boolean = true> {
+  luoghi?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  itinerari?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  residenze?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  stakeholders?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  articoli?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        text_html?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { Collections } from '.'
-import * as F from '@/db/fields'
+import * as F from '@/fields'
 import {
   lexicalEditor,
   BoldFeature,
@@ -9,9 +9,10 @@ import {
   lexicalHTML,
   HTMLConverterFeature,
 } from '@payloadcms/richtext-lexical'
+import { slugField } from '@/fields'
 
-export const Luoghi: CollectionConfig = {
-  slug: Collections.Luoghi,
+export const Luoghi: CollectionConfig<'luoghi'> = {
+  slug: 'luoghi',
 
   labels: {
     singular: 'Luogo',
@@ -19,7 +20,8 @@ export const Luoghi: CollectionConfig = {
   },
 
   admin: {
-    //useAsTitle: F.nome.name,
+    defaultColumns: ['title'],
+    useAsTitle: F.nome.name,
   },
 
   fields: [
@@ -32,6 +34,7 @@ export const Luoghi: CollectionConfig = {
             F.title('Info generali'),
             F.nome,
             F.posizione,
+
             {
               name: 'Itinerari_relation',
               label: 'Itinerari in cui si trova il luogo',
@@ -39,11 +42,11 @@ export const Luoghi: CollectionConfig = {
               relationTo: Collections.Itinerari,
               hasMany: true,
             },
-            F.divider,
+            F.divider('divider-1')  ,
             F.servizi,
-            F.divider,
+            F.divider('divider-2'),
             F.contatti,
-            F.divider,
+            F.divider('divider-3'),
             F.title('Orari'),
             {
               name: 'orari',
@@ -62,7 +65,13 @@ export const Luoghi: CollectionConfig = {
             lexicalHTML('orari', { name: 'orari_html' }),
           ],
         },
-        F.tabContenuto
+        F.tabContenuto,
+        {
+          label: 'Link',
+          fields: [
+            ...slugField('nome'),
+          ]
+        }
       ],
     },
   ],

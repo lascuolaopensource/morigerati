@@ -1,6 +1,12 @@
 import { Metadata } from 'next'
 import { loadDb } from '@/utils/db'
-// ... existing imports ...
+import StringToHTML from '@/components/serializer/stringToHTML'
+import { RandomPixel } from '@/components/uiElements/pixels'
+import Copertina from '@/components/uiElements/copertina'
+import { type Media } from '@/payload-types'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function generateMetadata(): Promise<Metadata> {
   const db = await loadDb()
@@ -30,4 +36,19 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-// ... rest of the page component 
+export default async function ChiSiamo() {
+  const db = await loadDb()
+  const chiSiamo = await db.findGlobal({
+    slug: 'chi_siamo',
+  })
+
+  return (
+    <main className="max-w-screen-xl mx-auto pb-4">
+      {chiSiamo.copertina && <Copertina copertina={chiSiamo.copertina as Media | undefined} />}
+      <div className="relative p-3 pt-5 max-w-screen-xl mx-auto">
+        <RandomPixel />
+        <StringToHTML htmlString={chiSiamo.testo_html ?? ''} />
+      </div>
+    </main>
+  )
+} 

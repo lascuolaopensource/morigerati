@@ -9,6 +9,7 @@ import {
   Tab,
   TextField,
   UIField,
+  CheckboxField
 } from 'payload'
 import { Collections } from '@/db/collections'
 
@@ -16,24 +17,67 @@ import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/ri
 
 import { capitalizeFirstLetter } from '@/utils/strings'
 
-export const divider: UIField = {
-  name: 'divider',
-  type: 'ui',
-  admin: {
-    components: {
-      Field: '/db/fields/components/divider.tsx',
+import { formatSlugHook } from './slug/formatSlug'
+
+type Overrides = {
+  slugOverrides?: Partial<TextField>
+  checkboxOverrides?: Partial<CheckboxField>
+}
+
+type Slug = (fieldToUse?: string, overrides?: Overrides) => [TextField, CheckboxField]
+
+export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
+  const { slugOverrides, checkboxOverrides } = overrides
+
+  const checkBoxField: CheckboxField = {
+    name: 'slugLock',
+    type: 'checkbox',
+    defaultValue: true,
+    admin: {
+      hidden: true,
+      position: 'sidebar',
     },
-  },
+    ...checkboxOverrides,
+  }
+
+  // Expect ts error here because of typescript mismatching Partial<TextField> with TextField
+  // @ts-expect-error
+  const slugField: TextField = {
+    name: 'slug',
+    type: 'text',
+    index: true,
+    label: 'Slug',
+    ...(slugOverrides || {}),
+    hooks: {
+      // Kept this in for hook or API based updates
+      beforeValidate: [formatSlugHook(fieldToUse)],
+    },
+    admin: {
+      position: 'sidebar',
+      ...(slugOverrides?.admin || {}),
+      components: {
+        Field: {
+          path: '@/fields/slug/SlugComponent#SlugComponent',
+          clientProps: {
+            fieldToUse,
+            checkboxFieldPath: checkBoxField.name,
+          },
+        },
+      },
+    },
+  }
+
+  return [slugField, checkBoxField]
 }
 
 export function title(text: string): UIField {
   return {
-    name: 'header',
+    name: `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
     type: 'ui',
     admin: {
       components: {
         Field: {
-          path: '/db/fields/components/header.tsx',
+          path: '@/fields/components/header.tsx',
           clientProps: {
             content: text,
           },
@@ -43,16 +87,33 @@ export function title(text: string): UIField {
   }
 }
 
-export function gap(size: number): UIField {
+export function gap(size: number, key: string): UIField {
   return {
-    name: 'gap',
+    name: `gap-${key}`,
     type: 'ui',
     admin: {
       components: {
         Field: {
-          path: '/db/fields/components/gap.tsx',
+          path: '@/fields/components/gap.tsx',
           clientProps: {
+
             size: size,
+          },
+        },
+      },
+    },
+  }
+}
+
+export function divider(key: string): UIField {
+  return {
+    name: `divider-${key}`,
+    type: 'ui',
+    admin: {
+      components: {
+        Field: {
+          path: '@/fields/components/divider.tsx',
+          clientProps: {
           },
         },
       },
@@ -199,7 +260,7 @@ export const contenutoFields: Field[] = [
   title('Immagini e media'),
   media,
   galleria,
-  divider,
+
   title('Contenuti testuali'),
   { ...testo, required: true },
   lexicalHTML('testo', { name: 'testo_html' }),
@@ -215,7 +276,7 @@ export const contenutoFieldsMedia: Field[] = [
     required: false,
   },
   galleria,
-  divider,
+
   title('Contenuti testuali'),
   { ...testo, required: true },
   lexicalHTML('testo', { name: 'testo_html' }),
@@ -226,7 +287,7 @@ export const contenutoFieldsUnrequired: Field[] = [
   media,
   linkArray,
   galleria,
-  divider,
+
   title('Contenuti testuali'),
   { ...testo, required: false },
   lexicalHTML('testo', { name: 'testo_html' }),

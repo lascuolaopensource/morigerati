@@ -1,15 +1,17 @@
 import { CollectionConfig } from 'payload'
 import { Collections } from '.'
-import * as F from '@/db/fields'
+import * as F from '@/fields'
 import { lexicalHTML } from '@payloadcms/richtext-lexical'
+import { slugField } from '@/fields'
 
-export const Residenze: CollectionConfig = {
-  slug: Collections.Residenze,
+export const Residenze: CollectionConfig<'residenze'> = {
+  slug: 'residenze',
   labels: {
     singular: 'Residenza',
     plural: 'Residenze',
   },
   admin: {
+    defaultColumns: ['title'],
     useAsTitle: F.nome.name,
   },
 
@@ -22,7 +24,6 @@ export const Residenze: CollectionConfig = {
           fields: [
             F.title('Informazioni generali'),
             F.nome,
-
             {
               name: 'data_inizio',
               label: 'Data inizio',
@@ -34,7 +35,7 @@ export const Residenze: CollectionConfig = {
               type: 'date',
             },
 
-            F.divider,
+            F.divider('divider-1'),
             {
               name: 'deadline_iscrizione',
               label: 'Scadenza iscrizioni',
@@ -45,13 +46,13 @@ export const Residenze: CollectionConfig = {
               label: 'Link iscrizione',
               type: 'text',
             },
-            F.divider,
+            F.divider('divider-2')  ,
             {
               name: 'indirizzo',
               label: 'Indirizzo / luogo',
               type: 'text',
             },
-            F.divider,
+            F.divider('divider-3')  ,
             {
               name: 'mostra_dettagli',
               type: 'checkbox',
@@ -80,7 +81,7 @@ export const Residenze: CollectionConfig = {
               label: 'Abstract',
             },
             lexicalHTML('abstract', { name: 'abstract_html' }),
-            F.divider,
+            F.divider('divider-4'),
 
             {
               ...F.testo,
@@ -127,8 +128,15 @@ export const Residenze: CollectionConfig = {
                 },
               ],
             },
+            
           ],
         },
+        {
+          label: 'Link',
+          fields: [
+            ...slugField('nome'),
+          ]
+        }
       ],
     },
   ],

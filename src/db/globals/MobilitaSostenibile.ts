@@ -1,5 +1,5 @@
 import type { GlobalConfig } from 'payload'
-import * as F from '@/db/fields'
+import * as F from '@/fields'
 import { Globals } from '.'
 
 export const MobilitaSostenibile: GlobalConfig = {

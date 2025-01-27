@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { Collections } from '.'
-import * as F from '@/db/fields'
+import * as F from '@/fields'
 import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
 
 export const Articoli: CollectionConfig = {
@@ -25,6 +25,8 @@ export const Articoli: CollectionConfig = {
               ...F.plainText('titolo'),
               required: true,
             },
+            F.gap(20, 'gap-1'),
+            F.gap(20, 'gap-2'),
             {
               ...F.plainText('sottotitolo'),
             },
@@ -45,7 +47,7 @@ export const Articoli: CollectionConfig = {
               label: 'Data pubblicazione',
               type: 'date',
             },
-            F.divider,
+
             ...F.contenutoFields,
           ],
         }

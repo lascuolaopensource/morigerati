@@ -55,7 +55,7 @@ const CardGrid: React.FC<CardGridProps> = ({
                 collection={item}
                 title={item.nome}
                 media={item.copertina as Media | undefined}
-                slugUrl={`/${category}/${item.id}`}
+                slugUrl={`/${category}/${item.slug}`}
                 category={category}
               />
             </div>

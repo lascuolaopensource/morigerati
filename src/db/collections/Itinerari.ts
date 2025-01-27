@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import * as F from '@/db/fields'
+import * as F from '@/fields'
 import { Collections } from '.'
 import {
   lexicalEditor,
@@ -8,13 +8,19 @@ import {
   ParagraphFeature,
 } from '@payloadcms/richtext-lexical'
 
-export const Itinerari: CollectionConfig = {
-  slug: Collections.Itinerari,
+import { slugField } from '@/fields'
+
+export const Itinerari: CollectionConfig<'itinerari'> = {
+  slug: 'itinerari',
+  defaultPopulate: {
+    slug: true,
+  },
   labels: {
     singular: 'Itinerario',
     plural: 'Itinerari',
   },
   admin: {
+    defaultColumns: ['title'],
     useAsTitle: F.nome.name,
   },
 
@@ -27,13 +33,14 @@ export const Itinerari: CollectionConfig = {
           fields: [
             F.title('Generale'),
             F.nome,
+            
             {
               ...F.tracciati,
               name: 'tracciato_gpx',
               label: 'Tracciato GPX',
             },
 
-            F.divider,
+            F.divider('divider-4'),
 
             F.title('Informazioni tecniche'),
             {
@@ -103,7 +110,7 @@ export const Itinerari: CollectionConfig = {
               ],
             },
 
-            F.divider,
+            F.divider('divider-1'),
 
             {
               name: 'servizi',
@@ -124,7 +131,7 @@ export const Itinerari: CollectionConfig = {
               ],
             },
 
-            F.divider,
+            F.divider('divider-2'),
 
             F.title('Contenuti collegati'),
             {
@@ -140,7 +147,7 @@ export const Itinerari: CollectionConfig = {
               hasMany: true,
             },
 
-            F.divider,
+            F.divider('divider-3'),
 
             {
               name: 'media_geolocalizzati',
@@ -154,7 +161,14 @@ export const Itinerari: CollectionConfig = {
           ],
         },
 
-        F.tabContenutoItinerario
+        F.tabContenutoItinerario,
+
+        {
+          label: 'Link',
+          fields: [
+            ...slugField('nome'),
+          ]
+        }
       ],
     },
   ],

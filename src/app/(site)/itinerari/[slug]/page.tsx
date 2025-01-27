@@ -37,6 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const itinerarioData = itinerari.docs.find((i) => i.id === params.slug)
 
+  
+
   if (!itinerarioData) {
     return {
       title: 'Itinerario non trovato | Morigerati',
@@ -76,7 +78,7 @@ export default async function Itinerario({ params }: { params: { slug: string } 
   const itinerario = await db.find({
     collection: 'itinerari',
     where: {
-      id: {
+      slug: {
         equals: params.slug,
       },
     },
@@ -84,6 +86,8 @@ export default async function Itinerario({ params }: { params: { slug: string } 
   })
 
   const itinerarioData = itinerario.docs[0]
+
+  const url = '/itinerari/' + itinerarioData.slug
 
   return (
     <div className="">

@@ -1,14 +1,16 @@
 import type { CollectionConfig } from 'payload'
-import * as F from '@/db/fields'
+import * as F from '@/fields'
 import { Collections } from '.'
+import { slugField } from '@/fields'
 
-export const Stakeholders: CollectionConfig = {
-  slug: Collections.Stakeholders,
+export const Stakeholders: CollectionConfig<'stakeholders'> = {
+  slug: 'stakeholders',
   labels: {
     singular: 'Stakeholder',
     plural: 'Stakeholders',
   },
   admin: {
+    defaultColumns: ['title'],
     useAsTitle: F.nome.name,
   },
 
@@ -33,11 +35,17 @@ export const Stakeholders: CollectionConfig = {
             },
             F.posizione,
             F.plainText('indirizzo'),
-            F.divider,
+            F.divider('divider-1'),
             F.contatti,
           ],
         },
-        F.tabContenuto
+        F.tabContenuto,
+        {
+          label: 'Link',
+          fields: [
+            ...slugField('nome'),
+          ]
+        }
       ],
     },
   ],

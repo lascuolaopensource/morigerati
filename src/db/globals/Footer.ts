@@ -1,6 +1,6 @@
 import type { GlobalConfig, RichTextField } from 'payload'
 import { Globals } from '.'
-import * as F from '@/db/fields'
+import * as F from '@/fields'
 import {
   lexicalEditor,
   BoldFeature,
@@ -26,7 +26,7 @@ export const Footer: GlobalConfig = {
       label: 'Testo a destra',
     },
 
-    F.divider,
+    F.divider('divider-1'),
 
     F.socialNetworkLinks,
   ],

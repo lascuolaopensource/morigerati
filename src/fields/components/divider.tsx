@@ -1,6 +1,6 @@
 // import {} from '@payloadcms/ui/scss'
 
-export default function Divider() {
+export default function Divider(key: string) {
   return (
     <div
       style={{
