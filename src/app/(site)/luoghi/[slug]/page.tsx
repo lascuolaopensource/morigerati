@@ -75,7 +75,7 @@ export default async function LuogoPage({ params }: Props) {
     depth: 2,
   })
 
-  const luogoData = await luoghi.docs.find((l) => l.slug === slug)
+  const luogoData = luoghi.docs.find((l) => l.slug === slug)
 
   if (!luogoData) {
     notFound()
