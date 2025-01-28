@@ -2,22 +2,22 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { Media } from '@/payload-types'
+import { GalleryCardProps } from './types'
 
-interface GalleryCardProps {
-  media: Media
-}
+const DEFAULT_HEIGHT = 240
 
-const GalleryCard: React.FC<GalleryCardProps> = ({ media }) => {
+const GalleryCard: React.FC<GalleryCardProps> = ({ media, height = DEFAULT_HEIGHT }) => {
   const isVideo = media.mimeType?.startsWith('video/')
-  const height = 240 // altezza fissa in pixel
+  const aspectRatio = media.width && media.height ? `${media.width}/${media.height}` : '1/1'
+
+  if (!media.url) return null
 
   return (
     <div
       style={{
         height: `${height}px`,
         width: 'auto',
-        aspectRatio: media.width && media.height ? `${media.width}/${media.height}` : '1/1',
+        aspectRatio,
       }}
       className="relative border-2 border-black rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95 cursor-pointer"
     >
@@ -30,11 +30,11 @@ const GalleryCard: React.FC<GalleryCardProps> = ({ media }) => {
           playsInline
           controls={false}
         >
-          <source src={media.url || ''} type={media.mimeType || ''} />
+          <source src={media.url} type={media.mimeType || undefined} />
         </video>
       ) : (
         <Image
-          src={media.url || ''}
+          src={media.url}
           alt={media.alt || ''}
           fill
           className="object-cover"
