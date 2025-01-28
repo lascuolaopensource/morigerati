@@ -9,7 +9,8 @@ import {
   Tab,
   TextField,
   UIField,
-  CheckboxField
+  CheckboxField,
+  EmailField,
 } from 'payload'
 import { Collections } from '@/db/collections'
 
@@ -18,6 +19,69 @@ import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/ri
 import { capitalizeFirstLetter } from '@/utils/strings'
 
 import { formatSlugHook } from './slug/formatSlug'
+
+// Common field configurations
+const defaultRichTextEditor = lexicalEditor({
+  features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
+})
+
+// Field factory functions
+const createLocalizedField = <T extends Field>(field: T): T => ({
+  ...field,
+  localized: true,
+})
+
+const createRequiredField = <T extends Field>(field: T): T => ({
+  ...field,
+  required: true,
+})
+
+const createTextField = (name: string, options: Partial<TextField> = {}): TextField =>
+  ({
+    name,
+    type: 'text',
+    ...options,
+  }) as TextField
+
+const createRichTextField = (name: string, options: Partial<RichTextField> = {}): RichTextField =>
+  ({
+    name,
+    type: 'richText',
+    editor: defaultRichTextEditor,
+    ...options,
+  }) as RichTextField
+
+const createRowField = (fields: Field[]): RowField =>
+  ({
+    type: 'row',
+    fields,
+  }) as RowField
+
+const createArrayField = (
+  name: string,
+  fields: Field[],
+  options: Partial<ArrayField> = {},
+): ArrayField =>
+  ({
+    name,
+    type: 'array',
+    fields,
+    ...options,
+  }) as ArrayField
+
+const createUIField = (name: string, componentPath: string, clientProps = {}): UIField =>
+  ({
+    name,
+    type: 'ui',
+    admin: {
+      components: {
+        Field: {
+          path: componentPath,
+          clientProps,
+        },
+      },
+    },
+  }) as UIField
 
 type Overrides = {
   slugOverrides?: Partial<TextField>
@@ -38,18 +102,14 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
       position: 'sidebar',
     },
     ...checkboxOverrides,
-  }
+  } as CheckboxField
 
-  // Expect ts error here because of typescript mismatching Partial<TextField> with TextField
-  // @ts-expect-error
   const slugField: TextField = {
     name: 'slug',
     type: 'text',
     index: true,
     label: 'Slug',
-    ...(slugOverrides || {}),
     hooks: {
-      // Kept this in for hook or API based updates
       beforeValidate: [formatSlugHook(fieldToUse)],
     },
     admin: {
@@ -65,168 +125,63 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
         },
       },
     },
-  }
+    ...(slugOverrides || {}),
+  } as TextField
 
   return [slugField, checkBoxField]
 }
 
-export function title(text: string): UIField {
-  return {
-    name: `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
-    type: 'ui',
-    admin: {
-      components: {
-        Field: {
-          path: '@/fields/components/header.tsx',
-          clientProps: {
-            content: text,
-          },
-        },
-      },
-    },
-  }
-}
+export const title = (text: string): UIField =>
+  createUIField(
+    `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
+    '@/fields/components/header.tsx',
+    { content: text },
+  )
 
-export function gap(size: number, key: string): UIField {
-  return {
-    name: `gap-${key}`,
-    type: 'ui',
-    admin: {
-      components: {
-        Field: {
-          path: '@/fields/components/gap.tsx',
-          clientProps: {
+export const gap = (size: number, key: string): UIField =>
+  createUIField(`gap-${key}`, '@/fields/components/gap.tsx', { size })
 
-            size: size,
-          },
-        },
-      },
-    },
-  }
-}
+export const divider = (key: string): UIField =>
+  createUIField(`divider-${key}`, '@/fields/components/divider.tsx', {})
 
-export function divider(key: string): UIField {
-  return {
-    name: `divider-${key}`,
-    type: 'ui',
-    admin: {
-      components: {
-        Field: {
-          path: '@/fields/components/divider.tsx',
-          clientProps: {
-          },
-        },
-      },
-    },
-  }
-}
+export const nome = createRequiredField(createLocalizedField(createTextField('nome')))
 
-//
+export const link = createTextField('link')
 
-export const nome: TextField = {
-  name: 'nome',
-  type: 'text',
-  required: true,
-  localized: true,
-}
+export const testo = createLocalizedField(createRichTextField('testo', { label: 'Testo' }))
 
-export const link: TextField = {
-  name: 'link',
-  type: 'text',
-}
+export const plainText = (name: string): TextField => createLocalizedField(createTextField(name))
 
-export const testo: RichTextField = {
-  name: 'testo',
-  label: 'Testo',
-  type: 'richText',
-  localized: true,
-  editor: lexicalEditor({
-    features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
-  }),
-}
+export const plainTextRequired = (name: string): TextField => createRequiredField(plainText(name))
 
-export function plainText(name: string): TextField {
-  return {
-    name,
-    type: 'text',
-    localized: true,
-  }
-}
-
-export function plainTextRequired(name: string): TextField {
-  return {
-    ...plainText(name),
-    required: true,
-  }
-}
-
-export function richText(name: string): RichTextField {
-  return {
-    name,
-    type: 'richText',
-    localized: true,
-    editor: lexicalEditor({
-      features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
-    }),
-  }
-}
+export const richText = (name: string): RichTextField =>
+  createLocalizedField(createRichTextField(name))
 
 export const posizione: PointField = {
   name: 'posizione',
   type: 'point',
 }
 
-export const linkConNome: RowField = {
-  type: 'row',
-  fields: [nome, { ...link, required: true }],
-}
+export const linkConNome: RowField = createRowField([nome, createRequiredField(link)])
 
-export const linkArray: ArrayField = {
+export const linkArray: ArrayField = createArrayField('links', linkConNome.fields, {
   label: 'Link',
-  name: 'links',
-  type: 'array',
-  fields: linkConNome.fields,
-}
+})
 
-export const programmaArray: ArrayField = {
-  label: 'Programma',
-  name: 'programma',
-  type: 'array',
-
-  fields: [
-    {
-      name: 'programma',
-      label: 'giorno / momento',
-      type: 'text',
-    },
+export const programmaArray: ArrayField = createArrayField(
+  'programma',
+  [
+    createTextField('programma', { label: 'giorno / momento' }),
     richText('testo'),
     lexicalHTML('testo', { name: 'testo_html' }),
   ],
-}
+  { label: 'Programma' },
+)
 
-export const contatti: ArrayField = {
-  name: 'contatti',
-  type: 'array',
-  fields: [
-    {
-      type: 'row',
-      fields: [nome, link],
-    },
-    {
-      type: 'row',
-      fields: [
-        {
-          name: 'email',
-          type: 'email',
-        },
-        {
-          name: 'telefono',
-          type: 'text',
-        },
-      ],
-    },
-  ],
-}
+export const contatti: ArrayField = createArrayField('contatti', [
+  createRowField([nome, link]),
+  createRowField([{ name: 'email', type: 'email' } as EmailField, createTextField('telefono')]),
+])
 
 export const media: RelationshipField = {
   name: 'copertina',
@@ -250,45 +205,39 @@ export const galleria: RelationshipField = {
   relationTo: Collections.Media,
 }
 
-export const servizi: ArrayField = {
-  name: 'servizi',
-  type: 'array',
-  fields: [nome, link, { ...testo, required: true }, lexicalHTML('testo', { name: 'testo_html' })],
-}
+export const servizi: ArrayField = createArrayField('servizi', [
+  nome,
+  link,
+  createRequiredField(testo),
+  lexicalHTML('testo', { name: 'testo_html' }),
+])
 
-export const contenutoFields: Field[] = [
+const baseContentFields: Field[] = [
   title('Immagini e media'),
   media,
   galleria,
-
   title('Contenuti testuali'),
-  { ...testo, required: true },
+  createRequiredField(testo),
   lexicalHTML('testo', { name: 'testo_html' }),
 ]
 
+export const contenutoFields: Field[] = baseContentFields
+
 export const contenutoFieldsMedia: Field[] = [
-  title('Immagini e media'),
-  media,
+  ...baseContentFields.slice(0, 2),
   {
     name: 'Video',
     type: 'relationship',
     relationTo: Collections.Media,
     required: false,
   },
-  galleria,
-
-  title('Contenuti testuali'),
-  { ...testo, required: true },
-  lexicalHTML('testo', { name: 'testo_html' }),
+  ...baseContentFields.slice(2),
 ]
 
 export const contenutoFieldsUnrequired: Field[] = [
-  title('Immagini e media'),
-  media,
+  ...baseContentFields.slice(0, 2),
   linkArray,
-  galleria,
-
-  title('Contenuti testuali'),
+  ...baseContentFields.slice(2, -2),
   { ...testo, required: false },
   lexicalHTML('testo', { name: 'testo_html' }),
 ]
@@ -309,12 +258,10 @@ export function titleAndText(name: string, label?: string): GroupField {
     type: 'group',
     label: label ?? capitalizeFirstLetter(name),
     fields: [
-      {
-        ...plainText(`title`),
-        required: true,
-        label: 'Titolo',
-      },
-      { ...richText('text'), label: 'Contenuto', required: true },
+      createRequiredField(createLocalizedField(createTextField('title', { label: 'Titolo' }))),
+      createRequiredField(
+        createLocalizedField(createRichTextField('text', { label: 'Contenuto' })),
+      ),
       lexicalHTML('text', { name: 'text_html' }),
     ],
   }
@@ -326,25 +273,15 @@ export function titleAndTextOptional(name: string, label?: string): GroupField {
     type: 'group',
     label: label ?? capitalizeFirstLetter(name),
     fields: [
-      {
-        ...plainText(`title`),
-        required: false,
-        label: 'Titolo',
-      },
-      { ...richText('text'), label: 'Contenuto', required: false },
+      createLocalizedField(createTextField('title', { label: 'Titolo' })),
+      createLocalizedField(createRichTextField('text', { label: 'Contenuto' })),
       lexicalHTML('text', { name: 'text_html' }),
     ],
   }
 }
 
-export const socialNetworkLink: RowField = {
-  type: 'row',
-  fields: [nome, { ...link, required: true }],
-}
+export const socialNetworkLink: RowField = createRowField([nome, createRequiredField(link)])
 
-export const socialNetworkLinks: ArrayField = {
-  name: 'Link Social',
-  type: 'array',
+export const socialNetworkLinks: ArrayField = createArrayField('Link Social', [socialNetworkLink], {
   localized: true,
-  fields: [socialNetworkLink],
-}
+})

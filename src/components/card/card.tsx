@@ -1,21 +1,20 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useMemo, useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { Media, Itinerari, Luoghi, Stakeholder, Residenze } from '@/payload-types'
+import { Media } from '@/payload-types'
 import loremPic from '@/public/loremPic.png'
 import Link from 'next/link'
 
-type CategoryType = 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
+export type CategoryType = 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
 
 interface CardProps {
   title: string
-  collection: Itinerari | Luoghi | Stakeholder | Residenze
   media: Media | undefined
   slugUrl: string
   category: CategoryType
 }
 
-const styleVariants = {
+const styleVariants: Record<CategoryType, { border: string; text: string }> = {
   itinerari: {
     border: 'border-itinerariColor bg-itinerariColor',
     text: 'text-itinerariColor',
@@ -32,91 +31,64 @@ const styleVariants = {
     border: 'border-residenzeColor bg-residenzeColor',
     text: 'text-residenzeColor',
   },
+} as const
+
+const generateDeterministicLetter = (title: string): string => {
+  const sum = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  const letter = String.fromCharCode(65 + (sum % 26))
+  return sum % 2 === 0 ? letter.toLowerCase() : letter
 }
 
-const generateRandomLetter = (): string => {
-  const letter = String.fromCharCode(65 + Math.floor(Math.random() * 26))
-  return Math.random() > 0.5 ? letter.toLowerCase() : letter
-}
-
-const MediaContent: React.FC<{ media: Media | undefined; title: string }> = ({
-  media,
-  title,
-}) => {
-  if (!media || typeof media === 'string' || media.mimeType?.startsWith('video/')) {
-    return (
-      <div className="w-full h-full">
-        <Image
-          src={loremPic}
-          alt={title}
-          width={240}
-          height={180}
-          className="w-full h-full object-cover rounded-lg"
-        />
-      </div>
-    )
-  }
-
-  return (
-    <div className="w-full h-full">
-      <Image
-        src={media.url || loremPic}
-        alt={title}
-        width={240}
-        height={180}
-        className="w-full h-full object-cover rounded-lg"
-      />
-    </div>
-  )
-}
-
-const Card: React.FC<CardProps> = ({ title, media, category, slugUrl }) => {
-  const [randomLetter, setRandomLetter] = useState<string>('')
+const Card = ({ title, media, category, slugUrl }: CardProps) => {
+  const randomLetter = useMemo(() => generateDeterministicLetter(title), [title])
   const titleRef = useRef<HTMLDivElement>(null)
-  const [letterTopPosition, setLetterTopPosition] = useState('0.5rem')
+  const [titleHeight, setTitleHeight] = useState(0)
+
+  const imageUrl = useMemo(
+    () =>
+      (media && 'url' in media && !media.mimeType?.startsWith('video/') && media.url) || loremPic,
+    [media],
+  )
 
   useEffect(() => {
-    setRandomLetter(generateRandomLetter())
-  }, [])
-
-  useEffect(() => {
-    const updateLetterPosition = () => {
-      if (titleRef.current) {
-        const titleHeight = titleRef.current.offsetHeight
-        setLetterTopPosition(`${titleHeight - 14}px`)
-      }
-    }
-
-    updateLetterPosition()
-    const resizeObserver = new ResizeObserver(updateLetterPosition)
     if (titleRef.current) {
-      resizeObserver.observe(titleRef.current)
-    }
-
-    return () => {
-      resizeObserver.disconnect()
+      setTitleHeight(titleRef.current.offsetHeight)
     }
   }, [title])
+
+  const styles = styleVariants[category]
 
   return (
     <Link href={slugUrl}>
       <div
-        className={`flex z-10 flex-col border-[3px] w-[240px] ${styleVariants[category].border} rounded-lg overflow-hidden duration-300 hover:scale-105 relative cursor-pointer`}
+        className={`group flex z-10 flex-col border-[3px] w-[240px] ${styles.border} rounded-lg overflow-hidden duration-300 hover:scale-95 relative cursor-pointer h-[180px]`}
       >
+        <div className="absolute inset-0 h-[180px]">
+          <Image
+            src={imageUrl}
+            alt={title}
+            width={240}
+            height={180}
+            className="w-full h-full object-cover"
+            style={{
+              borderRadius: `8px`,
+              clipPath: `inset(${titleHeight}px 0 0 0 round 8px 8px 8px 8px)`,
+            }}
+            priority
+          />
+        </div>
+
+        <div ref={titleRef} className={`z-10 ${styles.border} px-2 pt-2 -pb-2`}>
+          <p className="font-semibold text-xs leading-tight">{title}</p>
+        </div>
+
         <div
-          style={{ top: letterTopPosition }}
-          className={`absolute z-20 -right-2 ${styleVariants[category].text}
-            p-2 text-3xl font-bold font-transluoghi`}
+          className={`absolute z-20 -right-2 ${styles.text} p-2 text-3xl font-bold font-transluoghi`}
+          style={{
+            top: `${titleHeight - 17}px`,
+          }}
         >
           {randomLetter}
-        </div>
-
-        <div ref={titleRef} className="pl-2 min-h-[1rem]">
-          <p className="pt-1 font-semibold text-xs leading-tight pr-1">{title}</p>
-        </div>
-
-        <div className="h-[180px]">
-          <MediaContent media={media} title={title} />
         </div>
       </div>
     </Link>
