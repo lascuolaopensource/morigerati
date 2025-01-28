@@ -1,6 +1,7 @@
 import React from 'react'
 import { loadDb } from '@/utils/db'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 import BackButton from '@/components/uiElements/backButton'
 import ItinerarioDetailsCard from '@/components/itinerari/itinerarioDetailsCard'
@@ -29,17 +30,17 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = params
   const db = await loadDb()
   const itinerari = await db.find({
     collection: 'itinerari',
     depth: 2,
   })
 
-  const itinerarioData = itinerari.docs.find((i) => i.id === params.slug)
-
-  
+  const itinerarioData = itinerari.docs.find((i) => i.slug === slug)
 
   if (!itinerarioData) {
+    notFound()
     return {
       title: 'Itinerario non trovato | Morigerati',
     }
@@ -49,13 +50,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
   return {
-    title: itinerarioData?.meta?.title ?? itinerarioData.nome ?? 'Morigerati',
-    description: itinerarioData?.meta?.description || undefined,
+    title: `${itinerarioData.nome} | Morigerati`,
+    description: itinerarioData?.meta?.description,
     openGraph: {
       title: itinerarioData?.meta?.title ?? itinerarioData.nome ?? 'Morigerati',
       description: itinerarioData?.meta?.description || undefined,
       images: imageUrl ? [{ url: imageUrl }] : undefined,
-      url: `${baseUrl}/itinerari/${params.slug}`,
+      url: `${baseUrl}/itinerari/${slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -71,23 +72,20 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function Itinerario({ params }: { params: { slug: string } }) {
+  const { slug } = params
   const db = await loadDb()
-
-  const position: LatLngTuple = [40.139949, 15.555182]
-
-  const itinerario = await db.find({
+  const itinerari = await db.find({
     collection: 'itinerari',
-    where: {
-      slug: {
-        equals: params.slug,
-      },
-    },
     depth: 2,
   })
 
-  const itinerarioData = itinerario.docs[0]
+  const itinerarioData = itinerari.docs.find((i) => i.slug === slug)
 
-  const url = '/itinerari/' + itinerarioData.slug
+  if (!itinerarioData) {
+    notFound()
+  }
+
+  const position: LatLngTuple = [40.139949, 15.555182]
 
   return (
     <div className="">

@@ -14,6 +14,7 @@ import { Media } from '@/payload-types'
 import { RandomPixel } from '@/components/uiElements/pixels'
 import Galleria from '@/components/galleria/galleria'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -25,15 +26,17 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = params
   const db = await loadDb()
   const residenze = await db.find({
     collection: 'residenze',
     depth: 2,
   })
 
-  const residenzaData = residenze.docs.find((r) => r.id === params.slug)
+  const residenzaData = residenze.docs.find((r) => r.slug === slug)
 
   if (!residenzaData) {
+    notFound()
     return {
       title: 'Residenza non trovata | Morigerati',
     }
@@ -43,13 +46,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
   return {
-    title: residenzaData?.meta?.title ?? residenzaData.nome ?? 'Morigerati',
-    description: residenzaData?.meta?.description || undefined,
+    title: `${residenzaData.nome} | Morigerati`,
+    description: residenzaData?.meta?.description,
     openGraph: {
       title: residenzaData?.meta?.title ?? residenzaData.nome ?? 'Morigerati',
       description: residenzaData?.meta?.description || undefined,
       images: imageUrl ? [{ url: imageUrl }] : undefined,
-      url: `${baseUrl}/residenze/${params.slug}`,
+      url: `${baseUrl}/residenze/${slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -62,17 +65,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ResidenzaSlug({ params }: { params: { slug: string } }) {
+  const { slug } = params
   const db = await loadDb()
-  const residenza = await db.find({
+  const residenze = await db.find({
     collection: 'residenze',
-    where: {
-      id: {
-        equals: params.slug,
-      },
-    },
-    depth: 1,
+    depth: 2,
   })
-  const residenzaData = residenza.docs[0] as Residenze
+
+  const residenzaData = residenze.docs.find((r) => r.slug === slug)
+
+  if (!residenzaData) {
+    notFound()
+  }
 
   const isAfterCurrentDate = (dateString: string): boolean => {
     const currentDate = new Date()

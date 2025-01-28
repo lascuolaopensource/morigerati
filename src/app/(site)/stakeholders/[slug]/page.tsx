@@ -23,15 +23,17 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = params
   const db = await loadDb()
   const stakeholders = await db.find({
     collection: 'stakeholders',
     depth: 2,
   })
 
-  const stakeholderData = stakeholders.docs.find((s) => s.id === params.slug)
+  const stakeholderData = stakeholders.docs.find((s) => s.slug === slug)
 
   if (!stakeholderData) {
+    notFound()
     return {
       title: 'Stakeholder non trovato | Morigerati',
     }
@@ -41,13 +43,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
   return {
-    title: stakeholderData?.meta?.title ?? stakeholderData.nome ?? 'Morigerati',
-    description: stakeholderData?.meta?.description || undefined,
+    title: `${stakeholderData.nome} | Morigerati`,
+    description: stakeholderData?.meta?.description,
     openGraph: {
       title: stakeholderData?.meta?.title ?? stakeholderData.nome ?? 'Morigerati',
       description: stakeholderData?.meta?.description || undefined,
       images: imageUrl ? [{ url: imageUrl }] : undefined,
-      url: `${baseUrl}/stakeholders/${params.slug}`,
+      url: `${baseUrl}/stakeholders/${slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -63,6 +65,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function Stakeholder({ params }: { params: { slug: string } }) {
+  const { slug } = params
   const db = await loadDb()
 
   // Get stakeholder
@@ -71,7 +74,7 @@ export default async function Stakeholder({ params }: { params: { slug: string }
     depth: 2,
   })
 
-  const stakeholderData = stakeholders.docs.find((s) => s.id === params.slug)
+  const stakeholderData = stakeholders.docs.find((s) => s.slug === slug)
 
   if (!stakeholderData) {
     notFound()
@@ -141,10 +144,7 @@ export default async function Stakeholder({ params }: { params: { slug: string }
                 <h2 className="text-2xl font-semibold mb-4">Contatti</h2>
                 <ul className="space-y-4">
                   {stakeholderData.contatti.map((contatto, index) => (
-                    <li
-                      key={index}
-                      className="pb-4 last:pb-0"
-                    >
+                    <li key={index} className="pb-4 last:pb-0">
                       <p className="font-medium text-lg mb-2">{contatto.nome}</p>
                       {contatto.telefono && (
                         <p className="text-sm mb-1">

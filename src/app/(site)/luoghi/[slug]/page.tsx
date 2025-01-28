@@ -26,15 +26,17 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await Promise.resolve(params)
   const db = await loadDb()
   const luoghi = await db.find({
     collection: 'luoghi',
     depth: 2,
   })
 
-  const luogoData = luoghi.docs.find((l) => l.id === params.slug)
+  const luogoData = await luoghi.docs.find((l) => l.slug === slug)
 
   if (!luogoData) {
+    notFound()
     return {
       title: 'Luogo non trovato | Morigerati',
     }
@@ -44,13 +46,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
   return {
-    title: luogoData?.meta?.title ?? luogoData.nome ?? 'Morigerati',
-    description: luogoData?.meta?.description || undefined,
+    title: `${luogoData.nome} | Morigerati`,
+    description: luogoData.meta?.description,
     openGraph: {
       title: luogoData?.meta?.title ?? luogoData.nome ?? 'Morigerati',
       description: luogoData?.meta?.description || undefined,
       images: imageUrl ? [{ url: imageUrl }] : undefined,
-      url: `${baseUrl}/luoghi/${params.slug}`,
+      url: `${baseUrl}/luoghi/${slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -65,16 +67,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export default async function Luogo({ params }: { params: { slug: string } }) {
+export default async function LuogoPage({ params }: Props) {
+  const { slug } = params
   const db = await loadDb()
-
-  // Get luogo
   const luoghi = await db.find({
     collection: 'luoghi',
     depth: 2,
   })
 
-  const luogoData = luoghi.docs.find((l) => l.id === params.slug)
+  const luogoData = await luoghi.docs.find((l) => l.slug === slug)
 
   if (!luogoData) {
     notFound()
@@ -116,7 +117,7 @@ export default async function Luogo({ params }: { params: { slug: string } }) {
             <div className="mb-6">
               <StringToHTML htmlString={luogoData.testo_html ?? ''} />
             </div>
-            
+
             {/* Contacts and Hours */}
             <LuogoInfoRow
               contatti={(luogoData.contatti as []) ?? undefined}
