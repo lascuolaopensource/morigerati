@@ -11,6 +11,7 @@ export const Articoli: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'titolo',
+    defaultColumns: ['titolo', 'testo', 'data_pubblicazione'],
   },
 
   fields: [
@@ -50,7 +51,7 @@ export const Articoli: CollectionConfig = {
 
             ...F.contenutoFields,
           ],
-        }
+        },
       ],
     },
   ],

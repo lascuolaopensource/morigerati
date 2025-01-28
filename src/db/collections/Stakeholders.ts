@@ -10,7 +10,7 @@ export const Stakeholders: CollectionConfig<'stakeholders'> = {
     plural: 'Stakeholders',
   },
   admin: {
-    defaultColumns: ['title'],
+    defaultColumns: ['nome', 'testo'],
     useAsTitle: F.nome.name,
   },
 
@@ -42,10 +42,8 @@ export const Stakeholders: CollectionConfig<'stakeholders'> = {
         F.tabContenuto,
         {
           label: 'Link',
-          fields: [
-            ...slugField('nome'),
-          ]
-        }
+          fields: [...slugField('nome')],
+        },
       ],
     },
   ],

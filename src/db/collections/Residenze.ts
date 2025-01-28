@@ -11,7 +11,7 @@ export const Residenze: CollectionConfig<'residenze'> = {
     plural: 'Residenze',
   },
   admin: {
-    defaultColumns: ['title'],
+    defaultColumns: ['nome', 'abstract'],
     useAsTitle: F.nome.name,
   },
 
@@ -46,13 +46,13 @@ export const Residenze: CollectionConfig<'residenze'> = {
               label: 'Link iscrizione',
               type: 'text',
             },
-            F.divider('divider-2')  ,
+            F.divider('divider-2'),
             {
               name: 'indirizzo',
               label: 'Indirizzo / luogo',
               type: 'text',
             },
-            F.divider('divider-3')  ,
+            F.divider('divider-3'),
             {
               name: 'mostra_dettagli',
               type: 'checkbox',
@@ -128,15 +128,12 @@ export const Residenze: CollectionConfig<'residenze'> = {
                 },
               ],
             },
-            
           ],
         },
         {
           label: 'Link',
-          fields: [
-            ...slugField('nome'),
-          ]
-        }
+          fields: [...slugField('nome')],
+        },
       ],
     },
   ],

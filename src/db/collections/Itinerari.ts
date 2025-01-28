@@ -20,7 +20,7 @@ export const Itinerari: CollectionConfig<'itinerari'> = {
     plural: 'Itinerari',
   },
   admin: {
-    defaultColumns: ['title'],
+    defaultColumns: ['nome', 'testo'],
     useAsTitle: F.nome.name,
   },
 
@@ -33,7 +33,7 @@ export const Itinerari: CollectionConfig<'itinerari'> = {
           fields: [
             F.title('Generale'),
             F.nome,
-            
+
             {
               ...F.tracciati,
               name: 'tracciato_gpx',
@@ -165,10 +165,8 @@ export const Itinerari: CollectionConfig<'itinerari'> = {
 
         {
           label: 'Link',
-          fields: [
-            ...slugField('nome'),
-          ]
-        }
+          fields: [...slugField('nome')],
+        },
       ],
     },
   ],

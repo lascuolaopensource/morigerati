@@ -20,7 +20,7 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
   },
 
   admin: {
-    defaultColumns: ['title'],
+    defaultColumns: ['nome', 'testo'],
     useAsTitle: F.nome.name,
   },
 
@@ -42,7 +42,7 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
               relationTo: Collections.Itinerari,
               hasMany: true,
             },
-            F.divider('divider-1')  ,
+            F.divider('divider-1'),
             F.servizi,
             F.divider('divider-2'),
             F.contatti,
@@ -68,10 +68,8 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
         F.tabContenuto,
         {
           label: 'Link',
-          fields: [
-            ...slugField('nome'),
-          ]
-        }
+          fields: [...slugField('nome')],
+        },
       ],
     },
   ],
