@@ -1,169 +1,58 @@
 'use client'
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
-import Image from 'next/image'
+import { NAV_ITEMS, THEME_COLORS, type PageType } from '@/constants/navigation'
+import { XButton } from './xButton'
+import { NavigationItem } from './NavigationItem'
 import LogoGenerator from '@/components/logoGenerator/logo'
 
-const NAV_ITEMS = [
-  { href: '/', text: 'Home' },
-  { href: '/about', text: 'About' },
-  { href: '/mobilita', text: 'Mobilità sostenibile' },
-  { href: '/luoghi', text: 'Luoghi' },
-  { href: '/itinerari', text: 'Itinerari' },
-  { href: '/stakeholders', text: 'Stakeholders' },
-  { href: '/residenze', text: 'Residenze' },
-  { href: '/articoli', text: 'Articoli' },
-] as const
-
-const BACKGROUND_COLORS = {
-  luoghi: 'bg-luoghiColor',
-  itinerari: 'bg-itinerariColor',
-  stakeholders: 'bg-stakeholdersColor',
-  residenze: 'bg-residenzeColor',
-  default: 'bg-white',
-} as const
-
-const BORDER_COLORS = {
-  luoghi: 'bg-luogoColorScuro',
-  itinerari: 'bg-itinerarioColorScuro',
-  stakeholders: 'bg-stakeholderColorScuro',
-  residenze: 'bg-residenzeColorScuro',
-  default: 'bg-black',
-} as const
-
-const useBackgroundColor = () => {
+const useThemeColors = () => {
   const pathname = usePathname()
-  const path = pathname.split('/')[1]
-  return BACKGROUND_COLORS[path as keyof typeof BACKGROUND_COLORS] || BACKGROUND_COLORS.default
+  const path = pathname.split('/')[1] as PageType
+  const theme = THEME_COLORS[path] || THEME_COLORS.default
+  return theme
 }
-
-const useBorderColor = () => {
-  const pathname = usePathname()
-  const path = pathname.split('/')[1]
-  return BORDER_COLORS[path as keyof typeof BORDER_COLORS] || BORDER_COLORS.default
-}
-
-const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
-  <button
-    className="w-8 h-8 flex items-center justify-center z-50"
-    onClick={onClick}
-    aria-expanded={isOpen}
-    aria-controls="nav-menu"
-    aria-label={isOpen ? 'Close menu' : 'Open menu'}
-  >
-    <div className="relative w-6 h-6">
-      <div
-        className={`absolute top-1/2 left-1/2 w-5 h-0.5 bg-black transform -translate-x-1/2 transition-transform duration-300 ${
-          isOpen ? 'rotate-45' : '-translate-y-1'
-        }`}
-      />
-      <div
-        className={`absolute top-1/2 left-1/2 w-5 h-0.5 bg-black transform -translate-x-1/2 transition-opacity duration-300 ${
-          isOpen ? 'opacity-0' : 'opacity-100'
-        }`}
-      />
-      <div
-        className={`absolute top-1/2 left-1/2 w-5 h-0.5 bg-black transform -translate-x-1/2 transition-transform duration-300 ${
-          isOpen ? '-rotate-45' : 'translate-y-1'
-        }`}
-      />
-    </div>
-  </button>
-)
-
-const NavigationItem = ({
-  href,
-  text,
-  isActive,
-  onClick,
-}: {
-  href: string
-  text: string
-  isActive: boolean
-  onClick: () => void
-}) => (
-  <li>
-    <Link
-      href={href}
-      className={`flex items-center hover:opacity-70 transition-opacity duration-200 text-2xl ${
-        isActive ? 'font-bold' : 'font-normal'
-      }`}
-      onClick={onClick}
-    >
-      {isActive && (
-        <span className="mr-2" aria-hidden="true">
-          &rarr;
-        </span>
-      )}
-      {text}
-    </Link>
-  </li>
-)
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
-  const bgColor = useBackgroundColor()
-  const borderColor = useBorderColor()
-
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen((prev) => !prev)
-  }, [])
-
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isMenuOpen])
+  const theme = useThemeColors()
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMenuOpen) {
-        setIsMenuOpen(false)
-      }
+      if (e.key === 'Escape') setIsMenuOpen(false)
     }
 
+    document.body.style.overflow = isMenuOpen ? 'hidden' : ''
     document.addEventListener('keydown', handleEscape)
-    return () => document.removeEventListener('keydown', handleEscape)
+
+    return () => {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', handleEscape)
+    }
   }, [isMenuOpen])
 
   return (
-    <div style={{ zIndex: 99999 }}>
-      <nav className={`w-full ${bgColor} relative z-50`} role="navigation">
+    <div style={{ zIndex: 99999 }} className="pt-0.5">
+      <nav className={`w-full ${theme.background} relative z-50`} role="navigation">
         <div
           className="absolute inset-0 top-[-100vh] -z-10"
           style={{ backgroundColor: 'inherit' }}
           aria-hidden="true"
         />
 
-        {/*mobile*/}
-        {/* <div className="sm:hidden mx-auto py-2 flex justify-between items-center">
-          <div className="flex-grow flex justify-center relative">
-            <LogoGenerator />
-          </div>
-          <div className="absolute right-6">
-            <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
-          </div>
-        </div> */}
-
-        {/*desktop*/}
-        <div className="flex max-w-screen-xl mx-auto py-2 justify-between items-center px-2">
+        <div className="flex max-w-screen-xl mx-auto py-1 justify-between items-center px-2">
           <LogoGenerator />
-          <MenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
+          <XButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen((prev) => !prev)} />
         </div>
 
-        <div
-          className={`absolute bottom-0 left-0 w-full h-0.5 ${borderColor}`}
-          aria-hidden="true"
-        />
+        <div className={`absolute bottom-0 left-0 w-full h-0.5 `} aria-hidden="true" />
       </nav>
 
       {isMenuOpen && (
         <div
           id="nav-menu"
-          className={`fixed w-screen h-screen inset-0 ${bgColor} text-black z-40 overflow-hidden`}
+          className={`fixed w-screen h-screen inset-0 ${theme.background} text-black z-40 overflow-hidden`}
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
@@ -176,7 +65,7 @@ const Navbar = () => {
                   href={href}
                   text={text}
                   isActive={pathname.startsWith(href) && (href === '/' ? pathname === '/' : true)}
-                  onClick={toggleMenu}
+                  onClick={() => setIsMenuOpen(false)}
                 />
               ))}
             </ul>

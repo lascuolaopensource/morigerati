@@ -82,14 +82,14 @@ const Card = ({ title, media, category, slugUrl }: CardProps) => {
           <p className="font-semibold text-xs leading-tight">{title}</p>
         </div>
 
-        <div
+        {/* <div
           className={`absolute z-20 -right-2 ${styles.text} p-2 text-3xl font-bold font-transluoghi`}
           style={{
             top: `${titleHeight - 17}px`,
           }}
         >
           {randomLetter}
-        </div>
+        </div> */}
       </div>
     </Link>
   )

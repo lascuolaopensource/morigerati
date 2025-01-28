@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { JSX } from 'react'
 import P0 from '@/public/pixels/p0.svg'
 import P1 from '@/public/pixels/p1.svg'
 import P2 from '@/public/pixels/p2.svg'
@@ -28,7 +28,7 @@ const RandomPixel: React.FC<RandomPixelProps> = ({ p, size }) => {
   }
   const RandomPixelComponent = pixelComponents[randomPixelKey as keyof typeof pixelComponents]
   return (
-    <div className="relative" style={{ pointerEvents: 'none', zIndex: 0 }}>
+    <div className="relative" style={{ pointerEvents: 'none', zIndex: -1000 }}>
       <div className={`absolute right-0 w-1/2 md:w-1/6 h-[${size}px]`}>{RandomPixelComponent}</div>
     </div>
   )
