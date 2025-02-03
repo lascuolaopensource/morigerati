@@ -211,9 +211,9 @@ export const Mappa: React.FC<MapProps> = ({
             className="group relative h-12 px-6 rounded-full overflow-hidden transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-900 flex items-center justify-center gap-2"
             aria-label="Scarica tracciato GPX"
           >
-            <MdOutlineFileDownload 
-              size={24} 
-              className="text-white transform transition-all duration-300 group-hover:scale-125" 
+            <MdOutlineFileDownload
+              size={24}
+              className="text-white transform transition-all duration-300 group-hover:scale-125"
             />
             <span className="text-base text-white">Download tracciato GPX</span>
           </a>

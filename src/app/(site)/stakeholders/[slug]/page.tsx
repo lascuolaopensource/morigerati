@@ -14,7 +14,7 @@ import Copertina from '@/components/uiElements/copertina'
 import { Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
 import ArticoliTagsList from '@/components/articoli/tagsList'
-import CardGrid from '@/components/card/wrappers/cardsSwiper'
+import CardGrid from '@/components/card/cardsGrid'
 
 interface Props {
   params: {

@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/uiElements/backButton'
 
-import CardGrid from '@/components/card/wrappers/cardsSwiper'
+import CardGrid from '@/components/card/cardsGrid'
 import { RandomPixel } from '@/components/uiElements/pixels'
 import { notFound } from 'next/navigation'
 

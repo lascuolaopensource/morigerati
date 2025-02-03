@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import type { Map as LeafletMap } from 'leaflet'
-import { Tracciati } from '@/payload-types'
+import { Itinerari, Tracciati } from '@/payload-types'
 import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 
 interface TracksMapProps {
@@ -48,6 +48,15 @@ function parseGPX(gpxStr: string): [number, number][] {
   return points
 }
 
+const createTracciatoPopupContent = (tracciato: Tracciati, itinerario: Itinerari | null) => {
+  return `
+    <div class="p-2">
+      <h3 class="font-bold mb-2">${itinerario?.nome || tracciato.alt}</h3>
+      ${itinerario?.slug ? `<a href="/itinerari/${itinerario.slug}" class="text-blue-600 hover:text-blue-800 underline">Vai all'itinerario</a>` : ''}
+    </div>
+  `
+}
+
 const TracksMapComponent: React.FC<TracksMapProps> = ({
   tracciati,
   initialPosition = defaults.position,
@@ -59,6 +68,12 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
   useEffect(() => {
     if (typeof window === 'undefined') return
 
+    console.log('Map initialization with:', {
+      tracciati: tracciati.map((t) => ({ id: t.id, alt: t.alt })),
+      initialPosition,
+      initialZoom,
+    })
+
     // Dynamically import Leaflet and its styles
     Promise.all([
       import('leaflet'),
@@ -67,30 +82,63 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
       import('leaflet-defaulticon-compatibility'),
     ]).then(([L]) => {
       if (mapContainerRef.current && !mapRef.current) {
+        console.log('Creating map with initial position:', initialPosition)
+
         // Create map
-        mapRef.current = L.default.map(mapContainerRef.current).setView(initialPosition, initialZoom)
+        mapRef.current = L.default
+          .map(mapContainerRef.current)
+          .setView(initialPosition, initialZoom)
 
-        L.default.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(mapRef.current)
+        L.default
+          .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution:
+              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          })
+          .addTo(mapRef.current)
 
-        // Add all tracks to the map
+        // Add all tracks to the map and their starting point markers
         tracciati.forEach(async (tracciato, index) => {
           const gpxUrl = getTracciatoUrl(tracciato)
           if (gpxUrl) {
             try {
-              const response = await fetch(gpxUrl)
-              const gpxText = await response.text()
+              // Get the itinerario data from the API
+              const response = await fetch(`/api/itinerari?tracciato_id=${tracciato.id}`)
+              const data = await response.json()
+              const itinerario = data.itinerari as Itinerari | null
+
+              const gpxResponse = await fetch(gpxUrl)
+              const gpxText = await gpxResponse.text()
               const points = parseGPX(gpxText)
 
               if (points.length > 0) {
+                // Add the track line
                 const color = trackColors[index % trackColors.length]
-                L.default.polyline(points, {
-                  color: color,
-                  weight: 3,
-                  opacity: 0.8,
-                }).addTo(mapRef.current!)
+                L.default
+                  .polyline(points, {
+                    color: color,
+                    weight: 3,
+                    opacity: 0.8,
+                  })
+                  .addTo(mapRef.current!)
+
+                // Add marker at the start of the track
+                const startPoint = points[0]
+                console.log(
+                  'Adding marker for tracciato:',
+                  tracciato.alt,
+                  'at position:',
+                  startPoint,
+                )
+                try {
+                  const marker = L.default.marker(startPoint)
+                  if (mapRef.current) {
+                    marker.addTo(mapRef.current)
+                    const popupContent = createTracciatoPopupContent(tracciato, itinerario)
+                    marker.bindPopup(popupContent)
+                  }
+                } catch (error) {
+                  console.error('Error adding marker for tracciato:', tracciato.alt, error)
+                }
               }
             } catch (error) {
               console.error('Error loading GPX:', error)
@@ -115,4 +163,4 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
   )
 }
 
-export default TracksMapComponent 
+export default TracksMapComponent

@@ -3,7 +3,7 @@ import { loadDb } from '@/utils/db'
 import StringToHTML from '@/components/serializer/stringToHTML'
 import { Residenze as ResidenzaType } from '@/payload-types'
 import PassateFuture from '@/components/residenze/passateFuture'
-import MySwiper from '@/components/card/wrappers/cardsSwiper'
+import CardGrid from '@/components/card/cardsGrid'
 import NoResidenze from '@/components/residenze/noResidenze'
 
 export const dynamic = 'force-dynamic'
@@ -52,9 +52,13 @@ async function FilteredResidenze({ filter }: { filter: 'passata' | 'futura' }) {
 
   return (
     <div className="space-y-8">
-      {filter === 'futura' && future.length > 0 && <MySwiper items={future} category="residenze" />}
+      {filter === 'futura' && future.length > 0 && (
+        <CardGrid items={future} category="residenze" singleRow />
+      )}
 
-      {filter === 'passata' && past.length > 0 && <MySwiper items={past} category="residenze" />}
+      {filter === 'passata' && past.length > 0 && (
+        <CardGrid items={past} category="residenze" singleRow />
+      )}
 
       {filter === 'futura' && future.length === 0 && <NoResidenze />}
     </div>
