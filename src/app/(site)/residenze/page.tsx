@@ -46,6 +46,7 @@ async function FilteredResidenze({ filter }: { filter: 'passata' | 'futura' }) {
   const residenzeData = await db.find({
     collection: 'residenze',
     depth: 2,
+    sort: '-data_inizio',
   })
 
   const { past, future } = sortResidenze(residenzeData.docs)
