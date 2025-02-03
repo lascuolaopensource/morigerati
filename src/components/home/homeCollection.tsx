@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import StringToHTML from '../serializer/stringToHTML'
-import MySwyper from '../card/wrappers/cardsSwiper'
+import CardGrid from '../card/cardsGrid'
 import { loadDb } from '@/utils/db'
 import { RandomPixel } from '@/components/uiElements/pixels'
 import Link from 'next/link'
@@ -18,13 +18,13 @@ interface HomeCollectionProps {
   mappaText?: string
 }
 
-const HomeCollection: React.FC<HomeCollectionProps> = async ({ 
-  collection, 
-  layout = 'left', 
-  hasMap = false, 
+const HomeCollection: React.FC<HomeCollectionProps> = async ({
+  collection,
+  layout = 'left',
+  hasMap = false,
   tracciati = [],
   mappaTitle,
-  mappaText 
+  mappaText,
 }) => {
   const db = await loadDb()
   const home = await db.findGlobal({
@@ -32,7 +32,6 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
   })
   const data = await db.find({
     collection: collection,
-    
   })
 
   const color = {
@@ -64,13 +63,9 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
             </div>
           </div>
           <Suspense fallback={<div>Loading slides...</div>}>
-            <MySwyper items={data.docs} category={collection} singleRow={true} />
+            <CardGrid items={data.docs} category={collection} singleRow={true} />
           </Suspense>
-          <HomeTracksSection 
-            title={mappaTitle} 
-            text_html={mappaText} 
-            tracciati={tracciati} 
-          />
+          <HomeTracksSection title={mappaTitle} text_html={mappaText} tracciati={tracciati} />
           <div className="flex justify-center mt-4">
             <Link
               href={`/${collection}`}
@@ -117,7 +112,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
             )}
           </div>
           <Suspense fallback={<div>Loading slides...</div>}>
-            <MySwyper items={data.docs} category={collection} singleRow={true} />
+            <CardGrid items={data.docs} category={collection} singleRow={true} />
           </Suspense>
           <div className="flex justify-center mt-4">
             <Link

@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import React, { useMemo, useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Media } from '@/payload-types'
@@ -33,59 +33,51 @@ const styleVariants: Record<CategoryType, { border: string; text: string }> = {
   },
 } as const
 
-const generateDeterministicLetter = (title: string): string => {
-  const sum = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-  const letter = String.fromCharCode(65 + (sum % 26))
-  return sum % 2 === 0 ? letter.toLowerCase() : letter
-}
+// const generateDeterministicLetter = (title: string): string => {
+//   const sum = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+//   const letter = String.fromCharCode(65 + (sum % 26))
+//   return sum % 2 === 0 ? letter.toLowerCase() : letter
+// }
 
 const Card = ({ title, media, category, slugUrl }: CardProps) => {
-  const randomLetter = useMemo(() => generateDeterministicLetter(title), [title])
-  const titleRef = useRef<HTMLDivElement>(null)
-  const [titleHeight, setTitleHeight] = useState(0)
-
+  // const randomLetter = useMemo(() => generateDeterministicLetter(title), [title])
   const imageUrl = useMemo(
     () =>
       (media && 'url' in media && !media.mimeType?.startsWith('video/') && media.url) || loremPic,
     [media],
   )
 
-  useEffect(() => {
-    if (titleRef.current) {
-      setTitleHeight(titleRef.current.offsetHeight)
-    }
-  }, [title])
-
   const styles = styleVariants[category]
 
   return (
     <Link href={slugUrl}>
       <div
-        className={`group flex z-10 flex-col border-[3px] w-[240px] ${styles.border} rounded-lg overflow-hidden duration-300 hover:scale-95 relative cursor-pointer h-[135px]`}
+        className={`flex z-10 flex-col border-[3px] w-[230px] h-full ${styles.border} rounded-lg overflow-hidden duration-300 hover:scale-95 relative cursor-pointer`}
       >
-        <div className="absolute inset-0 h-[135px]">
+        <div className="h-[129.60px] flex-shrink-0">
           <Image
             src={imageUrl}
             alt={title}
-            width={240}
-            height={135}
+            width={230}
+            height={129.6}
             className="w-full h-full object-cover"
             style={{
-              borderRadius: `8px`,
-              clipPath: `inset(${titleHeight}px 0 0 0 round 8px 8px 8px 8px)`,
+              borderRadius: `8px 8px 0 0`,
             }}
             priority
           />
         </div>
 
-        <div ref={titleRef} className={`z-10 ${styles.border} px-2 pt-2 -pb-2`}>
-          <p className="font-semibold text-xs leading-tight">{title}</p>
+        <div
+          className={`${styles.border} px-2 flex flex-col items-center justify-center flex-grow pt-2`}
+        >
+          <p className="font-semibold text-xs w-full">{title}</p>
         </div>
 
         {/* <div
           className={`absolute z-20 -right-2 ${styles.text} p-2 text-3xl font-bold font-transluoghi`}
           style={{
-            top: `${titleHeight - 17}px`,
+            top: `23px`,
           }}
         >
           {randomLetter}

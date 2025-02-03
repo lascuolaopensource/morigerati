@@ -992,7 +992,6 @@ export interface Home {
     text_html?: string | null;
   };
   tracciati_mappa?: (string | Tracciati)[] | null;
-  federico?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1267,7 +1266,6 @@ export interface HomeSelect<T extends boolean = true> {
         text_html?: T;
       };
   tracciati_mappa?: T;
-  federico?: T;
   meta?:
     | T
     | {

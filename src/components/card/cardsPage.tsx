@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 
 import StringToHTML from '../serializer/stringToHTML'
-import MySwiper from './wrappers/cardsSwiper'
+import CardGrid from './cardsGrid'
 import { RandomLetter } from '../home/randomLetter'
 
 export const dynamic = 'force-dynamic'
@@ -14,7 +14,7 @@ interface cardsPageProps {
   displayAs?: 'row' | 'grid'
 }
 
-const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery }) => {
+const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery, displayAs = 'grid' }) => {
   const db = await loadDb()
   const testi = await db.findGlobal({
     slug: 'testi',
@@ -43,7 +43,12 @@ const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery }) => {
         )}
         <StringToHTML htmlString={testi[collectionQuery].text_html ?? ''} classs="prose-custom" />
         <Suspense>
-          <MySwiper items={docs} category={collectionQuery} />
+          <CardGrid
+            items={docs}
+            category={collectionQuery}
+            singleRow={displayAs === 'row'}
+            className="mt-6"
+          />
         </Suspense>
         <RandomLetter color={collectionQuery} position={'left'} />
       </div>
