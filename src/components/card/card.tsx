@@ -61,14 +61,14 @@ const Card = ({ title, media, category, slugUrl }: CardProps) => {
   return (
     <Link href={slugUrl}>
       <div
-        className={`group flex z-10 flex-col border-[3px] w-[240px] ${styles.border} rounded-lg overflow-hidden duration-300 hover:scale-95 relative cursor-pointer h-[180px]`}
+        className={`group flex z-10 flex-col border-[3px] w-[240px] ${styles.border} rounded-lg overflow-hidden duration-300 hover:scale-95 relative cursor-pointer h-[135px]`}
       >
-        <div className="absolute inset-0 h-[180px]">
+        <div className="absolute inset-0 h-[135px]">
           <Image
             src={imageUrl}
             alt={title}
             width={240}
-            height={180}
+            height={135}
             className="w-full h-full object-cover"
             style={{
               borderRadius: `8px`,
