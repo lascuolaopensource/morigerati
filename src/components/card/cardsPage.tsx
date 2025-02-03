@@ -24,6 +24,7 @@ const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery, displayAs 
   })
   const doc = await db.find({
     collection: collectionQuery,
+    sort: 'nome',
     depth: 2,
   })
 

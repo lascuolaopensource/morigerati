@@ -32,6 +32,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
   })
   const data = await db.find({
     collection: collection,
+    sort: 'nome',
   })
 
   const color = {
