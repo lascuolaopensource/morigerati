@@ -50,10 +50,10 @@ const CardGrid = ({ items = [], category, singleRow = false, className = '' }: C
     <div ref={containerRef} className={`relative w-full px-3 sm:px-6 ${className}`}>
       <div
         className={`
-          grid gap-3
+          grid gap-3 place-items-center place-content-center
           ${
             singleRow
-              ? 'grid-flow-col auto-cols-[230px] overflow-x-auto snap-x snap-mandatory pb-4'
+              ? 'grid-flow-col auto-cols-[230px] overflow-x-auto snap-x pb-4'
               : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
           }
           ${singleRow && !isOverflowing ? 'justify-center' : ''}
@@ -83,7 +83,7 @@ const CardGrid = ({ items = [], category, singleRow = false, className = '' }: C
       </div>
 
       {singleRow && isOverflowing && (
-        <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-4 w-12 pointer-events-none" />
       )}
     </div>
   )

@@ -1,7 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { Collections } from '.'
 import * as F from '@/fields'
-import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
 
 export const Articoli: CollectionConfig = {
   slug: Collections.Articoli,

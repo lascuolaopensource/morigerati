@@ -1,9 +1,10 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 
-import StringToHTML from '../serializer/stringToHTML'
 import CardGrid from './cardsGrid'
 import { RandomLetter } from '../home/randomLetter'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -30,19 +31,22 @@ const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery, displayAs 
 
   const docs = doc.docs
 
-  console.log(testi[collectionQuery].text_html == '<p></p>')
-
   return (
     <main>
-      <div className="p-3 max-w-screen-xl mx-auto">
+      <div className="max-w-screen-xl mx-auto relative w-screen h-[80vh] ">
         {testi[collectionQuery].title ? (
           <div className="font-normal text-sm leading-4">
-            <h1 className="font-bold sm:text-center text-[40px]">{testi[collectionQuery].title}</h1>
+            <h1 className="font-bold text-center text-[40px]">{testi[collectionQuery].title}</h1>
           </div>
         ) : (
           <p></p>
         )}
-        <StringToHTML htmlString={testi[collectionQuery].text_html ?? ''} classs="prose-custom" />
+        <div className="flex items-center justify-center">
+          <RichText
+            data={testi[collectionQuery].testo as SerializedEditorState}
+            className="prose prose-lg pl-6 pr-6 "
+          />
+        </div>
         <Suspense>
           <CardGrid
             items={docs}

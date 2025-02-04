@@ -5,11 +5,12 @@ import { notFound } from 'next/navigation'
 import { Media, Articoli } from '@/payload-types'
 import { Metadata } from 'next'
 
-import StringToHTML from '@/components/serializer/stringToHTML'
 import datePharser from '@/utils/formatDate'
 import Copertina from '@/components/uiElements/copertina'
 import TagsList from '@/components/articoli/tagsList'
 import Galleria from '@/components/galleria/galleria'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 interface Props {
   params: {
@@ -88,10 +89,9 @@ export default async function Articolo({ params }: { params: { slug: string } })
             <p></p>
           )}
           <TagsList tags={articoloData.tags?.map((tagObj) => tagObj.tag) ?? []} />
-          <p>{datePharser(articoloData.data_pubblicazione, '', true)}</p>
-        </div>
-        <div className="container mx-auto p-4">
-          <StringToHTML htmlString={articoloData.testo_html ?? ''} />
+          <p className="font-bold">{datePharser(articoloData.data_pubblicazione, '', true)}</p>
+
+          <RichText data={articoloData.testo as SerializedEditorState} className="prose prose-lg" />
         </div>
         <div className="pt-4 sm:px-36">
           <Galleria items={articoloData.galleria as Media[] | undefined} />

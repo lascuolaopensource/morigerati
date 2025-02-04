@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 
 import BackButton from '@/components/uiElements/backButton'
-import StringToHTML from '@/components/serializer/stringToHTML'
 import { Stakeholder as StakeholderType } from '@/payload-types'
 
 import DynamicMappa from '@/components/mappa/mapLoader'
@@ -15,6 +14,8 @@ import { Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
 import ArticoliTagsList from '@/components/articoli/tagsList'
 import CardGrid from '@/components/card/cardsGrid'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 interface Props {
   params: {
@@ -134,7 +135,10 @@ export default async function Stakeholder({ params }: { params: { slug: string }
             {/* Testo descrittivo */}
             {stakeholderData.testo && stakeholderData.testo.root && (
               <div className="mb-6">
-                <StringToHTML htmlString={stakeholderData.testo_html ?? ''} />
+                <RichText
+                  data={stakeholderData.testo as SerializedEditorState}
+                  className="prose prose-lg"
+                />
               </div>
             )}
 

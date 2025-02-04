@@ -6,8 +6,6 @@ import {
   BoldFeature,
   InlineToolbarFeature,
   ParagraphFeature,
-  lexicalHTML,
-  HTMLConverterFeature,
 } from '@payloadcms/richtext-lexical'
 import { slugField } from '@/fields'
 
@@ -39,7 +37,7 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
               name: 'Itinerari_relation',
               label: 'Itinerari in cui si trova il luogo',
               type: 'relationship',
-              relationTo: Collections.Itinerari,
+              relationTo: 'itinerari',
               hasMany: true,
             },
             F.divider('divider-1'),
@@ -58,11 +56,10 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
                   InlineToolbarFeature(),
                   ParagraphFeature(),
                   BoldFeature(),
-                  HTMLConverterFeature({}),
+                  InlineToolbarFeature(),
                 ],
               }),
             },
-            lexicalHTML('orari', { name: 'orari_html' }),
           ],
         },
         F.tabContenuto,

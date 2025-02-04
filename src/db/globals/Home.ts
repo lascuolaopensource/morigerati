@@ -1,7 +1,17 @@
 import type { GlobalConfig } from 'payload'
 import * as F from '@/fields'
 import { Globals } from '.'
-
+import {
+  BoldFeature,
+  InlineToolbarFeature,
+  ItalicFeature,
+  lexicalEditor,
+  LinkFeature,
+  OrderedListFeature,
+  ParagraphFeature,
+  UnderlineFeature,
+  UnorderedListFeature,
+} from '@payloadcms/richtext-lexical'
 export const Home: GlobalConfig = {
   slug: Globals.Home,
 
@@ -19,12 +29,29 @@ export const Home: GlobalConfig = {
       name: 'cover',
       label: 'Immagine di copertina',
     },
-
-    F.titleAndText('intro'),
-    F.titleAndText('itinerari'),
-    F.titleAndText('luoghi'),
-    F.titleAndText('residenze'),
-    F.titleAndTextOptional('mappa'),
+    {
+      name: 'title',
+      type: 'text',
+      label: 'Titolo',
+    },
+    {
+      name: 'testo',
+      type: 'richText',
+      label: 'Testo',
+      editor: lexicalEditor({
+        features: () => [
+          ParagraphFeature(),
+          BoldFeature(),
+          ItalicFeature(),
+          UnderlineFeature(),
+          LinkFeature(),
+          InlineToolbarFeature(),
+        ],
+      }),
+    },
+    F.titleAndTextHome('itinerari'),
+    F.titleAndTextHome('luoghi'),
+    F.titleAndTextHome('residenze'),
     {
       name: 'tracciati_mappa',
       type: 'relationship',

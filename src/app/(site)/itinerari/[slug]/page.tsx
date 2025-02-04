@@ -9,8 +9,6 @@ import { ServiziCardWrapper } from '@/components/itinerari/servizioCardWrapper'
 import CardGrid from '@/components/card/cardsGrid'
 import Galleria from '@/components/galleria/galleria'
 
-import StringToHTML from '@/components/serializer/stringToHTML'
-
 import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 import { Luoghi, Stakeholder } from '@/payload-types'
 
@@ -22,6 +20,8 @@ import MediaViewer from '@/components/uiElements/mediaViewer'
 import { type Media } from '@/payload-types'
 
 import { RandomPixel } from '@/components/uiElements/pixels'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 interface Props {
   params: {
@@ -117,7 +117,10 @@ export default async function Itinerario({ params }: { params: { slug: string } 
             />
 
             <div className="mb-6 mt-6">
-              <StringToHTML htmlString={itinerarioData?.testo_html ?? ''} />
+              <RichText
+                data={itinerarioData?.testo as SerializedEditorState}
+                className="prose prose-lg"
+              />
             </div>
           </div>
 

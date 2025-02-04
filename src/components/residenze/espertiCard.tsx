@@ -41,7 +41,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
         <div className="w-2/3 flex flex-col -mt-2.5">
           <h3 className="font-bold text-lg">{esperto.nome}</h3>
           <div className="flex-grow mt-2">
-            <p className="text-sm leading-normal">
+            <div className="text-sm leading-normal">
               {isExpanded ? (
                 <>
                   {esperto.biografia}
@@ -87,7 +87,7 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
                   {esperto.biografia && esperto.biografia.length > 200 && '...'}
                 </>
               )}
-            </p>
+            </div>
             {esperto.biografia && esperto.biografia.length > 200 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}

@@ -1,10 +1,11 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
-import StringToHTML from '@/components/serializer/stringToHTML'
 import { Residenze as ResidenzaType } from '@/payload-types'
 import PassateFuture from '@/components/residenze/passateFuture'
 import CardGrid from '@/components/card/cardsGrid'
 import NoResidenze from '@/components/residenze/noResidenze'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -82,7 +83,10 @@ const Residenze = async ({ searchParams }: { searchParams: { filter?: string } }
             <h1 className="font-bold text-[40px] sm:text-center">{testi.residenze.title}</h1>
           </div>
         )}
-        <StringToHTML htmlString={testi.residenze.text_html ?? ''} classs="prose-custom" />
+        <RichText
+          data={testi.residenze.testo as SerializedEditorState}
+          className="prose prose-lg"
+        />
         <PassateFuture />
         <Suspense fallback={<div className="py-8 text-center">Caricamento residenze...</div>}>
           <FilteredResidenze filter={filter} />

@@ -59,6 +59,7 @@ body {
     @apply pb-2;
     @apply leading-tight;
   }
+
   h2 {
     @apply font-bold;
     @apply text-2xl;
@@ -74,11 +75,20 @@ body {
     @apply pb-1;
     @apply leading-snug;
   }
+
   p {
     @apply font-normal;
     @apply text-sm;
     @apply pb-2;
     @apply leading-5;
+  }
+
+  li {
+    @apply text-sm;
+    line-height: 1em;
+  }
+  a {
+    @apply text-blue-700;
   }
 }
 

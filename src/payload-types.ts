@@ -134,7 +134,7 @@ export interface Luoghi {
     | {
         nome: string;
         link?: string | null;
-        testo: {
+        testo?: {
           root: {
             type: string;
             children: {
@@ -148,8 +148,7 @@ export interface Luoghi {
             version: number;
           };
           [k: string]: unknown;
-        };
-        testo_html?: string | null;
+        } | null;
         id?: string | null;
       }[]
     | null;
@@ -177,7 +176,6 @@ export interface Luoghi {
     };
     [k: string]: unknown;
   } | null;
-  orari_html?: string | null;
   copertina?: (string | null) | Media;
   galleria?: (string | Media)[] | null;
   testo: {
@@ -195,7 +193,6 @@ export interface Luoghi {
     };
     [k: string]: unknown;
   };
-  testo_html?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   meta?: {
@@ -275,7 +272,6 @@ export interface Itinerari {
     };
     [k: string]: unknown;
   };
-  testo_html?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   meta?: {
@@ -348,7 +344,6 @@ export interface Stakeholder {
     };
     [k: string]: unknown;
   };
-  testo_html?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   meta?: {
@@ -391,7 +386,6 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  abstract_html?: string | null;
   descrizione?: {
     root: {
       type: string;
@@ -407,7 +401,6 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  info_html?: string | null;
   copertina?: (string | null) | Media;
   galleria?: (string | Media)[] | null;
   programma?:
@@ -428,7 +421,6 @@ export interface Residenze {
           };
           [k: string]: unknown;
         } | null;
-        testo_html?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -499,7 +491,6 @@ export interface Articoli {
     };
     [k: string]: unknown;
   };
-  testo_html?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -639,7 +630,6 @@ export interface LuoghiSelect<T extends boolean = true> {
         nome?: T;
         link?: T;
         testo?: T;
-        testo_html?: T;
         id?: T;
       };
   contatti?:
@@ -652,11 +642,9 @@ export interface LuoghiSelect<T extends boolean = true> {
         id?: T;
       };
   orari?: T;
-  orari_html?: T;
   copertina?: T;
   galleria?: T;
   testo?: T;
-  testo_html?: T;
   slug?: T;
   slugLock?: T;
   meta?:
@@ -702,7 +690,6 @@ export interface ItinerariSelect<T extends boolean = true> {
   Video?: T;
   galleria?: T;
   testo?: T;
-  testo_html?: T;
   slug?: T;
   slugLock?: T;
   meta?:
@@ -729,9 +716,7 @@ export interface ResidenzeSelect<T extends boolean = true> {
   mostra_dettagli?: T;
   mostra_pulsante_iscrizione?: T;
   abstract?: T;
-  abstract_html?: T;
   descrizione?: T;
-  info_html?: T;
   copertina?: T;
   galleria?: T;
   programma?:
@@ -739,7 +724,6 @@ export interface ResidenzeSelect<T extends boolean = true> {
     | {
         programma?: T;
         testo?: T;
-        testo_html?: T;
         id?: T;
       };
   esperti?:
@@ -797,7 +781,6 @@ export interface StakeholdersSelect<T extends boolean = true> {
   copertina?: T;
   galleria?: T;
   testo?: T;
-  testo_html?: T;
   slug?: T;
   slugLock?: T;
   meta?:
@@ -827,7 +810,6 @@ export interface ArticoliSelect<T extends boolean = true> {
   copertina?: T;
   galleria?: T;
   testo?: T;
-  testo_html?: T;
   meta?:
     | T
     | {
@@ -896,28 +878,25 @@ export interface Home {
   id: string;
   statement?: string | null;
   cover?: (string | null) | Media;
-  intro: {
-    title: string;
-    text: {
-      root: {
+  title?: string | null;
+  testo?: {
+    root: {
+      type: string;
+      children: {
         type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
         version: number;
-      };
-      [k: string]: unknown;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
     };
-    text_html?: string | null;
-  };
+    [k: string]: unknown;
+  } | null;
   itinerari: {
     title: string;
-    text: {
+    testo: {
       root: {
         type: string;
         children: {
@@ -932,11 +911,10 @@ export interface Home {
       };
       [k: string]: unknown;
     };
-    text_html?: string | null;
   };
   luoghi: {
     title: string;
-    text: {
+    testo: {
       root: {
         type: string;
         children: {
@@ -951,11 +929,10 @@ export interface Home {
       };
       [k: string]: unknown;
     };
-    text_html?: string | null;
   };
   residenze: {
     title: string;
-    text: {
+    testo: {
       root: {
         type: string;
         children: {
@@ -970,26 +947,6 @@ export interface Home {
       };
       [k: string]: unknown;
     };
-    text_html?: string | null;
-  };
-  mappa?: {
-    title?: string | null;
-    text?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    text_html?: string | null;
   };
   tracciati_mappa?: (string | Tracciati)[] | null;
   meta?: {
@@ -1010,8 +967,7 @@ export interface Home {
 export interface ChiSiamo {
   id: string;
   copertina?: (string | null) | Media;
-  galleria?: (string | Media)[] | null;
-  testo: {
+  testo_chi_siamo?: {
     root: {
       type: string;
       children: {
@@ -1025,8 +981,8 @@ export interface ChiSiamo {
       version: number;
     };
     [k: string]: unknown;
-  };
-  testo_html?: string | null;
+  } | null;
+  galleria?: (string | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1061,7 +1017,6 @@ export interface MobilitaSostenibile {
     };
     [k: string]: unknown;
   };
-  testo_html?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1127,7 +1082,7 @@ export interface Testi {
   id: string;
   luoghi: {
     title: string;
-    text: {
+    testo: {
       root: {
         type: string;
         children: {
@@ -1142,11 +1097,10 @@ export interface Testi {
       };
       [k: string]: unknown;
     };
-    text_html?: string | null;
   };
   itinerari: {
     title: string;
-    text: {
+    testo: {
       root: {
         type: string;
         children: {
@@ -1161,11 +1115,10 @@ export interface Testi {
       };
       [k: string]: unknown;
     };
-    text_html?: string | null;
   };
   residenze: {
     title: string;
-    text: {
+    testo: {
       root: {
         type: string;
         children: {
@@ -1180,11 +1133,10 @@ export interface Testi {
       };
       [k: string]: unknown;
     };
-    text_html?: string | null;
   };
   stakeholders: {
     title: string;
-    text: {
+    testo: {
       root: {
         type: string;
         children: {
@@ -1199,11 +1151,10 @@ export interface Testi {
       };
       [k: string]: unknown;
     };
-    text_html?: string | null;
   };
   articoli: {
     title: string;
-    text: {
+    testo: {
       root: {
         type: string;
         children: {
@@ -1218,7 +1169,6 @@ export interface Testi {
       };
       [k: string]: unknown;
     };
-    text_html?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1230,40 +1180,25 @@ export interface Testi {
 export interface HomeSelect<T extends boolean = true> {
   statement?: T;
   cover?: T;
-  intro?:
-    | T
-    | {
-        title?: T;
-        text?: T;
-        text_html?: T;
-      };
+  title?: T;
+  testo?: T;
   itinerari?:
     | T
     | {
         title?: T;
-        text?: T;
-        text_html?: T;
+        testo?: T;
       };
   luoghi?:
     | T
     | {
         title?: T;
-        text?: T;
-        text_html?: T;
+        testo?: T;
       };
   residenze?:
     | T
     | {
         title?: T;
-        text?: T;
-        text_html?: T;
-      };
-  mappa?:
-    | T
-    | {
-        title?: T;
-        text?: T;
-        text_html?: T;
+        testo?: T;
       };
   tracciati_mappa?: T;
   meta?:
@@ -1283,9 +1218,8 @@ export interface HomeSelect<T extends boolean = true> {
  */
 export interface ChiSiamoSelect<T extends boolean = true> {
   copertina?: T;
+  testo_chi_siamo?: T;
   galleria?: T;
-  testo?: T;
-  testo_html?: T;
   meta?:
     | T
     | {
@@ -1305,7 +1239,6 @@ export interface MobilitaSostenibileSelect<T extends boolean = true> {
   copertina?: T;
   galleria?: T;
   testo?: T;
-  testo_html?: T;
   meta?:
     | T
     | {
@@ -1344,36 +1277,31 @@ export interface TestiSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
-        text?: T;
-        text_html?: T;
+        testo?: T;
       };
   itinerari?:
     | T
     | {
         title?: T;
-        text?: T;
-        text_html?: T;
+        testo?: T;
       };
   residenze?:
     | T
     | {
         title?: T;
-        text?: T;
-        text_html?: T;
+        testo?: T;
       };
   stakeholders?:
     | T
     | {
         title?: T;
-        text?: T;
-        text_html?: T;
+        testo?: T;
       };
   articoli?:
     | T
     | {
         title?: T;
-        text?: T;
-        text_html?: T;
+        testo?: T;
       };
   updatedAt?: T;
   createdAt?: T;

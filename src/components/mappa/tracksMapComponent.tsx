@@ -68,12 +68,6 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    console.log('Map initialization with:', {
-      tracciati: tracciati.map((t) => ({ id: t.id, alt: t.alt })),
-      initialPosition,
-      initialZoom,
-    })
-
     // Dynamically import Leaflet and its styles
     Promise.all([
       import('leaflet'),
@@ -82,8 +76,6 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
       import('leaflet-defaulticon-compatibility'),
     ]).then(([L]) => {
       if (mapContainerRef.current && !mapRef.current) {
-        console.log('Creating map with initial position:', initialPosition)
-
         // Create map
         mapRef.current = L.default
           .map(mapContainerRef.current)
@@ -123,12 +115,7 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
 
                 // Add marker at the start of the track
                 const startPoint = points[0]
-                console.log(
-                  'Adding marker for tracciato:',
-                  tracciato.alt,
-                  'at position:',
-                  startPoint,
-                )
+
                 try {
                   const marker = L.default.marker(startPoint)
                   if (mapRef.current) {

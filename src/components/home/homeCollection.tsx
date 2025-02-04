@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import StringToHTML from '../serializer/stringToHTML'
+
 import CardGrid from '../card/cardsGrid'
 import { loadDb } from '@/utils/db'
 import { RandomPixel } from '@/components/uiElements/pixels'
@@ -8,6 +8,8 @@ import { ArrowRight } from 'lucide-react'
 import { RandomLetter } from './randomLetter'
 import { HomeTracksSection } from './homeTracksSection'
 import { Tracciati } from '@/payload-types'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 interface HomeCollectionProps {
   collection: 'luoghi' | 'itinerari' | 'residenze'
@@ -54,12 +56,12 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
         <>
           <div className="text-center md:text-left md:w-full md:px-40 mb-4">
             <h2 className={`text-2xl ${color[collection]} text-center md:text-${layout}`}>
-              {home[collection].title}
+              {home[collection]?.title}
             </h2>
             <div className={`text-center md:text-${layout}`}>
-              <StringToHTML
-                htmlString={home[collection].text_html ?? ''}
-                classs={`max-w-1/4 mx-auto ${layout === 'left' ? 'md:ml-0' : 'md:ml-auto md:mr-0'}`}
+              <RichText
+                data={home[collection].testo as SerializedEditorState}
+                className="prose prose-lg"
               />
             </div>
           </div>
@@ -92,9 +94,9 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
                   {home[collection].title}
                 </h2>
                 <div className="text-center md:text-right">
-                  <StringToHTML
-                    htmlString={home[collection].text_html ?? ''}
-                    classs=" max-w-1/4 mx-auto md:ml-auto md:mr-0"
+                  <RichText
+                    data={home[collection].testo as SerializedEditorState}
+                    className="prose prose-lg"
                   />
                 </div>
               </>
@@ -104,9 +106,9 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
                   {home[collection].title}
                 </h2>
                 <div className="text-center md:text-left ">
-                  <StringToHTML
-                    htmlString={home[collection].text_html ?? ''}
-                    classs=" max-w-1/4 mx-auto md:ml-0"
+                  <RichText
+                    data={home[collection].testo as SerializedEditorState}
+                    className="prose prose-lg"
                   />
                 </div>
               </>

@@ -1,6 +1,7 @@
 import React from 'react'
-import StringToHTML from '@/components/serializer/stringToHTML'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 interface Servizio {
   nome: string
@@ -21,12 +22,7 @@ interface LuogoInfoRowProps {
   orari?: { root: any }
 }
 
-const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({
-  servizi,
-  contatti,
-  orari_html,
-  orari,
-}) => {
+const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({ servizi, contatti, orari_html, orari }) => {
   // Determina quali sezioni mostrare
   const hasServizi = servizi && servizi.length > 0
   const hasContatti = contatti && contatti.length > 0
@@ -54,7 +50,7 @@ const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({
           {servizi.map((servizio, index) => (
             <div key={index} className="mt-4">
               <h4 className="text-xl">{servizio.nome}</h4>
-              <StringToHTML htmlString={servizio.testo_html ?? ''} />
+              {/* <RichText data={servizio. as SerializedEditorState} className="prose prose-lg" /> */}
             </div>
           ))}
         </div>
@@ -68,9 +64,7 @@ const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({
             {contatti.map((contatto, index) => (
               <li key={index} className="mb-4">
                 <p className="font-medium">{contatto.nome}</p>
-                {contatto.telefono && (
-                  <p className="text-sm">Telefono: {contatto.telefono}</p>
-                )}
+                {contatto.telefono && <p className="text-sm">Telefono: {contatto.telefono}</p>}
                 {contatto.email && <p className="text-sm">Email: {contatto.email}</p>}
                 {contatto.link && (
                   <p className="text-sm">
@@ -95,7 +89,7 @@ const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({
       {hasOrari && (
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Orari di Apertura</h2>
-          <StringToHTML htmlString={orari_html ?? ''} />
+          <RichText data={orari as SerializedEditorState} className="prose prose-lg" />
         </div>
       )}
     </div>

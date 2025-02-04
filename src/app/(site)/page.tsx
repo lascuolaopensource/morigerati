@@ -1,6 +1,7 @@
 import React from 'react'
 import { loadDb } from '@/utils/db'
-import StringToHTML from '@/components/serializer/stringToHTML'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import Copertina from '@/components/uiElements/copertina'
 import { Media, Tracciati as TracciatiType } from '@/payload-types'
 import GridOverlay from '@/components/uiElements/gridOverlay'
@@ -43,16 +44,14 @@ export async function generateMetadata(): Promise<Metadata> {
 const Home = async () => {
   const db = await loadDb()
   const home = await db.findGlobal({ slug: 'home' })
-  const { tracciati, mappaTitle, mappaText } = await getHomeTracksData()
+  const { mappaTitle, mappaText } = await getHomeTracksData()
 
   const IntroSection = ({ isMobile = false }) => (
     <div
       className={`${isMobile ? 'sm:hidden' : 'hidden sm:flex flex-col'} md:w-full md:px-40 mb-4`}
     >
-      <h2 className={`${isMobile ? 'pt-4 text-xl' : 'text-3xl'} text-center `}>
-        {home.intro.title}
-      </h2>
-      <StringToHTML htmlString={home.intro.text_html ?? ''} classs="prose-custom-no-center" />
+      <h2 className={`${isMobile ? 'pt-4 text-xl' : 'text-3xl'} text-center `}>{home.title}</h2>
+      <RichText data={home.testo as SerializedEditorState} className="prose-custom" />
     </div>
   )
 

@@ -39,7 +39,7 @@ function baseRichText(name: string): RichTextField {
     required: true,
     localized: true,
     editor: lexicalEditor({
-      features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
+      features: () => [ParagraphFeature()],
     }),
   }
 }

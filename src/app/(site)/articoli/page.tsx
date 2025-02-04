@@ -1,11 +1,12 @@
 import React from 'react'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import StringToHTML from '@/components/serializer/stringToHTML'
 import { Articoli, Media } from '@/payload-types'
 import ArchiveCard from '@/components/articoli/articoliArchiveCard'
 import articoliUnpacker from '@/components/articoli/articoloPropsUnpack'
 import BackButton from '@/components/uiElements/backButton'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -32,7 +33,7 @@ const TuttiArticoliPage = async () => {
           </div>
         )}
 
-        <StringToHTML htmlString={testi.articoli.text_html ?? ''} />
+        <RichText data={testi.articoli.testo as SerializedEditorState} className="prose prose-lg" />
 
         <div className="flex flex-wrap -mx-2">
           {articoli.map((articolo, index) => {

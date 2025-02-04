@@ -1,6 +1,17 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import {
+  lexicalEditor,
+  InlineToolbarFeature,
+  ParagraphFeature,
+  BoldFeature,
+  ItalicFeature,
+  UnderlineFeature,
+  LinkFeature,
+  HeadingFeature,
+  OrderedListFeature,
+  UnorderedListFeature,
+} from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -38,7 +49,19 @@ export default buildConfig({
   },
   collections: [Users, Media, Luoghi, Itinerari, Residenze, Stakeholders, Articoli, Tracciati],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: () => [
+      InlineToolbarFeature(),
+      ParagraphFeature(),
+      BoldFeature(),
+      ItalicFeature(),
+      UnderlineFeature(),
+      LinkFeature(),
+      HeadingFeature(),
+      OrderedListFeature(),
+      UnorderedListFeature(),
+    ],
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -56,11 +79,7 @@ export default buildConfig({
         Collections.Residenze,
         Collections.Articoli,
       ],
-      globals: [
-        Globals.Home,
-        Globals.ChiSiamo,
-        Globals.MobilitaSostenibile,
-      ],
+      globals: [Globals.Home, Globals.ChiSiamo, Globals.MobilitaSostenibile],
       uploadsCollection: Collections.Media,
       generateTitle: ({ doc }) => {
         const title = doc?.nome || doc?.titolo || ''

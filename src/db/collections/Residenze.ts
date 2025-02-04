@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload'
 import { Collections } from '.'
 import * as F from '@/fields'
-import { lexicalHTML } from '@payloadcms/richtext-lexical'
+
 import { slugField } from '@/fields'
 
 export const Residenze: CollectionConfig<'residenze'> = {
@@ -80,7 +80,7 @@ export const Residenze: CollectionConfig<'residenze'> = {
               name: 'abstract',
               label: 'Abstract',
             },
-            lexicalHTML('abstract', { name: 'abstract_html' }),
+
             F.divider('divider-4'),
 
             {
@@ -88,7 +88,6 @@ export const Residenze: CollectionConfig<'residenze'> = {
               name: 'descrizione',
               label: 'Descrizione',
             },
-            lexicalHTML('descrizione', { name: 'info_html' }),
           ],
         },
 

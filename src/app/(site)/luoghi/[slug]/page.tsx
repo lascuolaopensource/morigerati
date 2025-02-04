@@ -13,11 +13,12 @@ import Copertina from '@/components/uiElements/copertina'
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
 
-import StringToHTML from '@/components/serializer/stringToHTML'
 import { Luoghi, Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
 import LuogoInfoRow from '@/components/luoghi/luogoInfoRow'
 import { ServiziCardWrapper } from '@/components/itinerari/servizioCardWrapper'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 interface Props {
   params: {
@@ -115,13 +116,15 @@ export default async function LuogoPage({ params }: Props) {
               <p></p>
             )}
             <div className="mb-6">
-              <StringToHTML htmlString={luogoData.testo_html ?? ''} />
+              <RichText
+                data={luogoData.testo as SerializedEditorState}
+                className="prose prose-lg"
+              />
             </div>
 
             {/* Contacts and Hours */}
             <LuogoInfoRow
               contatti={(luogoData.contatti as []) ?? undefined}
-              orari_html={luogoData.orari_html}
               orari={luogoData.orari as any | undefined}
             />
           </div>

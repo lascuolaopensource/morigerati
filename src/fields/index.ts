@@ -14,16 +14,22 @@ import {
 } from 'payload'
 import { Collections } from '@/db/collections'
 
-import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
+import {
+  BoldFeature,
+  HeadingFeature,
+  ItalicFeature,
+  lexicalEditor,
+  UnderlineFeature,
+  LinkFeature,
+  OrderedListFeature,
+  ParagraphFeature,
+  UnorderedListFeature,
+  InlineToolbarFeature,
+} from '@payloadcms/richtext-lexical'
 
 import { capitalizeFirstLetter } from '@/utils/strings'
 
 import { formatSlugHook } from './slug/formatSlug'
-
-// Common field configurations
-const defaultRichTextEditor = lexicalEditor({
-  features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
-})
 
 // Field factory functions
 const createLocalizedField = <T extends Field>(field: T): T => ({
@@ -43,12 +49,25 @@ const createTextField = (name: string, options: Partial<TextField> = {}): TextFi
     ...options,
   }) as TextField
 
-const createRichTextField = (name: string, options: Partial<RichTextField> = {}): RichTextField =>
+const createRichTextField = (name: string): RichTextField =>
   ({
     name,
     type: 'richText',
-    editor: defaultRichTextEditor,
-    ...options,
+  }) as RichTextField
+
+const createHomeRichTextField = (name: string): RichTextField =>
+  ({
+    name,
+    type: 'richText',
+    editor: lexicalEditor({
+      features: () => [
+        ParagraphFeature(),
+        BoldFeature(),
+        ItalicFeature(),
+        UnderlineFeature(),
+        InlineToolbarFeature(),
+      ],
+    }),
   }) as RichTextField
 
 const createRowField = (fields: Field[]): RowField =>
@@ -148,7 +167,7 @@ export const nome = createRequiredField(createLocalizedField(createTextField('no
 
 export const link = createTextField('link')
 
-export const testo = createLocalizedField(createRichTextField('testo', { label: 'Testo' }))
+export const testo = createLocalizedField(createRichTextField('testo'))
 
 export const plainText = (name: string): TextField => createLocalizedField(createTextField(name))
 
@@ -172,8 +191,22 @@ export const programmaArray: ArrayField = createArrayField(
   'programma',
   [
     createTextField('programma', { label: 'giorno / momento' }),
-    richText('testo'),
-    lexicalHTML('testo', { name: 'testo_html' }),
+    {
+      name: 'testo',
+      type: 'richText',
+      label: 'testo',
+      editor: lexicalEditor({
+        features: () => [
+          ParagraphFeature(),
+          BoldFeature(),
+          ItalicFeature(),
+          UnderlineFeature(),
+          LinkFeature(),
+          OrderedListFeature(),
+          UnorderedListFeature(),
+        ],
+      }),
+    },
   ],
   { label: 'Programma' },
 )
@@ -208,8 +241,14 @@ export const galleria: RelationshipField = {
 export const servizi: ArrayField = createArrayField('servizi', [
   nome,
   link,
-  createRequiredField(testo),
-  lexicalHTML('testo', { name: 'testo_html' }),
+  {
+    name: 'testo',
+    type: 'richText',
+    label: 'testo',
+    editor: lexicalEditor({
+      features: () => [ParagraphFeature()],
+    }),
+  },
 ])
 
 const baseContentFields: Field[] = [
@@ -218,7 +257,6 @@ const baseContentFields: Field[] = [
   galleria,
   title('Contenuti testuali'),
   createRequiredField(testo),
-  lexicalHTML('testo', { name: 'testo_html' }),
 ]
 
 export const contenutoFields: Field[] = baseContentFields
@@ -239,7 +277,6 @@ export const contenutoFieldsUnrequired: Field[] = [
   linkArray,
   ...baseContentFields.slice(2, -2),
   { ...testo, required: false },
-  lexicalHTML('testo', { name: 'testo_html' }),
 ]
 
 export const tabContenuto: Tab = {
@@ -259,10 +296,19 @@ export function titleAndText(name: string, label?: string): GroupField {
     label: label ?? capitalizeFirstLetter(name),
     fields: [
       createRequiredField(createLocalizedField(createTextField('title', { label: 'Titolo' }))),
-      createRequiredField(
-        createLocalizedField(createRichTextField('text', { label: 'Contenuto' })),
-      ),
-      lexicalHTML('text', { name: 'text_html' }),
+      createRequiredField(createLocalizedField(createRichTextField('testo'))),
+    ],
+  }
+}
+
+export function titleAndTextHome(name: string, label?: string): GroupField {
+  return {
+    name,
+    type: 'group',
+    label: label ?? capitalizeFirstLetter(name),
+    fields: [
+      createRequiredField(createLocalizedField(createTextField('title', { label: 'Titolo' }))),
+      createRequiredField(createLocalizedField(createHomeRichTextField('testo'))),
     ],
   }
 }
@@ -274,8 +320,7 @@ export function titleAndTextOptional(name: string, label?: string): GroupField {
     label: label ?? capitalizeFirstLetter(name),
     fields: [
       createLocalizedField(createTextField('title', { label: 'Titolo' })),
-      createLocalizedField(createRichTextField('text', { label: 'Contenuto' })),
-      lexicalHTML('text', { name: 'text_html' }),
+      createLocalizedField(createRichTextField('text')),
     ],
   }
 }

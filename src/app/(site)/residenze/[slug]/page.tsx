@@ -4,7 +4,6 @@ import BackButton from '@/components/uiElements/backButton'
 import { isArrayEmpty } from '@/utils/isArrayEmpty'
 import ProgrammaList from '@/components/residenze/programmaList'
 import DateDaDefinireBanner from '@/components/residenze/annuncio'
-import StringToHTML from '@/components/serializer/stringToHTML'
 import TutorCard from '@/components/residenze/espertiCard'
 import { Residenze } from '@/payload-types'
 import InfoResidenza from '@/components/residenze/infoResidenza'
@@ -15,6 +14,8 @@ import { RandomPixel } from '@/components/uiElements/pixels'
 import Galleria from '@/components/galleria/galleria'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -103,7 +104,10 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
                 )}
 
                 {!isAfterCurrentDate(residenzaData?.data_inizio ?? '') && (
-                  <StringToHTML htmlString={residenzaData.abstract_html ?? ''} />
+                  <RichText
+                    data={residenzaData.abstract as SerializedEditorState}
+                    className="prose prose-lg"
+                  />
                 )}
               </div>
             </div>
@@ -122,9 +126,9 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
 
           {isAfterCurrentDate(residenzaData?.data_inizio ?? '') && (
             <div className="mt-12 max-w-[800px] mx-auto">
-              <StringToHTML
-                htmlString={residenzaData.abstract_html ?? ''}
-                classs="prose-custom-justify"
+              <RichText
+                data={residenzaData.abstract as SerializedEditorState}
+                className="prose prose-lg"
               />
             </div>
           )}
@@ -136,12 +140,15 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
             />
           </div>
 
-          {residenzaData.info_html && (
+          {residenzaData.descrizione && (
             <div className="max-w-[800px] mx-auto mt-16">
               <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6">
                 Descrizione
               </h2>
-              <StringToHTML htmlString={residenzaData.info_html} classs="prose-custom-justify" />
+              <RichText
+                data={residenzaData.descrizione as SerializedEditorState}
+                className="prose prose-lg"
+              />
             </div>
           )}
 
