@@ -491,6 +491,8 @@ export interface Articoli {
     };
     [k: string]: unknown;
   };
+  slug?: string | null;
+  slugLock?: boolean | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -810,6 +812,8 @@ export interface ArticoliSelect<T extends boolean = true> {
   copertina?: T;
   galleria?: T;
   testo?: T;
+  slug?: T;
+  slugLock?: T;
   meta?:
     | T
     | {

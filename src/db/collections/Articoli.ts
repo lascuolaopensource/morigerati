@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { Collections } from '.'
 import * as F from '@/fields'
+import { slugField } from '@/fields'
 
 export const Articoli: CollectionConfig = {
   slug: Collections.Articoli,
@@ -50,6 +51,10 @@ export const Articoli: CollectionConfig = {
 
             ...F.contenutoFields,
           ],
+        },
+        {
+          label: 'Link',
+          fields: [...slugField('titolo')],
         },
       ],
     },

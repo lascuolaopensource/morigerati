@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     depth: 2,
   })
 
-  const articoloData = articoli.docs.find((a) => a.id === slug)
+  const articoloData = articoli.docs.find((a) => a.slug === slug)
 
   if (!articoloData) {
     notFound()
@@ -68,7 +68,7 @@ export default async function Articolo({ params }: { params: { slug: string } })
     depth: 2,
   })
 
-  const articoloData = articoli.docs.find((a) => a.id === slug)
+  const articoloData = articoli.docs.find((a) => a.slug === slug)
 
   if (!articoloData) {
     notFound()
