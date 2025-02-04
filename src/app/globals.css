@@ -88,7 +88,7 @@ body {
     line-height: 1em;
   }
   a {
-    @apply text-blue-700;
+    @apply text-black;
   }
 }
 
