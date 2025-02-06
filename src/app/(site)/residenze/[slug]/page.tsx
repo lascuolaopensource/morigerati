@@ -20,14 +20,8 @@ import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-interface Props {
-  params: {
-    slug: string
-  }
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const db = await loadDb()
   const residenze = await db.find({
     collection: 'residenze',
@@ -65,8 +59,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function ResidenzaSlug({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default async function ResidenzaSlug({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const db = await loadDb()
   const residenze = await db.find({
     collection: 'residenze',
@@ -169,16 +163,12 @@ export default async function ResidenzaSlug({ params }: { params: { slug: string
               </div>
             </div>
           )}
-
-          {residenzaData.galleria && (
-            <div className="mt-16 max-w-[800px] mx-auto">
-              <Galleria
-                items={residenzaData.galleria as Media[]}
-                titleColor=" text-residenzeColor"
-              />
-            </div>
-          )}
         </div>
+      </div>
+      <div className="max-w-[1400px] mx-auto">
+        {residenzaData.galleria && (
+          <Galleria items={residenzaData.galleria as Media[]} titleColor=" text-residenzeColor" />
+        )}
       </div>
     </div>
   )

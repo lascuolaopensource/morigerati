@@ -44,7 +44,6 @@ export async function generateMetadata(): Promise<Metadata> {
 const Home = async () => {
   const db = await loadDb()
   const home = await db.findGlobal({ slug: 'home' })
-  const { mappaTitle, mappaText } = await getHomeTracksData()
 
   const IntroSection = ({ isMobile = false }) => (
     <div
@@ -76,8 +75,6 @@ const Home = async () => {
           collection="itinerari"
           hasMap={true}
           tracciati={home.tracciati_mappa as TracciatiType[]}
-          mappaTitle={mappaTitle}
-          mappaText={mappaText}
         />
         <HomeCollection collection="luoghi" />
         <HomeCollection collection="residenze" />

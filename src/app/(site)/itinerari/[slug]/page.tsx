@@ -23,14 +23,12 @@ import { RandomPixel } from '@/components/uiElements/pixels'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
-interface Props {
-  params: {
-    slug: string
-  }
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
   const db = await loadDb()
   const itinerari = await db.find({
     collection: 'itinerari',
@@ -71,8 +69,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export default async function Itinerario({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default async function Itinerario({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const db = await loadDb()
   const itinerari = await db.find({
     collection: 'itinerari',

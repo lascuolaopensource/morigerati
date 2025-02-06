@@ -12,14 +12,8 @@ import Galleria from '@/components/galleria/galleria'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
-interface Props {
-  params: {
-    slug: string
-  }
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const db = await loadDb()
   const articoli = await db.find({
     collection: 'articoli',
@@ -60,8 +54,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export default async function Articolo({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default async function Articolo({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const db = await loadDb()
   const articoli = await db.find({
     collection: 'articoli',

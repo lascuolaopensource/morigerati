@@ -67,13 +67,13 @@ async function FilteredResidenze({ filter }: { filter: 'passata' | 'futura' }) {
   )
 }
 
-const Residenze = async ({ searchParams }: { searchParams: { filter?: string } }) => {
+const Residenze = async ({ searchParams }: { searchParams: Promise<{ filter?: string }> }) => {
   const db = await loadDb()
   const testi = await db.findGlobal({
     slug: 'testi',
   })
 
-  const filter = (searchParams.filter as 'passata' | 'futura') || 'futura'
+  const filter = ((await searchParams).filter as 'passata' | 'futura') || 'futura'
 
   return (
     <main className="min-h-screen">

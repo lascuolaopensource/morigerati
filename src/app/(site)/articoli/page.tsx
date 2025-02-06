@@ -7,6 +7,7 @@ import articoliUnpacker from '@/components/articoli/articoloPropsUnpack'
 import BackButton from '@/components/uiElements/backButton'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import NonCiSonoArticoli from '@/components/articoli/nonCiSonoArticoli'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -36,20 +37,24 @@ const TuttiArticoliPage = async () => {
         <RichText data={testi.articoli.testo as SerializedEditorState} className="prose prose-lg" />
 
         <div className="flex flex-wrap -mx-2">
-          {articoli.map((articolo, index) => {
-            const { title, subtitle, media, slugUrl, tags } = articoliUnpacker(articolo)
-            return (
-              <div key={index} className="w-full md:w-1/2 p-2">
-                <ArchiveCard
-                  title={title}
-                  subtitle={subtitle}
-                  media={media as Media | undefined}
-                  slugUrl={`/articoli/${slugUrl}`}
-                  tags={tags}
-                />
-              </div>
-            )
-          })}
+          {articoli.length > 0 ? (
+            articoli.map((articolo, index) => {
+              const { title, subtitle, media, slugUrl, tags } = articoliUnpacker(articolo)
+              return (
+                <div key={index} className="w-full md:w-1/2 p-2">
+                  <ArchiveCard
+                    title={title}
+                    subtitle={subtitle}
+                    media={media as Media | undefined}
+                    slugUrl={`/articoli/${slugUrl}`}
+                    tags={tags}
+                  />
+                </div>
+              )
+            })
+          ) : (
+            <NonCiSonoArticoli />
+          )}
         </div>
       </div>
     </main>

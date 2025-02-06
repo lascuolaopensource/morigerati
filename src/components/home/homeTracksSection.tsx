@@ -49,8 +49,6 @@ async function getLuoghiFromItinerari(tracciati: TracciatiType[]) {
 async function TracksMapSection({ tracciati }: { tracciati: TracciatiType[] }) {
   if (!tracciati || tracciati.length === 0) return null
 
-  const luoghi = await getLuoghiFromItinerari(tracciati)
-
   return <TracksMap tracciati={tracciati} />
 }
 

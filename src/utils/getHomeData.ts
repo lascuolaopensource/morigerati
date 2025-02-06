@@ -9,7 +9,5 @@ export async function getHomeTracksData() {
 
   return {
     tracciati: home.tracciati_mappa || [],
-    mappaTitle: home.mappa?.title || '',
-    mappaText: home.mappa?.text_html || '',
   }
 }

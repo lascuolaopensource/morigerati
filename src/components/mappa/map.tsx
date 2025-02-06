@@ -165,7 +165,11 @@ export const Mappa: React.FC<MapProps> = ({
       if (localizedMedia) {
         localizedMedia.forEach((media) => {
           if (media.posizione) {
-            const marker = L.marker(media.posizione)
+            const marker = L.marker(media.posizione, {
+              icon: L.divIcon({
+                className: 'text-white bg-green-500 rounded-full p-2',
+              }),
+            })
             if (mapRef.current) {
               marker.addTo(mapRef.current)
             }

@@ -26,8 +26,8 @@ interface Props {
   }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await Promise.resolve(params)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const db = await loadDb()
   const luoghi = await db.find({
     collection: 'luoghi',
@@ -68,8 +68,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export default async function LuogoPage({ params }: Props) {
-  const { slug } = params
+export default async function LuogoPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const db = await loadDb()
   const luoghi = await db.find({
     collection: 'luoghi',
