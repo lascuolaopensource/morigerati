@@ -6,8 +6,8 @@ import { slugField } from '@/fields'
 export const Stakeholders: CollectionConfig<'stakeholders'> = {
   slug: 'stakeholders',
   labels: {
-    singular: 'Stakeholder',
-    plural: 'Stakeholders',
+    singular: 'Persona',
+    plural: 'Persone',
   },
   admin: {
     defaultColumns: ['nome', 'testo'],

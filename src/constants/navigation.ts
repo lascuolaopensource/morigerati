@@ -4,7 +4,7 @@ export const NAV_ITEMS = [
   { href: '/mobilita', text: 'Mobilità sostenibile' },
   { href: '/luoghi', text: 'Luoghi' },
   { href: '/itinerari', text: 'Itinerari' },
-  { href: '/stakeholders', text: 'Stakeholders' },
+  { href: '/stakeholders', text: 'Persone' },
   { href: '/residenze', text: 'Residenze' },
   { href: '/articoli', text: 'Articoli' },
 ] as const

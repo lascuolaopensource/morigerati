@@ -13,7 +13,7 @@ export const Testi: GlobalConfig = {
     F.titleAndText('luoghi', 'Introduzione pagina "Luoghi"'),
     F.titleAndText('itinerari', 'Introduzione pagina "Itinerari"'),
     F.titleAndText('residenze', 'Introduzione pagina "Residenze"'),
-    F.titleAndText('stakeholders', 'Introduzione pagina "Stakeholders"'),
+    F.titleAndText('stakeholders', 'Introduzione pagina "Persone"'),
     F.titleAndText('articoli', 'Introduzione pagina "Articoli"'),
   ],
 }

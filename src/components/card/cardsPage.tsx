@@ -36,7 +36,9 @@ const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery, displayAs 
       <div className="max-w-screen-xl mx-auto relative w-screen h-[80vh] ">
         {testi[collectionQuery].title ? (
           <div className="font-normal text-sm leading-4">
-            <h1 className="font-bold text-center text-[40px]">{testi[collectionQuery].title}</h1>
+            <h1 className="font-bold text-center text-[40px]">
+              {collectionQuery === 'stakeholders' ? 'Persone' : testi[collectionQuery].title}
+            </h1>
           </div>
         ) : (
           <p></p>
