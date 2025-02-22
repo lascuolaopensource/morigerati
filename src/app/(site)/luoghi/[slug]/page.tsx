@@ -132,7 +132,7 @@ export default async function LuogoPage({ params }: { params: Promise<{ slug: st
           {/* Right column: Map */}
           <div className="lg:order-2">
             <div className="h-[500px] flex items-center justify-center">
-              <DynamicMappa initialPosition={position} initialZoom={14} />
+              <DynamicMappa initialPosition={position} initialZoom={14} showPositionPin={true} />
             </div>
           </div>
         </div>
