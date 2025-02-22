@@ -26,7 +26,7 @@ const RandomLetter: React.FC<RandomLetterProps> = ({ position = 'right', color =
   }
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none">
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none -z-50">
       <div
         className={`
           absolute 
