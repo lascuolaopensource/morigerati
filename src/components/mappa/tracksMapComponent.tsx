@@ -113,11 +113,11 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
                   })
                   .addTo(mapRef.current!)
 
-                // Add marker at the start of the track
-                const startPoint = points[0]
+                // Add marker at the end of the track
+                const endPoint = points[points.length - 1]
 
                 try {
-                  const marker = L.default.marker(startPoint)
+                  const marker = L.default.marker(endPoint)
                   if (mapRef.current) {
                     marker.addTo(mapRef.current)
                     const popupContent = createTracciatoPopupContent(tracciato, itinerario)

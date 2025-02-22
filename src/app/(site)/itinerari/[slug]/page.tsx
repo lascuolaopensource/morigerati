@@ -148,7 +148,7 @@ export default async function Itinerario({ params }: { params: Promise<{ slug: s
 
           {itinerarioData?.stakeholders && itinerarioData?.stakeholders.length > 0 && (
             <div className="">
-              <h2 className="font-bold text-xl text-center pb-4">Stakeholders che troverai</h2>
+              <h2 className="font-bold text-xl text-center pb-4">Persone che troverai</h2>
               <CardGrid
                 items={itinerarioData?.stakeholders as Stakeholder[]}
                 category="stakeholders"
