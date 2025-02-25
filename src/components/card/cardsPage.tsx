@@ -33,7 +33,7 @@ const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery, displayAs 
 
   return (
     <main>
-      <div className="max-w-screen-xl mx-auto relative w-screen h-[80vh] ">
+      <div className="max-w-screen-xl mx-auto relative w-screen py-8">
         {testi[collectionQuery].title ? (
           <div className="font-normal text-sm leading-4">
             <h1 className="font-bold text-center text-[40px]">
