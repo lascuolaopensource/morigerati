@@ -7,17 +7,39 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { RandomLetter } from './randomLetter'
 import { HomeTracksSection } from './homeTracksSection'
-import { Tracciati } from '@/payload-types'
+import { Tracciati, Itinerari, Luoghi, Residenze } from '@/payload-types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import { Locale } from '@/utils/localization'
+
+// Button text translations
+const buttonLabels = {
+  it: {
+    luoghi: 'Scopri tutti i luoghi',
+    itinerari: 'Scopri tutti gli itinerari',
+    residenze: 'Consulta il programma',
+  },
+  en: {
+    luoghi: 'Discover all places',
+    itinerari: 'Discover all itineraries',
+    residenze: 'View the program',
+  },
+}
+
+// Collection types
+type CollectionString = 'luoghi' | 'itinerari' | 'residenze'
+type CollectionData = Itinerari[] | Luoghi[] | Residenze[]
 
 interface HomeCollectionProps {
-  collection: 'luoghi' | 'itinerari' | 'residenze'
-  layout?: 'left' | 'right'
+  collection: CollectionString | CollectionData
+  layout?: 'left' | 'right' | 'grid'
   hasMap?: boolean
   tracciati?: Tracciati[]
   mappaTitle?: string
   mappaText?: string
+  title: string
+  text: SerializedEditorState
+  locale?: Locale
 }
 
 const HomeCollection: React.FC<HomeCollectionProps> = async ({
@@ -27,15 +49,37 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
   tracciati = [],
   mappaTitle,
   mappaText,
+  title,
+  text,
+  locale = 'it',
 }) => {
   const db = await loadDb()
-  const home = await db.findGlobal({
-    slug: 'home',
-  })
-  const data = await db.find({
-    collection: collection,
-    sort: 'nome',
-  })
+
+  let data
+  let collectionType: CollectionString = 'luoghi' // Default value
+
+  // Determine if collection is a string (collection name) or array of data
+  if (typeof collection === 'string') {
+    collectionType = collection
+    data = await db.find({
+      collection: collection,
+      sort: 'nome',
+      locale,
+    })
+  } else {
+    // If collection is an array, figure out what type it is based on first item
+    const firstItem = collection[0]
+    if (firstItem && 'collection' in firstItem) {
+      if (firstItem.collection === 'itinerari') {
+        collectionType = 'itinerari'
+      } else if (firstItem.collection === 'luoghi') {
+        collectionType = 'luoghi'
+      } else if (firstItem.collection === 'residenze') {
+        collectionType = 'residenze'
+      }
+    }
+    data = { docs: collection }
+  }
 
   const color = {
     luoghi: 'text-luoghiColor',
@@ -49,38 +93,37 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
     residenze: 'bg-residenzeColor hover:bg-residenzeColor/80',
   }
 
+  // Get localized button text
+  const buttonText = buttonLabels[locale]?.[collectionType] || buttonLabels.it[collectionType]
+
   return (
     <section className="relative pb-20">
-      <RandomLetter color={collection} position={layout == 'left' ? 'right' : 'left'} />
+      <RandomLetter color={collectionType} position={layout === 'left' ? 'right' : 'left'} />
       {hasMap ? (
         <>
           <div className="text-center md:text-left md:w-full md:px-40 mb-4">
-            <h2 className={`text-2xl ${color[collection]} text-center md:text-${layout}`}>
-              {home[collection]?.title}
+            <h2 className={`text-2xl ${color[collectionType]} text-center md:text-${layout}`}>
+              {title}
             </h2>
             <div className={`text-center md:text-${layout}`}>
-              <RichText
-                data={home[collection].testo as SerializedEditorState}
-                className="prose prose-lg"
-              />
+              <RichText data={text} className="prose prose-lg" />
             </div>
           </div>
           <Suspense fallback={<div>Loading slides...</div>}>
-            <CardGrid items={data.docs} category={collection} singleRow={true} />
+            <CardGrid items={data.docs} category={collectionType} singleRow={true} />
           </Suspense>
-          <HomeTracksSection title={mappaTitle} text_html={mappaText} tracciati={tracciati} />
+          <HomeTracksSection
+            title={mappaTitle}
+            text_html={mappaText}
+            tracciati={tracciati}
+            locale={locale}
+          />
           <div className="flex justify-center mt-4">
             <Link
-              href={`/${collection}`}
-              className={`${buttonColor[collection].split(' ')[0]} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
+              href={`/${locale}/${collectionType}`}
+              className={`${buttonColor[collectionType].split(' ')[0]} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
             >
-              <span>
-                {collection === 'luoghi'
-                  ? 'Scopri tutti i luoghi'
-                  : collection === 'itinerari'
-                    ? 'Scopri tutti gli itinerari'
-                    : 'Consulta il programma'}
-              </span>
+              <span>{buttonText}</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
             </Link>
           </div>
@@ -90,45 +133,33 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
           <div className="text-center md:text-left md:w-full md:px-40 mb-4">
             {layout === 'right' ? (
               <>
-                <h2 className={`text-2xl ${color[collection]} text-center md:text-right`}>
-                  {home[collection].title}
+                <h2 className={`text-2xl ${color[collectionType]} text-center md:text-right`}>
+                  {title}
                 </h2>
                 <div className="text-center md:text-right">
-                  <RichText
-                    data={home[collection].testo as SerializedEditorState}
-                    className="prose prose-lg"
-                  />
+                  <RichText data={text} className="prose prose-lg" />
                 </div>
               </>
             ) : (
               <>
-                <h2 className={`text-2xl ${color[collection]} text-center md:text-left`}>
-                  {home[collection].title}
+                <h2 className={`text-2xl ${color[collectionType]} text-center md:text-left`}>
+                  {title}
                 </h2>
                 <div className="text-center md:text-left ">
-                  <RichText
-                    data={home[collection].testo as SerializedEditorState}
-                    className="prose prose-lg"
-                  />
+                  <RichText data={text} className="prose prose-lg" />
                 </div>
               </>
             )}
           </div>
           <Suspense fallback={<div>Loading slides...</div>}>
-            <CardGrid items={data.docs} category={collection} singleRow={true} />
+            <CardGrid items={data.docs} category={collectionType} singleRow={true} />
           </Suspense>
           <div className="flex justify-center mt-4">
             <Link
-              href={`/${collection}`}
-              className={`${buttonColor[collection].split(' ')[0]} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
+              href={`/${locale}/${collectionType}`}
+              className={`${buttonColor[collectionType].split(' ')[0]} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
             >
-              <span>
-                {collection === 'luoghi'
-                  ? 'Scopri tutti i luoghi'
-                  : collection === 'itinerari'
-                    ? 'Scopri tutti gli itinerari'
-                    : 'Consulta il programma'}
-              </span>
+              <span>{buttonText}</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
             </Link>
           </div>

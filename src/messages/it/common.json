@@ -1,0 +1,104 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "Chi Siamo",
+    "mobility": "Mobilità Sostenibile",
+    "itineraries": "Itinerari",
+    "places": "Luoghi",
+    "residences": "Residenze",
+    "stakeholders": "Tutte le persone",
+    "articles": "Articoli"
+  },
+  "buttons": {
+    "readMore": "Leggi di più",
+    "viewAll": "Vedi tutti",
+    "download": "Scarica",
+    "explore": "Esplora",
+    "back": "Indietro",
+    "next": "Avanti",
+    "previous": "Precedente",
+    "close": "Chiudi",
+    "allPlaces": "Tutti i luoghi",
+    "allItineraries": "Tutti gli itinerari",
+    "allStakeholders": "Tutte le persone",
+    "allResidences": "Tutte le residenze",
+    "showMore": "Mostra tutto",
+    "showLess": "Mostra meno",
+    "book": "Prenota"
+  },
+  "footer": {
+    "contactUs": "Contattaci",
+    "followUs": "Seguici",
+    "legalNotice": "Note Legali",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy"
+  },
+  "strings": {
+    "notAvailable": "Non disponibile",
+    "gallery": "Galleria",
+    "itinerariesFoundIn": "In quale itinerario potrai trovarci"
+  },
+  "itinerari": {
+    "length": "lunghezza",
+    "duration": "durata",
+    "elevation": "dislivello",
+    "difficulty": "difficoltà",
+    "type": "tipo",
+    "services": "Servizi",
+    "peopleYouWillFind": "Persone che troverai",
+    "placesYouWillVisit": "Luoghi che incontrerai",
+    "difficulties": {
+      "T - Turistico": "T - Turistico",
+      "E - Escursionistico": "E - Escursionistico",
+      "EE - Escursionisti Esperti": "EE - Escursionisti Esperti"
+    },
+    "types": {
+      "Itinerario ad anello": "Itinerario ad anello",
+      "Andata e ritorno": "Andata e ritorno"
+    },
+    "units": {
+      "km": "km",
+      "ore": "ore",
+      "mt": "mt"
+    }
+  },
+  "luoghi": {
+    "contacts": "Contatti",
+    "openingHours": "Orari di Apertura",
+    "services": "Servizi",
+    "phone": "Telefono",
+    "email": "Email",
+    "link": "Link"
+  },
+  "stakeholders": {
+    "phone": "Telefono",
+    "email": "Email",
+    "link": "Link",
+    "contacts": "Contatti",
+    "address": "Indirizzo",
+    "type": "Tipologia",
+    "services": "Servizi",
+    "businessType": {
+      "Azienda": "Azienda",
+      "Ristoratori": "Ristoratori",
+      "etc": "Altro"
+    }
+  },
+  "residenze": {
+    "description": "Descrizione",
+    "program": "Programma",
+    "experts": "Esperti",
+    "projects": "Progetti",
+    "organizations": "Organizzazioni",
+    "expand": "Espandi",
+    "collapse": "Comprimi",
+    "address": "Indirizzo",
+    "startDate": "Data inizio",
+    "endDate": "Data fine",
+    "registrationDeadline": "Deadline iscrizioni",
+    "dateToBeDefined": "Data da definire",
+    "noDetails": "Nessun dettaglio disponibile.",
+    "datesNotAnnounced": "Le date non sono state ancora annunciate, torna presto!",
+    "register": "Iscriviti"
+  }
+}

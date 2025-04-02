@@ -1,65 +1,45 @@
-import React, { Suspense } from 'react'
-import { loadDb } from '@/utils/db'
-
-import CardGrid from './cardsGrid'
-import { RandomLetter } from '../home/randomLetter'
-import { RichText } from '@payloadcms/richtext-lexical/react'
+import React from 'react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { fetchGlobalData, fetchCollectionData } from '@/utils/dataFetching'
+import ArchivePageLayout from '@/components/pageLayout/ArchivePageLayout'
+import { type Testi as TestiType } from '@/payload-types'
+import { Locale } from '@/utils/localization'
+import { Globals } from '@/db/globals'
 
+// Force dynamic rendering and disable cache to ensure fresh data
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-interface cardsPageProps {
+interface CardsPageProps {
   collectionQuery: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
-
   displayAs?: 'row' | 'grid'
+  locale?: Locale
 }
 
-const CardsPage: React.FC<cardsPageProps> = async ({ collectionQuery, displayAs = 'grid' }) => {
-  const db = await loadDb()
-  const testi = await db.findGlobal({
-    slug: 'testi',
-  })
-  const home = await db.findGlobal({
-    slug: 'home',
-  })
-  const doc = await db.find({
-    collection: collectionQuery,
-    sort: 'nome',
-    depth: 2,
-  })
+const CardsPage: React.FC<CardsPageProps> = async ({
+  collectionQuery,
+  displayAs = 'grid',
+  locale = 'it',
+}) => {
+  // Fetch the global texts with the specified locale
+  const testi = await fetchGlobalData<TestiType>(Globals.Testi, locale)
 
-  const docs = doc.docs
+  // Fetch items from the specified collection with the specified locale
+  const result = await fetchCollectionData(collectionQuery, { sort: 'nome', depth: 2, locale })
+
+  const title = testi[collectionQuery].title || ''
 
   return (
-    <main>
-      <div className="max-w-screen-xl mx-auto relative w-screen py-8">
-        {testi[collectionQuery].title ? (
-          <div className="font-normal text-sm leading-4">
-            <h1 className="font-bold text-center text-[40px]">
-              {collectionQuery === 'stakeholders' ? 'Persone' : testi[collectionQuery].title}
-            </h1>
-          </div>
-        ) : (
-          <p></p>
-        )}
-        <div className="flex items-center justify-center">
-          <RichText
-            data={testi[collectionQuery].testo as SerializedEditorState}
-            className="prose prose-lg pl-6 pr-6 "
-          />
-        </div>
-        <Suspense>
-          <CardGrid
-            items={docs}
-            category={collectionQuery}
-            singleRow={displayAs === 'row'}
-            className="mt-6"
-          />
-        </Suspense>
-        <RandomLetter color={collectionQuery} position={'left'} />
-      </div>
-    </main>
+    <ArchivePageLayout
+      title={title}
+      introContent={testi[collectionQuery].testo as SerializedEditorState}
+      cardGridOptions={{
+        items: result.docs,
+        category: collectionQuery,
+        singleRow: displayAs === 'row',
+      }}
+      colorTheme={collectionQuery}
+    />
   )
 }
 

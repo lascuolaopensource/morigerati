@@ -1,12 +1,12 @@
 export const NAV_ITEMS = [
-  { href: '/', text: 'Home' },
-  { href: '/about', text: 'About' },
-  { href: '/mobilita', text: 'Mobilità sostenibile' },
-  { href: '/luoghi', text: 'Luoghi' },
-  { href: '/itinerari', text: 'Itinerari' },
-  { href: '/stakeholders', text: 'Persone' },
-  { href: '/residenze', text: 'Residenze' },
-  { href: '/articoli', text: 'Articoli' },
+  { href: '/', key: 'navigation.home' },
+  { href: '/about', key: 'navigation.about' },
+  { href: '/mobilita', key: 'navigation.mobility' },
+  { href: '/luoghi', key: 'navigation.places' },
+  { href: '/itinerari', key: 'navigation.itineraries' },
+  { href: '/stakeholders', key: 'navigation.stakeholders' },
+  { href: '/residenze', key: 'navigation.residences' },
+  { href: '/articoli', key: 'navigation.articles' },
 ] as const
 
 export type PageType = 'luoghi' | 'itinerari' | 'stakeholders' | 'residenze' | 'default'

@@ -105,12 +105,13 @@ const createUIField = (name: string, componentPath: string, clientProps = {}): U
 type Overrides = {
   slugOverrides?: Partial<TextField>
   checkboxOverrides?: Partial<CheckboxField>
+  localized?: boolean
 }
 
 type Slug = (fieldToUse?: string, overrides?: Overrides) => [TextField, CheckboxField]
 
 export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
-  const { slugOverrides, checkboxOverrides } = overrides
+  const { slugOverrides, checkboxOverrides, localized = false } = overrides
 
   const checkBoxField: CheckboxField = {
     name: 'slugLock',
@@ -128,6 +129,7 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
     type: 'text',
     index: true,
     label: 'Slug',
+    localized,
     hooks: {
       beforeValidate: [formatSlugHook(fieldToUse)],
     },
@@ -171,6 +173,8 @@ export const testo = createLocalizedField(createRichTextField('testo'))
 
 export const plainText = (name: string): TextField => createLocalizedField(createTextField(name))
 
+export const nonLocalizedText = (name: string): TextField => createTextField(name)
+
 export const plainTextRequired = (name: string): TextField => createRequiredField(plainText(name))
 
 export const richText = (name: string): RichTextField =>
@@ -185,6 +189,7 @@ export const linkConNome: RowField = createRowField([nome, createRequiredField(l
 
 export const linkArray: ArrayField = createArrayField('links', linkConNome.fields, {
   label: 'Link',
+  localized: true,
 })
 
 export const programmaArray: ArrayField = createArrayField(
@@ -195,6 +200,7 @@ export const programmaArray: ArrayField = createArrayField(
       name: 'testo',
       type: 'richText',
       label: 'testo',
+
       editor: lexicalEditor({
         features: () => [
           ParagraphFeature(),
@@ -208,13 +214,22 @@ export const programmaArray: ArrayField = createArrayField(
       }),
     },
   ],
-  { label: 'Programma' },
+  {
+    label: 'Programma',
+    localized: true,
+  },
 )
 
-export const contatti: ArrayField = createArrayField('contatti', [
-  createRowField([nome, link]),
-  createRowField([{ name: 'email', type: 'email' } as EmailField, createTextField('telefono')]),
-])
+export const contatti: ArrayField = createArrayField(
+  'contatti',
+  [
+    createRowField([nome, link]),
+    createRowField([{ name: 'email', type: 'email' } as EmailField, createTextField('telefono')]),
+  ],
+  {
+    localized: true,
+  },
+)
 
 export const media: RelationshipField = {
   name: 'copertina',
@@ -327,6 +342,8 @@ export function titleAndTextOptional(name: string, label?: string): GroupField {
 
 export const socialNetworkLink: RowField = createRowField([nome, createRequiredField(link)])
 
-export const socialNetworkLinks: ArrayField = createArrayField('Link Social', [socialNetworkLink], {
-  localized: true,
-})
+export const socialNetworkLinks: ArrayField = createArrayField(
+  'Link Social',
+  [socialNetworkLink],
+  {},
+)

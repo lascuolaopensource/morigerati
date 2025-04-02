@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { Tracciati as TracciatiType, Luoghi } from '@/payload-types'
 import TracksMap from '@/components/mappa/tracksMap'
+import { Locale } from '@/utils/localization'
 
 import { loadDb } from '@/utils/db'
 
@@ -8,15 +9,23 @@ interface HomeTracksSectionProps {
   title?: string
   text_html?: string
   tracciati: TracciatiType[]
+  locale?: Locale
 }
 
-async function getLuoghiFromItinerari(tracciati: TracciatiType[]) {
+// Loading translations
+const loadingText = {
+  it: 'Caricamento mappa...',
+  en: 'Loading map...',
+}
+
+async function getLuoghiFromItinerari(tracciati: TracciatiType[], locale: Locale = 'it') {
   const db = await loadDb()
 
   // First, let's get all itinerari since the relationship might be in either direction
   const itinerari = await db.find({
     collection: 'itinerari',
     depth: 2,
+    locale,
   })
 
   // Filter itinerari that have one of our tracciati
@@ -46,13 +55,24 @@ async function getLuoghiFromItinerari(tracciati: TracciatiType[]) {
 }
 
 // Server component that fetches data
-async function TracksMapSection({ tracciati }: { tracciati: TracciatiType[] }) {
+async function TracksMapSection({
+  tracciati,
+  locale = 'it',
+}: {
+  tracciati: TracciatiType[]
+  locale?: Locale
+}) {
   if (!tracciati || tracciati.length === 0) return null
 
   return <TracksMap tracciati={tracciati} />
 }
 
-export const HomeTracksSection = ({ title, text_html, tracciati }: HomeTracksSectionProps) => {
+export const HomeTracksSection = ({
+  title,
+  text_html,
+  tracciati,
+  locale = 'it',
+}: HomeTracksSectionProps) => {
   if (!tracciati || tracciati.length === 0) return null
 
   return (
@@ -63,8 +83,8 @@ export const HomeTracksSection = ({ title, text_html, tracciati }: HomeTracksSec
           {/* <RichText htmlString={text_html} classs="prose-custom" /> */}
         </div>
       )}
-      <Suspense fallback={<div>Caricamento mappa...</div>}>
-        <TracksMapSection tracciati={tracciati} />
+      <Suspense fallback={<div>{loadingText[locale]}</div>}>
+        <TracksMapSection tracciati={tracciati} locale={locale} />
       </Suspense>
     </div>
   )

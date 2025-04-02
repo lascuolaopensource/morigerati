@@ -6,7 +6,13 @@ const generateRandomLetter = (): string => {
   return alphabet[Math.floor(Math.random() * alphabet.length)]
 }
 
-const DateDaDefinireBanner: React.FC = () => {
+interface DateDaDefinireBannerProps {
+  datesNotAnnouncedText?: string
+}
+
+const DateDaDefinireBanner: React.FC<DateDaDefinireBannerProps> = ({
+  datesNotAnnouncedText = 'Le date non sono state ancora annunciate, torna presto!',
+}) => {
   const [letter, setLetter] = useState<string>('a')
 
   useEffect(() => {
@@ -19,7 +25,7 @@ const DateDaDefinireBanner: React.FC = () => {
         {letter}
       </span>
       <span className="text-lg break-words overflow-hidden text-center text-residenzeColor">
-        Le date non sono state ancora annunciate, torna presto!
+        {datesNotAnnouncedText}
       </span>
     </div>
   )

@@ -11,20 +11,12 @@ import {
 export const Footer: GlobalConfig = {
   slug: Globals.Footer,
 
-  access: {
-    read: () => true,
-  },
+  access: { read: () => true },
 
   fields: [
-    {
-      ...baseRichText('testo_sinistra'),
-      label: 'Testo a sinistra',
-    },
+    { ...baseRichText('testo_sinistra'), label: 'Testo a sinistra' },
 
-    {
-      ...baseRichText('testo_destra'),
-      label: 'Testo a destra',
-    },
+    { ...baseRichText('testo_destra'), label: 'Testo a destra' },
 
     F.divider('divider-1'),
 
@@ -38,8 +30,6 @@ function baseRichText(name: string): RichTextField {
     type: 'richText',
     required: true,
     localized: true,
-    editor: lexicalEditor({
-      features: () => [ParagraphFeature()],
-    }),
+    editor: lexicalEditor({ features: () => [ParagraphFeature()] }),
   }
 }

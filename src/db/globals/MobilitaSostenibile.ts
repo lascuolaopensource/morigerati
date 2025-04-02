@@ -10,5 +10,20 @@ export const MobilitaSostenibile: GlobalConfig = {
     read: () => true,
   },
 
-  fields: F.contenutoFields,
+  fields: [
+    {
+      name: 'copertina',
+      type: 'upload',
+      label: 'Immagine di copertina',
+      relationTo: 'media',
+    },
+    {
+      name: 'testo',
+      type: 'richText',
+      label: 'Testo',
+      localized: true,
+    },
+    F.divider('divider-1'),
+    F.galleria,
+  ],
 }

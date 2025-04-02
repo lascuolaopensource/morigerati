@@ -1,9 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTranslation } from '@/components/TranslationProvider'
 
 const NoResidenze = () => {
   const [randomLetter, setRandomLetter] = useState('')
+  const { t } = useTranslation()
 
   useEffect(() => {
     const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random() * 26)]
@@ -16,12 +18,8 @@ const NoResidenze = () => {
         {randomLetter.toLowerCase()}
       </span>
       <div className="relative z-10 text-center space-y-4">
-        <h2 className="text-3xl font-medium">
-          Per il momento, non ci sono residenze in programma!
-        </h2>
-        <p className="text-lg text-gray-600">
-          Ti invitiamo a consultare l&apos;archivio delle residenze passate!
-        </p>
+        <h2 className="text-3xl font-medium">{t('residences:noResidences')}</h2>
+        <p className="text-lg text-gray-600">{t('residences:checkPastResidences')}</p>
       </div>
     </div>
   )

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 
 interface RandomLetterProps {
   position?: 'left' | 'right'
-  color?: 'itinerari' | 'luoghi' | 'stakeholders' | 'residenze'
+  color?: 'itinerari' | 'luoghi' | 'stakeholders' | 'residenze' | 'articoli'
 }
 
 const generateRandomLetter = (): string => {
@@ -23,6 +23,7 @@ const RandomLetter: React.FC<RandomLetterProps> = ({ position = 'right', color =
     luoghi: 'text-luoghiColor',
     stakeholders: 'text-stakeholdersColor',
     residenze: 'text-residenzeColor',
+    articoli: 'text-itinerariColor/100',
   }
 
   return (

@@ -1,0 +1,21 @@
+{
+  "residences": {
+    "title": "Residences",
+    "loading": "Loading residences...",
+    "noResidences": "No residences available at the moment",
+    "checkPastResidences": "We invite you to check the archive of past residences!",
+    "goToArchive": "Go to archive",
+    "discoverAgenda": "Discover agenda",
+    "past": "Past Residences",
+    "future": "Future Residences",
+    "details": {
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "location": "Location",
+      "description": "Description",
+      "artists": "Artists",
+      "program": "Program",
+      "gallery": "Gallery"
+    }
+  }
+}

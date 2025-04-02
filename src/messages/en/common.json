@@ -1,0 +1,104 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About Us",
+    "mobility": "Sustainable Mobility",
+    "itineraries": "Itineraries",
+    "places": "Places",
+    "residences": "Residences",
+    "stakeholders": "All people",
+    "articles": "Articles"
+  },
+  "buttons": {
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "download": "Download",
+    "explore": "Explore",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "allPlaces": "All places",
+    "allItineraries": "All itineraries",
+    "allStakeholders": "All people",
+    "allResidences": "All residences",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "book": "Book now"
+  },
+  "footer": {
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "legalNotice": "Legal Notice",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy"
+  },
+  "strings": {
+    "notAvailable": "Not available",
+    "gallery": "Gallery",
+    "itinerariesFoundIn": "Itineraries where you can find us"
+  },
+  "itinerari": {
+    "length": "length",
+    "duration": "duration",
+    "elevation": "elevation gain",
+    "difficulty": "difficulty",
+    "type": "type",
+    "services": "Services",
+    "peopleYouWillFind": "People you will find",
+    "placesYouWillVisit": "Places you will visit",
+    "difficulties": {
+      "T - Turistico": "T - Touristic",
+      "E - Escursionistico": "E - Hiking",
+      "EE - Escursionisti Esperti": "EE - Expert Hikers"
+    },
+    "types": {
+      "Itinerario ad anello": "Loop trail",
+      "Andata e ritorno": "Out and back"
+    },
+    "units": {
+      "km": "km",
+      "ore": "hours",
+      "mt": "m"
+    }
+  },
+  "luoghi": {
+    "contacts": "Contacts",
+    "openingHours": "Opening Hours",
+    "services": "Services",
+    "phone": "Phone",
+    "email": "Email",
+    "link": "Link"
+  },
+  "stakeholders": {
+    "phone": "Phone",
+    "email": "Email",
+    "link": "Link",
+    "contacts": "Contacts",
+    "address": "Address",
+    "type": "Type",
+    "services": "Services",
+    "businessType": {
+      "Azienda": "Business",
+      "Ristoratori": "Restaurants",
+      "etc": "Other"
+    }
+  },
+  "residenze": {
+    "description": "Description",
+    "program": "Program",
+    "experts": "Experts",
+    "projects": "Projects",
+    "organizations": "Organizations",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "address": "Address",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "registrationDeadline": "Registration deadline",
+    "dateToBeDefined": "Date to be defined",
+    "noDetails": "No details available.",
+    "datesNotAnnounced": "Dates have not been announced yet, check back soon!",
+    "register": "Register"
+  }
+}

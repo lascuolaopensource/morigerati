@@ -23,6 +23,7 @@ export const ChiSiamo: GlobalConfig = {
       name: 'testo_chi_siamo',
       type: 'richText',
       label: 'Testo "Chi siamo"',
+      localized: true,
     },
     F.divider('divider-1'),
     F.galleria,

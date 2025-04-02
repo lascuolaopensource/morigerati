@@ -3,11 +3,26 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Residenze, Media } from '@/payload-types'
+import { Locale } from '@/utils/localization'
 
 type Esperto = NonNullable<Residenze['esperti']>[number]
 
-const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
+interface TutorCardProps {
+  esperto: Esperto
+  locale?: Locale
+  translations?: { projects?: string; organizations?: string; expand?: string; collapse?: string }
+}
+
+const TutorCard: React.FC<TutorCardProps> = ({ esperto, locale = 'it', translations = {} }) => {
   const [isExpanded, setIsExpanded] = useState(false)
+
+  // Default translations with fallbacks
+  const {
+    projects = 'Progetti',
+    organizations = 'Organizzazioni',
+    expand = 'Espandi',
+    collapse = 'Comprimi',
+  } = translations
 
   const renderMedia = (media: Media) => {
     return (
@@ -20,6 +35,65 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
       />
     )
   }
+
+  // Get localized nome if available
+  const getNome = () => {
+    if (typeof esperto.nome === 'object' && esperto.nome !== null) {
+      return esperto.nome[locale] || ''
+    }
+    return esperto.nome || ''
+  }
+
+  // Get localized biografia if available
+  const getBiografia = () => {
+    if (typeof esperto.biografia === 'object' && esperto.biografia !== null) {
+      return esperto.biografia[locale] || ''
+    }
+    return esperto.biografia || ''
+  }
+
+  // Get localized progetti if available
+  const getProjetti = () => {
+    if (!esperto.progetti || esperto.progetti.length === 0) {
+      return []
+    }
+
+    // If progetti is a localized object
+    if (
+      typeof esperto.progetti === 'object' &&
+      !Array.isArray(esperto.progetti) &&
+      esperto.progetti !== null &&
+      ((esperto.progetti as Record<string, any>).it || (esperto.progetti as Record<string, any>).en)
+    ) {
+      return (esperto.progetti as Record<string, any[]>)[locale] || []
+    }
+
+    return esperto.progetti
+  }
+
+  // Get localized organizzazioni if available
+  const getOrganizzazioni = () => {
+    if (!esperto.organizzazioni || esperto.organizzazioni.length === 0) {
+      return []
+    }
+
+    // If organizzazioni is a localized object
+    if (
+      typeof esperto.organizzazioni === 'object' &&
+      !Array.isArray(esperto.organizzazioni) &&
+      esperto.organizzazioni !== null &&
+      ((esperto.organizzazioni as Record<string, any>).it ||
+        (esperto.organizzazioni as Record<string, any>).en)
+    ) {
+      return (esperto.organizzazioni as Record<string, any[]>)[locale] || []
+    }
+
+    return esperto.organizzazioni
+  }
+
+  const biografia = getBiografia()
+  const progetti = getProjetti()
+  const organizzazioni = getOrganizzazioni()
 
   return (
     <div className="w-full md:w-[48%] bg-residenzeColor/20 overflow-hidden rounded-md">
@@ -39,42 +113,42 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
 
         {/* Right column - Content */}
         <div className="w-2/3 flex flex-col -mt-2.5">
-          <h3 className="font-bold text-lg">{esperto.nome}</h3>
+          <h3 className="font-bold text-lg">{getNome()}</h3>
           <div className="flex-grow mt-2">
             <div className="text-sm leading-normal">
               {isExpanded ? (
                 <>
-                  {esperto.biografia}
+                  {biografia}
 
                   {/* Projects and Organizations */}
-                  {esperto.progetti && esperto.progetti.length > 0 && (
+                  {progetti && progetti.length > 0 && (
                     <div className="mt-2">
-                      <h4 className="font-medium text-sm mb-1">Progetti</h4>
+                      <h4 className="font-medium text-sm mb-1">{projects}</h4>
                       <div className="flex flex-wrap gap-2">
-                        {esperto.progetti.map((project, index) => (
+                        {progetti.map((project, index) => (
                           <Link
                             key={index}
                             href={project.link}
                             className="underline hover:text-residenzeColor transition-colors text-sm"
                           >
-                            {project.nome}
+                            {typeof project.nome === 'object' ? project.nome[locale] : project.nome}
                           </Link>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {esperto.organizzazioni && esperto.organizzazioni.length > 0 && (
+                  {organizzazioni && organizzazioni.length > 0 && (
                     <div className="mt-2">
-                      <h4 className="font-medium text-sm mb-1">Organizzazioni</h4>
+                      <h4 className="font-medium text-sm mb-1">{organizations}</h4>
                       <div className="flex flex-wrap gap-2">
-                        {esperto.organizzazioni.map((org, index) => (
+                        {organizzazioni.map((org, index) => (
                           <Link
                             key={index}
                             href={org.link}
                             className="underline hover:text-residenzeColor transition-colors text-sm"
                           >
-                            {org.nome}
+                            {typeof org.nome === 'object' ? org.nome[locale] : org.nome}
                           </Link>
                         ))}
                       </div>
@@ -83,17 +157,17 @@ const TutorCard: React.FC<{ esperto: Esperto }> = ({ esperto }) => {
                 </>
               ) : (
                 <>
-                  {esperto.biografia?.slice(0, 200)}
-                  {esperto.biografia && esperto.biografia.length > 200 && '...'}
+                  {biografia?.slice(0, 200)}
+                  {biografia && biografia.length > 200 && '...'}
                 </>
               )}
             </div>
-            {esperto.biografia && esperto.biografia.length > 200 && (
+            {biografia && biografia.length > 200 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="text-xs text-residenzeColor font-medium underline mt-2"
               >
-                {isExpanded ? 'Comprimi' : 'Espandi'}
+                {isExpanded ? collapse : expand}
               </button>
             )}
           </div>

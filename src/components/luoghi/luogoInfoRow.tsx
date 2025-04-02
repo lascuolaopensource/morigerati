@@ -1,7 +1,9 @@
+'use client'
 import React from 'react'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { useTranslation } from '@/components/TranslationProvider'
 
 interface Servizio {
   nome: string
@@ -23,6 +25,16 @@ interface LuogoInfoRowProps {
 }
 
 const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({ servizi, contatti, orari_html, orari }) => {
+  const { t } = useTranslation()
+
+  // Translations for section headings and labels
+  const contactsTitle = t('common:luoghi.contacts', 'Contatti')
+  const openingHoursTitle = t('common:luoghi.openingHours', 'Orari di Apertura')
+  const servicesTitle = t('common:luoghi.services', 'Servizi')
+  const phoneLabel = t('common:luoghi.phone', 'Telefono')
+  const emailLabel = t('common:luoghi.email', 'Email')
+  const linkLabel = t('common:luoghi.link', 'Link')
+
   // Determina quali sezioni mostrare
   const hasServizi = servizi && servizi.length > 0
   const hasContatti = contatti && contatti.length > 0
@@ -46,7 +58,7 @@ const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({ servizi, contatti, orari_ht
       {/* Servizi section */}
       {hasServizi && (
         <div className="bg-gray-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Servizi</h2>
+          <h2 className="text-2xl font-semibold mb-4">{servicesTitle}</h2>
           {servizi.map((servizio, index) => (
             <div key={index} className="mt-4">
               <h4 className="text-xl">{servizio.nome}</h4>
@@ -59,16 +71,24 @@ const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({ servizi, contatti, orari_ht
       {/* Contatti section */}
       {hasContatti && (
         <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Contatti</h2>
+          <h2 className="text-2xl font-semibold mb-4">{contactsTitle}</h2>
           <ul>
             {contatti.map((contatto, index) => (
               <li key={index} className="mb-4">
                 <p className="font-medium">{contatto.nome}</p>
-                {contatto.telefono && <p className="text-sm">Telefono: {contatto.telefono}</p>}
-                {contatto.email && <p className="text-sm">Email: {contatto.email}</p>}
+                {contatto.telefono && (
+                  <p className="text-sm">
+                    {phoneLabel}: {contatto.telefono}
+                  </p>
+                )}
+                {contatto.email && (
+                  <p className="text-sm">
+                    {emailLabel}: {contatto.email}
+                  </p>
+                )}
                 {contatto.link && (
                   <p className="text-sm">
-                    Link:{' '}
+                    {linkLabel}:{' '}
                     <a
                       href={contatto.link}
                       target="_blank"
@@ -88,7 +108,7 @@ const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({ servizi, contatti, orari_ht
       {/* Orari section */}
       {hasOrari && (
         <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Orari di Apertura</h2>
+          <h2 className="text-2xl font-semibold mb-4">{openingHoursTitle}</h2>
           <RichText data={orari as SerializedEditorState} className="prose prose-lg" />
         </div>
       )}

@@ -26,11 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      images: imageUrl ? [{ url: imageUrl }] : undefined,
-    },
+    openGraph: { title, description, images: imageUrl ? [{ url: imageUrl }] : undefined },
     twitter: {
       card: 'summary_large_image',
       title,
@@ -75,9 +71,22 @@ const Home = async () => {
           collection="itinerari"
           hasMap={true}
           tracciati={home.tracciati_mappa as TracciatiType[]}
+          title={home.itinerari?.title || 'Itinerari'}
+          text={(home.itinerari?.testo as SerializedEditorState) || ({} as SerializedEditorState)}
+          locale="it"
         />
-        <HomeCollection collection="luoghi" />
-        <HomeCollection collection="residenze" />
+        <HomeCollection
+          collection="luoghi"
+          title={home.luoghi?.title || 'Luoghi'}
+          text={(home.luoghi?.testo as SerializedEditorState) || ({} as SerializedEditorState)}
+          locale="it"
+        />
+        <HomeCollection
+          collection="residenze"
+          title={home.residenze?.title || 'Residenze'}
+          text={(home.residenze?.testo as SerializedEditorState) || ({} as SerializedEditorState)}
+          locale="it"
+        />
       </div>
     </main>
   )

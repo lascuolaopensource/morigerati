@@ -8,6 +8,11 @@ type ContentNode = {
 }
 
 function renderNode(node: ContentNode): React.ReactNode {
+  if (!node) {
+    console.log('renderNode received null or undefined node')
+    return null
+  }
+
   if (typeof node.text === 'string') {
     return node.format === 1 ? (
       <div>
@@ -34,8 +39,11 @@ function renderNode(node: ContentNode): React.ReactNode {
 
 export function renderFooterContent(content: any): React.ReactNode {
   if (!content || typeof content !== 'object') {
+    console.log('renderFooterContent received invalid content:', content)
     return null
   }
+
+  console.log('renderFooterContent received content with keys:', Object.keys(content))
 
   const root = content.root || content
 

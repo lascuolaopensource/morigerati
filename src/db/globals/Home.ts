@@ -33,11 +33,13 @@ export const Home: GlobalConfig = {
       name: 'title',
       type: 'text',
       label: 'Titolo',
+      localized: true,
     },
     {
       name: 'testo',
       type: 'richText',
       label: 'Testo',
+      localized: true,
       editor: lexicalEditor({
         features: () => [
           ParagraphFeature(),

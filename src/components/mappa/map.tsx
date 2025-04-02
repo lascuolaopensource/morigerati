@@ -30,33 +30,35 @@ const FullscreenMedia = ({ media, onClose }: { media: Media | string; onClose: (
   const isVideo = !isString && media.mimeType?.startsWith('video/')
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-95">
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 p-2 text-white hover:text-gray-300 transition-colors"
+        className="absolute top-6 right-6 p-3 bg-black bg-opacity-50 rounded-full text-white hover:text-gray-300 transition-colors z-10"
         aria-label="Close fullscreen view"
       >
-        <X size={24} />
+        <X size={28} />
       </button>
 
-      {isVideo ? (
-        <video
-          src={(media as Media).url || ''}
-          className="max-w-[90vw] max-h-[90vh] object-contain"
-          controls
-          autoPlay
-          loop
-          playsInline
-        >
-          Your browser does not support video playback.
-        </video>
-      ) : (
-        <img
-          src={(media as Media).url || ''}
-          alt={isString ? 'Media' : (media as Media).alt || 'Media'}
-          className="max-w-[90vw] max-h-[90vh] object-contain"
-        />
-      )}
+      <div className="w-full h-full flex items-center justify-center p-8">
+        {isVideo ? (
+          <video
+            src={(media as Media).url || ''}
+            className="max-w-[95%] max-h-[90vh] w-auto h-auto object-contain rounded-lg"
+            controls
+            autoPlay
+            loop
+            playsInline
+          >
+            Your browser does not support video playback.
+          </video>
+        ) : (
+          <img
+            src={(media as Media).url || ''}
+            alt={isString ? 'Media' : (media as Media).alt || 'Media'}
+            className="max-w-[95%] max-h-[90vh] w-auto h-auto object-contain rounded-lg"
+          />
+        )}
+      </div>
     </div>
   )
 }
@@ -67,11 +69,8 @@ const createPopupContent = (
 ) => {
   if (typeof media === 'string') {
     return `
-      <div class="cursor-pointer" onclick='window.openFullscreenMedia("${media}")'>
-        <img src="${media}" alt="Media" style="max-width: 100px; max-height: 100px;" />
-        <div style="text-align: center; font-size: 12px; color: #666; margin-top: 4px;">
-          clicca per espandere
-        </div>
+      <div class="cursor-pointer" onclick='window.openFullscreenMedia("${media}")' style="padding: 5px; text-align: center;">
+        <img src="${media}" alt="Media" style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;" />
       </div>
     `
   }
@@ -81,29 +80,23 @@ const createPopupContent = (
 
   if (isVideo) {
     return `
-      <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(media)})'>
+      <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(media)})' style="padding: 5px; text-align: center;">
         <video 
           src="${mediaUrl}"
-          style="max-width: 100px; max-height: 100px; object-fit: cover;"
+          style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;"
           muted 
           loop 
           playsinline
         >
           Your browser does not support video playback.
         </video>
-        <div style="text-align: center; font-size: 12px; color: #666; margin-top: 4px;">
-          clicca per espandere
-        </div>
       </div>
     `
   }
 
   return `
-    <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(media)})'>
-      <img src="${mediaUrl}" alt="${media.alt || 'Media'}" style="max-width: 100px; max-height: 100px;" />
-      <div style="text-align: center; font-size: 12px; color: #666; margin-top: 4px;">
-        clicca per espandere
-      </div>
+    <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(media)})' style="padding: 5px; text-align: center;">
+      <img src="${mediaUrl}" alt="${media.alt || 'Media'}" style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;" />
     </div>
   `
 }
@@ -142,6 +135,26 @@ export const Mappa: React.FC<MapProps> = ({
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(mapRef.current)
 
+      // Add custom CSS for Leaflet popups
+      const style = document.createElement('style')
+      style.textContent = `
+        .leaflet-popup-content {
+          margin: 5px;
+          text-align: center;
+        }
+        .leaflet-popup-content-wrapper {
+          padding: 0;
+          border-radius: 8px;
+        }
+        .leaflet-popup-tip {
+          display: none;
+        }
+        .leaflet-popup-close-button {
+          display: none !important;
+        }
+      `
+      document.head.appendChild(style)
+
       if (showPositionPin) {
         positionMarkerRef.current = L.marker(initialPosition).addTo(mapRef.current)
       }
@@ -162,7 +175,8 @@ export const Mappa: React.FC<MapProps> = ({
           .addTo(mapRef.current)
       }
 
-      if (localizedMedia) {
+      // Check if localizedMedia is an array before using forEach
+      if (localizedMedia && Array.isArray(localizedMedia)) {
         localizedMedia.forEach((media) => {
           if (media.posizione) {
             const marker = L.marker(media.posizione, {
@@ -176,11 +190,15 @@ export const Mappa: React.FC<MapProps> = ({
 
             const popupContent = createPopupContent(media.copertina, setSelectedMedia)
             marker.bindPopup(popupContent, {
-              maxWidth: 120,
-              maxHeight: 120,
+              maxWidth: 140,
+              maxHeight: 140,
+              minWidth: 130,
+              className: 'custom-popup',
             })
           }
         })
+      } else {
+        console.warn('localizedMedia is not an array:', localizedMedia)
       }
     }
 

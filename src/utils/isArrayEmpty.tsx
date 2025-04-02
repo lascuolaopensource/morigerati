@@ -17,6 +17,17 @@ export function isArrayEmpty(field: any): boolean {
 
   // Se è un oggetto, controlliamo le sue proprietà
   if (typeof field === 'object') {
+    // Check if it's a localized object with locale keys (it, en)
+    if ('it' in field || 'en' in field) {
+      // If any locale has a non-empty array, the field is not empty
+      for (const locale of ['it', 'en']) {
+        if (field[locale] && Array.isArray(field[locale]) && field[locale].length > 0) {
+          return false
+        }
+      }
+      return true
+    }
+
     // Se ha una proprietà 'value' che è un array, controlliamo se è vuoto
     if (Array.isArray(field.value)) {
       return field.value.length === 0

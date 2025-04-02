@@ -1,14 +1,61 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import IG from '@/public/IG.png'
-import { loadDb } from '@/utils/db'
 import { renderFooterContent } from '@/utils/footerRenderElement'
 import LogoGenerator from '@/components/logoGenerator/logo'
 import { SocialIcon } from 'react-social-icons'
+import { Locale, getLocaleFromPath } from '@/utils/localization'
+import { usePathname } from 'next/navigation'
 
-const Footer = async () => {
-  const db = await loadDb()
-  const footer = await db.findGlobal({ slug: 'footer' })
+// Non abbiamo più bisogno di ricevere locale come prop
+const Footer = () => {
+  const [footer, setFooter] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const pathname = usePathname()
+
+  // Estrai la locale direttamente dal pathname
+  const locale = getLocaleFromPath(pathname)
+
+  // Log per debug
+  console.log(`Footer component rendered with locale from pathname: ${locale}`)
+
+  useEffect(() => {
+    console.log(`Footer useEffect triggered with locale: ${locale}`)
+
+    const loadFooter = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch(`/api/footer?locale=${locale}&t=${Date.now()}`, {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache' },
+        })
+        if (!response.ok) {
+          throw new Error('Failed to load footer')
+        }
+        const footerData = await response.json()
+        console.log(`Footer data loaded for locale ${locale}:`, footerData)
+        setFooter(footerData)
+      } catch (error) {
+        console.error('Error loading footer:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadFooter()
+  }, [locale]) // Ricarica quando cambia la lingua
+
+  if (loading) {
+    return (
+      <footer className="bg-black text-white px-2 py-4" style={{ zIndex: 99999 }}>
+        <div className="max-w-screen-xl mx-auto">
+          <div className="animate-pulse">Loading... (locale: {locale})</div>
+        </div>
+      </footer>
+    )
+  }
 
   return (
     <footer className="bg-black text-white px-2 py-4" style={{ zIndex: 99999 }}>
@@ -17,7 +64,7 @@ const Footer = async () => {
         <div className="flex justify-between">
           <LogoGenerator textColor="white" />
           <div className="flex space-x-2">
-            {footer['Link Social']?.map((social, index) => (
+            {footer?.['Link Social']?.map((social: { link: string }, index: number) => (
               <SocialIcon
                 key={index}
                 url={social.link}
@@ -27,16 +74,24 @@ const Footer = async () => {
           </div>
         </div>
 
-        <div className="flex-1">{renderFooterContent(footer.testo_sinistra)}</div>
-        <div className="flex-1">{renderFooterContent(footer.testo_destra)}</div>
+        <div className="flex-1">
+          {footer?.testo_sinistra && renderFooterContent(footer.testo_sinistra)}
+        </div>
+        <div className="flex-1">
+          {footer?.testo_destra && renderFooterContent(footer.testo_destra)}
+        </div>
       </div>
       {/* desktop */}
       <div className="hidden sm:flex max-w-screen-xl mx-auto justify-between">
         <LogoGenerator textColor="white" />
-        <div className="w-1/4">{renderFooterContent(footer.testo_sinistra)}</div>
-        <div className="w-1/4">{renderFooterContent(footer.testo_destra)}</div>
+        <div className="w-1/4">
+          {footer?.testo_sinistra && renderFooterContent(footer.testo_sinistra)}
+        </div>
+        <div className="w-1/4">
+          {footer?.testo_destra && renderFooterContent(footer.testo_destra)}
+        </div>
         <div className="flex space-x-2">
-          {footer['Link Social']?.map((social, index) => (
+          {footer?.['Link Social']?.map((social: { link: string }, index: number) => (
             <SocialIcon
               key={index}
               url={social.link}

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Itinerari } from '@/payload-types'
 import renderElement from '@/utils/renderElement'
+import { useTranslation } from '@/components/TranslationProvider'
 
 type Servizio = NonNullable<Itinerari['servizi']>[number]
 
@@ -23,6 +24,12 @@ const ServizioCardComponent: React.FC<ServizioCardProps> = ({ nome, testo, link 
   const [hasOverflow, setHasOverflow] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
   const textContent = useMemo(() => (testo?.root ? renderElement(testo.root) : ''), [testo])
+  const { t } = useTranslation()
+
+  // Get translated button texts
+  const showMoreText = t('common:buttons.showMore', 'Mostra tutto')
+  const showLessText = t('common:buttons.showLess', 'Mostra meno')
+  const bookText = t('common:buttons.book', 'Prenota')
 
   useEffect(() => {
     setLetter(generateRandomLetter([]))
@@ -77,7 +84,7 @@ const ServizioCardComponent: React.FC<ServizioCardProps> = ({ nome, testo, link 
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="text-[10px] text-gray-600 hover:text-gray-800 underline transition-colors"
               >
-                {isExpanded ? 'Mostra meno' : 'Mostra tutto'}
+                {isExpanded ? showLessText : showMoreText}
               </button>
             )}
           </div>
@@ -88,7 +95,7 @@ const ServizioCardComponent: React.FC<ServizioCardProps> = ({ nome, testo, link 
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center h-6 w-16 text-[10px] font-semibold bg-itinerariColor text-black rounded-full transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-itinerariColor"
             >
-              Prenota
+              {bookText}
             </a>
           )}
         </div>
