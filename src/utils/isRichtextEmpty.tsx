@@ -15,6 +15,12 @@ export function isRichTextEmpty(content: any): boolean {
 
   // Se è un oggetto, controlliamo le sue proprietà
   if (typeof content === 'object') {
+    // Check if it's a localized object with locale keys
+    if ('it' in content || 'en' in content) {
+      // Check if all locale values are empty
+      return Object.values(content).every(isRichTextEmpty)
+    }
+
     // Se ha una proprietà 'text', controlliamo se è vuota
     if ('text' in content) {
       return content.text.trim() === ''

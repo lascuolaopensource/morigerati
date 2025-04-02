@@ -38,7 +38,9 @@ const LuogoInfoRow: React.FC<LuogoInfoRowProps> = ({ servizi, contatti, orari_ht
   // Determina quali sezioni mostrare
   const hasServizi = servizi && servizi.length > 0
   const hasContatti = contatti && contatti.length > 0
-  const hasOrari = !isRichTextEmpty(orari)
+
+  // Safe check to ensure orari is not an object with locale keys
+  const hasOrari = orari && typeof orari === 'object' && !('it' in orari) && !isRichTextEmpty(orari)
 
   // Se non c'è niente da mostrare, non renderizzare il componente
   if (!hasServizi && !hasContatti && !hasOrari) {

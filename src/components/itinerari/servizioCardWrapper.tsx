@@ -27,7 +27,8 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
     setBgLetter(generateRandomLetter([]))
   }, [])
 
-  if (!servizi || servizi.length === 0) {
+  // Safety check for servizi array
+  if (!servizi || !Array.isArray(servizi) || servizi.length === 0) {
     return null
   }
 
@@ -44,18 +45,23 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
         <div className="max-w-[1400px] mx-auto relative z-10 pb-16">
           <h2 className="text-2xl font-semibold mb-3 text-center">{sectionTitle}</h2>
           <div className="flex flex-wrap justify-center gap-4 px-6">
-            {servizi.map((servizio, index) => (
-              <div
-                key={servizio.id || index}
-                className="w-full sm:w-[calc(50%-0.5rem)] max-w-sm relative"
-              >
-                <ServizioCardComponent
-                  nome={servizio.nome}
-                  testo={servizio.testo}
-                  link={servizio.link}
-                />
-              </div>
-            ))}
+            {servizi.map((servizio, index) => {
+              // Skip if servizio is not a proper object
+              if (!servizio || typeof servizio !== 'object') return null
+
+              return (
+                <div
+                  key={servizio.id || index}
+                  className="w-full sm:w-[calc(50%-0.5rem)] max-w-sm relative"
+                >
+                  <ServizioCardComponent
+                    nome={servizio.nome}
+                    testo={servizio.testo}
+                    link={servizio.link}
+                  />
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

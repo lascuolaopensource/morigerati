@@ -23,13 +23,32 @@ const ServizioCardComponent: React.FC<ServizioCardProps> = ({ nome, testo, link 
   const [letter, setLetter] = useState('')
   const [hasOverflow, setHasOverflow] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
-  const textContent = useMemo(() => (testo?.root ? renderElement(testo.root) : ''), [testo])
-  const { t } = useTranslation()
+  const { t, locale } = useTranslation()
+
+  // Process text content safely, handling potential localized content
+  const textContent = useMemo(() => {
+    // If testo is a localized object with it/en keys
+    if (testo && typeof testo === 'object' && !testo.root && ('it' in testo || 'en' in testo)) {
+      const localizedText = (testo[locale] || testo['it'] || testo['en']) as { root?: any }
+      return localizedText?.root ? renderElement(localizedText.root) : ''
+    }
+
+    // Regular rich text object
+    return testo?.root ? renderElement(testo.root) : ''
+  }, [testo, locale])
 
   // Get translated button texts
   const showMoreText = t('common:buttons.showMore', 'Mostra tutto')
   const showLessText = t('common:buttons.showLess', 'Mostra meno')
   const bookText = t('common:buttons.book', 'Prenota')
+
+  // Process nome to handle potential localization
+  const displayName = useMemo(() => {
+    if (nome && typeof nome === 'object' && ('it' in nome || 'en' in nome)) {
+      return nome[locale] || nome['it'] || nome['en'] || ''
+    }
+    return nome || ''
+  }, [nome, locale])
 
   useEffect(() => {
     setLetter(generateRandomLetter([]))
@@ -61,7 +80,7 @@ const ServizioCardComponent: React.FC<ServizioCardProps> = ({ nome, testo, link 
       </div>
 
       <div className="relative h-full flex flex-col">
-        <h3 className="text-lg font-medium mb-1">{nome}</h3>
+        <h3 className="text-lg font-medium mb-1">{displayName}</h3>
         <div className="flex-1 overflow-hidden">
           <div
             ref={contentRef}

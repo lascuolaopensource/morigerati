@@ -165,7 +165,15 @@ export default async function LuogoPage({ params }: PageProps) {
           {/* Left column: Content */}
           <div>
             {luogoData.nome ? (
-              <h1 className="text-4xl text-luogoColorScuro font-bold mb-4">{luogoData.nome}</h1>
+              <h1 className="text-4xl text-luogoColorScuro font-bold mb-4">
+                {typeof luogoData.nome === 'object' &&
+                luogoData.nome !== null &&
+                'it' in luogoData.nome
+                  ? luogoData.nome[locale as keyof typeof luogoData.nome] ||
+                    (luogoData.nome as Record<string, string>).it ||
+                    ''
+                  : luogoData.nome}
+              </h1>
             ) : (
               <p></p>
             )}
@@ -174,8 +182,8 @@ export default async function LuogoPage({ params }: PageProps) {
                 data={
                   typeof luogoData.testo === 'object' &&
                   luogoData.testo !== null &&
-                  luogoData.testo.it &&
-                  luogoData.testo.en
+                  'it' in luogoData.testo &&
+                  'en' in luogoData.testo
                     ? (luogoData.testo[locale] as SerializedEditorState)
                     : (luogoData.testo as SerializedEditorState)
                 }
@@ -189,8 +197,8 @@ export default async function LuogoPage({ params }: PageProps) {
               orari={
                 typeof luogoData.orari === 'object' &&
                 luogoData.orari !== null &&
-                luogoData.orari.it &&
-                luogoData.orari.en
+                'it' in luogoData.orari &&
+                'en' in luogoData.orari
                   ? (luogoData.orari[locale] as { root: any })
                   : (luogoData.orari as { root: any } | undefined)
               }
@@ -206,19 +214,21 @@ export default async function LuogoPage({ params }: PageProps) {
         </div>
 
         {/* Services section */}
-        <div>
-          <ServiziCardWrapper
-            servizi={
-              typeof luogoData.servizi === 'object' &&
-              luogoData.servizi !== null &&
-              !Array.isArray(luogoData.servizi) &&
-              (luogoData.servizi as Record<string, any>).it &&
-              (luogoData.servizi as Record<string, any>).en
-                ? (luogoData.servizi as Record<string, any>)[locale]
-                : luogoData.servizi
-            }
-          />
-        </div>
+        {luogoData.servizi && (
+          <div>
+            <ServiziCardWrapper
+              servizi={
+                typeof luogoData.servizi === 'object' &&
+                luogoData.servizi !== null &&
+                !Array.isArray(luogoData.servizi) &&
+                'it' in luogoData.servizi &&
+                'en' in luogoData.servizi
+                  ? luogoData.servizi[locale]
+                  : luogoData.servizi
+              }
+            />
+          </div>
+        )}
 
         {/* Galleria section */}
         {luogoData.galleria && luogoData.galleria.length > 0 && (
