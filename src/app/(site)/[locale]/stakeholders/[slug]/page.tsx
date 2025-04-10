@@ -12,7 +12,7 @@ import Copertina from '@/components/uiElements/copertina'
 
 import { Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
-import TagsList from '@/components/articoli/TagsList'
+import TagsList from '@/components/articoli/tagsList'
 import CardGrid from '@/components/card/cardsGrid'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'

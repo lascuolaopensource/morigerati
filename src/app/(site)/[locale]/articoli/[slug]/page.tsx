@@ -9,7 +9,7 @@ import { fetchItemBySlug } from '@/utils/dataFetching'
 
 import datePharser from '@/utils/formatDate'
 import Copertina from '@/components/uiElements/copertina'
-import TagsList from '@/components/articoli/TagsList'
+import TagsList from '@/components/articoli/tagsList'
 import Galleria from '@/components/galleria/galleria'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
