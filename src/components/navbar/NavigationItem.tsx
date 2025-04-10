@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { getLocaleFromPath, Locale } from '@/utils/localization'
+import { defaultLocale } from '@/middleware'
 
 interface NavigationItemProps {
   href: string
@@ -18,7 +19,7 @@ export const NavigationItem = ({
   text,
 }: NavigationItemProps) => {
   const pathname = usePathname()
-  const currentLocale = getLocaleFromPath(pathname)
+  const currentLocale = pathname ? getLocaleFromPath(pathname) : defaultLocale
 
   // Add locale prefix to links if they're not already absolute URLs
   const localizedHref =

@@ -7,6 +7,7 @@ import { NavigationItem } from './NavigationItem'
 import LogoGenerator from '@/components/logoGenerator/logo'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { getLocaleFromPath, Locale } from '@/utils/localization'
+import { defaultLocale } from '@/middleware'
 
 // Dizionario di traduzioni per i menu
 const MENU_TRANSLATIONS: Record<string, Record<string, string>> = {
@@ -38,7 +39,7 @@ const MENU_TRANSLATIONS: Record<string, Record<string, string>> = {
  */
 const useThemeColors = () => {
   const pathname = usePathname()
-  const path = pathname.split('/')[1] as PageType
+  const path = pathname ? (pathname.split('/')[1] as PageType) : 'default'
   const theme = THEME_COLORS[path] || THEME_COLORS.default
   return theme
 }
@@ -53,7 +54,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
   const theme = useThemeColors()
-  const currentLocale = getLocaleFromPath(pathname) as Locale
+  const currentLocale = pathname ? (getLocaleFromPath(pathname) as Locale) : defaultLocale
 
   // Ottieni le traduzioni per la locale corrente
   const translations = MENU_TRANSLATIONS[currentLocale] || MENU_TRANSLATIONS.it
@@ -115,7 +116,11 @@ const Navbar = () => {
                   href={href}
                   translationKey={key}
                   text={translations[key] || key}
-                  isActive={pathname.startsWith(href) && (href === '/' ? pathname === '/' : true)}
+                  isActive={
+                    pathname
+                      ? pathname.startsWith(href) && (href === '/' ? pathname === '/' : true)
+                      : false
+                  }
                   onClick={() => setIsMenuOpen(false)}
                 />
               ))}

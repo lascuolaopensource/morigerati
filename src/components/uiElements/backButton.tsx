@@ -11,6 +11,8 @@ const BackButton = () => {
 
   // Detect the current page section
   const getPageSection = () => {
+    if (!pathname) return ''
+
     const pathParts = pathname.split('/').filter(Boolean)
 
     // Skip the locale part

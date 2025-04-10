@@ -8,7 +8,7 @@ const ToggleButton: React.FC = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
-  const paramFilter = searchParams.get('filter') as 'passata' | 'futura'
+  const paramFilter = searchParams ? (searchParams.get('filter') as 'passata' | 'futura') : null
   const { t, locale } = useTranslation()
 
   const getFilterValue = (): 'passata' | 'futura' => {

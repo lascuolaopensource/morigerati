@@ -8,6 +8,7 @@ import LogoGenerator from '@/components/logoGenerator/logo'
 import { SocialIcon } from 'react-social-icons'
 import { Locale, getLocaleFromPath } from '@/utils/localization'
 import { usePathname } from 'next/navigation'
+import { defaultLocale } from '@/middleware'
 
 // Non abbiamo più bisogno di ricevere locale come prop
 const Footer = () => {
@@ -16,7 +17,7 @@ const Footer = () => {
   const pathname = usePathname()
 
   // Estrai la locale direttamente dal pathname
-  const locale = getLocaleFromPath(pathname)
+  const locale = pathname ? getLocaleFromPath(pathname) : defaultLocale
 
   // Log per debug
   console.log(`Footer component rendered with locale from pathname: ${locale}`)

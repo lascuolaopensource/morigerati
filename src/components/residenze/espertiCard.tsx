@@ -157,12 +157,12 @@ const TutorCard: React.FC<TutorCardProps> = ({ esperto, locale = 'it', translati
                 </>
               ) : (
                 <>
-                  {biografia?.slice(0, 200)}
-                  {biografia && biografia.length > 200 && '...'}
+                  {typeof biografia === 'string' ? biografia.slice(0, 200) : biografia}
+                  {typeof biografia === 'string' && biografia.length > 200 && '...'}
                 </>
               )}
             </div>
-            {biografia && biografia.length > 200 && (
+            {typeof biografia === 'string' && biografia.length > 200 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="text-xs text-residenzeColor font-medium underline mt-2"

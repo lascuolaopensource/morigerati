@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { Locale, getLocalizedPath } from '@/utils/localization'
+import { defaultLocale } from '@/middleware'
 
 interface LanguageSwitcherProps {
   currentLocale: Locale
@@ -36,7 +37,7 @@ export default function LanguageSwitcher({ currentLocale, className = '' }: Lang
     setIsChangingLanguage(true)
     setIsOpen(false)
 
-    const newPath = getLocalizedPath(pathname, newLocale)
+    const newPath = pathname ? getLocalizedPath(pathname, newLocale) : `/${newLocale}`
 
     // Set the new locale in the cookie
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=${60 * 60 * 24 * 365}`
