@@ -12,7 +12,7 @@ import Copertina from '@/components/uiElements/copertina'
 
 import { Media } from '@/payload-types'
 import Galleria from '@/components/galleria/galleria'
-import ArticoliTagsList from '@/components/articoli/TagsList'
+import TagsList from '@/components/articoli/TagsList'
 import CardGrid from '@/components/card/cardsGrid'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
@@ -137,7 +137,7 @@ export default async function Stakeholder({
             {stakeholderData.tipologia && (
               <div className="pt-4">
                 <span className="font-medium">{t('common:stakeholders.type', 'Tipologia')}: </span>
-                <ArticoliTagsList
+                <TagsList
                   tags={
                     Array.isArray(stakeholderData.tipologia)
                       ? stakeholderData.tipologia
