@@ -5,7 +5,7 @@ import { Locale, isValidLocale } from '@/utils/localization'
 import { locales } from '@/middleware'
 import { notFound } from 'next/navigation'
 
-// Validate and generate the dynamic segment
+// Validate and generate the dynamic segmentd
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
 }
