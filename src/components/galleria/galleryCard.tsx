@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { GalleryCardProps } from './types'
 
 const DEFAULT_HEIGHT = 240
+const MOBILE_HEIGHT = 180
 
 const GalleryCard: React.FC<GalleryCardProps> = ({ media, height = DEFAULT_HEIGHT }) => {
   const isVideo = media.mimeType?.startsWith('video/')
@@ -15,11 +16,9 @@ const GalleryCard: React.FC<GalleryCardProps> = ({ media, height = DEFAULT_HEIGH
   return (
     <div
       style={{
-        height: `${height}px`,
-        width: 'auto',
         aspectRatio,
       }}
-      className="relative border-2 border-black rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95 cursor-pointer"
+      className="relative border-2 border-black rounded overflow-hidden transition-transform duration-300 ease-in-out hover:scale-95 cursor-pointer h-[180px] sm:h-[240px] max-w-[calc(100vw-4rem)] sm:max-w-none"
     >
       {isVideo ? (
         <video

@@ -68,19 +68,19 @@ const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
   return (
     <div className="w-full overflow-hidden">
       <h2 className={`text-center pb-4 ${titleColor}`}>{galleryTitle}</h2>
-      <div className="w-full px-4">
+      <div className="w-full px-2 sm:px-4">
         <div className="w-full">
           <div className="relative pb-12">
             <Swiper
               {...swiperParams}
-              className="!flex overflow-visible"
+              className="!flex overflow-hidden"
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
               {items.map((item, index) => (
                 <SwiperSlide
                   key={item.id}
                   onClick={() => handleSlideClick(index)}
-                  className="!w-auto"
+                  className="!w-auto flex justify-center"
                 >
                   <GalleryCard media={item} />
                 </SwiperSlide>

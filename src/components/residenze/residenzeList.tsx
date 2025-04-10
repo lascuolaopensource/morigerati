@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Residenze } from '@/payload-types'
 import { useParams } from 'next/navigation'
-import { formatDate } from '@/utils/formatDate'
+import formatDate from '@/utils/formatDate'
 
 interface ResidenzeListProps {
   items: Residenze[]

@@ -1,6 +1,6 @@
 'use client'
 import { type Residenze } from '@/payload-types'
-import { formatDate } from '@/utils/formatDate'
+import formatDate from '@/utils/formatDate'
 import { useState, useEffect } from 'react'
 import { Locale } from '@/utils/localization'
 

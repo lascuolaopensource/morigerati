@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 import { Locale, isValidLocale } from '@/utils/localization'
 import { fetchItemBySlug } from '@/utils/dataFetching'
 
-import { formatDate } from '@/utils/formatDate'
+import formatDate from '@/utils/formatDate'
 import Copertina from '@/components/uiElements/copertina'
 import TagsList from '@/components/articoli/tagsList'
 import Galleria from '@/components/galleria/galleria'
