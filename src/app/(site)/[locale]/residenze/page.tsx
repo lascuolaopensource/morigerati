@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react'
 import { loadDb } from '@/utils/db'
 import { Residenze as ResidenzaType } from '@/payload-types'
-import PassateFuture from '@/components/residenze/passateFuture'
 import CardGrid from '@/components/card/cardsGrid'
 import NoResidenze from '@/components/residenze/noResidenze'
+import ResidenzeList from '@/components/residenze/residenzeList'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { defaultLocale } from '@/middleware'
@@ -49,13 +49,7 @@ interface PageProps {
   params: Promise<{ locale: Locale }>
 }
 
-async function FilteredResidenze({
-  filter,
-  locale,
-}: {
-  filter: 'passata' | 'futura'
-  locale: Locale
-}) {
+async function ResidenzeListing({ locale }: { locale: Locale }) {
   const db = await loadDb()
   const residenzeData = await db.find({
     collection: 'residenze',
@@ -65,18 +59,29 @@ async function FilteredResidenze({
   })
 
   const { past, future } = sortResidenze(residenzeData.docs)
+  const messages = await getMessages(locale, ['common', 'residences'])
+  const t = (key: string) => {
+    const [namespace, messageKey] = key.split(':')
+    return messages[namespace]?.[messageKey] || key
+  }
 
   return (
-    <div className="space-y-8">
-      {filter === 'futura' && future.length > 0 && (
-        <CardGrid items={future} category="residenze" singleRow />
+    <div className="space-y-16">
+      {future.length > 0 ? (
+        <div>
+          <h2 className="text-2xl font-bold text-residenzeColor mb-8">{t('residences:future')}</h2>
+          <CardGrid items={future} category="residenze" />
+        </div>
+      ) : (
+        <NoResidenze />
       )}
 
-      {filter === 'passata' && past.length > 0 && (
-        <CardGrid items={past} category="residenze" singleRow />
+      {past.length > 0 && (
+        <div>
+          <h2 className="text-2xl font-bold text-residenzeColor mb-8">{t('residences:past')}</h2>
+          <ResidenzeList items={past} />
+        </div>
       )}
-
-      {filter === 'futura' && future.length === 0 && <NoResidenze />}
     </div>
   )
 }
@@ -86,21 +91,14 @@ interface ResidenzePagProps {
   searchParams: Promise<{ filter?: string }>
 }
 
-const Residenze = async ({ searchParams, params }: ResidenzePagProps) => {
+const Residenze = async ({ params }: ResidenzePagProps) => {
   const { locale } = await params
   const db = await loadDb()
   const testi = await db.findGlobal({ slug: 'testi', locale: locale as 'it' | 'en' })
 
-  const filter = ((await searchParams).filter as 'passata' | 'futura') || 'futura'
-  const messages = await getMessages(locale as Locale, ['common', 'residences'])
-  const t = (key: string) => {
-    const [namespace, messageKey] = key.split(':')
-    return messages[namespace]?.[messageKey] || key
-  }
-
   return (
     <main className="min-h-screen">
-      <div className=" p-3 max-w-screen-xl mx-auto ">
+      <div className="p-3 max-w-screen-xl mx-auto">
         {testi.residenze.title && (
           <div className="font-normal text-sm pt-4 leading-4">
             <h1 className="font-bold text-[40px] sm:text-center">{testi.residenze.title}</h1>
@@ -110,10 +108,11 @@ const Residenze = async ({ searchParams, params }: ResidenzePagProps) => {
           data={testi.residenze.testo as SerializedEditorState}
           className="prose prose-lg"
         />
-        <PassateFuture />
-        <Suspense fallback={<div className="py-8 text-center">{t('residences:loading')}</div>}>
-          <FilteredResidenze filter={filter} locale={locale} />
-        </Suspense>
+        <div className="mt-12">
+          <Suspense fallback={<div className="py-8 text-center">Caricamento residenze...</div>}>
+            <ResidenzeListing locale={locale} />
+          </Suspense>
+        </div>
       </div>
     </main>
   )

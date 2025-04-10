@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 import { Locale, isValidLocale } from '@/utils/localization'
 import { fetchItemBySlug } from '@/utils/dataFetching'
 
-import datePharser from '@/utils/formatDate'
+import { formatDate } from '@/utils/formatDate'
 import Copertina from '@/components/uiElements/copertina'
 import TagsList from '@/components/articoli/tagsList'
 import Galleria from '@/components/galleria/galleria'
@@ -218,7 +218,7 @@ export default async function Articolo({ params }: PageProps) {
               )}
               <TagsList tags={processedTags} locale={locale as Locale} />
               <p className="font-bold">
-                {datePharser(articoloData.data_pubblicazione, locale, true, locale as Locale)}
+                {formatDate(articoloData.data_pubblicazione, locale, true, locale as Locale)}
               </p>
 
               <RichText

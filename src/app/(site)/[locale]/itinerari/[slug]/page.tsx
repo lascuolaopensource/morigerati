@@ -139,7 +139,7 @@ export default async function Itinerario({ params }: PageProps) {
           {/* Left column: Title, text, and details */}
           <div className="lg:order-1">
             {itinerarioData?.nome ? (
-              <h1 className="text-4xl text-itinerarioColorScuro font-bold mb-4">
+              <h1 className="text-4xl text-itinerarioColorScuro font-bold mb-4 break-words">
                 {itinerarioData?.nome}
               </h1>
             ) : (

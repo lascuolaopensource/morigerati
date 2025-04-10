@@ -99,6 +99,8 @@
     "dateToBeDefined": "Date to be defined",
     "noDetails": "No details available.",
     "datesNotAnnounced": "Dates have not been announced yet, check back soon!",
-    "register": "Register"
+    "register": "Register",
+    "archived": "Archived",
+    "upcoming": "Upcoming"
   }
 }

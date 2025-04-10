@@ -161,10 +161,10 @@ export default async function ResidenzaSlug({
 
         <div className="w-full max-w-[1200px] mx-auto space-y-12">
           <div className="flex flex-col lg:flex-row gap-8">
-            <div className="lg:w-1/2 min-w-[500px]">
+            <div className="lg:w-1/2 w-full overflow-hidden">
               <div className="prose-custom-no-center">
                 {residenzaData.nome && (
-                  <h1 className="text-4xl font-bold !text-residenzeColor mb-4">
+                  <h1 className="text-4xl font-bold !text-residenzeColor mb-4 break-words">
                     {typeof residenzaData.nome === 'object' && residenzaData.nome !== null
                       ? residenzaData.nome[locale] || ''
                       : residenzaData.nome}
@@ -225,6 +225,7 @@ export default async function ResidenzaSlug({
               link={residenzaData.link_iscrizione ?? ''}
               show={residenzaData.mostra_pulsante_iscrizione ?? false}
               buttonText={translations.register}
+              isArchived={isAfterCurrentDate(residenzaData?.data_inizio ?? '')}
             />
           </div>
 

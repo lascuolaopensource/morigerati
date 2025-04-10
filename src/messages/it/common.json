@@ -99,6 +99,8 @@
     "dateToBeDefined": "Data da definire",
     "noDetails": "Nessun dettaglio disponibile.",
     "datesNotAnnounced": "Le date non sono state ancora annunciate, torna presto!",
-    "register": "Iscriviti"
+    "register": "Iscriviti",
+    "archived": "In Archivio",
+    "upcoming": "In Programmazione"
   }
 }

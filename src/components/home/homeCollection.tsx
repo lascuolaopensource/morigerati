@@ -30,6 +30,25 @@ const buttonLabels = {
 type CollectionString = 'luoghi' | 'itinerari' | 'residenze'
 type CollectionData = Itinerari[] | Luoghi[] | Residenze[]
 
+// Filter function to get only future residenze (not yet ended)
+const filterFutureResidenze = (residenze: Residenze[]): Residenze[] => {
+  const now = new Date()
+  return residenze.filter((residenza) => {
+    // Use end date if available, otherwise use start date
+    const comparisonDate = residenza.data_fine
+      ? new Date(residenza.data_fine)
+      : residenza.data_inizio
+        ? new Date(residenza.data_inizio)
+        : null
+
+    // If no date is available, keep it
+    if (!comparisonDate) return true
+
+    // Only keep residenze that end in the future
+    return comparisonDate >= now
+  })
+}
+
 interface HomeCollectionProps {
   collection: CollectionString | CollectionData
   layout?: 'left' | 'right' | 'grid'
@@ -66,6 +85,11 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
       sort: 'nome',
       locale,
     })
+
+    // If this is the residenze collection, filter out past events
+    if (collectionType === 'residenze') {
+      data.docs = filterFutureResidenze(data.docs)
+    }
   } else {
     // If collection is an array, figure out what type it is based on first item
     const firstItem = collection[0]
@@ -79,6 +103,11 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
       }
     }
     data = { docs: collection }
+
+    // If this is the residenze collection, filter out past events
+    if (collectionType === 'residenze') {
+      data.docs = filterFutureResidenze(data.docs)
+    }
   }
 
   const color = {
