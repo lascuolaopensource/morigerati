@@ -69,7 +69,9 @@ async function ResidenzeListing({ locale }: { locale: Locale }) {
     <div className="space-y-16">
       {future.length > 0 ? (
         <div>
-          <h2 className="text-2xl font-bold text-residenzeColor mb-8">{t('residences:future')}</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 pb-2 border-b border-gray-200">
+            {t('residences:future')}
+          </h2>
           <CardGrid items={future} category="residenze" />
         </div>
       ) : (
@@ -78,7 +80,9 @@ async function ResidenzeListing({ locale }: { locale: Locale }) {
 
       {past.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-residenzeColor mb-8">{t('residences:past')}</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 pb-2 border-b border-gray-200">
+            {t('residences:past')}
+          </h2>
           <ResidenzeList items={past} />
         </div>
       )}

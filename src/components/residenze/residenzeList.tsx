@@ -42,7 +42,7 @@ const ResidenzeList: React.FC<ResidenzeListProps> = ({ items }) => {
           <Link key={item.id} href={`/${locale}/residenze/${slug}`}>
             <div className="flex justify-between items-center border-b border-gray-100 py-3 px-1 hover:bg-gray-50 transition-colors duration-200">
               <div className="flex-grow">
-                <h3 className="font-medium text-residenzeColor">{title}</h3>
+                <h3 className="font-medium text-gray-900">{title}</h3>
               </div>
 
               <div className="hidden sm:block text-sm text-gray-500 whitespace-nowrap ml-4">

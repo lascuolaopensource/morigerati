@@ -160,7 +160,7 @@ export default async function ResidenzaSlug({
         <div className="pt-8" />
 
         <div className="w-full max-w-[1200px] mx-auto space-y-12">
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-8 bg-gray-50 p-6 rounded-lg shadow-sm">
             <div className="lg:w-1/2 w-full overflow-hidden">
               <div className="prose-custom-no-center">
                 {residenzaData.nome && (
@@ -230,8 +230,8 @@ export default async function ResidenzaSlug({
           </div>
 
           {residenzaData.descrizione && (
-            <div className="max-w-[800px] mx-auto mt-16">
-              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6">
+            <div className="max-w-[800px] mx-auto mt-16 bg-white p-8 rounded-lg shadow-sm">
+              <h2 className="text-center text-gray-900 text-2xl font-bold mb-6 pb-2 border-b border-gray-200">
                 {translations.description}
               </h2>
               <RichText
@@ -247,8 +247,8 @@ export default async function ResidenzaSlug({
           )}
 
           {!isArrayEmpty(residenzaData.programma) && (
-            <div className="max-w-[800px] mx-auto mt-16">
-              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6">
+            <div className="max-w-[800px] mx-auto mt-16 bg-white p-8 rounded-lg shadow-sm">
+              <h2 className="text-center text-gray-900 text-2xl font-bold mb-6 pb-2 border-b border-gray-200">
                 {translations.program}
               </h2>
               <ProgrammaList
