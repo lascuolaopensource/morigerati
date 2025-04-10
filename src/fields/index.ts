@@ -165,7 +165,7 @@ export const gap = (size: number, key: string): UIField =>
 export const divider = (key: string): UIField =>
   createUIField(`divider-${key}`, '@/fields/components/divider.tsx', {})
 
-export const nome = createRequiredField(createLocalizedField(createTextField('nome')))
+export const nome = createRequiredField(createTextField('nome'))
 
 export const link = createTextField('link')
 
@@ -185,7 +185,10 @@ export const posizione: PointField = {
   type: 'point',
 }
 
-export const linkConNome: RowField = createRowField([nome, createRequiredField(link)])
+export const linkConNome: RowField = createRowField([
+  createRequiredField(createTextField('nome')),
+  createRequiredField(link),
+])
 
 export const linkArray: ArrayField = createArrayField('links', linkConNome.fields, {
   label: 'Link',
@@ -195,12 +198,12 @@ export const linkArray: ArrayField = createArrayField('links', linkConNome.field
 export const programmaArray: ArrayField = createArrayField(
   'programma',
   [
-    createTextField('programma', { label: 'giorno / momento' }),
+    createTextField('programma', { label: 'giorno / momento', localized: true }),
     {
       name: 'testo',
       type: 'richText',
       label: 'testo',
-
+      localized: true,
       editor: lexicalEditor({
         features: () => [
           ParagraphFeature(),
@@ -216,7 +219,6 @@ export const programmaArray: ArrayField = createArrayField(
   ],
   {
     label: 'Programma',
-    localized: true,
   },
 )
 
@@ -226,9 +228,7 @@ export const contatti: ArrayField = createArrayField(
     createRowField([nome, link]),
     createRowField([{ name: 'email', type: 'email' } as EmailField, createTextField('telefono')]),
   ],
-  {
-    localized: true,
-  },
+  {},
 )
 
 export const media: RelationshipField = {
@@ -254,12 +254,18 @@ export const galleria: RelationshipField = {
 }
 
 export const servizi: ArrayField = createArrayField('servizi', [
-  nome,
+  {
+    name: 'nome',
+    type: 'text',
+    label: 'Nome',
+    localized: true,
+  },
   link,
   {
     name: 'testo',
     type: 'richText',
     label: 'testo',
+    localized: true,
     editor: lexicalEditor({
       features: () => [ParagraphFeature()],
     }),

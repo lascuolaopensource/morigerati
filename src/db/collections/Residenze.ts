@@ -131,19 +131,28 @@ export const Residenze: CollectionConfig<'residenze'> = {
               name: 'esperti',
               label: 'Tutor ed esperti',
               type: 'array',
-              localized: true,
+
               fields: [
                 {
                   type: 'row',
                   fields: [
-                    F.nome,
+                    {
+                      name: 'nome',
+                      type: 'text',
+                      label: 'Nome',
+                    },
                     {
                       ...F.media,
                       name: 'foto',
                     },
                   ],
                 },
-                F.plainText('biografia'),
+                {
+                  name: 'biografia',
+                  type: 'richText',
+                  label: 'Biografia',
+                  localized: true,
+                },
 
                 {
                   name: 'progetti',

@@ -8,7 +8,7 @@ export const Stakeholders: CollectionConfig<'stakeholders'> = {
   slug: 'stakeholders',
   labels: {
     singular: 'Persona',
-    plural: 'Tutte le persone',
+    plural: 'Persone',
   },
   admin: {
     defaultColumns: ['nome', 'testo'],
@@ -59,7 +59,6 @@ export const Stakeholders: CollectionConfig<'stakeholders'> = {
                   name: 'tipologia',
                   type: 'select',
                   options: ['Azienda', 'Ristoratori', 'etc'],
-                  localized: true,
                 },
               ],
             },
@@ -67,7 +66,6 @@ export const Stakeholders: CollectionConfig<'stakeholders'> = {
             {
               name: 'indirizzo',
               type: 'text',
-              localized: true,
             },
             F.divider('divider-1'),
             F.contatti,

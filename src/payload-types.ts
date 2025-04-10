@@ -188,7 +188,7 @@ export interface Luoghi {
   Itinerari_relation?: (string | Itinerari)[] | null;
   servizi?:
     | {
-        nome: string;
+        nome?: string | null;
         link?: string | null;
         testo?: {
           root: {
@@ -277,7 +277,7 @@ export interface Itinerari {
   difficolta?: ('T - Turistico' | 'E - Escursionistico' | 'EE - Escursionisti Esperti') | null;
   servizi?:
     | {
-        nome: string;
+        nome?: string | null;
         link?: string | null;
         testo?: {
           root: {
@@ -482,9 +482,23 @@ export interface Residenze {
     | null;
   esperti?:
     | {
-        nome: string;
+        nome?: string | null;
         foto?: (string | null) | Media;
-        biografia?: string | null;
+        biografia?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         progetti?:
           | {
               nome: string;

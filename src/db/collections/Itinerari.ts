@@ -146,9 +146,14 @@ export const Itinerari: CollectionConfig<'itinerari'> = {
             {
               name: 'servizi',
               type: 'array',
-              localized: true,
+
               fields: [
-                F.nome,
+                {
+                  name: 'nome',
+                  type: 'text',
+                  label: 'Nome',
+                  localized: true,
+                },
                 F.link,
                 {
                   name: 'testo',

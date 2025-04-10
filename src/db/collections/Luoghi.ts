@@ -78,12 +78,10 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
             F.divider('divider-1'),
             {
               ...F.servizi,
-              localized: true,
             },
             F.divider('divider-2'),
             {
               ...F.contatti,
-              localized: true,
             },
             F.divider('divider-3'),
             F.title('Orari'),
