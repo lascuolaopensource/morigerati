@@ -134,18 +134,21 @@ export default function ArticlesList({
   }, [filteredTags, tagSearchTerm, showAllTags, selectedTags, initialTagsToShow])
 
   // Format date for display
-  const formatDate = (dateString?: string | null) => {
-    if (!dateString) return ''
-    try {
-      const date = new Date(dateString)
-      return formatDistanceToNow(date, {
-        addSuffix: true,
-        locale: locale === 'en' ? enUS : it,
-      })
-    } catch (e) {
-      return ''
-    }
-  }
+  const formatDate = useCallback(
+    (dateString?: string | null) => {
+      if (!dateString) return ''
+      try {
+        const date = new Date(dateString)
+        return formatDistanceToNow(date, {
+          addSuffix: true,
+          locale: locale === 'en' ? enUS : it,
+        })
+      } catch (e) {
+        return ''
+      }
+    },
+    [locale],
+  )
 
   // Process article data
   const processArticle = useCallback(
@@ -177,7 +180,7 @@ export default function ArticlesList({
         rawDate: displayDate, // Keep raw date for filtering
       }
     },
-    [formatDate, placeholderImage],
+    [formatDate],
   )
 
   // Filter articles based on search term, tags, and date
