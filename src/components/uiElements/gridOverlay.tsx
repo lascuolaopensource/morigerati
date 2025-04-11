@@ -18,25 +18,25 @@ const GridOverlay: React.FC<GridOverlayProps> = ({
   const [isScrolling, setIsScrolling] = useState(false)
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null)
 
-  const createInitialGrid = (rows: number, cols: number) => {
-    const newGrid: boolean[][] = []
-    for (let i = 0; i < rows; i++) {
-      const row: boolean[] = []
-      for (let j = 0; j < cols; j++) {
-        if (i >= rows - effectRows) {
-          const relativeRow = i - (rows - effectRows)
-          const threshold = (relativeRow / effectRows) * bottomDensity
-          row.push(Math.random() < threshold)
-        } else {
-          row.push(false)
-        }
-      }
-      newGrid.push(row)
-    }
-    return newGrid
-  }
-
   useEffect(() => {
+    const createInitialGrid = (rows: number, cols: number) => {
+      const newGrid: boolean[][] = []
+      for (let i = 0; i < rows; i++) {
+        const row: boolean[] = []
+        for (let j = 0; j < cols; j++) {
+          if (i >= rows - effectRows) {
+            const relativeRow = i - (rows - effectRows)
+            const threshold = (relativeRow / effectRows) * bottomDensity
+            row.push(Math.random() < threshold)
+          } else {
+            row.push(false)
+          }
+        }
+        newGrid.push(row)
+      }
+      return newGrid
+    }
+
     const updateGrid = () => {
       if (!overlayRef.current) return
 

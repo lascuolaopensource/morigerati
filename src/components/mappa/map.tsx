@@ -8,6 +8,7 @@ import 'leaflet-gpx'
 import { Media } from '@/payload-types'
 import { X } from 'lucide-react'
 import { MdOutlineFileDownload } from 'react-icons/md'
+import Image from 'next/image'
 
 interface MapProps {
   initialPosition: LatLngExpression
@@ -52,10 +53,13 @@ const FullscreenMedia = ({ media, onClose }: { media: Media | string; onClose: (
             Your browser does not support video playback.
           </video>
         ) : (
-          <img
+          <Image
             src={(media as Media).url || ''}
             alt={isString ? 'Media' : (media as Media).alt || 'Media'}
             className="max-w-[95%] max-h-[90vh] w-auto h-auto object-contain rounded-lg"
+            fill
+            style={{ objectFit: 'contain' }}
+            sizes="(max-width: 768px) 100vw, 90vw"
           />
         )}
       </div>

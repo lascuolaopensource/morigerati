@@ -37,7 +37,7 @@ const ToggleButton: React.FC = () => {
       // Se URL non ha parametro, aggiungilo
       router.push(`${pathname}?filter=${activeFilter}`, { scroll: false })
     }
-  }, [pathname, paramFilter, locale, router])
+  }, [pathname, paramFilter, locale, router, activeFilter])
 
   const handleFilterChange = () => {
     const newFilter = activeFilter === 'futura' ? 'passata' : 'futura'

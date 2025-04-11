@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Articoli, Media } from '@/payload-types'
@@ -19,6 +19,7 @@ import { Badge } from '@/components/ui/badge'
 import { makeSafeForDisplay } from '@/lib/safeDisplay'
 import { Search, Calendar, Tag, X, ChevronDown, ChevronUp, Filter } from 'lucide-react'
 import { Locale } from '@/utils/localization'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 interface ArticlesListProps {
   articles: Articoli[]
@@ -147,34 +148,37 @@ export default function ArticlesList({
   }
 
   // Process article data
-  const processArticle = (article: Articoli) => {
-    const processedTags = article.tags
-      ? article.tags.map((tag: any) => {
-          const tagText = typeof tag === 'string' ? tag : tag.tag || ''
-          return makeSafeForDisplay(tagText, 20)
-        })
-      : []
+  const processArticle = useCallback(
+    (article: Articoli) => {
+      const processedTags = article.tags
+        ? article.tags.map((tag: any) => {
+            const tagText = typeof tag === 'string' ? tag : tag.tag || ''
+            return makeSafeForDisplay(tagText, 20)
+          })
+        : []
 
-    const coverImage = article.copertina
-      ? typeof article.copertina === 'string'
-        ? undefined
-        : (article.copertina as Media)
-      : undefined
+      const coverImage = article.copertina
+        ? typeof article.copertina === 'string'
+          ? undefined
+          : (article.copertina as Media)
+        : undefined
 
-    const imageUrl = coverImage?.url || placeholderImage
-    const displayDate = article.data_pubblicazione || article.createdAt
+      const imageUrl = coverImage?.url || placeholderImage
+      const displayDate = article.data_pubblicazione || article.createdAt
 
-    return {
-      id: article.id,
-      title: article.titolo ? makeSafeForDisplay(article.titolo, 100) : 'Senza titolo',
-      subtitle: article.sottotitolo ? makeSafeForDisplay(article.sottotitolo, 150) : '',
-      slug: article.slug,
-      imageUrl,
-      tags: processedTags,
-      date: formatDate(displayDate),
-      rawDate: displayDate, // Keep raw date for filtering
-    }
-  }
+      return {
+        id: article.id,
+        title: article.titolo ? makeSafeForDisplay(article.titolo, 100) : 'Senza titolo',
+        subtitle: article.sottotitolo ? makeSafeForDisplay(article.sottotitolo, 150) : '',
+        slug: article.slug,
+        imageUrl,
+        tags: processedTags,
+        date: formatDate(displayDate),
+        rawDate: displayDate, // Keep raw date for filtering
+      }
+    },
+    [formatDate, placeholderImage],
+  )
 
   // Filter articles based on search term, tags, and date
   const filteredArticles = useMemo(() => {
@@ -225,7 +229,7 @@ export default function ArticlesList({
 
       return searchMatch && tagMatch && dateMatch
     })
-  }, [articles, searchTerm, selectedTags, dateFilter])
+  }, [articles, searchTerm, selectedTags, dateFilter, processArticle])
 
   // Toggle tag selection
   const toggleTag = (tag: string) => {
