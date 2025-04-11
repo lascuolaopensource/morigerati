@@ -1,51 +1,45 @@
 import { useParams } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import localization from '@/i18n/localization'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { TypedLocale } from 'payload'
 import { usePathname, useRouter } from '@/i18n/routing'
-import { useTransition } from 'react'
+import { ChangeEvent, useTransition } from 'react'
 
 export function LocaleSwitcher() {
   // inspired by https://github.com/amannn/next-intl/blob/main/examples/example-app-router/src/components/LocaleSwitcherSelect.tsx
   const locale = useLocale()
   const router = useRouter()
-  const [, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition()
   const pathname = usePathname()
   const params = useParams()
 
-  function onSelectChange(value: TypedLocale) {
+  function onSelectChange(event: ChangeEvent<HTMLSelectElement>) {
+    const nextLocale = event.target.value as TypedLocale
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
         // are used in combination with a given `pathname`. Since the two will
         // always match for the current route, we can skip runtime checks.
         { pathname, params },
-        { locale: value },
+        { locale: nextLocale },
       )
     })
   }
 
   return (
-    <Select onValueChange={onSelectChange} value={locale}>
-      <SelectTrigger className="w-full max-w-40 text-sm bg-transparent gap-2 pl-0 md:pl-3">
-        <SelectValue placeholder="Theme" />
-      </SelectTrigger>
-      <SelectContent>
-        {localization.locales
-          .sort((a, b) => a.label.localeCompare(b.label)) // Ordenar por label
-          .map((locale) => (
-            <SelectItem value={locale.code} key={locale.code}>
-              {locale.label}
-            </SelectItem>
-          ))}
-      </SelectContent>
-    </Select>
+    <select
+      className="w-full max-w-40 text-sm bg-transparent border border-gray-300 rounded p-2 disabled:opacity-50"
+      defaultValue={locale}
+      disabled={isPending}
+      onChange={onSelectChange}
+    >
+      {localization.locales
+        .sort((a, b) => a.label.localeCompare(b.label)) // Ordenar por label
+        .map((cur) => (
+          <option value={cur.code} key={cur.code}>
+            {cur.label}
+          </option>
+        ))}
+    </select>
   )
 }

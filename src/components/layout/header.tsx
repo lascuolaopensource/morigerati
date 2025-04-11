@@ -1,13 +1,9 @@
 import React from 'react'
-import Link from 'next/link'
-import { Locale } from '@/utils/localization'
-import LanguageSwitcher from '@/components/LanguageSwitcher'
+import { Link } from '@/i18n/routing'
+import { LocaleSwitcher } from '@/i18n/LocaleSwitcher'
+// import LanguageSwitcher from '@/components/LanguageSwitcher'
 
-interface HeaderProps {
-  currentLocale: Locale
-}
-
-const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
+const Header: React.FC = () => {
   return (
     <header className="bg-base-100 shadow-md">
       <div className="navbar max-w-screen-xl mx-auto">
@@ -34,53 +30,47 @@ const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link href={`/${currentLocale}`}>Home</Link>
+                <Link href={`/`}>Home</Link>
               </li>
               <li>
-                <Link href={`/${currentLocale}/itinerari`}>Itinerari</Link>
+                <Link href={`/itinerari`}>Itinerari</Link>
               </li>
               <li>
-                <Link href={`/${currentLocale}/luoghi`}>Luoghi</Link>
+                <Link href={`/luoghi`}>Luoghi</Link>
               </li>
               <li>
-                <Link href={`/${currentLocale}/residenze`}>Residenze</Link>
+                <Link href={`/residenze`}>Residenze</Link>
               </li>
               <li>
-                <Link href={`/${currentLocale}/about`}>About</Link>
+                <Link href={`/about`}>About</Link>
               </li>
             </ul>
           </div>
-          <Link href={`/${currentLocale}`} className="btn btn-ghost text-xl">
+          <Link href={`/`} className="btn btn-ghost text-xl">
             Morigerati
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link href={`/${currentLocale}`}>Home</Link>
+              <Link href={`/`}>Home</Link>
             </li>
             <li>
-              <Link href={`/${currentLocale}/itinerari`}>
-                {currentLocale === 'it' ? 'Itinerari' : 'Itineraries'}
-              </Link>
+              <Link href={`/itinerari`}>Itinerari</Link>
             </li>
             <li>
-              <Link href={`/${currentLocale}/luoghi`}>
-                {currentLocale === 'it' ? 'Luoghi' : 'Places'}
-              </Link>
+              <Link href={`/luoghi`}>Luoghi</Link>
             </li>
             <li>
-              <Link href={`/${currentLocale}/residenze`}>
-                {currentLocale === 'it' ? 'Residenze' : 'Residences'}
-              </Link>
+              <Link href={`/residenze`}>Residenze</Link>
             </li>
             <li>
-              <Link href={`/${currentLocale}/about`}>About</Link>
+              <Link href={`/about`}>About</Link>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <LanguageSwitcher currentLocale={currentLocale} />
+          <LocaleSwitcher />
         </div>
       </div>
     </header>

@@ -5,9 +5,8 @@ import { NAV_ITEMS, THEME_COLORS, type PageType } from '@/constants/navigation'
 import { XButton } from './xButton'
 import { NavigationItem } from './NavigationItem'
 import LogoGenerator from '@/components/logoGenerator/logo'
-import LanguageSwitcher from '@/components/LanguageSwitcher'
-import { getLocaleFromPath, Locale } from '@/utils/localization'
-import { defaultLocale } from '@/middleware'
+import { LocaleSwitcher } from '@/i18n/LocaleSwitcher'
+import { useLocale } from 'next-intl'
 
 // Dizionario di traduzioni per i menu
 const MENU_TRANSLATIONS: Record<string, Record<string, string>> = {
@@ -54,10 +53,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
   const theme = useThemeColors()
-  const currentLocale = pathname ? (getLocaleFromPath(pathname) as Locale) : defaultLocale
+  const locale = useLocale()
+  // const currentLocale = pathname ? (getLocaleFromPath(pathname) as Locale) : defaultLocale
 
   // Ottieni le traduzioni per la locale corrente
-  const translations = MENU_TRANSLATIONS[currentLocale] || MENU_TRANSLATIONS.it
+  // const translations = MENU_TRANSLATIONS[currentLocale] || MENU_TRANSLATIONS.it
 
   // Handle escape key press and body scroll lock
   useEffect(() => {
@@ -88,10 +88,7 @@ const Navbar = () => {
         <div className="flex max-w-screen-xl mx-auto py-1 justify-between items-center px-2">
           <LogoGenerator />
           <div className="flex items-center gap-4">
-            <LanguageSwitcher
-              currentLocale={currentLocale}
-              className="mr-4 text-black hover:text-gray-700"
-            />
+            <LocaleSwitcher />
             <XButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen((prev) => !prev)} />
           </div>
         </div>
@@ -115,7 +112,7 @@ const Navbar = () => {
                   key={href}
                   href={href}
                   translationKey={key}
-                  text={translations[key] || key}
+                  text={MENU_TRANSLATIONS[locale][key] || key}
                   isActive={
                     pathname
                       ? pathname.startsWith(href) && (href === '/' ? pathname === '/' : true)
