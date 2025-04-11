@@ -20,6 +20,10 @@ import { seoPlugin } from '@payloadcms/plugin-seo'
 
 import { s3Storage } from '@payloadcms/storage-s3'
 
+import localization from '@/i18n/localization'
+import { it } from '@payloadcms/translations/languages/it'
+import { en } from '@payloadcms/translations/languages/en'
+
 import { Users } from './db/collections/Users'
 import { Media } from './db/collections/Media'
 import { Articoli } from './db/collections/Articoli'
@@ -47,11 +51,11 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  localization: {
-    locales: ['it', 'en'],
-    defaultLocale: 'it',
-    fallback: false,
+  i18n: {
+    fallbackLanguage: localization.defaultLocale,
+    supportedLanguages: { it, en },
   },
+  localization,
   collections: [Users, Media, Luoghi, Itinerari, Residenze, Stakeholders, Articoli, Tracciati],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
   editor: lexicalEditor({

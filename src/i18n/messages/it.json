@@ -102,5 +102,31 @@
     "register": "Iscriviti",
     "archived": "In Archivio",
     "upcoming": "In Programmazione"
+  },
+  "about": {
+    "title": "Chi siamo"
+  },
+  "mobility": {
+    "title": "Mobilità Sostenibile",
+    "subtitle": "Come raggiungere Morigerati"
+  },
+  "residences": {
+    "title": "Residenze",
+    "loading": "Caricamento residenze...",
+    "noResidences": "Nessuna residenza disponibile al momento",
+    "checkPastResidences": "Ti invitiamo a consultare l'archivio delle residenze passate!",
+    "goToArchive": "Vai all'archivio",
+    "discoverAgenda": "Scopri l'agenda",
+    "past": "Archivio",
+    "future": "Programma",
+    "details": {
+      "startDate": "Data di Inizio",
+      "endDate": "Data di Fine",
+      "location": "Luogo",
+      "description": "Descrizione",
+      "artists": "Artisti",
+      "program": "Programma",
+      "gallery": "Galleria"
+    }
   }
 }
