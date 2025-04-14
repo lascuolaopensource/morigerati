@@ -112,18 +112,20 @@ export default buildConfig({
       collections: {
         [Media.slug]: {
           disableLocalStorage: true,
+          prefix: 'media',
         },
       },
+      bucket: process.env.S3_BUCKET!,
       disableLocalStorage: true,
-      bucket: process.env.S3_BUCKET || '',
+      enabled: true,
       config: {
-        forcePathStyle: true,
+        endpoint: process.env.S3_ENDPOINT!,
+        region: process.env.S3_REGION!,
         credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY || '',
-          secretAccessKey: process.env.S3_SECRET_KEY || '',
+          accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
         },
-        endpoint: process.env.S3_ENDPOINT || '',
-        region: process.env.S3_REGION || '',
+        forcePathStyle: true,
       },
     }),
     // storage-adapter-placeholder

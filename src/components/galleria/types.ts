@@ -1,17 +1,12 @@
 import { Media } from '@/payload-types'
 
 export interface GalleriaProps {
-  items: Media[] | undefined
+  items: Media[]
   titleColor?: string
 }
 
 export interface MediaGalleryProps {
-  items: Media[] | undefined
-  initialIndex?: number
+  items: Media[]
+  initialIndex: number
   onClose: () => void
-}
-
-export interface GalleryCardProps {
-  media: Media
-  height?: number
 }

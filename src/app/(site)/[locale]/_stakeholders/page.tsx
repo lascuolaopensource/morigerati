@@ -45,5 +45,3 @@ export default async function Page({ params }: PageProps) {
   const { locale } = await params
   return <CardsPage collectionQuery="stakeholders" locale={locale} />
 }
-
-export const dynamic = 'force-dynamic'

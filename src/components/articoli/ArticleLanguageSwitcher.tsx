@@ -30,10 +30,6 @@ export default function ArticleLanguageSwitcher({
     try {
       // Calcola la nuova lingua
       const newLocale: Locale = currentLocale === 'it' ? 'en' : 'it'
-      console.log(
-        `DEBUG: ArticleLanguageSwitcher - Cambio lingua da ${currentLocale} a ${newLocale}`,
-      )
-      console.log(`DEBUG: ArticleLanguageSwitcher - ID Articolo: ${articleId}`)
 
       // Imposta il cookie per la nuova lingua
       document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=${60 * 60 * 24 * 365}`
@@ -41,7 +37,6 @@ export default function ArticleLanguageSwitcher({
       // Usa la route di ID per trovare lo slug corretto nella nuova lingua
       // Questo è il modo più affidabile per navigare tra versioni localizzate
       const idRoute = `/${newLocale}/articoli/id/${articleId}`
-      console.log(`DEBUG: ArticleLanguageSwitcher - Navigazione a: ${idRoute}`)
 
       router.push(idRoute)
     } catch (error) {

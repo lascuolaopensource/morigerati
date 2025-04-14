@@ -27,6 +27,13 @@ export const Media: CollectionConfig = {
         formatOptions: { format: 'webp' },
       },
       {
+        name: 'small',
+        width: 600,
+        position: 'centre',
+        fit: 'inside',
+        formatOptions: { format: 'webp' },
+      },
+      {
         name: 'medium',
         width: 900,
         position: 'centre',

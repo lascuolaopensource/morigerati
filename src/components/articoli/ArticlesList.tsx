@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import { Articoli, Media } from '@/payload-types'
 import { formatDistanceToNow, format, isAfter, parseISO, subMonths } from 'date-fns'
 import { it, enUS } from 'date-fns/locale'
@@ -526,7 +526,7 @@ export default function ArticlesList({
 
             return (
               <Card key={id} className="overflow-hidden max-w-full">
-                <Link href={`/${locale}/articoli/${slug}`} className="group block h-full">
+                <Link href={`/articoli/${slug}`} className="group block h-full">
                   <div className="flex flex-col md:flex-row h-full">
                     {/* Article Image */}
                     <div className="relative w-full h-52 md:h-auto md:w-48 md:min-h-[8rem] flex-shrink-0 border-b md:border-b-0 md:border-r border-gray-200 overflow-hidden bg-gray-100">

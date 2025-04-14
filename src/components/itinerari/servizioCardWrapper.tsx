@@ -1,8 +1,12 @@
 'use client'
+//Boilerplate
 import React, { useState, useEffect } from 'react'
+//DB
 import { Itinerari } from '@/payload-types'
+//Components
 import { ServizioCardComponent } from './servizioCard'
-import { useTranslation } from '@/components/TranslationProvider'
+//Locale
+import { useMessages } from 'next-intl'
 
 type Servizio = NonNullable<Itinerari['servizi']>[number]
 
@@ -18,10 +22,7 @@ const generateRandomLetter = (usedLetters: string[]): string => {
 
 const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
   const [bgLetter, setBgLetter] = useState('')
-  const { t } = useTranslation()
-
-  // Translation for section title
-  const sectionTitle = t('common:itinerari.services', 'Servizi')
+  const messages = useMessages()
 
   useEffect(() => {
     setBgLetter(generateRandomLetter([]))
@@ -43,7 +44,9 @@ const ServiziCardWrapper: React.FC<ServiziWrapperProps> = ({ servizi }) => {
         </div>
 
         <div className="max-w-[1400px] mx-auto relative z-10 pb-16">
-          <h2 className="text-2xl font-semibold mb-3 text-center">{sectionTitle}</h2>
+          <h2 className="text-2xl font-semibold mb-3 text-center">
+            {messages.luoghi.servizi.title}
+          </h2>
           <div className="flex flex-wrap justify-center gap-4 px-6">
             {servizi.map((servizio, index) => {
               // Skip if servizio is not a proper object

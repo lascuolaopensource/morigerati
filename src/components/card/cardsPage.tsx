@@ -3,7 +3,7 @@ import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { fetchGlobalData, fetchCollectionData } from '@/utils/dataFetching'
 import ArchivePageLayout from '@/components/pageLayout/ArchivePageLayout'
 import { type Testi as TestiType } from '@/payload-types'
-import { Locale } from '@/utils/localization'
+import { getLocale } from 'next-intl/server'
 import { Globals } from '@/db/globals'
 
 // Force dynamic rendering and disable cache to ensure fresh data
@@ -13,14 +13,11 @@ export const revalidate = 0
 interface CardsPageProps {
   collectionQuery: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
   displayAs?: 'row' | 'grid'
-  locale?: Locale
+  locale?: 'it' | 'en'
 }
 
-const CardsPage: React.FC<CardsPageProps> = async ({
-  collectionQuery,
-  displayAs = 'grid',
-  locale = 'it',
-}) => {
+const CardsPage: React.FC<CardsPageProps> = async ({ collectionQuery, displayAs = 'grid' }) => {
+  const locale = (await getLocale()) as 'it' | 'en'
   // Fetch the global texts with the specified locale
   const testi = await fetchGlobalData<TestiType>(Globals.Testi, locale)
 

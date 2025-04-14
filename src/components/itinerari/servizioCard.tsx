@@ -1,8 +1,12 @@
 'use client'
+//Boilerplate
 import React, { useState, useEffect, useRef, useMemo } from 'react'
+//DB
 import { Itinerari } from '@/payload-types'
+//Components
 import renderElement from '@/utils/renderElement'
-import { useTranslation } from '@/components/TranslationProvider'
+//Locale
+import { useMessages } from 'next-intl'
 
 type Servizio = NonNullable<Itinerari['servizi']>[number]
 
@@ -23,7 +27,8 @@ const ServizioCardComponent: React.FC<ServizioCardProps> = ({ nome, testo, link 
   const [letter, setLetter] = useState('')
   const [hasOverflow, setHasOverflow] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
-  const { t, locale } = useTranslation()
+  const messages = useMessages()
+  const locale = messages.locale
 
   // Process text content safely, handling potential localized content
   const textContent = useMemo(() => {
@@ -36,11 +41,6 @@ const ServizioCardComponent: React.FC<ServizioCardProps> = ({ nome, testo, link 
     // Regular rich text object
     return testo?.root ? renderElement(testo.root) : ''
   }, [testo, locale])
-
-  // Get translated button texts
-  const showMoreText = t('common:buttons.showMore', 'Mostra tutto')
-  const showLessText = t('common:buttons.showLess', 'Mostra meno')
-  const bookText = t('common:buttons.book', 'Prenota')
 
   // Process nome to handle potential localization
   const displayName = useMemo(() => {
@@ -103,7 +103,7 @@ const ServizioCardComponent: React.FC<ServizioCardProps> = ({ nome, testo, link 
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="text-[10px] text-gray-600 hover:text-gray-800 underline transition-colors"
               >
-                {isExpanded ? showLessText : showMoreText}
+                {isExpanded ? messages.luoghi.servizi.less : messages.luoghi.servizi.more}
               </button>
             )}
           </div>
@@ -114,7 +114,7 @@ const ServizioCardComponent: React.FC<ServizioCardProps> = ({ nome, testo, link 
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center h-6 w-16 text-[10px] font-semibold bg-itinerariColor text-black rounded-full transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-itinerariColor"
             >
-              {bookText}
+              {messages.luoghi.servizi.book}
             </a>
           )}
         </div>

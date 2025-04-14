@@ -1,33 +1,30 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import { loadDb } from '@/utils/db'
 import BackButton from '@/components/uiElements/backButton'
 import { isArrayEmpty } from '@/utils/isArrayEmpty'
 import ProgrammaList from '@/components/residenze/programmaList'
 import DateDaDefinireBanner from '@/components/residenze/annuncio'
 import TutorCard from '@/components/residenze/espertiCard'
-import { Residenze } from '@/payload-types'
+
 import InfoResidenza from '@/components/residenze/infoResidenza'
 import PulsanteIscrizione from '@/components/residenze/pulsanteIscrizione'
 import Copertina from '@/components/uiElements/copertina'
-import { Media } from '@/payload-types'
-import { RandomPixel } from '@/components/uiElements/pixels'
+
 import Galleria from '@/components/galleria/galleria'
-import { Metadata } from 'next'
+
 import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import { Locale } from '@/utils/localization'
-import { getMessages } from '@/utils/getMessages'
+
+import { getMessages } from 'next-intl/server'
+
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import type { Media } from '@/payload-types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string; locale: Locale }>
-}) {
-  const { slug, locale } = await params
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const db = await loadDb()
   const residenze = await db.find({ collection: 'residenze', depth: 2, locale: 'all' })
 
@@ -36,7 +33,7 @@ export async function generateMetadata({
   const residenzaData = residenze.docs.find((r) => {
     if (typeof r.slug === 'object' && r.slug !== null) {
       // Handle localized slugs
-      return r.slug[locale] === slug || Object.values(r.slug).includes(slug)
+      return r.slug === slug || Object.values(r.slug).includes(slug)
     }
     // Handle non-localized slugs
     return r.slug === slug
@@ -69,17 +66,13 @@ export async function generateMetadata({
   }
 }
 
-export default async function ResidenzaSlug({
-  params,
-}: {
-  params: Promise<{ slug: string; locale: Locale }>
-}) {
-  const { slug, locale } = await params
+export default async function ResidenzaSlug({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const db = await loadDb()
   const residenze = await db.find({ collection: 'residenze', depth: 2, locale: 'all' })
 
   // Get translation messages
-  const messages = await getMessages(locale, ['common'])
+  const messages = await getMessages()
 
   // Translation function
   const t = (key: string, defaultValue: string = '') => {
@@ -112,7 +105,7 @@ export default async function ResidenzaSlug({
   const residenzaData = residenze.docs.find((r) => {
     if (typeof r.slug === 'object' && r.slug !== null) {
       // Handle localized slugs
-      return r.slug[locale] === slug || Object.values(r.slug).includes(slug)
+      return r.slug === slug || Object.values(r.slug).includes(slug)
     }
     // Handle non-localized slugs
     return r.slug === slug
@@ -165,23 +158,13 @@ export default async function ResidenzaSlug({
               <div className="prose-custom-no-center">
                 {residenzaData.nome && (
                   <h1 className="text-4xl font-bold !text-residenzeColor mb-4 break-words">
-                    {typeof residenzaData.nome === 'object' && residenzaData.nome !== null
-                      ? residenzaData.nome[locale] || ''
-                      : residenzaData.nome}
+                    {residenzaData.nome}
                   </h1>
                 )}
 
                 {!isAfterCurrentDate(residenzaData?.data_inizio ?? '') &&
                   residenzaData.abstract && (
-                    <RichText
-                      data={
-                        typeof residenzaData.abstract === 'object' &&
-                        residenzaData.abstract !== null
-                          ? ((residenzaData.abstract[locale] || {}) as SerializedEditorState)
-                          : (residenzaData.abstract as SerializedEditorState)
-                      }
-                      className="prose prose-lg"
-                    />
+                    <RichText data={residenzaData.abstract} className="prose prose-lg" />
                   )}
               </div>
             </div>

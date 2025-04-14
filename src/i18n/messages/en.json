@@ -1,4 +1,7 @@
 {
+  "common": {
+    "galleria": "Gallery"
+  },
   "navigation": {
     "home": "Home",
     "about": "About Us",
@@ -6,8 +9,13 @@
     "itineraries": "Itineraries",
     "places": "Places",
     "residences": "Residences",
-    "stakeholders": "All people",
+    "stakeholders": "People",
     "articles": "Articles"
+  },
+  "homeButtons": {
+    "itinerari": "Discover all itineraries",
+    "luoghi": "Discover all places",
+    "residenze": "View the program"
   },
   "buttons": {
     "readMore": "Read More",
@@ -35,8 +43,7 @@
   },
   "strings": {
     "notAvailable": "Not available",
-    "gallery": "Gallery",
-    "itinerariesFoundIn": "Itineraries where you can find us"
+    "itinerariesFoundIn": "In which itinerary can you find us"
   },
   "itinerari": {
     "length": "length",
@@ -60,7 +67,8 @@
       "km": "km",
       "ore": "hours",
       "mt": "m"
-    }
+    },
+    "itinerariesFoundIn": "In which itinerary can you find us"
   },
   "luoghi": {
     "contacts": "Contacts",
@@ -68,7 +76,13 @@
     "services": "Services",
     "phone": "Phone",
     "email": "Email",
-    "link": "Link"
+    "link": "Link",
+    "book": "Book",
+    "servizi": {
+      "title": "Services",
+      "more": "Show all",
+      "less": "Show less"
+    }
   },
   "stakeholders": {
     "phone": "Phone",
@@ -125,8 +139,15 @@
       "location": "Location",
       "description": "Description",
       "artists": "Artists",
-      "program": "Program",
-      "gallery": "Gallery"
+      "program": "Program"
     }
+  },
+  "backButton": {
+    "back": "Back",
+    "luoghi": "All places",
+    "itinerari": "All itineraries",
+    "stakeholders": "All people",
+    "residenze": "All residences",
+    "articles": "All articles"
   }
 }

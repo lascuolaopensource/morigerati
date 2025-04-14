@@ -82,13 +82,11 @@ export default async function Articolo({ params }: PageProps) {
       notFound()
     }
 
-    console.log(`DEBUG: Cercando articolo con slug=${slug} in locale=${locale}`)
-
     const db = await loadDb()
 
     try {
       // Prima prova a cercare direttamente con la localizzazione attiva
-      console.log(`DEBUG: Tentativo 1 - Cercando con locale=${locale}`)
+
       let articoloData = null
 
       // Prova 1: Cerca direttamente con la localizzazione specifica
@@ -99,23 +97,17 @@ export default async function Articolo({ params }: PageProps) {
         depth: 2,
       })
 
-      console.log(`DEBUG: Tentativo 1 - Trovati ${articoliLocalizzati.docs.length} risultati`)
-
       if (articoliLocalizzati.docs.length > 0) {
         articoloData = articoliLocalizzati.docs[0]
       }
 
       // Se non trovato, prova con la query OR
       if (!articoloData) {
-        console.log(`DEBUG: Tentativo 2 - Cercando con OR query`)
-
         const articoli = await db.find({
           collection: 'articoli',
           where: { or: [{ slug: { equals: slug } }, { [`slug.${locale}`]: { equals: slug } }] },
           depth: 2,
         })
-
-        console.log(`DEBUG: Tentativo 2 - Trovati ${articoli.docs.length} risultati`)
 
         // Verifica ogni articolo per trovare quello corretto
         articoloData = articoli.docs.find((art: any) => {
@@ -128,32 +120,17 @@ export default async function Articolo({ params }: PageProps) {
 
       // Terzo tentativo: cerca tutti gli articoli e filtra manualmente
       if (!articoloData) {
-        console.log(`DEBUG: Tentativo 3 - Ottenendo tutti gli articoli`)
-
         const tuttiArticoli = await db.find({ collection: 'articoli', limit: 100, depth: 2 })
-
-        console.log(`DEBUG: Tentativo 3 - Trovati ${tuttiArticoli.docs.length} articoli totali`)
-
-        // Log di debug per ogni articolo
-        tuttiArticoli.docs.forEach((art: any, index) => {
-          console.log(
-            `DEBUG: Articolo ${index + 1}: id=${art.id}, slug=${JSON.stringify(art.slug)}`,
-          )
-        })
 
         // Cerca manualmente
         articoloData = tuttiArticoli.docs.find((art: any) => {
           try {
             if (typeof art.slug === 'object' && art.slug !== null) {
               const slugLocalizzato = art.slug[locale]
-              console.log(
-                `DEBUG: Confronto slugs - ID=${art.id}, slug[${locale}]=${slugLocalizzato}, target=${slug}`,
-              )
+
               return slugLocalizzato === slug
             }
-            console.log(
-              `DEBUG: Confronto slug semplice - ID=${art.id}, slug=${art.slug}, target=${slug}`,
-            )
+
             return art.slug === slug
           } catch (err) {
             console.error(`ERROR: Errore nel confronto degli slug per articolo ${art.id}:`, err)
@@ -164,7 +141,6 @@ export default async function Articolo({ params }: PageProps) {
         // Se ancora non trovato ma il target è "titolo-en", cerca manualmente l'articolo
         // che sappiamo esistere dai log
         if (!articoloData && slug === 'titolo-en') {
-          console.log(`DEBUG: Tentativo speciale per titolo-en`)
           try {
             // Cerca l'articolo con id specifico che sappiamo esistere
             const articoloId = '67e42e90d3fbf0fdbc2cc727' // ID dell'articolo dai log
@@ -176,7 +152,6 @@ export default async function Articolo({ params }: PageProps) {
             })
 
             if (articoloSpeciale) {
-              console.log(`DEBUG: Trovato articolo speciale con ID ${articoloId}`)
               articoloData = articoloSpeciale
             }
           } catch (idError) {
@@ -186,11 +161,8 @@ export default async function Articolo({ params }: PageProps) {
       }
 
       if (!articoloData) {
-        console.log(`DEBUG: Articolo non trovato dopo tutti i tentativi`)
         notFound()
       }
-
-      console.log(`DEBUG: Articolo trovato! ID=${articoloData.id}`)
 
       // Process tags to handle both string and object format
       const processedTags = articoloData.tags

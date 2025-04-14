@@ -1,34 +1,23 @@
+//Boilerplate
 import React, { Suspense } from 'react'
-
-import CardGrid from '../card/cardsGrid'
+//DB
 import { loadDb } from '@/utils/db'
-import { RandomPixel } from '@/components/uiElements/pixels'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { RandomLetter } from './randomLetter'
-import { HomeTracksSection } from './homeTracksSection'
-import { Tracciati, Itinerari, Luoghi, Residenze } from '@/payload-types'
+import { Tracciati, Itinerari, Luoghi, Residenze, Stakeholder } from '@/payload-types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { Locale } from '@/utils/localization'
-
-// Button text translations
-const buttonLabels = {
-  it: {
-    luoghi: 'Scopri tutti i luoghi',
-    itinerari: 'Scopri tutti gli itinerari',
-    residenze: 'Consulta il programma',
-  },
-  en: {
-    luoghi: 'Discover all places',
-    itinerari: 'Discover all itineraries',
-    residenze: 'View the program',
-  },
-}
+//UI
+import { ArrowRight } from 'lucide-react'
+import { RandomLetter } from './randomLetter'
+import { bgColors, textColors } from '@/utils/colors'
+//Components
+import { HomeTracksSection } from './homeTracksSection'
+import CardGrid from '../card/cardsGrid'
+//Locale
+import { Link } from '@/i18n/routing'
+import { getMessages, getLocale } from 'next-intl/server'
 
 // Collection types
-type CollectionString = 'luoghi' | 'itinerari' | 'residenze'
-type CollectionData = Itinerari[] | Luoghi[] | Residenze[]
+type CollectionString = 'luoghi' | 'itinerari' | 'residenze' | 'stakeholders'
 
 // Filter function to get only future residenze (not yet ended)
 const filterFutureResidenze = (residenze: Residenze[]): Residenze[] => {
@@ -50,107 +39,62 @@ const filterFutureResidenze = (residenze: Residenze[]): Residenze[] => {
 }
 
 interface HomeCollectionProps {
-  collection: CollectionString | CollectionData
+  collection: CollectionString
   layout?: 'left' | 'right' | 'grid'
   hasMap?: boolean
   tracciati?: Tracciati[]
-  mappaTitle?: string
-  mappaText?: string
   title: string
   text: SerializedEditorState
-  locale?: Locale
+  singleRow?: boolean
 }
 
 const HomeCollection: React.FC<HomeCollectionProps> = async ({
-  collection,
+  collection = 'luoghi',
   layout = 'left',
   hasMap = false,
   tracciati = [],
-  mappaTitle,
-  mappaText,
   title,
   text,
-  locale = 'it',
+  singleRow = true,
 }) => {
   const db = await loadDb()
+  const messages = await getMessages()
+  const locale = (await getLocale()) as 'it' | 'en'
+  const color = textColors[collection]
+  const buttonColor = bgColors[collection]
 
-  let data
-  let collectionType: CollectionString = 'luoghi' // Default value
+  const buttonText = messages.homeButtons[collection]
 
-  // Determine if collection is a string (collection name) or array of data
-  if (typeof collection === 'string') {
-    collectionType = collection
-    data = await db.find({
-      collection: collection,
-      sort: 'nome',
-      locale,
-    })
+  let data = (await db.find({
+    collection: collection,
+    sort: 'nome',
+    depth: 2,
+  })) as { docs: Itinerari[] | Luoghi[] | Residenze[] | Stakeholder[] }
 
-    // If this is the residenze collection, filter out past events
-    if (collectionType === 'residenze') {
-      data.docs = filterFutureResidenze(data.docs)
-    }
-  } else {
-    // If collection is an array, figure out what type it is based on first item
-    const firstItem = collection[0]
-    if (firstItem && 'collection' in firstItem) {
-      if (firstItem.collection === 'itinerari') {
-        collectionType = 'itinerari'
-      } else if (firstItem.collection === 'luoghi') {
-        collectionType = 'luoghi'
-      } else if (firstItem.collection === 'residenze') {
-        collectionType = 'residenze'
-      }
-    }
-    data = { docs: collection }
-
-    // If this is the residenze collection, filter out past events
-    if (collectionType === 'residenze') {
-      data.docs = filterFutureResidenze(data.docs)
-    }
+  if (collection === 'residenze') {
+    data.docs = filterFutureResidenze(data.docs)
   }
-
-  const color = {
-    luoghi: 'text-luoghiColor',
-    itinerari: 'text-itinerariColor',
-    residenze: 'text-residenzeColor',
-  }
-
-  const buttonColor = {
-    luoghi: 'bg-luoghiColor hover:bg-luoghiColor/80',
-    itinerari: 'bg-itinerariColor hover:bg-itinerariColor/80',
-    residenze: 'bg-residenzeColor hover:bg-residenzeColor/80',
-  }
-
-  // Get localized button text
-  const buttonText = buttonLabels[locale]?.[collectionType] || buttonLabels.it[collectionType]
 
   return (
     <section className="relative pb-20">
-      <RandomLetter color={collectionType} position={layout === 'left' ? 'right' : 'left'} />
+      <RandomLetter color={collection} position={layout === 'left' ? 'right' : 'left'} />
       {hasMap ? (
         <>
           <div className="text-center md:text-left md:w-full md:px-40 mb-4">
-            <h2 className={`text-2xl ${color[collectionType]} text-center md:text-${layout}`}>
-              {title}
-            </h2>
+            <h2 className={`text-2xl ${color} text-center md:text-${layout}`}>{title}</h2>
             <div className={`text-center md:text-${layout}`}>
               <RichText data={text} className="prose prose-lg" />
             </div>
           </div>
           <Suspense fallback={<div>Loading slides...</div>}>
-            <CardGrid items={data.docs} category={collectionType} singleRow={true} />
+            <CardGrid items={data.docs} category={collection} singleRow={singleRow} />
           </Suspense>
-          <HomeTracksSection
-            title={mappaTitle}
-            text_html={mappaText}
-            tracciati={tracciati}
-            locale={locale}
-          />
+          <HomeTracksSection tracciati={tracciati} />
           <div className="flex justify-center mt-4">
             <Link
-              href={`/${locale}/${collectionType}`}
-              className={`${buttonColor[collectionType].split(' ')[0]} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
+              href={`/${locale}/${collection}`}
+              locale={locale}
+              className={`${buttonColor} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
             >
               <span>{buttonText}</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
@@ -162,18 +106,14 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
           <div className="text-center md:text-left md:w-full md:px-40 mb-4">
             {layout === 'right' ? (
               <>
-                <h2 className={`text-2xl ${color[collectionType]} text-center md:text-right`}>
-                  {title}
-                </h2>
+                <h2 className={`text-2xl ${color} text-center md:text-right`}>{title}</h2>
                 <div className="text-center md:text-right">
                   <RichText data={text} className="prose prose-lg" />
                 </div>
               </>
             ) : (
               <>
-                <h2 className={`text-2xl ${color[collectionType]} text-center md:text-left`}>
-                  {title}
-                </h2>
+                <h2 className={`text-2xl ${color} text-center md:text-left`}>{title}</h2>
                 <div className="text-center md:text-left ">
                   <RichText data={text} className="prose prose-lg" />
                 </div>
@@ -181,12 +121,12 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
             )}
           </div>
           <Suspense fallback={<div>Loading slides...</div>}>
-            <CardGrid items={data.docs} category={collectionType} singleRow={true} />
+            <CardGrid items={data.docs} category={collection} singleRow={true} />
           </Suspense>
           <div className="flex justify-center mt-4">
             <Link
-              href={`/${locale}/${collectionType}`}
-              className={`${buttonColor[collectionType].split(' ')[0]} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
+              href={`/${collection}`}
+              className={`${buttonColor} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
             >
               <span>{buttonText}</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />

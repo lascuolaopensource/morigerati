@@ -1,17 +1,22 @@
 'use client'
+//Boilerplate
 import React, { useState, useRef, useCallback, useEffect } from 'react'
+//Types
+import { GalleriaProps } from './types'
 import { Media } from '@/payload-types'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules'
+//Components
 import MediaGallery from '@/components/galleria/mediaGallery'
 import GalleryCard from './galleryCard'
+//Swiper
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules'
+import type SwiperCore from 'swiper'
+import type { SwiperOptions } from 'swiper/types'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import type { SwiperOptions } from 'swiper/types'
-import type SwiperCore from 'swiper'
-import { GalleriaProps } from './types'
-import { useTranslation } from '@/components/TranslationProvider'
+//Locale
+import { useMessages } from 'next-intl'
 
 const swiperParams: SwiperOptions = {
   modules: [Navigation, Pagination, Keyboard, Mousewheel],
@@ -33,10 +38,7 @@ const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
   const [showGallery, setShowGallery] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const swiperRef = useRef<SwiperCore | null>(null)
-  const { t } = useTranslation()
-
-  // Get the localized gallery title
-  const galleryTitle = t('common:strings.gallery', 'Galleria')
+  const messages = useMessages()
 
   const handleSlideClick = useCallback((index: number) => {
     setSelectedIndex(index)
@@ -67,7 +69,7 @@ const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
 
   return (
     <div className="w-full overflow-hidden">
-      <h2 className={`text-center pb-4 ${titleColor}`}>{galleryTitle}</h2>
+      <h2 className={`text-center pb-4 ${titleColor}`}>{messages.common.galleria}</h2>
       <div className="w-full px-2 sm:px-4">
         <div className="w-full">
           <div className="relative pb-12">
@@ -76,7 +78,7 @@ const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
               className="!flex overflow-hidden"
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
-              {items.map((item, index) => (
+              {items.map((item: Media, index: number) => (
                 <SwiperSlide
                   key={item.id}
                   onClick={() => handleSlideClick(index)}

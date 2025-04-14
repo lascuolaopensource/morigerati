@@ -4,12 +4,12 @@
 
 @font-face {
   font-family: 'TransInstrumentSans';
-  src: url('../public//fonts/TransInstrumentSansVF.ttf');
+  src: url('../../../public//fonts/TransInstrumentSansVF.ttf');
 }
 
 @font-face {
   font-family: 'Transluoghi';
-  src: url('../public//fonts/Transluoghi2.ttf');
+  src: url('../../../public//fonts/Transluoghi2.ttf');
 }
 
 @keyframes scroll {

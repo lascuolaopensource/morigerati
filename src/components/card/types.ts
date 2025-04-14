@@ -6,33 +6,7 @@ export type Item = Itinerari | Luoghi | Stakeholder | Residenze | Articoli
 /**
  * Category types supported by the card component
  */
-export type CategoryType = 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze' | 'articoli'
-
-/**
- * Style definitions for card variants
- * Each category has specific styling applied to borders and text
- */
-export const styleVariants: Record<
-  Exclude<CategoryType, 'articoli'>,
-  { border: string; text: string }
-> = {
-  itinerari: {
-    border: 'border-itinerariColor bg-itinerariColor',
-    text: 'text-itinerariColor',
-  },
-  luoghi: {
-    border: 'border-luoghiColor bg-luoghiColor',
-    text: 'text-luoghiColor',
-  },
-  stakeholders: {
-    border: 'border-stakeholdersColor bg-stakeholdersColor',
-    text: 'text-stakeholdersColor',
-  },
-  residenze: {
-    border: 'border-residenzeColor bg-residenzeColor',
-    text: 'text-residenzeColor',
-  },
-} as const
+export type CategoryType = 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
 
 /**
  * Card grid configuration

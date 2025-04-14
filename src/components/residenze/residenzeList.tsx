@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import { Residenze } from '@/payload-types'
 import { useParams } from 'next/navigation'
 import formatDate from '@/utils/formatDate'

@@ -44,21 +44,30 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ items, initialIndex = 0, on
   if (!items?.length) return null
 
   const currentItem = items[currentIndex]
-  if (!currentItem?.url) return null
+  if (!currentItem) return null
 
   const renderMedia = () => {
     const isVideo = currentItem.mimeType?.startsWith('video/')
 
     if (isVideo && currentItem.url) {
       return (
-        <video src={currentItem.url} controls className="w-full h-full object-contain" autoPlay />
+        <video
+          src={currentItem.url as string}
+          controls
+          autoPlay
+          className="w-full h-full object-contain"
+          controlsList="nodownload"
+        />
       )
     }
+
+    // Per le immagini, usa la versione large se disponibile
+    const imageUrl = currentItem.sizes?.large?.url || currentItem.url
 
     return (
       <div className="relative w-full h-full">
         <Image
-          src={currentItem.url || ''}
+          src={imageUrl || ''}
           alt={currentItem.alt || ''}
           fill
           className="object-contain"

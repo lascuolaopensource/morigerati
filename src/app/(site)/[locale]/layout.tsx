@@ -1,55 +1,68 @@
+//Boilerplate
 import { ReactNode, Suspense } from 'react'
-import { notFound } from 'next/navigation'
-import localization from '@/i18n/localization'
-import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
-import DynamicFavicon from '@/components/uiElements/favicon'
-import Navbar from '@/components/navbar/navbar'
-import Footer from '@/components/footer/footer'
 import { Metadata } from 'next'
+import { NextIntlClientProvider } from 'next-intl'
+import { notFound } from 'next/navigation'
+//CSS
+import './globals.css'
+//Metadata
+import DynamicFavicon from '@/components/uiElements/favicon'
+//Ui
+import Navbar from '@/components/layout/navbar/navbar'
+import Footer from '@/components/layout/footer/footer'
+//Locale
+import { routing } from '@/i18n/routing'
+import { getLocale, getMessages, setRequestLocale } from 'next-intl/server'
+//DB
+import { loadDb } from '@/utils/db'
+
 // Validate and generate the dynamic segmentd
 export function generateStaticParams() {
-  return localization.locales.map((locale) => ({ locale }))
+  return routing.locales.map((locale) => ({ locale }))
 }
-export const metadata: Metadata = {
+
+/* export const metadata: Metadata = {
   title: 'Transluoghi - Ecomuseo del Bussento Contemporaneo',
   description: 'Transluoghi - Ecomuseo del Bussento Contemporaneo',
-}
+} */
 
-type LocaleLayoutProps = {
-  children: ReactNode
-  params: {
-    locale: string
-  }
-}
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = (await getLocale()) as 'en' | 'it'
+  const messages = await getMessages()
 
-export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  const { locale } = await params
-
-  // Check if locale is valid
-  if (!localization.locales.some((l) => l.code === locale)) {
+  // Check if locale is valid and notFound if not
+  if (!routing.locales.includes(locale as any)) {
     notFound()
   }
 
-  // Load messages for the current locale
-  const messages = await getMessages({
-    locale,
+  setRequestLocale(locale)
+
+  //Import footer data from DB
+  const db = await loadDb()
+  const footerData = await db.findGlobal({
+    slug: 'footer',
+    locale: locale,
   })
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <div className="min-h-screen overscroll-none">
-        <Navbar />
-        <div className="flex flex-col min-h-screen">
-          <main className="">
-            <DynamicFavicon />
-            <div>{children}</div>
-          </main>
-        </div>
-        <Suspense fallback={<div>Loading footer...</div>}>
-          <Footer />
-        </Suspense>
-      </div>
-    </NextIntlClientProvider>
+    <html lang={locale}>
+      <body className="flex h-screen flex-col">
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <div className="min-h-screen overscroll-none">
+            <Navbar />
+            <div className="flex flex-col min-h-screen">
+              <main className="">
+                <DynamicFavicon />
+                <div>{children}</div>
+              </main>
+            </div>
+
+            <Suspense fallback={<div>Loading footer...</div>}>
+              <Footer footer={footerData} />
+            </Suspense>
+          </div>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   )
 }

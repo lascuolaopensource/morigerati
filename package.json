@@ -18,12 +18,13 @@
     "db:down": "docker compose -f docker-compose.db.yml down"
   },
   "dependencies": {
+    "@mux/mux-player-react": "^3.3.4",
     "@payloadcms/db-mongodb": "latest",
-    "@payloadcms/translations": "latest",
     "@payloadcms/next": "latest",
     "@payloadcms/plugin-seo": "latest",
     "@payloadcms/richtext-lexical": "latest",
     "@payloadcms/storage-s3": "latest",
+    "@payloadcms/translations": "latest",
     "@payloadcms/ui": "latest",
     "@svgr/webpack": "^8.1.0",
     "@types/react-modal": "^3.16.3",
