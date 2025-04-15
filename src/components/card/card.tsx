@@ -2,7 +2,7 @@
 import React from 'react'
 import Image, { StaticImageData } from 'next/image'
 //Ui
-import placeholderImage from '@/public/placeholder-image.jpg'
+import placeholderImage from '/public/placeholder-image.jpg'
 //Types
 import { CategoryType } from './types'
 //DB

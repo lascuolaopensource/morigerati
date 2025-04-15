@@ -104,7 +104,7 @@ export default async function LuogoPage({ params }: PageProps) {
 
       <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
         <BackButton message={messages.backButton.luoghi} redirect={`/luoghi`} />
-        {/* <RandomPixel p={3} /> */}
+        <RandomPixel p={3} />
         <div className="pt-4"></div>
 
         {/* Grid container for desktop layout */}
@@ -176,7 +176,6 @@ export default async function LuogoPage({ params }: PageProps) {
             titleColor="text-luogoColorScuro"
           />
         </div>
-        {/* )} */}
 
         {/* Itinerari correlati section */}
         {itinerariCorrelati && itinerariCorrelati.length > 0 && (
