@@ -1,5 +1,7 @@
+//Boilerplate
 import React from 'react'
 import Image from 'next/image'
+//Db
 import { type Media } from '@/payload-types'
 
 interface CopertinaProps {
@@ -7,14 +9,19 @@ interface CopertinaProps {
 }
 
 const Copertina: React.FC<CopertinaProps> = ({ copertina }) => {
-  if (!copertina || typeof copertina === 'string' || copertina.mimeType?.startsWith('video/')) {
+  if (
+    !copertina ||
+    typeof copertina === 'string' ||
+    copertina.mimeType?.startsWith('video/') ||
+    !copertina.sizes?.large?.url
+  ) {
     return null
   }
 
   return (
     <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
       <Image
-        src={copertina.url || ''}
+        src={copertina.sizes.large.url}
         alt={copertina.alt || 'Fullscreen Image'}
         fill
         style={{ objectFit: 'cover' }}

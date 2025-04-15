@@ -34,7 +34,7 @@ const swiperParams: SwiperOptions = {
   },
 }
 
-const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
+const Galleria: React.FC<GalleriaProps> = ({ items }) => {
   const [showGallery, setShowGallery] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const swiperRef = useRef<SwiperCore | null>(null)
@@ -69,7 +69,7 @@ const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
 
   return (
     <div className="w-full overflow-hidden">
-      <h2 className={`text-center pb-4 ${titleColor}`}>{messages.common.galleria}</h2>
+      <h2 className={'text-center pb-4'}>{messages.common.galleria}</h2>
       <div className="w-full px-2 sm:px-4">
         <div className="w-full">
           <div className="relative pb-12">

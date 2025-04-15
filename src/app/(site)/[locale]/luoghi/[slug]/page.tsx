@@ -42,22 +42,17 @@ export default async function LuogoPage({ params }: PageProps) {
     collection: 'luoghi',
     depth: 2,
     locale: locale,
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
   })
 
-  // For localized slugs, we need to find the document by checking if slug matches
-  // the locale-specific value or the slug object contains the correct locale
-  const luogoData = luoghi.docs.find((l) => {
-    if (typeof l.slug === 'object' && l.slug !== null) {
-      return l.slug[locale] === slug
-    }
-    return l.slug === slug
-  })
+  const luogoData = luoghi.docs[0]
 
   if (!luogoData) {
-    console.error(
-      'Luogo not found. Available slugs:',
-      luoghi.docs.map((l) => ({ id: l.id, slug: l.slug })),
-    )
+    console.error('Luogo not found with slug:', slug)
     notFound()
   }
 
@@ -145,7 +140,17 @@ export default async function LuogoPage({ params }: PageProps) {
 
             {/* Contacts and Hours */}
             <LuogoInfoRow
-              contatti={(luogoData.contatti as []) ?? undefined}
+              contatti={
+                luogoData.contatti
+                  ? luogoData.contatti.map((c) => ({
+                      nome: c.nome,
+                      telefono: c.telefono || undefined,
+                      email: c.email || undefined,
+                      link: c.link || undefined,
+                      id: c.id || undefined,
+                    }))
+                  : undefined
+              }
               orari={luogoData.orari as SerializedEditorState | undefined}
             />
           </div>
