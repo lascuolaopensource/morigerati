@@ -1,19 +1,29 @@
-// 'use client'
+//Boilerplate
 import React from 'react'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
+//Ui
 import placeholderImage from '@/public/placeholder-image.jpg'
-import { Link } from '@/i18n/routing'
+//Types
 import { CategoryType } from './types'
+//DB
+import { Media } from '@/payload-types'
+//Utils
 import { bgColors, borderColors } from '@/utils/colors'
+//Locale
+import { Link } from '@/i18n/routing'
 
 interface CardProps {
   title: string
-  media: string
+  media: Media | undefined
   slugUrl: string
   category: CategoryType
 }
 
 const Card: React.FC<CardProps> = ({ title, media, slugUrl, category }) => {
+  let cover: string | null | undefined | StaticImageData = media?.sizes?.small?.url
+  if (media?.mimeType?.startsWith('video/')) {
+    cover = placeholderImage
+  }
   return (
     <Link href={slugUrl}>
       <div
@@ -21,7 +31,7 @@ const Card: React.FC<CardProps> = ({ title, media, slugUrl, category }) => {
       >
         <div className="h-[129.60px] flex-shrink-0">
           <Image
-            src={media || placeholderImage}
+            src={cover || placeholderImage}
             alt={title}
             width={230}
             height={129.6}

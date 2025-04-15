@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'next/image'
 //Db
-import { type Media } from '@/payload-types'
+import { Media } from '@/payload-types'
 
 interface CopertinaProps {
   copertina: Media | undefined
