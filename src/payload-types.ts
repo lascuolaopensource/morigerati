@@ -72,7 +72,7 @@ export interface Config {
     luoghi: Luoghi;
     itinerari: Itinerari;
     residenze: Residenze;
-    stakeholders: Stakeholder;
+    persone: Persone;
     articoli: Articoli;
     tracciati: Tracciati;
     'payload-locked-documents': PayloadLockedDocument;
@@ -86,7 +86,7 @@ export interface Config {
     luoghi: LuoghiSelect<false> | LuoghiSelect<true>;
     itinerari: ItinerariSelect<false> | ItinerariSelect<true>;
     residenze: ResidenzeSelect<false> | ResidenzeSelect<true>;
-    stakeholders: StakeholdersSelect<false> | StakeholdersSelect<true>;
+    persone: PersoneSelect<false> | PersoneSelect<true>;
     articoli: ArticoliSelect<false> | ArticoliSelect<true>;
     tracciati: TracciatiSelect<false> | TracciatiSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -324,7 +324,7 @@ export interface Itinerari {
   lunghezza?: number | null;
   tempo?: number | null;
   dislivello?: string | null;
-  tipo?: ('Itinerario ad anello' | 'Andata e ritorno')[] | null;
+  tipo?: ('Itinerario ad anello' | 'Andata e ritorno') | null;
   difficolta?: ('T - Turistico' | 'E - Escursionistico' | 'EE - Escursionisti Esperti') | null;
   servizi?:
     | {
@@ -349,7 +349,7 @@ export interface Itinerari {
       }[]
     | null;
   luoghi?: (string | Luoghi)[] | null;
-  stakeholders?: (string | Stakeholder)[] | null;
+  persone?: (string | Persone)[] | null;
   media_geolocalizzati?:
     | {
         /**
@@ -399,6 +399,7 @@ export interface Itinerari {
 export interface Tracciati {
   id: string;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -413,9 +414,9 @@ export interface Tracciati {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "stakeholders".
+ * via the `definition` "persone".
  */
-export interface Stakeholder {
+export interface Persone {
   id: string;
   nome: string;
   tipologia?: ('Azienda' | 'Ristoratori' | 'etc') | null;
@@ -653,8 +654,8 @@ export interface PayloadLockedDocument {
         value: string | Residenze;
       } | null)
     | ({
-        relationTo: 'stakeholders';
-        value: string | Stakeholder;
+        relationTo: 'persone';
+        value: string | Persone;
       } | null)
     | ({
         relationTo: 'articoli';
@@ -866,7 +867,7 @@ export interface ItinerariSelect<T extends boolean = true> {
         id?: T;
       };
   luoghi?: T;
-  stakeholders?: T;
+  persone?: T;
   media_geolocalizzati?:
     | T
     | {
@@ -950,9 +951,9 @@ export interface ResidenzeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "stakeholders_select".
+ * via the `definition` "persone_select".
  */
-export interface StakeholdersSelect<T extends boolean = true> {
+export interface PersoneSelect<T extends boolean = true> {
   nome?: T;
   tipologia?: T;
   posizione?: T;
@@ -1016,6 +1017,7 @@ export interface ArticoliSelect<T extends boolean = true> {
  */
 export interface TracciatiSelect<T extends boolean = true> {
   alt?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1324,7 +1326,7 @@ export interface Testi {
       [k: string]: unknown;
     };
   };
-  stakeholders: {
+  persone: {
     title: string;
     testo: {
       root: {
@@ -1481,7 +1483,7 @@ export interface TestiSelect<T extends boolean = true> {
         title?: T;
         testo?: T;
       };
-  stakeholders?:
+  persone?:
     | T
     | {
         title?: T;

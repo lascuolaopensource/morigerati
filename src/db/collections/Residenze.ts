@@ -170,7 +170,7 @@ export const Residenze: CollectionConfig<'residenze'> = {
         },
         {
           label: 'Link',
-          fields: [...slugField('nome', { localized: true })],
+          fields: [...slugField('nome')],
         },
       ],
     },

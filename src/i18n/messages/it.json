@@ -9,7 +9,7 @@
     "itineraries": "Itinerari",
     "places": "Luoghi",
     "residences": "Residenze",
-    "stakeholders": "Persone",
+    "persone": "Persone",
     "articles": "Articoli"
   },
   "homeButtons": {
@@ -46,6 +46,7 @@
     "itinerariesFoundIn": "In quale itinerario potrai trovarci"
   },
   "itinerari": {
+    "notAvailable": "Non disponibile",
     "length": "lunghezza",
     "duration": "durata",
     "elevation": "dislivello",
@@ -84,7 +85,7 @@
       "book": "Prenota"
     }
   },
-  "stakeholders": {
+  "persone": {
     "phone": "Telefono",
     "email": "Email",
     "link": "Link",
@@ -115,7 +116,13 @@
     "datesNotAnnounced": "Le date non sono state ancora annunciate, torna presto!",
     "register": "Iscriviti",
     "archived": "In Archivio",
-    "upcoming": "In Programmazione"
+    "upcoming": "In Programmazione",
+    "noResidenze": "Nessuna residenza disponibile al momento",
+    "checkPastResidenze": "Ti invitiamo a consultare l'archivio delle residenze passate!",
+    "goToArchive": "Archivio",
+    "discoverAgenda": "Programma",
+    "notAvailable": "Non disponibile",
+    "addressNotAvailable": "Indirizzo non disponibile"
   },
   "about": {
     "title": "Chi siamo"
@@ -124,29 +131,12 @@
     "title": "Mobilità Sostenibile",
     "subtitle": "Come raggiungere Morigerati"
   },
-  "residences": {
-    "title": "Residenze",
-    "loading": "Caricamento residenze...",
-    "noResidences": "Nessuna residenza disponibile al momento",
-    "checkPastResidences": "Ti invitiamo a consultare l'archivio delle residenze passate!",
-    "goToArchive": "Vai all'archivio",
-    "discoverAgenda": "Scopri l'agenda",
-    "past": "Archivio",
-    "future": "Programma",
-    "details": {
-      "startDate": "Data di Inizio",
-      "endDate": "Data di Fine",
-      "location": "Luogo",
-      "description": "Descrizione",
-      "artists": "Artisti",
-      "program": "Programma"
-    }
-  },
+
   "backButton": {
     "back": "Indietro",
     "luoghi": "Tutti i luoghi",
     "itinerari": "Tutti gli itinerari",
-    "stakeholders": "Tutte le persone",
+    "persone": "Tutte le persone",
     "residenze": "Tutte le residenze",
     "articles": "Tutti gli articoli"
   }

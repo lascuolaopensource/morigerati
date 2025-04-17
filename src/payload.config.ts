@@ -30,7 +30,7 @@ import { Articoli } from './db/collections/Articoli'
 import { Itinerari } from './db/collections/Itinerari'
 import { Luoghi } from './db/collections/Luoghi'
 import { Residenze } from './db/collections/Residenze'
-import { Stakeholders } from './db/collections/Stakeholders'
+import { Persone } from './db/collections/Persone'
 import { Tracciati } from './db/collections/Tracciati'
 
 import { Home } from './db/globals/Home'
@@ -56,7 +56,7 @@ export default buildConfig({
     supportedLanguages: { it, en },
   },
   localization,
-  collections: [Users, Media, Luoghi, Itinerari, Residenze, Stakeholders, Articoli, Tracciati],
+  collections: [Users, Media, Luoghi, Itinerari, Residenze, Persone, Articoli, Tracciati],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
   editor: lexicalEditor({
     features: () => [
@@ -83,7 +83,7 @@ export default buildConfig({
     seoPlugin({
       collections: [
         Collections.Luoghi,
-        Collections.Stakeholders,
+        Collections.Persone,
         Collections.Itinerari,
         Collections.Residenze,
         Collections.Articoli,
@@ -113,6 +113,10 @@ export default buildConfig({
         [Media.slug]: {
           disableLocalStorage: true,
           prefix: 'media',
+        },
+        [Tracciati.slug]: {
+          disableLocalStorage: true,
+          prefix: 'tracciati',
         },
       },
       bucket: process.env.S3_BUCKET!,

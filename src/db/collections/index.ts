@@ -1,6 +1,6 @@
 export enum Collections {
   Luoghi = 'luoghi',
-  Stakeholders = 'stakeholders',
+  Persone = 'persone',
   Itinerari = 'itinerari',
   Media = 'media',
   Residenze = 'residenze',

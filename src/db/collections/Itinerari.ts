@@ -98,8 +98,6 @@ export const Itinerari: CollectionConfig<'itinerari'> = {
                 {
                   name: 'tipo',
                   type: 'select',
-                  hasMany: true,
-
                   admin: {
                     isClearable: true,
                     isSortable: true,
@@ -177,9 +175,9 @@ export const Itinerari: CollectionConfig<'itinerari'> = {
               hasMany: true,
             },
             {
-              name: 'stakeholders',
+              name: 'persone',
               type: 'relationship',
-              relationTo: Collections.Stakeholders,
+              relationTo: Collections.Persone,
               hasMany: true,
             },
 
@@ -202,7 +200,7 @@ export const Itinerari: CollectionConfig<'itinerari'> = {
 
         {
           label: 'Link',
-          fields: [...slugField('nome', { localized: true })],
+          fields: [...slugField('nome')],
         },
       ],
     },

@@ -1,16 +1,20 @@
 'use client'
+//Boilerplate
 import React, { useEffect, useState } from 'react'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
-import { ArrowRightLeft } from 'lucide-react'
-import { useTranslation } from '@/components/TranslationProvider'
+//Components
+import { ChevronDown } from 'lucide-react'
+//Locale
+import { useMessages } from 'next-intl'
 
-const ToggleButton: React.FC = () => {
+const FilterDropdown: React.FC = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const paramFilter = searchParams ? (searchParams.get('filter') as 'passata' | 'futura') : null
-  const { t, locale } = useTranslation()
+  const messages = useMessages()
 
+  // Always default to showing "futura" (program) if no filter is specified
   const getFilterValue = (): 'passata' | 'futura' => {
     if (paramFilter === 'passata' || paramFilter === 'futura') {
       return paramFilter
@@ -23,56 +27,53 @@ const ToggleButton: React.FC = () => {
       }
     }
 
-    return 'futura'
+    return 'futura' // Default to program/future residences
   }
 
   const [activeFilter, setActiveFilter] = useState<'passata' | 'futura'>(getFilterValue())
 
-  // Sincronizza lo stato quando cambiano i parametri URL o la lingua
+  // Sync state when URL parameters or language change
   useEffect(() => {
     if (paramFilter && paramFilter !== activeFilter) {
       setActiveFilter(paramFilter)
       localStorage.setItem('residenceFilter', paramFilter)
     } else if (!paramFilter) {
-      // Se URL non ha parametro, aggiungilo
-      router.push(`${pathname}?filter=${activeFilter}`, { scroll: false })
+      // If URL has no parameter, always default to "futura" (program)
+      const defaultFilter = 'futura'
+      setActiveFilter(defaultFilter)
+      localStorage.setItem('residenceFilter', defaultFilter)
+      router.push(`${pathname}?filter=${defaultFilter}`, { scroll: false })
     }
-  }, [pathname, paramFilter, locale, router, activeFilter])
+  }, [pathname, paramFilter, router, activeFilter])
 
-  const handleFilterChange = () => {
-    const newFilter = activeFilter === 'futura' ? 'passata' : 'futura'
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newFilter = e.target.value as 'passata' | 'futura'
     setActiveFilter(newFilter)
     localStorage.setItem('residenceFilter', newFilter)
     router.push(`${pathname}?filter=${newFilter}`, { scroll: false })
   }
 
   return (
-    <div className="flex justify-center items-center pb-20 pt-12 md:max-w-[700px] mx-auto">
-      <button
-        onClick={handleFilterChange}
-        className={`group relative w-full max-w-xs h-12 rounded-full overflow-hidden hover:scale-105 transition-all duration-300 ${
-          activeFilter === 'futura' ? 'bg-residenzeColor' : 'bg-[#f5c8ba]'
-        }`}
-        aria-label={
-          activeFilter === 'futura' ? t('residences:goToArchive') : t('residences:discoverAgenda')
-        }
-      >
-        <div className="relative flex items-center justify-center w-full h-full">
-          <span className="flex items-center gap-2 font-bold group-hover:-translate-y-px transition-transform duration-300">
-            {activeFilter === 'futura'
-              ? t('residences:goToArchive')
-              : t('residences:discoverAgenda')}
-          </span>
-
-          <ArrowRightLeft
-            className={`absolute right-4 w-5 h-5 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12 ${
-              activeFilter === 'futura' ? 'rotate-0' : 'rotate-180'
-            }`}
-          />
+    <div className="flex justify-center items-center mb-8 md:max-w-[260px] mx-auto">
+      <div className="relative w-full">
+        <select
+          value={activeFilter}
+          onChange={handleFilterChange}
+          className={`appearance-none block w-full px-4 py-3 rounded-lg font-medium text-center border focus:outline-none focus:ring-2 transition-all duration-300 cursor-pointer ${
+            activeFilter === 'futura'
+              ? 'bg-residenzeColor border-residenzeColor/30 focus:ring-residenzeColor/50'
+              : 'bg-[#f5c8ba] border-[#f5c8ba]/30 focus:ring-[#f5c8ba]/50'
+          }`}
+        >
+          <option value="futura">Programma</option>
+          <option value="passata">Archivio</option>
+        </select>
+        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+          <ChevronDown className="w-5 h-5" />
         </div>
-      </button>
+      </div>
     </div>
   )
 }
 
-export default ToggleButton
+export default FilterDropdown

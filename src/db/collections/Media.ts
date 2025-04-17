@@ -32,6 +32,7 @@ export const Media: CollectionConfig = {
         position: 'centre',
         fit: 'inside',
         formatOptions: { format: 'webp' },
+        withoutEnlargement: true,
       },
       {
         name: 'medium',
@@ -39,6 +40,7 @@ export const Media: CollectionConfig = {
         position: 'centre',
         fit: 'inside',
         formatOptions: { format: 'webp' },
+        withoutEnlargement: true,
       },
       {
         name: 'large',
@@ -46,6 +48,7 @@ export const Media: CollectionConfig = {
         position: 'centre',
         fit: 'inside',
         formatOptions: { format: 'webp' },
+        withoutEnlargement: true,
       },
       {
         name: 'xlarge',
@@ -53,6 +56,7 @@ export const Media: CollectionConfig = {
         position: 'centre',
         fit: 'inside',
         formatOptions: { format: 'webp' },
+        withoutEnlargement: true,
       },
       {
         name: 'og',
@@ -62,6 +66,7 @@ export const Media: CollectionConfig = {
         position: 'centre',
         fit: 'inside',
         formatOptions: { format: 'webp' },
+        withoutEnlargement: true,
       },
     ],
   },

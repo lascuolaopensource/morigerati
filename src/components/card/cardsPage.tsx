@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 interface CardsPageProps {
-  collectionQuery: 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
+  collectionQuery: 'luoghi' | 'persone' | 'itinerari' | 'residenze'
   displayAs?: 'row' | 'grid'
   locale?: 'it' | 'en'
 }

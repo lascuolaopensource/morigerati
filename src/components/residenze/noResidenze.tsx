@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useTranslation } from '@/components/TranslationProvider'
+import { useMessages } from 'next-intl'
 
 const NoResidenze = () => {
   const [randomLetter, setRandomLetter] = useState('')
-  const { t } = useTranslation()
+  const messages = useMessages()
 
   useEffect(() => {
     const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random() * 26)]
@@ -13,13 +13,10 @@ const NoResidenze = () => {
   }, [])
 
   return (
-    <div className="w-full h-[50vh] flex flex-col items-center justify-center relative overflow-hidden">
-      <span className="absolute top-16  text-[12rem] text-residenzeColor/15 font-bold font-transluoghi z-0">
-        {randomLetter.toLowerCase()}
-      </span>
+    <div className="w-full flex flex-col items-center justify-center relative overflow-hidden">
       <div className="relative z-10 text-center space-y-4">
-        <h2 className="text-3xl font-medium">{t('residences:noResidences')}</h2>
-        <p className="text-lg text-gray-600">{t('residences:checkPastResidences')}</p>
+        <h2 className="text-3xl font-medium">{messages.residenze.noResidenze}</h2>
+        <p className="text-lg text-gray-600">{messages.residenze.checkPastResidenze}</p>
       </div>
     </div>
   )

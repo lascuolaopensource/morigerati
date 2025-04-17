@@ -1,12 +1,12 @@
 import { Media } from '@/payload-types'
-import { Itinerari, Luoghi, Stakeholder, Residenze, Articoli } from '@/payload-types'
+import { Itinerari, Luoghi, Persone, Residenze } from '@/payload-types'
 
-export type Item = Itinerari | Luoghi | Stakeholder | Residenze | Articoli
+export type Item = Itinerari | Luoghi | Persone | Residenze
 
 /**
  * Category types supported by the card component
  */
-export type CategoryType = 'luoghi' | 'stakeholders' | 'itinerari' | 'residenze'
+export type CategoryType = 'luoghi' | 'persone' | 'itinerari' | 'residenze'
 
 /**
  * Card grid configuration

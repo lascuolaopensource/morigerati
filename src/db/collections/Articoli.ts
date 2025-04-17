@@ -73,7 +73,7 @@ export const Articoli: CollectionConfig = {
         },
         {
           label: 'Link',
-          fields: [...slugField('titolo', { localized: true })],
+          fields: [...slugField('titolo')],
         },
       ],
     },

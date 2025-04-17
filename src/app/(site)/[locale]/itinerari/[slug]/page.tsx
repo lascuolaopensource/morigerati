@@ -1,33 +1,30 @@
+//Boilerplate
 import React from 'react'
-import { loadDb } from '@/utils/db'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-
+//DB
+import { loadDb } from '@/utils/db'
+import { Luoghi, Persone } from '@/payload-types'
+import { type Media } from '@/payload-types'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+//Components
 import BackButton from '@/components/uiElements/backButton'
 import ItinerarioDetailsCard from '@/components/itinerari/itinerarioDetailsCard'
 import { ServiziCardWrapper } from '@/components/itinerari/servizioCardWrapper'
 import CardGrid from '@/components/card/cardsGrid'
 import Galleria from '@/components/galleria/galleria'
-
-import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
-import { Luoghi, Stakeholder } from '@/payload-types'
-
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
 import Copertina from '@/components/uiElements/copertina'
 import MediaViewer from '@/components/uiElements/mediaViewer'
-
-import { type Media } from '@/payload-types'
-
+import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 import { RandomPixel } from '@/components/uiElements/pixels'
-import { RichText } from '@payloadcms/richtext-lexical/react'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import { Locale } from '@/utils/localization'
-import { getMessages } from '@/utils/getMessages'
+//Locale
+import { getLocale, getMessages } from 'next-intl/server'
 
 interface ItinerarioParams {
   slug: string
-  locale: string
 }
 
 interface PageProps {
@@ -35,8 +32,9 @@ interface PageProps {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug, locale } = await params
+  const slug = (await params).slug
   const db = await loadDb()
+  const locale = (await getLocale()) as 'it' | 'en'
   const itinerari = await db.find({
     collection: 'itinerari',
     depth: 2,
@@ -88,8 +86,9 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function Itinerario({ params }: PageProps) {
-  const { slug, locale } = await params
+  const slug = (await params).slug
   const db = await loadDb()
+  const locale = (await getLocale()) as 'it' | 'en'
 
   const itinerari = await db.find({
     collection: 'itinerari',
@@ -115,7 +114,7 @@ export default async function Itinerario({ params }: PageProps) {
   }
 
   // Get translations
-  const messages = await getMessages(locale as Locale)
+  const messages = await getMessages()
   const peopleTitle =
     messages?.common?.itinerari?.peopleYouWillFind ||
     (locale === 'it' ? 'Persone che troverai' : 'People you will find')
@@ -127,10 +126,10 @@ export default async function Itinerario({ params }: PageProps) {
 
   return (
     <div className="">
-      <Copertina copertina={itinerarioData?.copertina as Media | undefined} />
+      <Copertina copertina={itinerarioData.copertina as Media} />
 
       <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
-        <BackButton />
+        <BackButton message={messages.backButton.itinerari} redirect={`/itinerari`} />
 
         <div className="pt-4"></div>
 
@@ -179,21 +178,17 @@ export default async function Itinerario({ params }: PageProps) {
         <div className="">
           {itinerarioData?.Video && (
             <div className="mb-4">
-              <MediaViewer media={(itinerarioData?.Video as Media) || undefined} />
+              <MediaViewer media={itinerarioData?.Video as Media} />
             </div>
           )}
-          <Galleria items={itinerarioData?.galleria as Media[] | undefined} />
+          <Galleria items={itinerarioData?.galleria as Media[]} />
 
           <ServiziCardWrapper servizi={itinerarioData?.servizi} />
 
-          {itinerarioData?.stakeholders && itinerarioData?.stakeholders.length > 0 && (
+          {itinerarioData?.persone && itinerarioData?.persone.length > 0 && (
             <div className="">
               <h2 className="font-bold text-xl text-center pb-4">{peopleTitle}</h2>
-              <CardGrid
-                items={itinerarioData?.stakeholders as Stakeholder[]}
-                category="stakeholders"
-                singleRow
-              />
+              <CardGrid items={itinerarioData?.persone as Persone[]} category="persone" singleRow />
             </div>
           )}
 

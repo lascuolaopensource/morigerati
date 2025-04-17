@@ -9,7 +9,7 @@
     "itineraries": "Itineraries",
     "places": "Places",
     "residences": "Residences",
-    "stakeholders": "People",
+    "persone": "People",
     "articles": "Articles"
   },
   "homeButtons": {
@@ -43,9 +43,10 @@
   },
   "strings": {
     "notAvailable": "Not available",
-    "itinerariesFoundIn": "In which itinerary can you find us"
+    "itinerariesFoundIn": "In which itinerary you can find us"
   },
   "itinerari": {
+    "notAvailable": "Not available",
     "length": "length",
     "duration": "duration",
     "elevation": "elevation gain",
@@ -53,7 +54,8 @@
     "type": "type",
     "services": "Services",
     "peopleYouWillFind": "People you will find",
-    "placesYouWillVisit": "Places you will visit",
+    "placesYouWillVisit": "Places you'll pass by",
+
     "difficulties": {
       "T - Turistico": "T - Touristic",
       "E - Escursionistico": "E - Hiking",
@@ -84,7 +86,7 @@
       "less": "Show less"
     }
   },
-  "stakeholders": {
+  "persone": {
     "phone": "Phone",
     "email": "Email",
     "link": "Link",
@@ -115,7 +117,13 @@
     "datesNotAnnounced": "Dates have not been announced yet, check back soon!",
     "register": "Register",
     "archived": "Archived",
-    "upcoming": "Upcoming"
+    "upcoming": "Upcoming",
+    "noResidenze": "No residences available at the moment",
+    "checkPastResidenze": "We invite you to check the archive of past residences!",
+    "goToArchive": "Archive",
+    "discoverAgenda": "Program",
+    "notAvailable": "Not available",
+    "addressNotAvailable": "Address not available"
   },
   "about": {
     "title": "About Us"
@@ -124,29 +132,12 @@
     "title": "Sustainable Mobility",
     "subtitle": "How to reach Morigerati"
   },
-  "residences": {
-    "title": "Residences",
-    "loading": "Loading residences...",
-    "noResidences": "No residences available at the moment",
-    "checkPastResidences": "We invite you to check the archive of past residences!",
-    "goToArchive": "Go to archive",
-    "discoverAgenda": "Discover agenda",
-    "past": "Archive",
-    "future": "Program",
-    "details": {
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "location": "Location",
-      "description": "Description",
-      "artists": "Artists",
-      "program": "Program"
-    }
-  },
+
   "backButton": {
     "back": "Back",
     "luoghi": "All places",
     "itinerari": "All itineraries",
-    "stakeholders": "All people",
+    "persone": "All people",
     "residenze": "All residences",
     "articles": "All articles"
   }

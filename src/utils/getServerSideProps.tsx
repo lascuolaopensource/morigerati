@@ -2,11 +2,7 @@ import { GetServerSideProps } from 'next'
 import { loadDb } from '@/utils/db'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const collection = context.params?.collection as
-    | 'itinerari'
-    | 'luoghi'
-    | 'stakeholders'
-    | 'residenze'
+  const collection = context.params?.collection as 'itinerari' | 'luoghi' | 'persone' | 'residenze'
 
   if (!collection) {
     return {

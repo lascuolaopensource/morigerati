@@ -3,19 +3,20 @@ import React from 'react'
 import { notFound } from 'next/navigation'
 //DB
 import { loadDb } from '@/utils/db'
-import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { Media } from '@/payload-types'
 //Components
 import BackButton from '@/components/uiElements/backButton'
-import CardGrid from '@/components/card/cardsGrid'
 import { RandomPixel } from '@/components/uiElements/pixels'
 import Copertina from '@/components/uiElements/copertina'
-import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
 import Galleria from '@/components/galleria/galleria'
-import LuogoInfoRow from '@/components/luoghi/luogoInfoRow'
-import { ServiziCardWrapper } from '@/components/itinerari/servizioCardWrapper'
+// New imported components
+import LuogoHeader from '@/components/luoghi/LuogoHeader'
+import LuogoMap from '@/components/luoghi/LuogoMap'
+import RelatedItineraries from '@/components/luoghi/RelatedItineraries'
+import ServiziSection from '@/components/luoghi/ServiziSection'
+import LuogoInfoSection from '@/components/luoghi/LuogoInfoSection'
 //Locale
 import { getLocale, getMessages } from 'next-intl/server'
 //Metadata
@@ -100,7 +101,7 @@ export default async function LuogoPage({ params }: PageProps) {
 
   return (
     <div className="">
-      <Copertina copertina={luogoData?.copertina as Media | undefined} />
+      <Copertina copertina={luogoData?.copertina as Media} />
 
       <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
         <BackButton message={messages.backButton.luoghi} redirect={`/luoghi`} />
@@ -111,64 +112,20 @@ export default async function LuogoPage({ params }: PageProps) {
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 mb-8">
           {/* Left column: Content */}
           <div>
-            {luogoData.nome ? (
-              <h1 className="text-4xl text-luogoColorScuro font-bold mb-4">
-                {typeof luogoData.nome === 'object' &&
-                luogoData.nome !== null &&
-                'it' in luogoData.nome
-                  ? luogoData.nome[locale as keyof typeof luogoData.nome] ||
-                    (luogoData.nome as Record<string, string>).it ||
-                    ''
-                  : luogoData.nome}
-              </h1>
-            ) : (
-              <p></p>
-            )}
-            <div className="mb-6">
-              <RichText
-                data={
-                  typeof luogoData.testo === 'object' &&
-                  luogoData.testo !== null &&
-                  'it' in luogoData.testo &&
-                  'en' in luogoData.testo
-                    ? (luogoData.testo[locale] as SerializedEditorState)
-                    : (luogoData.testo as SerializedEditorState)
-                }
-                className="prose prose-lg"
-              />
-            </div>
+            <LuogoHeader nome={luogoData.nome} testo={luogoData.testo} locale={locale} />
 
-            {/* Contacts and Hours */}
-            <LuogoInfoRow
-              contatti={
-                luogoData.contatti
-                  ? luogoData.contatti.map((c) => ({
-                      nome: c.nome,
-                      telefono: c.telefono || undefined,
-                      email: c.email || undefined,
-                      link: c.link || undefined,
-                      id: c.id || undefined,
-                    }))
-                  : undefined
-              }
-              orari={luogoData.orari as SerializedEditorState | undefined}
-            />
+            {/* Contacts and Hours - now using LuogoInfoSection */}
+            <LuogoInfoSection luogoData={luogoData} />
           </div>
 
           {/* Right column: Map */}
           <div className="lg:order-2">
-            <div className="h-[500px] flex items-center justify-center">
-              <DynamicMappa initialPosition={position} initialZoom={14} showPositionPin={true} />
-            </div>
+            <LuogoMap position={position} />
           </div>
         </div>
 
         {/* Services section */}
-        {luogoData.servizi && Array.isArray(luogoData.servizi) && (
-          <div>
-            <ServiziCardWrapper servizi={luogoData.servizi} />
-          </div>
-        )}
+        <ServiziSection servizi={luogoData.servizi} />
 
         <div className="mt-8">
           <Galleria
@@ -178,16 +135,10 @@ export default async function LuogoPage({ params }: PageProps) {
         </div>
 
         {/* Itinerari correlati section */}
-        {itinerariCorrelati && itinerariCorrelati.length > 0 && (
-          <div className="mt-12 mb-16">
-            <h2 className="text-2xl font-semibold mb-6 text-center">
-              {messages.strings.itinerariesFoundIn}
-            </h2>
-            <div className="bg-luogoColor/5 p-6 rounded-lg">
-              <CardGrid items={itinerariCorrelati} category="itinerari" />
-            </div>
-          </div>
-        )}
+        <RelatedItineraries
+          itinerari={itinerariCorrelati}
+          messageTitle={messages.strings.itinerariesFoundIn}
+        />
       </div>
     </div>
   )

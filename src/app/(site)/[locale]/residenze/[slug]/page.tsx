@@ -1,0 +1,211 @@
+//Boilerplate
+import React from 'react'
+import { notFound } from 'next/navigation'
+//DB
+import { loadDb } from '@/utils/db'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import type { Media } from '@/payload-types'
+//Components
+import BackButton from '@/components/uiElements/backButton'
+import ProgrammaList from '@/components/residenze/programmaList'
+import DateDaDefinireBanner from '@/components/residenze/annuncio'
+import TutorCard from '@/components/residenze/espertiCard'
+import InfoResidenza from '@/components/residenze/infoResidenza'
+import PulsanteIscrizione from '@/components/residenze/pulsanteIscrizione'
+import Copertina from '@/components/uiElements/copertina'
+import Galleria from '@/components/galleria/galleria'
+//Utils
+import { isArrayEmpty } from '@/utils/isArrayEmpty'
+//Locale
+import { getLocale, getMessages } from 'next-intl/server'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const db = await loadDb()
+  const residenze = await db.find({ collection: 'residenze', depth: 2, locale: 'all' })
+
+  // Find the residenza with the matching slug
+  // Handle both localized and non-localized slugs
+  const residenzaData = residenze.docs.find((r) => {
+    if (typeof r.slug === 'object' && r.slug !== null) {
+      // Handle localized slugs
+      return r.slug === slug || Object.values(r.slug).includes(slug)
+    }
+    // Handle non-localized slugs
+    return r.slug === slug
+  })
+
+  if (!residenzaData) {
+    notFound()
+    return { title: 'Residenza non trovata | Morigerati' }
+  }
+
+  const metaImage = residenzaData?.meta?.image
+  const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
+  return {
+    title: `${residenzaData.nome} | Morigerati`,
+    description: residenzaData?.meta?.description,
+    openGraph: {
+      title: residenzaData?.meta?.title ?? residenzaData.nome ?? 'Morigerati',
+      description: residenzaData?.meta?.description || undefined,
+      images: imageUrl ? [{ url: imageUrl }] : undefined,
+      url: `${baseUrl}/residenze/${slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: residenzaData?.meta?.title ?? residenzaData.nome ?? 'Morigerati',
+      description: residenzaData?.meta?.description || undefined,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+    metadataBase: new URL(baseUrl),
+  }
+}
+
+export default async function ResidenzaSlug({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const db = await loadDb()
+  const locale = (await getLocale()) as 'it' | 'en'
+  const residenze = await db.find({ collection: 'residenze', depth: 2, locale: locale })
+
+  // Get translation messages
+  const messages = await getMessages()
+
+  // Translation function
+
+  // Find the residenza with the matching slug
+  // Handle both localized and non-localized slugs
+  const residenzaData = residenze.docs.find((r) => {
+    if (typeof r.slug === 'object' && r.slug !== null) {
+      // Handle localized slugs
+      return r.slug === slug || Object.values(r.slug).includes(slug)
+    }
+    // Handle non-localized slugs
+    return r.slug === slug
+  })
+
+  if (!residenzaData) {
+    notFound()
+  }
+
+  const isAfterCurrentDate = (dateString: string): boolean => {
+    const currentDate = new Date()
+    const startDate = new Date(dateString)
+    return currentDate > startDate
+  }
+
+  return (
+    <div>
+      <Copertina copertina={residenzaData.copertina as Media} />
+
+      <div className="p-4 sm:px-6 lg:px-12 xl:px-16 max-w-[1400px] mx-auto">
+        <BackButton message={messages.backButton.residenze} redirect={'/residenze'} />
+        <div className="pt-8" />
+
+        <div className="w-full max-w-[1200px] mx-auto space-y-12">
+          <div className="flex flex-col lg:flex-row gap-8 p-6">
+            <div className="lg:w-1/2 w-full overflow-hidden">
+              <div className="prose-custom-no-center">
+                {residenzaData.nome && (
+                  <h1 className="text-4xl font-bold !text-residenzeColor mb-4 break-words">
+                    {residenzaData.nome}
+                  </h1>
+                )}
+              </div>
+            </div>
+
+            <div className="lg:w-1/2 w-full">
+              {residenzaData.mostra_dettagli ? (
+                <InfoResidenza
+                  residenza={residenzaData}
+                  onlyDate={isAfterCurrentDate(residenzaData?.data_inizio ?? '')}
+                />
+              ) : residenzaData.data_inizio && residenzaData.data_fine ? (
+                <DateDaDefinireBanner
+                  datesNotAnnouncedText={messages.residenze.datesNotAnnounced}
+                />
+              ) : null}
+            </div>
+          </div>
+
+          <div className="mt-12 max-w-[800px] mx-auto">
+            <RichText
+              data={residenzaData.abstract as unknown as SerializedEditorState}
+              className="prose prose-lg"
+            />
+          </div>
+
+          <div className="mt-12 max-w-[800px] mx-auto">
+            <PulsanteIscrizione
+              link={residenzaData.link_iscrizione ?? ''}
+              show={residenzaData.mostra_pulsante_iscrizione ?? false}
+              buttonText={messages.residenze.register}
+              isArchived={isAfterCurrentDate(residenzaData?.data_inizio ?? '')}
+            />
+          </div>
+
+          {residenzaData.descrizione && (
+            <div className="max-w-[800px] mx-auto mt-16 bg-white p-8">
+              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6 pb-2">
+                {messages.residenze.description}
+              </h2>
+              <RichText
+                data={
+                  typeof residenzaData.descrizione === 'object' &&
+                  residenzaData.descrizione !== null
+                    ? ((residenzaData.descrizione[locale] || {}) as SerializedEditorState)
+                    : (residenzaData.descrizione as SerializedEditorState)
+                }
+                className="prose prose-lg"
+              />
+            </div>
+          )}
+
+          {!isArrayEmpty(residenzaData.programma) && (
+            <div className="max-w-[800px] mx-auto mt-16 bg-white px-8">
+              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6 pb-2 ">
+                {messages.residenze.program}
+              </h2>
+              <ProgrammaList
+                residenza={residenzaData}
+                noDetailsText={messages.residenze.noDetails}
+              />
+            </div>
+          )}
+
+          {!isArrayEmpty(residenzaData.esperti) && (
+            <div className="mt-16 w-full mx-auto">
+              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6">
+                {messages.residenze.experts}
+              </h2>
+              <div className="flex flex-wrap justify-center gap-8 mt-8">
+                {residenzaData.esperti?.map((esperto, index) => (
+                  <TutorCard
+                    key={index}
+                    esperto={esperto}
+                    locale={locale}
+                    translations={{
+                      projects: messages.residenze.projects,
+                      organizations: messages.residenze.organizations,
+                      expand: messages.residenze.expand,
+                      collapse: messages.residenze.collapse,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="max-w-[1400px] mx-auto">
+        {residenzaData.galleria && (
+          <Galleria items={residenzaData.galleria as Media[]} titleColor=" text-residenzeColor" />
+        )}
+      </div>
+    </div>
+  )
+}

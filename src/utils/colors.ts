@@ -2,7 +2,7 @@ export const textColors = {
   luoghi: 'text-luoghiColor',
   itinerari: 'text-itinerariColor',
   residenze: 'text-residenzeColor',
-  stakeholders: 'text-stakeholdersColor',
+  persone: 'text-personeColor',
 }
 
 export const bgColors = {
@@ -10,12 +10,12 @@ export const bgColors = {
   itinerari: 'bg-itinerariColor',
   residenze: 'bg-residenzeColor',
   default: 'bg-white',
-  stakeholders: 'bg-stakeholdersColor',
+  persone: 'bg-personeColor',
 }
 
 export const borderColors = {
   luoghi: 'border-luoghiColor',
   itinerari: 'border-itinerariColor',
   residenze: 'border-residenzeColor',
-  stakeholders: 'border-stakeholdersColor',
+  persone: 'border-personeColor',
 }

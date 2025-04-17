@@ -1,5 +1,4 @@
 import type { CollectionConfig } from 'payload'
-import { Collections } from '.'
 import * as F from '@/fields'
 import {
   lexicalEditor,

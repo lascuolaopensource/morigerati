@@ -2,7 +2,7 @@
 import React, { Suspense } from 'react'
 //DB
 import { loadDb } from '@/utils/db'
-import { Tracciati, Itinerari, Luoghi, Residenze, Stakeholder } from '@/payload-types'
+import { Tracciati, Itinerari, Luoghi, Residenze, Persone } from '@/payload-types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 //UI
@@ -17,7 +17,7 @@ import { Link } from '@/i18n/routing'
 import { getMessages, getLocale } from 'next-intl/server'
 
 // Collection types
-type CollectionString = 'luoghi' | 'itinerari' | 'residenze' | 'stakeholders'
+type CollectionString = 'luoghi' | 'itinerari' | 'residenze' | 'persone'
 
 // Filter function to get only future residenze (not yet ended)
 const filterFutureResidenze = (residenze: Residenze[]): Residenze[] => {
@@ -49,7 +49,7 @@ interface HomeCollectionProps {
 }
 
 const HomeCollection: React.FC<HomeCollectionProps> = async ({
-  collection = 'luoghi',
+  collection,
   layout = 'left',
   hasMap = false,
   tracciati = [],
@@ -69,7 +69,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
     collection: collection,
     sort: 'nome',
     depth: 2,
-  })) as { docs: Itinerari[] | Luoghi[] | Residenze[] | Stakeholder[] }
+  })) as { docs: Itinerari[] | Luoghi[] | Residenze[] | Persone[] }
 
   if (collection === 'residenze') {
     data.docs = filterFutureResidenze(data.docs)
@@ -92,7 +92,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
           <HomeTracksSection tracciati={tracciati} />
           <div className="flex justify-center mt-4">
             <Link
-              href={`/${locale}/${collection}`}
+              href={`/${collection}`}
               locale={locale}
               className={`${buttonColor} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
             >

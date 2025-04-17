@@ -7,19 +7,19 @@ import { cn } from '@/lib/utils'
 import Card from './card'
 //Constants
 import { GRID_COLUMNS } from './constants'
-import { CategoryType } from './types'
+import { CategoryType, Item } from './types'
 //DB
-import { Itinerari, Luoghi, Residenze, Stakeholder } from '@/payload-types'
+import { Media } from '@/payload-types'
 
 interface CardGridProps {
-  items: Itinerari[] | Luoghi[] | Residenze[] | Stakeholder[]
+  items: Item[]
   category: CategoryType
   singleRow?: boolean
   className?: string
 }
 
 const CardGrid: React.FC<CardGridProps> = ({
-  items = [],
+  items,
   category,
   singleRow = false,
   className = '',
@@ -39,6 +39,7 @@ const CardGrid: React.FC<CardGridProps> = ({
       }
 
       calculateVisibleCards()
+
       window.addEventListener('resize', calculateVisibleCards)
       return () => window.removeEventListener('resize', calculateVisibleCards)
     }
@@ -68,8 +69,8 @@ const CardGrid: React.FC<CardGridProps> = ({
           >
             <Card
               title={item.nome}
-              media={item.copertina as string}
-              slugUrl={`/${category}/${item.slug}`}
+              media={item.copertina as Media}
+              slugUrl={`/${category}/${typeof item.slug === 'string' ? item.slug : ''}`}
               category={category}
             />
           </div>

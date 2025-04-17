@@ -4,7 +4,7 @@ export const NAV_ITEMS = [
   { href: '/mobilita', key: 'navigation.mobility' },
   { href: '/luoghi', key: 'navigation.places' },
   { href: '/itinerari', key: 'navigation.itineraries' },
-  { href: '/persone', key: 'navigation.stakeholders' },
+  { href: '/persone', key: 'navigation.persone' },
   { href: '/residenze', key: 'navigation.residences' },
   { href: '/articoli', key: 'navigation.articles' },
 ] as const

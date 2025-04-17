@@ -1,8 +1,10 @@
 'use client'
-import { type Itinerari } from '@/payload-types'
+//Boilerplate
 import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
-import { useTranslation } from '@/components/TranslationProvider'
+//DB
+import { type Itinerari } from '@/payload-types'
+//Locale
+import { useMessages } from 'next-intl'
 
 const generateRandomLetter = (usedLetters: string[]): string => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
@@ -40,11 +42,11 @@ interface TipoSectionProps {
   tipo: ItinerarioDetailsProps['tipo']
   letter: string
   unavailableText: string
-  t: (key: string, defaultValue?: string) => string
 }
 
-const TipoSection = ({ tipo, letter, unavailableText, t }: TipoSectionProps) => {
+const TipoSection = ({ tipo, letter, unavailableText }: TipoSectionProps) => {
   const formatTipo = (tipoValue: typeof tipo) => {
+    const messages = useMessages()
     if (!tipoValue?.length) return unavailableText
 
     if (typeof tipoValue === 'object' && !Array.isArray(tipoValue)) {
@@ -54,10 +56,10 @@ const TipoSection = ({ tipo, letter, unavailableText, t }: TipoSectionProps) => 
 
     // Translate each tipo value using the translations
     if (Array.isArray(tipoValue)) {
-      return tipoValue.map((type) => t(`common:itinerari.types.${type}`, type)).join(', ')
+      return tipoValue.map((type) => messages?.itinerari?.types?.[type]).join(', ')
     }
 
-    return t(`common:itinerari.types.${tipoValue}`, tipoValue as string)
+    return messages?.itinerari?.types?.[tipoValue as string]
   }
 
   return (
@@ -79,15 +81,14 @@ export default function ItinerarioDetailsCard({
   tipo,
 }: ItinerarioDetailsProps) {
   const [letters, setLetters] = useState<string[]>([])
-  const { t } = useTranslation()
+  const messages = useMessages()
 
   // Translation values
-  const unavailableText = t('common:strings.notAvailable', 'Non disponibile')
-  const lengthLabel = t('common:itinerari.length', 'lunghezza')
-  const durationLabel = t('common:itinerari.duration', 'durata')
-  const elevationLabel = t('common:itinerari.elevation', 'dislivello')
-  const difficultyLabel = t('common:itinerari.difficulty', 'difficoltà')
-  const typeLabel = t('common:itinerari.type', 'tipo')
+  const unavailableText = messages?.itinerari?.notAvailable
+  const lengthLabel = messages?.itinerari?.length
+  const durationLabel = messages?.itinerari?.duration
+  const elevationLabel = messages?.itinerari?.elevation
+  const difficultyLabel = messages?.itinerari?.difficulty
 
   useEffect(() => {
     const newLetters: string[] = []
@@ -107,17 +108,17 @@ export default function ItinerarioDetailsCard({
 
     // If the value is a difficulty, translate it
     if (typeof value === 'string' && value.includes(' - ')) {
-      return t(`common:itinerari.difficulties.${value}`, value)
+      return messages?.itinerari?.difficulties?.[value]
     }
 
     // Translate the unit if provided
-    const translatedUnit = unit ? t(`common:itinerari.units.${unit}`, unit) : ''
+    const translatedUnit = unit ? messages?.itinerari?.units?.[unit] : ''
     return unit ? `${value} ${translatedUnit}` : value
   }
 
   return (
     <div className="pt-5 grid gap-2 w-full">
-      <TipoSection tipo={tipo} letter={letters[0] || ''} unavailableText={unavailableText} t={t} />
+      <TipoSection tipo={tipo} letter={letters[0] || ''} unavailableText={unavailableText} />
       <div className="grid grid-cols-2 gap-2 w-full">
         <DetailSection
           label={lengthLabel}

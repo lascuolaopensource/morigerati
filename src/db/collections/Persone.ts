@@ -1,11 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import * as F from '@/fields'
-import { Collections } from '.'
 import { slugField } from '@/fields'
 import { formatSlug } from '@/fields/slug/formatSlug'
 
-export const Stakeholders: CollectionConfig<'stakeholders'> = {
-  slug: 'stakeholders',
+export const Persone: CollectionConfig<'persone'> = {
+  slug: 'persone',
   labels: {
     singular: 'Persona',
     plural: 'Persone',
@@ -74,7 +73,7 @@ export const Stakeholders: CollectionConfig<'stakeholders'> = {
         F.tabContenuto,
         {
           label: 'Link',
-          fields: [...slugField('nome', { localized: true })],
+          fields: [...slugField('nome')],
         },
       ],
     },

@@ -1,6 +1,5 @@
 // Boilerplate
 import React from 'react'
-import type { Metadata } from 'next'
 //PayloadCMS
 import { loadDb } from '@/utils/db'
 import { RichText } from '@payloadcms/richtext-lexical/react'
@@ -12,7 +11,6 @@ import GridOverlay from '@/components/uiElements/gridOverlay'
 import HomeCollection from '@/components/home/homeCollection'
 //Locale
 import { getLocale } from 'next-intl/server'
-import { truncate } from 'node:fs/promises'
 
 //-------------------------------------------------------------------------
 
