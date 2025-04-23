@@ -28,7 +28,7 @@ const ProgrammaList: React.FC<ProgrammaListProps> = ({
           <div className="w-2/6 font-bold text-sm break-words">{giorno.programma || ''}</div>
           <div className="w-4/6 pl-1">
             {giorno.testo ? (
-              <div className="">
+              <div className="pl-4">
                 <RichText data={giorno.testo as SerializedEditorState} className="prose prose-lg" />
               </div>
             ) : (

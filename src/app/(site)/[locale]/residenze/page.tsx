@@ -85,11 +85,11 @@ interface ResidenzePagProps {
   searchParams: { filter?: string }
 }
 
-const Residenze = async ({ params, searchParams }: ResidenzePagProps) => {
-  const { locale } = params
-  const { filter = 'futura' } = searchParams
+const Residenze = async ({ searchParams }: ResidenzePagProps) => {
+  const locale = (await getLocale()) as 'it' | 'en'
+  const { filter = 'futura' } = await searchParams
   const db = await loadDb()
-  const testi = await db.findGlobal({ slug: 'testi', locale: locale as 'it' | 'en' })
+  const testi = await db.findGlobal({ slug: 'testi', locale: locale })
 
   return (
     <ArchivePageLayout

@@ -28,7 +28,7 @@ export function LocaleSwitcher() {
 
   return (
     <select
-      className="w-full max-w-40 text-sm bg-transparent border border-gray-300 rounded p-2 disabled:opacity-50"
+      className="w-full max-w-40 text-sm bg-transparent  p-2 "
       defaultValue={locale}
       disabled={isPending}
       onChange={onSelectChange}

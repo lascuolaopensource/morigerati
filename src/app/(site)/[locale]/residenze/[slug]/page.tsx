@@ -154,12 +154,7 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
                 {messages.residenze.description}
               </h2>
               <RichText
-                data={
-                  typeof residenzaData.descrizione === 'object' &&
-                  residenzaData.descrizione !== null
-                    ? ((residenzaData.descrizione[locale] || {}) as SerializedEditorState)
-                    : (residenzaData.descrizione as SerializedEditorState)
-                }
+                data={residenzaData.descrizione as SerializedEditorState}
                 className="prose prose-lg"
               />
             </div>
@@ -187,12 +182,9 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
                   <TutorCard
                     key={index}
                     esperto={esperto}
-                    locale={locale}
                     translations={{
                       projects: messages.residenze.projects,
                       organizations: messages.residenze.organizations,
-                      expand: messages.residenze.expand,
-                      collapse: messages.residenze.collapse,
                     }}
                   />
                 ))}
@@ -203,7 +195,7 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
       </div>
       <div className="max-w-[1400px] mx-auto">
         {residenzaData.galleria && (
-          <Galleria items={residenzaData.galleria as Media[]} titleColor=" text-residenzeColor" />
+          <Galleria items={residenzaData.galleria as Media[]} titleColor="text-residenzeColor" />
         )}
       </div>
     </div>

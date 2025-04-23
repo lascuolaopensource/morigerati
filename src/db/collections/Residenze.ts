@@ -1,9 +1,10 @@
 import { CollectionConfig } from 'payload'
-import { Collections } from '.'
 import * as F from '@/fields'
 import { formatSlug } from '@/fields/slug/formatSlug'
 
 import { slugField } from '@/fields'
+import { BoldFeature, ParagraphFeature } from '@payloadcms/richtext-lexical'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Residenze: CollectionConfig<'residenze'> = {
   slug: 'residenze',
@@ -152,6 +153,7 @@ export const Residenze: CollectionConfig<'residenze'> = {
                   type: 'richText',
                   label: 'Biografia',
                   localized: true,
+                  editor: lexicalEditor({ features: () => [ParagraphFeature(), BoldFeature()] }),
                 },
 
                 {

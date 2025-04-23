@@ -1,28 +1,27 @@
 'use client'
-import React, { useState } from 'react'
+//Boilerplate
+import React from 'react'
 import Image from 'next/image'
+//Locale
 import { Link } from '@/i18n/routing'
+import { useLocale } from 'next-intl'
+//DB
 import { Residenze, Media } from '@/payload-types'
-import { Locale } from '@/utils/localization'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 type Esperto = NonNullable<Residenze['esperti']>[number]
 
 interface TutorCardProps {
   esperto: Esperto
-  locale?: Locale
-  translations?: { projects?: string; organizations?: string; expand?: string; collapse?: string }
+  translations?: { projects?: string; organizations?: string }
 }
 
-const TutorCard: React.FC<TutorCardProps> = ({ esperto, locale = 'it', translations = {} }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
+const TutorCard: React.FC<TutorCardProps> = ({ esperto, translations = {} }) => {
+  const locale = useLocale()
 
   // Default translations with fallbacks
-  const {
-    projects = 'Progetti',
-    organizations = 'Organizzazioni',
-    expand = 'Espandi',
-    collapse = 'Comprimi',
-  } = translations
+  const { projects = 'Progetti', organizations = 'Organizzazioni' } = translations
 
   const renderMedia = (media: Media) => {
     return (
@@ -42,14 +41,6 @@ const TutorCard: React.FC<TutorCardProps> = ({ esperto, locale = 'it', translati
       return esperto.nome[locale] || ''
     }
     return esperto.nome || ''
-  }
-
-  // Get localized biografia if available
-  const getBiografia = () => {
-    if (typeof esperto.biografia === 'object' && esperto.biografia !== null) {
-      return esperto.biografia[locale] || ''
-    }
-    return esperto.biografia || ''
   }
 
   // Get localized progetti if available
@@ -91,12 +82,12 @@ const TutorCard: React.FC<TutorCardProps> = ({ esperto, locale = 'it', translati
     return esperto.organizzazioni
   }
 
-  const biografia = getBiografia()
   const progetti = getProjetti()
   const organizzazioni = getOrganizzazioni()
 
+  const biografia = esperto.biografia as SerializedEditorState
   return (
-    <div className="w-full md:w-[48%] bg-residenzeColor/20 overflow-hidden rounded-md">
+    <div className="w-full md:w-[48%] bg-residenzeColor/20 overflow-hidden rounded-md h-auto">
       <div className="flex p-4 gap-4">
         {/* Left column - Image */}
         <div className="w-1/3 max-w-[240px]">
@@ -116,60 +107,43 @@ const TutorCard: React.FC<TutorCardProps> = ({ esperto, locale = 'it', translati
           <h3 className="font-bold text-lg">{getNome()}</h3>
           <div className="flex-grow mt-2">
             <div className="text-sm leading-normal">
-              {isExpanded ? (
-                <>
-                  {biografia}
+              <RichText data={biografia as SerializedEditorState} />
 
-                  {/* Projects and Organizations */}
-                  {progetti && progetti.length > 0 && (
-                    <div className="mt-2">
-                      <h4 className="font-medium text-sm mb-1">{projects}</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {progetti.map((project, index) => (
-                          <Link
-                            key={index}
-                            href={project.link}
-                            className="underline hover:text-residenzeColor transition-colors text-sm"
-                          >
-                            {typeof project.nome === 'object' ? project.nome[locale] : project.nome}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+              {/* Projects and Organizations */}
+              {progetti && progetti.length > 0 && (
+                <div className="mt-2">
+                  <h4 className="font-medium text-sm mb-1">{projects}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {progetti.map((project, index) => (
+                      <Link
+                        key={index}
+                        href={project.link}
+                        className="underline hover:text-residenzeColor transition-colors text-sm"
+                      >
+                        {typeof project.nome === 'object' ? project.nome[locale] : project.nome}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-                  {organizzazioni && organizzazioni.length > 0 && (
-                    <div className="mt-2">
-                      <h4 className="font-medium text-sm mb-1">{organizations}</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {organizzazioni.map((org, index) => (
-                          <Link
-                            key={index}
-                            href={org.link}
-                            className="underline hover:text-residenzeColor transition-colors text-sm"
-                          >
-                            {typeof org.nome === 'object' ? org.nome[locale] : org.nome}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <>
-                  {typeof biografia === 'string' ? biografia.slice(0, 200) : biografia}
-                  {typeof biografia === 'string' && biografia.length > 200 && '...'}
-                </>
+              {organizzazioni && organizzazioni.length > 0 && (
+                <div className="mt-2">
+                  <h4 className="font-medium text-sm mb-1">{organizations}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {organizzazioni.map((org, index) => (
+                      <Link
+                        key={index}
+                        href={org.link}
+                        className="underline hover:text-residenzeColor transition-colors text-sm"
+                      >
+                        {typeof org.nome === 'object' ? org.nome[locale] : org.nome}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
-            {typeof biografia === 'string' && biografia.length > 200 && (
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="text-xs text-residenzeColor font-medium underline mt-2"
-              >
-                {isExpanded ? collapse : expand}
-              </button>
-            )}
           </div>
         </div>
       </div>
