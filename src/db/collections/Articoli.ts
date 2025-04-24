@@ -40,7 +40,7 @@ export const Articoli: CollectionConfig = {
               type: 'array',
               label: 'Tags',
               maxRows: 3,
-              localized: true,
+              fallback: false,
               fields: [
                 {
                   name: 'tag',

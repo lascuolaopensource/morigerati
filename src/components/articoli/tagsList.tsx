@@ -1,21 +1,28 @@
+//Boilerplate
 import React from 'react'
+//UI
 import { Badge } from '@/components/ui/badge'
+//Utils
 import { makeSafeForDisplay } from '@/lib/safeDisplay'
-import { Locale } from '@/utils/localization'
+//Locale
+import { getLocale } from 'next-intl/server'
 
 interface TagsListProps {
   tags: (string | { tag?: string } | any)[]
   className?: string
-  locale?: Locale
+  locale?: string
 }
 
 /**
  * Component for displaying a list of tags using shadcn Badge component
  */
-export default function TagsList({ tags, className = '', locale = 'it' }: TagsListProps) {
+export default function TagsList({ tags, className = '', locale: propLocale }: TagsListProps) {
   if (!tags || tags.length === 0) {
     return null
   }
+
+  // Use provided locale prop if available, otherwise get from next-intl
+  const locale = propLocale || getLocale()
 
   return (
     <div className={`flex flex-wrap gap-2 my-3 ${className}`}>
