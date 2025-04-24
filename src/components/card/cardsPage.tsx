@@ -1,10 +1,15 @@
+//Boilerplate
 import React from 'react'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import { fetchGlobalData, fetchCollectionData } from '@/utils/dataFetching'
-import ArchivePageLayout from '@/components/pageLayout/ArchivePageLayout'
-import { type Testi as TestiType } from '@/payload-types'
+//Locale
 import { getLocale } from 'next-intl/server'
+//DB
 import { Globals } from '@/db/globals'
+import { type Testi as TestiType } from '@/payload-types'
+//Utils
+import { fetchGlobalData, fetchCollectionData } from '@/utils/dataFetching'
+//Components
+import ArchivePageLayout from '@/components/pageLayout/ArchivePageLayout'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 // Force dynamic rendering and disable cache to ensure fresh data
 export const dynamic = 'force-dynamic'

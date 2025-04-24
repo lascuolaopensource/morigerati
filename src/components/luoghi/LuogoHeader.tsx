@@ -3,29 +3,16 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 interface LuogoHeaderProps {
-  nome: string | Record<string, string>
-  testo: SerializedEditorState | Record<string, SerializedEditorState>
-  locale: 'it' | 'en'
+  nome: string
+  testo: SerializedEditorState
 }
 
-export default function LuogoHeader({ nome, testo, locale }: LuogoHeaderProps) {
-  const displayName =
-    typeof nome === 'object' && nome !== null && 'it' in nome ? nome[locale] || nome.it || '' : nome
-
-  const displayText =
-    typeof testo === 'object' && testo !== null && 'it' in testo && 'en' in testo
-      ? (testo[locale] as SerializedEditorState)
-      : (testo as SerializedEditorState)
-
+export default function LuogoHeader({ nome, testo }: LuogoHeaderProps) {
   return (
     <div>
-      {displayName ? (
-        <h1 className="text-4xl text-luogoColorScuro font-bold mb-4">{displayName}</h1>
-      ) : (
-        <p></p>
-      )}
+      <h1 className="text-4xl text-luogoColorScuro font-bold mb-4">{nome}</h1>
       <div className="mb-6">
-        <RichText data={displayText} className="prose prose-lg" />
+        <RichText data={testo} className="prose prose-lg" />
       </div>
     </div>
   )

@@ -1,9 +1,10 @@
 'use client'
-
+//Boilerplate
 import React, { useRef, useEffect, useState } from 'react'
+//UI
 import Image from 'next/image'
+//DB
 import { Media } from '@/payload-types'
-import { FaPlay } from 'react-icons/fa'
 
 export interface GalleryCardProps {
   media: Media

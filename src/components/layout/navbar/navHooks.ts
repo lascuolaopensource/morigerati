@@ -5,7 +5,7 @@ import { bgColors } from '@/utils/colors'
 // Custom hook for handling theme colors based on current path
 export const useThemeColors = () => {
   const pathname = usePathname()
-  const path = pathname ? (pathname.split('/')[1] as keyof typeof bgColors) : 'default'
+  const path = pathname ? (pathname.split('/')[2] as keyof typeof bgColors) : 'default'
   return bgColors[path] || bgColors.default
 }
 

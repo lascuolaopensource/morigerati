@@ -2,7 +2,6 @@
 import React from 'react'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { useMessages } from 'next-intl'
 
 interface Servizio {

@@ -1,6 +1,10 @@
+//Boilerplate
 import React from 'react'
+//UI
 import { Search, Calendar, X } from 'lucide-react'
+//Components
 import { TagFilter } from './TagFilter'
+//Locale
 import { useTranslations } from 'next-intl'
 
 interface SearchFiltersProps {
@@ -32,20 +36,6 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
   hasActiveFilters,
   messages,
 }) => {
-  const tagFilterTranslations = {
-    selectedTags: messages('selectedTags'),
-    selectTags: messages('selectTags'),
-    availableTags: messages('availableTags'),
-    searchTags: messages('searchTags'),
-    noTagsFound: messages('noTagsFound'),
-    noTagsAvailable: messages('noTagsAvailable'),
-    showLessTags: messages('showLessTags'),
-    showAllTags: messages('showAllTags'),
-    tags: messages('tags'),
-    selectedTagsCount: messages('selectedTagsCount'),
-    clearAll: messages('clearAll'),
-  }
-
   return (
     <div className="mb-8 space-y-4">
       {/* Search */}
@@ -85,7 +75,6 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
           toggleTag={toggleTag}
           clearTags={clearTags}
           isMobile={isMobile}
-          translations={tagFilterTranslations}
         />
 
         {/* Clear filters */}

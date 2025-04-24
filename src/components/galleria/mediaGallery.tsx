@@ -1,7 +1,11 @@
 'use client'
+//Boilerplate
 import React, { useState, useEffect, useCallback } from 'react'
+//UI
 import Image from 'next/image'
+//DB
 import { MediaGalleryProps } from './types'
+//UI
 import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa'
 
 const MediaGallery: React.FC<MediaGalleryProps> = ({ items, initialIndex = 0, onClose }) => {

@@ -3,7 +3,6 @@ import React from 'react'
 import { notFound } from 'next/navigation'
 //DB
 import { loadDb } from '@/utils/db'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { Media } from '@/payload-types'
 //Components
 import BackButton from '@/components/uiElements/backButton'
@@ -11,7 +10,6 @@ import { RandomPixel } from '@/components/uiElements/pixels'
 import Copertina from '@/components/uiElements/copertina'
 import { LatLngTuple } from 'leaflet'
 import Galleria from '@/components/galleria/galleria'
-// New imported components
 import LuogoHeader from '@/components/luoghi/LuogoHeader'
 import LuogoMap from '@/components/luoghi/LuogoMap'
 import RelatedItineraries from '@/components/luoghi/RelatedItineraries'
@@ -112,7 +110,7 @@ export default async function LuogoPage({ params }: PageProps) {
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 mb-8">
           {/* Left column: Content */}
           <div>
-            <LuogoHeader nome={luogoData.nome} testo={luogoData.testo} locale={locale} />
+            <LuogoHeader nome={luogoData.nome} testo={luogoData.testo} />
 
             {/* Contacts and Hours - now using LuogoInfoSection */}
             <LuogoInfoSection luogoData={luogoData} />

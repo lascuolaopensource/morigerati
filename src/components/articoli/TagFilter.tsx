@@ -1,7 +1,12 @@
+//Boilerplate
 import React, { useRef, useEffect, useState } from 'react'
+//UI
 import { Tag, ChevronDown, ChevronUp, Search, X } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+//Utils
 import { makeSafeForDisplay } from '@/lib/safeDisplay'
+//Locale
+import { useTranslations } from 'next-intl'
 
 interface TagFilterProps {
   allTags: string[]
@@ -9,19 +14,6 @@ interface TagFilterProps {
   toggleTag: (tag: string) => void
   clearTags: () => void
   isMobile: boolean
-  translations: {
-    selectedTags: string
-    selectTags: string
-    availableTags: string
-    searchTags: string
-    noTagsFound: string
-    noTagsAvailable: string
-    showLessTags: string
-    showAllTags: string
-    tags: string
-    selectedTagsCount: string
-    clearAll: string
-  }
 }
 
 export const TagFilter: React.FC<TagFilterProps> = ({
@@ -30,8 +22,9 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   toggleTag,
   clearTags,
   isMobile,
-  translations: t,
 }) => {
+  const messages = useTranslations()
+
   const [tagSearchTerm, setTagSearchTerm] = useState('')
   const [showAllTags, setShowAllTags] = useState(false)
   const [isTagDropdownOpen, setIsTagDropdownOpen] = useState(false)
@@ -116,9 +109,11 @@ export const TagFilter: React.FC<TagFilterProps> = ({
           className="bg-white border border-gray-200 rounded-sm py-1 px-2 text-sm focus:outline-none focus:ring-1 focus:ring-articoliColor"
         >
           <option value="" disabled>
-            {selectedTags.length > 0 ? `${t.selectedTags} (${selectedTags.length})` : t.selectTags}
+            {selectedTags.length > 0
+              ? `${messages('articoli.selectedTags')} (${selectedTags.length})`
+              : messages('articoli.selectTags')}
           </option>
-          <optgroup label={t.availableTags}>
+          <optgroup label={messages('availableTags')}>
             {allTags.map((tag, index) => (
               <option
                 key={index}
@@ -144,7 +139,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
         }`}
       >
         <Tag className="h-4 w-4 mr-1" />
-        <span>{t.tags}</span>
+        <span>{messages('articoli.tags')}</span>
         {selectedTags.length > 0 && (
           <Badge className="ml-1 px-1.5 py-0 text-[10px] bg-articoliColor">
             {selectedTags.length}
@@ -165,7 +160,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
               <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-gray-400" />
               <input
                 type="text"
-                placeholder={t.searchTags}
+                placeholder={messages('articoli.searchTags')}
                 value={tagSearchTerm}
                 onChange={(e) => setTagSearchTerm(e.target.value)}
                 className="w-full pl-7 pr-2 py-1.5 text-xs border border-gray-200 rounded-sm focus:outline-none focus:ring-1 focus:ring-articoliColor"
@@ -190,7 +185,9 @@ export const TagFilter: React.FC<TagFilterProps> = ({
                 ))
               ) : (
                 <p className="text-xs text-gray-500 py-1">
-                  {tagSearchTerm ? t.noTagsFound : t.noTagsAvailable}
+                  {tagSearchTerm
+                    ? messages('articoli.noTagsFound')
+                    : messages('articoli.noTagsAvailable')}
                 </p>
               )}
             </div>
@@ -203,12 +200,12 @@ export const TagFilter: React.FC<TagFilterProps> = ({
               >
                 {showAllTags ? (
                   <>
-                    <ChevronUp className="h-3 w-3 mr-1" /> {t.showLessTags}
+                    <ChevronUp className="h-3 w-3 mr-1" /> {messages('articoli.showLessTags')}
                   </>
                 ) : (
                   <>
-                    <ChevronDown className="h-3 w-3 mr-1" /> {t.showAllTags} {filteredTags.length}{' '}
-                    {t.tags}
+                    <ChevronDown className="h-3 w-3 mr-1" /> {messages('articoli.showAllTags')}{' '}
+                    {filteredTags.length} {messages('articoli.tags')}
                   </>
                 )}
               </button>
@@ -219,13 +216,13 @@ export const TagFilter: React.FC<TagFilterProps> = ({
               <div className="mt-3 pt-2 border-t border-gray-200">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-gray-600">
-                    {t.selectedTagsCount} {selectedTags.length}
+                    {messages('articoli.selectedTagsCount')} {selectedTags.length}
                   </span>
                   <button
                     onClick={clearTags}
                     className="text-xs text-articoliColor hover:underline"
                   >
-                    {t.clearAll}
+                    {messages('articoli.clearAll')}
                   </button>
                 </div>
               </div>

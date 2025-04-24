@@ -1,6 +1,9 @@
+//Boilerplate
 import React from 'react'
 import Image from 'next/image'
+//Locale
 import { Link } from '@/i18n/routing'
+//Components
 import { Card, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
