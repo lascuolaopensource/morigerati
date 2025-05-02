@@ -217,8 +217,8 @@ export const Mappa: React.FC<MapProps> = ({
             setGpxBounds(bounds)
 
             // Find the first and last layer in the GPX (they should be polylines)
-            let startPoint = null
-            let endPoint = null
+            let startPoint: L.LatLng | null = null
+            let endPoint: L.LatLng | null = null
 
             // Replace any default markers with dot markers - critical for the blue pin in the screenshot
             if (mapRef.current) {
@@ -245,8 +245,10 @@ export const Mappa: React.FC<MapProps> = ({
                   })
 
                   // Remove the original marker and add the dot marker
-                  mapRef.current.removeLayer(layer)
-                  dotMarker.addTo(mapRef.current)
+                  if (mapRef.current) {
+                    mapRef.current.removeLayer(layer)
+                    dotMarker.addTo(mapRef.current)
+                  }
                 }
               })
             }
@@ -255,8 +257,20 @@ export const Mappa: React.FC<MapProps> = ({
               if (layer instanceof L.Polyline) {
                 const latlngs = layer.getLatLngs()
                 if (latlngs && latlngs.length > 0) {
-                  if (!startPoint) startPoint = latlngs[0]
-                  endPoint = latlngs[latlngs.length - 1]
+                  // Handle potential nested arrays (multi-polylines)
+                  const firstPoint =
+                    Array.isArray(latlngs[0]) && !('lat' in latlngs[0])
+                      ? (latlngs[0] as L.LatLng[])[0]
+                      : (latlngs[0] as L.LatLng)
+
+                  const lastArray = latlngs[latlngs.length - 1]
+                  const lastPoint =
+                    Array.isArray(lastArray) && !('lat' in lastArray)
+                      ? (lastArray as L.LatLng[])[lastArray.length - 1]
+                      : (lastArray as L.LatLng)
+
+                  if (!startPoint) startPoint = firstPoint
+                  endPoint = lastPoint
                 }
               }
 

@@ -112,7 +112,8 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
     return () => {
       // Reset dell'ID leaflet e pulizia del container
       if (mapContainer) {
-        mapContainer._leaflet_id = null
+        // Use type assertion to safely access Leaflet's internal property
+        ;(mapContainer as any)._leaflet_id = null
         while (mapContainer.firstChild) {
           mapContainer.removeChild(mapContainer.firstChild)
         }
@@ -148,20 +149,24 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
 
         // Clear del container per sicurezza
         const container = mapContainerRef.current
-        while (container.firstChild) {
-          container.removeChild(container.firstChild)
-        }
+        if (container) {
+          while (container.firstChild) {
+            container.removeChild(container.firstChild)
+          }
 
-        // Verifica se c'è già una mappa nel container
-        if (container._leaflet_id) {
-          console.warn('Rilevata mappa Leaflet esistente nel container, pulizia...')
-          container._leaflet_id = null
+          // Verifica se c'è già una mappa nel container
+          if ((container as any)._leaflet_id) {
+            console.warn('Rilevata mappa Leaflet esistente nel container, pulizia...')
+            ;(container as any)._leaflet_id = null
+          }
         }
 
         // Determina se siamo su mobile
         const isMobile = window.innerWidth < 768
 
         // Inizializza la mappa Leaflet
+        if (!container) return // Exit if container is null
+
         const map = L.map(container, {
           zoomControl: !isMobile,
           attributionControl: true,
@@ -243,7 +248,7 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
             // Analizza il GPX per ottenere i punti
             const parser = new DOMParser()
             const gpx = parser.parseFromString(gpxText, 'text/xml')
-            const points = []
+            const points: L.LatLngTuple[] = []
 
             // Ottieni tutti i punti di traccia
             const trackpoints = gpx.getElementsByTagName('trkpt')
