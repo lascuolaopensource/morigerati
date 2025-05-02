@@ -2,7 +2,7 @@
 //Boilerplate
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 //DB
-import { Itinerari } from '@/payload-types'
+import type { Itinerari } from '@/payload-types'
 //Components
 import renderElement from '@/utils/renderElement'
 //Locale

@@ -2,8 +2,8 @@
 import React, { Suspense } from 'react'
 //DB
 import { loadDb } from '@/utils/db'
-import { Tracciati, Itinerari, Luoghi, Residenze, Persone } from '@/payload-types'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import type { Tracciati, Itinerari, Luoghi, Residenze, Persone } from '@/payload-types'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 //UI
 import { ArrowRight } from 'lucide-react'

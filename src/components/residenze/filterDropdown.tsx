@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Residenze } from '@/payload-types'
+import type { Residenze } from '@/payload-types'
 import CardGrid from '@/components/card/cardsGrid'
 
 interface FilterDropdownProps {

@@ -1,4 +1,4 @@
-import { Tracciati } from '@/payload-types'
+import type { Tracciati } from '@/payload-types'
 
 const isTracciato = (obj: any): obj is Tracciati => {
   return obj && typeof obj === 'object' && 'url' in obj

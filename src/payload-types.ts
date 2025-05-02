@@ -419,7 +419,7 @@ export interface Tracciati {
 export interface Persone {
   id: string;
   nome: string;
-  tipologia?: ('Azienda' | 'Ristoratori' | 'etc') | null;
+  tipologia?: string | null;
   /**
    * @minItems 2
    * @maxItems 2
@@ -1140,7 +1140,6 @@ export interface Home {
       [k: string]: unknown;
     };
   };
-  tracciati_mappa?: (string | Tracciati)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1392,7 +1391,6 @@ export interface HomeSelect<T extends boolean = true> {
         title?: T;
         testo?: T;
       };
-  tracciati_mappa?: T;
   meta?:
     | T
     | {

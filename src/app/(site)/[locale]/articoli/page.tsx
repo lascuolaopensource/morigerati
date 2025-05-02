@@ -1,19 +1,33 @@
 //Boilerplate
 import React from 'react'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+
 //Db
-import { Articoli, type Testi as TestiType } from '@/payload-types'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { type Testi as TestiType } from '@/payload-types'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { Globals } from '@/db/globals'
 import { loadDb } from '@/utils/db'
 //Utils
-import { fetchGlobalData, fetchCollectionData } from '@/utils/dataFetching'
+import { fetchGlobalData } from '@/utils/dataFetching'
+import { createMetadata } from '@/utils/metadataHelpers'
 //Components
 import ArticlesList from '@/components/articoli/ArticlesList'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 //Locale
 import { getLocale } from 'next-intl/server'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as 'en' | 'it'
+  const testi = await fetchGlobalData<TestiType>(Globals.Testi, locale)
+
+  return createMetadata(testi.articoli, {
+    pagePath: 'articoli',
+    defaultTitle: locale === 'it' ? 'Articoli' : 'Articles',
+    titleField: 'title', // Using the title field from testi.articoli if available
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
+    locale,
+  })
+}
 
 export default async function ArticoliPage() {
   const db = await loadDb()

@@ -4,9 +4,9 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 //DB
 import { loadDb } from '@/utils/db'
-import { Luoghi, Persone } from '@/payload-types'
-import { type Media } from '@/payload-types'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import type { Luoghi, Persone } from '@/payload-types'
+import type { Media } from '@/payload-types'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 //Components
 import BackButton from '@/components/uiElements/backButton'
@@ -19,9 +19,9 @@ import { LatLngTuple } from 'leaflet'
 import Copertina from '@/components/uiElements/copertina'
 import MediaViewer from '@/components/uiElements/mediaViewer'
 import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
-import { RandomPixel } from '@/components/uiElements/pixels'
 //Locale
 import { getLocale, getMessages } from 'next-intl/server'
+import { createMetadata } from '@/utils/metadataHelpers'
 
 interface ItinerarioParams {
   slug: string
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const itinerari = await db.find({
     collection: 'itinerari',
     depth: 2,
-    locale: locale as 'it' | 'en', // Casting per utilizzare il tipo corretto
+    locale: locale as 'it' | 'en',
   })
 
   // For localized slugs, we need to find the document by checking if slug matches
@@ -60,26 +60,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
-  const metaImage = itinerarioData?.meta?.image
-  const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
-  return {
-    title: `${itinerarioData.nome} | Morigerati`,
-    description: itinerarioData?.meta?.description,
-    openGraph: {
-      title: itinerarioData?.meta?.title ?? itinerarioData.nome ?? 'Morigerati',
-      description: itinerarioData?.meta?.description || undefined,
-      images: imageUrl ? [{ url: imageUrl }] : undefined,
-      url: `${baseUrl}/${locale}/itinerari/${slug}`,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: itinerarioData?.meta?.title ?? itinerarioData.nome ?? 'Morigerati',
-      description: itinerarioData?.meta?.description || undefined,
-      images: imageUrl ? [imageUrl] : undefined,
-    },
-    metadataBase: new URL(baseUrl),
-  }
+  return createMetadata(itinerarioData, {
+    pagePath: `itinerari/${slug}`,
+    titleField: 'nome',
+    defaultTitle: locale === 'it' ? 'Itinerario' : 'Itinerary',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
+    locale,
+  })
 }
 
 export const dynamic = 'force-dynamic'

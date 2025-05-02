@@ -2,12 +2,14 @@ import { loadDb } from '@/utils/db'
 
 export async function getHomeTracksData() {
   const db = await loadDb()
-  const home = await db.findGlobal({
-    slug: 'home',
+
+  // Fetch all tracciati instead of relying on the relationship field
+  const { docs: tracciati } = await db.find({
+    collection: 'tracciati',
     depth: 2,
   })
 
   return {
-    tracciati: home.tracciati_mappa || [],
+    tracciati: tracciati || [],
   }
 }

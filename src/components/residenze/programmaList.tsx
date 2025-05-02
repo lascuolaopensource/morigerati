@@ -1,8 +1,8 @@
 //Boilerplate
 import React from 'react'
-import { Residenze } from '@/payload-types'
+import type { Residenze } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 interface ProgrammaListProps {
   residenza: Residenze

@@ -1,9 +1,10 @@
 //Boilerplate
 import React from 'react'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 //DB
 import { loadDb } from '@/utils/db'
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 //Components
 import BackButton from '@/components/uiElements/backButton'
 import { RandomPixel } from '@/components/uiElements/pixels'
@@ -18,7 +19,7 @@ import LuogoInfoSection from '@/components/luoghi/LuogoInfoSection'
 //Locale
 import { getLocale, getMessages } from 'next-intl/server'
 //Metadata
-import { generateMetadataForPage } from '@/utils/generateMetadata'
+import { createMetadata } from '@/utils/metadataHelpers'
 
 interface LuogoParams {
   slug: string
@@ -26,6 +27,40 @@ interface LuogoParams {
 
 interface PageProps {
   params: Promise<LuogoParams>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const locale = (await getLocale()) as 'it' | 'en'
+  const db = await loadDb()
+
+  const luoghi = await db.find({
+    collection: 'luoghi',
+    depth: 2,
+    locale: locale,
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+  })
+
+  const luogoData = luoghi.docs[0]
+
+  if (!luogoData) {
+    notFound()
+    return {
+      title: locale === 'it' ? 'Luogo non trovato | Morigerati' : 'Place not found | Morigerati',
+    }
+  }
+
+  return createMetadata(luogoData, {
+    pagePath: `luoghi/${slug}`,
+    titleField: 'nome',
+    defaultTitle: locale === 'it' ? 'Luogo' : 'Place',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
+    locale,
+  })
 }
 
 export const dynamic = 'force-dynamic'
@@ -54,14 +89,6 @@ export default async function LuogoPage({ params }: PageProps) {
     console.error('Luogo not found with slug:', slug)
     notFound()
   }
-
-  generateMetadataForPage({
-    title: luogoData.nome || 'Titolo di default',
-    description: luogoData.meta?.description || undefined,
-    imageUrl: luogoData.copertina as string,
-    collection: 'luoghi',
-    slug,
-  })
 
   // Get all itinerari
   const allItinerari = await db.find({

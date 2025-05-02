@@ -1,5 +1,5 @@
-import { Media } from '@/payload-types'
-import { Itinerari, Luoghi, Persone, Residenze } from '@/payload-types'
+import type { Media } from '@/payload-types'
+import type { Itinerari, Luoghi, Persone, Residenze } from '@/payload-types'
 
 export type Item = Itinerari | Luoghi | Persone | Residenze
 

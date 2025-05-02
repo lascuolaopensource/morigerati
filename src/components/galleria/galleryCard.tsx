@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from 'react'
 //UI
 import Image from 'next/image'
 //DB
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 
 export interface GalleryCardProps {
   media: Media
@@ -12,18 +12,32 @@ export interface GalleryCardProps {
 }
 
 const GalleryCard: React.FC<GalleryCardProps> = ({ media, height = 240 }) => {
-  if (!media) return null
-
-  const isVideo = media.mimeType?.startsWith('video/')
-  const aspectRatio = media.width && media.height ? `${media.width}/${media.height}` : '1/1'
   const videoRef = useRef<HTMLVideoElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [hasMedia, setHasMedia] = useState<boolean>(!!media)
+  const [isVideo, setIsVideo] = useState<boolean>(false)
+  const [aspectRatio, setAspectRatio] = useState<string>('1/1')
+
+  // Set initial values in useEffect rather than during render
+  useEffect(() => {
+    if (!media) {
+      setHasMedia(false)
+      return
+    }
+
+    setHasMedia(true)
+    setIsVideo(media.mimeType?.startsWith('video/') || false)
+    setAspectRatio(media.width && media.height ? `${media.width}/${media.height}` : '1/1')
+  }, [media])
 
   // Usa Intersection Observer per rilevare quando la card diventa visibile
   useEffect(() => {
-    if (!cardRef.current) return
+    if (!hasMedia) return
+
+    const currentCardRef = cardRef.current
+    if (!currentCardRef) return
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -37,18 +51,16 @@ const GalleryCard: React.FC<GalleryCardProps> = ({ media, height = 240 }) => {
       },
     )
 
-    observer.observe(cardRef.current)
+    observer.observe(currentCardRef)
 
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current)
-      }
+      observer.unobserve(currentCardRef)
     }
-  }, [])
+  }, [hasMedia])
 
   // Carica l'anteprima solo quando la card è visibile
   useEffect(() => {
-    if (!isVideo || !isVisible || !videoRef.current || isLoaded) return
+    if (!hasMedia || !isVideo || !isVisible || !videoRef.current || isLoaded) return
 
     const video = videoRef.current
 
@@ -96,14 +108,18 @@ const GalleryCard: React.FC<GalleryCardProps> = ({ media, height = 240 }) => {
 
     return () => {
       clearTimeout(timer)
-      if (videoRef.current) {
-        videoRef.current.onerror = null
+      // Save the current reference to avoid the stale ref issue
+      const currentVideoRef = videoRef.current
+      if (currentVideoRef) {
+        currentVideoRef.onerror = null
         // Rimuovi eventuali listener rimasti
-        videoRef.current.removeEventListener('loadedmetadata', () => {})
-        videoRef.current.removeEventListener('seeked', () => {})
+        currentVideoRef.removeEventListener('loadedmetadata', () => {})
+        currentVideoRef.removeEventListener('seeked', () => {})
       }
     }
-  }, [isVideo, isVisible, isLoaded])
+  }, [hasMedia, isVideo, isVisible, isLoaded])
+
+  if (!hasMedia) return null
 
   return (
     <div

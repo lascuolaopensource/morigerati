@@ -1,7 +1,7 @@
 //Boilerplate
 import React from 'react'
 import Image from 'next/image'
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 
 interface CopertinaProps {
   copertina: Media

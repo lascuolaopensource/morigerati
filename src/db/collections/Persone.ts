@@ -56,8 +56,8 @@ export const Persone: CollectionConfig<'persone'> = {
                 F.nome,
                 {
                   name: 'tipologia',
-                  type: 'select',
-                  options: ['Azienda', 'Ristoratori', 'etc'],
+                  type: 'text',
+                  localized: true,
                 },
               ],
             },

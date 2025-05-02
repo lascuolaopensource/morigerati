@@ -1,15 +1,15 @@
 //Boilerplate
 import React from 'react'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 //DB
 import { loadDb } from '@/utils/db'
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 //Components
 import BackButton from '@/components/uiElements/backButton'
 import { LatLngTuple } from 'leaflet'
 import Copertina from '@/components/uiElements/copertina'
 import Galleria from '@/components/galleria/galleria'
-import CardGrid from '@/components/card/cardsGrid'
 // New imported components
 import PersonaHeader from '@/components/persone/PersonaHeader'
 import PersonaContent from '@/components/persone/PersonaContent'
@@ -18,8 +18,14 @@ import LuogoMap from '@/components/luoghi/LuogoMap'
 import RelatedItineraries from '@/components/luoghi/RelatedItineraries'
 //Locale
 import { getMessages, getLocale } from 'next-intl/server'
+//Metadata
+import { createMetadata } from '@/utils/metadataHelpers'
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
   const slug = (await params).slug
   const db = await loadDb()
   const locale = (await getLocale()) as 'it' | 'en'
@@ -29,29 +35,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!stakeholderData) {
     notFound()
-    return { title: 'persone non trovato | Morigerati' }
+    return {
+      title: locale === 'it' ? 'Persona non trovata | Morigerati' : 'Person not found | Morigerati',
+    }
   }
 
-  const metaImage = stakeholderData?.meta?.image
-  const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
-  return {
-    title: `${stakeholderData.nome} | Morigerati`,
-    description: stakeholderData?.meta?.description,
-    openGraph: {
-      title: stakeholderData?.meta?.title ?? stakeholderData.nome ?? 'Morigerati',
-      description: stakeholderData?.meta?.description || undefined,
-      images: imageUrl ? [{ url: imageUrl }] : undefined,
-      url: `${baseUrl}/persone/${slug}`,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: stakeholderData?.meta?.title ?? stakeholderData.nome ?? 'Morigerati',
-      description: stakeholderData?.meta?.description || undefined,
-      images: imageUrl ? [imageUrl] : undefined,
-    },
-    metadataBase: new URL(baseUrl),
-  }
+  return createMetadata(stakeholderData, {
+    pagePath: `persone/${slug}`,
+    titleField: 'nome',
+    defaultTitle: locale === 'it' ? 'Persona' : 'Person',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
+    locale,
+  })
 }
 
 export const dynamic = 'force-dynamic'

@@ -1,5 +1,6 @@
 //Boilerplate
 import React, { Suspense } from 'react'
+import { Metadata } from 'next'
 //DB
 import { loadDb } from '@/utils/db'
 import { Residenze as ResidenzaType } from '@/payload-types'
@@ -11,10 +12,26 @@ import NoResidenze from '@/components/residenze/noResidenze'
 //Locale
 import { getLocale, getMessages } from 'next-intl/server'
 import ArchivePageLayout from '@/components/pageLayout/ArchivePageLayout'
+//Metadata
+import { createMetadata } from '@/utils/metadataHelpers'
 
 // Force dynamic rendering and disable cache to ensure fresh data
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as 'it' | 'en'
+  const db = await loadDb()
+  const testi = await db.findGlobal({ slug: 'testi', locale: locale })
+
+  return createMetadata(testi.residenze, {
+    pagePath: 'residenze',
+    titleField: 'title',
+    defaultTitle: locale === 'it' ? 'Residenze Artistiche' : 'Artist Residencies',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
+    locale,
+  })
+}
 
 interface SortedResidenze {
   past: ResidenzaType[]
@@ -80,12 +97,12 @@ async function ResidenzeListing({ filter }: { filter?: string }) {
   )
 }
 
-interface ResidenzePagProps {
-  params: { locale: string }
-  searchParams: { filter?: string }
+interface PageProps {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<{ filter?: string }>
 }
 
-const Residenze = async ({ searchParams }: ResidenzePagProps) => {
+const Residenze = async ({ params, searchParams }: PageProps) => {
   const locale = (await getLocale()) as 'it' | 'en'
   const { filter = 'futura' } = await searchParams
   const db = await loadDb()

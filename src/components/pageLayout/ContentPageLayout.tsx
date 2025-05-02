@@ -1,9 +1,8 @@
 import React, { ReactNode } from 'react'
-import { RandomPixel } from '@/components/uiElements/pixels'
 import Copertina from '@/components/uiElements/copertina'
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import Galleria from '@/components/galleria/galleria'
 
 interface ContentPageLayoutProps {

@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import type { Map as LeafletMap } from 'leaflet'
-import { Itinerari, Tracciati } from '@/payload-types'
+import type { Itinerari, Tracciati } from '@/payload-types'
 import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 
 interface TracksMapProps {
@@ -88,182 +88,269 @@ const createTracciatoPopupContent = (tracciato: Tracciati, itinerario: Itinerari
   `
 }
 
+/**
+ * Una versione completamente riscritta del componente mappa per evitare
+ * problemi di inizializzazione multipla di Leaflet
+ */
 const TracksMapComponent: React.FC<TracksMapProps> = ({
   tracciati,
   initialPosition = defaults.position,
   initialZoom = defaults.zoom,
 }) => {
-  const mapRef = useRef<LeafletMap | null>(null)
+  // Referenza al container della mappa
   const mapContainerRef = useRef<HTMLDivElement>(null)
-  const [mapIsReady, setMapIsReady] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
 
-  // Detect mobile devices
+  // Stato per tener traccia se è client-side
+  const [isClient, setIsClient] = useState(false)
+
+  // Effetto per impostare isClient = true solo lato client
   useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
+    setIsClient(true)
 
-    // Check initially
-    checkIfMobile()
-
-    // Add listener for window resize
-    window.addEventListener('resize', checkIfMobile)
-
-    // Cleanup
+    // Cleanup per la mappa (se presente)
+    const mapContainer = mapContainerRef.current
     return () => {
-      window.removeEventListener('resize', checkIfMobile)
+      // Reset dell'ID leaflet e pulizia del container
+      if (mapContainer) {
+        mapContainer._leaflet_id = null
+        while (mapContainer.firstChild) {
+          mapContainer.removeChild(mapContainer.firstChild)
+        }
+      }
+
+      // Rimuovi globalmente tutti gli stili leaflet non necessari
+      document.querySelectorAll('style').forEach((style) => {
+        if (style.innerHTML.includes('leaflet')) {
+          style.remove()
+        }
+      })
     }
   }, [])
 
-  // Initialize the map
+  // Effetto che esegue il codice della mappa solo lato client e una volta sola
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    // Skippa se non siamo lato client o se il container non è pronto
+    if (!isClient || !mapContainerRef.current) return
 
-    // Cleanup function
-    let isMounted = true
-
-    // Dynamically import Leaflet and its styles
-    Promise.all([
-      import('leaflet'),
-      import('leaflet/dist/leaflet.css'),
-      import('leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'),
-      import('leaflet-defaulticon-compatibility'),
-    ])
-      .then(([L]) => {
-        if (!isMounted) return
-
-        if (mapContainerRef.current && !mapRef.current) {
-          try {
-            // Create map with mobile-friendly options
-            const map = L.default
-              .map(mapContainerRef.current, {
-                zoomControl: !isMobile, // Hide default zoom control on mobile
-                attributionControl: true,
-                dragging: true,
-
-                tapTolerance: 15, // More forgiving tap detection for fat fingers
-              })
-              .setView(initialPosition, isMobile ? initialZoom - 1 : initialZoom) // Zoom out slightly on mobile
-
-            // Add tile layer
-            L.default
-              .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution:
-                  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-              })
-              .addTo(map)
-
-            // Add custom zoom control position for mobile
-            if (isMobile) {
-              L.default.control
-                .zoom({
-                  position: 'bottomright', // Better position for thumb access on mobile
-                })
-                .addTo(map)
-            }
-
-            mapRef.current = map
-
-            // Signal that the map is ready for adding tracks
-            setMapIsReady(true)
-          } catch (error) {
-            console.error('Error initializing map:', error)
-          }
+    async function initializeMap() {
+      try {
+        // Carica CSS di Leaflet
+        if (!(window as any).leafletCssLoaded) {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
+          document.head.appendChild(link)
+          ;(window as any).leafletCssLoaded = true
         }
-      })
-      .catch((error) => {
-        console.error('Error loading leaflet dependencies:', error)
-      })
 
-    return () => {
-      isMounted = false
-      if (mapRef.current) {
-        mapRef.current.remove()
-        mapRef.current = null
-        setMapIsReady(false)
-      }
-    }
-  }, [initialPosition, initialZoom, isMobile])
+        // Importa Leaflet dinamicamente
+        const L = (await import('leaflet')).default
 
-  // Add tracks after map is ready
-  useEffect(() => {
-    if (!mapIsReady || !mapRef.current) return
+        // Clear del container per sicurezza
+        const container = mapContainerRef.current
+        while (container.firstChild) {
+          container.removeChild(container.firstChild)
+        }
 
-    // Load Leaflet to add tracks
-    import('leaflet')
-      .then((L) => {
-        // Add all tracks to the map and their starting point markers
-        tracciati.forEach(async (tracciato, index) => {
+        // Verifica se c'è già una mappa nel container
+        if (container._leaflet_id) {
+          console.warn('Rilevata mappa Leaflet esistente nel container, pulizia...')
+          container._leaflet_id = null
+        }
+
+        // Determina se siamo su mobile
+        const isMobile = window.innerWidth < 768
+
+        // Inizializza la mappa Leaflet
+        const map = L.map(container, {
+          zoomControl: !isMobile,
+          attributionControl: true,
+          dragging: true,
+          tapTolerance: 15,
+        }).setView(initialPosition, isMobile ? initialZoom - 1 : initialZoom)
+
+        // Aggiungi il layer delle tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map)
+
+        // Aggiungi controlli di zoom personalizzati per mobile
+        if (isMobile) {
+          L.control
+            .zoom({
+              position: 'bottomright',
+            })
+            .addTo(map)
+        }
+
+        // Carica e visualizza tutti i tracciati
+        for (let i = 0; i < tracciati.length; i++) {
+          const tracciato = tracciati[i]
+          const color = trackColors[i % trackColors.length]
+
+          // Ottieni l'URL del file GPX
           const gpxUrl = getTracciatoUrl(tracciato)
-          if (!gpxUrl) return
+          if (!gpxUrl) continue
 
           try {
-            // Get the itinerario data from the API (usando il nuovo endpoint)
+            // Ottieni i dati dell'itinerario
             const response = await fetch(`/api/itinerari-by-tracciato?tracciato_id=${tracciato.id}`)
             const data = await response.json()
-            const itinerario = data.itinerari as Itinerari | null
 
-            const gpxResponse = await fetch(gpxUrl)
-            const gpxText = await gpxResponse.text()
-            const points = parseGPX(gpxText)
+            // Log completo della risposta per debug
+            console.log('RISPOSTA API COMPLETA:', JSON.stringify(data, null, 2))
 
-            if (points.length > 0 && mapRef.current) {
-              // Add the track line
-              const color = trackColors[index % trackColors.length]
-              try {
-                const polyline = L.default.polyline(points, {
-                  color: color,
-                  weight: isMobile ? 4 : 3, // Thicker lines on mobile for better visibility
-                  opacity: 0.8,
-                  smoothFactor: isMobile ? 1 : 1.5, // Lower for mobile to improve performance
-                })
+            // Estrai l'itinerario dalla struttura appropriata
+            // A seconda di come è strutturata la risposta, potrebbe essere data.itinerari o data.itinerario
+            const itinerarioObj = data.itinerari || data.itinerario
 
-                // Add to map with a null check
-                if (mapRef.current) {
-                  polyline.addTo(mapRef.current)
-                }
+            // Se abbiamo un array, prendiamo il primo elemento
+            const itinerario = Array.isArray(itinerarioObj) ? itinerarioObj[0] : itinerarioObj
 
-                // Add marker at the end of the track
-                const endPoint = points[points.length - 1]
+            console.log('ITINERARIO ESTRATTO:', itinerario)
 
-                // Add marker with a null check
-                if (mapRef.current) {
-                  // Create marker with options optimal for mobile
-                  const marker = L.default.marker(endPoint, {
-                    keyboard: false, // Disable keyboard nav on mobile
-                    title: itinerario?.nome || tracciato.alt, // Add title for accessibility
-                  })
+            // Estrazione più sicura del nome e dello slug
+            let itinerarioNome = 'Nessun nome disponibile'
+            let itinerarioSlug = null
 
-                  marker.addTo(mapRef.current)
+            // Cerca il nome in vari percorsi possibili
+            if (itinerario) {
+              if (typeof itinerario.nome === 'string') {
+                itinerarioNome = itinerario.nome
+              } else if (itinerario.nome && typeof itinerario.nome === 'object') {
+                // Potrebbe essere un oggetto localizzato
+                itinerarioNome =
+                  itinerario.nome.it || itinerario.nome.en || Object.values(itinerario.nome)[0]
+              }
 
-                  // Create popup with custom options for mobile
-                  const popupContent = createTracciatoPopupContent(tracciato, itinerario)
-                  marker.bindPopup(popupContent, {
-                    className: 'custom-popup',
-                    closeButton: true,
-                    closeOnClick: true,
-                    autoPan: true,
-                    maxWidth: isMobile ? 260 : 300,
-                  })
-                }
-              } catch (error) {
-                console.error('Error adding polyline or marker:', error)
+              // Estrai lo slug
+              if (typeof itinerario.slug === 'string') {
+                itinerarioSlug = itinerario.slug
+              } else if (itinerario.slug && typeof itinerario.slug === 'object') {
+                // Potrebbe essere un oggetto localizzato
+                itinerarioSlug =
+                  itinerario.slug.it || itinerario.slug.en || Object.values(itinerario.slug)[0]
               }
             }
+
+            console.log(`INFO ESTRATTE - Nome: "${itinerarioNome}", Slug: "${itinerarioSlug}"`)
+
+            // Carica e analizza il file GPX
+            const gpxResponse = await fetch(gpxUrl)
+            const gpxText = await gpxResponse.text()
+
+            // Analizza il GPX per ottenere i punti
+            const parser = new DOMParser()
+            const gpx = parser.parseFromString(gpxText, 'text/xml')
+            const points = []
+
+            // Ottieni tutti i punti di traccia
+            const trackpoints = gpx.getElementsByTagName('trkpt')
+            for (let j = 0; j < trackpoints.length; j++) {
+              const point = trackpoints[j]
+              const lat = parseFloat(point.getAttribute('lat') || '0')
+              const lon = parseFloat(point.getAttribute('lon') || '0')
+              if (lat && lon) {
+                points.push([lat, lon])
+              }
+            }
+
+            if (points.length > 0) {
+              // Crea il polyline per il tracciato
+              const polyline = L.polyline(points, {
+                color: color,
+                weight: isMobile ? 4 : 3,
+                opacity: 0.8,
+                smoothFactor: isMobile ? 1 : 1.5,
+              }).addTo(map)
+
+              // Aggiungi il marker alla fine del tracciato
+              const endPoint = points[points.length - 1]
+
+              // Crea un'icona personalizzata per il marker con cursore pointer
+              const customIcon = L.divIcon({
+                className: 'track-marker-icon',
+                html: `<div style="background-color: ${color}; width: 16px; height: 16px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.5); cursor: pointer; display: flex; align-items: center; justify-content: center;"></div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
+              })
+
+              // Crea un marker che non apre popup ma va direttamente all'itinerario
+              const marker = L.marker(endPoint, {
+                icon: customIcon,
+                title: itinerarioNome, // Mostra il nome come tooltip al passaggio del mouse
+                riseOnHover: true,
+                keyboard: false,
+                interactive: true,
+              })
+
+              // Aggiungi il marker alla mappa
+              marker.addTo(map)
+
+              // IMPORTANTE: Disabilita completamente il popup per evitare qualsiasi problema
+              marker.unbindPopup()
+
+              // Se abbiamo un itinerario con slug, facciamo in modo che il marker porti a quell'itinerario
+              if (itinerarioSlug) {
+                marker.on('click', function (e) {
+                  // Previeni qualsiasi comportamento di default
+                  if (e.originalEvent) {
+                    e.originalEvent.preventDefault()
+                    e.originalEvent.stopPropagation()
+                  }
+
+                  // Naviga all'itinerario
+                  window.location.href = `/itinerari/${itinerarioSlug}`
+                  return false
+                })
+              }
+
+              // Aggiungi sempre un tooltip con il nome dell'itinerario
+              marker.bindTooltip(`${itinerarioNome}`, {
+                permanent: false,
+                direction: 'top',
+                offset: [0, -10],
+                opacity: 0.8,
+                className: 'itinerario-tooltip',
+              })
+            }
           } catch (error) {
-            console.error('Error loading GPX for tracciato:', tracciato.alt, error)
+            console.error(`Errore nel caricamento del tracciato ${tracciato.alt}:`, error)
           }
-        })
-      })
-      .catch((error) => {
-        console.error('Error loading leaflet for tracks:', error)
-      })
-  }, [mapIsReady, tracciati, isMobile])
+        }
+
+        // Salva un riferimento alla mappa come attributo del container
+        // per poter fare pulizia in seguito se necessario
+        ;(container as any)._mapInstance = map
+      } catch (error) {
+        console.error("Errore durante l'inizializzazione della mappa:", error)
+      }
+    }
+
+    // Inizializza la mappa
+    initializeMap()
+
+    // Funzione di pulizia
+    return () => {
+      if (mapContainerRef.current && (mapContainerRef.current as any)._mapInstance) {
+        try {
+          ;(mapContainerRef.current as any)._mapInstance.remove()
+          ;(mapContainerRef.current as any)._mapInstance = null
+        } catch (e) {
+          console.error('Errore durante la pulizia della mappa:', e)
+        }
+      }
+    }
+  }, [isClient, tracciati, initialPosition, initialZoom]) // Dipendenze esplicite
 
   return (
     <div className="w-full rounded-lg border-2 border-gray-800 overflow-hidden">
-      <div ref={mapContainerRef} className="h-[350px] md:h-[400px] w-full z-0" />
+      <div
+        ref={mapContainerRef}
+        className="h-[350px] md:h-[400px] w-full z-0"
+        id={`map-container-${Math.random().toString(36).substr(2, 9)}`} // ID casuale per ogni istanza
+      />
     </div>
   )
 }

@@ -9,7 +9,7 @@ import Card from './card'
 import { GRID_COLUMNS } from './constants'
 import { CategoryType, Item } from './types'
 //DB
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 
 interface CardGridProps {
   items: Item[]

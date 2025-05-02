@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
 import 'leaflet-defaulticon-compatibility'
 import 'leaflet-gpx'
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 import { X } from 'lucide-react'
 import { MdOutlineFileDownload } from 'react-icons/md'
 import Image from 'next/image'
@@ -134,6 +134,14 @@ export const Mappa: React.FC<MapProps> = ({
       // Create map
       mapRef.current = L.map(mapContainerRef.current).setView(initialPosition, initialZoom)
 
+      // Override default Leaflet marker icon globally with a dot
+      L.Marker.prototype.options.icon = L.divIcon({
+        className: 'custom-dot-marker',
+        html: `<div style="background-color: #3388ff; width: 10px; height: 10px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3);"></div>`,
+        iconSize: [14, 14],
+        iconAnchor: [7, 7],
+      })
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -160,21 +168,144 @@ export const Mappa: React.FC<MapProps> = ({
       document.head.appendChild(style)
 
       if (showPositionPin) {
-        positionMarkerRef.current = L.marker(initialPosition).addTo(mapRef.current)
+        // Create a blue dot for the position marker
+        const positionIcon = L.divIcon({
+          className: 'position-marker-icon',
+          html: `<div style="background-color: #007bff; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.4);"></div>`,
+          iconSize: [16, 16],
+          iconAnchor: [8, 8],
+        })
+
+        positionMarkerRef.current = L.marker(initialPosition, {
+          icon: positionIcon,
+          title: 'Current position',
+        }).addTo(mapRef.current)
       }
 
       if (gpxUrl) {
-        new L.GPX(gpxUrl, {
+        // Crea icone circolari personalizzate per inizio e fine percorso
+        const createCircleIcon = (color: string) => {
+          return L.divIcon({
+            className: 'track-endpoint-icon',
+            html: `<div style="background-color: ${color}; width: 10px; height: 10px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3);"></div>`,
+            iconSize: [14, 14],
+            iconAnchor: [7, 7],
+          })
+        }
+
+        // Carica il GPX e gestisci inizio e fine tracciato
+        const gpxTrack = new L.GPX(gpxUrl, {
           async: true,
+          polyline_options: {
+            color: '#3388ff',
+            weight: 5,
+            opacity: 0.8,
+          },
           marker_options: {
-            startIconUrl: '', // Rimuovi l'icona di start
-            endIconUrl: '', // Rimuovi l'icona di end
-            wptIconUrls: '', // Rimuovi l'icona dei waypoints
+            startIconUrl: null, // Completely disable default markers
+            endIconUrl: null, // Completely disable default markers
+            wptIconUrls: null, // Completely disable default markers
+            shadowUrl: null, // Disable shadow
+            clickable: false, // Make default markers not clickable
+          },
+          gpx_options: {
+            parseElements: ['track', 'waypoint'], // Parse both tracks and waypoints
           },
         })
-          .on('loaded', function (e: { target: L.GPX }) {
+          .on('loaded', function (e: { target: any }) {
             const bounds = e.target.getBounds()
             setGpxBounds(bounds)
+
+            // Find the first and last layer in the GPX (they should be polylines)
+            let startPoint = null
+            let endPoint = null
+
+            // Replace any default markers with dot markers - critical for the blue pin in the screenshot
+            if (mapRef.current) {
+              mapRef.current.eachLayer((layer) => {
+                // Check if it's a marker but not one of our custom markers
+                if (
+                  layer instanceof L.Marker &&
+                  (!layer.options.icon ||
+                    (layer.options.icon instanceof L.Icon &&
+                      !(layer.options.icon instanceof L.DivIcon)))
+                ) {
+                  const position = layer.getLatLng()
+                  const title = layer.options.title || 'Location'
+
+                  // Create a new dot marker to replace it
+                  const dotMarker = L.marker(position, {
+                    icon: L.divIcon({
+                      className: 'replaced-marker-icon',
+                      html: `<div style="background-color: #3388ff; width: 10px; height: 10px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3);"></div>`,
+                      iconSize: [14, 14],
+                      iconAnchor: [7, 7],
+                    }),
+                    title: title,
+                  })
+
+                  // Remove the original marker and add the dot marker
+                  mapRef.current.removeLayer(layer)
+                  dotMarker.addTo(mapRef.current)
+                }
+              })
+            }
+
+            e.target.eachLayer((layer: any) => {
+              if (layer instanceof L.Polyline) {
+                const latlngs = layer.getLatLngs()
+                if (latlngs && latlngs.length > 0) {
+                  if (!startPoint) startPoint = latlngs[0]
+                  endPoint = latlngs[latlngs.length - 1]
+                }
+              }
+
+              // Handle waypoints separately (remove and replace with dot markers)
+              if (layer instanceof L.Marker && mapRef.current) {
+                // Get waypoint position and name (if any)
+                const waypointPos = layer.getLatLng()
+                const waypointName = layer.options.title || 'Waypoint'
+
+                // Remove the default waypoint marker
+                mapRef.current.removeLayer(layer)
+
+                // Create a new dot marker for the waypoint
+                const dotMarker = L.marker(waypointPos, {
+                  icon: L.divIcon({
+                    className: 'waypoint-dot-icon',
+                    html: `<div style="background-color: #3388ff; width: 10px; height: 10px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3);"></div>`,
+                    iconSize: [14, 14],
+                    iconAnchor: [7, 7],
+                  }),
+                  title: waypointName,
+                })
+
+                // Add the dot marker to the map
+                dotMarker.addTo(mapRef.current)
+
+                // Add a tooltip with the waypoint name
+                dotMarker.bindTooltip(waypointName, {
+                  permanent: false,
+                  direction: 'top',
+                  offset: [0, -5],
+                })
+              }
+            })
+
+            // Aggiungi marker circolari all'inizio e alla fine
+            if (startPoint && mapRef.current) {
+              L.marker(startPoint, {
+                icon: createCircleIcon('#22c55e'), // Verde per l'inizio
+                title: 'Inizio percorso',
+              }).addTo(mapRef.current)
+            }
+
+            if (endPoint && mapRef.current) {
+              L.marker(endPoint, {
+                icon: createCircleIcon('#ef4444'), // Rosso per la fine
+                title: 'Fine percorso',
+              }).addTo(mapRef.current)
+            }
           })
           .addTo(mapRef.current)
       }
@@ -185,7 +316,10 @@ export const Mappa: React.FC<MapProps> = ({
           if (media.posizione) {
             const marker = L.marker(media.posizione, {
               icon: L.divIcon({
-                className: 'text-white bg-green-500 rounded-full p-2',
+                className: 'media-marker-icon',
+                html: `<div style="background-color: #22c55e; width: 10px; height: 10px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [14, 14],
+                iconAnchor: [7, 7],
               }),
             })
             if (mapRef.current) {

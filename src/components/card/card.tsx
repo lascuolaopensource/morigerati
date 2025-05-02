@@ -6,7 +6,7 @@ import placeholderImage from '/public/placeholder-image.jpg'
 //Types
 import { CategoryType } from './types'
 //DB
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 //Utils
 import { bgColors, borderColors } from '@/utils/colors'
 //Locale

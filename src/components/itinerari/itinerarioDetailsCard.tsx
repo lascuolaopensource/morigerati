@@ -42,11 +42,11 @@ interface TipoSectionProps {
   tipo: ItinerarioDetailsProps['tipo']
   letter: string
   unavailableText: string
+  messages: any // Add messages as a prop
 }
 
-const TipoSection = ({ tipo, letter, unavailableText }: TipoSectionProps) => {
+const TipoSection = ({ tipo, letter, unavailableText, messages }: TipoSectionProps) => {
   const formatTipo = (tipoValue: typeof tipo) => {
-    const messages = useMessages()
     if (!tipoValue?.length) return unavailableText
 
     if (typeof tipoValue === 'object' && !Array.isArray(tipoValue)) {
@@ -118,7 +118,12 @@ export default function ItinerarioDetailsCard({
 
   return (
     <div className="pt-5 grid gap-2 w-full">
-      <TipoSection tipo={tipo} letter={letters[0] || ''} unavailableText={unavailableText} />
+      <TipoSection
+        tipo={tipo}
+        letter={letters[0] || ''}
+        unavailableText={unavailableText}
+        messages={messages} // Pass messages as a prop
+      />
       <div className="grid grid-cols-2 gap-2 w-full">
         <DetailSection
           label={lengthLabel}

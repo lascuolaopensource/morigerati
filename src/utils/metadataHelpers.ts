@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 import { getMediaUrl } from './media'
 
 // Type for objects with basic meta properties
@@ -26,6 +26,7 @@ export function createMetadata(
     defaultTitle?: string
     pagePath?: string
     titleField?: string // For collection items that have a custom title field like 'nome' or 'titolo'
+    locale?: string // Add locale parameter
   },
 ): Metadata {
   const {
@@ -33,6 +34,7 @@ export function createMetadata(
     defaultTitle = 'Morigerati',
     pagePath = '',
     titleField,
+    locale = 'it',
   } = options
 
   // Get title from meta, or from the specified field, or use default
@@ -47,8 +49,8 @@ export function createMetadata(
   const metaImage = data?.meta?.image
   const imageUrl = metaImage ? getMediaUrl(metaImage) : undefined
 
-  // Create the full URL for the page
-  const url = pagePath ? `${baseUrl}/${pagePath}` : baseUrl
+  // Create the full URL for the page - with locale support
+  const url = pagePath ? `${baseUrl}/${locale}/${pagePath}` : baseUrl
 
   return {
     title: fullTitle,

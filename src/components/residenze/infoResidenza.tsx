@@ -1,6 +1,6 @@
 'use client'
 //Boilerplate
-import { type Residenze } from '@/payload-types'
+import type { Residenze } from '@/payload-types'
 import { useState, useEffect } from 'react'
 //Utils
 import formatDate from '@/utils/formatDate'

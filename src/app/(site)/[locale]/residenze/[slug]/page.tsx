@@ -1,6 +1,7 @@
 //Boilerplate
 import React from 'react'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 //DB
 import { loadDb } from '@/utils/db'
 import { RichText } from '@payloadcms/richtext-lexical/react'
@@ -19,14 +20,21 @@ import Galleria from '@/components/galleria/galleria'
 import { isArrayEmpty } from '@/utils/isArrayEmpty'
 //Locale
 import { getLocale, getMessages } from 'next-intl/server'
+//Metadata
+import { createMetadata } from '@/utils/metadataHelpers'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
   const { slug } = await params
   const db = await loadDb()
-  const residenze = await db.find({ collection: 'residenze', depth: 2, locale: 'all' })
+  const locale = (await getLocale()) as 'it' | 'en'
+  const residenze = await db.find({ collection: 'residenze', depth: 2, locale: locale })
 
   // Find the residenza with the matching slug
   // Handle both localized and non-localized slugs
@@ -41,29 +49,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!residenzaData) {
     notFound()
-    return { title: 'Residenza non trovata | Morigerati' }
+    return {
+      title:
+        locale === 'it' ? 'Residenza non trovata | Morigerati' : 'Residency not found | Morigerati',
+    }
   }
 
-  const metaImage = residenzaData?.meta?.image
-  const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
-  return {
-    title: `${residenzaData.nome} | Morigerati`,
-    description: residenzaData?.meta?.description,
-    openGraph: {
-      title: residenzaData?.meta?.title ?? residenzaData.nome ?? 'Morigerati',
-      description: residenzaData?.meta?.description || undefined,
-      images: imageUrl ? [{ url: imageUrl }] : undefined,
-      url: `${baseUrl}/residenze/${slug}`,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: residenzaData?.meta?.title ?? residenzaData.nome ?? 'Morigerati',
-      description: residenzaData?.meta?.description || undefined,
-      images: imageUrl ? [imageUrl] : undefined,
-    },
-    metadataBase: new URL(baseUrl),
-  }
+  return createMetadata(residenzaData, {
+    pagePath: `residenze/${slug}`,
+    titleField: 'nome',
+    defaultTitle: locale === 'it' ? 'Residenza Artistica' : 'Artist Residency',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
+    locale,
+  })
 }
 
 export default async function ResidenzaSlug({ params }: { params: Promise<{ slug: string }> }) {

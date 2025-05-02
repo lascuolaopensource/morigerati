@@ -1,43 +1,39 @@
 // Boilerplate
 import React from 'react'
+import { Metadata } from 'next'
 //PayloadCMS
 import { loadDb } from '@/utils/db'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import { Media, Tracciati as TracciatiType } from '@/payload-types'
+import type { Media, Tracciati as TracciatiType } from '@/payload-types'
 //UI
 import Copertina from '@/components/uiElements/copertina'
 import GridOverlay from '@/components/uiElements/gridOverlay'
 import HomeCollection from '@/components/home/homeCollection'
 //Locale
 import { getLocale } from 'next-intl/server'
+// Utils
+import { getHomeTracksData } from '@/utils/getHomeData'
+import { createMetadata } from '@/utils/metadataHelpers'
 
 //-------------------------------------------------------------------------
 
-/* export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as 'it' | 'en'
   const db = await loadDb()
-  const home = await db.findGlobal({ slug: 'home' })
+  const home = await db.findGlobal({
+    slug: 'home',
+    locale: locale,
+  })
 
-  const metaImage = home?.meta?.image
-  const imageUrl = metaImage && typeof metaImage !== 'string' ? metaImage.url : undefined
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it'
-
-  const title = 'Morigerati - Transluoghi'
-  const description = home?.meta?.description || undefined
-
-  return {
-    title,
-    description,
-    openGraph: { title, description, images: imageUrl ? [{ url: imageUrl }] : undefined },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: imageUrl ? [imageUrl] : undefined,
-    },
-    metadataBase: new URL(baseUrl),
-  }
-} */
+  return createMetadata(home, {
+    pagePath: '',
+    titleField: 'title',
+    defaultTitle: 'Morigerati - Transluoghi',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
+    locale,
+  })
+}
 
 // Accept params prop which includes the locale
 export default async function Page() {
@@ -60,11 +56,14 @@ export default async function Page() {
       locale: locale,
     })
 
+    // Get all tracciati for the map
+    const { tracciati } = await getHomeTracksData()
+
     // Check if home data exists for the locale
     if (!home) {
       // Handle case where global data for the specific locale doesn't exist
       // Maybe return a specific message or fallback content
-      return <div>Content for '{locale}' not found.</div>
+      return <div>Content for &lsquo;{locale}&rsquo; not found.</div>
     }
 
     // Home page component content
@@ -102,7 +101,7 @@ export default async function Page() {
             hasMap={true}
             title={home.itinerari?.title} // Use optional chaining if structure might vary by locale
             text={home.itinerari?.testo as SerializedEditorState}
-            tracciati={home.tracciati_mappa as TracciatiType[]}
+            tracciati={tracciati as TracciatiType[]}
             singleRow={true}
           />
           <HomeCollection

@@ -2,7 +2,7 @@
 //Boilerplate
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 //dB
-import { Articoli, Media } from '@/payload-types'
+import type { Articoli, Media } from '@/payload-types'
 //Utils
 import { formatDistanceToNow, isAfter, parseISO, subMonths } from 'date-fns'
 import { it, enUS } from 'date-fns/locale'

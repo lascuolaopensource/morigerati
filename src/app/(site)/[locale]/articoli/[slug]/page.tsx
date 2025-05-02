@@ -1,10 +1,12 @@
 //Boilerplate
 import React from 'react'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 //DB
 import { loadDb } from '@/utils/db'
-import { Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 //Components
 import BackButton from '@/components/uiElements/backButton'
 import Copertina from '@/components/uiElements/copertina'
@@ -12,6 +14,7 @@ import TagsList from '@/components/articoli/tagsList'
 import Galleria from '@/components/galleria/galleria'
 //Utils
 import formatDate from '@/utils/formatDate'
+import { createMetadata } from '@/utils/metadataHelpers'
 
 //Locale
 import { getLocale, getMessages } from 'next-intl/server'
@@ -22,6 +25,37 @@ interface ArticleParams {
 
 interface PageProps {
   params: Promise<ArticleParams>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const locale = (await getLocale()) as 'it' | 'en'
+
+  const db = await loadDb()
+  const articoloData = await db.find({
+    collection: 'articoli',
+    locale: locale,
+    where: { slug: { equals: slug } },
+    depth: 2,
+  })
+
+  if (!articoloData.docs.length) {
+    notFound()
+    return {
+      title:
+        locale === 'it' ? 'Articolo non trovato | Morigerati' : 'Article not found | Morigerati',
+    }
+  }
+
+  const articolo = articoloData.docs[0]
+
+  return createMetadata(articolo, {
+    pagePath: `articoli/${slug}`,
+    titleField: 'titolo',
+    defaultTitle: locale === 'it' ? 'Articolo' : 'Article',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
+    locale,
+  })
 }
 
 export default async function Articolo({ params }: PageProps) {
@@ -39,6 +73,10 @@ export default async function Articolo({ params }: PageProps) {
   })
 
   const articolo = articoloData.docs[0]
+
+  if (!articolo) {
+    notFound()
+  }
 
   return (
     <div className="bg-white pb-10">

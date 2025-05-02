@@ -2,7 +2,7 @@
 //Boilerplate
 import React, { useState, useEffect } from 'react'
 //DB
-import { Itinerari } from '@/payload-types'
+import type { Itinerari } from '@/payload-types'
 //Components
 import { ServizioCardComponent } from './servizioCard'
 //Locale

@@ -54,12 +54,5 @@ export const Home: GlobalConfig = {
     F.titleAndTextHome('itinerari'),
     F.titleAndTextHome('luoghi'),
     F.titleAndTextHome('residenze'),
-    {
-      name: 'tracciati_mappa',
-      type: 'relationship',
-      relationTo: 'tracciati',
-      hasMany: true,
-      label: 'Tracciati da mostrare sulla mappa',
-    },
   ],
 }
