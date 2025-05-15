@@ -103,7 +103,7 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
         F.tabContenuto,
         {
           label: 'Link',
-          fields: [...slugField('nome', { localized: true })],
+          fields: [...slugField('nome')],
         },
       ],
     },

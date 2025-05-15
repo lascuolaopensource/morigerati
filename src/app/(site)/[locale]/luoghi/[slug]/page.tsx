@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     collection: 'luoghi',
     depth: 2,
     locale: locale,
+
     where: {
       slug: {
         equals: slug,
@@ -46,13 +47,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   })
 
   const luogoData = luoghi.docs[0]
-
-  if (!luogoData) {
-    notFound()
-    return {
-      title: locale === 'it' ? 'Luogo non trovato | Morigerati' : 'Place not found | Morigerati',
-    }
-  }
 
   return createMetadata(luogoData, {
     pagePath: `luoghi/${slug}`,
@@ -76,6 +70,7 @@ export default async function LuogoPage({ params }: PageProps) {
     collection: 'luoghi',
     depth: 2,
     locale: locale,
+
     where: {
       slug: {
         equals: slug,
