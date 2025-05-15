@@ -139,7 +139,7 @@ export default function ItinerarioDetailsCard({
         />
         <DetailSection
           label={elevationLabel}
-          value={formatValue(dislivello, 'mt')}
+          value={dislivello}
           letter={letters[3] || ''}
           unavailableText={unavailableText}
         />
