@@ -69,12 +69,14 @@ export default function ArchivePageLayout({
 
       {/* Card grid if options are provided */}
       {cardGridOptions && (
-        <CardGrid
-          items={cardGridOptions.items}
-          category={cardGridOptions.category}
-          singleRow={cardGridOptions.singleRow}
-          className="mt-6"
-        />
+        <div className="px-8">
+          <CardGrid
+            items={cardGridOptions.items}
+            category={cardGridOptions.category}
+            singleRow={cardGridOptions.singleRow}
+            className="mt-6"
+          />
+        </div>
       )}
 
       {/* Custom content */}

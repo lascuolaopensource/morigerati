@@ -1,12 +1,11 @@
 'use client'
 //Boilerplate
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 //Utils
 import { cn } from '@/lib/utils'
 //Components
 import Card from './card'
 //Constants
-import { GRID_COLUMNS } from './constants'
 import { CategoryType, Item } from './types'
 //DB
 import type { Media } from '@/payload-types'
@@ -24,55 +23,112 @@ const CardGrid: React.FC<CardGridProps> = ({
   singleRow = false,
   className = '',
 }) => {
-  const [visibleCards, setVisibleCards] = React.useState<number>(0)
+  if (!items?.length) return null
 
-  React.useEffect(() => {
-    if (singleRow) {
-      const calculateVisibleCards = () => {
-        const container = document.querySelector('.card-grid-container')
-        if (!container) return
-        const containerWidth = container.clientWidth
-        const cardWidth = 230 // Width of each card
-        const gap = 12 // Gap between cards (3 * 4px)
-        const visibleCount = Math.floor(containerWidth / (cardWidth + gap))
-        setVisibleCards(visibleCount)
+  // Card dimensions
+  const CARD_WIDTH = 230
+  const GAP = 12
+
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [columns, setColumns] = useState(1)
+  const [visibleCards, setVisibleCards] = useState(items.length)
+
+  // Effect to calculate the number of columns based on container width
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const calculateLayout = () => {
+      if (!containerRef.current) return
+
+      const containerWidth = containerRef.current.clientWidth
+
+      if (singleRow) {
+        // Calculate how many cards can fit in the container for single row
+        const possibleCards = Math.floor((containerWidth + GAP) / (CARD_WIDTH + GAP))
+        const actualVisibleCards = Math.max(1, possibleCards)
+        setVisibleCards(actualVisibleCards)
+      } else {
+        // Calculate columns for grid layout
+        const possibleColumns = Math.floor((containerWidth + GAP) / (CARD_WIDTH + GAP))
+        const actualColumns = Math.max(1, possibleColumns)
+        setColumns(actualColumns)
       }
+    }
 
-      calculateVisibleCards()
+    // Initial calculation
+    calculateLayout()
 
-      window.addEventListener('resize', calculateVisibleCards)
-      return () => window.removeEventListener('resize', calculateVisibleCards)
+    // Recalculate on resize
+    const resizeObserver = new ResizeObserver(calculateLayout)
+    resizeObserver.observe(containerRef.current)
+
+    return () => {
+      if (containerRef.current) {
+        resizeObserver.unobserve(containerRef.current)
+      }
+      resizeObserver.disconnect()
     }
   }, [singleRow])
 
-  if (!items?.length) return null
+  // Style for individual cards
+  const cardStyle = {
+    width: `${CARD_WIDTH}px`,
+    minWidth: `${CARD_WIDTH}px`,
+    maxWidth: `${CARD_WIDTH}px`,
+  }
 
-  const gridClassName = singleRow
-    ? 'grid-flow-col auto-cols-[230px] gap-3'
-    : Object.values(GRID_COLUMNS).join(' ')
+  // Grid container style for multi-row layout
+  const gridStyle = !singleRow
+    ? {
+        display: 'grid',
+        gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+        gap: `${GAP}px`,
+        width: '100%',
+      }
+    : undefined
 
+  // Limit items in single row mode
   const displayItems = singleRow ? items.slice(0, visibleCards) : items
 
+  if (singleRow) {
+    // Calculate total width of displayed cards
+    const totalCardsWidth = visibleCards * CARD_WIDTH + (visibleCards - 1) * GAP
+
+    // Single row with centered cards
+    return (
+      <div ref={containerRef} className={cn('relative w-full card-grid-container', className)}>
+        <div className="flex justify-center">
+          <div className="flex gap-3 pb-4" style={{ width: `${totalCardsWidth}px` }}>
+            {displayItems.map((item) => (
+              <div key={item.id} style={cardStyle} className="flex-shrink-0 flex-grow-0">
+                <Card
+                  title={item.nome}
+                  media={item.copertina as Media}
+                  slugUrl={`/${category}/${typeof item.slug === 'string' ? item.slug : ''}`}
+                  category={category}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Multi-row grid with container-responsive columns
   return (
-    <div className={cn('relative w-full px-3 sm:px-6 card-grid-container', className)}>
-      <div
-        className={cn(
-          'grid gap-3 place-items-center place-content-center',
-          gridClassName,
-          singleRow && 'justify-center',
-        )}
-      >
+    <div ref={containerRef} className={cn('relative w-full card-grid-container', className)}>
+      <div style={gridStyle}>
         {displayItems.map((item) => (
-          <div
-            key={item.id}
-            className={cn('transform transition-transform duration-300 hover:scale-[0.97] h-full')}
-          >
-            <Card
-              title={item.nome}
-              media={item.copertina as Media}
-              slugUrl={`/${category}/${typeof item.slug === 'string' ? item.slug : ''}`}
-              category={category}
-            />
+          <div key={item.id} className="flex justify-center">
+            <div style={cardStyle}>
+              <Card
+                title={item.nome}
+                media={item.copertina as Media}
+                slugUrl={`/${category}/${typeof item.slug === 'string' ? item.slug : ''}`}
+                category={category}
+              />
+            </div>
           </div>
         ))}
       </div>
