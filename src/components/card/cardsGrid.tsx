@@ -23,15 +23,14 @@ const CardGrid: React.FC<CardGridProps> = ({
   singleRow = false,
   className = '',
 }) => {
-  if (!items?.length) return null
+  // Always call hooks at the top level, unconditionally
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [columns, setColumns] = useState(1)
+  const [visibleCards, setVisibleCards] = useState(items.length)
 
   // Card dimensions
   const CARD_WIDTH = 230
   const GAP = 12
-
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [columns, setColumns] = useState(1)
-  const [visibleCards, setVisibleCards] = useState(items.length)
 
   // Effect to calculate the number of columns based on container width
   useEffect(() => {
@@ -62,13 +61,18 @@ const CardGrid: React.FC<CardGridProps> = ({
     const resizeObserver = new ResizeObserver(calculateLayout)
     resizeObserver.observe(containerRef.current)
 
+    // Fix for exhaustive-deps warning
+    const currentRef = containerRef.current
+
     return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current)
+      if (currentRef) {
+        resizeObserver.unobserve(currentRef)
       }
       resizeObserver.disconnect()
     }
-  }, [singleRow])
+  }, [singleRow, GAP, CARD_WIDTH])
+
+  if (!items?.length) return null
 
   // Style for individual cards
   const cardStyle = {
