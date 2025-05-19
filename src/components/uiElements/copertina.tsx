@@ -19,7 +19,7 @@ const Copertina: React.FC<CopertinaProps> = ({ copertina }) => {
   return (
     <div className="relative w-screen h-[80vh] left-1/2 right-1/2 -mx-[50vw]">
       <Image
-        src={copertina.sizes?.large?.url ?? ''}
+        src={copertina.url ?? ''}
         alt="Fullscreen Image"
         fill
         style={{ objectFit: 'cover' }}

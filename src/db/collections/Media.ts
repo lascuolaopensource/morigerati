@@ -70,10 +70,6 @@ export const Media: CollectionConfig = {
         formatOptions: { format: 'webp', options: { quality: 90 } },
         withoutEnlargement: true,
       },
-      {
-        name: 'full',
-        formatOptions: { format: 'webp', options: { quality: 90 } },
-      },
     ],
   },
 }

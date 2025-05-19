@@ -66,7 +66,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ items, initialIndex = 0, on
     }
 
     // Per le immagini, usa la versione large se disponibile
-    const imageUrl = currentItem.sizes?.large?.url || currentItem.url
+    const imageUrl = currentItem.url ?? currentItem.sizes?.large?.url
 
     return (
       <div className="relative w-full h-full">
