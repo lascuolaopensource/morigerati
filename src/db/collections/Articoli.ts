@@ -56,12 +56,7 @@ export const Articoli: CollectionConfig = {
             },
 
             ...F.contenutoFields.map((field: any) => {
-              if (
-                field.name === 'testo_html' ||
-                field.name === 'testo' ||
-                field.name === 'copertina' ||
-                field.name === 'galleria'
-              ) {
+              if (field.name === 'testo_html' || field.name === 'testo') {
                 return {
                   ...field,
                   localized: true,
