@@ -18,6 +18,7 @@ export const Media: CollectionConfig = {
     adminThumbnail: 'thumbnail',
     crop: true,
     focalPoint: true,
+
     formatOptions: { format: 'webp' },
     imageSizes: [
       {
@@ -25,14 +26,14 @@ export const Media: CollectionConfig = {
         width: 300,
         position: 'centre',
         fit: 'inside',
-        formatOptions: { format: 'webp' },
+        formatOptions: { format: 'webp', options: { quality: 90 } },
       },
       {
         name: 'small',
         width: 600,
         position: 'centre',
         fit: 'inside',
-        formatOptions: { format: 'webp' },
+        formatOptions: { format: 'webp', options: { quality: 90 } },
         withoutEnlargement: true,
       },
       {
@@ -40,7 +41,7 @@ export const Media: CollectionConfig = {
         width: 900,
         position: 'centre',
         fit: 'inside',
-        formatOptions: { format: 'webp' },
+        formatOptions: { format: 'webp', options: { quality: 90 } },
         withoutEnlargement: true,
       },
       {
@@ -48,7 +49,7 @@ export const Media: CollectionConfig = {
         width: 1400,
         position: 'centre',
         fit: 'inside',
-        formatOptions: { format: 'webp' },
+        formatOptions: { format: 'webp', options: { quality: 90 } },
         withoutEnlargement: true,
       },
       {
@@ -56,7 +57,7 @@ export const Media: CollectionConfig = {
         width: 1920,
         position: 'centre',
         fit: 'inside',
-        formatOptions: { format: 'webp' },
+        formatOptions: { format: 'webp', options: { quality: 90 } },
         withoutEnlargement: true,
       },
       {
@@ -66,7 +67,7 @@ export const Media: CollectionConfig = {
         crop: 'center',
         position: 'centre',
         fit: 'inside',
-        formatOptions: { format: 'webp' },
+        formatOptions: { format: 'webp', options: { quality: 90 } },
         withoutEnlargement: true,
       },
     ],
