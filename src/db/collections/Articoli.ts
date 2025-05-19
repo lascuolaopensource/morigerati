@@ -76,7 +76,7 @@ export const Articoli: CollectionConfig = {
   hooks: {
     beforeChange: [
       ({ data, req }) => {
-        // Assicura che lo slug rifletta la localizzazione corrente
+        // Assicura che lo slug rifletta la localizzazione corrente v
         const locale = req.locale || 'it'
 
         // Ritorna i dati modificati
