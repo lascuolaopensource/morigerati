@@ -44,11 +44,6 @@ export default async function ChiSiamo() {
       coverImage={chiSiamo.copertina}
       richTextContent={chiSiamo.testo_chi_siamo as SerializedEditorState}
       galleryItems={chiSiamo.galleria}
-    >
-      {' '}
-      <main className="max-w-screen-xl mx-auto relative py-8">
-        <RandomLetter color="articoli" position={'right'} />
-      </main>
-    </ContentPageLayout>
+    />
   )
 }

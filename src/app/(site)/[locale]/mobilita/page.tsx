@@ -42,11 +42,7 @@ const Mobilita = async () => {
       coverImage={mobilita.copertina}
       richTextContent={mobilita.testo as SerializedEditorState}
       galleryItems={mobilita.galleria}
-    >
-      <main className="max-w-screen-xl mx-auto relative py-8">
-        <RandomLetter color="articoli" position={'right'} />
-      </main>
-    </ContentPageLayout>
+    />
   )
 }
 

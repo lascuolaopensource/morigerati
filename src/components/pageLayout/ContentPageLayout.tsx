@@ -10,7 +10,6 @@ interface ContentPageLayoutProps {
   coverImage?: string | Media | null
   richTextContent?: SerializedEditorState | null
   galleryItems?: (string | Media)[] | null
-  children?: ReactNode
   className?: string
 }
 
@@ -29,7 +28,6 @@ export default function ContentPageLayout({
   coverImage,
   richTextContent,
   galleryItems,
-  children,
   className = '',
 }: ContentPageLayoutProps) {
   // Filter gallery items to ensure they're valid Media objects
@@ -48,11 +46,9 @@ export default function ContentPageLayout({
           </div>
         )}
 
-        {children}
-
         {mediaItems.length > 0 && (
           <div>
-            <Galleria items={mediaItems} showTitle={false} />
+            <Galleria items={mediaItems} />
           </div>
         )}
       </div>
