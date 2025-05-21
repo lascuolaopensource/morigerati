@@ -4,6 +4,7 @@ import type { Media } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import Galleria from '@/components/galleria/galleria'
+import PixelBorder from '../uiElements/pixelBorder'
 
 interface ContentPageLayoutProps {
   coverImage?: string | Media | null
@@ -35,21 +36,23 @@ export default function ContentPageLayout({
   const mediaItems = galleryItems ? galleryItems.filter(isMediaItem).filter(Boolean) : []
 
   return (
-    <main className={`max-w-screen-xl mx-auto pb-4 ${className}`}>
-      {/* Cover image */}
+    <main className={`max-w-screen-xl mx-auto pb-10 ${className}`}>
       {coverImage && isMediaItem(coverImage) && <Copertina copertina={coverImage} />}
 
-      <div className="relative p-3 pt-5 max-w-screen-xl mx-auto">
-        {/* Rich text content */}
-        {richTextContent && <RichText data={richTextContent} className="prose prose-lg" />}
+      <PixelBorder color="black" className="w-full" />
 
-        {/* Custom children content */}
+      <div className="p-4 md:p-8 !py-10">
+        {richTextContent && (
+          <div>
+            <RichText data={richTextContent} className="prose md:prose-lg mx-auto" />
+          </div>
+        )}
+
         {children}
 
-        {/* Gallery */}
         {mediaItems.length > 0 && (
-          <div className="p-4">
-            <Galleria items={mediaItems} />
+          <div>
+            <Galleria items={mediaItems} showTitle={false} />
           </div>
         )}
       </div>
