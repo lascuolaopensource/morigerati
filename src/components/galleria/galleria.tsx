@@ -23,6 +23,7 @@ const Galleria: React.FC<GalleriaProps> = ({ items, cardClassName }) => {
   const [index, setIndex] = React.useState(-1)
 
   // TODO - Handle video
+  // TODO - Handle placeholder (use thumbnailURL)
 
   const photos: Photo[] = items
     .map((item) => ({
