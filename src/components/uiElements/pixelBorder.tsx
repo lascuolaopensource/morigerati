@@ -1,7 +1,6 @@
 import { getRandomPixel } from '@/utils/getRandomPixel'
 
 interface PixelBorderProps {
-  color?: string
   className?: string
 }
 
