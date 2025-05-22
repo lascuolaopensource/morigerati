@@ -12,7 +12,7 @@ import type { Footer as FooterType } from '@/payload-types'
 
 const Footer = async ({ footer }: { footer: FooterType }) => {
   return (
-    <footer className="bg-black text-white px-4 md:px-8 py-4">
+    <footer className="bg-black text-white px-4 md:px-8 py-12">
       {/* mobile */}
       <div className="sm:hidden max-w-screen-xl mx-auto flex flex-col items-left gap-y-4">
         <div className="flex justify-between">
