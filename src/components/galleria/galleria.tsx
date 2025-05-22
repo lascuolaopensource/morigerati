@@ -1,102 +1,64 @@
 'use client'
-//Boilerplate
-import React, { useState, useRef, useCallback, useEffect } from 'react'
-//Types
-import { GalleriaProps } from './types'
-import { Media } from '@/payload-types'
-//Components
-import MediaGallery from '@/components/galleria/mediaGallery'
-import GalleryCard from './galleryCard'
-//Swiper
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules'
-import type SwiperCore from 'swiper'
-import type { SwiperOptions } from 'swiper/types'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-//Locale
-import { useMessages } from 'next-intl'
 
-const swiperParams: SwiperOptions = {
-  modules: [Navigation, Pagination, Keyboard, Mousewheel],
-  mousewheel: true,
-  keyboard: true,
-  spaceBetween: 20,
-  slidesPerView: 'auto',
-  initialSlide: 0,
-  watchSlidesProgress: true,
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    dynamicBullets: true,
-    bulletActiveClass: 'bullet-active',
-  },
+import React from 'react'
+import { z } from 'zod'
+
+import Lightbox from 'yet-another-react-lightbox'
+import 'yet-another-react-lightbox/styles.css'
+
+import { Photo, RowsPhotoAlbum } from 'react-photo-album'
+import 'react-photo-album/rows.css'
+
+import { Media } from '@/payload-types'
+import { GalleryCardFactory } from './galleryCard'
+
+//
+
+export interface GalleriaProps {
+  items: Media[]
+  cardClassName?: string
 }
 
-const Galleria: React.FC<GalleriaProps> = ({ items, titleColor }) => {
-  const [showGallery, setShowGallery] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const swiperRef = useRef<SwiperCore | null>(null)
-  const messages = useMessages()
+const Galleria: React.FC<GalleriaProps> = ({ items, cardClassName }) => {
+  const [index, setIndex] = React.useState(-1)
 
-  const handleSlideClick = useCallback((index: number) => {
-    setSelectedIndex(index)
-    setShowGallery(true)
-  }, [])
+  // TODO - Handle video
+  // TODO - Handle placeholder (use thumbnailURL)
 
-  const handleCloseGallery = useCallback(() => {
-    setShowGallery(false)
-  }, [])
-
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      const swiperInstance = swiperRef.current
-      if (swiperInstance) {
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-          swiperInstance.mousewheel.disable()
-        } else {
-          swiperInstance.mousewheel.enable()
-        }
-      }
-    }
-
-    window.addEventListener('wheel', handleWheel)
-    return () => window.removeEventListener('wheel', handleWheel)
-  }, [])
-
-  if (!items?.length) return null
+  const photos: Photo[] = items
+    .map((item) => ({
+      src: item.url,
+      width: item.width,
+      height: item.height,
+    }))
+    .filter(isPhoto)
 
   return (
-    <div className="w-full overflow-hidden">
-      <h2 className={'text-center pb-4 ' + titleColor}>{messages.common.galleria}</h2>
-      <div className="w-full px-2 sm:px-4">
-        <div className="w-full">
-          <div className="relative pb-12">
-            <Swiper
-              {...swiperParams}
-              className="!flex overflow-hidden"
-              onSwiper={(swiper) => (swiperRef.current = swiper)}
-            >
-              {items.map((item: Media, index: number) => (
-                <SwiperSlide
-                  key={item.id}
-                  onClick={() => handleSlideClick(index)}
-                  className="!w-auto flex justify-center"
-                >
-                  <GalleryCard media={item} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div className="swiper-pagination absolute bottom-8" />
-          </div>
-        </div>
-      </div>
-      {showGallery && (
-        <MediaGallery items={items} initialIndex={selectedIndex} onClose={handleCloseGallery} />
-      )}
-    </div>
+    <>
+      <RowsPhotoAlbum
+        render={{
+          image: GalleryCardFactory({ className: cardClassName }),
+        }}
+        photos={photos}
+        targetRowHeight={150}
+        onClick={({ index: current }) => setIndex(current)}
+      />
+
+      <Lightbox index={index} slides={photos} open={index >= 0} close={() => setIndex(-1)} />
+    </>
   )
 }
 
 export default Galleria
+
+//
+
+const photoSchema = z.object({
+  src: z.string(),
+  width: z.number(),
+  height: z.number(),
+})
+
+function isPhoto(item: object): item is Photo {
+  return photoSchema.safeParse(item).success
+}
