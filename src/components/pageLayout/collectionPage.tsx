@@ -1,8 +1,7 @@
 import { CollectionHeading } from '@/components/pageLayout/collectionHeading'
-import { Collections } from '@/db/collections'
 import { loadDb } from '@/utils/db'
-import { CardItem, CollectionGrid } from '@/components/pageLayout/collectionGrid'
-import { MainCollections } from '@/utils/types'
+import { CollectionGrid } from '@/components/pageLayout/collectionGrid'
+import { MainCollections, MainCollectionRecord } from '@/utils/types'
 import { getLocale } from '@/utils/i18n'
 
 // TODO - Review metadata
@@ -32,7 +31,7 @@ export async function CollectionPage(props: Props) {
     sort: 'nome',
   })
 
-  const items = query.docs as CardItem[]
+  const items = query.docs as MainCollectionRecord[]
 
   return (
     <>
