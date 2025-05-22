@@ -24,8 +24,6 @@ const Galleria: React.FC<GalleriaProps> = ({ items, cardClassName }) => {
 
   // TODO - Handle video
 
-  console.log(items)
-
   const photos: Photo[] = items
     .map((item) => ({
       src: item.url,
