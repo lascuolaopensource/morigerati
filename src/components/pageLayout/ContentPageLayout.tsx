@@ -5,7 +5,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import Galleria from '@/components/galleria/galleria'
 import PixelBorder from '../uiElements/pixelBorder'
-import { getRandomColor } from '@/utils/colors'
+import { getRandomColorTheme } from '@/utils/colors'
 
 //
 
@@ -21,7 +21,7 @@ export default function ContentPageLayout({
   galleryItems,
 }: ContentPageLayoutProps) {
   const mediaItems = galleryItems ? galleryItems.filter(isMediaItem) : []
-  const { text, bg, border } = getRandomColor()
+  const { text, bg, border } = getRandomColorTheme()
 
   return (
     <>

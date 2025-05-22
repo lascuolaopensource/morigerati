@@ -1,46 +1,49 @@
-type ColorType = 'luoghi' | 'itinerari' | 'residenze' | 'persone' | 'default'
+import { MainCollections } from './types'
 
-type ColorData = {
+//
+
+type ColorTheme = {
   text: string
   bg: string
   border: string
 }
 
-export const textColors: Record<ColorType, string> = {
-  luoghi: 'text-luoghiColor',
+export const textColors: Record<MainCollections, string> = {
   itinerari: 'text-itinerariColor',
-  residenze: 'text-residenzeColor',
+  luoghi: 'text-luoghiColor',
   persone: 'text-personeColor',
-  default: 'text-black',
+  residenze: 'text-residenzeColor',
 }
 
-export const bgColors: Record<ColorType, string> = {
-  luoghi: 'bg-luoghiColor',
+export const bgColors: Record<MainCollections, string> = {
   itinerari: 'bg-itinerariColor',
-  residenze: 'bg-residenzeColor',
-  default: 'bg-white',
+  luoghi: 'bg-luoghiColor',
   persone: 'bg-personeColor',
+  residenze: 'bg-residenzeColor',
 }
 
-export const borderColors: Record<ColorType, string> = {
-  luoghi: 'border-luoghiColor',
+export const borderColors: Record<MainCollections, string> = {
   itinerari: 'border-itinerariColor',
-  residenze: 'border-residenzeColor',
+  luoghi: 'border-luoghiColor',
   persone: 'border-personeColor',
-  default: 'border-black',
+  residenze: 'border-residenzeColor',
 }
 
 export function randomChoice<T>(array: T[]): T {
   return array[Math.floor(Math.random() * array.length)]
 }
 
-export function getRandomColor(): ColorData {
-  const keys = Object.keys(bgColors).filter((key) => key !== 'default') as ColorType[]
+export function getColorTheme(collection: MainCollections): ColorTheme {
+  return {
+    text: textColors[collection],
+    bg: bgColors[collection],
+    border: borderColors[collection],
+  }
+}
+
+export function getRandomColorTheme(): ColorTheme {
+  const keys = Object.keys(bgColors) as MainCollections[]
   const randomKey = randomChoice(keys)
 
-  return {
-    text: textColors[randomKey],
-    bg: bgColors[randomKey],
-    border: borderColors[randomKey],
-  }
+  return getColorTheme(randomKey)
 }
