@@ -35,7 +35,7 @@ export function randomChoice<T>(array: T[]): T {
 }
 
 export function getRandomColor(): ColorData {
-  const keys = Object.keys(bgColors) as ColorType[]
+  const keys = Object.keys(bgColors).filter((key) => key !== 'default') as ColorType[]
   const randomKey = randomChoice(keys)
 
   return {
