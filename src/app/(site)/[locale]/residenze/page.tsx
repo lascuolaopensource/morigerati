@@ -1,21 +1,20 @@
 //Boilerplate
 import React, { Suspense } from 'react'
 import { Metadata } from 'next'
-//DB
+
 import { loadDb } from '@/utils/db'
 import { Residenze as ResidenzaType } from '@/payload-types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-//Components
-import CardGrid from '@/components/card/cardsGrid'
-import PassateFuture from './_partials/passateFuture'
+
+import SelectResidenzeView, { FilterType } from './_partials/selectResidenzeView'
 import NoResidenze from './_partials/noResidenze'
-//Locale
 import { getLocale, getMessages } from 'next-intl/server'
-//Metadata
 
 import { createMetadata } from '@/utils/metadataHelpers'
 import { CollectionHeading } from '@/components/pageLayout/collectionHeading'
 import { CollectionGrid } from '@/components/pageLayout/collectionGrid'
+
+//
 
 // Force dynamic rendering and disable cache to ensure fresh data
 export const dynamic = 'force-dynamic'
@@ -39,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 interface PageProps {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ filter?: string }>
+  searchParams: Promise<{ filter?: FilterType }>
 }
 
 //
@@ -59,7 +58,7 @@ const Residenze = async ({ params, searchParams }: PageProps) => {
       />
 
       <Suspense fallback={<div className="py-8 text-center">Caricamento residenze...</div>}>
-        <div className="max-w-screen-xl px-4 md:px-8 mx-auto">
+        <div className="max-w-screen-xl px-4 md:px-8 pt-8 mx-auto">
           <ResidenzeListing filter={filter} />
         </div>
       </Suspense>
@@ -73,7 +72,6 @@ export default Residenze
 
 async function ResidenzeListing({ filter }: { filter?: string }) {
   const db = await loadDb()
-  const messages = await getMessages()
 
   const residenzeData = await db.find({
     collection: 'residenze',
@@ -82,10 +80,6 @@ async function ResidenzeListing({ filter }: { filter?: string }) {
   })
 
   const { past, future } = sortResidenze(residenzeData.docs)
-  const t = (key: string) => {
-    const [namespace, messageKey] = key.split(':')
-    return messages[namespace]?.[messageKey] || key
-  }
 
   // Check if filter is 'passata' (past) or 'futura' (future)
   const isPast = filter === 'passata'
@@ -93,13 +87,19 @@ async function ResidenzeListing({ filter }: { filter?: string }) {
 
   return (
     <div className="space-y-4">
-      <PassateFuture />
+      <div className="flex items-center gap-4 w-full">
+        <hr className="border grow" />
+        <SelectResidenzeView />
+        <hr className="border grow" />
+      </div>
 
-      {displayResidenze.length > 0 ? (
-        <CollectionGrid collection="residenze" items={displayResidenze} />
-      ) : (
-        <NoResidenze />
-      )}
+      <div className="py-8">
+        {displayResidenze.length > 0 ? (
+          <CollectionGrid collection="residenze" items={displayResidenze} />
+        ) : (
+          <NoResidenze />
+        )}
+      </div>
     </div>
   )
 }
