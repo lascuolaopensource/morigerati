@@ -9,41 +9,39 @@ import type { Media } from '@/payload-types'
 import { getColorTheme } from '@/utils/colors'
 //Locale
 import { Link } from '@/i18n/routing'
-import { MainCollections } from '@/utils/types'
+import { MainCollections, MainCollectionRecord } from '@/utils/types'
 
 interface CardProps {
-  title: string
-  media?: Media
-  slugUrl: string
   category: MainCollections
+  record: MainCollectionRecord
   className?: string
 }
 
-const Card: React.FC<CardProps> = ({ title, media, slugUrl, category, className = '' }) => {
-  let cover: string | null | undefined | StaticImageData = media?.sizes?.small?.url
+const Card: React.FC<CardProps> = ({ category, record, className = '' }) => {
+  //
 
-  if (media?.mimeType?.startsWith('video/')) {
-    cover = placeholderImage
-  }
+  const copertina = record.copertina as Media | undefined
+  let cover: string | null | undefined | StaticImageData = copertina?.sizes?.small?.url
+  if (copertina?.mimeType?.startsWith('video/')) cover = placeholderImage
 
   const { bg, border } = getColorTheme(category)
 
   return (
     <Link
-      href={slugUrl}
+      href={`/${category}/${record.slug}`}
       className={`flex flex-col border-[3px] h-full ${border} ${bg} rounded-lg overflow-hidden duration-300 hover:scale-95 relative cursor-pointer ${className}`}
     >
       <div className="relative h-[160px] aspect-video rounded-md overflow-hidden">
         <Image
           src={cover || placeholderImage}
-          alt={media ? media.alt : ''}
+          alt={copertina?.alt || ''}
           fill
           className="object-cover"
           priority
         />
       </div>
 
-      <p className="font-medium p-2 pb-1 pt-2">{title}</p>
+      <p className="font-medium p-2 pb-1 pt-2">{record.nome}</p>
     </Link>
   )
 }
