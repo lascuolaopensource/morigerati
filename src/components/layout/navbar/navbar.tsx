@@ -17,7 +17,7 @@ const Navbar = () => {
     <>
       {/* Main navigation bar */}
       <nav className={`w-full ${theme} relative z-50`} role="navigation">
-        <div className="flex max-w-screen-xl mx-auto py-1 justify-between items-center pl-2 pr-4">
+        <div className="flex max-w-screen-xl mx-auto py-1 justify-between items-center pl-2 pr-4 md:pl-4 md:pr-8">
           <LogoGenerator />
           <div className="flex items-center gap-4">
             <LocaleSwitcher />
