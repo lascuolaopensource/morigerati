@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = ({ category, record, className = '' }) => {
   return (
     <Link
       href={`/${category}/${record.slug}`}
-      className={`flex flex-col border-[3px] h-full ${border} ${bg} rounded-lg overflow-hidden duration-300 hover:scale-95 relative cursor-pointer ${className}`}
+      className={`flex flex-col border-[3px] h-full ${border} ${bg} rounded-lg overflow-hidden duration-300 hover:scale-105 relative cursor-pointer ${className}`}
     >
       <div className="relative h-[160px] aspect-video rounded-md overflow-hidden">
         <Image
