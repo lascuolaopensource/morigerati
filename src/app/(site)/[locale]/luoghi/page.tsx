@@ -1,8 +1,8 @@
-//Boilerplate
-import React from 'react'
-//Components
-import CardsPage from '@/components/card/cardsPage'
+import { CollectionPage } from '@/components/pageLayout/collectionPage'
 
-export default async function Page() {
-  return <CardsPage collectionQuery="luoghi" displayAs="grid" generateSeoMetadata={true} />
+// TODO - Review metadata
+// return <CardsPage collectionQuery="luoghi" displayAs="grid" generateSeoMetadata={true} />
+
+export default function Page() {
+  return <CollectionPage collection="luoghi" />
 }
