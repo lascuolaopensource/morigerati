@@ -34,7 +34,7 @@ export default function ContentPageLayout({
   const mediaItems = galleryItems ? galleryItems.filter(isMediaItem).filter(Boolean) : []
 
   return (
-    <main className={`max-w-screen-xl mx-auto pb-10 ${className}`}>
+    <div className={`max-w-screen-xl mx-auto pb-10 ${className}`}>
       {coverImage && isMediaItem(coverImage) && <Copertina copertina={coverImage} />}
 
       <PixelBorder color="black" className="w-full" />
@@ -52,6 +52,6 @@ export default function ContentPageLayout({
           </div>
         )}
       </div>
-    </main>
+    </div>
   )
 }

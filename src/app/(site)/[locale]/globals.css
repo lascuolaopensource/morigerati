@@ -25,13 +25,10 @@
   animation: scroll 10s linear infinite;
 }
 
-main {
-  min-height: 100svh;
-}
-
 body {
   font-family: 'TransInstrumentSans';
 }
+
 /* 
 .prose-custom {
   @apply prose max-w-none;
