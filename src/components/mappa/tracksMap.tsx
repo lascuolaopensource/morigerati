@@ -41,7 +41,6 @@ const TracksMap: React.FC<TracksMapProps> = ({ tracciati, initialPosition, initi
     // possiamo tentare un fix automatico
     const handleError = (event: ErrorEvent) => {
       if (event.message.includes('Map container is already initialized')) {
-        console.log('Tentativo di ripristino della mappa...')
         setIsVisible(false)
         setTimeout(() => {
           setMapKey(`map-${Date.now()}`)

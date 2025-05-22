@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { z } from 'zod'
 
 import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
@@ -9,29 +10,33 @@ import { Photo, RowsPhotoAlbum } from 'react-photo-album'
 import 'react-photo-album/rows.css'
 
 import { Media } from '@/payload-types'
-import { GalleryCard } from './galleryCard'
+import { GalleryCardFactory } from './galleryCard'
 
 //
 
 export interface GalleriaProps {
   items: Media[]
-  titleColor?: string
+  cardClassName?: string
 }
 
-const Galleria: React.FC<GalleriaProps> = ({ items }) => {
+const Galleria: React.FC<GalleriaProps> = ({ items, cardClassName }) => {
   const [index, setIndex] = React.useState(-1)
 
-  const photos: Photo[] = items.map((item) => ({
-    src: item.url || '',
-    width: item.width || 0,
-    height: item.height || 0,
-  }))
+  // TODO - Handle video
+
+  const photos: Photo[] = items
+    .map((item) => ({
+      src: item.thumbnailURL,
+      width: item.width,
+      height: item.height,
+    }))
+    .filter(isPhoto)
 
   return (
     <>
       <RowsPhotoAlbum
         render={{
-          image: GalleryCard,
+          image: GalleryCardFactory({ className: cardClassName }),
         }}
         photos={photos}
         targetRowHeight={150}
@@ -44,3 +49,15 @@ const Galleria: React.FC<GalleriaProps> = ({ items }) => {
 }
 
 export default Galleria
+
+//
+
+const photoSchema = z.object({
+  src: z.string(),
+  width: z.number(),
+  height: z.number(),
+})
+
+function isPhoto(item: object): item is Photo {
+  return photoSchema.safeParse(item).success
+}
