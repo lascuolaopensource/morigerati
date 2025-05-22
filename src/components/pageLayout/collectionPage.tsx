@@ -1,8 +1,9 @@
 import { CollectionHeading } from '@/components/pageLayout/collectionHeading'
 import { Collections } from '@/db/collections'
 import { loadDb } from '@/utils/db'
-import { CollectionGrid } from '@/components/pageLayout/collectionGrid'
+import { CardItem, CollectionGrid } from '@/components/pageLayout/collectionGrid'
 import { MainCollections } from '@/utils/types'
+import { getLocale } from '@/utils/i18n'
 
 // TODO - Review metadata
 // return <CardsPage collectionQuery="luoghi" displayAs="grid" generateSeoMetadata={true} />
@@ -13,6 +14,7 @@ type Props = {
 
 export async function CollectionPage(props: Props) {
   const db = await loadDb()
+  const locale = await getLocale()
 
   const testiQuery = await db.findGlobal({
     slug: 'testi',
@@ -24,6 +26,14 @@ export async function CollectionPage(props: Props) {
     return null
   }
 
+  const query = await db.find({
+    collection: props.collection,
+    locale,
+    sort: 'nome',
+  })
+
+  const items = query.docs as CardItem[]
+
   return (
     <>
       <CollectionHeading
@@ -33,7 +43,7 @@ export async function CollectionPage(props: Props) {
       />
 
       <div className="px-4 md:px-8 py-12 max-w-screen-xl mx-auto">
-        <CollectionGrid collection={props.collection} />
+        <CollectionGrid collection={props.collection} items={items} />
       </div>
     </>
   )

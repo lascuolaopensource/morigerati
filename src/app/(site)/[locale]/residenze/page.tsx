@@ -7,13 +7,15 @@ import { Residenze as ResidenzaType } from '@/payload-types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 //Components
 import CardGrid from '@/components/card/cardsGrid'
-import PassateFuture from '@/components/residenze/passateFuture'
-import NoResidenze from '@/components/residenze/noResidenze'
+import PassateFuture from './_partials/passateFuture'
+import NoResidenze from './_partials/noResidenze'
 //Locale
 import { getLocale, getMessages } from 'next-intl/server'
-import ArchivePageLayout from '@/components/pageLayout/ArchivePageLayout'
 //Metadata
+
 import { createMetadata } from '@/utils/metadataHelpers'
+import { CollectionHeading } from '@/components/pageLayout/collectionHeading'
+import { CollectionGrid } from '@/components/pageLayout/collectionGrid'
 
 // Force dynamic rendering and disable cache to ensure fresh data
 export const dynamic = 'force-dynamic'
@@ -33,37 +35,41 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 }
 
-interface SortedResidenze {
-  past: ResidenzaType[]
-  future: ResidenzaType[]
+//
+
+interface PageProps {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<{ filter?: string }>
 }
 
-const sortResidenze = (residenze: ResidenzaType[]): SortedResidenze => {
-  const now = new Date()
+//
 
-  return residenze.reduce(
-    (acc: SortedResidenze, residenza) => {
-      const comparisonDate = residenza.data_fine
-        ? new Date(residenza.data_fine)
-        : residenza.data_inizio
-          ? new Date(residenza.data_inizio)
-          : null
+const Residenze = async ({ params, searchParams }: PageProps) => {
+  const locale = (await getLocale()) as 'it' | 'en'
+  const { filter = 'futura' } = await searchParams
+  const db = await loadDb()
+  const testi = await db.findGlobal({ slug: 'testi', locale: locale })
 
-      if (!comparisonDate) {
-        acc.past.push(residenza)
-      } else {
-        if (comparisonDate < now) {
-          acc.past.push(residenza)
-        } else {
-          acc.future.push(residenza)
-        }
-      }
+  return (
+    <>
+      <CollectionHeading
+        collection="residenze"
+        title={testi.residenze.title}
+        introContent={testi.residenze.testo as SerializedEditorState}
+      />
 
-      return acc
-    },
-    { past: [], future: [] },
+      <Suspense fallback={<div className="py-8 text-center">Caricamento residenze...</div>}>
+        <div className="max-w-screen-xl px-4 md:px-8 mx-auto">
+          <ResidenzeListing filter={filter} />
+        </div>
+      </Suspense>
+    </>
   )
 }
+
+export default Residenze
+
+//
 
 async function ResidenzeListing({ filter }: { filter?: string }) {
   const db = await loadDb()
@@ -88,8 +94,9 @@ async function ResidenzeListing({ filter }: { filter?: string }) {
   return (
     <div className="space-y-4">
       <PassateFuture />
+
       {displayResidenze.length > 0 ? (
-        <CardGrid items={displayResidenze} category="residenze" />
+        <CollectionGrid collection="residenze" items={displayResidenze} />
       ) : (
         <NoResidenze />
       )}
@@ -97,30 +104,34 @@ async function ResidenzeListing({ filter }: { filter?: string }) {
   )
 }
 
-interface PageProps {
-  params: Promise<{ locale: string }>
-  searchParams: Promise<{ filter?: string }>
+interface SortedResidenze {
+  past: ResidenzaType[]
+  future: ResidenzaType[]
 }
 
-const Residenze = async ({ params, searchParams }: PageProps) => {
-  const locale = (await getLocale()) as 'it' | 'en'
-  const { filter = 'futura' } = await searchParams
-  const db = await loadDb()
-  const testi = await db.findGlobal({ slug: 'testi', locale: locale })
+const sortResidenze = (residenze: ResidenzaType[]): SortedResidenze => {
+  const now = new Date()
 
-  return (
-    <ArchivePageLayout
-      title={testi.residenze.title}
-      introContent={testi.residenze.testo as SerializedEditorState}
-      colorTheme="residenze"
-    >
-      <div className="w-full">
-        <Suspense fallback={<div className="py-8 text-center">Caricamento residenze...</div>}>
-          <ResidenzeListing filter={filter} />
-        </Suspense>
-      </div>
-    </ArchivePageLayout>
+  return residenze.reduce(
+    (acc: SortedResidenze, residenza) => {
+      const comparisonDate = residenza.data_fine
+        ? new Date(residenza.data_fine)
+        : residenza.data_inizio
+        ? new Date(residenza.data_inizio)
+        : null
+
+      if (!comparisonDate) {
+        acc.past.push(residenza)
+      } else {
+        if (comparisonDate < now) {
+          acc.past.push(residenza)
+        } else {
+          acc.future.push(residenza)
+        }
+      }
+
+      return acc
+    },
+    { past: [], future: [] },
   )
 }
-
-export default Residenze
