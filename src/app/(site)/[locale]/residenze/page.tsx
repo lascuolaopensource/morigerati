@@ -1,19 +1,20 @@
 //Boilerplate
 import React, { Suspense } from 'react'
 import { Metadata } from 'next'
-//DB
+
 import { loadDb } from '@/utils/db'
 import { Residenze as ResidenzaType } from '@/payload-types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-//Components
-import CardGrid from '@/components/card/cardsGrid'
-import PassateFuture from '@/components/residenze/passateFuture'
-import NoResidenze from '@/components/residenze/noResidenze'
-//Locale
+
+import SelectResidenzeView, { FilterType } from './_partials/selectResidenzeView'
+import NoResidenze from './_partials/noResidenze'
 import { getLocale, getMessages } from 'next-intl/server'
-import ArchivePageLayout from '@/components/pageLayout/ArchivePageLayout'
-//Metadata
+
 import { createMetadata } from '@/utils/metadataHelpers'
+import { CollectionHeading } from '@/components/pageLayout/collectionHeading'
+import { CollectionGrid } from '@/components/pageLayout/collectionGrid'
+
+//
 
 // Force dynamic rendering and disable cache to ensure fresh data
 export const dynamic = 'force-dynamic'
@@ -33,6 +34,76 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 }
 
+//
+
+interface PageProps {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<{ filter?: FilterType }>
+}
+
+//
+
+const Residenze = async ({ params, searchParams }: PageProps) => {
+  const locale = (await getLocale()) as 'it' | 'en'
+  const { filter = 'futura' } = await searchParams
+  const db = await loadDb()
+  const testi = await db.findGlobal({ slug: 'testi', locale: locale })
+
+  return (
+    <>
+      <CollectionHeading
+        collection="residenze"
+        title={testi.residenze.title}
+        introContent={testi.residenze.testo as SerializedEditorState}
+      />
+
+      <Suspense fallback={<div className="py-8 text-center">Caricamento residenze...</div>}>
+        <div className="max-w-screen-xl px-4 md:px-8 pt-8 mx-auto">
+          <ResidenzeListing filter={filter} />
+        </div>
+      </Suspense>
+    </>
+  )
+}
+
+export default Residenze
+
+//
+
+async function ResidenzeListing({ filter }: { filter?: string }) {
+  const db = await loadDb()
+
+  const residenzeData = await db.find({
+    collection: 'residenze',
+    depth: 2,
+    sort: '-data_inizio',
+  })
+
+  const { past, future } = sortResidenze(residenzeData.docs)
+
+  // Check if filter is 'passata' (past) or 'futura' (future)
+  const isPast = filter === 'passata'
+  const displayResidenze = isPast ? past : future
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-4 w-full">
+        <hr className="border grow" />
+        <SelectResidenzeView />
+        <hr className="border grow" />
+      </div>
+
+      <div className="py-8">
+        {displayResidenze.length > 0 ? (
+          <CollectionGrid collection="residenze" items={displayResidenze} />
+        ) : (
+          <NoResidenze />
+        )}
+      </div>
+    </div>
+  )
+}
+
 interface SortedResidenze {
   past: ResidenzaType[]
   future: ResidenzaType[]
@@ -46,8 +117,8 @@ const sortResidenze = (residenze: ResidenzaType[]): SortedResidenze => {
       const comparisonDate = residenza.data_fine
         ? new Date(residenza.data_fine)
         : residenza.data_inizio
-          ? new Date(residenza.data_inizio)
-          : null
+        ? new Date(residenza.data_inizio)
+        : null
 
       if (!comparisonDate) {
         acc.past.push(residenza)
@@ -64,63 +135,3 @@ const sortResidenze = (residenze: ResidenzaType[]): SortedResidenze => {
     { past: [], future: [] },
   )
 }
-
-async function ResidenzeListing({ filter }: { filter?: string }) {
-  const db = await loadDb()
-  const messages = await getMessages()
-
-  const residenzeData = await db.find({
-    collection: 'residenze',
-    depth: 2,
-    sort: '-data_inizio',
-  })
-
-  const { past, future } = sortResidenze(residenzeData.docs)
-  const t = (key: string) => {
-    const [namespace, messageKey] = key.split(':')
-    return messages[namespace]?.[messageKey] || key
-  }
-
-  // Check if filter is 'passata' (past) or 'futura' (future)
-  const isPast = filter === 'passata'
-  const displayResidenze = isPast ? past : future
-
-  return (
-    <div className="space-y-4">
-      <PassateFuture />
-      {displayResidenze.length > 0 ? (
-        <CardGrid items={displayResidenze} category="residenze" />
-      ) : (
-        <NoResidenze />
-      )}
-    </div>
-  )
-}
-
-interface PageProps {
-  params: Promise<{ locale: string }>
-  searchParams: Promise<{ filter?: string }>
-}
-
-const Residenze = async ({ params, searchParams }: PageProps) => {
-  const locale = (await getLocale()) as 'it' | 'en'
-  const { filter = 'futura' } = await searchParams
-  const db = await loadDb()
-  const testi = await db.findGlobal({ slug: 'testi', locale: locale })
-
-  return (
-    <ArchivePageLayout
-      title={testi.residenze.title}
-      introContent={testi.residenze.testo as SerializedEditorState}
-      colorTheme="residenze"
-    >
-      <div className="w-full">
-        <Suspense fallback={<div className="py-8 text-center">Caricamento residenze...</div>}>
-          <ResidenzeListing filter={filter} />
-        </Suspense>
-      </div>
-    </ArchivePageLayout>
-  )
-}
-
-export default Residenze
