@@ -8,7 +8,6 @@ import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical
 
 //Components
 import ContentPageLayout from '@/components/pageLayout/ContentPageLayout'
-import { RandomLetter } from '@/components/home/randomLetter'
 //Locale
 import { getLocale } from 'next-intl/server'
 import { createMetadata } from '@/utils/metadataHelpers'
