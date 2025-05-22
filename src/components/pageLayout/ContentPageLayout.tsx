@@ -29,14 +29,12 @@ export default function ContentPageLayout({
 
       <PixelBorder className={`w-full ${bg}`} />
 
-      <div className="max-w-screen-xl mx-auto pb-10 ">
-        <div className="p-4 md:p-8 !py-10">
-          {richTextContent && (
-            <div>
-              <RichText data={richTextContent} className="prose md:prose-lg mx-auto" />
-            </div>
-          )}
-        </div>
+      <div className="max-w-screen-xl mx-auto grow p-4 md:p-8 !py-10">
+        {richTextContent && (
+          <div>
+            <RichText data={richTextContent} className="prose md:prose-lg mx-auto" />
+          </div>
+        )}
       </div>
 
       <PixelBorder className={`w-full ${bg}`} />
