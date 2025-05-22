@@ -24,21 +24,15 @@ import Card from '../card/card'
 interface HomeCollectionProps {
   collection: MainCollections
   alignment?: 'left' | 'right'
-  hasMap?: boolean
-  tracciati?: Tracciati[]
   title: string
   text: SerializedEditorState
-  singleRow?: boolean
 }
 
 const HomeCollection: React.FC<HomeCollectionProps> = async ({
   collection,
-  alignment: layout = 'left',
-  hasMap = false,
-  tracciati = [],
+  alignment = 'left',
   title,
   text,
-  singleRow = true,
 }) => {
   const db = await loadDb()
   const messages = await getMessages()
@@ -53,6 +47,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
     sort: 'nome',
     depth: 2,
     limit: 2,
+    locale,
   })) as { docs: MainCollectionRecord[] }
 
   if (collection === 'residenze') {
@@ -63,15 +58,15 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
     'flex flex-col md:flex-row gap-8 md:gap-0 items-center',
     'max-w-screen-xl mx-auto py-12 md:py-18 ',
     {
-      'md:flex-row': layout === 'left',
-      'md:flex-row-reverse': layout === 'right',
+      'md:flex-row': alignment === 'left',
+      'md:flex-row-reverse': alignment === 'right',
     },
   )
 
   const textClasses = cn(
     {
-      'text-left items-start': layout === 'left',
-      'text-right items-end': layout === 'right',
+      'text-left items-start': alignment === 'left',
+      'text-right items-end': alignment === 'right',
     },
     'flex flex-col gap-4 max-w-screen-xl mx-auto px-4 md:px-8',
   )

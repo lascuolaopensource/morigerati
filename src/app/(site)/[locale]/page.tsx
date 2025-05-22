@@ -10,11 +10,11 @@ import type { Media, Tracciati as TracciatiType } from '@/payload-types'
 import Copertina from '@/components/uiElements/copertina'
 import GridOverlay from '@/components/uiElements/gridOverlay'
 import HomeCollection from '@/components/home/homeCollection'
+import PixelBorder from '@/components/uiElements/pixelBorder'
+
 // Utils
-import { getHomeTracksData } from '@/utils/getHomeData'
 import { createMetadata } from '@/utils/metadataHelpers'
 import { getLocale } from '@/utils/i18n'
-import PixelBorder from '@/components/uiElements/pixelBorder'
 
 //-------------------------------------------------------------------------
 
@@ -43,10 +43,6 @@ export default async function Page() {
   const home = await db.findGlobal({
     slug: 'home',
     locale: locale,
-  })
-
-  const { docs: tracciati } = await db.find({
-    collection: 'tracciati',
   })
 
   return (
@@ -78,11 +74,8 @@ export default async function Page() {
 
       <HomeCollection
         collection="itinerari"
-        hasMap={true}
         title={home.itinerari?.title} // Use optional chaining if structure might vary by locale
         text={home.itinerari?.testo as SerializedEditorState}
-        tracciati={tracciati as TracciatiType[]}
-        singleRow={true}
       />
 
       <PixelBorder className="bg-luoghiColor" />
@@ -91,7 +84,6 @@ export default async function Page() {
         collection="luoghi"
         title={home.luoghi?.title}
         text={home.luoghi?.testo as SerializedEditorState}
-        singleRow={true}
         alignment="right"
       />
 
@@ -101,7 +93,6 @@ export default async function Page() {
         collection="residenze"
         title={home.residenze?.title}
         text={home.residenze?.testo as SerializedEditorState}
-        singleRow={true}
       />
 
       <PixelBorder className="!bg-black" />
