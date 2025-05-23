@@ -22,6 +22,7 @@ import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 //Locale
 import { getLocale, getMessages } from 'next-intl/server'
 import { createMetadata } from '@/utils/metadataHelpers'
+import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
 
 interface ItinerarioParams {
   slug: string
@@ -111,9 +112,32 @@ export default async function Itinerario({ params }: PageProps) {
 
   const position: LatLngTuple = [40.139949, 15.555182]
 
+  const galleryItems = (itinerarioData.galleria as Media[]) || []
+
   return (
     <div className="">
       <Copertina copertina={itinerarioData.copertina as Media} />
+
+      <DetailPageHeading
+        title={itinerarioData.nome}
+        collection="itinerari"
+        backButton={{
+          href: '/itinerari',
+          message: messages.backButton.itinerari,
+        }}
+        mapProps={{
+          gpxUrl: getTracciatoUrl(itinerarioData?.tracciato_gpx),
+          showGpxDownload: true,
+        }}
+      >
+        <ItinerarioDetailsCard
+          lunghezza={itinerarioData?.lunghezza}
+          tempo={itinerarioData?.tempo}
+          dislivello={itinerarioData?.dislivello}
+          difficolta={itinerarioData?.difficolta}
+          tipo={itinerarioData?.tipo}
+        />
+      </DetailPageHeading>
 
       <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
         <BackButton message={messages.backButton.itinerari} redirect={`/itinerari`} />
@@ -132,14 +156,6 @@ export default async function Itinerario({ params }: PageProps) {
               <p></p>
             )}
 
-            <ItinerarioDetailsCard
-              lunghezza={itinerarioData?.lunghezza}
-              tempo={itinerarioData?.tempo}
-              dislivello={itinerarioData?.dislivello}
-              difficolta={itinerarioData?.difficolta}
-              tipo={itinerarioData?.tipo}
-            />
-
             <div className="mb-6 mt-6">
               <RichText
                 data={itinerarioData?.testo as SerializedEditorState}
@@ -157,6 +173,12 @@ export default async function Itinerario({ params }: PageProps) {
                 gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
                 localizedMedia={itinerarioData?.media_geolocalizzati}
               />
+              {/* <DynamicMappa
+                initialPosition={position}
+                initialZoom={14}
+                gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
+                localizedMedia={itinerarioData?.media_geolocalizzati}
+              /> */}
             </div>
           </div>
         </div>
@@ -168,7 +190,12 @@ export default async function Itinerario({ params }: PageProps) {
               <MediaViewer media={itinerarioData?.Video as Media} />
             </div>
           )}
-          <Galleria items={itinerarioData?.galleria as Media[]} />
+
+          {galleryItems.length > 0 && (
+            <div className="mb-4">
+              <Galleria items={galleryItems} />
+            </div>
+          )}
 
           <ServiziCardWrapper servizi={itinerarioData?.servizi} />
 

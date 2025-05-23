@@ -121,8 +121,6 @@ export default async function LuogoPage({ params }: PageProps) {
     }
   }
 
-  const position: LatLngTuple = luogoData.posizione ?? [40.139949, 15.555182]
-
   const galleryItems = (luogoData.galleria as Media[]) || []
 
   return (
@@ -133,7 +131,9 @@ export default async function LuogoPage({ params }: PageProps) {
         collection="luoghi"
         backButton={{ message: messages.backButton.luoghi, href: `/luoghi` }}
         title={luogoData.nome}
-        position={position}
+        mapProps={{
+          initialPosition: luogoData.posizione,
+        }}
       />
 
       <Container className="max-w-prose space-y-8">

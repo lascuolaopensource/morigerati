@@ -9,9 +9,12 @@ import type { Media } from '@/payload-types'
 import { X } from 'lucide-react'
 import { MdOutlineFileDownload } from 'react-icons/md'
 import Image from 'next/image'
+import { MoonLoader } from 'react-spinners'
 
-interface MapProps {
-  initialPosition: LatLngExpression
+//
+
+export interface MapProps {
+  initialPosition?: LatLngExpression | null | undefined
   initialZoom?: number
   gpxUrl?: string
   localizedMedia?:
@@ -19,110 +22,30 @@ interface MapProps {
     | null
     | undefined
   showPositionPin?: boolean
+  showGpxDownload?: boolean
 }
 
 const defaults = {
   zoom: 13,
 }
 
-// Componente per la visualizzazione a schermo intero
-const FullscreenMedia = ({ media, onClose }: { media: Media | string; onClose: () => void }) => {
-  const isString = typeof media === 'string'
-  const isVideo = !isString && media.mimeType?.startsWith('video/')
+export function Mappa(props: MapProps) {
+  const {
+    initialPosition,
+    initialZoom = defaults.zoom,
+    gpxUrl,
+    localizedMedia,
+    showPositionPin = false,
+    showGpxDownload = false,
+  } = props
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-95">
-      <button
-        onClick={onClose}
-        className="absolute top-6 right-6 p-3 bg-black bg-opacity-50 rounded-full text-white hover:text-gray-300 transition-colors z-10"
-        aria-label="Close fullscreen view"
-      >
-        <X size={28} />
-      </button>
-
-      <div className="w-full h-full flex items-center justify-center p-8">
-        {isVideo ? (
-          <video
-            src={(media as Media).url || ''}
-            className="max-w-[95%] max-h-[90vh] w-auto h-auto object-contain rounded-lg"
-            controls
-            autoPlay
-            loop
-            playsInline
-          >
-            Your browser does not support video playback.
-          </video>
-        ) : (
-          <Image
-            src={(media as Media).url || ''}
-            alt={isString ? 'Media' : (media as Media).alt || 'Media'}
-            className="max-w-[95%] max-h-[90vh] w-auto h-auto object-contain rounded-lg"
-            fill
-            style={{ objectFit: 'contain' }}
-            sizes="(max-width: 768px) 100vw, 90vw"
-          />
-        )}
-      </div>
-    </div>
-  )
-}
-
-const createPopupContent = (
-  media: Media | string,
-  onMediaClick: (media: Media | string) => void,
-) => {
-  if (typeof media === 'string') {
-    return `
-      <div class="cursor-pointer" onclick='window.openFullscreenMedia("${media}")' style="padding: 5px; text-align: center;">
-        <img src="${media}" alt="Media" style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;" />
-      </div>
-    `
-  }
-
-  const isVideo = media.mimeType?.startsWith('video/')
-  const mediaUrl = media.url || ''
-
-  if (isVideo) {
-    return `
-      <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(
-        media,
-      )})' style="padding: 5px; text-align: center;">
-        <video 
-          src="${mediaUrl}"
-          style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;"
-          muted 
-          loop 
-          playsinline
-        >
-          Your browser does not support video playback.
-        </video>
-      </div>
-    `
-  }
-
-  return `
-    <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(
-      media,
-    )})' style="padding: 5px; text-align: center;">
-      <img src="${mediaUrl}" alt="${
-    media.alt || 'Media'
-  }" style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;" />
-    </div>
-  `
-}
-
-export const Mappa: React.FC<MapProps> = ({
-  initialPosition,
-  initialZoom = defaults.zoom,
-  gpxUrl,
-  localizedMedia,
-  showPositionPin = false,
-}) => {
   const mapRef = useRef<L.Map | null>(null)
   const mapContainerRef = useRef<HTMLDivElement>(null)
-  const [gpxBounds, setGpxBounds] = useState<L.LatLngBounds | null>(null)
   const positionMarkerRef = useRef<L.Marker | null>(null)
   const [selectedMedia, setSelectedMedia] = useState<Media | string | null>(null)
+  const [gpxLoaded, setGpxLoaded] = useState(!Boolean(gpxUrl))
+
+  const actualInitialPosition = initialPosition ?? [40.14003842, 15.555298241]
 
   // Aggiungi la funzione al window object per essere accessibile dal popup
   useEffect(() => {
@@ -138,7 +61,7 @@ export const Mappa: React.FC<MapProps> = ({
   useEffect(() => {
     if (typeof window !== 'undefined' && mapContainerRef.current && !mapRef.current) {
       // Create map
-      mapRef.current = L.map(mapContainerRef.current).setView(initialPosition, initialZoom)
+      mapRef.current = L.map(mapContainerRef.current).setView(actualInitialPosition, initialZoom)
 
       // Override default Leaflet marker icon globally with a dot
       L.Marker.prototype.options.icon = L.divIcon({
@@ -182,7 +105,7 @@ export const Mappa: React.FC<MapProps> = ({
           iconAnchor: [8, 8],
         })
 
-        positionMarkerRef.current = L.marker(initialPosition, {
+        positionMarkerRef.current = L.marker(actualInitialPosition, {
           icon: positionIcon,
           title: 'Current position',
         }).addTo(mapRef.current)
@@ -219,8 +142,14 @@ export const Mappa: React.FC<MapProps> = ({
           },
         })
           .on('loaded', function (e: { target: any }) {
+            setGpxLoaded(true)
+
             const bounds = e.target.getBounds()
-            setGpxBounds(bounds)
+            // setGpxBounds(bounds)
+
+            if (mapRef.current) {
+              mapRef.current.fitBounds(bounds)
+            }
 
             // Find the first and last layer in the GPX (they should be polylines)
             let startPoint: L.LatLng | null = null
@@ -371,34 +300,124 @@ export const Mappa: React.FC<MapProps> = ({
     }
   }, [initialPosition, initialZoom, gpxUrl, localizedMedia, showPositionPin])
 
-  useEffect(() => {
-    if (mapRef.current && gpxBounds) {
-      mapRef.current.fitBounds(gpxBounds)
-    }
-  }, [gpxBounds])
-
   return (
-    <div className="w-full h-full rounded-lg border-2 border-gray-800 overflow-hidden">
+    <div className="w-full h-full rounded-lg border-2 border-gray-800 overflow-hidden relative">
       <div ref={mapContainerRef} className="h-full w-full z-0" />
+
       {selectedMedia && (
         <FullscreenMedia media={selectedMedia} onClose={() => setSelectedMedia(null)} />
       )}
-      {gpxUrl && (
-        <div className="w-full p-4 flex justify-center">
+
+      {gpxUrl && showGpxDownload && (
+        <div className="w-full p-4 absolute bottom-0 left-0">
           <a
             href={gpxUrl}
             download
-            className="group relative h-12 px-6 rounded-full overflow-hidden transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-900 flex items-center justify-center gap-2"
+            className="text-white w-full p-3 rounded-full transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-900 flex items-center justify-center gap-2"
             aria-label="Scarica tracciato GPX"
           >
-            <MdOutlineFileDownload
-              size={24}
-              className="text-white transform transition-all duration-300 group-hover:scale-125"
-            />
-            <span className="text-base text-white">Download tracciato GPX</span>
+            <MdOutlineFileDownload size={24} />
+            <span>Download tracciato GPX</span>
           </a>
+        </div>
+      )}
+
+      {!gpxLoaded && (
+        <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+          <div className="flex bg-white rounded-md p-4 items-center justify-center gap-4 border shadow-md">
+            <MoonLoader color="#7fcbae" size={20} />
+            <span className="text-itinerariColor">Caricamento tracciato...</span>
+          </div>
         </div>
       )}
     </div>
   )
+}
+
+//
+
+// Componente per la visualizzazione a schermo intero
+const FullscreenMedia = ({ media, onClose }: { media: Media | string; onClose: () => void }) => {
+  const isString = typeof media === 'string'
+  const isVideo = !isString && media.mimeType?.startsWith('video/')
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-95">
+      <button
+        onClick={onClose}
+        className="absolute top-6 right-6 p-3 bg-black bg-opacity-50 rounded-full text-white hover:text-gray-300 transition-colors z-10"
+        aria-label="Close fullscreen view"
+      >
+        <X size={28} />
+      </button>
+
+      <div className="w-full h-full flex items-center justify-center p-8">
+        {isVideo ? (
+          <video
+            src={(media as Media).url || ''}
+            className="max-w-[95%] max-h-[90vh] w-auto h-auto object-contain rounded-lg"
+            controls
+            autoPlay
+            loop
+            playsInline
+          >
+            Your browser does not support video playback.
+          </video>
+        ) : (
+          <Image
+            src={(media as Media).url || ''}
+            alt={isString ? 'Media' : (media as Media).alt || 'Media'}
+            className="max-w-[95%] max-h-[90vh] w-auto h-auto object-contain rounded-lg"
+            fill
+            style={{ objectFit: 'contain' }}
+            sizes="(max-width: 768px) 100vw, 90vw"
+          />
+        )}
+      </div>
+    </div>
+  )
+}
+
+const createPopupContent = (
+  media: Media | string,
+  onMediaClick: (media: Media | string) => void,
+) => {
+  if (typeof media === 'string') {
+    return `
+      <div class="cursor-pointer" onclick='window.openFullscreenMedia("${media}")' style="padding: 5px; text-align: center;">
+        <img src="${media}" alt="Media" style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;" />
+      </div>
+    `
+  }
+
+  const isVideo = media.mimeType?.startsWith('video/')
+  const mediaUrl = media.url || ''
+
+  if (isVideo) {
+    return `
+      <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(
+        media,
+      )})' style="padding: 5px; text-align: center;">
+        <video 
+          src="${mediaUrl}"
+          style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;"
+          muted 
+          loop 
+          playsinline
+        >
+          Your browser does not support video playback.
+        </video>
+      </div>
+    `
+  }
+
+  return `
+    <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(
+      media,
+    )})' style="padding: 5px; text-align: center;">
+      <img src="${mediaUrl}" alt="${
+    media.alt || 'Media'
+  }" style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;" />
+    </div>
+  `
 }

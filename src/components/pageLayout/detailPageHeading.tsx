@@ -1,9 +1,9 @@
 import { MainCollections } from '@/utils/types'
 import BackButton from '../uiElements/backButton'
-import LuogoMap from '../uiElements/LuogoMap'
-import { LatLngTuple } from 'leaflet'
 import { getColorTheme } from '@/utils/colors'
 import PixelBorder from '../uiElements/pixelBorder'
+import DynamicMappa from '../mappa/mapLoader'
+import { MapProps } from '../mappa/map'
 
 type Props = {
   collection: MainCollections
@@ -12,13 +12,16 @@ type Props = {
     href: string
   }
   title: string
-  position?: LatLngTuple | null | undefined
   children?: React.ReactNode
+  mapProps?: MapProps
 }
 
 export function DetailPageHeading(props: Props) {
-  const { collection, backButton, title, position, children } = props
+  const { collection, backButton, title, children, mapProps } = props
   const { bg } = getColorTheme(collection)
+
+  const { initialZoom = 16, showPositionPin = true, ...rest } = mapProps || {}
+  const showMap = rest.initialPosition || rest.gpxUrl || rest.localizedMedia
 
   return (
     <>
@@ -29,8 +32,10 @@ export function DetailPageHeading(props: Props) {
             <h1 className="text-4xl text-white font-bold text-balance">{title}</h1>
             {children}
           </div>
-          {position && (
-            <LuogoMap position={position} className="grow !h-[300px] w-full max-w-[500px]" />
+          {showMap && (
+            <div className="grow h-[300px] sm:h-auto sm:min-h-[300px] sm:self-stretch w-full sm:max-w-[500px]">
+              <DynamicMappa initialZoom={initialZoom} showPositionPin={showPositionPin} {...rest} />
+            </div>
           )}
         </div>
       </div>
