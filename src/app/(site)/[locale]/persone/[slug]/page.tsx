@@ -14,7 +14,7 @@ import Galleria from '@/components/galleria/galleria'
 import PersonaHeader from '@/components/persone/PersonaHeader'
 import PersonaContent from '@/components/persone/PersonaContent'
 import PersonaContacts from '@/components/persone/PersonaContacts'
-import LuogoMap from '@/components/luoghi/LuogoMap'
+import LuogoMap from '@/components/uiElements/LuogoMap'
 import RelatedItineraries from '@/components/luoghi/RelatedItineraries'
 //Locale
 import { getMessages, getLocale } from 'next-intl/server'

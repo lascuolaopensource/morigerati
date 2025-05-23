@@ -84,7 +84,9 @@ const createPopupContent = (
 
   if (isVideo) {
     return `
-      <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(media)})' style="padding: 5px; text-align: center;">
+      <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(
+        media,
+      )})' style="padding: 5px; text-align: center;">
         <video 
           src="${mediaUrl}"
           style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;"
@@ -99,8 +101,12 @@ const createPopupContent = (
   }
 
   return `
-    <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(media)})' style="padding: 5px; text-align: center;">
-      <img src="${mediaUrl}" alt="${media.alt || 'Media'}" style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;" />
+    <div class="cursor-pointer" onclick='window.openFullscreenMedia(${JSON.stringify(
+      media,
+    )})' style="padding: 5px; text-align: center;">
+      <img src="${mediaUrl}" alt="${
+    media.alt || 'Media'
+  }" style="max-width: 120px; max-height: 120px; object-fit: contain; margin: 0 auto;" />
     </div>
   `
 }
@@ -372,8 +378,8 @@ export const Mappa: React.FC<MapProps> = ({
   }, [gpxBounds])
 
   return (
-    <div className="w-full rounded-lg border-2 border-gray-800 overflow-hidden">
-      <div ref={mapContainerRef} className="h-[400px] w-full z-0" />
+    <div className="w-full h-full rounded-lg border-2 border-gray-800 overflow-hidden">
+      <div ref={mapContainerRef} className="h-full w-full z-0" />
       {selectedMedia && (
         <FullscreenMedia media={selectedMedia} onClose={() => setSelectedMedia(null)} />
       )}
