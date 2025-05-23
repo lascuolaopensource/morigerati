@@ -25,6 +25,7 @@ import { createMetadata } from '@/utils/metadataHelpers'
 import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
 import { Container } from '@/components/uiElements/container'
 import { ServiziSection } from '@/components/uiElements/serviziSection'
+import PixelBorder from '@/components/uiElements/pixelBorder'
 
 interface ItinerarioParams {
   slug: string
@@ -154,32 +155,10 @@ export default async function Itinerario({ params }: PageProps) {
         />
 
         <ServiziSection servizi={itinerarioData?.servizi} collection="itinerari" />
-      </Container>
 
-      <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
-        {/* Right column: Map */}
-        <div className="lg:order-2">
-          <div className="h-[500px]">
-            <DynamicMappa
-              initialPosition={position}
-              initialZoom={14}
-              gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
-              localizedMedia={itinerarioData?.media_geolocalizzati}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Content below the two columns */}
-      <div className="">
-        {galleryItems.length > 0 && (
-          <div className="mb-4">
-            <Galleria items={galleryItems} />
-          </div>
-        )}
-
-        <ServiziCardWrapper servizi={itinerarioData?.servizi} />
-
+        {/* TODO - Review this section */}
+        {/* Content below the two columns */}
+        {/* <div className="">
         {itinerarioData?.persone && itinerarioData?.persone.length > 0 && (
           <div className="">
             <h2 className="font-bold text-xl text-center pb-4">{peopleTitle}</h2>
@@ -193,6 +172,26 @@ export default async function Itinerario({ params }: PageProps) {
             <CardGrid items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" singleRow />
           </div>
         )}
+      </div> */}
+      </Container>
+
+      <div>
+        <PixelBorder className="bg-itinerariColor" />
+        <div className="bg-itinerariColor">
+          <Container className="space-y-6">
+            <p className="text-center text-3xl font-bold text-white">Scopri il percorso!</p>
+            <div className="h-[600px]">
+              <DynamicMappa
+                initialPosition={position}
+                initialZoom={14}
+                gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
+                localizedMedia={itinerarioData?.media_geolocalizzati}
+              />
+            </div>
+
+            {galleryItems.length > 0 && <Galleria items={galleryItems} />}
+          </Container>
+        </div>
       </div>
     </>
   )
