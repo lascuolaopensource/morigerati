@@ -20,6 +20,7 @@ import RelatedItineraries from '@/components/luoghi/RelatedItineraries'
 import { getMessages, getLocale } from 'next-intl/server'
 //Metadata
 import { createMetadata } from '@/utils/metadataHelpers'
+import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
 
 export async function generateMetadata({
   params,
@@ -82,13 +83,17 @@ export default async function persone({ params }: { params: Promise<{ slug: stri
   const position: LatLngTuple = stakeholderData.posizione ?? [40.139949, 15.555182]
 
   return (
-    <div className="">
+    <>
       <Copertina copertina={stakeholderData.copertina as Media} />
 
-      <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
-        <BackButton message={messages.backButton.persone} redirect={'/persone'} />
-        <div className="pt-4"></div>
+      <DetailPageHeading
+        collection="persone"
+        backButton={{ message: messages.backButton.persone, href: '/persone' }}
+        title={stakeholderData.nome}
+        position={position}
+      />
 
+      <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
         {/* Grid container for desktop layout */}
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 mb-8">
           {/* Left column: Content */}
@@ -105,11 +110,6 @@ export default async function persone({ params }: { params: Promise<{ slug: stri
 
             <PersonaContacts contatti={stakeholderData.contatti} locale={locale} />
           </div>
-
-          {/* Right column: Map */}
-          <div className="lg:order-2">
-            <LuogoMap position={position} />
-          </div>
         </div>
 
         {/* Galleria */}
@@ -125,6 +125,6 @@ export default async function persone({ params }: { params: Promise<{ slug: stri
           messageTitle={messages.strings.itinerariesFoundIn}
         />
       </div>
-    </div>
+    </>
   )
 }

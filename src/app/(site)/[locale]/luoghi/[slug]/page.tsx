@@ -24,6 +24,7 @@ import { useMessages } from 'next-intl'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
 import { T } from '@/components/uiElements/t'
 import { cn } from '@/lib/utils'
+import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
 
 //
 
@@ -131,17 +132,12 @@ export default async function LuogoPage({ params }: PageProps) {
     <>
       <Copertina copertina={luogoData?.copertina as Media} />
 
-      <div className="bg-luoghiColor">
-        <div className="flex flex-col justify-between sm:flex-row sm:items-center mx-auto max-w-screen-xl px-4 md:px-8 gap-4 sm:gap-8 py-8">
-          <div className="space-y-3">
-            <BackButton message={messages.backButton.luoghi} redirect={`/luoghi`} />
-            <h1 className="text-4xl text-white font-bold">{luogoData.nome}</h1>
-          </div>
-          <LuogoMap position={position} className="grow !h-[300px] w-full max-w-[500px]" />
-        </div>
-      </div>
-
-      <PixelBorder className="bg-luoghiColor" />
+      <DetailPageHeading
+        collection="luoghi"
+        backButton={{ message: messages.backButton.luoghi, href: `/luoghi` }}
+        title={luogoData.nome}
+        position={position}
+      />
 
       <Container className="max-w-prose space-y-8">
         <RichText data={luogoData.testo} className="prose md:prose-lg" />
