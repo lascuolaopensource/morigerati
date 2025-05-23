@@ -12,7 +12,7 @@ type Props = {
     href: string
   }
   title: string
-  position: LatLngTuple
+  position?: LatLngTuple | null | undefined
   children?: React.ReactNode
 }
 
@@ -26,10 +26,12 @@ export function DetailPageHeading(props: Props) {
         <div className="flex flex-col justify-between sm:flex-row sm:items-center mx-auto max-w-screen-xl px-4 md:px-8 gap-4 sm:gap-8 py-8">
           <div className="space-y-3">
             <BackButton message={backButton.message} redirect={backButton.href} />
-            <h1 className="text-4xl text-white font-bold">{title}</h1>
+            <h1 className="text-4xl text-white font-bold text-balance">{title}</h1>
             {children}
           </div>
-          <LuogoMap position={position} className="grow !h-[300px] w-full max-w-[500px]" />
+          {position && (
+            <LuogoMap position={position} className="grow !h-[300px] w-full max-w-[500px]" />
+          )}
         </div>
       </div>
       <PixelBorder className={bg} />
