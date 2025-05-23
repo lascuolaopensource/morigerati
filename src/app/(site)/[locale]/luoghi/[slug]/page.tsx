@@ -1,29 +1,27 @@
-//Boilerplate
 import React from 'react'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
-//DB
+
 import { loadDb } from '@/utils/db'
-import type { Itinerari, Luoghi, Media } from '@/payload-types'
-//Components
-import BackButton from '@/components/uiElements/backButton'
+import type { Luoghi, Media } from '@/payload-types'
+
 import Copertina from '@/components/uiElements/copertina'
 import { LatLngTuple } from 'leaflet'
 import Galleria from '@/components/galleria/galleria'
-import LuogoMap from '@/components/uiElements/LuogoMap'
-//Locale
+
 import { getLocale, getMessages } from 'next-intl/server'
-//Metadata
+
 import { createMetadata } from '@/utils/metadataHelpers'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import PixelBorder from '@/components/uiElements/pixelBorder'
 import { Container } from '@/components/uiElements/container'
 import { CardServizio } from '@/components/uiElements/cardServizio'
 import { useMessages } from 'next-intl'
 import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
-import { T } from '@/components/uiElements/t'
-import { cn } from '@/lib/utils'
+import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
+import { Contatti } from '@/components/uiElements/contatti'
+
+import { InfoSection } from '@/components/uiElements/infoSection'
 
 //
 
@@ -131,17 +129,12 @@ export default async function LuogoPage({ params }: PageProps) {
     <>
       <Copertina copertina={luogoData?.copertina as Media} />
 
-      <div className="bg-luoghiColor">
-        <div className="flex flex-col justify-between sm:flex-row sm:items-center mx-auto max-w-screen-xl px-4 md:px-8 gap-4 sm:gap-8 py-8">
-          <div className="space-y-3">
-            <BackButton message={messages.backButton.luoghi} redirect={`/luoghi`} />
-            <h1 className="text-4xl text-white font-bold">{luogoData.nome}</h1>
-          </div>
-          <LuogoMap position={position} className="grow !h-[300px] w-full max-w-[500px]" />
-        </div>
-      </div>
-
-      <PixelBorder className="bg-luoghiColor" />
+      <DetailPageHeading
+        collection="luoghi"
+        backButton={{ message: messages.backButton.luoghi, href: `/luoghi` }}
+        title={luogoData.nome}
+        position={position}
+      />
 
       <Container className="max-w-prose space-y-8">
         <RichText data={luogoData.testo} className="prose md:prose-lg" />
@@ -151,7 +144,7 @@ export default async function LuogoPage({ params }: PageProps) {
         {luogoData.servizi && luogoData.servizi.length > 0 && (
           <>
             <div className="max-w-prose space-y-2">
-              <Section title={messages.luoghi.servizi.title}>
+              <InfoSection collection="luoghi" title={messages.luoghi.servizi.title}>
                 {luogoData.servizi.map((servizio) => (
                   <CardServizio
                     key={servizio.id}
@@ -159,7 +152,7 @@ export default async function LuogoPage({ params }: PageProps) {
                     className="bg-luoghiColor/30"
                   />
                 ))}
-              </Section>
+              </InfoSection>
             </div>
           </>
         )}
@@ -208,62 +201,14 @@ function LuogoInfoSection(props: { luogo: Luoghi }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
       {hasContatti && (
-        <Section title={messages.luoghi.contacts}>
-          <ul>
-            {contatti.map((contatto: any, index: number) => (
-              <li key={index} className="mb-4">
-                <p className="font-medium">{contatto.nome}</p>
-                {contatto.telefono && (
-                  <p className="text-sm">
-                    {messages.luoghi.phone}: {contatto.telefono}
-                  </p>
-                )}
-                {contatto.email && (
-                  <p className="text-sm">
-                    {messages.luoghi.email}: {contatto.email}
-                  </p>
-                )}
-                {contatto.link && (
-                  <p className="text-sm">
-                    {messages.luoghi.link}:{' '}
-                    <a
-                      href={contatto.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:underline"
-                    >
-                      {contatto.link}
-                    </a>
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
-        </Section>
+        <InfoSection collection="luoghi" title={messages.luoghi.contacts}>
+          <Contatti contatti={contatti} />
+        </InfoSection>
       )}
 
-      {hasOrari && <Section title={messages.luoghi.openingHours} text={orari} />}
-    </div>
-  )
-}
-
-function Section(props: {
-  children?: React.ReactNode
-  title: string
-  text?: SerializedEditorState
-  className?: string
-}) {
-  const { children, title, text, className } = props
-
-  return (
-    <div className={cn('space-y-4', className)}>
-      <T tag="h2" className="border-b border-b-luoghiColor">
-        {title}
-      </T>
-
-      {text && <RichText data={text} className="prose-sm" />}
-
-      {Boolean(children) && children}
+      {hasOrari && (
+        <InfoSection collection="luoghi" title={messages.luoghi.openingHours} text={orari} />
+      )}
     </div>
   )
 }
