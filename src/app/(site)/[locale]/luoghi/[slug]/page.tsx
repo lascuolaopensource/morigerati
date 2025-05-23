@@ -22,6 +22,7 @@ import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
 import { Contatti } from '@/components/uiElements/contatti'
 
 import { InfoSection } from '@/components/uiElements/infoSection'
+import { ServiziSection } from '@/components/uiElements/serviziSection'
 
 //
 
@@ -138,25 +139,8 @@ export default async function LuogoPage({ params }: PageProps) {
 
       <Container className="max-w-prose space-y-8">
         <RichText data={luogoData.testo} className="prose md:prose-lg" />
-
         <PixelBorder className="bg-luoghiColor !h-10" />
-
-        {luogoData.servizi && luogoData.servizi.length > 0 && (
-          <>
-            <div className="max-w-prose space-y-2">
-              <InfoSection collection="luoghi" title={messages.luoghi.servizi.title}>
-                {luogoData.servizi.map((servizio) => (
-                  <CardServizio
-                    key={servizio.id}
-                    servizio={servizio}
-                    className="bg-luoghiColor/30"
-                  />
-                ))}
-              </InfoSection>
-            </div>
-          </>
-        )}
-
+        <ServiziSection servizi={luogoData.servizi} collection="luoghi" />
         <LuogoInfoSection luogo={luogoData} />
       </Container>
 

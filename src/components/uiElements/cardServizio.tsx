@@ -2,7 +2,9 @@ import { cn } from '@/lib/utils'
 import { Luoghi, Itinerari } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 
-type Servizio = NonNullable<Luoghi['servizi']>[number] | NonNullable<Itinerari['servizi']>[number]
+export type Servizio =
+  | NonNullable<Luoghi['servizi']>[number]
+  | NonNullable<Itinerari['servizi']>[number]
 
 type Props = {
   servizio: Servizio

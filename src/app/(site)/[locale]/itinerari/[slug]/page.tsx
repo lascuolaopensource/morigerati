@@ -23,6 +23,8 @@ import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 import { getLocale, getMessages } from 'next-intl/server'
 import { createMetadata } from '@/utils/metadataHelpers'
 import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
+import { Container } from '@/components/uiElements/container'
+import { ServiziSection } from '@/components/uiElements/serviziSection'
 
 interface ItinerarioParams {
   slug: string
@@ -115,7 +117,7 @@ export default async function Itinerario({ params }: PageProps) {
   const galleryItems = (itinerarioData.galleria as Media[]) || []
 
   return (
-    <div className="">
+    <>
       <Copertina copertina={itinerarioData.copertina as Media} />
 
       <DetailPageHeading
@@ -139,81 +141,59 @@ export default async function Itinerario({ params }: PageProps) {
         />
       </DetailPageHeading>
 
+      <Container className="max-w-prose space-y-8">
+        {itinerarioData?.Video && (
+          <div className="rounded-md overflow-hidden">
+            <MediaViewer media={itinerarioData?.Video as Media} />
+          </div>
+        )}
+
+        <RichText
+          data={itinerarioData?.testo as SerializedEditorState}
+          className="prose md:prose-lg"
+        />
+
+        <ServiziSection servizi={itinerarioData?.servizi} collection="itinerari" />
+      </Container>
+
       <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
-        <BackButton message={messages.backButton.itinerari} redirect={`/itinerari`} />
-
-        <div className="pt-4"></div>
-
-        {/* Grid container for desktop layout */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8">
-          {/* Left column: Title, text, and details */}
-          <div className="lg:order-1">
-            {itinerarioData?.nome ? (
-              <h1 className="text-4xl text-itinerarioColorScuro font-bold mb-4 break-words">
-                {itinerarioData?.nome}
-              </h1>
-            ) : (
-              <p></p>
-            )}
-
-            <div className="mb-6 mt-6">
-              <RichText
-                data={itinerarioData?.testo as SerializedEditorState}
-                className="prose prose-lg"
-              />
-            </div>
+        {/* Right column: Map */}
+        <div className="lg:order-2">
+          <div className="h-[500px]">
+            <DynamicMappa
+              initialPosition={position}
+              initialZoom={14}
+              gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
+              localizedMedia={itinerarioData?.media_geolocalizzati}
+            />
           </div>
-
-          {/* Right column: Map */}
-          <div className="lg:order-2">
-            <div className="h-[500px]">
-              <DynamicMappa
-                initialPosition={position}
-                initialZoom={14}
-                gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
-                localizedMedia={itinerarioData?.media_geolocalizzati}
-              />
-              {/* <DynamicMappa
-                initialPosition={position}
-                initialZoom={14}
-                gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
-                localizedMedia={itinerarioData?.media_geolocalizzati}
-              /> */}
-            </div>
-          </div>
-        </div>
-
-        {/* Content below the two columns */}
-        <div className="">
-          {itinerarioData?.Video && (
-            <div className="mb-4">
-              <MediaViewer media={itinerarioData?.Video as Media} />
-            </div>
-          )}
-
-          {galleryItems.length > 0 && (
-            <div className="mb-4">
-              <Galleria items={galleryItems} />
-            </div>
-          )}
-
-          <ServiziCardWrapper servizi={itinerarioData?.servizi} />
-
-          {itinerarioData?.persone && itinerarioData?.persone.length > 0 && (
-            <div className="">
-              <h2 className="font-bold text-xl text-center pb-4">{peopleTitle}</h2>
-              <CardGrid items={itinerarioData?.persone as Persone[]} category="persone" singleRow />
-            </div>
-          )}
-
-          {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
-            <div className="">
-              <h2 className="font-bold pt-4 text-xl text-center pb-4">{placesTitle}</h2>
-              <CardGrid items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" singleRow />
-            </div>
-          )}
         </div>
       </div>
-    </div>
+
+      {/* Content below the two columns */}
+      <div className="">
+        {galleryItems.length > 0 && (
+          <div className="mb-4">
+            <Galleria items={galleryItems} />
+          </div>
+        )}
+
+        <ServiziCardWrapper servizi={itinerarioData?.servizi} />
+
+        {itinerarioData?.persone && itinerarioData?.persone.length > 0 && (
+          <div className="">
+            <h2 className="font-bold text-xl text-center pb-4">{peopleTitle}</h2>
+            <CardGrid items={itinerarioData?.persone as Persone[]} category="persone" singleRow />
+          </div>
+        )}
+
+        {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
+          <div className="">
+            <h2 className="font-bold pt-4 text-xl text-center pb-4">{placesTitle}</h2>
+            <CardGrid items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" singleRow />
+          </div>
+        )}
+      </div>
+    </>
   )
 }
