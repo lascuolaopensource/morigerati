@@ -1,25 +1,30 @@
-//Boilerplate
 import React from 'react'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
-//DB
+
 import { loadDb } from '@/utils/db'
-import type { Media } from '@/payload-types'
-//Components
-import BackButton from '@/components/uiElements/backButton'
-import { RandomPixel } from '@/components/uiElements/pixels'
+import type { Luoghi, Media } from '@/payload-types'
+
 import Copertina from '@/components/uiElements/copertina'
 import { LatLngTuple } from 'leaflet'
 import Galleria from '@/components/galleria/galleria'
-import LuogoHeader from '@/components/luoghi/LuogoHeader'
-import LuogoMap from '@/components/luoghi/LuogoMap'
-import RelatedItineraries from '@/components/luoghi/RelatedItineraries'
-import ServiziSection from '@/components/luoghi/ServiziSection'
-import LuogoInfoSection from '@/components/luoghi/LuogoInfoSection'
-//Locale
+
 import { getLocale, getMessages } from 'next-intl/server'
-//Metadata
+
 import { createMetadata } from '@/utils/metadataHelpers'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import PixelBorder from '@/components/uiElements/pixelBorder'
+import { Container } from '@/components/uiElements/container'
+import { CardServizio } from '@/components/uiElements/cardServizio'
+import { useMessages } from 'next-intl'
+import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
+import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
+import { Contatti } from '@/components/uiElements/contatti'
+
+import { InfoSection } from '@/components/uiElements/infoSection'
+import { ServiziSection } from '@/components/uiElements/serviziSection'
+
+//
 
 interface LuogoParams {
   slug: string
@@ -37,8 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const luoghi = await db.find({
     collection: 'luoghi',
     depth: 2,
-    locale: locale,
-
+    locale,
     where: {
       slug: {
         equals: slug,
@@ -57,6 +61,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   })
 }
 
+//
+
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -70,7 +76,6 @@ export default async function LuogoPage({ params }: PageProps) {
     collection: 'luoghi',
     depth: 2,
     locale: locale,
-
     where: {
       slug: {
         equals: slug,
@@ -117,49 +122,77 @@ export default async function LuogoPage({ params }: PageProps) {
     }
   }
 
-  const position: LatLngTuple = luogoData.posizione ?? [40.139949, 15.555182]
+  const galleryItems = (luogoData.galleria as Media[]) || []
 
   return (
-    <div className="">
+    <>
       <Copertina copertina={luogoData?.copertina as Media} />
 
-      <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
-        <BackButton message={messages.backButton.luoghi} redirect={`/luoghi`} />
-        <RandomPixel p={3} />
-        <div className="pt-4"></div>
+      <DetailPageHeading
+        collection="luoghi"
+        backButton={{ message: messages.backButton.luoghi, href: `/luoghi` }}
+        title={luogoData.nome}
+        mapProps={{
+          initialPosition: luogoData.posizione,
+        }}
+      />
 
-        {/* Grid container for desktop layout */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8 mb-8">
-          {/* Left column: Content */}
-          <div>
-            <LuogoHeader nome={luogoData.nome} testo={luogoData.testo} />
+      <Container className="max-w-prose space-y-8">
+        <RichText data={luogoData.testo} className="prose md:prose-lg" />
+        <PixelBorder className="bg-luoghiColor !h-10" />
+        <ServiziSection servizi={luogoData.servizi} collection="luoghi" />
+        <LuogoInfoSection luogo={luogoData} />
+      </Container>
 
-            {/* Contacts and Hours - now using LuogoInfoSection */}
-            <LuogoInfoSection luogoData={luogoData} />
-          </div>
+      {/* TODO: Add related itineraries */}
+      {/* <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
 
-          {/* Right column: Map */}
-          <div className="lg:order-2">
-            <LuogoMap position={position} />
-          </div>
-        </div>
-
-        {/* Services section */}
-        <ServiziSection servizi={luogoData.servizi} />
-
-        <div className="mt-8">
-          <Galleria
-            items={(luogoData.galleria as Media[]) || []}
-            titleColor="text-luogoColorScuro"
-          />
-        </div>
-
-        {/* Itinerari correlati section */}
         <RelatedItineraries
           itinerari={itinerariCorrelati}
           messageTitle={messages.strings.itinerariesFoundIn}
         />
-      </div>
+      </div> */}
+
+      <PixelBorder className={`w-full bg-luoghiColor`} />
+
+      {galleryItems.length > 0 && (
+        <div className={`bg-luoghiColor`}>
+          <Container>
+            <Galleria items={galleryItems} />
+          </Container>
+        </div>
+      )}
+    </>
+  )
+}
+
+//
+
+function LuogoInfoSection(props: { luogo: Luoghi }) {
+  const { luogo } = props
+  const messages = useMessages()
+
+  const contatti = luogo.contatti ?? []
+  const hasContatti = contatti.length > 0
+
+  const orari = luogo.orari
+  const hasOrari = orari?.root && !isRichTextEmpty(orari)
+
+  if (!hasContatti && !hasOrari) {
+    return null
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+      {hasContatti && (
+        <InfoSection collection="luoghi" title={messages.luoghi.contacts}>
+          <Contatti contatti={contatti} />
+        </InfoSection>
+      )}
+
+      {hasOrari && (
+        <InfoSection collection="luoghi" title={messages.luoghi.openingHours} text={orari} />
+      )}
     </div>
   )
 }

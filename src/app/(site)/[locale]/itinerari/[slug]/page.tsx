@@ -22,6 +22,10 @@ import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 //Locale
 import { getLocale, getMessages } from 'next-intl/server'
 import { createMetadata } from '@/utils/metadataHelpers'
+import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
+import { Container } from '@/components/uiElements/container'
+import { ServiziSection } from '@/components/uiElements/serviziSection'
+import PixelBorder from '@/components/uiElements/pixelBorder'
 
 interface ItinerarioParams {
   slug: string
@@ -111,46 +115,72 @@ export default async function Itinerario({ params }: PageProps) {
 
   const position: LatLngTuple = [40.139949, 15.555182]
 
+  const galleryItems = (itinerarioData.galleria as Media[]) || []
+
   return (
-    <div className="">
+    <>
       <Copertina copertina={itinerarioData.copertina as Media} />
 
-      <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
-        <BackButton message={messages.backButton.itinerari} redirect={`/itinerari`} />
+      <DetailPageHeading
+        title={itinerarioData.nome}
+        collection="itinerari"
+        backButton={{
+          href: '/itinerari',
+          message: messages.backButton.itinerari,
+        }}
+        mapProps={{
+          gpxUrl: getTracciatoUrl(itinerarioData?.tracciato_gpx),
+          showGpxDownload: true,
+        }}
+      >
+        <ItinerarioDetailsCard
+          lunghezza={itinerarioData?.lunghezza}
+          tempo={itinerarioData?.tempo}
+          dislivello={itinerarioData?.dislivello}
+          difficolta={itinerarioData?.difficolta}
+          tipo={itinerarioData?.tipo}
+        />
+      </DetailPageHeading>
 
-        <div className="pt-4"></div>
-
-        {/* Grid container for desktop layout */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8">
-          {/* Left column: Title, text, and details */}
-          <div className="lg:order-1">
-            {itinerarioData?.nome ? (
-              <h1 className="text-4xl text-itinerarioColorScuro font-bold mb-4 break-words">
-                {itinerarioData?.nome}
-              </h1>
-            ) : (
-              <p></p>
-            )}
-
-            <ItinerarioDetailsCard
-              lunghezza={itinerarioData?.lunghezza}
-              tempo={itinerarioData?.tempo}
-              dislivello={itinerarioData?.dislivello}
-              difficolta={itinerarioData?.difficolta}
-              tipo={itinerarioData?.tipo}
-            />
-
-            <div className="mb-6 mt-6">
-              <RichText
-                data={itinerarioData?.testo as SerializedEditorState}
-                className="prose prose-lg"
-              />
-            </div>
+      <Container className="max-w-prose space-y-8">
+        {itinerarioData?.Video && (
+          <div className="rounded-md overflow-hidden">
+            <MediaViewer media={itinerarioData?.Video as Media} />
           </div>
+        )}
 
-          {/* Right column: Map */}
-          <div className="lg:order-2">
-            <div className="h-[500px]">
+        <RichText
+          data={itinerarioData?.testo as SerializedEditorState}
+          className="prose md:prose-lg"
+        />
+
+        <ServiziSection servizi={itinerarioData?.servizi} collection="itinerari" />
+
+        {/* TODO - Review this section */}
+        {/* Content below the two columns */}
+        {/* <div className="">
+        {itinerarioData?.persone && itinerarioData?.persone.length > 0 && (
+          <div className="">
+            <h2 className="font-bold text-xl text-center pb-4">{peopleTitle}</h2>
+            <CardGrid items={itinerarioData?.persone as Persone[]} category="persone" singleRow />
+          </div>
+        )}
+
+        {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
+          <div className="">
+            <h2 className="font-bold pt-4 text-xl text-center pb-4">{placesTitle}</h2>
+            <CardGrid items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" singleRow />
+          </div>
+        )}
+      </div> */}
+      </Container>
+
+      <div>
+        <PixelBorder className="bg-itinerariColor" />
+        <div className="bg-itinerariColor">
+          <Container className="space-y-6">
+            <p className="text-center text-3xl font-bold text-white">Scopri il percorso!</p>
+            <div className="h-[600px]">
               <DynamicMappa
                 initialPosition={position}
                 initialZoom={14}
@@ -158,35 +188,11 @@ export default async function Itinerario({ params }: PageProps) {
                 localizedMedia={itinerarioData?.media_geolocalizzati}
               />
             </div>
-          </div>
-        </div>
 
-        {/* Content below the two columns */}
-        <div className="">
-          {itinerarioData?.Video && (
-            <div className="mb-4">
-              <MediaViewer media={itinerarioData?.Video as Media} />
-            </div>
-          )}
-          <Galleria items={itinerarioData?.galleria as Media[]} />
-
-          <ServiziCardWrapper servizi={itinerarioData?.servizi} />
-
-          {itinerarioData?.persone && itinerarioData?.persone.length > 0 && (
-            <div className="">
-              <h2 className="font-bold text-xl text-center pb-4">{peopleTitle}</h2>
-              <CardGrid items={itinerarioData?.persone as Persone[]} category="persone" singleRow />
-            </div>
-          )}
-
-          {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
-            <div className="">
-              <h2 className="font-bold pt-4 text-xl text-center pb-4">{placesTitle}</h2>
-              <CardGrid items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" singleRow />
-            </div>
-          )}
+            {galleryItems.length > 0 && <Galleria items={galleryItems} />}
+          </Container>
         </div>
       </div>
-    </div>
+    </>
   )
 }

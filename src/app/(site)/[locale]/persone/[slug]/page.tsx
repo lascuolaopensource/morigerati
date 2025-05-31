@@ -5,21 +5,20 @@ import { Metadata } from 'next'
 //DB
 import { loadDb } from '@/utils/db'
 import type { Media } from '@/payload-types'
-//Components
-import BackButton from '@/components/uiElements/backButton'
-import { LatLngTuple } from 'leaflet'
+
 import Copertina from '@/components/uiElements/copertina'
 import Galleria from '@/components/galleria/galleria'
-// New imported components
-import PersonaHeader from '@/components/persone/PersonaHeader'
-import PersonaContent from '@/components/persone/PersonaContent'
-import PersonaContacts from '@/components/persone/PersonaContacts'
-import LuogoMap from '@/components/luoghi/LuogoMap'
-import RelatedItineraries from '@/components/luoghi/RelatedItineraries'
+
 //Locale
 import { getMessages, getLocale } from 'next-intl/server'
 //Metadata
 import { createMetadata } from '@/utils/metadataHelpers'
+import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
+import { Container } from '@/components/uiElements/container'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import PixelBorder from '@/components/uiElements/pixelBorder'
+import { InfoSection } from '@/components/uiElements/infoSection'
+import { Contatti } from '@/components/uiElements/contatti'
 
 export async function generateMetadata({
   params,
@@ -61,13 +60,10 @@ export default async function persone({ params }: { params: Promise<{ slug: stri
   const messages = await getMessages()
 
   // Get persone
-  const persone = await db.find({ collection: 'persone', depth: 2, locale: 'all' })
+  const persone = await db.find({ collection: 'persone', depth: 2, locale })
 
-  const stakeholderData = persone.docs.find((s) => s.slug === slug)
-
-  if (!stakeholderData) {
-    notFound()
-  }
+  const persona = persone.docs.find((s) => s.slug === slug)
+  if (!persona) notFound()
 
   // Get all itinerari
   const allItinerari = await db.find({ collection: 'itinerari' })
@@ -75,56 +71,58 @@ export default async function persone({ params }: { params: Promise<{ slug: stri
   // Filter itinerari that have this persone
   const itinerariCorrelati = allItinerari.docs.filter((itinerario) =>
     itinerario.persone?.some((s) =>
-      typeof s === 'string' ? s === stakeholderData.id : s.id === stakeholderData.id,
+      typeof s === 'string' ? s === persona.id : s.id === persona.id,
     ),
   )
 
-  const position: LatLngTuple = stakeholderData.posizione ?? [40.139949, 15.555182]
+  const galleryItems = persona.galleria as Media[]
 
   return (
-    <div className="">
-      <Copertina copertina={stakeholderData.copertina as Media} />
+    <>
+      <Copertina copertina={persona.copertina as Media} />
 
-      <div className="p-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto">
-        <BackButton message={messages.backButton.persone} redirect={'/persone'} />
-        <div className="pt-4"></div>
+      <DetailPageHeading
+        collection="persone"
+        backButton={{ message: messages.backButton.persone, href: '/persone' }}
+        title={persona.nome}
+        position={persona.posizione}
+      >
+        {persona.tipologia && <Tag tag={persona.tipologia} />}
+      </DetailPageHeading>
 
-        {/* Grid container for desktop layout */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8 mb-8">
-          {/* Left column: Content */}
-          <div>
-            <PersonaHeader
-              nome={stakeholderData.nome}
-              tipologia={stakeholderData.tipologia}
-              indirizzo={stakeholderData.indirizzo}
-              locale={locale}
-              messages={messages}
-            />
+      <Container className="max-w-prose space-y-8">
+        <RichText data={persona.testo} className="prose md:prose-lg" />
 
-            <PersonaContent testo={stakeholderData.testo} locale={locale} />
-
-            <PersonaContacts contatti={stakeholderData.contatti} locale={locale} />
-          </div>
-
-          {/* Right column: Map */}
-          <div className="lg:order-2">
-            <LuogoMap position={position} />
-          </div>
-        </div>
-
-        {/* Galleria */}
-        {stakeholderData.galleria && stakeholderData.galleria.length > 0 && (
-          <div className="mt-8">
-            <Galleria items={stakeholderData.galleria as Media[]} />
-          </div>
+        {persona.contatti && (
+          <InfoSection collection="persone" title={messages.luoghi.contacts}>
+            <Contatti contatti={persona.contatti} />
+          </InfoSection>
         )}
+      </Container>
 
-        {/* Itinerari correlati */}
-        <RelatedItineraries
+      {/* TODO - Itinerari correlati */}
+      {/* <RelatedItineraries
           itinerari={itinerariCorrelati}
           messageTitle={messages.strings.itinerariesFoundIn}
-        />
-      </div>
-    </div>
+        /> */}
+
+      <PixelBorder className="bg-personeColor" />
+
+      {galleryItems.length > 0 && (
+        <div className={`bg-personeColor`}>
+          <Container>
+            <Galleria items={galleryItems} />
+          </Container>
+        </div>
+      )}
+    </>
+  )
+}
+
+function Tag(props: { tag: string }) {
+  const { tag } = props
+
+  return (
+    <p className="text-sm rounded-full bg-personeColorScuro px-2 py-1 text-white w-fit">{tag}</p>
   )
 }

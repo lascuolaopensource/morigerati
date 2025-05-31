@@ -26,8 +26,8 @@ interface DetailSectionProps {
 
 const DetailSection = ({ label, value, letter, unavailableText }: DetailSectionProps) => {
   return (
-    <div className="h-full bg-itinerariColor/20 p-2 text-black relative overflow-hidden">
-      <span className="absolute -top-4 -right-1 text-7xl text-itinerariColor/15 font-bold font-transluoghi z-0">
+    <div className="h-full bg-white/20 rounded-md p-2 text-black relative overflow-hidden">
+      <span className="absolute -top-4 -right-1 text-7xl text-white/20 font-bold font-transluoghi z-0">
         {letter}
       </span>
       <div className="flex flex-col relative z-1">
@@ -63,8 +63,8 @@ const TipoSection = ({ tipo, letter, unavailableText, messages }: TipoSectionPro
   }
 
   return (
-    <div className="w-full bg-itinerariColor/20 p-2 text-black relative min-h-[60px] flex items-center justify-center overflow-hidden">
-      <span className="absolute -top-4 -right-1 text-7xl text-itinerariColor/15 font-bold font-transluoghi z-0">
+    <div className="w-full bg-white/20 rounded-md p-2 text-black relative min-h-[60px] flex items-center justify-center overflow-hidden">
+      <span className="absolute -top-4 -right-1 text-7xl text-white/20 font-bold font-transluoghi z-0">
         {letter}
       </span>
       <span className="text-xs uppercase absolute top-2 left-2 z-1">Tipo</span>

@@ -1,19 +1,22 @@
 //Boilerplate
 import React, { Suspense } from 'react'
 import { Metadata } from 'next'
-//DB
+
 import { loadDb } from '@/utils/db'
-import { Residenze as ResidenzaType } from '@/payload-types'
+import { Residenze } from '@/payload-types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-//Components
-import CardGrid from '@/components/card/cardsGrid'
-import PassateFuture from '@/components/residenze/passateFuture'
-import NoResidenze from '@/components/residenze/noResidenze'
-//Locale
+
+import SelectResidenzeView, { FilterType } from './_partials/selectResidenzeView'
+import NoResidenze from './_partials/noResidenze'
 import { getLocale, getMessages } from 'next-intl/server'
-import ArchivePageLayout from '@/components/pageLayout/ArchivePageLayout'
-//Metadata
+
 import { createMetadata } from '@/utils/metadataHelpers'
+import { CollectionHeading } from '@/components/pageLayout/collectionHeading'
+import { CollectionGrid } from '@/components/pageLayout/collectionGrid'
+import { Container } from '@/components/uiElements/container'
+import CardResidenza from './_partials/cardResidenza'
+
+//
 
 // Force dynamic rendering and disable cache to ensure fresh data
 export const dynamic = 'force-dynamic'
@@ -33,94 +36,102 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 }
 
-interface SortedResidenze {
-  past: ResidenzaType[]
-  future: ResidenzaType[]
-}
-
-const sortResidenze = (residenze: ResidenzaType[]): SortedResidenze => {
-  const now = new Date()
-
-  return residenze.reduce(
-    (acc: SortedResidenze, residenza) => {
-      const comparisonDate = residenza.data_fine
-        ? new Date(residenza.data_fine)
-        : residenza.data_inizio
-          ? new Date(residenza.data_inizio)
-          : null
-
-      if (!comparisonDate) {
-        acc.past.push(residenza)
-      } else {
-        if (comparisonDate < now) {
-          acc.past.push(residenza)
-        } else {
-          acc.future.push(residenza)
-        }
-      }
-
-      return acc
-    },
-    { past: [], future: [] },
-  )
-}
-
-async function ResidenzeListing({ filter }: { filter?: string }) {
-  const db = await loadDb()
-  const messages = await getMessages()
-
-  const residenzeData = await db.find({
-    collection: 'residenze',
-    depth: 2,
-    sort: '-data_inizio',
-  })
-
-  const { past, future } = sortResidenze(residenzeData.docs)
-  const t = (key: string) => {
-    const [namespace, messageKey] = key.split(':')
-    return messages[namespace]?.[messageKey] || key
-  }
-
-  // Check if filter is 'passata' (past) or 'futura' (future)
-  const isPast = filter === 'passata'
-  const displayResidenze = isPast ? past : future
-
-  return (
-    <div className="space-y-4">
-      <PassateFuture />
-      {displayResidenze.length > 0 ? (
-        <CardGrid items={displayResidenze} category="residenze" />
-      ) : (
-        <NoResidenze />
-      )}
-    </div>
-  )
-}
+//
 
 interface PageProps {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ filter?: string }>
+  searchParams: Promise<{ filter?: FilterType }>
 }
 
-const Residenze = async ({ params, searchParams }: PageProps) => {
+//
+
+export default async function Page({ searchParams }: PageProps) {
   const locale = (await getLocale()) as 'it' | 'en'
   const { filter = 'futura' } = await searchParams
   const db = await loadDb()
   const testi = await db.findGlobal({ slug: 'testi', locale: locale })
 
+  const { docs: residenze } = await db.find({
+    collection: 'residenze',
+    sort: ['data_inizio', 'data_fine'],
+    where: {
+      data_inizio: {
+        greater_than: new Date().toISOString(),
+      },
+    },
+  })
+
   return (
-    <ArchivePageLayout
-      title={testi.residenze.title}
-      introContent={testi.residenze.testo as SerializedEditorState}
-      colorTheme="residenze"
-    >
-      <div className="w-full">
-        <Suspense fallback={<div className="py-8 text-center">Caricamento residenze...</div>}>
-          <ResidenzeListing filter={filter} />
-        </Suspense>
-      </div>
-    </ArchivePageLayout>
+    <>
+      <CollectionHeading
+        collection="residenze"
+        title={testi.residenze.title}
+        introContent={testi.residenze.testo as SerializedEditorState}
+      />
+      <Container>
+        <div className="flex flex-col gap-2">
+          {residenze.map((item) => (
+            <CardResidenza key={item.id} residenza={item} />
+          ))}
+        </div>
+      </Container>
+    </>
   )
 }
 
-export default Residenze
+//
+
+// async function ResidenzeListing({ filter }: { filter?: string }) {
+//   const db = await loadDb()
+
+//   const { past, future } = sortResidenze(residenzeData.docs)
+
+//   // Check if filter is 'passata' (past) or 'futura' (future)
+//   const isPast = filter === 'passata'
+//   const displayResidenze = isPast ? past : future
+
+//   return (
+//     <div className="space-y-4">
+//       <div className="flex items-center gap-4 w-full">
+//         <hr className="border grow" />
+//         <SelectResidenzeView />
+//         <hr className="border grow" />
+//       </div>
+
+//       <div className="py-8">
+//         {displayResidenze.length > 0 ? (
+//           <CollectionGrid collection="residenze" items={displayResidenze} />
+//         ) : (
+//           <NoResidenze />
+//         )}
+//       </div>
+//     </div>
+//   )
+// }
+
+// function groupResidenze = (residenze: ResidenzaType[]): SortedResidenze => {
+//   const now = new Date()
+
+//   return residenze.reduce(
+//     (acc: SortedResidenze, residenza) => {
+//       const comparisonDate = residenza.data_fine
+//         ? new Date(residenza.data_fine)
+//         : residenza.data_inizio
+//         ? new Date(residenza.data_inizio)
+//         : null
+
+//       if (!comparisonDate) {
+//         acc.past.push(residenza)
+//       } else {
+//         if (comparisonDate < now) {
+//           acc.past.push(residenza)
+//         } else {
+//           acc.future.push(residenza)
+//         }
+//       }
+
+//       return acc
+//     },
+//     { past: [], future: [] },
+//   )
+// }

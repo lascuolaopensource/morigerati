@@ -6,7 +6,9 @@ import { bgColors } from '@/utils/colors'
 export const useThemeColors = () => {
   const pathname = usePathname()
   const path = pathname ? (pathname.split('/')[2] as keyof typeof bgColors) : 'default'
-  return bgColors[path] || bgColors.default
+  // @ts-ignore
+  const bgColor = bgColors[path] || 'bg-white'
+  return bgColor
 }
 
 // Custom hook for managing menu state and side effects

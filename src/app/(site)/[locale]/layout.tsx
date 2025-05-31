@@ -46,21 +46,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang={locale}>
-      <body className="flex h-screen flex-col">
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <div className="min-h-screen overscroll-none">
-            <Navbar />
-            <div className="flex flex-col min-h-screen">
-              <main className="">
-                <DynamicFavicon />
-                <div>{children}</div>
-              </main>
-            </div>
+      <DynamicFavicon />
 
-            <Suspense fallback={<div>Loading footer...</div>}>
-              <Footer footer={footerData} />
-            </Suspense>
-          </div>
+      <body className="flex min-h-screen flex-col">
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Navbar />
+          <main className="grow flex flex-col">{children}</main>
+          <Footer footer={footerData} />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -8,7 +8,6 @@ import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical
 
 //Components
 import ContentPageLayout from '@/components/pageLayout/ContentPageLayout'
-import { RandomLetter } from '@/components/home/randomLetter'
 //Locale
 import { getLocale } from 'next-intl/server'
 import { createMetadata } from '@/utils/metadataHelpers'
@@ -44,11 +43,6 @@ export default async function ChiSiamo() {
       coverImage={chiSiamo.copertina}
       richTextContent={chiSiamo.testo_chi_siamo as SerializedEditorState}
       galleryItems={chiSiamo.galleria}
-    >
-      {' '}
-      <main className="max-w-screen-xl mx-auto relative py-8">
-        <RandomLetter color="articoli" position={'right'} />
-      </main>
-    </ContentPageLayout>
+    />
   )
 }
