@@ -1,20 +1,18 @@
-//Boilerplate
-import React, { Suspense } from 'react'
+import React from 'react'
 import { Metadata } from 'next'
 
 import { loadDb } from '@/utils/db'
-import { Residenze } from '@/payload-types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
-import SelectResidenzeView, { FilterType } from './_partials/selectResidenzeView'
-import NoResidenze from './_partials/noResidenze'
-import { getLocale, getMessages } from 'next-intl/server'
+import { getLocale } from '@/utils/i18n'
 
 import { createMetadata } from '@/utils/metadataHelpers'
 import { CollectionHeading } from '@/components/pageLayout/collectionHeading'
-import { CollectionGrid } from '@/components/pageLayout/collectionGrid'
 import { Container } from '@/components/uiElements/container'
 import CardResidenza from './_partials/cardResidenza'
+import { EmptyState } from '@/components/uiElements/emptyState'
+import { T } from '@/components/uiElements/t'
+import { ArrowRight } from 'lucide-react'
 
 //
 
@@ -23,7 +21,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = (await getLocale()) as 'it' | 'en'
+  const locale = await getLocale()
   const db = await loadDb()
   const testi = await db.findGlobal({ slug: 'testi', locale: locale })
 
@@ -38,28 +36,54 @@ export async function generateMetadata(): Promise<Metadata> {
 
 //
 
+const FILTER_PARAM = 'filter'
+
+type FilterType = 'archivio' | 'programma'
+
 interface PageProps {
-  params: Promise<{ locale: string }>
-  searchParams: Promise<{ filter?: FilterType }>
+  searchParams: Promise<{ [FILTER_PARAM]?: FilterType }>
 }
 
 //
 
 export default async function Page({ searchParams }: PageProps) {
-  const locale = (await getLocale()) as 'it' | 'en'
-  const { filter = 'futura' } = await searchParams
   const db = await loadDb()
-  const testi = await db.findGlobal({ slug: 'testi', locale: locale })
+  const locale = await getLocale()
+
+  const filter: FilterType = (await searchParams)[FILTER_PARAM] ?? 'programma'
+  const today = new Date().toISOString()
+
+  const testi = await db.findGlobal({ slug: 'testi', locale })
 
   const { docs: residenze } = await db.find({
     collection: 'residenze',
     sort: ['data_inizio', 'data_fine'],
+    locale,
     where: {
-      data_inizio: {
-        greater_than: new Date().toISOString(),
-      },
+      data_inizio: filter == 'programma' ? { greater_than: today } : { less_than: today },
     },
   })
+
+  const headings: Record<FilterType, HeadingProps> = {
+    programma: {
+      title: 'Programma delle residenze',
+      link: {
+        label: "Vai all'archivio",
+        filter: 'archivio',
+      },
+    },
+    archivio: {
+      title: 'Archivio delle residenze',
+      link: {
+        label: 'Vai al programma',
+        filter: 'programma',
+      },
+    },
+  }
+
+  const heading = headings[filter]
+
+  // const residenze = []
 
   return (
     <>
@@ -69,13 +93,55 @@ export default async function Page({ searchParams }: PageProps) {
         introContent={testi.residenze.testo as SerializedEditorState}
       />
       <Container>
-        <div className="flex flex-col gap-2">
-          {residenze.map((item) => (
-            <CardResidenza key={item.id} residenza={item} />
-          ))}
-        </div>
+        <Heading {...heading} />
+
+        {residenze.length > 0 && (
+          <div className="flex flex-col gap-2 pt-6">
+            {residenze.map((item) => (
+              <CardResidenza key={item.id} residenza={item} />
+            ))}
+          </div>
+        )}
+
+        {residenze.length === 0 && (
+          <EmptyState
+            title="Nessuna residenza trovata"
+            description="Nessuna residenza trovata"
+            color="residenze"
+          />
+        )}
       </Container>
     </>
+  )
+}
+
+//
+
+type HeadingProps = {
+  title: string
+  link: {
+    label: string
+    filter: FilterType
+  }
+}
+
+function Heading(props: HeadingProps) {
+  const { title, link } = props
+
+  return (
+    <div className="flex items-center gap-6 w-full justify-between">
+      <T tag="h2" className="text-residenzeColor">
+        {title}
+      </T>
+      <hr className="border grow hidden md:block" />
+      <a
+        className="bg-residenzeColor hover:bg-residenzeColor/80 p-2 rounded-md flex items-center gap-1  text-white font-medium"
+        href={`/residenze?${FILTER_PARAM}=${link.filter}`}
+      >
+        <ArrowRight size={16} />
+        <span>{link.label}</span>
+      </a>
+    </div>
   )
 }
 

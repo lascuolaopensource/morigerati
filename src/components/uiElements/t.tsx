@@ -13,9 +13,9 @@ export function T(props: Props) {
 
   const classes = cn(
     {
-      'text-3xl font-semibold': tag === 'h1',
-      'text-2xl font-semibold': tag === 'h2',
-      'text-xl font-medium': tag === 'h3',
+      'text-3xl md:text-4xl font-semibold': tag === 'h1',
+      'text-2xl md:text-3xl font-semibold': tag === 'h2',
+      'text-xl md:text-2xl font-medium': tag === 'h3',
     },
     className,
   )
