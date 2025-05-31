@@ -7,28 +7,32 @@ import { SocialIcon } from 'react-social-icons'
 import LogoGenerator from '@/components/uiElements/logo'
 //DB
 import type { Footer as FooterType } from '@/payload-types'
+import PixelBorder from '@/components/uiElements/pixelBorder'
 
 //
 
 const Footer = async ({ footer }: { footer: FooterType }) => {
   return (
-    <footer className="bg-black text-white px-4 md:px-8 py-12">
-      {/* mobile */}
-      <div className="sm:hidden max-w-screen-xl mx-auto flex flex-col items-left gap-y-4">
-        <div className="flex justify-between">
+    <>
+      <PixelBorder className="w-full bg-black" />
+      <footer className="bg-black text-white px-4 md:px-8 py-12">
+        {/* mobile */}
+        <div className="sm:hidden max-w-screen-xl mx-auto flex flex-col items-left gap-y-4">
+          <div className="flex justify-between">
+            <LogoGenerator textColor="white" />
+            <SocialIcons footer={footer} />
+          </div>
+          <TextContent footer={footer} className="flex-1" />
+        </div>
+
+        {/* desktop */}
+        <div className="hidden sm:flex max-w-screen-xl mx-auto justify-between">
           <LogoGenerator textColor="white" />
+          <TextContent footer={footer} className="w-1/4" />
           <SocialIcons footer={footer} />
         </div>
-        <TextContent footer={footer} className="flex-1" />
-      </div>
-
-      {/* desktop */}
-      <div className="hidden sm:flex max-w-screen-xl mx-auto justify-between">
-        <LogoGenerator textColor="white" />
-        <TextContent footer={footer} className="w-1/4" />
-        <SocialIcons footer={footer} />
-      </div>
-    </footer>
+      </footer>
+    </>
   )
 }
 
