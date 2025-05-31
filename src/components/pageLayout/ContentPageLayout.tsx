@@ -37,14 +37,16 @@ export default function ContentPageLayout({
         )}
       </div>
 
-      <PixelBorder className={`w-full ${bg}`} />
-
       {mediaItems.length > 0 && (
-        <div className={bg}>
-          <div className={`max-w-screen-xl mx-auto p-4 md:p-8 `}>
-            <Galleria items={mediaItems} />
+        <>
+          <PixelBorder className={`w-full ${bg}`} />
+
+          <div className={bg}>
+            <div className={`max-w-screen-xl mx-auto p-4 md:p-8 `}>
+              <Galleria items={mediaItems} />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   )

@@ -3,6 +3,7 @@ import { loadDb } from '@/utils/db'
 import { CollectionGrid } from '@/components/pageLayout/collectionGrid'
 import { MainCollections, MainCollectionRecord } from '@/utils/types'
 import { getLocale } from '@/utils/i18n'
+import { Container } from '../uiElements/container'
 
 // TODO - Review metadata
 // return <CardsPage collectionQuery="luoghi" displayAs="grid" generateSeoMetadata={true} />
@@ -41,9 +42,9 @@ export async function CollectionPage(props: Props) {
         introContent={testi.testo}
       />
 
-      <div className="px-4 md:px-8 py-12 max-w-screen-xl mx-auto">
+      <Container className="py-12">
         <CollectionGrid collection={props.collection} items={items} />
-      </div>
+      </Container>
     </>
   )
 }

@@ -58,11 +58,21 @@ export const Residenze: CollectionConfig<'residenze'> = {
               name: 'data_inizio',
               label: 'Data inizio',
               type: 'date',
+              admin: {
+                date: {
+                  displayFormat: 'dd/MM/yyyy',
+                },
+              },
             },
             {
               name: 'data_fine',
               label: 'Data fine',
               type: 'date',
+              admin: {
+                date: {
+                  displayFormat: 'dd/MM/yyyy',
+                },
+              },
             },
 
             F.divider('divider-1'),
@@ -70,6 +80,11 @@ export const Residenze: CollectionConfig<'residenze'> = {
               name: 'deadline_iscrizione',
               label: 'Scadenza iscrizioni',
               type: 'date',
+              admin: {
+                date: {
+                  displayFormat: 'dd/MM/yyyy',
+                },
+              },
             },
             {
               name: 'link_iscrizione',

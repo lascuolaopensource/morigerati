@@ -1,21 +1,23 @@
 'use client'
-//Boilerplate
+
 import React, { useEffect, useState } from 'react'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
-//Components
 import { ChevronDown } from 'lucide-react'
 
-// Create a union type for filter values
-export type FilterType = 'passata' | 'futura'
-
-interface FilterDropdownProps {
-  onFilterChange?: (filter: FilterType) => void
-}
+/* - Types - */
 
 const FILTER_PARAM = 'filter'
 
+export type FilterType = 'passata' | 'futura'
+
 function getFilterFromString(filter?: string | null): FilterType {
   return filter === 'passata' ? 'passata' : 'futura'
+}
+
+//
+
+interface FilterDropdownProps {
+  onFilterChange?: (filter: FilterType) => void
 }
 
 const FilterDropdown: React.FC<FilterDropdownProps> = ({ onFilterChange }) => {

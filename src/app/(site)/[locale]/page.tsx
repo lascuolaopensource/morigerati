@@ -94,8 +94,6 @@ export default async function Page() {
         title={home.residenze?.title}
         text={home.residenze?.testo as SerializedEditorState}
       />
-
-      <PixelBorder className="!bg-black" />
     </>
   )
 }
