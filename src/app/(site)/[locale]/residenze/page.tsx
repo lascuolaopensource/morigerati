@@ -92,7 +92,7 @@ export default async function Page({ searchParams }: PageProps) {
         title={testi.residenze.title}
         introContent={testi.residenze.testo as SerializedEditorState}
       />
-      <Container>
+      <Container className="!max-w-screen-lg">
         <Heading {...heading} />
 
         {residenze.length > 0 && (
