@@ -1,130 +1,80 @@
-'use client'
-//Boilerplate
 import type { Residenze } from '@/payload-types'
-import { useState, useEffect } from 'react'
-//Utils
 import formatDate from '@/utils/formatDate'
-//Locale
-import { useLocale, useTranslations } from 'next-intl'
-
-const generateRandomLetter = (usedLetters: string[]): string => {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
-  const availableLetters = alphabet.filter((letter) => !usedLetters.includes(letter))
-  return availableLetters[Math.floor(Math.random() * availableLetters.length)]
-}
+import { useLocale, useMessages, useTranslations } from 'next-intl'
+import { BentoBoxItem } from '@/components/uiElements/bentoBoxItem'
+import { Button } from '@/components/uiElements/button'
+import { ArrowRight } from 'lucide-react'
+import { getMessages } from 'next-intl/server'
 
 interface InfoResidenzaProps {
   residenza: Residenze
-  onlyDate?: boolean
+  canEnroll?: boolean
 }
 
-interface DetailSectionProps {
-  label: string | undefined
-  value: string
-  letter: string
-}
-
-const DetailSection = ({ label, value, letter }: DetailSectionProps) => {
-  return (
-    <div className="h-full bg-residenzeColor/20 p-2 text-black relative overflow-hidden">
-      <span className="absolute -top-4 -right-1 text-7xl text-[#f1bca5] font-bold font-transluoghi z-0 select-none">
-        {letter}
-      </span>
-      <div className="flex flex-col relative z-1">
-        <span className="text-xs  font-medium">{label}</span>
-        <span className="text-base break-words overflow-hidden">{value}</span>
-      </div>
-    </div>
-  )
-}
-
-interface AddressSectionProps {
-  address: string | null | undefined
-  letter: string
-  addressLabel: string
-}
-
-const AddressSection = ({ address, letter, addressLabel }: AddressSectionProps) => {
-  return (
-    <div className="w-full bg-residenzeColor/20 p-2 text-black relative min-h-[60px] flex flex-col justify-center overflow-hidden">
-      <span className="absolute -top-4 -right-1 text-7xl text-[#f1bca5] font-bold font-transluoghi z-0 select-none">
-        {letter}
-      </span>
-      <span className="text-xs font-thin mb-1">{addressLabel}</span>
-      <span className="text-lg break-words overflow-hidden">{address}</span>
-    </div>
-  )
-}
-
-const InfoResidenza = ({ residenza, onlyDate = false }: InfoResidenzaProps) => {
-  const [letters, setLetters] = useState<string[]>([])
-
+function InfoResidenza({ residenza, canEnroll = true }: InfoResidenzaProps) {
   const locale = useLocale()
   const messages = useTranslations()
+  const t = useMessages()
 
-  // Default translations with fallbacks
-
-  useEffect(() => {
-    const newLetters: string[] = []
-    for (let i = 0; i < 4; i++) {
-      newLetters.push(generateRandomLetter(newLetters))
-    }
-    setLetters(newLetters)
-  }, [])
-
-  if (onlyDate && residenza.data_inizio && residenza.data_fine) {
-    return (
-      <div className="w-full overflow-hidden">
-        <h3 className="text-residenzeColor text-lg text-right break-words">
-          {formatDate(residenza.data_inizio, messages('residenze.dateToBeDefined'), false, locale)}{' '}
-          → {formatDate(residenza.data_fine, messages('residenze.dateToBeDefined'), false, locale)}
-        </h3>
-      </div>
-    )
-  }
-
-  return (
-    <div className="grid gap-2 w-full">
-      <AddressSection
-        address={residenza.indirizzo || messages('residenze.addressNotAvailable')}
-        letter={letters[0] || 'a'}
-        addressLabel={messages('residenze.address')}
+  const datesRow = (
+    <div className="grid grid-cols-2 gap-2 w-full">
+      <BentoBoxItem
+        label={messages('residenze.startDate')}
+        value={
+          formatDate(residenza.data_inizio, messages('residenze.dateToBeDefined'), false, locale) ||
+          messages('residenze.dateToBeDefined')
+        }
       />
-      <div className="grid grid-cols-2 gap-2 w-full">
-        <DetailSection
-          label={messages('residenze.startDate')}
-          value={
-            formatDate(
-              residenza.data_inizio,
-              messages('residenze.dateToBeDefined'),
-              false,
-              locale,
-            ) || messages('residenze.dateToBeDefined')
-          }
-          letter={letters[1] || messages('residenze.notAvailable')}
-        />
-        <DetailSection
+      {residenza.data_fine && (
+        <BentoBoxItem
           label={messages('residenze.endDate')}
           value={
             formatDate(residenza.data_fine, messages('residenze.dateToBeDefined'), false, locale) ||
             messages('residenze.dateToBeDefined')
           }
-          letter={letters[2] || messages('residenze.notAvailable')}
         />
-      </div>
-      <DetailSection
-        label={messages('residenze.registrationDeadline')}
-        value={
-          formatDate(
-            residenza.deadline_iscrizione,
-            messages('residenze.dateToBeDefined'),
-            false,
-            locale,
-          ) || messages('residenze.dateToBeDefined')
-        }
-        letter={letters[3] || 'd'}
-      />
+      )}
     </div>
+  )
+
+  return (
+    <>
+      <div className="grid gap-2 w-full">
+        <BentoBoxItem
+          label={messages('residenze.address')}
+          value={residenza.indirizzo || messages('residenze.addressNotAvailable')}
+        />
+        {datesRow}
+        {canEnroll && (
+          <BentoBoxItem
+            label={messages('residenze.registrationDeadline')}
+            value={
+              formatDate(
+                residenza.deadline_iscrizione,
+                messages('residenze.dateToBeDefined'),
+                false,
+                locale,
+              ) || messages('residenze.dateToBeDefined')
+            }
+          />
+        )}
+
+        {!canEnroll && (
+          <BentoBoxItem label={messages('residenze.registrationDeadline')}>
+            <p className="text-center text-lg bg-white/20 rounded-md p-3 leading-[1.2] font-semibold">
+              {messages('residenze.enrollmentNotAvailable')}
+            </p>
+          </BentoBoxItem>
+        )}
+      </div>
+
+      {canEnroll && (
+        <Button href={residenza.link_iscrizione!} size="lg" target="_blank">
+          <ArrowRight />
+          <span> {t.residenze.register}!</span>
+        </Button>
+      )}
+    </>
   )
 }
 

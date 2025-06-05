@@ -140,7 +140,7 @@
     "registrationDeadline": "Deadline iscrizioni",
     "dateToBeDefined": "Data da definire",
     "noDetails": "Nessun dettaglio disponibile.",
-    "datesNotAnnounced": "Le date non sono state ancora annunciate, torna presto!",
+    "datesNotAnnounced": "Le date di iscrizione non sono state ancora annunciate, controlla questa pagina per aggiornamenti!",
     "register": "Iscriviti",
     "archived": "In Archivio",
     "upcoming": "In Programmazione",
@@ -149,7 +149,8 @@
     "goToArchive": "Archivio",
     "discoverAgenda": "Programma",
     "notAvailable": "Non disponibile",
-    "addressNotAvailable": "Indirizzo non disponibile"
+    "addressNotAvailable": "Indirizzo non disponibile",
+    "enrollmentNotAvailable": "Le iscrizioni non sono state ancora aperte, controlla questa pagina per aggiornamenti!"
   },
   "about": {
     "title": "Chi siamo"

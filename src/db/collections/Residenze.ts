@@ -54,6 +54,8 @@ export const Residenze: CollectionConfig<'residenze'> = {
           fields: [
             F.title('Informazioni generali'),
             F.nome,
+
+            F.divider('divider-X'),
             {
               name: 'data_inizio',
               label: 'Data inizio',
@@ -92,25 +94,17 @@ export const Residenze: CollectionConfig<'residenze'> = {
               label: 'Link iscrizione',
               type: 'text',
             },
-            F.divider('divider-2'),
-            {
-              name: 'indirizzo',
-              label: 'Indirizzo / luogo',
-              type: 'text',
-            },
-            F.divider('divider-3'),
-            {
-              name: 'mostra_dettagli',
-              type: 'checkbox',
-              label: 'Mostra dettagli sulla pagina',
-              defaultValue: false,
-            },
-
             {
               name: 'mostra_pulsante_iscrizione',
               type: 'checkbox',
               label: 'Mostra pulsante iscrizione',
               defaultValue: false,
+            },
+            F.divider('divider-2'),
+            {
+              name: 'indirizzo',
+              label: 'Indirizzo / luogo',
+              type: 'text',
             },
           ],
         },

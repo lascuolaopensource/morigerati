@@ -4,6 +4,7 @@ import { T } from './t'
 import { cn } from '@/lib/utils'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { getColorTheme } from '@/utils/colors'
+import { SectionTitle } from './sectionTitle'
 
 export function InfoSection(props: {
   children?: React.ReactNode
@@ -13,13 +14,10 @@ export function InfoSection(props: {
   collection: MainCollections
 }) {
   const { children, title, text, className, collection } = props
-  const { border } = getColorTheme(collection)
 
   return (
     <div className={cn('space-y-4', className)}>
-      <T tag="h2" className={`border-b ${border}`}>
-        {title}
-      </T>
+      <SectionTitle color={collection}>{title}</SectionTitle>
 
       {text && <RichText data={text} className="prose-sm" />}
 

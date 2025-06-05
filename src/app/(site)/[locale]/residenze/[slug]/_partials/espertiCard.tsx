@@ -1,7 +1,4 @@
-'use client'
-//Boilerplate
 import React from 'react'
-import Image from 'next/image'
 //Locale
 import { Link } from '@/i18n/routing'
 import { useLocale } from 'next-intl'
@@ -9,6 +6,8 @@ import { useLocale } from 'next-intl'
 import type { Residenze, Media } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { ImageWithFallback } from '@/utils/imageWithFallback'
+import { getMedia } from '@/utils'
 
 type Esperto = NonNullable<Residenze['esperti']>[number]
 
@@ -22,18 +21,6 @@ const TutorCard: React.FC<TutorCardProps> = ({ esperto, translations = {} }) => 
 
   // Default translations with fallbacks
   const { projects = 'Progetti', organizations = 'Organizzazioni' } = translations
-
-  const renderMedia = (media: Media) => {
-    return (
-      <Image
-        src={(media.url as string) || ''}
-        alt={(media.url as string) || ''}
-        fill
-        className="object-cover w-full h-full"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
-    )
-  }
 
   // Get localized nome if available
   const getNome = () => {
@@ -85,25 +72,20 @@ const TutorCard: React.FC<TutorCardProps> = ({ esperto, translations = {} }) => 
   const progetti = getProjetti()
   const organizzazioni = getOrganizzazioni()
 
+  const foto = getMedia(esperto.foto)
+
   const biografia = esperto.biografia as SerializedEditorState
   return (
-    <div className="w-full md:w-[48%] bg-residenzeColor/20 overflow-hidden rounded-md h-auto">
+    <div className="w-full bg-residenzeColor/20 overflow-hidden rounded-md h-auto">
       <div className="flex p-4 gap-4">
-        {/* Left column - Image */}
-        <div className="w-1/3 max-w-[240px]">
-          <div className="aspect-square relative overflow-hidden border-2 border-residenzeColor rounded-md">
-            <div className="absolute inset-0">
-              {esperto.foto ? (
-                renderMedia(esperto.foto as Media)
-              ) : (
-                <div className="w-full h-full bg-residenzeColor/30" />
-              )}
-            </div>
-          </div>
-        </div>
+        <ImageWithFallback
+          src={foto?.url}
+          alt={esperto.nome ?? ''}
+          className="size-32 shrink-0 bg-residenzeColor/30 object-cover"
+        />
 
         {/* Right column - Content */}
-        <div className="w-2/3 flex flex-col -mt-2.5">
+        <div className="flex flex-col">
           <h3 className="font-bold text-lg">{getNome()}</h3>
           <div className="flex-grow mt-2">
             <div className="text-sm leading-normal">

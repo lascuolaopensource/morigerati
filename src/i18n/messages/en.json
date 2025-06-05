@@ -150,7 +150,8 @@
     "goToArchive": "Archive",
     "discoverAgenda": "Program",
     "notAvailable": "Not available",
-    "addressNotAvailable": "Address not available"
+    "addressNotAvailable": "Address not available",
+    "enrollmentNotAvailable": "Enrollments have not been opened yet, check back soon!"
   },
   "about": {
     "title": "About Us"

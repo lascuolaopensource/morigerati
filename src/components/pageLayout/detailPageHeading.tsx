@@ -14,14 +14,15 @@ type Props = {
   title: string
   children?: React.ReactNode
   mapProps?: MapProps
+  rightContent?: React.ReactNode
 }
 
 export function DetailPageHeading(props: Props) {
-  const { collection, backButton, title, children, mapProps } = props
+  const { collection, backButton, title, children, mapProps, rightContent } = props
   const { bg } = getColorTheme(collection)
 
   const { initialZoom = 16, showPositionPin = true, ...rest } = mapProps || {}
-  const showMap = rest.initialPosition || rest.gpxUrl || rest.localizedMedia
+  const showMap = (rest.initialPosition || rest.gpxUrl || rest.localizedMedia) && !rightContent
 
   return (
     <>
@@ -32,11 +33,14 @@ export function DetailPageHeading(props: Props) {
             <h1 className="text-4xl text-white font-bold text-balance">{title}</h1>
             {children}
           </div>
+
           {showMap && (
             <div className="grow h-[300px] sm:h-auto sm:min-h-[300px] sm:self-stretch w-full sm:max-w-[500px]">
               <DynamicMappa initialZoom={initialZoom} showPositionPin={showPositionPin} {...rest} />
             </div>
           )}
+
+          {rightContent}
         </div>
       </div>
       <PixelBorder className={bg} />

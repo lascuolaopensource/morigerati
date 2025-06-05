@@ -5,15 +5,11 @@ import { Metadata } from 'next'
 //DB
 import { loadDb } from '@/utils/db'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import type { Media } from '@/payload-types'
 //Components
-import BackButton from '@/components/uiElements/backButton'
 import ProgrammaList from './_partials/programmaList'
-import DateDaDefinireBanner from './_partials/annuncio'
 import TutorCard from './_partials/espertiCard'
 import InfoResidenza from './_partials/infoResidenza'
-import PulsanteIscrizione from './_partials/pulsanteIscrizione'
 import Copertina from '@/components/uiElements/copertina'
 import Galleria from '@/components/galleria/galleria'
 //Utils
@@ -23,6 +19,11 @@ import { getMessages } from 'next-intl/server'
 //Metadata
 import { createMetadata } from '@/utils/metadataHelpers'
 import { getLocale } from '@/utils/i18n'
+import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
+import { format } from 'date-fns'
+import { Container } from '@/components/uiElements/container'
+import { SectionTitle } from '@/components/uiElements/sectionTitle'
+import PixelBorder from '@/components/uiElements/pixelBorder'
 
 //
 
@@ -81,99 +82,101 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
   const messages = await getMessages()
 
   const startDate = new Date(residenza.data_inizio)
-  const isPastDate = startDate < new Date()
+  const isStartPassed = startDate < new Date()
+
+  const canEnroll =
+    !isStartPassed &&
+    Boolean(residenza.link_iscrizione) &&
+    Boolean(residenza.mostra_pulsante_iscrizione) &&
+    Boolean(residenza.deadline_iscrizione)
+
+  const startDateString = format(residenza.data_inizio, 'dd/MM/yyyy')
+  const endDateString = residenza.data_fine ? format(residenza.data_fine, 'dd/MM/yyyy') : undefined
 
   return (
     <div>
       <Copertina copertina={residenza.copertina as Media} />
-
-      <div className="p-4 sm:px-6 lg:px-12 xl:px-16 max-w-[1400px] mx-auto">
-        <BackButton message={messages.backButton.residenze} redirect={'/residenze'} />
-        <div className="pt-8" />
-
-        <div className="w-full max-w-[1200px] mx-auto space-y-12">
-          <div className="flex flex-col lg:flex-row gap-8 p-6">
-            <div className="lg:w-1/2 w-full overflow-hidden">
-              <div className="prose-custom-no-center">
-                {residenza.nome && (
-                  <h1 className="text-4xl font-bold !text-residenzeColor mb-4 break-words">
-                    {residenza.nome}
-                  </h1>
-                )}
-              </div>
+      <DetailPageHeading
+        title={residenza.nome}
+        collection="residenze"
+        backButton={{
+          message: messages.backButton.residenze,
+          href: '/residenze',
+        }}
+        rightContent={
+          !isStartPassed && (
+            <div className="grow w-full space-y-6">
+              <InfoResidenza residenza={residenza} canEnroll={canEnroll} />
             </div>
-
-            <div className="lg:w-1/2 w-full">
-              {residenza.mostra_dettagli ? (
-                <InfoResidenza residenza={residenza} onlyDate={isPastDate} />
-              ) : residenza.data_inizio && residenza.data_fine ? (
-                <DateDaDefinireBanner
-                  datesNotAnnouncedText={messages.residenze.datesNotAnnounced}
-                />
-              ) : null}
-            </div>
-          </div>
-
-          <div className="mt-12 max-w-[800px] mx-auto">
-            <RichText
-              data={residenza.abstract as unknown as SerializedEditorState}
-              className="prose prose-lg"
-            />
-          </div>
-
-          <div className="mt-12 max-w-[800px] mx-auto">
-            <PulsanteIscrizione
-              link={residenza.link_iscrizione ?? ''}
-              show={residenza.mostra_pulsante_iscrizione ?? false}
-              buttonText={messages.residenze.register}
-              isArchived={isPastDate}
-            />
-          </div>
-
-          {residenza.descrizione && (
-            <div className="max-w-[800px] mx-auto mt-16 bg-white p-8">
-              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6 pb-2">
-                {messages.residenze.description}
-              </h2>
-              <RichText
-                data={residenza.descrizione as SerializedEditorState}
-                className="prose prose-lg"
-              />
-            </div>
-          )}
-
-          {!isArrayEmpty(residenza.programma) && (
-            <div className="max-w-[800px] mx-auto mt-16 bg-white px-8">
-              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6 pb-2 ">
-                {messages.residenze.program}
-              </h2>
-              <ProgrammaList residenza={residenza} noDetailsText={messages.residenze.noDetails} />
-            </div>
-          )}
-
-          {!isArrayEmpty(residenza.esperti) && (
-            <div className="mt-16 w-full mx-auto">
-              <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6">
-                {messages.residenze.experts}
-              </h2>
-              <div className="flex flex-wrap justify-center gap-8 mt-8">
-                {residenza.esperti?.map((esperto, index) => (
-                  <TutorCard
-                    key={index}
-                    esperto={esperto}
-                    translations={{
-                      projects: messages.residenze.projects,
-                      organizations: messages.residenze.organizations,
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
+          )
+        }
+      >
+        <div className="flex gap-2">
+          <span>{startDateString}</span>
+          {endDateString && (
+            <>
+              <span>→</span>
+              <span>{endDateString}</span>
+            </>
           )}
         </div>
-      </div>
-      <div className="max-w-[1400px] mx-auto">
-        {residenza.galleria && <Galleria items={residenza.galleria as Media[]} />}
+      </DetailPageHeading>
+
+      {residenza.abstract && (
+        <Container className="flex flex-col items-center max-w-prose">
+          <RichText
+            data={residenza.abstract}
+            className="prose prose-lg text-center text-balance"
+            disableTextAlign={true}
+          />
+        </Container>
+      )}
+
+      <Container className="flex flex-col items-center max-w-prose space-y-8">
+        {residenza.descrizione && (
+          <div className="space-y-4">
+            <SectionTitle color="residenze">{messages.residenze.description}</SectionTitle>
+            <RichText
+              data={residenza.descrizione}
+              className="prose prose-lg text-left"
+              disableTextAlign={true}
+            />
+          </div>
+        )}
+
+        {residenza.programma?.length && (
+          <div className="">
+            <SectionTitle color="residenze" className="border-none">
+              {messages.residenze.program}
+            </SectionTitle>
+            <ProgrammaList residenza={residenza} noDetailsText={messages.residenze.noDetails} />
+          </div>
+        )}
+
+        {residenza.esperti?.length && (
+          <div className="space-y-4">
+            <SectionTitle color="residenze">{messages.residenze.experts}</SectionTitle>
+            <div className="space-y-2">
+              {residenza.esperti?.map((esperto, index) => (
+                <TutorCard
+                  key={index}
+                  esperto={esperto}
+                  translations={{
+                    projects: messages.residenze.projects,
+                    organizations: messages.residenze.organizations,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </Container>
+
+      <PixelBorder className="bg-residenzeColor" />
+      <div className="bg-residenzeColor">
+        <Container>
+          {residenza.galleria && <Galleria items={residenza.galleria as Media[]} />}
+        </Container>
       </div>
     </div>
   )
