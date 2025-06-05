@@ -6,9 +6,10 @@ import { format } from 'date-fns'
 
 type Props = {
   residenza: Residenze
+  archive?: boolean
 }
 
-export default function CardResidenza({ residenza }: Props) {
+export default function CardResidenza({ residenza, archive = false }: Props) {
   const copertina = getMedia(residenza.copertina)?.sizes?.medium?.url
 
   const dataInizio = residenza.data_inizio ? format(residenza.data_inizio, 'dd/MM/yyyy') : undefined
@@ -18,40 +19,42 @@ export default function CardResidenza({ residenza }: Props) {
   return (
     <a
       href={`/residenze/${residenza.slug}`}
-      className="flex items-center bg-residenzeColor p-3 w-full rounded-lg hover:scale-105 transition-all duration-300 gap-4"
+      className="flex flex-col sm:flex-row items-center bg-residenzeColor p-3 w-full rounded-lg hover:scale-105 hover:shadow-lg transition-all duration-300 gap-4"
     >
       <ImageWithFallback
         src={copertina}
         alt={`Immagine di copertina`}
         fill
-        className="size-[120px]"
+        className="w-full h-[200px] sm:size-[120px] shrink-0"
         priority
       />
 
       <div className=" space-y-1">
         <p className="flex gap-1 text-lg text-black">
-          {hasMultipleDates && (
+          {!archive && (
             <>
-              <span>Dal</span>
-              <span className="font-bold">{dataInizio}</span>
-              <span>al</span>
-              <span className="font-bold">{dataFine}</span>
-            </>
-          )}
-          {!hasMultipleDates && (
-            <>
-              <span>Il</span>
-              <span className="font-bold">{dataInizio}</span>
+              {hasMultipleDates && (
+                <>
+                  <span>Dal</span>
+                  <span className="font-bold">{dataInizio}</span>
+                  <span>al</span>
+                  <span className="font-bold">{dataFine}</span>
+                </>
+              )}
+              {!hasMultipleDates && (
+                <>
+                  <span>Il</span>
+                  <span className="font-bold">{dataInizio}</span>
+                </>
+              )}
             </>
           )}
         </p>
 
-        <p className="text-3xl font-semibold text-white">{residenza.nome}</p>
+        <p className="text-2xl font-semibold text-white">{residenza.nome}</p>
         {residenza.abstract && (
-          <RichText className="max-w-prose text-balance" data={residenza.abstract} />
+          <RichText className="max-w-prose sm:text-balance" data={residenza.abstract} />
         )}
-
-        {/* <pre>{JSON.stringify(residenza, null, 2)}</pre> */}
       </div>
     </a>
   )

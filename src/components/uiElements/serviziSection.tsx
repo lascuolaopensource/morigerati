@@ -26,7 +26,7 @@ export function ServiziSection(props: Props) {
 
   return (
     <div className="max-w-prose space-y-2">
-      <InfoSection collection="luoghi" title={title}>
+      <InfoSection collection={collection} title={title}>
         {servizi.map((servizio) => (
           <CardServizio key={servizio.id} servizio={servizio} className={classes} />
         ))}

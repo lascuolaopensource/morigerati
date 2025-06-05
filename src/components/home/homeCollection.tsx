@@ -51,7 +51,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
   })) as { docs: MainCollectionRecord[] }
 
   if (collection === 'residenze') {
-    data.docs = filterFutureResidenze(data.docs)
+    data.docs = filterFutureResidenze(data.docs as Residenze[])
   }
 
   const sectionClasses = cn(
@@ -86,56 +86,6 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
           <Card key={doc.id} category={collection} record={doc} />
         ))}
       </div>
-
-      {/* <RandomLetter color={collection} position={layout === 'left' ? 'right' : 'left'} />
-      {hasMap ? (
-        <>
-          <div className="text-center md:text-left md:w-full md:px-40 mb-4">
-            <h2 className={`text-2xl ${color} text-center md:text-${layout}`}>{title}</h2>
-            <div className={`text-center md:text-${layout}`}>
-              <RichText data={text} className="prose prose-lg" />
-            </div>
-          </div>
-          <Suspense fallback={<div>Loading slides...</div>}>
-            <CardGrid items={data.docs} category={collection} singleRow={singleRow} />
-          </Suspense>
-          <HomeTracksSection tracciati={tracciati} />
-          <div className="flex justify-center mt-4">
-            <Link
-              href={`/${collection}`}
-              locale={locale}
-              className={`${buttonColor} group flex items-center gap-2 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:gap-3`}
-            >
-              <span>{buttonText}</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
-            </Link>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="text-center md:text-left md:w-full md:px-40 mb-4">
-            {layout === 'right' ? (
-              <>
-                <h2 className={`text-2xl ${color} text-center md:text-right`}>{title}</h2>
-                <div className="text-center md:text-right">
-                  <RichText data={text} className="prose prose-lg" />
-                </div>
-              </>
-            ) : (
-              <>
-                <h2 className={`text-2xl ${color} text-center md:text-left`}>{title}</h2>
-                <div className="text-center md:text-left ">
-                  <RichText data={text} className="prose prose-lg" />
-                </div>
-              </>
-            )}
-          </div>
-          <Suspense fallback={<div>Loading slides...</div>}>
-            <CardGrid items={data.docs} category={collection} singleRow={true} />
-          </Suspense>
-          <div className="flex justify-center mt-4"></div>
-        </>
-      )} */}
     </section>
   )
 }

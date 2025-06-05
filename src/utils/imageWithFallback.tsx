@@ -21,7 +21,7 @@ export function ImageWithFallback({ className, placeholderPulse, src, ...props }
           placeholderPulse && 'animate-pulse',
         )}
       />
-      {src && <Image fill src={src} {...props} />}
+      {src && <Image fill src={src} {...props} className="object-cover" />}
     </div>
   )
 }

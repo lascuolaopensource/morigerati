@@ -472,13 +472,12 @@ export interface Persone {
 export interface Residenze {
   id: string;
   nome: string;
-  data_inizio?: string | null;
+  data_inizio: string;
   data_fine?: string | null;
   deadline_iscrizione?: string | null;
   link_iscrizione?: string | null;
-  indirizzo?: string | null;
-  mostra_dettagli?: boolean | null;
   mostra_pulsante_iscrizione?: boolean | null;
+  indirizzo?: string | null;
   abstract?: {
     root: {
       type: string;
@@ -901,9 +900,8 @@ export interface ResidenzeSelect<T extends boolean = true> {
   data_fine?: T;
   deadline_iscrizione?: T;
   link_iscrizione?: T;
-  indirizzo?: T;
-  mostra_dettagli?: T;
   mostra_pulsante_iscrizione?: T;
+  indirizzo?: T;
   abstract?: T;
   descrizione?: T;
   copertina?: T;

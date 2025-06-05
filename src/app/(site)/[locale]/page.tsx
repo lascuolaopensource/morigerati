@@ -9,12 +9,12 @@ import type { Media, Tracciati as TracciatiType } from '@/payload-types'
 //UI
 import Copertina from '@/components/uiElements/copertina'
 import GridOverlay from '@/components/uiElements/gridOverlay'
-import HomeCollection from '@/components/home/homeCollection'
 import PixelBorder from '@/components/uiElements/pixelBorder'
 
 // Utils
 import { createMetadata } from '@/utils/metadataHelpers'
 import { getLocale } from '@/utils/i18n'
+import HomeCollection from '@/components/home/homeCollection'
 
 //-------------------------------------------------------------------------
 
