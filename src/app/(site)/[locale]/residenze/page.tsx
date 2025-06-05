@@ -13,6 +13,7 @@ import CardResidenza from './_partials/cardResidenza'
 import { EmptyState } from '@/components/uiElements/emptyState'
 import { T } from '@/components/uiElements/t'
 import { ArrowRight } from 'lucide-react'
+import { Button } from '@/components/uiElements/button'
 
 //
 
@@ -64,26 +65,38 @@ export default async function Page({ searchParams }: PageProps) {
     },
   })
 
-  const headings: Record<FilterType, HeadingProps> = {
+  const texts: Record<FilterType, PageTexts> = {
     programma: {
-      title: 'Programma delle residenze',
-      link: {
-        label: "Vai all'archivio",
-        filter: 'archivio',
+      heading: {
+        title: '📆 Programma delle residenze',
+        link: {
+          label: "Vai all'archivio",
+          filter: 'archivio',
+        },
+      },
+      emptyState: {
+        title: 'Attualmente, non ci sono residenze in programma',
+        cta: "Esplora l'archivio!",
+        ctaFilter: 'archivio',
       },
     },
     archivio: {
-      title: 'Archivio delle residenze',
-      link: {
-        label: 'Vai al programma',
-        filter: 'programma',
+      heading: {
+        title: '📁 Archivio delle residenze',
+        link: {
+          label: 'Vai al programma',
+          filter: 'programma',
+        },
+      },
+      emptyState: {
+        title: 'Non ci sono residenze in archivio',
+        cta: 'Esplora il programma!',
+        ctaFilter: 'programma',
       },
     },
   }
 
-  const heading = headings[filter]
-
-  // const residenze = []
+  const { emptyState, heading } = texts[filter]
 
   return (
     <>
@@ -92,23 +105,26 @@ export default async function Page({ searchParams }: PageProps) {
         title={testi.residenze.title}
         introContent={testi.residenze.testo as SerializedEditorState}
       />
-      <Container className="!max-w-screen-lg">
+      <Container className="!max-w-screen-lg space-y-6">
         <Heading {...heading} />
 
         {residenze.length > 0 && (
-          <div className="flex flex-col gap-2 pt-6">
+          <div className="flex flex-col gap-2">
             {residenze.map((item) => (
-              <CardResidenza key={item.id} residenza={item} />
+              <CardResidenza key={item.id} residenza={item} archive={filter === 'archivio'} />
             ))}
           </div>
         )}
 
         {residenze.length === 0 && (
-          <EmptyState
-            title="Nessuna residenza trovata"
-            description="Nessuna residenza trovata"
-            color="residenze"
-          />
+          <EmptyState title={emptyState.title} color="residenze">
+            <div>
+              <Button color="residenze" href={filterToHref(emptyState.ctaFilter)}>
+                <ArrowRight size={16} />
+                <span>{emptyState.cta}</span>
+              </Button>
+            </div>
+          </EmptyState>
         )}
       </Container>
     </>
@@ -116,6 +132,15 @@ export default async function Page({ searchParams }: PageProps) {
 }
 
 //
+
+type PageTexts = {
+  heading: HeadingProps
+  emptyState: {
+    title: string
+    cta: string
+    ctaFilter: FilterType
+  }
+}
 
 type HeadingProps = {
   title: string
@@ -133,71 +158,15 @@ function Heading(props: HeadingProps) {
       <T tag="h2" className="text-residenzeColor">
         {title}
       </T>
-      <hr className="border grow hidden md:block" />
-      <a
-        className="bg-residenzeColor hover:bg-residenzeColor/80 p-2 rounded-md flex items-center gap-1  text-white font-medium"
-        href={`/residenze?${FILTER_PARAM}=${link.filter}`}
-      >
+      <hr className="border grow hidden sm:block" />
+      <Button color="residenze" href={filterToHref(link.filter)}>
         <ArrowRight size={16} />
         <span>{link.label}</span>
-      </a>
+      </Button>
     </div>
   )
 }
 
-//
-
-// async function ResidenzeListing({ filter }: { filter?: string }) {
-//   const db = await loadDb()
-
-//   const { past, future } = sortResidenze(residenzeData.docs)
-
-//   // Check if filter is 'passata' (past) or 'futura' (future)
-//   const isPast = filter === 'passata'
-//   const displayResidenze = isPast ? past : future
-
-//   return (
-//     <div className="space-y-4">
-//       <div className="flex items-center gap-4 w-full">
-//         <hr className="border grow" />
-//         <SelectResidenzeView />
-//         <hr className="border grow" />
-//       </div>
-
-//       <div className="py-8">
-//         {displayResidenze.length > 0 ? (
-//           <CollectionGrid collection="residenze" items={displayResidenze} />
-//         ) : (
-//           <NoResidenze />
-//         )}
-//       </div>
-//     </div>
-//   )
-// }
-
-// function groupResidenze = (residenze: ResidenzaType[]): SortedResidenze => {
-//   const now = new Date()
-
-//   return residenze.reduce(
-//     (acc: SortedResidenze, residenza) => {
-//       const comparisonDate = residenza.data_fine
-//         ? new Date(residenza.data_fine)
-//         : residenza.data_inizio
-//         ? new Date(residenza.data_inizio)
-//         : null
-
-//       if (!comparisonDate) {
-//         acc.past.push(residenza)
-//       } else {
-//         if (comparisonDate < now) {
-//           acc.past.push(residenza)
-//         } else {
-//           acc.future.push(residenza)
-//         }
-//       }
-
-//       return acc
-//     },
-//     { past: [], future: [] },
-//   )
-// }
+function filterToHref(filter: FilterType) {
+  return `/residenze?${FILTER_PARAM}=${filter}`
+}

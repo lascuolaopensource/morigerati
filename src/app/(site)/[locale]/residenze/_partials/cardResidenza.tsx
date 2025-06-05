@@ -6,9 +6,10 @@ import { format } from 'date-fns'
 
 type Props = {
   residenza: Residenze
+  archive?: boolean
 }
 
-export default function CardResidenza({ residenza }: Props) {
+export default function CardResidenza({ residenza, archive = false }: Props) {
   const copertina = getMedia(residenza.copertina)?.sizes?.medium?.url
 
   const dataInizio = residenza.data_inizio ? format(residenza.data_inizio, 'dd/MM/yyyy') : undefined
@@ -30,18 +31,22 @@ export default function CardResidenza({ residenza }: Props) {
 
       <div className=" space-y-1">
         <p className="flex gap-1 text-lg text-black">
-          {hasMultipleDates && (
+          {!archive && (
             <>
-              <span>Dal</span>
-              <span className="font-bold">{dataInizio}</span>
-              <span>al</span>
-              <span className="font-bold">{dataFine}</span>
-            </>
-          )}
-          {!hasMultipleDates && (
-            <>
-              <span>Il</span>
-              <span className="font-bold">{dataInizio}</span>
+              {hasMultipleDates && (
+                <>
+                  <span>Dal</span>
+                  <span className="font-bold">{dataInizio}</span>
+                  <span>al</span>
+                  <span className="font-bold">{dataFine}</span>
+                </>
+              )}
+              {!hasMultipleDates && (
+                <>
+                  <span>Il</span>
+                  <span className="font-bold">{dataInizio}</span>
+                </>
+              )}
             </>
           )}
         </p>
@@ -50,8 +55,6 @@ export default function CardResidenza({ residenza }: Props) {
         {residenza.abstract && (
           <RichText className="max-w-prose sm:text-balance" data={residenza.abstract} />
         )}
-
-        {/* <pre>{JSON.stringify(residenza, null, 2)}</pre> */}
       </div>
     </a>
   )

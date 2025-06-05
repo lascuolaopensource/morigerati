@@ -8,36 +8,40 @@ type ColorTheme = {
   border: string
 }
 
-export const textColors: Record<MainCollections, string> = {
+export const textColors: Record<MainCollections | 'default', string> = {
   itinerari: 'text-itinerariColor',
   luoghi: 'text-luoghiColor',
   persone: 'text-personeColor',
   residenze: 'text-residenzeColor',
+  default: 'text-black',
 }
 
-export const bgColors: Record<MainCollections, string> = {
+export const bgColors: Record<MainCollections | 'default', string> = {
   itinerari: 'bg-itinerariColor',
   luoghi: 'bg-luoghiColor',
   persone: 'bg-personeColor',
   residenze: 'bg-residenzeColor',
+  default: 'bg-black',
 }
 
-export const borderColors: Record<MainCollections, string> = {
+export const borderColors: Record<MainCollections | 'default', string> = {
   itinerari: 'border-itinerariColor',
   luoghi: 'border-luoghiColor',
   persone: 'border-personeColor',
   residenze: 'border-residenzeColor',
+  default: 'border-black',
 }
 
 export function randomChoice<T>(array: T[]): T {
   return array[Math.floor(Math.random() * array.length)]
 }
 
-export function getColorTheme(collection: MainCollections): ColorTheme {
+export function getColorTheme(collection: MainCollections | undefined | 'default'): ColorTheme {
+  const c = collection || 'default'
   return {
-    text: textColors[collection],
-    bg: bgColors[collection],
-    border: borderColors[collection],
+    text: textColors[c],
+    bg: bgColors[c],
+    border: borderColors[c],
   }
 }
 
