@@ -9,11 +9,11 @@ import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical
 import type { Media } from '@/payload-types'
 //Components
 import BackButton from '@/components/uiElements/backButton'
-import ProgrammaList from '@/components/residenze/programmaList'
-import DateDaDefinireBanner from '@/components/residenze/annuncio'
-import TutorCard from '@/components/residenze/espertiCard'
-import InfoResidenza from '@/components/residenze/infoResidenza'
-import PulsanteIscrizione from '@/components/residenze/pulsanteIscrizione'
+import ProgrammaList from './_partials/programmaList'
+import DateDaDefinireBanner from './_partials/annuncio'
+import TutorCard from './_partials/espertiCard'
+import InfoResidenza from './_partials/infoResidenza'
+import PulsanteIscrizione from './_partials/pulsanteIscrizione'
 import Copertina from '@/components/uiElements/copertina'
 import Galleria from '@/components/galleria/galleria'
 //Utils
