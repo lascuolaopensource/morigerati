@@ -1,22 +1,15 @@
-//Boilerplate
 import React from 'react'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
-//DB
 import { loadDb } from '@/utils/db'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { Media } from '@/payload-types'
-//Components
 import ProgrammaList from './_partials/programmaList'
 import TutorCard from './_partials/espertiCard'
 import InfoResidenza from './_partials/infoResidenza'
 import Copertina from '@/components/uiElements/copertina'
 import Galleria from '@/components/galleria/galleria'
-//Utils
-import { isArrayEmpty } from '@/utils/isArrayEmpty'
-//Locale
 import { getMessages } from 'next-intl/server'
-//Metadata
 import { createMetadata } from '@/utils/metadataHelpers'
 import { getLocale } from '@/utils/i18n'
 import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
@@ -24,6 +17,7 @@ import { format } from 'date-fns'
 import { Container } from '@/components/uiElements/container'
 import { SectionTitle } from '@/components/uiElements/sectionTitle'
 import PixelBorder from '@/components/uiElements/pixelBorder'
+import { getResidenzaState } from './_partials/utils'
 
 //
 
@@ -79,16 +73,11 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
   const residenza = await loadResidenza((await params).slug)
   if (!residenza) notFound()
 
+  const { data_inizio, deadline_iscrizione, link_iscrizione, mostra_pulsante_iscrizione } =
+    residenza
+
   const messages = await getMessages()
-
-  const startDate = new Date(residenza.data_inizio)
-  const isStartPassed = startDate < new Date()
-
-  const canEnroll =
-    !isStartPassed &&
-    Boolean(residenza.link_iscrizione) &&
-    Boolean(residenza.mostra_pulsante_iscrizione) &&
-    Boolean(residenza.deadline_iscrizione)
+  const state = getResidenzaState(residenza)
 
   const startDateString = format(residenza.data_inizio, 'dd/MM/yyyy')
   const endDateString = residenza.data_fine ? format(residenza.data_fine, 'dd/MM/yyyy') : undefined
@@ -104,22 +93,24 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
           href: '/residenze',
         }}
         rightContent={
-          !isStartPassed && (
+          state != 'started' && (
             <div className="grow w-full space-y-6">
-              <InfoResidenza residenza={residenza} canEnroll={canEnroll} />
+              <InfoResidenza residenza={residenza} />
             </div>
           )
         }
       >
-        <div className="flex gap-2">
-          <span>{startDateString}</span>
-          {endDateString && (
-            <>
-              <span>→</span>
-              <span>{endDateString}</span>
-            </>
-          )}
-        </div>
+        {state == 'started' && (
+          <div className="flex gap-2">
+            <span>{startDateString}</span>
+            {endDateString && (
+              <>
+                <span>→</span>
+                <span>{endDateString}</span>
+              </>
+            )}
+          </div>
+        )}
       </DetailPageHeading>
 
       {residenza.abstract && (
