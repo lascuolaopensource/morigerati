@@ -85,7 +85,9 @@ export default async function persone({ params }: { params: Promise<{ slug: stri
         collection="persone"
         backButton={{ message: messages.backButton.persone, href: '/persone' }}
         title={persona.nome}
-        position={persona.posizione}
+        mapProps={{
+          initialPosition: persona.posizione,
+        }}
       >
         {persona.tipologia && <Tag tag={persona.tipologia} />}
       </DetailPageHeading>

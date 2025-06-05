@@ -472,7 +472,7 @@ export interface Persone {
 export interface Residenze {
   id: string;
   nome: string;
-  data_inizio?: string | null;
+  data_inizio: string;
   data_fine?: string | null;
   deadline_iscrizione?: string | null;
   link_iscrizione?: string | null;

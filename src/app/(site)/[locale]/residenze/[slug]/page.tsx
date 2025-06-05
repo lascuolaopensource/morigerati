@@ -19,33 +19,43 @@ import Galleria from '@/components/galleria/galleria'
 //Utils
 import { isArrayEmpty } from '@/utils/isArrayEmpty'
 //Locale
-import { getLocale, getMessages } from 'next-intl/server'
+import { getMessages } from 'next-intl/server'
 //Metadata
 import { createMetadata } from '@/utils/metadataHelpers'
+import { getLocale } from '@/utils/i18n'
+
+//
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+
+//
+
+async function loadResidenza(slug: string) {
+  const db = await loadDb()
+  const locale = await getLocale()
+  const { docs } = await db.find({
+    collection: 'residenze',
+    depth: 2,
+    locale: locale,
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+  })
+  if (docs.length != 1) return undefined
+  return docs[0]
+}
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const { slug } = await params
-  const db = await loadDb()
-  const locale = (await getLocale()) as 'it' | 'en'
-  const residenze = await db.find({ collection: 'residenze', depth: 2, locale: locale })
-
-  // Find the residenza with the matching slug
-  // Handle both localized and non-localized slugs
-  const residenzaData = residenze.docs.find((r) => {
-    if (typeof r.slug === 'object' && r.slug !== null) {
-      // Handle localized slugs
-      return r.slug === slug || Object.values(r.slug).includes(slug)
-    }
-    // Handle non-localized slugs
-    return r.slug === slug
-  })
+  const locale = await getLocale()
+  const slug = (await params).slug
+  const residenzaData = await loadResidenza(slug)
 
   if (!residenzaData) {
     notFound()
@@ -65,40 +75,17 @@ export async function generateMetadata({
 }
 
 export default async function ResidenzaSlug({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const db = await loadDb()
-  const locale = (await getLocale()) as 'it' | 'en'
-  const residenze = await db.find({ collection: 'residenze', depth: 2, locale: locale })
+  const residenza = await loadResidenza((await params).slug)
+  if (!residenza) notFound()
 
-  // Get translation messages
   const messages = await getMessages()
 
-  // Translation function
-
-  // Find the residenza with the matching slug
-  // Handle both localized and non-localized slugs
-  const residenzaData = residenze.docs.find((r) => {
-    if (typeof r.slug === 'object' && r.slug !== null) {
-      // Handle localized slugs
-      return r.slug === slug || Object.values(r.slug).includes(slug)
-    }
-    // Handle non-localized slugs
-    return r.slug === slug
-  })
-
-  if (!residenzaData) {
-    notFound()
-  }
-
-  const isAfterCurrentDate = (dateString: string): boolean => {
-    const currentDate = new Date()
-    const startDate = new Date(dateString)
-    return currentDate > startDate
-  }
+  const startDate = new Date(residenza.data_inizio)
+  const isPastDate = startDate < new Date()
 
   return (
     <div>
-      <Copertina copertina={residenzaData.copertina as Media} />
+      <Copertina copertina={residenza.copertina as Media} />
 
       <div className="p-4 sm:px-6 lg:px-12 xl:px-16 max-w-[1400px] mx-auto">
         <BackButton message={messages.backButton.residenze} redirect={'/residenze'} />
@@ -108,21 +95,18 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
           <div className="flex flex-col lg:flex-row gap-8 p-6">
             <div className="lg:w-1/2 w-full overflow-hidden">
               <div className="prose-custom-no-center">
-                {residenzaData.nome && (
+                {residenza.nome && (
                   <h1 className="text-4xl font-bold !text-residenzeColor mb-4 break-words">
-                    {residenzaData.nome}
+                    {residenza.nome}
                   </h1>
                 )}
               </div>
             </div>
 
             <div className="lg:w-1/2 w-full">
-              {residenzaData.mostra_dettagli ? (
-                <InfoResidenza
-                  residenza={residenzaData}
-                  onlyDate={isAfterCurrentDate(residenzaData?.data_inizio ?? '')}
-                />
-              ) : residenzaData.data_inizio && residenzaData.data_fine ? (
+              {residenza.mostra_dettagli ? (
+                <InfoResidenza residenza={residenza} onlyDate={isPastDate} />
+              ) : residenza.data_inizio && residenza.data_fine ? (
                 <DateDaDefinireBanner
                   datesNotAnnouncedText={messages.residenze.datesNotAnnounced}
                 />
@@ -132,51 +116,48 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
 
           <div className="mt-12 max-w-[800px] mx-auto">
             <RichText
-              data={residenzaData.abstract as unknown as SerializedEditorState}
+              data={residenza.abstract as unknown as SerializedEditorState}
               className="prose prose-lg"
             />
           </div>
 
           <div className="mt-12 max-w-[800px] mx-auto">
             <PulsanteIscrizione
-              link={residenzaData.link_iscrizione ?? ''}
-              show={residenzaData.mostra_pulsante_iscrizione ?? false}
+              link={residenza.link_iscrizione ?? ''}
+              show={residenza.mostra_pulsante_iscrizione ?? false}
               buttonText={messages.residenze.register}
-              isArchived={isAfterCurrentDate(residenzaData?.data_inizio ?? '')}
+              isArchived={isPastDate}
             />
           </div>
 
-          {residenzaData.descrizione && (
+          {residenza.descrizione && (
             <div className="max-w-[800px] mx-auto mt-16 bg-white p-8">
               <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6 pb-2">
                 {messages.residenze.description}
               </h2>
               <RichText
-                data={residenzaData.descrizione as SerializedEditorState}
+                data={residenza.descrizione as SerializedEditorState}
                 className="prose prose-lg"
               />
             </div>
           )}
 
-          {!isArrayEmpty(residenzaData.programma) && (
+          {!isArrayEmpty(residenza.programma) && (
             <div className="max-w-[800px] mx-auto mt-16 bg-white px-8">
               <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6 pb-2 ">
                 {messages.residenze.program}
               </h2>
-              <ProgrammaList
-                residenza={residenzaData}
-                noDetailsText={messages.residenze.noDetails}
-              />
+              <ProgrammaList residenza={residenza} noDetailsText={messages.residenze.noDetails} />
             </div>
           )}
 
-          {!isArrayEmpty(residenzaData.esperti) && (
+          {!isArrayEmpty(residenza.esperti) && (
             <div className="mt-16 w-full mx-auto">
               <h2 className="text-center text-residenzeColor text-2xl font-bold mb-6">
                 {messages.residenze.experts}
               </h2>
               <div className="flex flex-wrap justify-center gap-8 mt-8">
-                {residenzaData.esperti?.map((esperto, index) => (
+                {residenza.esperti?.map((esperto, index) => (
                   <TutorCard
                     key={index}
                     esperto={esperto}
@@ -192,9 +173,7 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
         </div>
       </div>
       <div className="max-w-[1400px] mx-auto">
-        {residenzaData.galleria && (
-          <Galleria items={residenzaData.galleria as Media[]} titleColor="text-residenzeColor" />
-        )}
+        {residenza.galleria && <Galleria items={residenza.galleria as Media[]} />}
       </div>
     </div>
   )

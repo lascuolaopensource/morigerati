@@ -63,6 +63,7 @@ export const Residenze: CollectionConfig<'residenze'> = {
                   displayFormat: 'dd/MM/yyyy',
                 },
               },
+              required: true,
             },
             {
               name: 'data_fine',

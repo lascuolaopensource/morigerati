@@ -1,9 +1,10 @@
 import { Metadata } from 'next'
 //Components
-import { getCollectionMetadata } from '@/components/card/cardsPage'
+
 //Locale
 import { getLocale } from 'next-intl/server'
 import { CollectionPage } from '@/components/pageLayout/collectionPage'
+import { getCollectionMetadata } from '@/utils/getCollectionMetadata'
 
 //
 
