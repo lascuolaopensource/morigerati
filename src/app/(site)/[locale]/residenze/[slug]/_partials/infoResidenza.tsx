@@ -74,7 +74,7 @@ function InfoResidenza({ residenza, canEnroll = true }: InfoResidenzaProps) {
 
         {state == 'cannotEnroll' && (
           <BentoBoxItem label={messages('residenze.registrationDeadline')}>
-            <T>La deadline per l'iscrizione è passata. Non è più possibile iscriversi.</T>
+            <T>La deadline per l&apos;iscrizione è passata. Non è più possibile iscriversi.</T>
           </BentoBoxItem>
         )}
       </div>
