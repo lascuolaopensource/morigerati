@@ -17,7 +17,7 @@ export function Button(props: Props) {
   const { bg } = getColorTheme(color)
 
   const classes = cn(
-    'w-full rounded-full px-4 py-2 text-white text-nowrap text-center',
+    'rounded-full px-4 py-2 text-white text-nowrap text-center',
     'hover:cursor-pointer hover:scale-105 transition-transform duration-300',
     'flex items-center justify-center gap-1',
     bg,
