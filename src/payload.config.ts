@@ -16,7 +16,6 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-import { seoPlugin } from '@payloadcms/plugin-seo'
 
 import { s3Storage } from '@payloadcms/storage-s3'
 
@@ -40,6 +39,7 @@ import { Footer } from './db/globals/Footer'
 import { Testi } from './db/globals/Testi'
 import { Collections } from './db/collections'
 import { Globals } from './db/globals'
+import { seoPlugin } from './modules/seo'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -80,35 +80,12 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    seoPlugin({
-      collections: [
-        Collections.Luoghi,
-        Collections.Persone,
-        Collections.Itinerari,
-        Collections.Residenze,
-        Collections.Articoli,
-      ],
-      globals: [Globals.Home, Globals.ChiSiamo, Globals.MobilitaSostenibile],
-      uploadsCollection: Collections.Media,
-      generateTitle: ({ doc }) => {
-        const title = doc?.nome || doc?.titolo || ''
-        return title ? `${title} | Morigerati` : 'Morigerati'
-      },
-      generateDescription: ({ doc }) => {
-        if (doc?.testo_html) {
-          return doc.testo_html.replace(/<[^>]*>/g, '').substring(0, 155)
-        }
-        return ''
-      },
-      generateURL: ({ doc, collectionSlug, globalSlug }) => {
-        if (globalSlug) {
-          return `https://morigerati.it/${globalSlug === Globals.Home ? '' : globalSlug.replace('_', '-')}`
-        }
-        return `https://morigerati.it/${collectionSlug}/${doc?.slug || ''}`
-      },
-      tabbedUI: true,
-    }),
+    seoPlugin,
+
     s3Storage({
+      enabled: true,
+      bucket: process.env.S3_BUCKET!,
+      disableLocalStorage: true,
       collections: {
         [Media.slug]: {
           disableLocalStorage: true,
@@ -119,9 +96,6 @@ export default buildConfig({
           prefix: 'tracciati',
         },
       },
-      bucket: process.env.S3_BUCKET!,
-      disableLocalStorage: true,
-      enabled: true,
       config: {
         endpoint: process.env.S3_ENDPOINT!,
         region: process.env.S3_REGION!,
@@ -132,6 +106,5 @@ export default buildConfig({
         forcePathStyle: true,
       },
     }),
-    // storage-adapter-placeholder
   ],
 })
