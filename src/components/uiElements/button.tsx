@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { getColorTheme } from '@/utils/colors'
 import { MainCollections } from '@/utils/types'
+import Link from 'next/link'
 
 type Props = {
   children: React.ReactNode
@@ -31,9 +32,9 @@ export function Button(props: Props) {
 
   if (href) {
     return (
-      <a href={href} className={classes} target={target}>
+      <Link href={href} className={classes} target={target}>
         {children}
-      </a>
+      </Link>
     )
   } else {
     return (

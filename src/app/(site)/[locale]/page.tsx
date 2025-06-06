@@ -12,38 +12,24 @@ import GridOverlay from '@/components/uiElements/gridOverlay'
 import PixelBorder from '@/components/uiElements/pixelBorder'
 
 // Utils
-import { createMetadata } from '@/utils/metadataHelpers'
 import { getLocale } from '@/utils/i18n'
 import HomeCollection from '@/components/home/homeCollection'
+import { createMetadata } from '@/modules/seo'
 
-//-------------------------------------------------------------------------
+//
 
-export async function generateMetadata(): Promise<Metadata> {
+async function load() {
   const locale = await getLocale()
   const db = await loadDb()
   const home = await db.findGlobal({
     slug: 'home',
     locale: locale,
   })
-
-  return createMetadata(home, {
-    pagePath: '',
-    titleField: 'title',
-    defaultTitle: 'Morigerati - Transluoghi',
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
-    locale,
-  })
+  return { locale, home }
 }
 
-// Accept params prop which includes the locale
 export default async function Page() {
-  const locale = (await getLocale()) as 'en' | 'it'
-  const db = await loadDb()
-
-  const home = await db.findGlobal({
-    slug: 'home',
-    locale: locale,
-  })
+  const { home } = await load()
 
   return (
     <>
@@ -96,4 +82,13 @@ export default async function Page() {
       />
     </>
   )
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await load()
+
+  return createMetadata({
+    pathname: '/',
+    locale,
+  })
 }

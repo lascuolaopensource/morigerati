@@ -1,12 +1,8 @@
 import React from 'react'
 import { Metadata } from 'next'
-
 import { loadDb } from '@/utils/db'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-
 import { getLocale } from '@/utils/i18n'
-
-import { createMetadata } from '@/utils/metadataHelpers'
 import { CollectionHeading } from '@/components/pageLayout/collectionHeading'
 import { Container } from '@/components/uiElements/container'
 import CardResidenza from './_partials/cardResidenza'
@@ -14,47 +10,30 @@ import { EmptyState } from '@/components/uiElements/emptyState'
 import { T } from '@/components/uiElements/t'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/uiElements/button'
+import { createMetadata } from '@/modules/seo'
+import { convertLexicalToMarkdown } from '@payloadcms/richtext-lexical'
 
 //
 
+// TODO - Review: PayloadCMS website template uses a different technique to refresh the page
 // Force dynamic rendering and disable cache to ensure fresh data
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export async function generateMetadata(): Promise<Metadata> {
+//
+
+async function load() {
   const locale = await getLocale()
   const db = await loadDb()
   const testi = await db.findGlobal({ slug: 'testi', locale: locale })
-
-  return createMetadata(testi.residenze, {
-    pagePath: 'residenze',
-    titleField: 'title',
-    defaultTitle: locale === 'it' ? 'Residenze Artistiche' : 'Artist Residencies',
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
-    locale,
-  })
+  return { testi: testi.residenze, locale, db }
 }
-
-//
-
-const FILTER_PARAM = 'filter'
-
-type FilterType = 'archivio' | 'programma'
-
-interface PageProps {
-  searchParams: Promise<{ [FILTER_PARAM]?: FilterType }>
-}
-
-//
 
 export default async function Page({ searchParams }: PageProps) {
-  const db = await loadDb()
-  const locale = await getLocale()
-
   const filter: FilterType = (await searchParams)[FILTER_PARAM] ?? 'programma'
   const today = new Date().toISOString()
 
-  const testi = await db.findGlobal({ slug: 'testi', locale })
+  const { testi, locale, db } = await load()
 
   const { docs: residenze } = await db.find({
     collection: 'residenze',
@@ -102,8 +81,8 @@ export default async function Page({ searchParams }: PageProps) {
     <>
       <CollectionHeading
         collection="residenze"
-        title={testi.residenze.title}
-        introContent={testi.residenze.testo as SerializedEditorState}
+        title={testi.title}
+        introContent={testi.testo as SerializedEditorState}
       />
       <Container className="!max-w-screen-lg space-y-6">
         <Heading {...heading} />
@@ -131,7 +110,25 @@ export default async function Page({ searchParams }: PageProps) {
   )
 }
 
-//
+export async function generateMetadata(): Promise<Metadata> {
+  const { testi, locale } = await load()
+
+  return createMetadata({
+    title: testi.title,
+    locale,
+    // TODO - Load description from testi global, serialize lexical to plain text
+  })
+}
+
+/* Utils */
+
+const FILTER_PARAM = 'filter'
+
+type FilterType = 'archivio' | 'programma'
+
+interface PageProps {
+  searchParams: Promise<{ [FILTER_PARAM]?: FilterType }>
+}
 
 type PageTexts = {
   heading: HeadingProps

@@ -1,41 +1,25 @@
-//Boilerplate
 import React from 'react'
 import { Metadata } from 'next'
-//DB
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { loadDb } from '@/utils/db'
-//Components
 import ContentPageLayout from '@/components/pageLayout/ContentPageLayout'
-//Locale
-import { getLocale } from 'next-intl/server'
-import { RandomLetter } from '@/components/home/randomLetter'
-//Metadata
-import { createMetadata } from '@/utils/metadataHelpers'
+import { getLocale } from '@/modules/i18n'
+import { createMetadata } from '@/modules/seo'
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = (await getLocale()) as 'it' | 'en'
+//
+
+async function load() {
+  const locale = await getLocale()
   const db = await loadDb()
   const mobilita = await db.findGlobal({
     slug: 'mobilita_sostenibile',
-    locale: locale,
-  })
-
-  return createMetadata(mobilita, {
-    pagePath: 'mobilita',
-    titleField: 'mobilita_sostenibile',
-    defaultTitle: locale === 'it' ? 'Mobilità Sostenibile' : 'Sustainable Mobility',
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
     locale,
   })
+  return { mobilita, locale }
 }
 
-const Mobilita = async () => {
-  const locale = (await getLocale()) as 'it' | 'en'
-  const db = await loadDb()
-  const mobilita = await db.findGlobal({
-    slug: 'mobilita_sostenibile',
-    locale: locale,
-  })
+export default async function Mobilita() {
+  const { mobilita } = await load()
 
   return (
     <ContentPageLayout
@@ -46,4 +30,13 @@ const Mobilita = async () => {
   )
 }
 
-export default Mobilita
+export async function generateMetadata(): Promise<Metadata> {
+  const { mobilita, locale } = await load()
+
+  return createMetadata({
+    doc: mobilita,
+    // TODO - Load from translations
+    title: locale === 'it' ? 'Mobilità Sostenibile' : 'Sustainable Mobility',
+    locale,
+  })
+}

@@ -10,7 +10,6 @@ import InfoResidenza from './_partials/infoResidenza'
 import Copertina from '@/components/uiElements/copertina'
 import Galleria from '@/components/galleria/galleria'
 import { getMessages } from 'next-intl/server'
-import { createMetadata } from '@/utils/metadataHelpers'
 import { getLocale } from '@/utils/i18n'
 import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
 import { format } from 'date-fns'
@@ -18,6 +17,7 @@ import { Container } from '@/components/uiElements/container'
 import { SectionTitle } from '@/components/uiElements/sectionTitle'
 import PixelBorder from '@/components/uiElements/pixelBorder'
 import { getResidenzaState } from './_partials/utils'
+import { createMetadata } from '@/modules/seo'
 
 //
 
@@ -32,45 +32,22 @@ async function loadResidenza(slug: string) {
   const { docs } = await db.find({
     collection: 'residenze',
     depth: 2,
-    locale: locale,
+    locale,
     where: {
       slug: {
         equals: slug,
       },
     },
   })
-  if (docs.length != 1) return undefined
-  return docs[0]
+  return { residenza: docs.at(0), locale, db }
 }
 
-export async function generateMetadata({
-  params,
-}: {
+type PageProps = {
   params: Promise<{ slug: string }>
-}): Promise<Metadata> {
-  const locale = await getLocale()
-  const slug = (await params).slug
-  const residenzaData = await loadResidenza(slug)
-
-  if (!residenzaData) {
-    notFound()
-    return {
-      title:
-        locale === 'it' ? 'Residenza non trovata | Morigerati' : 'Residency not found | Morigerati',
-    }
-  }
-
-  return createMetadata(residenzaData, {
-    pagePath: `residenze/${slug}`,
-    titleField: 'nome',
-    defaultTitle: locale === 'it' ? 'Residenza Artistica' : 'Artist Residency',
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
-    locale,
-  })
 }
 
 export default async function ResidenzaSlug({ params }: { params: Promise<{ slug: string }> }) {
-  const residenza = await loadResidenza((await params).slug)
+  const { residenza } = await loadResidenza((await params).slug)
   if (!residenza) notFound()
 
   const { data_inizio, deadline_iscrizione, link_iscrizione, mostra_pulsante_iscrizione } =
@@ -171,4 +148,15 @@ export default async function ResidenzaSlug({ params }: { params: Promise<{ slug
       </div>
     </div>
   )
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const slug = (await params).slug
+  const { residenza, locale } = await loadResidenza(slug)
+
+  return createMetadata({
+    doc: residenza,
+    pathname: `residenze/${slug}`,
+    locale,
+  })
 }

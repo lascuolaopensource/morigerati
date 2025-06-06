@@ -17,156 +17,101 @@ import Copertina from '@/components/uiElements/copertina'
 import MediaViewer from '@/components/uiElements/mediaViewer'
 import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
 //Locale
-import { getLocale, getMessages } from 'next-intl/server'
-import { createMetadata } from '@/utils/metadataHelpers'
+import { getMessages } from 'next-intl/server'
 import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
 import { Container } from '@/components/uiElements/container'
 import { ServiziSection } from '@/components/uiElements/serviziSection'
 import PixelBorder from '@/components/uiElements/pixelBorder'
+import { getLocale } from '@/modules/i18n'
+import { createMetadata } from '@/modules/seo'
+import { getMedia, getMediaArray } from '@/utils'
+import { appConfig } from '@/app-config'
 
-interface ItinerarioParams {
-  slug: string
-}
-
-interface PageProps {
-  params: Promise<ItinerarioParams>
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const slug = (await params).slug
-  const db = await loadDb()
-  const locale = (await getLocale()) as 'it' | 'en'
-  const itinerari = await db.find({
-    collection: 'itinerari',
-    depth: 2,
-    locale: locale as 'it' | 'en',
-  })
-
-  // For localized slugs, we need to find the document by checking if slug matches
-  // the locale-specific value or the slug object contains the correct locale
-  const itinerarioData = itinerari.docs.find((i) => {
-    if (typeof i.slug === 'object' && i.slug !== null) {
-      return i.slug[locale] === slug
-    }
-    return i.slug === slug
-  })
-
-  if (!itinerarioData) {
-    notFound()
-    return {
-      title:
-        locale === 'it'
-          ? 'Itinerario non trovato | Morigerati'
-          : 'Itinerary not found | Morigerati',
-    }
-  }
-
-  return createMetadata(itinerarioData, {
-    pagePath: `itinerari/${slug}`,
-    titleField: 'nome',
-    defaultTitle: locale === 'it' ? 'Itinerario' : 'Itinerary',
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
-    locale,
-  })
-}
+//
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export default async function Itinerario({ params }: PageProps) {
-  const slug = (await params).slug
-  const db = await loadDb()
-  const locale = (await getLocale()) as 'it' | 'en'
+//
 
-  const itinerari = await db.find({
+interface PageProps {
+  params: Promise<{
+    slug: string
+  }>
+}
+
+async function load(pageProps: PageProps) {
+  const slug = (await pageProps.params).slug
+  const locale = await getLocale()
+  const db = await loadDb()
+  const { docs } = await db.find({
     collection: 'itinerari',
     depth: 2,
-    locale: locale as 'it' | 'en', // Casting per utilizzare il tipo corretto
+    locale,
+    where: { slug: { equals: slug } },
   })
+  return { itinerario: docs.at(0), locale, db, slug }
+}
 
-  // For localized slugs, we need to find the document by checking if slug matches
-  // the locale-specific value or the slug object contains the correct locale
-  const itinerarioData = itinerari.docs.find((i) => {
-    if (typeof i.slug === 'object' && i.slug !== null) {
-      return i.slug[locale] === slug
-    }
-    return i.slug === slug
-  })
+export default async function Itinerario(pageProps: PageProps) {
+  const { itinerario } = await load(pageProps)
+  if (!itinerario) notFound()
 
-  if (!itinerarioData) {
-    console.error(
-      'Itinerario not found. Available slugs:',
-      itinerari.docs.map((i) => ({ id: i.id, slug: i.slug })),
-    )
-    notFound()
-  }
-
-  // Get translations
   const messages = await getMessages()
-  const peopleTitle =
-    messages?.common?.itinerari?.peopleYouWillFind ||
-    (locale === 'it' ? 'Persone che troverai' : 'People you will find')
-  const placesTitle =
-    messages?.common?.itinerari?.placesYouWillVisit ||
-    (locale === 'it' ? 'Luoghi che incontrerai' : 'Places you will visit')
 
-  const position: LatLngTuple = [40.139949, 15.555182]
-
-  const galleryItems = (itinerarioData.galleria as Media[]) || []
+  const position = appConfig.coordinateMorigerati as LatLngTuple
+  const galleryItems = getMediaArray(itinerario.galleria)
 
   return (
     <>
-      <Copertina copertina={itinerarioData.copertina as Media} />
+      <Copertina copertina={itinerario.copertina as Media} />
 
       <DetailPageHeading
-        title={itinerarioData.nome}
+        title={itinerario.nome}
         collection="itinerari"
         backButton={{
           href: '/itinerari',
           message: messages.backButton.itinerari,
         }}
         mapProps={{
-          gpxUrl: getTracciatoUrl(itinerarioData?.tracciato_gpx),
+          gpxUrl: getTracciatoUrl(itinerario?.tracciato_gpx),
           showGpxDownload: true,
         }}
       >
         <ItinerarioDetailsCard
-          lunghezza={itinerarioData?.lunghezza}
-          tempo={itinerarioData?.tempo}
-          dislivello={itinerarioData?.dislivello}
-          difficolta={itinerarioData?.difficolta}
-          tipo={itinerarioData?.tipo}
+          lunghezza={itinerario.lunghezza}
+          tempo={itinerario.tempo}
+          dislivello={itinerario.dislivello}
+          difficolta={itinerario.difficolta}
+          tipo={itinerario.tipo}
         />
       </DetailPageHeading>
 
       <Container className="max-w-prose space-y-8">
-        {itinerarioData?.Video && (
+        {itinerario?.Video && (
           <div className="rounded-md overflow-hidden">
-            <MediaViewer media={itinerarioData?.Video as Media} />
+            <MediaViewer media={itinerario.Video as Media} />
           </div>
         )}
 
-        <RichText
-          data={itinerarioData?.testo as SerializedEditorState}
-          className="prose md:prose-lg"
-        />
+        <RichText data={itinerario.testo as SerializedEditorState} className="prose md:prose-lg" />
 
-        <ServiziSection servizi={itinerarioData?.servizi} collection="itinerari" />
+        <ServiziSection servizi={itinerario.servizi} collection="itinerari" />
 
         {/* TODO - Review this section */}
         {/* Content below the two columns */}
         {/* <div className="">
-        {itinerarioData?.persone && itinerarioData?.persone.length > 0 && (
+        {itinerario?.persone && itinerario?.persone.length > 0 && (
           <div className="">
             <h2 className="font-bold text-xl text-center pb-4">{peopleTitle}</h2>
-            <CardGrid items={itinerarioData?.persone as Persone[]} category="persone" singleRow />
+            <CardGrid items={itinerario?.persone as Persone[]} category="persone" singleRow />
           </div>
         )}
 
-        {itinerarioData?.luoghi && itinerarioData?.luoghi.length > 0 && (
+        {itinerario?.luoghi && itinerario?.luoghi.length > 0 && (
           <div className="">
             <h2 className="font-bold pt-4 text-xl text-center pb-4">{placesTitle}</h2>
-            <CardGrid items={itinerarioData?.luoghi as Luoghi[]} category="luoghi" singleRow />
+            <CardGrid items={itinerario?.luoghi as Luoghi[]} category="luoghi" singleRow />
           </div>
         )}
       </div> */}
@@ -181,8 +126,8 @@ export default async function Itinerario({ params }: PageProps) {
               <DynamicMappa
                 initialPosition={position}
                 initialZoom={14}
-                gpxUrl={getTracciatoUrl(itinerarioData?.tracciato_gpx)}
-                localizedMedia={itinerarioData?.media_geolocalizzati}
+                gpxUrl={getTracciatoUrl(itinerario.tracciato_gpx)}
+                localizedMedia={itinerario.media_geolocalizzati}
               />
             </div>
 
@@ -193,3 +138,23 @@ export default async function Itinerario({ params }: PageProps) {
     </>
   )
 }
+
+export async function generateMetadata(pageProps: PageProps): Promise<Metadata> {
+  const { itinerario, locale, slug } = await load(pageProps)
+
+  return createMetadata({
+    doc: itinerario,
+    pathname: `itinerari/${slug}`,
+    locale,
+  })
+}
+
+//
+
+// TODO - Review related content
+// const peopleTitle =
+//   messages?.common?.itinerari?.peopleYouWillFind ||
+//   (locale === 'it' ? 'Persone che troverai' : 'People you will find')
+// const placesTitle =
+//   messages?.common?.itinerari?.placesYouWillVisit ||
+//   (locale === 'it' ? 'Luoghi che incontrerai' : 'Places you will visit')
