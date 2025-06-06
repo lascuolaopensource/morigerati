@@ -27,6 +27,10 @@ export function createMetadata(args: GenerateMetadataArgs = {}): Metadata {
   const description = descriptionArg ?? doc?.meta?.description ?? undefined
   const ogImage = getImageURL(doc?.meta?.image)
 
+  let url = ''
+  if (locale) url += locale
+  if (args.pathname) url += '/' + args.pathname
+
   return {
     metadataBase: new URL(getServerSideURL()),
     title,
@@ -43,7 +47,7 @@ export function createMetadata(args: GenerateMetadataArgs = {}): Metadata {
       title,
       // TODO - Review url / Include Locale
       // url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
-      url: locale + '/' + args.pathname,
+      url,
     }),
     twitter: {
       card: 'summary_large_image',
