@@ -5,18 +5,14 @@ import { Collections } from '@/db/collections'
 import { Globals } from '@/db/globals'
 import { getServerSideURL } from '@/modules/utils/getURL'
 import { Entity } from '@/modules/types'
-import { generateBaseTitle } from './generateBaseTitle'
+import { generateBaseSEOTitle } from './utils'
+import { getPageTitle } from '@/modules/utils/getPageTitle'
 
 //
 
 const generateTitle: GenerateTitle<Partial<Entity>> = ({ doc }) => {
-  let title: string | undefined
-  if ('nome' in doc) {
-    title = doc.nome
-  } else if ('titolo' in doc) {
-    title = doc.titolo
-  }
-  return generateBaseTitle(title)
+  const title = getPageTitle(doc)
+  return generateBaseSEOTitle(title)
 }
 
 // TODO - Improve this function

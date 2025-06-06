@@ -1,42 +1,25 @@
-//Boilerplate
 import React from 'react'
 import { Metadata } from 'next'
-
-//DB
 import { loadDb } from '@/utils/db'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-
-//Components
 import ContentPageLayout from '@/components/pageLayout/ContentPageLayout'
-//Locale
-import { getLocale } from 'next-intl/server'
-import { createMetadata } from '@/utils/metadataHelpers'
+import { getLocale } from '@/utils/i18n'
+import { createMetadata } from '@/modules/seo'
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = (await getLocale()) as 'it' | 'en'
+//
+
+async function load() {
+  const locale = await getLocale()
   const db = await loadDb()
   const chiSiamo = await db.findGlobal({
     slug: 'chi_siamo',
     locale,
   })
-
-  // The SEO plugin in Payload should already populate meta.title, meta.description, meta.image
-  return createMetadata(chiSiamo, {
-    pagePath: `${locale === 'it' ? 'chi-siamo' : 'about'}`,
-    titleField: 'chi_siamo', // Fallback if meta.title is not available
-    defaultTitle: locale === 'it' ? 'Chi Siamo' : 'About Us',
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
-    locale,
-  })
+  return { chiSiamo, locale }
 }
 
 export default async function ChiSiamo() {
-  const locale = (await getLocale()) as 'it' | 'en'
-  const db = await loadDb()
-  const chiSiamo = await db.findGlobal({
-    slug: 'chi_siamo',
-    locale,
-  })
+  const { chiSiamo } = await load()
 
   return (
     <ContentPageLayout
@@ -45,4 +28,14 @@ export default async function ChiSiamo() {
       galleryItems={chiSiamo.galleria}
     />
   )
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { chiSiamo, locale } = await load()
+  return createMetadata({
+    doc: chiSiamo,
+    locale,
+    // TODO - Load from translations
+    title: locale === 'it' ? 'Chi Siamo' : 'About Us',
+  })
 }

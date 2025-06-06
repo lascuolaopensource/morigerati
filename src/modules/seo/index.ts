@@ -1,5 +1,6 @@
 import { seoPlugin } from './plugin'
-import { generateMetadata } from './generateMetadata'
+import { createMetadata } from './createMetadata'
 import { mergeOpenGraph } from './openGraph'
+import { createCollectionsPagesMetadata } from './createCollectionsPagesMetadata'
 
-export { seoPlugin, generateMetadata, mergeOpenGraph }
+export { seoPlugin, createMetadata, mergeOpenGraph, createCollectionsPagesMetadata }

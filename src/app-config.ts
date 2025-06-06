@@ -4,4 +4,6 @@ export const appConfig = {
   description:
     'Comunità che riconosce, rigenera, risuona. Infiltrazioni culturali per paesaggi ostinati',
   defaultOGImage: '/website-template-OG.webp',
+
+  coordinateMorigerati: [40.139949, 15.555182],
 }

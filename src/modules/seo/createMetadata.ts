@@ -2,19 +2,35 @@ import type { Metadata } from 'next'
 import { getServerSideURL } from '@/modules/utils/getURL'
 import { Entity } from '@/modules/types'
 import { mergeOpenGraph } from './openGraph'
-import { generateBaseTitle } from './generateBaseTitle'
+import { generateBaseSEOTitle } from './utils'
 import { Config, Media } from '@/payload-types'
 import { appConfig } from '@/app-config'
+import { Locale } from '@/modules/i18n'
+import { getPageTitle } from '@/modules/utils/getPageTitle'
 
 //
 
-export function generateMetadata(doc?: Partial<Entity>): Metadata {
-  const title = generateBaseTitle(doc?.meta?.title)
+type GenerateMetadataArgs = {
+  doc?: Partial<Entity>
+  locale?: Locale
+  title?: string
+  description?: string
+  pathname?: string
+}
+
+export function createMetadata(args: GenerateMetadataArgs = {}): Metadata {
+  const { doc, locale, title: titleArg, description: descriptionArg } = args
+
+  const pageTitle = doc ? getPageTitle(doc) : undefined
+  const title = generateBaseSEOTitle(titleArg ?? doc?.meta?.title ?? pageTitle)
+
+  const description = descriptionArg ?? doc?.meta?.description ?? undefined
   const ogImage = getImageURL(doc?.meta?.image)
 
   return {
+    metadataBase: new URL(getServerSideURL()),
     title,
-    description: doc?.meta?.description,
+    description,
     openGraph: mergeOpenGraph({
       description: doc?.meta?.description || '',
       images: ogImage
@@ -25,9 +41,16 @@ export function generateMetadata(doc?: Partial<Entity>): Metadata {
           ]
         : undefined,
       title,
-      // TODO - Review url
+      // TODO - Review url / Include Locale
       // url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
+      url: locale + '/' + args.pathname,
     }),
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ogImage,
+    },
   }
 }
 

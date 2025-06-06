@@ -15,6 +15,7 @@ import { routing } from '@/i18n/routing'
 import { getLocale, getMessages, setRequestLocale } from 'next-intl/server'
 //DB
 import { loadDb } from '@/utils/db'
+import { createMetadata } from '@/modules/seo'
 
 // Validate and generate the dynamic segmentd
 export function generateStaticParams() {
@@ -57,4 +58,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </body>
     </html>
   )
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return createMetadata()
 }

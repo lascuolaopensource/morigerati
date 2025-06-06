@@ -1,16 +1,11 @@
 import { Metadata } from 'next'
-//Components
-
-//Locale
-import { getLocale } from 'next-intl/server'
 import { CollectionPage } from '@/components/pageLayout/collectionPage'
-import { getCollectionMetadata } from '@/utils/getCollectionMetadata'
+import { createCollectionsPagesMetadata } from '@/modules/seo/createCollectionsPagesMetadata'
 
 //
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = (await getLocale()) as 'it' | 'en'
-  return getCollectionMetadata('itinerari', locale)
+  return createCollectionsPagesMetadata('itinerari')
 }
 
 export default async function Page() {

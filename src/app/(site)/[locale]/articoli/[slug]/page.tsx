@@ -14,69 +14,34 @@ import TagsList from '@/components/articoli/tagsList'
 import Galleria from '@/components/galleria/galleria'
 //Utils
 import formatDate from '@/utils/formatDate'
-import { createMetadata } from '@/utils/metadataHelpers'
+import { createMetadata } from '@/modules/seo'
 
 //Locale
-import { getLocale, getMessages } from 'next-intl/server'
+import { getMessages } from 'next-intl/server'
+import { getLocale } from '@/modules/i18n'
 
-interface ArticleParams {
-  slug: string
-}
+//
 
 interface PageProps {
-  params: Promise<ArticleParams>
+  params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params
-  const locale = (await getLocale()) as 'it' | 'en'
-
+async function load(pageProps: PageProps) {
+  const { slug } = await pageProps.params
+  const locale = await getLocale()
   const db = await loadDb()
-  const articoloData = await db.find({
+  const { docs } = await db.find({
     collection: 'articoli',
-    locale: locale,
-    where: { slug: { equals: slug } },
-    depth: 2,
-  })
-
-  if (!articoloData.docs.length) {
-    notFound()
-    return {
-      title:
-        locale === 'it' ? 'Articolo non trovato | Morigerati' : 'Article not found | Morigerati',
-    }
-  }
-
-  const articolo = articoloData.docs[0]
-
-  return createMetadata(articolo, {
-    pagePath: `articoli/${slug}`,
-    titleField: 'titolo',
-    defaultTitle: locale === 'it' ? 'Articolo' : 'Article',
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
     locale,
+    where: { slug: { equals: slug } },
   })
+  return { locale, articolo: docs.at(0) }
 }
 
-export default async function Articolo({ params }: PageProps) {
-  const { slug } = await params
-  const locale = (await getLocale()) as 'it' | 'en'
+export default async function Articolo(pageProps: PageProps) {
+  const { articolo, locale } = await load(pageProps)
+  if (!articolo) notFound()
   const messages = await getMessages()
-
-  const db = await loadDb()
-
-  const articoloData = await db.find({
-    collection: 'articoli',
-    locale: locale,
-    where: { slug: { equals: slug } },
-    depth: 2,
-  })
-
-  const articolo = articoloData.docs[0]
-
-  if (!articolo) {
-    notFound()
-  }
 
   return (
     <div className="bg-white pb-10">
@@ -105,4 +70,15 @@ export default async function Articolo({ params }: PageProps) {
       </div>
     </div>
   )
+}
+
+export async function generateMetadata(pageProps: PageProps): Promise<Metadata> {
+  const { articolo, locale } = await load(pageProps)
+  if (!articolo) notFound()
+
+  return createMetadata({
+    pathname: `articoli/${articolo.slug}`,
+    title: articolo.titolo,
+    locale,
+  })
 }

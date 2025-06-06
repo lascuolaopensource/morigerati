@@ -10,72 +10,57 @@ import Copertina from '@/components/uiElements/copertina'
 import Galleria from '@/components/galleria/galleria'
 
 //Locale
-import { getMessages, getLocale } from 'next-intl/server'
-//Metadata
-import { createMetadata } from '@/utils/metadataHelpers'
+import { getMessages } from 'next-intl/server'
 import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
 import { Container } from '@/components/uiElements/container'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import PixelBorder from '@/components/uiElements/pixelBorder'
 import { InfoSection } from '@/components/uiElements/infoSection'
 import { Contatti } from '@/components/uiElements/contatti'
+import { getLocale } from '@/modules/i18n'
+import { createMetadata } from '@/modules/seo'
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}): Promise<Metadata> {
-  const slug = (await params).slug
-  const db = await loadDb()
-  const locale = (await getLocale()) as 'it' | 'en'
-  const persone = await db.find({ collection: 'persone', depth: 2, locale: locale })
-
-  const stakeholderData = persone.docs.find((s) => s.slug === slug)
-
-  if (!stakeholderData) {
-    notFound()
-    return {
-      title: locale === 'it' ? 'Persona non trovata | Morigerati' : 'Person not found | Morigerati',
-    }
-  }
-
-  return createMetadata(stakeholderData, {
-    pagePath: `persone/${slug}`,
-    titleField: 'nome',
-    defaultTitle: locale === 'it' ? 'Persona' : 'Person',
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://transluighiecomuseo.it',
-    locale,
-  })
-}
+//
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export default async function persone({ params }: { params: Promise<{ slug: string }> }) {
-  const slug = (await params).slug
-  const locale = (await getLocale()) as 'it' | 'en'
+//
+
+type PageProps = {
+  params: Promise<{ slug: string }>
+}
+
+async function load(pageProps: PageProps) {
+  const slug = (await pageProps.params).slug
   const db = await loadDb()
+  const locale = await getLocale()
+  const { docs } = await db.find({
+    collection: 'persone',
+    depth: 2,
+    locale,
+    where: { slug: { equals: slug } },
+  })
+  return { persona: docs.at(0), locale, db, slug }
+}
 
-  // Get translation messages
-  const messages = await getMessages()
-
-  // Get persone
-  const persone = await db.find({ collection: 'persone', depth: 2, locale })
-
-  const persona = persone.docs.find((s) => s.slug === slug)
+export default async function persone(pageProps: PageProps) {
+  const { persona } = await load(pageProps)
   if (!persona) notFound()
 
-  // Get all itinerari
-  const allItinerari = await db.find({ collection: 'itinerari' })
-
-  // Filter itinerari that have this persone
-  const itinerariCorrelati = allItinerari.docs.filter((itinerario) =>
-    itinerario.persone?.some((s) =>
-      typeof s === 'string' ? s === persona.id : s.id === persona.id,
-    ),
-  )
+  const messages = await getMessages()
 
   const galleryItems = persona.galleria as Media[]
+
+  // TODO - Review itinerari collegati
+  // // Get all itinerari
+  // const allItinerari = await db.find({ collection: 'itinerari' })
+  // // Filter itinerari that have this persone
+  // const itinerariCorrelati = allItinerari.docs.filter((itinerario) =>
+  //   itinerario.persone?.some((s) =>
+  //     typeof s === 'string' ? s === persona.id : s.id === persona.id,
+  //   ),
+  // )
 
   return (
     <>
@@ -120,6 +105,18 @@ export default async function persone({ params }: { params: Promise<{ slug: stri
     </>
   )
 }
+
+export async function generateMetadata(pageProps: PageProps): Promise<Metadata> {
+  const { persona, locale, slug } = await load(pageProps)
+
+  return createMetadata({
+    doc: persona,
+    pathname: `persone/${slug}`,
+    locale,
+  })
+}
+
+/* Utils */
 
 function Tag(props: { tag: string }) {
   const { tag } = props
