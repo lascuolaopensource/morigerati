@@ -7,13 +7,13 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import type { Media, Tracciati as TracciatiType } from '@/payload-types'
 //UI
-import Copertina from '@/components/uiElements/copertina'
-import GridOverlay from '@/components/uiElements/gridOverlay'
-import PixelBorder from '@/components/uiElements/pixelBorder'
+import Copertina from '@/modules/components/uiElements/copertina'
+import GridOverlay from '@/modules/components/uiElements/gridOverlay'
+import PixelBorder from '@/modules/components/uiElements/pixelBorder'
 
 // Utils
 import { getLocale } from '@/modules/utils/i18n'
-import HomeCollection from '@/components/home/homeCollection'
+import HomeCollection from '@/modules/components/home/homeCollection'
 import { createMetadata } from '@/modules/seo'
 
 //

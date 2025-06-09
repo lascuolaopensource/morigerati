@@ -1,7 +1,7 @@
 //Boilerplate
 import React from 'react'
 //UI
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@/modules/components/ui/badge'
 //Utils
 import { makeSafeForDisplay } from '@/modules/utils/safeDisplay'
 

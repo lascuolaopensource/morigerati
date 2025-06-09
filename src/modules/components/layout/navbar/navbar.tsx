@@ -1,7 +1,7 @@
 'use client'
 
 //Components
-import LogoGenerator from '@/components/uiElements/logo'
+import LogoGenerator from '@/modules/components/uiElements/logo'
 import { XButton } from './xButton'
 import { NavigationMenu } from './NavigationMenu'
 //Locale

@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 //UI
 import { Tag, ChevronDown, ChevronUp, Search, X } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@/modules/components/ui/badge'
 //Utils
 import { makeSafeForDisplay } from '@/modules/utils/safeDisplay'
 //Locale

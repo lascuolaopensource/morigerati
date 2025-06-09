@@ -1,6 +1,6 @@
-import { CollectionHeading } from '@/components/pageLayout/collectionHeading'
+import { CollectionHeading } from '@/modules/components/pageLayout/collectionHeading'
 import { loadDb } from '@/modules/utils/db'
-import { CollectionGrid } from '@/components/pageLayout/collectionGrid'
+import { CollectionGrid } from '@/modules/components/pageLayout/collectionGrid'
 import { MainCollections, MainCollectionRecord } from '@/modules/types'
 import { getLocale } from '@/modules/utils/i18n'
 import { Container } from '../uiElements/container'

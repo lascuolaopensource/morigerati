@@ -4,8 +4,14 @@ import Image from 'next/image'
 //Locale
 import { Link } from '@/i18n/routing'
 //Components
-import { Card, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/modules/components/ui/card'
+import { Badge } from '@/modules/components/ui/badge'
 
 interface ArticleCardProps {
   article: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ServiziCardWrapper } from '@/components/itinerari/servizioCardWrapper'
+import { ServiziCardWrapper } from '@/modules/components/itinerari/servizioCardWrapper'
 
 interface ServiziSectionProps {
   servizi: any

@@ -1,9 +1,9 @@
 import React from 'react'
-import Copertina from '@/components/uiElements/copertina'
+import Copertina from '@/modules/components/uiElements/copertina'
 import type { Media } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import Galleria from '@/components/galleria/galleria'
+import Galleria from '@/modules/components/galleria/galleria'
 import PixelBorder from '../uiElements/pixelBorder'
 import { getRandomColorTheme } from '@/modules/utils/colors'
 

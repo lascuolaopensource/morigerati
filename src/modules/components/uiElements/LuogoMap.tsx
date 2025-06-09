@@ -1,5 +1,5 @@
 import React from 'react'
-import DynamicMappa from '@/components/mappa/mapLoader'
+import DynamicMappa from '@/modules/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
 import { cn } from '@/modules/utils/utils'
 

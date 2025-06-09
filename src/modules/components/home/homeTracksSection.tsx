@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { Tracciati as TracciatiType } from '@/payload-types'
 import type { Luoghi } from '@/payload-types'
-import TracksMap from '@/components/mappa/tracksMap'
+import TracksMap from '@/modules/components/mappa/tracksMap'
 
 import { loadDb } from '@/modules/utils/db'
 

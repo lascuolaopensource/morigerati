@@ -8,7 +8,7 @@ import { formatDistanceToNow, isAfter, parseISO, subMonths } from 'date-fns'
 import { it, enUS } from 'date-fns/locale'
 import placeholderImage from '/public/placeholder-image.jpg'
 //Components
-import { Card } from '@/components/ui/card'
+import { Card } from '@/modules/components/ui/card'
 import { makeSafeForDisplay } from '@/modules/utils/safeDisplay'
 import { ArticleCard } from './ArticleCard'
 import { SearchFilters } from './SearchFilters'

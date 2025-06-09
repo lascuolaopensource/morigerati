@@ -2,7 +2,7 @@ import React from 'react'
 import { Metadata } from 'next'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { loadDb } from '@/modules/utils/db'
-import ContentPageLayout from '@/components/pageLayout/ContentPageLayout'
+import ContentPageLayout from '@/modules/components/pageLayout/ContentPageLayout'
 import { getLocale } from '@/modules/i18n'
 import { createMetadata } from '@/modules/seo'
 

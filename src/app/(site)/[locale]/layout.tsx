@@ -6,10 +6,10 @@ import { notFound } from 'next/navigation'
 //CSS
 import './globals.css'
 //Metadata
-import DynamicFavicon from '@/components/uiElements/favicon'
+import DynamicFavicon from '@/modules/components/uiElements/favicon'
 //Ui
-import Navbar from '@/components/layout/navbar/navbar'
-import Footer from '@/components/layout/footer/footer'
+import Navbar from '@/modules/components/layout/navbar/navbar'
+import Footer from '@/modules/components/layout/footer/footer'
 //Locale
 import { routing } from '@/i18n/routing'
 import { getLocale, getMessages, setRequestLocale } from 'next-intl/server'

@@ -1,13 +1,13 @@
 //Boilerplate
 import React from 'react'
 //Utils
-import { renderFooterContent } from '@/components/layout/footer/footerRenderElement'
+import { renderFooterContent } from '@/modules/components/layout/footer/footerRenderElement'
 //UI
 import { SocialIcon } from 'react-social-icons'
-import LogoGenerator from '@/components/uiElements/logo'
+import LogoGenerator from '@/modules/components/uiElements/logo'
 //DB
 import type { Footer as FooterType } from '@/payload-types'
-import PixelBorder from '@/components/uiElements/pixelBorder'
+import PixelBorder from '@/modules/components/uiElements/pixelBorder'
 
 //
 
