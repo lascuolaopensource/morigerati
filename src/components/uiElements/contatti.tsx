@@ -1,4 +1,4 @@
-import { cn } from '@/utils/utils'
+import { cn } from '@/modules/utils/utils'
 import { Luoghi, Persone } from '@/payload-types'
 import { useMessages } from 'next-intl'
 

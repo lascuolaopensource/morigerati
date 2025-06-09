@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { bgColors } from '@/utils/colors'
+import { bgColors } from '@/modules/utils/colors'
 
 // Custom hook for handling theme colors based on current path
 export const useThemeColors = () => {

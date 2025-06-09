@@ -1,7 +1,7 @@
 import React from 'react'
 import { Metadata } from 'next'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 import { createMetadata } from '@/modules/seo'
 import ArticlesList from '@/components/articoli/ArticlesList'
 import { RichText } from '@payloadcms/richtext-lexical/react'

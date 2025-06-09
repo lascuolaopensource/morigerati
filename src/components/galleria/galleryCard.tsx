@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { RenderImageContext, RenderImageProps } from 'react-photo-album'
-import { getRandomPixel } from '@/utils/getRandomPixel'
+import { getRandomPixel } from '@/modules/utils/getRandomPixel'
 
 //
 

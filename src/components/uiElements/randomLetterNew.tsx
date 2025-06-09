@@ -1,5 +1,5 @@
-import { cn } from '@/utils/utils'
-import { getColorTheme } from '@/utils/colors'
+import { cn } from '@/modules/utils/utils'
+import { getColorTheme } from '@/modules/utils/colors'
 import { MainCollections } from '@/modules/types'
 
 interface Props {

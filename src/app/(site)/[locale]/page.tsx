@@ -2,7 +2,7 @@
 import React from 'react'
 import { Metadata } from 'next'
 //PayloadCMS
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import type { Media, Tracciati as TracciatiType } from '@/payload-types'
@@ -12,7 +12,7 @@ import GridOverlay from '@/components/uiElements/gridOverlay'
 import PixelBorder from '@/components/uiElements/pixelBorder'
 
 // Utils
-import { getLocale } from '@/utils/i18n'
+import { getLocale } from '@/modules/utils/i18n'
 import HomeCollection from '@/components/home/homeCollection'
 import { createMetadata } from '@/modules/seo'
 

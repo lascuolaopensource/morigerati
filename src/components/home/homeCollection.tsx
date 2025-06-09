@@ -2,21 +2,21 @@
 import React from 'react'
 
 //DB
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 import type { Tracciati, Itinerari, Luoghi, Residenze, Persone, Media } from '@/payload-types'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 
 //UI
 import { ArrowRight } from 'lucide-react'
-import { getColorTheme } from '@/utils/colors'
+import { getColorTheme } from '@/modules/utils/colors'
 
 //Locale
 import { Link } from '@/i18n/routing'
 import { getMessages } from 'next-intl/server'
 import { MainCollectionRecord, MainCollections } from '@/modules/types'
-import { cn } from '@/utils/utils'
-import { getLocale } from '@/utils/i18n'
+import { cn } from '@/modules/utils/utils'
+import { getLocale } from '@/modules/utils/i18n'
 import Card from '../card/card'
 
 //

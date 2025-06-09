@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const collection = context.params?.collection as 'itinerari' | 'luoghi' | 'persone' | 'residenze'

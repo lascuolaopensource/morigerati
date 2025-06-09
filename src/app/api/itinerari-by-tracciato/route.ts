@@ -1,4 +1,4 @@
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {

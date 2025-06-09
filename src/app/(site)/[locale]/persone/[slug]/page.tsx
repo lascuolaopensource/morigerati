@@ -3,7 +3,7 @@ import React from 'react'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 //DB
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 import type { Media } from '@/payload-types'
 
 import Copertina from '@/components/uiElements/copertina'

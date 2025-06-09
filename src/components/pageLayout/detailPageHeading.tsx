@@ -1,6 +1,6 @@
 import { MainCollections } from '@/modules/types'
 import BackButton from '../uiElements/backButton'
-import { getColorTheme } from '@/utils/colors'
+import { getColorTheme } from '@/modules/utils/colors'
 import PixelBorder from '../uiElements/pixelBorder'
 import DynamicMappa from '../mappa/mapLoader'
 import { MapProps } from '../mappa/map'

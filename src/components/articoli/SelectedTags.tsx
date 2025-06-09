@@ -1,7 +1,7 @@
 import React from 'react'
 import { X } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { makeSafeForDisplay } from '@/utils/safeDisplay'
+import { makeSafeForDisplay } from '@/modules/utils/safeDisplay'
 
 interface SelectedTagsProps {
   selectedTags: string[]

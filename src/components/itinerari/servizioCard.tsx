@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 //DB
 import type { Itinerari } from '@/payload-types'
 //Components
-import renderElement from '@/utils/renderElement'
+import renderElement from '@/modules/utils/renderElement'
 //Locale
 import { useMessages } from 'next-intl'
 

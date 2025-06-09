@@ -1,4 +1,4 @@
-import { cn } from '@/utils/utils'
+import { cn } from '@/modules/utils/utils'
 
 export function Container({
   children,

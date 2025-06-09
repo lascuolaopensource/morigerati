@@ -3,7 +3,7 @@ import { Tracciati as TracciatiType } from '@/payload-types'
 import type { Luoghi } from '@/payload-types'
 import TracksMap from '@/components/mappa/tracksMap'
 
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 
 interface HomeTracksSectionProps {
   title?: string

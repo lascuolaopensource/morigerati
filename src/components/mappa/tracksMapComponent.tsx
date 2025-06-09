@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Map as LeafletMap } from 'leaflet'
 import type { Itinerari, Tracciati } from '@/payload-types'
-import { getTracciatoUrl } from '@/utils/getTracciatoUrl'
+import { getTracciatoUrl } from '@/modules/utils/getTracciatoUrl'
 
 interface TracksMapProps {
   tracciati: Tracciati[]
@@ -83,7 +83,11 @@ const createTracciatoPopupContent = (tracciato: Tracciati, itinerario: Itinerari
     ${popupCustomStyle}
     <div class="p-2">
       <h3 class="font-bold mb-2 text-base">${itinerario?.nome || tracciato.alt}</h3>
-      ${itinerario?.slug ? `<a href="/itinerari/${itinerario.slug}" class="text-blue-600 hover:text-blue-800 underline block py-1">Vai all'itinerario</a>` : ''}
+      ${
+        itinerario?.slug
+          ? `<a href="/itinerari/${itinerario.slug}" class="text-blue-600 hover:text-blue-800 underline block py-1">Vai all'itinerario</a>`
+          : ''
+      }
     </div>
   `
 }

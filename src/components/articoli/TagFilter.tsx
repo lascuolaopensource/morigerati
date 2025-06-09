@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import { Tag, ChevronDown, ChevronUp, Search, X } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 //Utils
-import { makeSafeForDisplay } from '@/utils/safeDisplay'
+import { makeSafeForDisplay } from '@/modules/utils/safeDisplay'
 //Locale
 import { useTranslations } from 'next-intl'
 

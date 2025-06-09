@@ -14,7 +14,7 @@ import Footer from '@/components/layout/footer/footer'
 import { routing } from '@/i18n/routing'
 import { getLocale, getMessages, setRequestLocale } from 'next-intl/server'
 //DB
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 import { createMetadata } from '@/modules/seo'
 
 // Validate and generate the dynamic segmentd

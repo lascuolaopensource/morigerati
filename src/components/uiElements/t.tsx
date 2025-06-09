@@ -1,4 +1,4 @@
-import { cn } from '@/utils/utils'
+import { cn } from '@/modules/utils/utils'
 
 type Props = {
   children: React.ReactNode

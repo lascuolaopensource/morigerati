@@ -1,7 +1,7 @@
 import { MainCollections } from '@/modules/types'
 import { RandomLetterNew } from './randomLetterNew'
 import { T } from './t'
-import { getColorTheme } from '@/utils/colors'
+import { getColorTheme } from '@/modules/utils/colors'
 
 type Props = {
   title?: string

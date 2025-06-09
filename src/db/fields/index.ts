@@ -27,7 +27,7 @@ import {
   InlineToolbarFeature,
 } from '@payloadcms/richtext-lexical'
 
-import { capitalizeFirstLetter } from '@/utils/strings'
+import { capitalizeFirstLetter } from '@/modules/utils/strings'
 
 import { formatSlugHook } from './slug/formatSlug'
 
@@ -47,13 +47,13 @@ const createTextField = (name: string, options: Partial<TextField> = {}): TextFi
     name,
     type: 'text',
     ...options,
-  }) as TextField
+  } as TextField)
 
 const createRichTextField = (name: string): RichTextField =>
   ({
     name,
     type: 'richText',
-  }) as RichTextField
+  } as RichTextField)
 
 const createHomeRichTextField = (name: string): RichTextField =>
   ({
@@ -68,13 +68,13 @@ const createHomeRichTextField = (name: string): RichTextField =>
         InlineToolbarFeature(),
       ],
     }),
-  }) as RichTextField
+  } as RichTextField)
 
 const createRowField = (fields: Field[]): RowField =>
   ({
     type: 'row',
     fields,
-  }) as RowField
+  } as RowField)
 
 const createArrayField = (
   name: string,
@@ -86,7 +86,7 @@ const createArrayField = (
     type: 'array',
     fields,
     ...options,
-  }) as ArrayField
+  } as ArrayField)
 
 const createUIField = (name: string, componentPath: string, clientProps = {}): UIField =>
   ({
@@ -100,7 +100,7 @@ const createUIField = (name: string, componentPath: string, clientProps = {}): U
         },
       },
     },
-  }) as UIField
+  } as UIField)
 
 type Overrides = {
   slugOverrides?: Partial<TextField>
