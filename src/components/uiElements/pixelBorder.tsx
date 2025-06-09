@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/utils'
 import { getRandomPixel } from '@/utils/getRandomPixel'
 
 interface PixelBorderProps {

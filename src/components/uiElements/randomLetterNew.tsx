@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/utils'
 import { getColorTheme } from '@/utils/colors'
 import { MainCollections } from '@/modules/types'
 

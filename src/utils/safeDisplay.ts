@@ -1,4 +1,4 @@
-import { truncateText } from './utils'
+import { truncateText } from '../utils/utils'
 
 /**
  * Makes text safe for display by truncating and breaking very long words

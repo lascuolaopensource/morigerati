@@ -1,6 +1,6 @@
 import Image, { ImageProps } from 'next/image'
 import { getRandomPixel } from './getRandomPixel'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/utils'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
 type Props = Omit<ImageProps, 'src'> & {

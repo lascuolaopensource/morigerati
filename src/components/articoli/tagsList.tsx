@@ -3,7 +3,7 @@ import React from 'react'
 //UI
 import { Badge } from '@/components/ui/badge'
 //Utils
-import { makeSafeForDisplay } from '@/lib/safeDisplay'
+import { makeSafeForDisplay } from '@/utils/safeDisplay'
 
 interface TagsListProps {
   tags: (string | { tag?: string } | any)[]

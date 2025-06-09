@@ -1,6 +1,6 @@
 import { MainCollections } from '@/modules/types'
 import { T } from './t'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/utils'
 import { getColorTheme } from '@/utils/colors'
 
 //

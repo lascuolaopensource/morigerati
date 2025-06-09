@@ -1,7 +1,7 @@
 import React from 'react'
 import DynamicMappa from '@/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/utils'
 
 interface Props {
   position: LatLngTuple
