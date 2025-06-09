@@ -8,7 +8,7 @@ import type { Media } from '@/payload-types'
 //Utils
 import { getColorTheme } from '@/modules/utils/colors'
 //Locale
-import { Link } from '@/i18n/routing'
+import { Link } from '@/modules/i18n/routing'
 import { MainCollections, MainCollectionRecord } from '@/modules/types'
 
 interface CardProps {

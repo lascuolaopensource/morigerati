@@ -1,6 +1,6 @@
 import React from 'react'
 //Locale
-import { Link } from '@/i18n/routing'
+import { Link } from '@/modules/i18n/routing'
 import { useLocale } from 'next-intl'
 //DB
 import type { Residenze, Media } from '@/payload-types'

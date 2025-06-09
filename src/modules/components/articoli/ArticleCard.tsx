@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'next/image'
 //Locale
-import { Link } from '@/i18n/routing'
+import { Link } from '@/modules/i18n/routing'
 //Components
 import {
   Card,

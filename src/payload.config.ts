@@ -19,7 +19,7 @@ import sharp from 'sharp'
 
 import { s3Storage } from '@payloadcms/storage-s3'
 
-import localization from '@/i18n/localization'
+import localization from '@/modules/i18n/localization'
 import { it } from '@payloadcms/translations/languages/it'
 import { en } from '@payloadcms/translations/languages/en'
 

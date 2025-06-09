@@ -12,11 +12,11 @@ import { ArrowRight } from 'lucide-react'
 import { getColorTheme } from '@/modules/utils/colors'
 
 //Locale
-import { Link } from '@/i18n/routing'
+import { Link } from '@/modules/i18n/routing'
 import { getMessages } from 'next-intl/server'
 import { MainCollectionRecord, MainCollections } from '@/modules/types'
 import { cn } from '@/modules/utils/utils'
-import { getLocale } from '@/modules/utils/i18n'
+import { getLocale } from '@/modules/i18n'
 import Card from '../card/card'
 
 //

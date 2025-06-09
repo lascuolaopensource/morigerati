@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from '@/i18n/routing'
-import { LocaleSwitcher } from '@/i18n/LocaleSwitcher'
+import { Link } from '@/modules/i18n/routing'
+import { LocaleSwitcher } from '@/modules/i18n/LocaleSwitcher'
 // import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 const Header: React.FC = () => {

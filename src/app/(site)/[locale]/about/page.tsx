@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { loadDb } from '@/modules/utils/db'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import ContentPageLayout from '@/modules/components/pageLayout/ContentPageLayout'
-import { getLocale } from '@/modules/utils/i18n'
+import { getLocale } from '@/modules/i18n'
 import { createMetadata } from '@/modules/seo'
 
 //

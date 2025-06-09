@@ -1,8 +1,8 @@
 import { useParams } from 'next/navigation'
 import { useLocale } from 'next-intl'
-import localization from '@/i18n/localization'
+import localization from './localization'
 import { TypedLocale } from 'payload'
-import { usePathname, useRouter } from '@/i18n/routing'
+import { usePathname, useRouter } from './routing'
 import { ChangeEvent, useTransition } from 'react'
 
 export function LocaleSwitcher() {

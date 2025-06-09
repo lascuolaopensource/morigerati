@@ -11,7 +11,7 @@ import DynamicFavicon from '@/modules/components/uiElements/favicon'
 import Navbar from '@/modules/components/layout/navbar/navbar'
 import Footer from '@/modules/components/layout/footer/footer'
 //Locale
-import { routing } from '@/i18n/routing'
+import { routing } from '@/modules/i18n/routing'
 import { getLocale, getMessages, setRequestLocale } from 'next-intl/server'
 //DB
 import { loadDb } from '@/modules/utils/db'
