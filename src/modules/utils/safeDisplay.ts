@@ -1,4 +1,14 @@
-import { truncateText } from '../utils/utils'
+/**
+ * Truncates a string to a specified length and adds ellipsis if needed
+ *
+ * @param text - Text to truncate
+ * @param maxLength - Maximum length before truncation
+ * @returns Truncated text with ellipsis if needed
+ */
+export function truncateText(text: string, maxLength: number): string {
+  if (!text || text.length <= maxLength) return text
+  return text.slice(0, maxLength) + '...'
+}
 
 /**
  * Makes text safe for display by truncating and breaking very long words

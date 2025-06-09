@@ -10,7 +10,6 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import PixelBorder from '@/modules/components/uiElements/pixelBorder'
 import { Container } from '@/modules/components/uiElements/container'
 import { useMessages } from 'next-intl'
-import { isRichTextEmpty } from '@/modules/utils/isRichtextEmpty'
 import { DetailPageHeading } from '@/modules/components/pageLayout/detailPageHeading'
 import { Contatti } from '@/modules/components/uiElements/contatti'
 import { InfoSection } from '@/modules/components/uiElements/infoSection'
@@ -111,7 +110,7 @@ function LuogoInfoSection(props: { luogo: Luoghi }) {
   const hasContatti = contatti.length > 0
 
   const orari = luogo.orari
-  const hasOrari = orari?.root && !isRichTextEmpty(orari)
+  const hasOrari = orari?.root
 
   if (!hasContatti && !hasOrari) {
     return null
