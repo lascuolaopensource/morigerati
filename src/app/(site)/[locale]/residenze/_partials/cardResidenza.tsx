@@ -1,6 +1,6 @@
 import { Residenze } from '@/payload-types'
-import { getMedia } from '@/utils'
-import { ImageWithFallback } from '@/utils/imageWithFallback'
+import { getMedia } from '@/modules/utils'
+import { ImageWithFallback } from '@/modules/utils/imageWithFallback'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { format } from 'date-fns'
 

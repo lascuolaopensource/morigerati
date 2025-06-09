@@ -3,17 +3,17 @@ import React from 'react'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 //DB
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 import type { Media } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 //Components
-import BackButton from '@/components/uiElements/backButton'
-import Copertina from '@/components/uiElements/copertina'
-import TagsList from '@/components/articoli/tagsList'
-import Galleria from '@/components/galleria/galleria'
+import BackButton from '@/modules/components/uiElements/backButton'
+import Copertina from '@/modules/components/uiElements/copertina'
+import TagsList from '@/modules/components/articoli/tagsList'
+import Galleria from '@/modules/components/galleria/galleria'
 //Utils
-import formatDate from '@/utils/formatDate'
+import formatDate from '@/modules/utils/formatDate'
 import { createMetadata } from '@/modules/seo'
 
 //Locale

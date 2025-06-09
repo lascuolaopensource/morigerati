@@ -1,4 +1,4 @@
-import { CollectionPage } from '@/components/pageLayout/collectionPage'
+import { CollectionPage } from '@/modules/components/pageLayout/collectionPage'
 import { createCollectionsPagesMetadata } from '@/modules/seo'
 import { Metadata } from 'next'
 

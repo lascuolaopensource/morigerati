@@ -1,8 +1,8 @@
 import { CollectionConfig } from 'payload'
-import * as F from '@/fields'
-import { formatSlug } from '@/fields/slug/formatSlug'
+import * as F from '@/db/fields'
+import { formatSlug } from '@/db/fields/slug/formatSlug'
 
-import { slugField } from '@/fields'
+import { slugField } from '@/db/fields'
 import { BoldFeature, ParagraphFeature } from '@payloadcms/richtext-lexical'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 

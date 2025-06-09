@@ -1,5 +1,5 @@
 import type { GlobalConfig } from 'payload'
-import * as F from '@/fields'
+import * as F from '@/db/fields'
 import { Globals } from '.'
 import { HeadingFeature } from '@payloadcms/richtext-lexical'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'

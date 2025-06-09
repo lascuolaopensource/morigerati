@@ -1,4 +1,7 @@
 import { Config } from '@/payload-types'
+import { Luoghi, Persone, Itinerari, Residenze } from '@/payload-types'
+
+//
 
 export type CollectionName = keyof Omit<
   Config['collections'],
@@ -16,3 +19,9 @@ export type Global = Config['globals'][GlobalName]
 
 export type EntityName = CollectionName | GlobalName
 export type Entity = Collection | Global
+
+//
+
+export type MainCollections = 'luoghi' | 'itinerari' | 'residenze' | 'persone'
+
+export type MainCollectionRecord = Luoghi | Persone | Itinerari | Residenze

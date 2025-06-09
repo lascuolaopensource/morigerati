@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import * as F from '@/fields'
+import * as F from '@/db/fields'
 import { Collections } from '.'
 import {
   lexicalEditor,
@@ -8,8 +8,8 @@ import {
   ParagraphFeature,
 } from '@payloadcms/richtext-lexical'
 
-import { slugField } from '@/fields'
-import { formatSlug } from '@/fields/slug/formatSlug'
+import { slugField } from '@/db/fields'
+import { formatSlug } from '@/db/fields/slug/formatSlug'
 
 export const Itinerari: CollectionConfig<'itinerari'> = {
   slug: 'itinerari',

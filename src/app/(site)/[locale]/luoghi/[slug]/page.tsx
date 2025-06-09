@@ -1,20 +1,19 @@
 import React from 'react'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
-import { loadDb } from '@/utils/db'
+import { loadDb } from '@/modules/utils/db'
 import type { Luoghi, Media } from '@/payload-types'
-import Copertina from '@/components/uiElements/copertina'
-import Galleria from '@/components/galleria/galleria'
+import Copertina from '@/modules/components/uiElements/copertina'
+import Galleria from '@/modules/components/galleria/galleria'
 import { getMessages } from 'next-intl/server'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import PixelBorder from '@/components/uiElements/pixelBorder'
-import { Container } from '@/components/uiElements/container'
+import PixelBorder from '@/modules/components/uiElements/pixelBorder'
+import { Container } from '@/modules/components/uiElements/container'
 import { useMessages } from 'next-intl'
-import { isRichTextEmpty } from '@/utils/isRichtextEmpty'
-import { DetailPageHeading } from '@/components/pageLayout/detailPageHeading'
-import { Contatti } from '@/components/uiElements/contatti'
-import { InfoSection } from '@/components/uiElements/infoSection'
-import { ServiziSection } from '@/components/uiElements/serviziSection'
+import { DetailPageHeading } from '@/modules/components/pageLayout/detailPageHeading'
+import { Contatti } from '@/modules/components/uiElements/contatti'
+import { InfoSection } from '@/modules/components/uiElements/infoSection'
+import { ServiziSection } from '@/modules/components/uiElements/serviziSection'
 import { getLocale } from '@/modules/i18n'
 import { createMetadata } from '@/modules/seo'
 
@@ -111,7 +110,7 @@ function LuogoInfoSection(props: { luogo: Luoghi }) {
   const hasContatti = contatti.length > 0
 
   const orari = luogo.orari
-  const hasOrari = orari?.root && !isRichTextEmpty(orari)
+  const hasOrari = orari?.root
 
   if (!hasContatti && !hasOrari) {
     return null

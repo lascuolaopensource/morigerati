@@ -3,7 +3,7 @@ import React from 'react'
 import { Metadata } from 'next'
 //Locale
 import { getLocale } from 'next-intl/server'
-import { CollectionPage } from '@/components/pageLayout/collectionPage'
+import { CollectionPage } from '@/modules/components/pageLayout/collectionPage'
 import { createCollectionsPagesMetadata } from '@/modules/seo'
 
 //
