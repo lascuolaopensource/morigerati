@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
-import * as F from '@/fields'
-import { slugField } from '@/fields'
-import { formatSlug } from '@/fields/slug/formatSlug'
+import * as F from '@/db/fields'
+import { slugField } from '@/db/fields'
+import { formatSlug } from '@/db/fields/slug/formatSlug'
 
 export const Persone: CollectionConfig<'persone'> = {
   slug: 'persone',

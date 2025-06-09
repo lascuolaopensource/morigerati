@@ -1,6 +1,6 @@
 import type { GlobalConfig, RichTextField } from 'payload'
 import { Globals } from '.'
-import * as F from '@/fields'
+import * as F from '@/db/fields'
 import {
   lexicalEditor,
   BoldFeature,
