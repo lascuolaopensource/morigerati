@@ -14,7 +14,7 @@ import { getColorTheme } from '@/utils/colors'
 //Locale
 import { Link } from '@/i18n/routing'
 import { getMessages } from 'next-intl/server'
-import { MainCollectionRecord, MainCollections } from '@/utils/types'
+import { MainCollectionRecord, MainCollections } from '@/modules/types'
 import { cn } from '@/lib/utils'
 import { getLocale } from '@/utils/i18n'
 import Card from '../card/card'

@@ -1,4 +1,4 @@
-import { MainCollections } from '@/utils/types'
+import { MainCollections } from '@/modules/types'
 import BackButton from '../uiElements/backButton'
 import { getColorTheme } from '@/utils/colors'
 import PixelBorder from '../uiElements/pixelBorder'

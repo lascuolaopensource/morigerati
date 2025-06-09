@@ -1,4 +1,4 @@
-import { MainCollections } from '@/utils/types'
+import { MainCollections } from '@/modules/types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { T } from './t'
 import { cn } from '@/lib/utils'

@@ -1,6 +1,6 @@
 import { Media } from '@/payload-types'
 import Card from '../card/card'
-import { MainCollectionRecord, MainCollections } from '@/utils/types'
+import { MainCollectionRecord, MainCollections } from '@/modules/types'
 
 //
 

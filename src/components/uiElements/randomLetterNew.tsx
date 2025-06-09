@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 import { getColorTheme } from '@/utils/colors'
-import { MainCollections } from '@/utils/types'
+import { MainCollections } from '@/modules/types'
 
 interface Props {
   color?: MainCollections

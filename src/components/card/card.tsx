@@ -9,7 +9,7 @@ import type { Media } from '@/payload-types'
 import { getColorTheme } from '@/utils/colors'
 //Locale
 import { Link } from '@/i18n/routing'
-import { MainCollections, MainCollectionRecord } from '@/utils/types'
+import { MainCollections, MainCollectionRecord } from '@/modules/types'
 
 interface CardProps {
   category: MainCollections

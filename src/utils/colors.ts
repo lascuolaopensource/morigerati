@@ -1,4 +1,4 @@
-import { MainCollections } from './types'
+import { MainCollections } from '@/modules/types'
 
 //
 

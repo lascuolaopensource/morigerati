@@ -1,4 +1,4 @@
-import { MainCollections } from '@/utils/types'
+import { MainCollections } from '@/modules/types'
 import { Servizio, CardServizio } from './cardServizio'
 import { InfoSection } from './infoSection'
 import { cn } from '@/lib/utils'

@@ -1,4 +1,4 @@
-import { MainCollections } from '@/utils/types'
+import { MainCollections } from '@/modules/types'
 import { RandomLetterNew } from './randomLetterNew'
 import { T } from './t'
 import { getColorTheme } from '@/utils/colors'
