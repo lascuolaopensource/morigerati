@@ -41,23 +41,37 @@ import { Testi } from './db/globals/Testi'
 
 import { seoPlugin } from './modules/seo'
 
+//
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  secret: process.env.PAYLOAD_SECRET || '',
+
+  serverURL: process.env.NEXT_PUBLIC_DOMAIN,
+  csrf: [],
+
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URI || '',
+  }),
+
   admin: {
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
+
   i18n: {
     fallbackLanguage: localization.defaultLocale,
     supportedLanguages: { it, en },
   },
   localization,
+
   collections: [Users, Media, Luoghi, Itinerari, Residenze, Persone, Articoli, Tracciati, Account],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
+
   editor: lexicalEditor({
     features: () => [
       InlineToolbarFeature(),
@@ -71,14 +85,9 @@ export default buildConfig({
       UnorderedListFeature(),
     ],
   }),
-  secret: process.env.PAYLOAD_SECRET || '',
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
-  }),
+
   sharp,
+
   plugins: [
     seoPlugin,
 
@@ -107,4 +116,8 @@ export default buildConfig({
       },
     }),
   ],
+
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
 })
