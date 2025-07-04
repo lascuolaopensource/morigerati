@@ -38,6 +38,7 @@ const Card: React.FC<CardProps> = ({ category, record, className = '' }) => {
           fill
           className="object-cover"
           priority
+          unoptimized
         />
       </div>
 

@@ -30,6 +30,7 @@ export function GalleryCardFactory(options: { className?: string } = {}) {
           alt={alt}
           title={title}
           sizes={sizes}
+          unoptimized
           placeholder={'blurDataURL' in photo ? 'blur' : undefined}
         />
       </div>
