@@ -1,19 +1,16 @@
 import type { CollectionConfig } from 'payload'
+import { Collections } from '.'
 import { imageSizes } from '../utils'
 
-export const Media: CollectionConfig = {
-  slug: 'media',
+export const PostMedia: CollectionConfig = {
+  slug: Collections.PostMedia,
+
   access: {
     read: () => true,
-  },
-  fields: [
-    {
-      name: 'alt',
-      type: 'text',
-      required: true,
-      localized: true,
+    create: ({ req: { user } }) => {
+      return user !== null
     },
-  ],
+  },
 
   upload: {
     disableLocalStorage: true,
@@ -24,4 +21,5 @@ export const Media: CollectionConfig = {
     formatOptions: { format: 'webp' },
     imageSizes,
   },
+  fields: [],
 }

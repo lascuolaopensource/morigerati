@@ -1,6 +1,6 @@
 import { getLocale as nextIntlGetLocale } from 'next-intl/server'
 
-const locales = ['it', 'en']
+export const locales = ['it', 'en']
 
 export type Locale = 'it' | 'en'
 

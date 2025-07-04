@@ -8,9 +8,15 @@ export const Account: CollectionConfig = {
     plural: 'Accounts',
   },
   admin: {
-    useAsTitle: 'email',
+    useAsTitle: 'nome',
   },
+
   auth: true,
+  access: {
+    read: () => true,
+    admin: () => false,
+  },
+
   fields: [
     {
       name: 'nome',

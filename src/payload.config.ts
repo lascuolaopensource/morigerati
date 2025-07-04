@@ -40,6 +40,8 @@ import { Footer } from './db/globals/Footer'
 import { Testi } from './db/globals/Testi'
 
 import { seoPlugin } from './modules/seo'
+import { Post } from './db/collections/Post'
+import { PostMedia } from './db/collections/PostMedia'
 
 //
 
@@ -69,7 +71,19 @@ export default buildConfig({
   },
   localization,
 
-  collections: [Users, Media, Luoghi, Itinerari, Residenze, Persone, Articoli, Tracciati, Account],
+  collections: [
+    Users,
+    Media,
+    Luoghi,
+    Itinerari,
+    Residenze,
+    Persone,
+    Articoli,
+    Tracciati,
+    Account,
+    Post,
+    PostMedia,
+  ],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
 
   editor: lexicalEditor({
@@ -103,6 +117,10 @@ export default buildConfig({
         [Tracciati.slug]: {
           disableLocalStorage: true,
           prefix: 'tracciati',
+        },
+        [PostMedia.slug]: {
+          disableLocalStorage: true,
+          prefix: 'post-media',
         },
       },
       config: {

@@ -7,4 +7,6 @@ export enum Collections {
   Articoli = 'articoli',
   Tracciati = 'tracciati',
   Account = 'account',
+  Post = 'post',
+  PostMedia = 'post-media',
 }
