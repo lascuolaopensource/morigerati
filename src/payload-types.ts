@@ -64,6 +64,7 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    account: AccountAuthOperations;
   };
   blocks: {};
   collections: {
@@ -75,6 +76,7 @@ export interface Config {
     persone: Persone;
     articoli: Articoli;
     tracciati: Tracciati;
+    account: Account;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -89,6 +91,7 @@ export interface Config {
     persone: PersoneSelect<false> | PersoneSelect<true>;
     articoli: ArticoliSelect<false> | ArticoliSelect<true>;
     tracciati: TracciatiSelect<false> | TracciatiSelect<true>;
+    account: AccountSelect<false> | AccountSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -111,15 +114,37 @@ export interface Config {
     testi: TestiSelect<false> | TestiSelect<true>;
   };
   locale: 'en' | 'it';
-  user: User & {
-    collection: 'users';
-  };
+  user:
+    | (User & {
+        collection: 'users';
+      })
+    | (Account & {
+        collection: 'account';
+      });
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface AccountAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -627,6 +652,25 @@ export interface Articoli {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "account".
+ */
+export interface Account {
+  id: string;
+  nome: string;
+  persona?: (string | null) | Persone;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -663,12 +707,21 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'tracciati';
         value: string | Tracciati;
+      } | null)
+    | ({
+        relationTo: 'account';
+        value: string | Account;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'account';
+        value: string | Account;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -678,10 +731,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: string;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'account';
+        value: string | Account;
+      };
   key?: string | null;
   value?:
     | {
@@ -1027,6 +1085,23 @@ export interface TracciatiSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "account_select".
+ */
+export interface AccountSelect<T extends boolean = true> {
+  nome?: T;
+  persona?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

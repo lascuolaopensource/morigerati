@@ -31,14 +31,14 @@ import { Luoghi } from './db/collections/Luoghi'
 import { Residenze } from './db/collections/Residenze'
 import { Persone } from './db/collections/Persone'
 import { Tracciati } from './db/collections/Tracciati'
+import { Account } from './db/collections/Account'
 
 import { Home } from './db/globals/Home'
 import { ChiSiamo } from './db/globals/ChiSiamo'
 import { MobilitaSostenibile } from './db/globals/MobilitaSostenibile'
 import { Footer } from './db/globals/Footer'
 import { Testi } from './db/globals/Testi'
-import { Collections } from './db/collections'
-import { Globals } from './db/globals'
+
 import { seoPlugin } from './modules/seo'
 
 const filename = fileURLToPath(import.meta.url)
@@ -56,7 +56,7 @@ export default buildConfig({
     supportedLanguages: { it, en },
   },
   localization,
-  collections: [Users, Media, Luoghi, Itinerari, Residenze, Persone, Articoli, Tracciati],
+  collections: [Users, Media, Luoghi, Itinerari, Residenze, Persone, Articoli, Tracciati, Account],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
   editor: lexicalEditor({
     features: () => [
