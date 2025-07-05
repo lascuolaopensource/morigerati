@@ -15,7 +15,7 @@ export default function LoginPage() {
   const [state, action, pending] = useActionState(signup, undefined)
 
   return (
-    <form action={action} className="flex flex-col gap-6 max-w-md w-full mx-auto p-4">
+    <form action={action} className="flex flex-col gap-6 w-full">
       <FieldWrapper>
         <Label htmlFor="email">Email</Label>
         <Input id="email" name="email" type="email" />
@@ -33,7 +33,9 @@ export default function LoginPage() {
         </Alert>
       )}
 
-      <Button type="submit">Login</Button>
+      <Button type="submit" disabled={pending}>
+        {pending ? 'Attendi...' : 'Login'}
+      </Button>
     </form>
   )
 }

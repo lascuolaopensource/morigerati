@@ -43,7 +43,7 @@ export async function signup(
   }
 
   const locale = await getLocale()
-  redirect(`/${locale}/account/posts`)
+  redirect(`/${locale}/feed/my-posts`)
 }
 
 const schema = z.object({
