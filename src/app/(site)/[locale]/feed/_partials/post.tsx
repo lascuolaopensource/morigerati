@@ -1,5 +1,6 @@
 import { getMedia } from '@/modules/utils'
 import { ImageWithFallback } from '@/modules/utils/imageWithFallback'
+import { cn } from '@/modules/utils/utils'
 import { Post as PostType } from '@/payload-types'
 import { formatDate } from 'date-fns'
 
@@ -8,25 +9,33 @@ import { formatDate } from 'date-fns'
 type PostProps = {
   post: PostType
   owner: string
+  size?: 'sm' | 'md'
 }
 
 export function Post(props: PostProps) {
-  const { post, owner } = props
+  const { post, owner, size = 'md' } = props
   const media = getMedia(post.media)
 
   return (
-    <div className="p-4 space-y-4 border rounded-md">
+    <div className={cn('border rounded-md', size === 'sm' ? 'p-3 space-y-3' : 'p-4 space-y-4')}>
       <div className=" flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <div className="flex items-center justify-center overflow-hidden size-8 bg-itinerariColor rounded-sm">
+          <div
+            className={cn(
+              'flex items-center justify-center overflow-hidden size-8 bg-itinerariColor rounded-sm',
+              size === 'sm' && 'scale-80',
+            )}
+          >
             <p className="font-transluoghi text-[24px] block select-none text-center text-itinerarioColorScuro">
               {owner.slice(0, 2)}
             </p>
           </div>
-          <p className=" text-black">{owner}</p>
+          <p className={cn('text-black', size === 'sm' ? 'text-sm' : 'text-md')}>{owner}</p>
         </div>
 
-        <p className=" text-gray-300">{formatDate(post.updatedAt, 'dd/MM/yyyy')}</p>
+        <p className={cn('text-gray-300', size === 'sm' ? 'text-sm' : 'text-md')}>
+          {formatDate(post.updatedAt, 'dd/MM/yyyy')}
+        </p>
       </div>
 
       {media?.url && (
@@ -38,10 +47,13 @@ export function Post(props: PostProps) {
       )}
 
       <div className="space-y-1">
-        <p className="text-lg font-medium">{post.text}</p>
+        <p className={cn('font-medium', size === 'sm' ? 'text-md' : 'text-lg')}>{post.text}</p>
         {post.link && (
           <a
-            className="text-blue-500 block hover:underline truncate"
+            className={cn(
+              'text-blue-500 block hover:underline truncate',
+              size === 'sm' ? 'text-sm' : 'text-md',
+            )}
             href={post.link}
             target="_blank"
             rel="noopener noreferrer"
