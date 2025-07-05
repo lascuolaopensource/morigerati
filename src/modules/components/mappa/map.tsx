@@ -366,6 +366,7 @@ const FullscreenMedia = ({ media, onClose }: { media: Media | string; onClose: (
         ) : (
           <Image
             src={(media as Media).url || ''}
+            unoptimized
             alt={isString ? 'Media' : (media as Media).alt || 'Media'}
             className="max-w-[95%] max-h-[90vh] w-auto h-auto object-contain rounded-lg"
             fill

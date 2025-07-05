@@ -31,33 +31,61 @@ import { Luoghi } from './db/collections/Luoghi'
 import { Residenze } from './db/collections/Residenze'
 import { Persone } from './db/collections/Persone'
 import { Tracciati } from './db/collections/Tracciati'
+import { Account } from './db/collections/Account'
 
 import { Home } from './db/globals/Home'
 import { ChiSiamo } from './db/globals/ChiSiamo'
 import { MobilitaSostenibile } from './db/globals/MobilitaSostenibile'
 import { Footer } from './db/globals/Footer'
 import { Testi } from './db/globals/Testi'
-import { Collections } from './db/collections'
-import { Globals } from './db/globals'
+
 import { seoPlugin } from './modules/seo'
+import { Post } from './db/collections/Post'
+import { PostMedia } from './db/collections/PostMedia'
+
+//
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  secret: process.env.PAYLOAD_SECRET || '',
+
+  serverURL: process.env.NEXT_PUBLIC_DOMAIN,
+  csrf: [],
+
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URI || '',
+  }),
+
   admin: {
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
+
   i18n: {
     fallbackLanguage: localization.defaultLocale,
     supportedLanguages: { it, en },
   },
   localization,
-  collections: [Users, Media, Luoghi, Itinerari, Residenze, Persone, Articoli, Tracciati],
+
+  collections: [
+    Users,
+    Media,
+    Luoghi,
+    Itinerari,
+    Residenze,
+    Persone,
+    Articoli,
+    Tracciati,
+    Account,
+    Post,
+    PostMedia,
+  ],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
+
   editor: lexicalEditor({
     features: () => [
       InlineToolbarFeature(),
@@ -71,14 +99,9 @@ export default buildConfig({
       UnorderedListFeature(),
     ],
   }),
-  secret: process.env.PAYLOAD_SECRET || '',
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
-  }),
+
   sharp,
+
   plugins: [
     seoPlugin,
 
@@ -95,6 +118,10 @@ export default buildConfig({
           disableLocalStorage: true,
           prefix: 'tracciati',
         },
+        [PostMedia.slug]: {
+          disableLocalStorage: true,
+          prefix: 'post-media',
+        },
       },
       config: {
         endpoint: process.env.S3_ENDPOINT!,
@@ -107,4 +134,8 @@ export default buildConfig({
       },
     }),
   ],
+
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
 })

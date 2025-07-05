@@ -21,7 +21,13 @@ const Copertina: React.FC<CopertinaProps> = ({ copertina, className = '' }) => {
 
   return (
     <div className={`relative h-[50vh] max-h-[600px] ${className}`}>
-      <Image src={copertina.url ?? ''} alt={copertina.alt} fill className="object-cover" />
+      <Image
+        src={copertina.url ?? ''}
+        alt={copertina.alt}
+        unoptimized={true}
+        fill
+        className="object-cover"
+      />
     </div>
   )
 }

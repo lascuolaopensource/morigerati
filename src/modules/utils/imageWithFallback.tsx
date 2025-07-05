@@ -17,11 +17,11 @@ export function ImageWithFallback({ className, placeholderPulse, src, ...props }
       <div
         style={{ backgroundImage: pixel.cssUrl, backgroundSize: '20%' }}
         className={cn(
-          'absolute inset-0 opacity-30 bg-gray/10',
+          'absolute inset-0 opacity-30 bg-gray/10 w-full h-full',
           placeholderPulse && 'animate-pulse',
         )}
       />
-      {src && <Image fill src={src} {...props} className="object-cover" />}
+      {src && <Image unoptimized fill src={src} {...props} className="object-cover" />}
     </div>
   )
 }

@@ -138,7 +138,7 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
       ...(slugOverrides?.admin || {}),
       components: {
         Field: {
-          path: '@/fields/slug/SlugComponent#SlugComponent',
+          path: '@/db/fields/slug/SlugComponent#SlugComponent',
           clientProps: {
             fieldToUse,
             checkboxFieldPath: checkBoxField.name,
@@ -155,15 +155,15 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
 export const title = (text: string): UIField =>
   createUIField(
     `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
-    '@/fields/components/header.tsx',
+    '@/db/fields/components/header.tsx',
     { content: text },
   )
 
 export const gap = (size: number, key: string): UIField =>
-  createUIField(`gap-${key}`, '@/fields/components/gap.tsx', { size })
+  createUIField(`gap-${key}`, '@/db/fields/components/gap.tsx', { size })
 
 export const divider = (key: string): UIField =>
-  createUIField(`divider-${key}`, '@/fields/components/divider.tsx', {})
+  createUIField(`divider-${key}`, '@/db/fields/components/divider.tsx', {})
 
 export const nome = createRequiredField(createTextField('nome'))
 

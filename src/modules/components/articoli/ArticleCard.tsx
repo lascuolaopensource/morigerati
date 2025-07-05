@@ -41,6 +41,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, isMobile }) =
               fill
               sizes="(max-width: 768px) 100vw, 192px"
               quality={80}
+              unoptimized
               className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
           </div>

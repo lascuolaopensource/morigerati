@@ -1,6 +1,8 @@
-import { Media } from '@/payload-types'
+import { Media, Post } from '@/payload-types'
 
-export function getMedia(media: Media | undefined | null | string): Media | undefined {
+export function getMedia<T extends Media | Post['media']>(
+  media: T | undefined | null | string,
+): T | undefined {
   if (typeof media === 'string') throw new Error('Unexpected: Media is a string')
   if (!media) return undefined
   return media

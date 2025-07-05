@@ -6,4 +6,7 @@ export enum Collections {
   Residenze = 'residenze',
   Articoli = 'articoli',
   Tracciati = 'tracciati',
+  Account = 'account',
+  Post = 'post',
+  PostMedia = 'post-media',
 }

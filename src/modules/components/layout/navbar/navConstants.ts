@@ -7,4 +7,5 @@ export const NAV_ITEMS = [
   { href: '/persone', key: 'navigation.persone' },
   { href: '/residenze', key: 'navigation.residences' },
   { href: '/articoli', key: 'navigation.articles' },
+  { href: '/feed', key: 'navigation.feed' },
 ] as const
