@@ -1,4 +1,4 @@
-import { Config } from '@/payload-types'
+import { Account, Config, Post, PostMedia } from '@/payload-types'
 import { Luoghi, Persone, Itinerari, Residenze } from '@/payload-types'
 
 //
@@ -18,7 +18,7 @@ export type GlobalName = keyof Omit<Config['globals'], 'footer' | 'testi'>
 export type Global = Config['globals'][GlobalName]
 
 export type EntityName = CollectionName | GlobalName
-export type Entity = Collection | Global
+export type Entity = Exclude<Collection, Post | Account | PostMedia> | Global
 
 //
 
