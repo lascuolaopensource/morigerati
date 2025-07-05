@@ -6,9 +6,9 @@ import { Entity } from '@/modules/types'
 export function getPageTitle(doc: Partial<Entity>): string | undefined {
   let title: string | undefined
   if ('nome' in doc) {
-    title = doc.nome
+    title = doc.nome as string
   } else if ('titolo' in doc) {
-    title = doc.titolo
+    title = doc.titolo as string
   }
   return title
 }
