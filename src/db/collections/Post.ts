@@ -41,7 +41,7 @@ export const Post: CollectionConfig = {
             console.log(value, req.user)
             if (value && req.user?.collection == 'users') {
               return value
-            } else if (!value && req.user?.collection == 'account') {
+            } else if (req.user?.collection == 'account') {
               return req.user?.id
             }
             throw new Error('Unexpected error')
