@@ -15,6 +15,8 @@ import PixelBorder from '@/modules/components/uiElements/pixelBorder'
 import { getLocale } from '@/modules/i18n'
 import HomeCollection from '@/modules/components/home/homeCollection'
 import { createMetadata } from '@/modules/seo'
+import { Map } from '@/modules/components/mappa-new/map'
+import { GpxTracks } from '@/modules/components/mappa-new/gpx-tracks'
 
 //
 
@@ -30,6 +32,33 @@ async function load() {
 
 export default async function Page() {
   const { home } = await load()
+
+  const db = await loadDb()
+
+  const tracciatiQuery = await db.find({
+    collection: 'tracciati',
+  })
+
+  const trackColors = [
+    '#FF5733', // Rosso-arancio
+    '#33FF57', // Verde lime
+    '#3357FF', // Blu
+    '#FF33F6', // Rosa
+    '#33FFF6', // Ciano
+    '#F6FF33', // Giallo
+    '#9933FF', // Viola
+    '#FF8333', // Arancione
+    '#33FF99', // Verde acqua
+    '#FF3333', // Rosso
+  ]
+
+  const tracciati = tracciatiQuery.docs
+    .map((t) => t.url)
+    .filter((t) => t !== null && t !== undefined)
+    .map((t, i) => ({
+      url: t,
+      color: trackColors[i],
+    }))
 
   return (
     <>
@@ -62,7 +91,13 @@ export default async function Page() {
         collection="itinerari"
         title={home.itinerari?.title} // Use optional chaining if structure might vary by locale
         text={home.itinerari?.testo as SerializedEditorState}
-      />
+      >
+        <div className="size-[300px]">
+          <Map>
+            <GpxTracks gpxTracks={tracciati} />
+          </Map>
+        </div>
+      </HomeCollection>
 
       <PixelBorder className="bg-luoghiColor" />
 

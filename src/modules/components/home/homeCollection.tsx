@@ -26,6 +26,7 @@ interface HomeCollectionProps {
   alignment?: 'left' | 'right'
   title: string
   text: SerializedEditorState
+  children?: React.ReactNode
 }
 
 const HomeCollection: React.FC<HomeCollectionProps> = async ({
@@ -33,6 +34,7 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
   alignment = 'left',
   title,
   text,
+  children,
 }) => {
   const db = await loadDb()
   const messages = await getMessages()
@@ -81,11 +83,15 @@ const HomeCollection: React.FC<HomeCollectionProps> = async ({
         </ViewAllButton>
       </div>
 
-      <div className="grow grid grid-cols-2 gap-4 px-4 md:px-8">
-        {data.docs.map((doc) => (
-          <Card key={doc.id} category={collection} record={doc} />
-        ))}
-      </div>
+      {!children && (
+        <div className="grow grid grid-cols-2 gap-4 px-4 md:px-8">
+          {data.docs.map((doc) => (
+            <Card key={doc.id} category={collection} record={doc} />
+          ))}
+        </div>
+      )}
+
+      {children && <div className="grow px-4 md:px-8">{children}</div>}
     </section>
   )
 }
