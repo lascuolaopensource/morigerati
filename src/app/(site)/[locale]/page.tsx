@@ -17,6 +17,7 @@ import HomeCollection from '@/modules/components/home/homeCollection'
 import { createMetadata } from '@/modules/seo'
 import { Map } from '@/modules/components/mappa-new/map'
 import { GpxTracks } from '@/modules/components/mappa-new/gpx-tracks'
+import HomeTracksSection from '@/modules/components/home/homeTracksSection'
 
 //
 
@@ -53,12 +54,6 @@ export default async function Page() {
   ]
 
   const tracciati = tracciatiQuery.docs
-    .map((t) => t.url)
-    .filter((t) => t !== null && t !== undefined)
-    .map((t, i) => ({
-      url: t,
-      color: trackColors[i],
-    }))
 
   return (
     <>
@@ -92,10 +87,8 @@ export default async function Page() {
         title={home.itinerari?.title} // Use optional chaining if structure might vary by locale
         text={home.itinerari?.testo as SerializedEditorState}
       >
-        <div className="size-[300px]">
-          <Map>
-            <GpxTracks gpxTracks={tracciati} />
-          </Map>
+        <div className="md:w-[400px] w-[calc(100vw-4rem)]">
+          <HomeTracksSection tracciati={tracciati} />
         </div>
       </HomeCollection>
 

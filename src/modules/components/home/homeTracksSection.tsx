@@ -63,11 +63,9 @@ export const HomeTracksSection = ({ tracciati }: HomeTracksSectionProps) => {
   if (!tracciati || tracciati.length === 0) return null
 
   return (
-    <div className="py-8">
-      <Suspense>
-        <TracksMapSection tracciati={tracciati} />
-      </Suspense>
-    </div>
+    <Suspense>
+      <TracksMapSection tracciati={tracciati} />
+    </Suspense>
   )
 }
 

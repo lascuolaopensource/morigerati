@@ -58,8 +58,8 @@ const TracksMap: React.FC<TracksMapProps> = ({ tracciati, initialPosition, initi
 
   if (!isVisible) {
     return (
-      <div className="w-full rounded-lg border-2 border-gray-800 overflow-hidden">
-        <div className="h-[350px] md:h-[400px] w-full z-0 flex items-center justify-center bg-gray-100">
+      <div className=" rounded-lg border-2 border-gray-800 overflow-hidden">
+        <div className="h-[350px] md:h-[400px] z-0 flex items-center justify-center bg-gray-100">
           <p className="text-gray-500">Ricaricamento mappa...</p>
         </div>
       </div>
