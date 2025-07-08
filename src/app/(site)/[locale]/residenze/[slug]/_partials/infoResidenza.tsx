@@ -1,5 +1,5 @@
 import type { Residenze } from '@/payload-types'
-import formatDate from '@/modules/utils/formatDate'
+import { formatDate } from '@/modules/utils/formatDate'
 import { useLocale, useMessages, useTranslations } from 'next-intl'
 import { BentoBoxItem } from '@/modules/components/uiElements/bentoBoxItem'
 import { Button } from '@/modules/components/uiElements/button'

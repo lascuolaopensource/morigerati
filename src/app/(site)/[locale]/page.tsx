@@ -15,7 +15,7 @@ import PixelBorder from '@/modules/components/uiElements/pixelBorder'
 import { getLocale } from '@/modules/i18n'
 import { createMetadata } from '@/modules/seo'
 import HomeCollection from './_partials/homeCollection'
-import HomeTracksSection from './_partials/homeTracksSection'
+import { HomeTracksSection } from './_partials/homeTracksSection'
 
 //
 

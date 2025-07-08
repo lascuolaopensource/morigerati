@@ -38,7 +38,6 @@ export const Post: CollectionConfig = {
       hooks: {
         beforeValidate: [
           ({ value, req }) => {
-            console.log(value, req.user)
             if (value && req.user?.collection == 'users') {
               return value
             } else if (req.user?.collection == 'account') {

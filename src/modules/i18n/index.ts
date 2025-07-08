@@ -1,10 +1,10 @@
 import { getLocale as nextIntlGetLocale } from 'next-intl/server'
 
-export const locales = ['it', 'en']
+const locales = ['it', 'en'] as const
 
-export type Locale = 'it' | 'en'
+export type Locale = (typeof locales)[number]
 
 export async function getLocale(): Promise<Locale> {
   const locale = await nextIntlGetLocale()
-  return locales.includes(locale) ? (locale as Locale) : 'it'
+  return locales.includes(locale as Locale) ? (locale as Locale) : 'it'
 }

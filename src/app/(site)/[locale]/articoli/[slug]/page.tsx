@@ -13,7 +13,7 @@ import Copertina from '@/modules/components/uiElements/copertina'
 import TagsList from '../_partials/tagsList'
 import Galleria from '@/modules/components/galleria/galleria'
 //Utils
-import formatDate from '@/modules/utils/formatDate'
+import { formatDate } from '@/modules/utils/formatDate'
 import { createMetadata } from '@/modules/seo'
 
 //Locale

@@ -68,5 +68,3 @@ export const HomeTracksSection = ({ tracciati }: HomeTracksSectionProps) => {
     </Suspense>
   )
 }
-
-export default HomeTracksSection
