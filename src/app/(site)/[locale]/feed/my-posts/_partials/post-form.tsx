@@ -5,7 +5,13 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useRouter } from 'next/navigation'
 import { FieldWrapper, SheetForm } from './components'
-import { handleCreatePost, handleDeletePost, handleUpdatePost, Post } from './post-form-handling'
+import {
+  handleCreatePost,
+  handleDeletePost,
+  handleUpdatePost,
+  mimeTypes,
+  Post,
+} from './post-form-handling'
 
 //
 
@@ -53,7 +59,7 @@ export function PostForm({ apiUrl, postId, initialValues, sheetTrigger }: PostFo
       {!postId && (
         <FieldWrapper>
           <Label htmlFor="media">Media</Label>
-          <Input id="media" name="media" type="file" />
+          <Input id="media" name="media" type="file" accept={mimeTypes.join(',')} />
         </FieldWrapper>
       )}
     </SheetForm>

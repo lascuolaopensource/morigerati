@@ -48,6 +48,8 @@ import { PostMedia } from './db/collections/PostMedia'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+export const MAX_FILE_SIZE = 5000000
+
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || '',
 
@@ -85,6 +87,12 @@ export default buildConfig({
     PostMedia,
   ],
   globals: [Home, ChiSiamo, MobilitaSostenibile, Footer, Testi],
+
+  upload: {
+    limits: {
+      fileSize: MAX_FILE_SIZE,
+    },
+  },
 
   editor: lexicalEditor({
     features: () => [

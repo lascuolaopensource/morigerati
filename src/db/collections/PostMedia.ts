@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { Collections } from '.'
 import { imageSizes } from '../utils'
 
-export const PostMedia: CollectionConfig = {
+export const PostMedia = {
   slug: Collections.PostMedia,
 
   access: {
@@ -15,11 +15,11 @@ export const PostMedia: CollectionConfig = {
   upload: {
     disableLocalStorage: true,
     adminThumbnail: 'thumbnail',
-    crop: true,
-    focalPoint: true,
-
-    formatOptions: { format: 'webp' },
     imageSizes,
+    formatOptions: { format: 'webp' },
+    mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'image/gif'],
   },
   fields: [],
-}
+
+  //
+} satisfies CollectionConfig

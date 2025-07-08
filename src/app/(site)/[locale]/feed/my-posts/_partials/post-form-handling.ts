@@ -1,11 +1,15 @@
 import { z } from 'zod/v4'
+import { PostMedia } from '@/db/collections/PostMedia'
+import { MAX_FILE_SIZE } from '@payload-config'
 
 //
+
+export const mimeTypes = PostMedia.upload.mimeTypes
 
 const postSchema = z.object({
   text: z.string().trim(),
   link: z.nullish(z.url()),
-  media: z.nullish(z.file()),
+  media: z.nullish(z.file().mime(mimeTypes).max(MAX_FILE_SIZE)),
 })
 
 export type Post = z.infer<typeof postSchema>
