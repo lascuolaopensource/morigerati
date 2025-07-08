@@ -1,4 +1,4 @@
-import { Entity } from '@/modules/types'
+import { Entity } from '#/types'
 
 //
 

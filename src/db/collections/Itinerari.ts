@@ -206,5 +206,3 @@ export const Itinerari: CollectionConfig<'itinerari'> = {
     },
   ],
 }
-
-export default Itinerari

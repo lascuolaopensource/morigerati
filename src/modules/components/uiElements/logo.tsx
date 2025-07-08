@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Link } from '@/modules/i18n/routing'
+import { Link } from '#/i18n/routing'
 
 interface LogoGeneratorProps {
   textColor?: string

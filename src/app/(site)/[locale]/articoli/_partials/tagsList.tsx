@@ -1,9 +1,9 @@
 //Boilerplate
 import React from 'react'
 //UI
-import { Badge } from '@/modules/components/ui/badge'
+import { Badge } from '#/components/ui-custom/badge'
 //Utils
-import { makeSafeForDisplay } from '@/modules/utils/safeDisplay'
+import { makeSafeForDisplay } from '#/utils/safeDisplay'
 
 interface TagsListProps {
   tags: (string | { tag?: string } | any)[]

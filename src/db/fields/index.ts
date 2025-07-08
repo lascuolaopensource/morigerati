@@ -27,7 +27,7 @@ import {
   InlineToolbarFeature,
 } from '@payloadcms/richtext-lexical'
 
-import { capitalizeFirstLetter } from '@/modules/utils/strings'
+import { capitalizeFirstLetter } from '#/utils/strings'
 
 import { formatSlugHook } from './slug/formatSlug'
 
@@ -173,13 +173,6 @@ export const testo = createLocalizedField(createRichTextField('testo'))
 
 export const plainText = (name: string): TextField => createLocalizedField(createTextField(name))
 
-export const nonLocalizedText = (name: string): TextField => createTextField(name)
-
-export const plainTextRequired = (name: string): TextField => createRequiredField(plainText(name))
-
-export const richText = (name: string): RichTextField =>
-  createLocalizedField(createRichTextField(name))
-
 export const posizione: PointField = {
   name: 'posizione',
   type: 'point',
@@ -189,11 +182,6 @@ export const linkConNome: RowField = createRowField([
   createRequiredField(createTextField('nome')),
   createRequiredField(link),
 ])
-
-export const linkArray: ArrayField = createArrayField('links', linkConNome.fields, {
-  label: 'Link',
-  localized: true,
-})
 
 export const programmaArray: ArrayField = createArrayField(
   'programma',
@@ -282,7 +270,7 @@ const baseContentFields: Field[] = [
 
 export const contenutoFields: Field[] = baseContentFields
 
-export const contenutoFieldsMedia: Field[] = [
+const contenutoFieldsMedia: Field[] = [
   ...baseContentFields.slice(0, 2),
   {
     name: 'Video',
@@ -291,13 +279,6 @@ export const contenutoFieldsMedia: Field[] = [
     required: false,
   },
   ...baseContentFields.slice(2),
-]
-
-export const contenutoFieldsUnrequired: Field[] = [
-  ...baseContentFields.slice(0, 2),
-  linkArray,
-  ...baseContentFields.slice(2, -2),
-  { ...testo, required: false },
 ]
 
 export const tabContenuto: Tab = {
@@ -334,19 +315,7 @@ export function titleAndTextHome(name: string, label?: string): GroupField {
   }
 }
 
-export function titleAndTextOptional(name: string, label?: string): GroupField {
-  return {
-    name,
-    type: 'group',
-    label: label ?? capitalizeFirstLetter(name),
-    fields: [
-      createLocalizedField(createTextField('title', { label: 'Titolo' })),
-      createLocalizedField(createRichTextField('text')),
-    ],
-  }
-}
-
-export const socialNetworkLink: RowField = createRowField([nome, createRequiredField(link)])
+const socialNetworkLink: RowField = createRowField([nome, createRequiredField(link)])
 
 export const socialNetworkLinks: ArrayField = createArrayField(
   'Link Social',

@@ -1,4 +1,4 @@
-import { loadDb } from '@/modules/utils/db'
+import { loadDb } from '#/utils/db'
 import { Post } from './_partials/post'
 import { Account } from '@/payload-types'
 

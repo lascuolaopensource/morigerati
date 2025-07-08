@@ -1,8 +1,8 @@
-import { CollectionHeading } from '@/modules/components/pageLayout/collectionHeading'
-import { loadDb } from '@/modules/utils/db'
-import { CollectionGrid } from '@/modules/components/pageLayout/collectionGrid'
-import { MainCollections, MainCollectionRecord } from '@/modules/types'
-import { getLocale } from '@/modules/i18n'
+import { CollectionHeading } from '#/components/pageLayout/collectionHeading'
+import { loadDb } from '#/utils/db'
+import { CollectionGrid } from '#/components/pageLayout/collectionGrid'
+import { MainCollections, MainCollectionRecord } from '#/types'
+import { getLocale } from '#/i18n'
 import { Container } from '../uiElements/container'
 
 // TODO - Review metadata

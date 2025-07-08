@@ -1,9 +1,9 @@
 import { Suspense } from 'react'
 import { Tracciati as TracciatiType } from '@/payload-types'
 import type { Luoghi } from '@/payload-types'
-import TracksMap from '@/modules/components/mappa/tracksMap'
+import TracksMap from '#/components/mappa/tracksMap'
 
-import { loadDb } from '@/modules/utils/db'
+import { loadDb } from '#/utils/db'
 
 interface HomeTracksSectionProps {
   title?: string
@@ -68,5 +68,3 @@ export const HomeTracksSection = ({ tracciati }: HomeTracksSectionProps) => {
     </Suspense>
   )
 }
-
-export default HomeTracksSection

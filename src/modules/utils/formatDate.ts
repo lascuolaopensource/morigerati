@@ -56,6 +56,3 @@ export function formatDate(
 
   return formattedDate
 }
-
-// Also export as default for compatibility with existing imports
-export default formatDate

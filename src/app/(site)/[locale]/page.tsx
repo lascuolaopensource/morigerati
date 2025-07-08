@@ -2,22 +2,20 @@
 import React from 'react'
 import { Metadata } from 'next'
 //PayloadCMS
-import { loadDb } from '@/modules/utils/db'
+import { loadDb } from '#/utils/db'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import type { Media, Tracciati as TracciatiType } from '@/payload-types'
 //UI
-import Copertina from '@/modules/components/uiElements/copertina'
-import GridOverlay from '@/modules/components/uiElements/gridOverlay'
-import PixelBorder from '@/modules/components/uiElements/pixelBorder'
+import Copertina from '#/components/uiElements/copertina'
+import GridOverlay from '#/components/uiElements/gridOverlay'
+import PixelBorder from '#/components/uiElements/pixelBorder'
 
 // Utils
-import { getLocale } from '@/modules/i18n'
-import HomeCollection from '@/modules/components/home/homeCollection'
-import { createMetadata } from '@/modules/seo'
-import { Map } from '@/modules/components/mappa-new/map'
-import { GpxTracks } from '@/modules/components/mappa-new/gpx-tracks'
-import HomeTracksSection from '@/modules/components/home/homeTracksSection'
+import { getLocale } from '#/i18n'
+import { createMetadata } from '#/seo'
+import HomeCollection from './_partials/homeCollection'
+import { HomeTracksSection } from './_partials/homeTracksSection'
 
 //
 

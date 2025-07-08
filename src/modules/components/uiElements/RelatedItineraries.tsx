@@ -5,6 +5,7 @@ interface RelatedItinerariesProps {
   messageTitle: string
 }
 
+// TODO - Re-implement this
 export default function RelatedItineraries({ itinerari, messageTitle }: RelatedItinerariesProps) {
   if (!itinerari || itinerari.length === 0) {
     return null

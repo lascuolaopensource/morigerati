@@ -3,10 +3,10 @@ import { Plugin } from 'payload'
 import { seoPlugin as _seoPlugin } from '@payloadcms/plugin-seo'
 import { Collections } from '@/db/collections'
 import { Globals } from '@/db/globals'
-import { getServerSideURL } from '@/modules/utils/getURL'
-import { Entity } from '@/modules/types'
+import { getServerSideURL } from '#/utils/getURL'
+import { Entity } from '#/types'
 import { generateBaseSEOTitle } from './utils'
-import { getPageTitle } from '@/modules/utils/getPageTitle'
+import { getPageTitle } from '#/utils/getPageTitle'
 
 //
 

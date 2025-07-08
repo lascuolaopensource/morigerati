@@ -5,7 +5,7 @@ import { login } from '@payloadcms/next/auth'
 import config from '@payload-config'
 
 import { redirect } from 'next/navigation'
-import { getLocale } from '@/modules/i18n'
+import { getLocale } from '#/i18n'
 
 type FormState = {
   error?: string

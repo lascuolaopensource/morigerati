@@ -1,6 +1,6 @@
 import { Residenze } from '@/payload-types'
 
-export type ResidenzaState = 'notAnnounced' | 'cannotEnroll' | 'canEnroll' | 'started'
+type ResidenzaState = 'notAnnounced' | 'cannotEnroll' | 'canEnroll' | 'started'
 
 export function getResidenzaState(residenza: Residenze): ResidenzaState {
   const { data_inizio, deadline_iscrizione, link_iscrizione, mostra_pulsante_iscrizione } =

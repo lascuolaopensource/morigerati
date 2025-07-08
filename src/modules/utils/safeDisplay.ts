@@ -5,7 +5,7 @@
  * @param maxLength - Maximum length before truncation
  * @returns Truncated text with ellipsis if needed
  */
-export function truncateText(text: string, maxLength: number): string {
+function truncateText(text: string, maxLength: number): string {
   if (!text || text.length <= maxLength) return text
   return text.slice(0, maxLength) + '...'
 }

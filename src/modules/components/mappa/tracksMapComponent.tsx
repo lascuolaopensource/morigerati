@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Map as LeafletMap } from 'leaflet'
 import type { Itinerari, Tracciati } from '@/payload-types'
-import { getTracciatoUrl } from '@/modules/utils/getTracciatoUrl'
+import { getTracciatoUrl } from '#/utils/getTracciatoUrl'
 
 interface TracksMapProps {
   tracciati: Tracciati[]
@@ -207,17 +207,12 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
             const response = await fetch(`/api/itinerari-by-tracciato?tracciato_id=${tracciato.id}`)
             const data = await response.json()
 
-            // Log completo della risposta per debug
-            console.log('RISPOSTA API COMPLETA:', JSON.stringify(data, null, 2))
-
             // Estrai l'itinerario dalla struttura appropriata
             // A seconda di come è strutturata la risposta, potrebbe essere data.itinerari o data.itinerario
             const itinerarioObj = data.itinerari || data.itinerario
 
             // Se abbiamo un array, prendiamo il primo elemento
             const itinerario = Array.isArray(itinerarioObj) ? itinerarioObj[0] : itinerarioObj
-
-            console.log('ITINERARIO ESTRATTO:', itinerario)
 
             // Estrazione più sicura del nome e dello slug
             let itinerarioNome = 'Nessun nome disponibile'
@@ -242,8 +237,6 @@ const TracksMapComponent: React.FC<TracksMapProps> = ({
                   itinerario.slug.it || itinerario.slug.en || Object.values(itinerario.slug)[0]
               }
             }
-
-            console.log(`INFO ESTRATTE - Nome: "${itinerarioNome}", Slug: "${itinerarioSlug}"`)
 
             // Carica e analizza il file GPX
             const gpxResponse = await fetch(gpxUrl)

@@ -1,7 +1,7 @@
-import { MainCollections } from '@/modules/types'
+import { MainCollections } from '#/types'
 import { Servizio, CardServizio } from './cardServizio'
 import { InfoSection } from './infoSection'
-import { cn } from '@/modules/utils/utils'
+import { cn } from '#/utils/utils'
 import { useMessages } from 'next-intl'
 
 type Props = {

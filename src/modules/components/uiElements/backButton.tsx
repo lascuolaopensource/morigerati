@@ -1,6 +1,6 @@
 //Locale
-import { Link } from '@/modules/i18n/routing'
-import { cn } from '@/modules/utils/utils'
+import { Link } from '#/i18n/routing'
+import { cn } from '#/utils/utils'
 
 interface BackButtonProps {
   message: string

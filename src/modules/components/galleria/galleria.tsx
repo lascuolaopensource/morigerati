@@ -14,7 +14,7 @@ import { GalleryCardFactory } from './galleryCard'
 
 //
 
-export interface GalleriaProps {
+interface GalleriaProps {
   items: Media[]
   cardClassName?: string
 }

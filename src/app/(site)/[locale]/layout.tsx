@@ -6,16 +6,16 @@ import { notFound } from 'next/navigation'
 //CSS
 import './globals.css'
 //Metadata
-import DynamicFavicon from '@/modules/components/uiElements/favicon'
+import DynamicFavicon from '#/components/uiElements/favicon'
 //Ui
-import Navbar from '@/modules/components/layout/navbar/navbar'
-import Footer from '@/modules/components/layout/footer/footer'
+import Navbar from '#/components/layout/navbar/navbar'
+import Footer from '#/components/layout/footer/footer'
 //Locale
-import { routing } from '@/modules/i18n/routing'
+import { routing } from '#/i18n/routing'
 import { getLocale, getMessages, setRequestLocale } from 'next-intl/server'
 //DB
-import { loadDb } from '@/modules/utils/db'
-import { createMetadata } from '@/modules/seo'
+import { loadDb } from '#/utils/db'
+import { createMetadata } from '#/seo'
 
 // Validate and generate the dynamic segmentd
 export function generateStaticParams() {

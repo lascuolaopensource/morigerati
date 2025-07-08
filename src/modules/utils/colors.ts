@@ -1,4 +1,4 @@
-import { MainCollections } from '@/modules/types'
+import { MainCollections } from '#/types'
 
 //
 
@@ -8,7 +8,7 @@ type ColorTheme = {
   border: string
 }
 
-export const textColors: Record<MainCollections | 'default', string> = {
+const textColors: Record<MainCollections | 'default', string> = {
   itinerari: 'text-itinerariColor',
   luoghi: 'text-luoghiColor',
   persone: 'text-personeColor',
@@ -24,7 +24,7 @@ export const bgColors: Record<MainCollections | 'default', string> = {
   default: 'bg-black',
 }
 
-export const borderColors: Record<MainCollections | 'default', string> = {
+const borderColors: Record<MainCollections | 'default', string> = {
   itinerari: 'border-itinerariColor',
   luoghi: 'border-luoghiColor',
   persone: 'border-personeColor',
@@ -32,7 +32,7 @@ export const borderColors: Record<MainCollections | 'default', string> = {
   default: 'border-black',
 }
 
-export function randomChoice<T>(array: T[]): T {
+function randomChoice<T>(array: T[]): T {
   return array[Math.floor(Math.random() * array.length)]
 }
 

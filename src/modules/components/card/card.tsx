@@ -6,10 +6,10 @@ import placeholderImage from '/public/placeholder-image.jpg'
 //DB
 import type { Media } from '@/payload-types'
 //Utils
-import { getColorTheme } from '@/modules/utils/colors'
+import { getColorTheme } from '#/utils/colors'
 //Locale
-import { Link } from '@/modules/i18n/routing'
-import { MainCollections, MainCollectionRecord } from '@/modules/types'
+import { Link } from '#/i18n/routing'
+import { MainCollections, MainCollectionRecord } from '#/types'
 
 interface CardProps {
   category: MainCollections

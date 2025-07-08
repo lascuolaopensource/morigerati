@@ -3,10 +3,10 @@
 import { signup } from './auth'
 import { useActionState } from 'react'
 
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { Alert, AlertTitle } from '@/components/ui/alert'
+import { Input } from '#/components/ui/input'
+import { Button } from '#/components/ui/button'
+import { Label } from '#/components/ui/label'
+import { Alert, AlertTitle } from '#/components/ui/alert'
 import { AlertCircleIcon } from 'lucide-react'
 
 //

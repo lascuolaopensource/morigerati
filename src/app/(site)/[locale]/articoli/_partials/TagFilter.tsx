@@ -2,9 +2,9 @@
 import React, { useRef, useEffect, useState } from 'react'
 //UI
 import { Tag, ChevronDown, ChevronUp, Search, X } from 'lucide-react'
-import { Badge } from '@/modules/components/ui/badge'
+import { Badge } from '#/components/ui-custom/badge'
 //Utils
-import { makeSafeForDisplay } from '@/modules/utils/safeDisplay'
+import { makeSafeForDisplay } from '#/utils/safeDisplay'
 //Locale
 import { useTranslations } from 'next-intl'
 
