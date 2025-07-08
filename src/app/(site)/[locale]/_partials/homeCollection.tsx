@@ -17,7 +17,7 @@ import { getMessages } from 'next-intl/server'
 import { MainCollectionRecord, MainCollections } from '@/modules/types'
 import { cn } from '@/modules/utils/utils'
 import { getLocale } from '@/modules/i18n'
-import Card from '../card/card'
+import Card from '@/modules/components/card/card'
 
 //
 

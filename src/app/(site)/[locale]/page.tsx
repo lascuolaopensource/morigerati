@@ -13,11 +13,9 @@ import PixelBorder from '@/modules/components/uiElements/pixelBorder'
 
 // Utils
 import { getLocale } from '@/modules/i18n'
-import HomeCollection from '@/modules/components/home/homeCollection'
 import { createMetadata } from '@/modules/seo'
-import { Map } from '@/modules/components/mappa-new/map'
-import { GpxTracks } from '@/modules/components/mappa-new/gpx-tracks'
-import HomeTracksSection from '@/modules/components/home/homeTracksSection'
+import HomeCollection from './_partials/homeCollection'
+import HomeTracksSection from './_partials/homeTracksSection'
 
 //
 

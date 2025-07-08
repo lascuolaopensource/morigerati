@@ -9,7 +9,7 @@ import type { Media } from '@/payload-types'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 //Components
-import ItinerarioDetailsCard from '@/modules/components/itinerari/itinerarioDetailsCard'
+import ItinerarioDetailsCard from './_partials/itinerarioDetailsCard'
 import Galleria from '@/modules/components/galleria/galleria'
 import DynamicMappa from '@/modules/components/mappa/mapLoader'
 import { LatLngTuple } from 'leaflet'

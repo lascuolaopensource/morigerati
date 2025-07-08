@@ -10,7 +10,7 @@ import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical
 //Components
 import BackButton from '@/modules/components/uiElements/backButton'
 import Copertina from '@/modules/components/uiElements/copertina'
-import TagsList from '@/modules/components/articoli/tagsList'
+import TagsList from '../_partials/tagsList'
 import Galleria from '@/modules/components/galleria/galleria'
 //Utils
 import formatDate from '@/modules/utils/formatDate'
