@@ -131,13 +131,18 @@ export function Mappa(props: MapProps) {
             opacity: 0.8,
           },
           marker_options: {
+            // @ts-ignore
             startIconUrl: null, // Completely disable default markers
+            // @ts-ignore
             endIconUrl: null, // Completely disable default markers
+            // @ts-ignore
             wptIconUrls: null, // Completely disable default markers
+            // @ts-ignore
             shadowUrl: null, // Disable shadow
             clickable: false, // Make default markers not clickable
           },
           gpx_options: {
+            // @ts-ignore
             parseElements: ['track', 'waypoint'], // Parse both tracks and waypoints
           },
         })
