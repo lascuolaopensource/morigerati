@@ -1,5 +1,5 @@
-import { CollectionPage } from '@/modules/components/pageLayout/collectionPage'
-import { createCollectionsPagesMetadata } from '@/modules/seo'
+import { CollectionPage } from '#/components/pageLayout/collectionPage'
+import { createCollectionsPagesMetadata } from '#/seo'
 import { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {

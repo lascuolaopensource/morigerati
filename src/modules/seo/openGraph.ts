@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getServerSideURL } from '@/modules/utils/getURL'
+import { getServerSideURL } from '#/utils/getURL'
 import { appConfig } from '@/app-config'
 
 //

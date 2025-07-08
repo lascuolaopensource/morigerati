@@ -1,13 +1,13 @@
 import React from 'react'
 //Locale
-import { Link } from '@/modules/i18n/routing'
+import { Link } from '#/i18n/routing'
 import { useLocale } from 'next-intl'
 //DB
 import type { Residenze, Media } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import { ImageWithFallback } from '@/modules/utils/imageWithFallback'
-import { getMedia } from '@/modules/utils'
+import { ImageWithFallback } from '#/utils/imageWithFallback'
+import { getMedia } from '#/utils'
 
 type Esperto = NonNullable<Residenze['esperti']>[number]
 

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
-import { CollectionPage } from '@/modules/components/pageLayout/collectionPage'
-import { createCollectionsPagesMetadata } from '@/modules/seo/createCollectionsPagesMetadata'
+import { CollectionPage } from '#/components/pageLayout/collectionPage'
+import { createCollectionsPagesMetadata } from '#/seo/createCollectionsPagesMetadata'
 
 //
 

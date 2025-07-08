@@ -1,11 +1,11 @@
 'use client'
 
 //Components
-import LogoGenerator from '@/modules/components/uiElements/logo'
+import LogoGenerator from '#/components/uiElements/logo'
 import { XButton } from './xButton'
 import { NavigationMenu } from './NavigationMenu'
 //Locale
-import { LocaleSwitcher } from '@/modules/i18n/LocaleSwitcher'
+import { LocaleSwitcher } from '#/i18n/LocaleSwitcher'
 //Hooks
 import { useThemeColors, useMenuController } from './navHooks'
 

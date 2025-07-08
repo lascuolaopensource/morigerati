@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "#/*": ["./src/modules/*"],
       "@payload-config": ["./src/payload.config.ts"]
     },
     "target": "ES2017"
@@ -30,7 +31,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/**/*.ts",
-    "src/**/*.tsx"
-, "next.config.mjs"  ],
+    "src/**/*.tsx",
+    "next.config.mjs"
+  ],
   "exclude": ["node_modules"]
 }

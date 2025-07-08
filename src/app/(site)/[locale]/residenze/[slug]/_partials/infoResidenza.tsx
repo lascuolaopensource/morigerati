@@ -1,11 +1,11 @@
 import type { Residenze } from '@/payload-types'
-import { formatDate } from '@/modules/utils/formatDate'
+import { formatDate } from '#/utils/formatDate'
 import { useLocale, useMessages, useTranslations } from 'next-intl'
-import { BentoBoxItem } from '@/modules/components/uiElements/bentoBoxItem'
-import { Button } from '@/modules/components/uiElements/button'
+import { BentoBoxItem } from '#/components/uiElements/bentoBoxItem'
+import { Button } from '#/components/uiElements/button'
 import { ArrowRight } from 'lucide-react'
 import { getResidenzaState } from './utils'
-import { T } from '@/modules/components/uiElements/t'
+import { T } from '#/components/uiElements/t'
 
 interface InfoResidenzaProps {
   residenza: Residenze

@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'next/image'
 //Locale
-import { Link } from '@/modules/i18n/routing'
+import { Link } from '#/i18n/routing'
 //Components
 import {
   Card,
@@ -10,8 +10,8 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from '@/modules/components/ui/card'
-import { Badge } from '@/modules/components/ui/badge'
+} from '#/components/ui-custom/card'
+import { Badge } from '#/components/ui-custom/badge'
 
 interface ArticleCardProps {
   article: {

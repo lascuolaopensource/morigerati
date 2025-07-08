@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { getServerSideURL } from '@/modules/utils/getURL'
-import { Entity } from '@/modules/types'
+import { getServerSideURL } from '#/utils/getURL'
+import { Entity } from '#/types'
 import { mergeOpenGraph } from './openGraph'
 import { generateBaseSEOTitle } from './utils'
 import { Config, Media } from '@/payload-types'
 import { appConfig } from '@/app-config'
-import { Locale } from '@/modules/i18n'
-import { getPageTitle } from '@/modules/utils/getPageTitle'
+import { Locale } from '#/i18n'
+import { getPageTitle } from '#/utils/getPageTitle'
 
 //
 

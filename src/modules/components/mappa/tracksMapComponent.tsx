@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Map as LeafletMap } from 'leaflet'
 import type { Itinerari, Tracciati } from '@/payload-types'
-import { getTracciatoUrl } from '@/modules/utils/getTracciatoUrl'
+import { getTracciatoUrl } from '#/utils/getTracciatoUrl'
 
 interface TracksMapProps {
   tracciati: Tracciati[]

@@ -1,9 +1,9 @@
-import { MainCollections } from '@/modules/types'
+import { MainCollections } from '#/types'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { T } from './t'
-import { cn } from '@/modules/utils/utils'
+import { cn } from '#/utils/utils'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { getColorTheme } from '@/modules/utils/colors'
+import { getColorTheme } from '#/utils/colors'
 import { SectionTitle } from './sectionTitle'
 
 export function InfoSection(props: {

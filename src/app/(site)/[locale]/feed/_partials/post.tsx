@@ -1,6 +1,6 @@
-import { getMedia } from '@/modules/utils'
-import { ImageWithFallback } from '@/modules/utils/imageWithFallback'
-import { cn } from '@/modules/utils/utils'
+import { getMedia } from '#/utils'
+import { ImageWithFallback } from '#/utils/imageWithFallback'
+import { cn } from '#/utils/utils'
 import { Post as PostType } from '@/payload-types'
 import { formatDate } from 'date-fns'
 

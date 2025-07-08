@@ -1,11 +1,11 @@
-import { getLocale } from '@/modules/i18n'
-import { redirect } from '@/modules/i18n/routing'
-import { loadDb } from '@/modules/utils/db'
+import { getLocale } from '#/i18n'
+import { redirect } from '#/i18n/routing'
+import { loadDb } from '#/utils/db'
 import { headers } from 'next/headers'
 import { AlertCircleIcon, PencilIcon, TrashIcon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '#/components/ui/button'
 import { DeletePost, PostForm } from './_partials/post-form'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Alert, AlertDescription, AlertTitle } from '#/components/ui/alert'
 import { Post } from '../_partials/post'
 
 //

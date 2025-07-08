@@ -1,8 +1,8 @@
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import PixelBorder from '../uiElements/pixelBorder'
-import { getColorTheme } from '@/modules/utils/colors'
-import { MainCollections } from '@/modules/types'
+import { getColorTheme } from '#/utils/colors'
+import { MainCollections } from '#/types'
 import { T } from '../uiElements/t'
 
 //

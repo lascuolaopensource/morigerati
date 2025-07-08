@@ -3,22 +3,22 @@ import React from 'react'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 //DB
-import { loadDb } from '@/modules/utils/db'
+import { loadDb } from '#/utils/db'
 import type { Media } from '@/payload-types'
 
-import Copertina from '@/modules/components/uiElements/copertina'
-import Galleria from '@/modules/components/galleria/galleria'
+import Copertina from '#/components/uiElements/copertina'
+import Galleria from '#/components/galleria/galleria'
 
 //Locale
 import { getMessages } from 'next-intl/server'
-import { DetailPageHeading } from '@/modules/components/pageLayout/detailPageHeading'
-import { Container } from '@/modules/components/uiElements/container'
+import { DetailPageHeading } from '#/components/pageLayout/detailPageHeading'
+import { Container } from '#/components/uiElements/container'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import PixelBorder from '@/modules/components/uiElements/pixelBorder'
-import { InfoSection } from '@/modules/components/uiElements/infoSection'
-import { Contatti } from '@/modules/components/uiElements/contatti'
-import { getLocale } from '@/modules/i18n'
-import { createMetadata } from '@/modules/seo'
+import PixelBorder from '#/components/uiElements/pixelBorder'
+import { InfoSection } from '#/components/uiElements/infoSection'
+import { Contatti } from '#/components/uiElements/contatti'
+import { getLocale } from '#/i18n'
+import { createMetadata } from '#/seo'
 
 //
 

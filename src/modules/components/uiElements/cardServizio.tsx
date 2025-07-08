@@ -1,4 +1,4 @@
-import { cn } from '@/modules/utils/utils'
+import { cn } from '#/utils/utils'
 import { Luoghi, Itinerari } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 

@@ -1,7 +1,7 @@
-import { MainCollections } from '@/modules/types'
+import { MainCollections } from '#/types'
 import { T } from './t'
-import { cn } from '@/modules/utils/utils'
-import { getColorTheme } from '@/modules/utils/colors'
+import { cn } from '#/utils/utils'
+import { getColorTheme } from '#/utils/colors'
 
 //
 

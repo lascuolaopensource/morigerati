@@ -1,5 +1,5 @@
-import { cn } from '@/modules/utils/utils'
-import { getRandomPixel } from '@/modules/utils/getRandomPixel'
+import { cn } from '#/utils/utils'
+import { getRandomPixel } from '#/utils/getRandomPixel'
 
 interface PixelBorderProps {
   className?: string

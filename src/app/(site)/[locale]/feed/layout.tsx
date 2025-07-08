@@ -1,4 +1,4 @@
-import PixelBorder from '@/modules/components/uiElements/pixelBorder'
+import PixelBorder from '#/components/uiElements/pixelBorder'
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   return (

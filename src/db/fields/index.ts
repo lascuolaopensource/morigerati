@@ -27,7 +27,7 @@ import {
   InlineToolbarFeature,
 } from '@payloadcms/richtext-lexical'
 
-import { capitalizeFirstLetter } from '@/modules/utils/strings'
+import { capitalizeFirstLetter } from '#/utils/strings'
 
 import { formatSlugHook } from './slug/formatSlug'
 

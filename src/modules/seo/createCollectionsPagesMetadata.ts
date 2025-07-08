@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { createMetadata } from './createMetadata'
-import { getLocale } from '@/modules/i18n'
-import { MainCollections } from '@/modules/types'
+import { getLocale } from '#/i18n'
+import { MainCollections } from '#/types'
 // import { loadDb } from '@/utils/db'
 
 //
