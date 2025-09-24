@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "#/*": ["./src/modules/*"],
       "@payload-config": ["./src/payload.config.ts"]
     },
     "target": "ES2017"
@@ -29,9 +30,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/articoli/articoliCards",
-    "src/components/mappa/leaflet-gpx.d,ts",
-    "src/components/uiElements/autoPlaySilentVideo.tsx"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "next.config.mjs"
   ],
   "exclude": ["node_modules"]
 }

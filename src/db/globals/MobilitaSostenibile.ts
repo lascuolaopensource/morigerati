@@ -1,5 +1,5 @@
 import type { GlobalConfig } from 'payload'
-import * as F from '@/fields'
+import * as F from '@/db/fields'
 import { Globals } from '.'
 
 export const MobilitaSostenibile: GlobalConfig = {
@@ -10,5 +10,20 @@ export const MobilitaSostenibile: GlobalConfig = {
     read: () => true,
   },
 
-  fields: F.contenutoFields,
+  fields: [
+    {
+      name: 'copertina',
+      type: 'upload',
+      label: 'Immagine di copertina',
+      relationTo: 'media',
+    },
+    {
+      name: 'testo',
+      type: 'richText',
+      label: 'Testo',
+      localized: true,
+    },
+    F.divider('divider-1'),
+    F.galleria,
+  ],
 }

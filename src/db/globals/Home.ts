@@ -1,5 +1,5 @@
 import type { GlobalConfig } from 'payload'
-import * as F from '@/fields'
+import * as F from '@/db/fields'
 import { Globals } from '.'
 import {
   BoldFeature,
@@ -33,11 +33,13 @@ export const Home: GlobalConfig = {
       name: 'title',
       type: 'text',
       label: 'Titolo',
+      localized: true,
     },
     {
       name: 'testo',
       type: 'richText',
       label: 'Testo',
+      localized: true,
       editor: lexicalEditor({
         features: () => [
           ParagraphFeature(),
@@ -52,12 +54,5 @@ export const Home: GlobalConfig = {
     F.titleAndTextHome('itinerari'),
     F.titleAndTextHome('luoghi'),
     F.titleAndTextHome('residenze'),
-    {
-      name: 'tracciati_mappa',
-      type: 'relationship',
-      relationTo: 'tracciati',
-      hasMany: true,
-      label: 'Tracciati da mostrare sulla mappa',
-    },
   ],
 }

@@ -6,19 +6,79 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * Supported timezones in IANA format.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportedTimezones".
+ */
+export type SupportedTimezones =
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Brisbane'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
+
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    account: AccountAuthOperations;
   };
+  blocks: {};
   collections: {
     users: User;
     media: Media;
     luoghi: Luoghi;
     itinerari: Itinerari;
     residenze: Residenze;
-    stakeholders: Stakeholder;
+    persone: Persone;
     articoli: Articoli;
     tracciati: Tracciati;
+    account: Account;
+    post: Post;
+    'post-media': PostMedia;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -30,9 +90,12 @@ export interface Config {
     luoghi: LuoghiSelect<false> | LuoghiSelect<true>;
     itinerari: ItinerariSelect<false> | ItinerariSelect<true>;
     residenze: ResidenzeSelect<false> | ResidenzeSelect<true>;
-    stakeholders: StakeholdersSelect<false> | StakeholdersSelect<true>;
+    persone: PersoneSelect<false> | PersoneSelect<true>;
     articoli: ArticoliSelect<false> | ArticoliSelect<true>;
     tracciati: TracciatiSelect<false> | TracciatiSelect<true>;
+    account: AccountSelect<false> | AccountSelect<true>;
+    post: PostSelect<false> | PostSelect<true>;
+    'post-media': PostMediaSelect<false> | PostMediaSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -54,16 +117,38 @@ export interface Config {
     footer: FooterSelect<false> | FooterSelect<true>;
     testi: TestiSelect<false> | TestiSelect<true>;
   };
-  locale: null;
-  user: User & {
-    collection: 'users';
-  };
+  locale: 'en' | 'it';
+  user:
+    | (User & {
+        collection: 'users';
+      })
+    | (Account & {
+        collection: 'account';
+      });
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface AccountAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -96,6 +181,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -105,6 +197,7 @@ export interface User {
 export interface Media {
   id: string;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -116,6 +209,56 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    xlarge?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -132,7 +275,7 @@ export interface Luoghi {
   Itinerari_relation?: (string | Itinerari)[] | null;
   servizi?:
     | {
-        nome: string;
+        nome?: string | null;
         link?: string | null;
         testo?: {
           root: {
@@ -217,11 +360,11 @@ export interface Itinerari {
   lunghezza?: number | null;
   tempo?: number | null;
   dislivello?: string | null;
-  tipo?: ('Itinerario ad anello' | 'Andata e ritorno')[] | null;
+  tipo?: ('Itinerario ad anello' | 'Andata e ritorno') | null;
   difficolta?: ('T - Turistico' | 'E - Escursionistico' | 'EE - Escursionisti Esperti') | null;
   servizi?:
     | {
-        nome: string;
+        nome?: string | null;
         link?: string | null;
         testo?: {
           root: {
@@ -242,7 +385,7 @@ export interface Itinerari {
       }[]
     | null;
   luoghi?: (string | Luoghi)[] | null;
-  stakeholders?: (string | Stakeholder)[] | null;
+  persone?: (string | Persone)[] | null;
   media_geolocalizzati?:
     | {
         /**
@@ -292,6 +435,7 @@ export interface Itinerari {
 export interface Tracciati {
   id: string;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -306,12 +450,12 @@ export interface Tracciati {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "stakeholders".
+ * via the `definition` "persone".
  */
-export interface Stakeholder {
+export interface Persone {
   id: string;
   nome: string;
-  tipologia?: ('Azienda' | 'Ristoratori' | 'etc') | null;
+  tipologia?: string | null;
   /**
    * @minItems 2
    * @maxItems 2
@@ -364,13 +508,12 @@ export interface Stakeholder {
 export interface Residenze {
   id: string;
   nome: string;
-  data_inizio?: string | null;
+  data_inizio: string;
   data_fine?: string | null;
   deadline_iscrizione?: string | null;
   link_iscrizione?: string | null;
-  indirizzo?: string | null;
-  mostra_dettagli?: boolean | null;
   mostra_pulsante_iscrizione?: boolean | null;
+  indirizzo?: string | null;
   abstract?: {
     root: {
       type: string;
@@ -426,9 +569,23 @@ export interface Residenze {
     | null;
   esperti?:
     | {
-        nome: string;
+        nome?: string | null;
         foto?: (string | null) | Media;
-        biografia?: string | null;
+        biografia?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         progetti?:
           | {
               nome: string;
@@ -506,6 +663,114 @@ export interface Articoli {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "account".
+ */
+export interface Account {
+  id: string;
+  nome: string;
+  persona?: (string | null) | Persone;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post".
+ */
+export interface Post {
+  id: string;
+  text: string;
+  link?: string | null;
+  media?: (string | null) | PostMedia;
+  owner: string | Account;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post-media".
+ */
+export interface PostMedia {
+  id: string;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    xlarge?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -532,8 +797,8 @@ export interface PayloadLockedDocument {
         value: string | Residenze;
       } | null)
     | ({
-        relationTo: 'stakeholders';
-        value: string | Stakeholder;
+        relationTo: 'persone';
+        value: string | Persone;
       } | null)
     | ({
         relationTo: 'articoli';
@@ -542,12 +807,29 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'tracciati';
         value: string | Tracciati;
+      } | null)
+    | ({
+        relationTo: 'account';
+        value: string | Account;
+      } | null)
+    | ({
+        relationTo: 'post';
+        value: string | Post;
+      } | null)
+    | ({
+        relationTo: 'post-media';
+        value: string | PostMedia;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'account';
+        value: string | Account;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -557,10 +839,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: string;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'account';
+        value: string | Account;
+      };
   key?: string | null;
   value?:
     | {
@@ -599,6 +886,13 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -606,6 +900,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -617,6 +912,70 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        xlarge?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        og?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -680,7 +1039,7 @@ export interface ItinerariSelect<T extends boolean = true> {
         id?: T;
       };
   luoghi?: T;
-  stakeholders?: T;
+  persone?: T;
   media_geolocalizzati?:
     | T
     | {
@@ -714,9 +1073,8 @@ export interface ResidenzeSelect<T extends boolean = true> {
   data_fine?: T;
   deadline_iscrizione?: T;
   link_iscrizione?: T;
-  indirizzo?: T;
-  mostra_dettagli?: T;
   mostra_pulsante_iscrizione?: T;
+  indirizzo?: T;
   abstract?: T;
   descrizione?: T;
   copertina?: T;
@@ -764,9 +1122,9 @@ export interface ResidenzeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "stakeholders_select".
+ * via the `definition` "persone_select".
  */
-export interface StakeholdersSelect<T extends boolean = true> {
+export interface PersoneSelect<T extends boolean = true> {
   nome?: T;
   tipologia?: T;
   posizione?: T;
@@ -830,6 +1188,7 @@ export interface ArticoliSelect<T extends boolean = true> {
  */
 export interface TracciatiSelect<T extends boolean = true> {
   alt?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -841,6 +1200,124 @@ export interface TracciatiSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "account_select".
+ */
+export interface AccountSelect<T extends boolean = true> {
+  nome?: T;
+  persona?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post_select".
+ */
+export interface PostSelect<T extends boolean = true> {
+  text?: T;
+  link?: T;
+  media?: T;
+  owner?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post-media_select".
+ */
+export interface PostMediaSelect<T extends boolean = true> {
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        xlarge?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        og?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -952,7 +1429,6 @@ export interface Home {
       [k: string]: unknown;
     };
   };
-  tracciati_mappa?: (string | Tracciati)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1005,8 +1481,7 @@ export interface ChiSiamo {
 export interface MobilitaSostenibile {
   id: string;
   copertina?: (string | null) | Media;
-  galleria?: (string | Media)[] | null;
-  testo: {
+  testo?: {
     root: {
       type: string;
       children: {
@@ -1020,7 +1495,8 @@ export interface MobilitaSostenibile {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
+  galleria?: (string | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1138,7 +1614,7 @@ export interface Testi {
       [k: string]: unknown;
     };
   };
-  stakeholders: {
+  persone: {
     title: string;
     testo: {
       root: {
@@ -1204,7 +1680,6 @@ export interface HomeSelect<T extends boolean = true> {
         title?: T;
         testo?: T;
       };
-  tracciati_mappa?: T;
   meta?:
     | T
     | {
@@ -1241,8 +1716,8 @@ export interface ChiSiamoSelect<T extends boolean = true> {
  */
 export interface MobilitaSostenibileSelect<T extends boolean = true> {
   copertina?: T;
-  galleria?: T;
   testo?: T;
+  galleria?: T;
   meta?:
     | T
     | {
@@ -1295,7 +1770,7 @@ export interface TestiSelect<T extends boolean = true> {
         title?: T;
         testo?: T;
       };
-  stakeholders?:
+  persone?:
     | T
     | {
         title?: T;
