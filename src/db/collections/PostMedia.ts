@@ -13,11 +13,11 @@ export const PostMedia = {
   },
 
   upload: {
-    disableLocalStorage: true,
     adminThumbnail: 'thumbnail',
     imageSizes,
     formatOptions: { format: 'webp' },
     mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'image/gif'],
+    staticDir: 'data/post-media',
   },
   fields: [],
 

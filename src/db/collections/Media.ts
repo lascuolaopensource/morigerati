@@ -16,12 +16,11 @@ export const Media: CollectionConfig = {
   ],
 
   upload: {
-    disableLocalStorage: true,
     adminThumbnail: 'thumbnail',
     crop: true,
     focalPoint: true,
-
     formatOptions: { format: 'webp' },
     imageSizes,
+    staticDir: 'data/media',
   },
 }

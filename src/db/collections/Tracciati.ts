@@ -16,5 +16,7 @@ export const Tracciati: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
+  upload: {
+    staticDir: 'data/tracciati',
+  },
 }

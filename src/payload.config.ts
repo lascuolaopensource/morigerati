@@ -1,5 +1,4 @@
-// storage-adapter-import-placeholder
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import {
   lexicalEditor,
   InlineToolbarFeature,
@@ -16,8 +15,6 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-
-import { s3Storage } from '@payloadcms/storage-s3'
 
 import localization from '#/i18n/localization'
 import { it } from '@payloadcms/translations/languages/it'
@@ -54,8 +51,10 @@ export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_DOMAIN,
   csrf: [],
 
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+  db: sqliteAdapter({
+    client: {
+      url: process.env.DATABASE_URI || '',
+    },
   }),
 
   admin: {
@@ -108,40 +107,38 @@ export default buildConfig({
 
   sharp,
 
-  plugins: [
-    seoPlugin,
-
-    s3Storage({
-      enabled: true,
-      bucket: process.env.S3_BUCKET!,
-      disableLocalStorage: true,
-      collections: {
-        [Media.slug]: {
-          disableLocalStorage: true,
-          prefix: 'media',
-        },
-        [Tracciati.slug]: {
-          disableLocalStorage: true,
-          prefix: 'tracciati',
-        },
-        [PostMedia.slug]: {
-          disableLocalStorage: true,
-          prefix: 'post-media',
-        },
-      },
-      config: {
-        endpoint: process.env.S3_ENDPOINT!,
-        region: process.env.S3_REGION!,
-        credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID!,
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
-        },
-        forcePathStyle: true,
-      },
-    }),
-  ],
+  plugins: [seoPlugin],
 
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
 })
+
+// s3Storage({
+//   enabled: true,
+//   bucket: process.env.S3_BUCKET!,
+//   disableLocalStorage: true,
+//   collections: {
+//     [Media.slug]: {
+//       disableLocalStorage: true,
+//       prefix: 'media',
+//     },
+//     [Tracciati.slug]: {
+//       disableLocalStorage: true,
+//       prefix: 'tracciati',
+//     },
+//     [PostMedia.slug]: {
+//       disableLocalStorage: true,
+//       prefix: 'post-media',
+//     },
+//   },
+//   config: {
+//     endpoint: process.env.S3_ENDPOINT!,
+//     region: process.env.S3_REGION!,
+//     credentials: {
+//       accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+//       secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+//     },
+//     forcePathStyle: true,
+//   },
+// }),

@@ -101,7 +101,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   globals: {
     home: Home;
@@ -171,7 +171,7 @@ export interface AccountAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -195,9 +195,8 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -265,14 +264,14 @@ export interface Media {
  * via the `definition` "luoghi".
  */
 export interface Luoghi {
-  id: string;
+  id: number;
   nome: string;
   /**
    * @minItems 2
    * @maxItems 2
    */
   posizione?: [number, number] | null;
-  Itinerari_relation?: (string | Itinerari)[] | null;
+  Itinerari_relation?: (number | Itinerari)[] | null;
   servizi?:
     | {
         nome?: string | null;
@@ -281,7 +280,7 @@ export interface Luoghi {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -308,7 +307,7 @@ export interface Luoghi {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -319,13 +318,13 @@ export interface Luoghi {
     };
     [k: string]: unknown;
   } | null;
-  copertina?: (string | null) | Media;
-  galleria?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  galleria?: (number | Media)[] | null;
   testo: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -344,7 +343,7 @@ export interface Luoghi {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -354,9 +353,9 @@ export interface Luoghi {
  * via the `definition` "itinerari".
  */
 export interface Itinerari {
-  id: string;
+  id: number;
   nome: string;
-  tracciato_gpx?: (string | null) | Tracciati;
+  tracciato_gpx?: (number | null) | Tracciati;
   lunghezza?: number | null;
   tempo?: number | null;
   dislivello?: string | null;
@@ -370,7 +369,7 @@ export interface Itinerari {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -384,8 +383,8 @@ export interface Itinerari {
         id?: string | null;
       }[]
     | null;
-  luoghi?: (string | Luoghi)[] | null;
-  persone?: (string | Persone)[] | null;
+  luoghi?: (number | Luoghi)[] | null;
+  persone?: (number | Persone)[] | null;
   media_geolocalizzati?:
     | {
         /**
@@ -393,18 +392,18 @@ export interface Itinerari {
          * @maxItems 2
          */
         posizione: [number, number];
-        copertina: string | Media;
+        copertina: number | Media;
         id?: string | null;
       }[]
     | null;
-  copertina?: (string | null) | Media;
-  Video?: (string | null) | Media;
-  galleria?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  Video?: (number | null) | Media;
+  galleria?: (number | Media)[] | null;
   testo: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -423,7 +422,7 @@ export interface Itinerari {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -433,9 +432,8 @@ export interface Itinerari {
  * via the `definition` "tracciati".
  */
 export interface Tracciati {
-  id: string;
+  id: number;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -453,7 +451,7 @@ export interface Tracciati {
  * via the `definition` "persone".
  */
 export interface Persone {
-  id: string;
+  id: number;
   nome: string;
   tipologia?: string | null;
   /**
@@ -471,13 +469,13 @@ export interface Persone {
         id?: string | null;
       }[]
     | null;
-  copertina?: (string | null) | Media;
-  galleria?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  galleria?: (number | Media)[] | null;
   testo: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -496,7 +494,7 @@ export interface Persone {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -506,7 +504,7 @@ export interface Persone {
  * via the `definition` "residenze".
  */
 export interface Residenze {
-  id: string;
+  id: number;
   nome: string;
   data_inizio: string;
   data_fine?: string | null;
@@ -518,7 +516,7 @@ export interface Residenze {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -533,7 +531,7 @@ export interface Residenze {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -544,8 +542,8 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  copertina?: (string | null) | Media;
-  galleria?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  galleria?: (number | Media)[] | null;
   programma?:
     | {
         programma?: string | null;
@@ -553,7 +551,7 @@ export interface Residenze {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -570,12 +568,12 @@ export interface Residenze {
   esperti?:
     | {
         nome?: string | null;
-        foto?: (string | null) | Media;
+        foto?: (number | null) | Media;
         biografia?: {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -611,7 +609,7 @@ export interface Residenze {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -621,7 +619,7 @@ export interface Residenze {
  * via the `definition` "articoli".
  */
 export interface Articoli {
-  id: string;
+  id: number;
   titolo: string;
   sottotitolo?: string | null;
   tags?:
@@ -631,13 +629,13 @@ export interface Articoli {
       }[]
     | null;
   data_pubblicazione?: string | null;
-  copertina?: (string | null) | Media;
-  galleria?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  galleria?: (number | Media)[] | null;
   testo: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -656,7 +654,7 @@ export interface Articoli {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -666,9 +664,9 @@ export interface Articoli {
  * via the `definition` "account".
  */
 export interface Account {
-  id: string;
+  id: number;
   nome: string;
-  persona?: (string | null) | Persone;
+  persona?: (number | null) | Persone;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -692,11 +690,11 @@ export interface Account {
  * via the `definition` "post".
  */
 export interface Post {
-  id: string;
+  id: number;
   text: string;
   link?: string | null;
-  media?: (string | null) | PostMedia;
-  owner: string | Account;
+  media?: (number | null) | PostMedia;
+  owner: number | Account;
   updatedAt: string;
   createdAt: string;
 }
@@ -705,8 +703,7 @@ export interface Post {
  * via the `definition` "post-media".
  */
 export interface PostMedia {
-  id: string;
-  prefix?: string | null;
+  id: number;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -774,61 +771,61 @@ export interface PostMedia {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'luoghi';
-        value: string | Luoghi;
+        value: number | Luoghi;
       } | null)
     | ({
         relationTo: 'itinerari';
-        value: string | Itinerari;
+        value: number | Itinerari;
       } | null)
     | ({
         relationTo: 'residenze';
-        value: string | Residenze;
+        value: number | Residenze;
       } | null)
     | ({
         relationTo: 'persone';
-        value: string | Persone;
+        value: number | Persone;
       } | null)
     | ({
         relationTo: 'articoli';
-        value: string | Articoli;
+        value: number | Articoli;
       } | null)
     | ({
         relationTo: 'tracciati';
-        value: string | Tracciati;
+        value: number | Tracciati;
       } | null)
     | ({
         relationTo: 'account';
-        value: string | Account;
+        value: number | Account;
       } | null)
     | ({
         relationTo: 'post';
-        value: string | Post;
+        value: number | Post;
       } | null)
     | ({
         relationTo: 'post-media';
-        value: string | PostMedia;
+        value: number | PostMedia;
       } | null);
   globalSlug?: string | null;
   user:
     | {
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       }
     | {
         relationTo: 'account';
-        value: string | Account;
+        value: number | Account;
       };
   updatedAt: string;
   createdAt: string;
@@ -838,15 +835,15 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user:
     | {
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       }
     | {
         relationTo: 'account';
-        value: string | Account;
+        value: number | Account;
       };
   key?: string | null;
   value?:
@@ -866,7 +863,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -900,7 +897,6 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1188,7 +1184,6 @@ export interface ArticoliSelect<T extends boolean = true> {
  */
 export interface TracciatiSelect<T extends boolean = true> {
   alt?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1242,7 +1237,6 @@ export interface PostSelect<T extends boolean = true> {
  * via the `definition` "post-media_select".
  */
 export interface PostMediaSelect<T extends boolean = true> {
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1356,15 +1350,15 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "home".
  */
 export interface Home {
-  id: string;
+  id: number;
   statement?: string | null;
-  cover?: (string | null) | Media;
+  cover?: (number | null) | Media;
   title?: string | null;
   testo?: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1381,7 +1375,7 @@ export interface Home {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1399,7 +1393,7 @@ export interface Home {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1417,7 +1411,7 @@ export interface Home {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1435,7 +1429,7 @@ export interface Home {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1445,13 +1439,13 @@ export interface Home {
  * via the `definition` "chi_siamo".
  */
 export interface ChiSiamo {
-  id: string;
-  copertina?: (string | null) | Media;
+  id: number;
+  copertina?: (number | null) | Media;
   testo_chi_siamo?: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1462,14 +1456,14 @@ export interface ChiSiamo {
     };
     [k: string]: unknown;
   } | null;
-  galleria?: (string | Media)[] | null;
+  galleria?: (number | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1479,13 +1473,13 @@ export interface ChiSiamo {
  * via the `definition` "mobilita_sostenibile".
  */
 export interface MobilitaSostenibile {
-  id: string;
-  copertina?: (string | null) | Media;
+  id: number;
+  copertina?: (number | null) | Media;
   testo?: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1496,14 +1490,14 @@ export interface MobilitaSostenibile {
     };
     [k: string]: unknown;
   } | null;
-  galleria?: (string | Media)[] | null;
+  galleria?: (number | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1513,12 +1507,12 @@ export interface MobilitaSostenibile {
  * via the `definition` "footer".
  */
 export interface Footer {
-  id: string;
+  id: number;
   testo_sinistra: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1533,7 +1527,7 @@ export interface Footer {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1559,14 +1553,14 @@ export interface Footer {
  * via the `definition` "testi".
  */
 export interface Testi {
-  id: string;
+  id: number;
   luoghi: {
     title: string;
     testo: {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1584,7 +1578,7 @@ export interface Testi {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1602,7 +1596,7 @@ export interface Testi {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1620,7 +1614,7 @@ export interface Testi {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1638,7 +1632,7 @@ export interface Testi {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
