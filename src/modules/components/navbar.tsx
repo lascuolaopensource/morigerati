@@ -54,7 +54,7 @@ export function Navbar() {
 
 	return (
 		<nav className={cn('z-50 transition-all', classes.className)} role="navigation">
-			<div className="flex justify-between items-center max-w-7xl py-1 pb-[6px] px-3">
+			<div className="flex justify-between items-center max-w-7xl py-1 pb-[6px] px-3 mx-auto">
 				<NavbarLogo />
 
 				<div className="flex items-center">

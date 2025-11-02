@@ -16,11 +16,17 @@ export const Home: GlobalConfig = {
 			label: 'Immagine di copertina',
 			required: true,
 		}),
-		F.plainText({
+		{
 			name: 'statement',
-			label: 'Statement',
+			type: 'text',
 			required: true,
-		}),
+			localized: true,
+		},
+		// F.plainText({
+		// 	name: 'statement',
+		// 	label: 'Statement',
+		// 	required: true,
+		// }),
 		// {
 		// 	...F.media,
 		// 	name: 'cover',
