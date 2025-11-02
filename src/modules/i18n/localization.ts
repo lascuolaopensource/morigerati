@@ -6,7 +6,7 @@ import { routing } from './routing'
 
 const [it, en] = routing.locales
 
-export const localization: LocalizationConfig = {
+export const localization = {
 	defaultLocale: routing.defaultLocale,
 	fallback: true,
 	locales: [
@@ -19,4 +19,4 @@ export const localization: LocalizationConfig = {
 			label: 'English 🇬🇧',
 		},
 	],
-}
+} as const satisfies LocalizationConfig
