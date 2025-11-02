@@ -1,9 +1,10 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
-
-import './styles.css'
 import React from 'react'
 
+import './styles.css'
+
+import { Navbar } from '@/modules/components/navbar'
 import { hasLocale } from '@/modules/i18n'
 
 // export const metadata = {
@@ -12,25 +13,24 @@ import { hasLocale } from '@/modules/i18n'
 // }
 
 type Props = {
-  children: React.ReactNode
-  params: Promise<{ locale: string }>
+	children: React.ReactNode
+	params: Promise<{ locale: string }>
 }
 
 export default async function RootLayout(props: Props) {
-  const { children, params } = props
+	const { children, params } = props
 
-  const { locale } = await params
-  if (!hasLocale(locale)) {
-    notFound()
-  }
+	const { locale } = await params
+	if (!hasLocale(locale)) notFound()
 
-  return (
-    <html lang="en">
-      <body>
-        <NextIntlClientProvider>
-          <main>{children}</main>
-        </NextIntlClientProvider>
-      </body>
-    </html>
-  )
+	return (
+		<html lang="en">
+			<body>
+				<NextIntlClientProvider>
+					<Navbar />
+					<main>{children}</main>
+				</NextIntlClientProvider>
+			</body>
+		</html>
+	)
 }

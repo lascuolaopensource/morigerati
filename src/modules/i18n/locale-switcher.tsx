@@ -30,18 +30,18 @@ export function LocaleSwitcher() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className="cursor-pointer">
-				<Button variant="outline">
+				<Button variant="ghost">
 					{currentLocaleLabel}
 					<RefreshCcw />
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="center">
-				<DropdownMenuGroup>
+				<DropdownMenuGroup className="space-y-0.5">
 					{localization.locales.map((l) => (
 						<DropdownMenuItem
 							key={l.code}
 							className={cn('cursor-pointer justify-center', {
-								'bg-blue-100': currentLocale === l.code,
+								'bg-blue-100 hover:bg-blue-100!': currentLocale === l.code,
 							})}
 							onClick={() => handleChangeLocale(l.code)}
 						>
