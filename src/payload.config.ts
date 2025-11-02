@@ -1,16 +1,16 @@
-// storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { it } from '@payloadcms/translations/languages/it'
+// storage-adapter-import-placeholder
 import { localization } from '#/i18n'
 import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
-import { Media } from '@/db/collections/Media'
-import { Users } from '@/db/collections/Users'
+import { Media } from '@/db/collections/fino'
+import { Users } from '@/db/collections/uten'
+import { Home } from '@/db/globals/shome'
 
 //
 
@@ -24,8 +24,10 @@ export default buildConfig({
 			baseDir: path.resolve(dirname),
 		},
 	},
+
 	collections: [Users, Media],
-	editor: lexicalEditor(),
+	globals: [Home],
+
 	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {
 		outputFile: path.resolve(dirname, 'payload-types.ts'),
