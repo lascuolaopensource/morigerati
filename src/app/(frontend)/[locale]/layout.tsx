@@ -1,11 +1,16 @@
+import { cn } from '$/lib/utils'
 import { NextIntlClientProvider } from 'next-intl'
-import { notFound } from 'next/navigation'
-import React from 'react'
+import localFont from 'next/font/local'
 
 import './styles.css'
 
+import { notFound } from 'next/navigation'
+import React from 'react'
+
 import { Navbar } from '@/modules/components/navbar'
 import { hasLocale } from '@/modules/i18n'
+
+//
 
 // export const metadata = {
 //   description: 'A blank template using Payload in a Next.js app.',
@@ -24,7 +29,7 @@ export default async function RootLayout(props: Props) {
 	if (!hasLocale(locale)) notFound()
 
 	return (
-		<html lang="en">
+		<html lang="en" className={cn(transluoghiPixelsFont.variable, transinstrumentFont.variable)}>
 			<body>
 				<NextIntlClientProvider>
 					<Navbar />
@@ -34,3 +39,13 @@ export default async function RootLayout(props: Props) {
 		</html>
 	)
 }
+
+const transluoghiPixelsFont = localFont({
+	src: './_fonts/transluoghi-pixels.ttf',
+	variable: '--font-transluoghi-pixels',
+})
+
+const transinstrumentFont = localFont({
+	src: './_fonts/transinstrument-sans-vf.ttf',
+	variable: '--font-transinstrument',
+})

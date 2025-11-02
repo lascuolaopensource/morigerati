@@ -129,4 +129,6 @@
 	--color-persone-dark: #696136;
 	--color-residenze: #f69679;
 	--color-residenze-dark: #754637;
+	--font-transluoghi-pixels: var(--font-transluoghi-pixels);
+	--font-sans: var(--font-transinstrument);
 }

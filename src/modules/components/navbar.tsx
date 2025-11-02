@@ -11,7 +11,7 @@ import { MenuIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import NavbarLogo from './navbar-logo'
+import { NavbarLogo } from './navbar-logo'
 
 //
 
@@ -54,10 +54,10 @@ export function Navbar() {
 
 	return (
 		<nav className={cn('z-50 transition-all', classes.className)} role="navigation">
-			<div className="flex justify-between items-center max-w-7xl py-1 px-3">
+			<div className="flex justify-between items-center max-w-7xl py-1 pb-[6px] px-3">
 				<NavbarLogo />
 
-				<div className="flex items-center gap-2">
+				<div className="flex items-center">
 					<LocaleSwitcher />
 
 					<div className="hidden lg:flex items-center gap-0">
@@ -88,7 +88,7 @@ function NavbarMenu(props: NavbarMenuProps) {
 	return (
 		<Sheet open={isOpen} onOpenChange={setIsOpen}>
 			<SheetTrigger className="lg:hidden p-2 rounded-lg hover:cursor-pointer hover:ring-black hover:ring-2">
-				<MenuIcon />
+				<MenuIcon size={20} />
 			</SheetTrigger>
 
 			<SheetContent
@@ -127,7 +127,10 @@ function NavbarLink(props: LinkProps) {
 	return (
 		<Link
 			href={href}
-			className={cn('p-2 rounded-lg hover:cursor-pointer hover:ring-black hover:ring-2', className)}
+			className={cn(
+				'px-2 py-[6px] rounded-lg hover:cursor-pointer hover:ring-black hover:ring-2',
+				className,
+			)}
 			{...rest}
 		>
 			{children || title}

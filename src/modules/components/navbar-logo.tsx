@@ -1,96 +1,68 @@
 'use client'
 
 import { Link } from '#/i18n'
-import React from 'react'
+import { useState } from 'react'
 
-interface LogoGeneratorProps {
-	textColor?: string
-}
+//
 
-const LogoGenerator: React.FC<LogoGeneratorProps> = ({ textColor = 'black' }) => {
-	// const [letters, setLetters] = useState({ first: '', second: '' })
-	// const [isHovering, setIsHovering] = useState(false)
+export function NavbarLogo() {
+	const [letters, setLetters] = useState(getRandomLetters())
+	const [logoInterval, setLogoInterval] = useState<NodeJS.Timeout>()
 
-	// const generateLetters = () => {
-	// 	const alphabet = 'abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ'
-	// 	let letter1, letter2
-	// 	do {
-	// 		letter1 = alphabet[Math.floor(Math.random() * alphabet.length)]
-	// 		letter2 = alphabet[Math.floor(Math.random() * alphabet.length)]
-	// 	} while (
-	// 		!(letter1.toLowerCase() === letter1 && letter2.toLowerCase() !== letter2) &&
-	// 		!(letter1.toLowerCase() !== letter1 && letter2.toLowerCase() === letter2)
-	// 	)
-	// 	setLetters({ first: letter1, second: letter2 })
-	// }
+	function startInterval() {
+		const intv = setInterval(() => {
+			setLetters(getRandomLetters())
+		}, 100)
+		setLogoInterval(intv)
+	}
 
-	// useEffect(() => {
-	// 	generateLetters()
-	// 	const interval = setInterval(
-	// 		generateLetters,
-	// 		isHovering && window.innerWidth >= 1024 ? 50 : 3000,
-	// 	)
-	// 	return () => clearInterval(interval)
-	// }, [isHovering])
+	function stopInterval() {
+		if (logoInterval) {
+			clearInterval(logoInterval)
+			setLogoInterval(undefined)
+		}
+	}
 
 	return (
-		<Link href="/">
+		<Link href="/" className="block">
 			<div
-				className="w-[250px]"
-				// onMouseEnter={() => setIsHovering(true)}
-				// onMouseLeave={() => setIsHovering(false)}
+				className="w-[250px] text-black"
+				onMouseEnter={startInterval}
+				onMouseLeave={stopInterval}
 			>
-				<svg viewBox="0 0 600 100" className="w-full" preserveAspectRatio="xMinYMid meet">
-					{/* <text
-						x="20"
-						y="75"
-						className="text-[70px] font-bold"
-						style={{
-							fontFamily: 'Transluoghi',
-							fill: textColor,
-						}}
+				<svg viewBox="0 0 550 95" className="w-full" preserveAspectRatio="xMinYMid meet">
+					<defs>
+						<clipPath id="logo-letters-clip">
+							<rect width="260" height="90" />
+						</clipPath>
+					</defs>
+					<text
+						y="90"
+						className="text-[85px] font-transluoghi-pixels"
+						clipPath="url(#logo-letters-clip)"
 					>
-						{letters.first}
-						{letters.second}
-					</text> */}
+						{letters}
+					</text>
 
-					{/* Text Block */}
-					<g transform="translate(310, 28)">
-						<text
-							className="text-[24px] font-semibold"
-							style={{
-								fontFamily: 'sans-serif',
-								fill: textColor,
-							}}
-						>
-							Transluoghi
-						</text>
-						<text
-							y="26"
-							className="text-[24px]"
-							style={{
-								fontFamily: 'sans-serif',
-								fill: textColor,
-							}}
-						>
-							Ecomuseo del Bussento
-						</text>
-						<text
-							x="87"
-							y="51"
-							className="text-[24px]"
-							style={{
-								fontFamily: 'sans-serif',
-								fill: textColor,
-							}}
-						>
-							Contemporaneo
-						</text>
-					</g>
+					<text className="font-semibold text-[25px]" x="275" y="30">
+						Transluoghi
+					</text>
+					<text className="text-[25px]" x="550" y="60" textAnchor="end">
+						Ecomuseo del Bussento
+					</text>
+					<text className="text-[25px]" x="550" y="90" textAnchor="end">
+						Contemporaneo
+					</text>
 				</svg>
 			</div>
 		</Link>
 	)
 }
 
-export default LogoGenerator
+function getRandomLetters(count = 4) {
+	const alphabet = 'abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	return Array.from(
+		{ length: count },
+		() => alphabet[Math.floor(Math.random() * alphabet.length)],
+	).join('')
+}

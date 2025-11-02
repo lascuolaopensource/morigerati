@@ -9,7 +9,7 @@ import {
 	DropdownMenuTrigger,
 } from '$/components/ui/dropdown-menu'
 import { cn } from '$/lib/utils'
-import { RefreshCcw } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { useLocale } from 'next-intl'
 
 import { localization } from './localization'
@@ -30,9 +30,9 @@ export function LocaleSwitcher() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className="cursor-pointer">
-				<Button variant="ghost">
-					{currentLocaleLabel}
-					<RefreshCcw />
+				<Button variant="ghost" className="hover:ring-black hover:ring-2 flex items-center gap-1">
+					<span className="translate-y-0.5">{currentLocaleLabel}</span>
+					<ChevronDown />
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="center">
