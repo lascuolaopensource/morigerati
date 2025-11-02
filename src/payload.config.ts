@@ -1,14 +1,15 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { it } from '@payloadcms/translations/languages/it'
-// storage-adapter-import-placeholder
 import { localization } from '#/i18n'
+import { Record } from 'effect'
 import path from 'path'
-import { buildConfig } from 'payload'
+import { AdminDependencies, buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import { Media } from '@/db/collections/media'
+import { Tracciati } from '@/db/collections/tracciati'
 import { Users } from '@/db/collections/users'
 import { Home } from '@/db/globals/home'
 
@@ -23,9 +24,14 @@ export default buildConfig({
 		importMap: {
 			baseDir: path.resolve(dirname),
 		},
+		dependencies: components({
+			divider: 'src/db/fields/components/divider.tsx',
+			gap: 'src/db/fields/components/gap.tsx',
+			header: 'src/db/fields/components/header.tsx',
+		}),
 	},
 
-	collections: [Users, Media],
+	collections: [Users, Media, Tracciati],
 	globals: [Home],
 
 	secret: process.env.PAYLOAD_SECRET || '',
@@ -55,6 +61,7 @@ function s3() {
 		disableLocalStorage: true,
 		collections: {
 			[Media.slug]: true,
+			[Tracciati.slug]: true,
 		},
 		bucket: process.env.S3_BUCKET!,
 		enabled: true,
@@ -68,4 +75,11 @@ function s3() {
 			forcePathStyle: true,
 		},
 	})
+}
+
+function components(items: Record<string, string>): AdminDependencies {
+	return Record.map(items, (item) => ({
+		path: item,
+		type: 'component',
+	}))
 }

@@ -34,6 +34,7 @@
     "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
+    "effect": "^3.18.4",
     "eslint-plugin-perfectionist": "^4.15.1",
     "graphql": "^16.8.1",
     "lucide-react": "^0.552.0",

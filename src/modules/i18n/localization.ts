@@ -12,11 +12,11 @@ export const localization = {
 	locales: [
 		{
 			code: it,
-			label: 'Italiano 🇮🇹',
+			label: '🇮🇹',
 		},
 		{
 			code: en,
-			label: 'English 🇬🇧',
+			label: '🇬🇧',
 		},
 	],
 } as const satisfies LocalizationConfig

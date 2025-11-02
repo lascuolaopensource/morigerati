@@ -1,324 +1,316 @@
-import {
-  ArrayField,
-  Field,
-  GroupField,
-  PointField,
-  RelationshipField,
-  RichTextField,
-  RowField,
-  Tab,
-  TextField,
-  UIField,
-  CheckboxField,
-  EmailField,
-} from 'payload'
-import { Collections } from '@/db/collections'
+import type { CollectionSlug, RichTextField, UploadField } from 'payload'
 
 import {
-  BoldFeature,
-  HeadingFeature,
-  ItalicFeature,
-  lexicalEditor,
-  UnderlineFeature,
-  LinkFeature,
-  OrderedListFeature,
-  ParagraphFeature,
-  UnorderedListFeature,
-  InlineToolbarFeature,
+	BoldFeature,
+	ItalicFeature,
+	lexicalEditor,
+	LinkFeature,
 } from '@payloadcms/richtext-lexical'
 
-import { capitalizeFirstLetter } from '#/utils/strings'
+import { createUIField } from './utils'
 
-import { formatSlugHook } from './slug/formatSlug'
+//
 
-// Field factory functions
-const createLocalizedField = <T extends Field>(field: T): T => ({
-  ...field,
-  localized: true,
-})
-
-const createRequiredField = <T extends Field>(field: T): T => ({
-  ...field,
-  required: true,
-})
-
-const createTextField = (name: string, options: Partial<TextField> = {}): TextField =>
-  ({
-    name,
-    type: 'text',
-    ...options,
-  } as TextField)
-
-const createRichTextField = (name: string): RichTextField =>
-  ({
-    name,
-    type: 'richText',
-  } as RichTextField)
-
-const createHomeRichTextField = (name: string): RichTextField =>
-  ({
-    name,
-    type: 'richText',
-    editor: lexicalEditor({
-      features: () => [
-        ParagraphFeature(),
-        BoldFeature(),
-        ItalicFeature(),
-        UnderlineFeature(),
-        InlineToolbarFeature(),
-      ],
-    }),
-  } as RichTextField)
-
-const createRowField = (fields: Field[]): RowField =>
-  ({
-    type: 'row',
-    fields,
-  } as RowField)
-
-const createArrayField = (
-  name: string,
-  fields: Field[],
-  options: Partial<ArrayField> = {},
-): ArrayField =>
-  ({
-    name,
-    type: 'array',
-    fields,
-    ...options,
-  } as ArrayField)
-
-const createUIField = (name: string, componentPath: string, clientProps = {}): UIField =>
-  ({
-    name,
-    type: 'ui',
-    admin: {
-      components: {
-        Field: {
-          path: componentPath,
-          clientProps,
-        },
-      },
-    },
-  } as UIField)
-
-type Overrides = {
-  slugOverrides?: Partial<TextField>
-  checkboxOverrides?: Partial<CheckboxField>
-  localized?: boolean
+export function header(text: string) {
+	return createUIField({
+		name: `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
+		componentPath: 'src/db/fields/components/header.tsx#default',
+		clientProps: { content: text },
+	})
 }
 
-type Slug = (fieldToUse?: string, overrides?: Overrides) => [TextField, CheckboxField]
-
-export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
-  const { slugOverrides, checkboxOverrides, localized = false } = overrides
-
-  const checkBoxField: CheckboxField = {
-    name: 'slugLock',
-    type: 'checkbox',
-    defaultValue: true,
-    admin: {
-      hidden: true,
-      position: 'sidebar',
-    },
-    ...checkboxOverrides,
-  } as CheckboxField
-
-  const slugField: TextField = {
-    name: 'slug',
-    type: 'text',
-    index: true,
-    label: 'Slug',
-    localized,
-    hooks: {
-      beforeValidate: [formatSlugHook(fieldToUse)],
-    },
-    admin: {
-      position: 'sidebar',
-      ...(slugOverrides?.admin || {}),
-      components: {
-        Field: {
-          path: '@/db/fields/slug/SlugComponent#SlugComponent',
-          clientProps: {
-            fieldToUse,
-            checkboxFieldPath: checkBoxField.name,
-          },
-        },
-      },
-    },
-    ...(slugOverrides || {}),
-  } as TextField
-
-  return [slugField, checkBoxField]
+export function upload<C extends CollectionSlug>(
+	props: { collection: C } & Omit<UploadField, 'relationTo' | 'type'>,
+): UploadField {
+	const { collection, ...rest } = props
+	// @ts-expect-error - Slight type mismatch
+	return {
+		...rest,
+		type: 'upload',
+		relationTo: collection,
+	}
 }
 
-export const title = (text: string): UIField =>
-  createUIField(
-    `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
-    '@/db/fields/components/header.tsx',
-    { content: text },
-  )
-
-export const gap = (size: number, key: string): UIField =>
-  createUIField(`gap-${key}`, '@/db/fields/components/gap.tsx', { size })
-
-export const divider = (key: string): UIField =>
-  createUIField(`divider-${key}`, '@/db/fields/components/divider.tsx', {})
-
-export const nome = createRequiredField(createTextField('nome'))
-
-export const link = createTextField('link')
-
-export const testo = createLocalizedField(createRichTextField('testo'))
-
-export const plainText = (name: string): TextField => createLocalizedField(createTextField(name))
-
-export const posizione: PointField = {
-  name: 'posizione',
-  type: 'point',
+export function media(props: Omit<Parameters<typeof upload>[0], 'collection'>): UploadField {
+	return upload({ collection: 'media', ...props })
 }
 
-export const linkConNome: RowField = createRowField([
-  createRequiredField(createTextField('nome')),
-  createRequiredField(link),
-])
-
-export const programmaArray: ArrayField = createArrayField(
-  'programma',
-  [
-    createTextField('programma', { label: 'giorno / momento', localized: true }),
-    {
-      name: 'testo',
-      type: 'richText',
-      label: 'testo',
-      localized: true,
-      editor: lexicalEditor({
-        features: () => [
-          ParagraphFeature(),
-          BoldFeature(),
-          ItalicFeature(),
-          UnderlineFeature(),
-          LinkFeature(),
-          OrderedListFeature(),
-          UnorderedListFeature(),
-        ],
-      }),
-    },
-  ],
-  {
-    label: 'Programma',
-  },
-)
-
-export const contatti: ArrayField = createArrayField(
-  'contatti',
-  [
-    createRowField([nome, link]),
-    createRowField([{ name: 'email', type: 'email' } as EmailField, createTextField('telefono')]),
-  ],
-  {},
-)
-
-export const media: RelationshipField = {
-  name: 'copertina',
-  label: 'Copertina',
-  type: 'relationship',
-  relationTo: Collections.Media,
+export function plainText(
+	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
+): RichTextField {
+	return {
+		localized: true,
+		editor: lexicalEditor({ features: () => [BoldFeature(), ItalicFeature(), LinkFeature()] }),
+		...props,
+		type: 'richText',
+	}
 }
 
-export const tracciati: RelationshipField = {
-  name: 'tracciato',
-  label: 'tracciato',
-  type: 'relationship',
-  relationTo: Collections.Tracciati,
-}
+// // Field factory functions
+// const createLocalizedField = <T extends Field>(field: T): T => ({
+// 	...field,
+// 	localized: true,
+// })
 
-export const galleria: RelationshipField = {
-  name: 'galleria',
-  label: 'Galleria',
-  type: 'relationship',
-  hasMany: true,
-  relationTo: Collections.Media,
-}
+// const createRequiredField = <T extends Field>(field: T): T => ({
+// 	...field,
+// 	required: true,
+// })
 
-export const servizi: ArrayField = createArrayField('servizi', [
-  {
-    name: 'nome',
-    type: 'text',
-    label: 'Nome',
-    localized: true,
-  },
-  link,
-  {
-    name: 'testo',
-    type: 'richText',
-    label: 'testo',
-    localized: true,
-    editor: lexicalEditor({
-      features: () => [ParagraphFeature()],
-    }),
-  },
-])
+// const createTextField = (name: string, options: Partial<TextField> = {}): TextField =>
+// 	({
+// 		name,
+// 		type: 'text',
+// 		...options,
+// 	}) as TextField
 
-const baseContentFields: Field[] = [
-  title('Immagini e media'),
-  media,
-  galleria,
-  title('Contenuti testuali'),
-  createRequiredField(testo),
-]
+// const createRichTextField = (name: string): RichTextField =>
+// 	({
+// 		name,
+// 		type: 'richText',
+// 	}) as RichTextField
 
-export const contenutoFields: Field[] = baseContentFields
+// const createHomeRichTextField = (name: string): RichTextField =>
+// 	({
+// 		name,
+// 		type: 'richText',
+// 		editor: lexicalEditor({
+// 			features: () => [
+// 				ParagraphFeature(),
+// 				BoldFeature(),
+// 				ItalicFeature(),
+// 				UnderlineFeature(),
+// 				InlineToolbarFeature(),
+// 			],
+// 		}),
+// 	}) as RichTextField
 
-const contenutoFieldsMedia: Field[] = [
-  ...baseContentFields.slice(0, 2),
-  {
-    name: 'Video',
-    type: 'relationship',
-    relationTo: Collections.Media,
-    required: false,
-  },
-  ...baseContentFields.slice(2),
-]
+// const createRowField = (fields: Field[]): RowField =>
+// 	({
+// 		type: 'row',
+// 		fields,
+// 	}) as RowField
 
-export const tabContenuto: Tab = {
-  label: 'Contenuto',
-  fields: contenutoFields,
-}
+// const createArrayField = (
+// 	name: string,
+// 	fields: Field[],
+// 	options: Partial<ArrayField> = {},
+// ): ArrayField =>
+// 	({
+// 		name,
+// 		type: 'array',
+// 		fields,
+// 		...options,
+// 	}) as ArrayField
 
-export const tabContenutoItinerario: Tab = {
-  label: 'Contenuto',
-  fields: contenutoFieldsMedia,
-}
+// type Overrides = {
+// 	slugOverrides?: Partial<TextField>
+// 	checkboxOverrides?: Partial<CheckboxField>
+// 	localized?: boolean
+// }
 
-export function titleAndText(name: string, label?: string): GroupField {
-  return {
-    name,
-    type: 'group',
-    label: label ?? capitalizeFirstLetter(name),
-    fields: [
-      createRequiredField(createLocalizedField(createTextField('title', { label: 'Titolo' }))),
-      createRequiredField(createLocalizedField(createRichTextField('testo'))),
-    ],
-  }
-}
+// type Slug = (fieldToUse?: string, overrides?: Overrides) => [TextField, CheckboxField]
 
-export function titleAndTextHome(name: string, label?: string): GroupField {
-  return {
-    name,
-    type: 'group',
-    label: label ?? capitalizeFirstLetter(name),
-    fields: [
-      createRequiredField(createLocalizedField(createTextField('title', { label: 'Titolo' }))),
-      createRequiredField(createLocalizedField(createHomeRichTextField('testo'))),
-    ],
-  }
-}
+// export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
+// 	const { slugOverrides, checkboxOverrides, localized = false } = overrides
 
-const socialNetworkLink: RowField = createRowField([nome, createRequiredField(link)])
+// 	const checkBoxField: CheckboxField = {
+// 		name: 'slugLock',
+// 		type: 'checkbox',
+// 		defaultValue: true,
+// 		admin: {
+// 			hidden: true,
+// 			position: 'sidebar',
+// 		},
+// 		...checkboxOverrides,
+// 	} as CheckboxField
 
-export const socialNetworkLinks: ArrayField = createArrayField(
-  'Link Social',
-  [socialNetworkLink],
-  {},
-)
+// 	const slugField: TextField = {
+// 		name: 'slug',
+// 		type: 'text',
+// 		index: true,
+// 		label: 'Slug',
+// 		localized,
+// 		hooks: {
+// 			beforeValidate: [formatSlugHook(fieldToUse)],
+// 		},
+// 		admin: {
+// 			position: 'sidebar',
+// 			...(slugOverrides?.admin || {}),
+// 			components: {
+// 				Field: {
+// 					path: '@/db/fields/slug/SlugComponent#SlugComponent',
+// 					clientProps: {
+// 						fieldToUse,
+// 						checkboxFieldPath: checkBoxField.name,
+// 					},
+// 				},
+// 			},
+// 		},
+// 		...(slugOverrides || {}),
+// 	} as TextField
+
+// 	return [slugField, checkBoxField]
+// }
+
+// export const gap = (size: number, key: string): UIField =>
+// 	createUIField(`gap-${key}`, '@/db/fields/components/gap.tsx', { size })
+
+// export const divider = (key: string): UIField =>
+// 	createUIField(`divider-${key}`, '@/db/fields/components/divider.tsx', {})
+
+// export const nome = createRequiredField(createTextField('nome'))
+
+// export const link = createTextField('link')
+
+// export const testo = createLocalizedField(createRichTextField('testo'))
+
+// export const posizione: PointField = {
+// 	name: 'posizione',
+// 	type: 'point',
+// }
+
+// export const linkConNome: RowField = createRowField([
+// 	createRequiredField(createTextField('nome')),
+// 	createRequiredField(link),
+// ])
+
+// export const programmaArray: ArrayField = createArrayField(
+// 	'programma',
+// 	[
+// 		createTextField('programma', { label: 'giorno / momento', localized: true }),
+// 		{
+// 			name: 'testo',
+// 			type: 'richText',
+// 			label: 'testo',
+// 			localized: true,
+// 			editor: lexicalEditor({
+// 				features: () => [
+// 					ParagraphFeature(),
+// 					BoldFeature(),
+// 					ItalicFeature(),
+// 					UnderlineFeature(),
+// 					LinkFeature(),
+// 					OrderedListFeature(),
+// 					UnorderedListFeature(),
+// 				],
+// 			}),
+// 		},
+// 	],
+// 	{
+// 		label: 'Programma',
+// 	},
+// )
+
+// export const contatti: ArrayField = createArrayField(
+// 	'contatti',
+// 	[
+// 		createRowField([nome, link]),
+// 		createRowField([{ name: 'email', type: 'email' } as EmailField, createTextField('telefono')]),
+// 	],
+// 	{},
+// )
+
+// export const media: RelationshipField = {
+// 	name: 'copertina',
+// 	label: 'Copertina',
+// 	type: 'relationship',
+// 	relationTo: 'media',
+// }
+
+// export const tracciati: RelationshipField = {
+// 	name: 'tracciato',
+// 	label: 'tracciato',
+// 	type: 'relationship',
+// 	relationTo: 'tracciati',
+// }
+
+// export const galleria: RelationshipField = {
+// 	name: 'galleria',
+// 	label: 'Galleria',
+// 	type: 'relationship',
+// 	hasMany: true,
+// 	relationTo: 'media',
+// }
+
+// export const servizi: ArrayField = createArrayField('servizi', [
+// 	{
+// 		name: 'nome',
+// 		type: 'text',
+// 		label: 'Nome',
+// 		localized: true,
+// 	},
+// 	link,
+// 	{
+// 		name: 'testo',
+// 		type: 'richText',
+// 		label: 'testo',
+// 		localized: true,
+// 		editor: lexicalEditor({
+// 			features: () => [ParagraphFeature()],
+// 		}),
+// 	},
+// ])
+
+// const baseContentFields: Field[] = [
+// 	title('Immagini e media'),
+// 	media,
+// 	galleria,
+// 	title('Contenuti testuali'),
+// 	createRequiredField(testo),
+// ]
+
+// export const contenutoFields: Field[] = baseContentFields
+
+// const contenutoFieldsMedia: Field[] = [
+// 	...baseContentFields.slice(0, 2),
+// 	{
+// 		name: 'Video',
+// 		type: 'relationship',
+// 		relationTo: 'media',
+// 		required: false,
+// 	},
+// 	...baseContentFields.slice(2),
+// ]
+
+// export const tabContenuto: Tab = {
+// 	label: 'Contenuto',
+// 	fields: contenutoFields,
+// }
+
+// export const tabContenutoItinerario: Tab = {
+// 	label: 'Contenuto',
+// 	fields: contenutoFieldsMedia,
+// }
+
+// export function titleAndText(name: string, label?: string): GroupField {
+// 	return {
+// 		name,
+// 		type: 'group',
+// 		label: label ?? capitalizeFirstLetter(name),
+// 		fields: [
+// 			createRequiredField(createLocalizedField(createTextField('title', { label: 'Titolo' }))),
+// 			createRequiredField(createLocalizedField(createRichTextField('testo'))),
+// 		],
+// 	}
+// }
+
+// export function titleAndTextHome(name: string, label?: string): GroupField {
+// 	return {
+// 		name,
+// 		type: 'group',
+// 		label: label ?? capitalizeFirstLetter(name),
+// 		fields: [
+// 			createRequiredField(createLocalizedField(createTextField('title', { label: 'Titolo' }))),
+// 			createRequiredField(createLocalizedField(createHomeRichTextField('testo'))),
+// 		],
+// 	}
+// }
+
+// const socialNetworkLink: RowField = createRowField([nome, createRequiredField(link)])
+
+// export const socialNetworkLinks: ArrayField = createArrayField(
+// 	'Link Social',
+// 	[socialNetworkLink],
+// 	{},
+// )

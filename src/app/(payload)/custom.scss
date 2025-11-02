@@ -1,0 +1,22 @@
+@import '~@payloadcms/ui/scss';
+
+.row__fields {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem;
+
+	@media (max-width: $breakpoint-m-width) {
+		grid-template-columns: 1fr;
+		gap: 0rem;
+	}
+}
+
+.render-fields:not(.row__fields) > .field-type {
+	margin-bottom: 3rem;
+}
+
+@media (max-width: $breakpoint-m-width) {
+	.render-fields.row__fields > .field-type:not(:last-child) {
+		margin-bottom: 3rem;
+	}
+}
