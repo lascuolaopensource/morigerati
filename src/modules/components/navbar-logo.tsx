@@ -6,7 +6,7 @@ import { useState } from 'react'
 //
 
 export function NavbarLogo() {
-	const [letters, setLetters] = useState(getRandomLetters())
+	const [letters, setLetters] = useState('xA')
 	const [logoInterval, setLogoInterval] = useState<NodeJS.Timeout>()
 
 	function startInterval() {
