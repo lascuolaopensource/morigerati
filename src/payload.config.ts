@@ -8,9 +8,9 @@ import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
-import { Media } from '@/db/collections/fino'
-import { Users } from '@/db/collections/uten'
-import { Home } from '@/db/globals/shome'
+import { Media } from '@/db/collections/media'
+import { Users } from '@/db/collections/users'
+import { Home } from '@/db/globals/home'
 
 //
 
