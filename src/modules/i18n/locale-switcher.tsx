@@ -35,12 +35,14 @@ export function LocaleSwitcher() {
 					<RefreshCcw />
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align="start">
+			<DropdownMenuContent align="center">
 				<DropdownMenuGroup>
 					{localization.locales.map((l) => (
 						<DropdownMenuItem
 							key={l.code}
-							className={cn('cursor-pointer', { 'bg-blue-100': currentLocale === l.code })}
+							className={cn('cursor-pointer justify-center', {
+								'bg-blue-100': currentLocale === l.code,
+							})}
 							onClick={() => handleChangeLocale(l.code)}
 						>
 							{l.label}
