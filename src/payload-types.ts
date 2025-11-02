@@ -483,6 +483,21 @@ export interface Home {
   id: number;
   cover: number | Media;
   statement: string;
+  introduzione: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -493,6 +508,7 @@ export interface Home {
 export interface HomeSelect<T extends boolean = true> {
   cover?: T;
   statement?: T;
+  introduzione?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

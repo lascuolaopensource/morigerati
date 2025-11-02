@@ -35,7 +35,7 @@ export function media(props: Omit<Parameters<typeof upload>[0], 'collection'>): 
 	return upload({ collection: 'media', ...props })
 }
 
-export function plainText(
+export function plainRichText(
 	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
 ): RichTextField {
 	return {

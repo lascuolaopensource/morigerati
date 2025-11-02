@@ -5,6 +5,8 @@ import { getLocale } from 'next-intl/server'
 
 import { Copertina } from '@/modules/components/copertina'
 import GridOverlay from '@/modules/components/grid-overlay'
+import { PixelBorder } from '@/modules/components/pixel-border'
+import { RichText } from '@/modules/components/richtext'
 
 //
 
@@ -42,23 +44,16 @@ export default async function Page() {
 
 	return (
 		<>
-			<div>
-				<Copertina copertina={home.cover} title={home.statement} overlay={true}>
-					<GridOverlay targetSquareSize={16} bottomDensity={1} effectRows={8} />
-				</Copertina>
-				<pre>{JSON.stringify(home, null, 2)}</pre>
-				{/* {home.cover && (
-				)}
+			<Copertina copertina={home.cover} title={home.statement} overlay={true}>
+				<GridOverlay targetSquareSize={16} bottomDensity={1} effectRows={8} />
+			</Copertina>
 
-				<div className="absolute inset-0 bg-black opacity-30" />
-				<div className="absolute inset-0 flex items-center justify-center">
-					<p className="font-transInstrumentSans text-center font-bold text-white text-3xl z-10 max-w-xl px-4">
-						{home.statement}
-					</p>
-				</div>
+			<RichText
+				data={home.introduzione}
+				className="text-center mx-auto py-6 max-w-2xl text-balance"
+			/>
 
-				<GridOverlay targetSquareSize={16} bottomDensity={1} effectRows={8} /> */}
-			</div>
+			<PixelBorder className="bg-itinerari" />
 
 			{/* <div className="flex flex-col gap-4 items-center py-12 px-4 md:px-8">
         <h2 className="text-3xl text-center">{home.title}</h2>
@@ -68,7 +63,7 @@ export default async function Page() {
         />
       </div>
 
-      <PixelBorder className="bg-itinerariColor" />
+
 
       <HomeCollection
         collection="itinerari"

@@ -22,11 +22,11 @@ export const Home: GlobalConfig = {
 			required: true,
 			localized: true,
 		},
-		// F.plainText({
-		// 	name: 'statement',
-		// 	label: 'Statement',
-		// 	required: true,
-		// }),
+		F.plainRichText({
+			name: 'introduzione',
+			label: 'Introduzione',
+			required: true,
+		}),
 		// {
 		// 	...F.media,
 		// 	name: 'cover',
