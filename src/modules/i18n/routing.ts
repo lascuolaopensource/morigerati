@@ -4,9 +4,9 @@ import { defineRouting } from 'next-intl/routing'
 //
 
 export const routing = defineRouting({
-  locales: ['en', 'de'],
-  defaultLocale: 'en',
-  localePrefix: 'always',
+	locales: ['it', 'en'],
+	defaultLocale: 'it',
+	localePrefix: 'always',
 })
 
 export const intlMiddleware = createIntlMiddleware(routing)
