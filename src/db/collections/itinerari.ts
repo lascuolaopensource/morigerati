@@ -165,7 +165,6 @@ export const Itinerari: CollectionConfig = {
 				// 	],
 				// },
 
-				// F.tabContenutoItinerario,
 				F.tabContenuto({ video: true }),
 			],
 		},
