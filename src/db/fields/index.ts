@@ -1,4 +1,4 @@
-import type { CollectionSlug, RichTextField, UploadField } from 'payload'
+import type { CollectionSlug, Field, RichTextField, Tab, TextField, UploadField } from 'payload'
 
 import {
 	BoldFeature,
@@ -6,6 +6,7 @@ import {
 	lexicalEditor,
 	LinkFeature,
 } from '@payloadcms/richtext-lexical'
+import { nanoid } from 'nanoid'
 
 import { createUIField } from './utils'
 
@@ -16,6 +17,14 @@ export function header(text: string) {
 		name: `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
 		componentPath: 'src/db/fields/components/header.tsx#default',
 		clientProps: { content: text },
+	})
+}
+
+export function divider() {
+	return createUIField({
+		name: 'divider-' + nanoid(5),
+		componentPath: 'src/db/fields/components/divider.tsx#default',
+		clientProps: {},
 	})
 }
 
@@ -35,6 +44,10 @@ export function media(props: Omit<Parameters<typeof upload>[0], 'collection'>): 
 	return upload({ collection: 'media', ...props })
 }
 
+export function video(props: Omit<Parameters<typeof upload>[0], 'collection'>): UploadField {
+	return upload({ collection: 'video', ...props })
+}
+
 export function plainRichText(
 	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
 ): RichTextField {
@@ -43,6 +56,40 @@ export function plainRichText(
 		editor: lexicalEditor({ features: () => [BoldFeature(), ItalicFeature(), LinkFeature()] }),
 		...props,
 		type: 'richText',
+	}
+}
+
+export const name: TextField = {
+	type: 'text',
+	label: 'Nome',
+	name: 'name',
+	required: true,
+	localized: true,
+}
+
+export function tabContenuto(props: { video?: boolean } = {}): Tab {
+	const fields: Field[] = [
+		header('Immagini e media'),
+		media({ name: 'gallery', label: 'Galleria', hasMany: true }),
+		divider(),
+		header('Contenuti testuali'),
+		{
+			name: 'text_content',
+			type: 'richText',
+			label: 'Contenuto testuale',
+			localized: true,
+			required: true,
+			editor: lexicalEditor(),
+		},
+	]
+
+	if (props.video) {
+		fields.splice(2, 0, video({ name: 'video', label: 'Video' }))
+	}
+
+	return {
+		label: 'Contenuto',
+		fields: fields,
 	}
 }
 

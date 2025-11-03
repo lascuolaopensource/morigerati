@@ -69,8 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    video: Video;
     tracciati: Tracciati;
-    'payload-kv': PayloadKv;
+    itinerari: Itinerari;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,8 +80,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    video: VideoSelect<false> | VideoSelect<true>;
     tracciati: TracciatiSelect<false> | TracciatiSelect<true>;
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    itinerari: ItinerariSelect<false> | ItinerariSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -216,6 +218,25 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "video".
+ */
+export interface Video {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tracciati".
  */
 export interface Tracciati {
@@ -234,20 +255,30 @@ export interface Tracciati {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-kv".
+ * via the `definition` "itinerari".
  */
-export interface PayloadKv {
+export interface Itinerari {
   id: number;
-  key: string;
-  data:
-    | {
+  name: string;
+  gallery?: (number | Media)[] | null;
+  video?: (number | null) | Video;
+  text_content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
         [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -265,12 +296,16 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'video';
+        value: number | Video;
+      } | null)
+    | ({
         relationTo: 'tracciati';
         value: number | Tracciati;
       } | null)
     | ({
-        relationTo: 'payload-kv';
-        value: number | PayloadKv;
+        relationTo: 'itinerari';
+        value: number | Itinerari;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -420,6 +455,24 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "video_select".
+ */
+export interface VideoSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tracciati_select".
  */
 export interface TracciatiSelect<T extends boolean = true> {
@@ -437,11 +490,15 @@ export interface TracciatiSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-kv_select".
+ * via the `definition` "itinerari_select".
  */
-export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T;
-  data?: T;
+export interface ItinerariSelect<T extends boolean = true> {
+  name?: T;
+  gallery?: T;
+  video?: T;
+  text_content?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

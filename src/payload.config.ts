@@ -8,9 +8,11 @@ import { AdminDependencies, buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
+import { Itinerari } from '@/db/collections/itinerari'
 import { Media } from '@/db/collections/media'
 import { Tracciati } from '@/db/collections/tracciati'
 import { Users } from '@/db/collections/users'
+import { Video } from '@/db/collections/video'
 import { Home } from '@/db/globals/home'
 
 //
@@ -31,7 +33,7 @@ export default buildConfig({
 		}),
 	},
 
-	collections: [Users, Media, Tracciati],
+	collections: [Users, Media, Video, Tracciati, Itinerari],
 	globals: [Home],
 
 	secret: process.env.PAYLOAD_SECRET || '',
@@ -62,6 +64,7 @@ function s3() {
 		collections: {
 			[Media.slug]: true,
 			[Tracciati.slug]: true,
+			[Video.slug]: true,
 		},
 		bucket: process.env.S3_BUCKET!,
 		enabled: true,

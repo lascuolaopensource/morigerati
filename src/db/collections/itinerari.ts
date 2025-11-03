@@ -1,208 +1,173 @@
 import type { CollectionConfig } from 'payload'
+
 import * as F from '@/db/fields'
-import { Collections } from '.'
-import {
-  lexicalEditor,
-  BoldFeature,
-  InlineToolbarFeature,
-  ParagraphFeature,
-} from '@payloadcms/richtext-lexical'
 
-import { slugField } from '@/db/fields'
-import { formatSlug } from '@/db/fields/slug/formatSlug'
+//
 
-export const Itinerari: CollectionConfig<'itinerari'> = {
-  slug: 'itinerari',
-  defaultPopulate: {
-    slug: true,
-  },
-  labels: {
-    singular: 'Itinerario',
-    plural: 'Itinerari',
-  },
-  admin: {
-    defaultColumns: ['nome', 'testo'],
-    useAsTitle: F.nome.name,
-  },
+export const Itinerari: CollectionConfig = {
+	slug: 'itinerari',
+	defaultPopulate: {
+		slug: true,
+	},
+	labels: {
+		singular: 'Itinerario',
+		plural: 'Itinerari',
+	},
+	admin: {
+		defaultColumns: [F.name.name],
+		useAsTitle: F.name.name,
+	},
 
-  hooks: {
-    beforeChange: [
-      async ({ req, data, originalDoc, operation }) => {
-        // For localized fields, ensure the slug is properly updated for each locale
-        if (data.nome && typeof data.nome === 'object') {
-          // Initialize slug object if it doesn't exist
-          if (!data.slug) {
-            data.slug = {}
-          } else if (typeof data.slug === 'string') {
-            // If slug exists as a string, convert to object
-            const defaultSlug = data.slug
-            data.slug = { [req.locale || 'it']: defaultSlug }
-          }
+	fields: [
+		{
+			type: 'tabs',
+			tabs: [
+				{
+					label: 'Dati',
+					fields: [F.name],
+				},
+				// {
+				// 	label: 'Dati',
+				// 	fields: [
+				// 		F.title('Generale'),
+				// 		F.nome,
 
-          // Generate slug for each locale in nome
-          Object.entries(data.nome).forEach(([locale, value]) => {
-            if (typeof value === 'string' && value.trim()) {
-              // Only update if nome is not empty
-              data.slug[locale] = formatSlug(value)
-            }
-          })
-        }
+				// 		{
+				// 			...F.tracciati,
+				// 			name: 'tracciato_gpx',
+				// 			label: 'Tracciato GPX',
+				// 		},
 
-        return data
-      },
-    ],
-  },
+				// 		F.divider('divider-4'),
 
-  fields: [
-    {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'Dati',
-          fields: [
-            F.title('Generale'),
-            F.nome,
+				// 		F.title('Informazioni tecniche'),
+				// 		{
+				// 			type: 'row',
+				// 			fields: [
+				// 				{
+				// 					name: 'lunghezza',
+				// 					label: 'Lunghezza itinerario (metri)',
+				// 					type: 'number',
+				// 				},
+				// 				{
+				// 					name: 'tempo',
+				// 					label: 'Durata (ore)',
+				// 					type: 'number',
+				// 				},
+				// 				{
+				// 					name: 'dislivello',
+				// 					label: 'Dislivello (metri)',
+				// 					type: 'text',
+				// 				},
+				// 			],
+				// 		},
+				// 		{
+				// 			type: 'row',
+				// 			fields: [
+				// 				{
+				// 					name: 'tipo',
+				// 					type: 'select',
+				// 					admin: {
+				// 						isClearable: true,
+				// 						isSortable: true,
+				// 					},
+				// 					options: [
+				// 						{
+				// 							label: 'Itinerario ad anello',
+				// 							value: 'Itinerario ad anello',
+				// 						},
+				// 						{
+				// 							label: 'Andata e ritorno',
+				// 							value: 'Andata e ritorno',
+				// 						},
+				// 					],
+				// 				},
+				// 				{
+				// 					name: 'difficolta',
+				// 					label: 'Difficoltà',
+				// 					type: 'select',
 
-            {
-              ...F.tracciati,
-              name: 'tracciato_gpx',
-              label: 'Tracciato GPX',
-            },
+				// 					admin: {
+				// 						isClearable: true,
+				// 					},
+				// 					options: [
+				// 						{
+				// 							label: 'T - Turistico',
+				// 							value: 'T - Turistico',
+				// 						},
+				// 						{
+				// 							label: 'E - Escursionistico',
+				// 							value: 'E - Escursionistico',
+				// 						},
+				// 						{
+				// 							label: 'EE - Escursionisti Esperti',
+				// 							value: 'EE - Escursionisti Esperti',
+				// 						},
+				// 					],
+				// 				},
+				// 			],
+				// 		},
 
-            F.divider('divider-4'),
+				// 		F.divider('divider-1'),
 
-            F.title('Informazioni tecniche'),
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'lunghezza',
-                  label: 'Lunghezza itinerario (metri)',
-                  type: 'number',
-                },
-                {
-                  name: 'tempo',
-                  label: 'Durata (ore)',
-                  type: 'number',
-                },
-                {
-                  name: 'dislivello',
-                  label: 'Dislivello (metri)',
-                  type: 'text',
-                },
-              ],
-            },
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'tipo',
-                  type: 'select',
-                  admin: {
-                    isClearable: true,
-                    isSortable: true,
-                  },
-                  options: [
-                    {
-                      label: 'Itinerario ad anello',
-                      value: 'Itinerario ad anello',
-                    },
-                    {
-                      label: 'Andata e ritorno',
-                      value: 'Andata e ritorno',
-                    },
-                  ],
-                },
-                {
-                  name: 'difficolta',
-                  label: 'Difficoltà',
-                  type: 'select',
+				// 		{
+				// 			name: 'servizi',
+				// 			type: 'array',
 
-                  admin: {
-                    isClearable: true,
-                  },
-                  options: [
-                    {
-                      label: 'T - Turistico',
-                      value: 'T - Turistico',
-                    },
-                    {
-                      label: 'E - Escursionistico',
-                      value: 'E - Escursionistico',
-                    },
-                    {
-                      label: 'EE - Escursionisti Esperti',
-                      value: 'EE - Escursionisti Esperti',
-                    },
-                  ],
-                },
-              ],
-            },
+				// 			fields: [
+				// 				{
+				// 					name: 'nome',
+				// 					type: 'text',
+				// 					label: 'Nome',
+				// 					localized: true,
+				// 				},
+				// 				F.link,
+				// 				{
+				// 					name: 'testo',
+				// 					type: 'richText',
+				// 					label: 'Testo',
+				// 					localized: true,
+				// 					editor: lexicalEditor({
+				// 						features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
+				// 					}),
+				// 				},
+				// 			],
+				// 		},
 
-            F.divider('divider-1'),
+				// 		F.divider('divider-2'),
 
-            {
-              name: 'servizi',
-              type: 'array',
+				// 		F.title('Contenuti collegati'),
+				// 		{
+				// 			name: 'luoghi',
+				// 			type: 'relationship',
+				// 			relationTo: Collections.Luoghi,
+				// 			hasMany: true,
+				// 		},
+				// 		{
+				// 			name: 'persone',
+				// 			type: 'relationship',
+				// 			relationTo: Collections.Persone,
+				// 			hasMany: true,
+				// 		},
 
-              fields: [
-                {
-                  name: 'nome',
-                  type: 'text',
-                  label: 'Nome',
-                  localized: true,
-                },
-                F.link,
-                {
-                  name: 'testo',
-                  type: 'richText',
-                  label: 'Testo',
-                  localized: true,
-                  editor: lexicalEditor({
-                    features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
-                  }),
-                },
-              ],
-            },
+				// 		F.divider('divider-3'),
 
-            F.divider('divider-2'),
+				// 		{
+				// 			name: 'media_geolocalizzati',
+				// 			label: 'Media geolocalizzati',
+				// 			type: 'array',
 
-            F.title('Contenuti collegati'),
-            {
-              name: 'luoghi',
-              type: 'relationship',
-              relationTo: Collections.Luoghi,
-              hasMany: true,
-            },
-            {
-              name: 'persone',
-              type: 'relationship',
-              relationTo: Collections.Persone,
-              hasMany: true,
-            },
+				// 			fields: [
+				// 				{ name: 'posizione', type: 'point', required: true },
+				// 				{ ...F.media, required: true },
+				// 			],
+				// 		},
+				// 	],
+				// },
 
-            F.divider('divider-3'),
-
-            {
-              name: 'media_geolocalizzati',
-              label: 'Media geolocalizzati',
-              type: 'array',
-
-              fields: [
-                { name: 'posizione', type: 'point', required: true },
-                { ...F.media, required: true },
-              ],
-            },
-          ],
-        },
-
-        F.tabContenutoItinerario,
-
-        {
-          label: 'Link',
-          fields: [...slugField('nome')],
-        },
-      ],
-    },
-  ],
+				// F.tabContenutoItinerario,
+				F.tabContenuto({ video: true }),
+			],
+		},
+	],
 }
