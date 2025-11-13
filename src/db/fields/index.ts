@@ -1,4 +1,12 @@
-import type { CollectionSlug, Field, RichTextField, Tab, TextField, UploadField } from 'payload'
+import type {
+	CollectionSlug,
+	Field,
+	GroupField,
+	RichTextField,
+	Tab,
+	TextField,
+	UploadField,
+} from 'payload'
 
 import {
 	BoldFeature,
@@ -7,6 +15,8 @@ import {
 	LinkFeature,
 } from '@payloadcms/richtext-lexical'
 import { nanoid } from 'nanoid'
+
+import { capitalizeFirstLetter } from '@/modules/utils'
 
 import { createUIField } from './utils'
 
@@ -90,6 +100,28 @@ export function tabContenuto(props: { video?: boolean } = {}): Tab {
 	return {
 		label: 'Contenuto',
 		fields: fields,
+	}
+}
+
+export function titleAndDescription(name: string, label?: string): GroupField {
+	return {
+		name,
+		type: 'group',
+		label: label ?? capitalizeFirstLetter(name),
+		fields: [
+			{
+				name: 'title',
+				type: 'text',
+				label: 'Titolo',
+				localized: true,
+				required: true,
+			},
+			plainRichText({
+				name: 'description',
+				label: 'Descrizione',
+				required: true,
+			}),
+		],
 	}
 }
 
@@ -338,18 +370,6 @@ export function tabContenuto(props: { video?: boolean } = {}): Tab {
 // 		fields: [
 // 			createRequiredField(createLocalizedField(createTextField('title', { label: 'Titolo' }))),
 // 			createRequiredField(createLocalizedField(createRichTextField('testo'))),
-// 		],
-// 	}
-// }
-
-// export function titleAndTextHome(name: string, label?: string): GroupField {
-// 	return {
-// 		name,
-// 		type: 'group',
-// 		label: label ?? capitalizeFirstLetter(name),
-// 		fields: [
-// 			createRequiredField(createLocalizedField(createTextField('title', { label: 'Titolo' }))),
-// 			createRequiredField(createLocalizedField(createHomeRichTextField('testo'))),
 // 		],
 // 	}
 // }

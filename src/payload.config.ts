@@ -1,10 +1,10 @@
-import { postgresAdapter } from '@payloadcms/db-postgres'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { it } from '@payloadcms/translations/languages/it'
 import { localization } from '#/i18n'
 import { Record } from 'effect'
 import path from 'path'
-import { AdminDependencies, buildConfig } from 'payload'
+import { buildConfig, type AdminDependencies } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
@@ -40,10 +40,8 @@ export default buildConfig({
 	typescript: {
 		outputFile: path.resolve(dirname, 'payload-types.ts'),
 	},
-	db: postgresAdapter({
-		pool: {
-			connectionString: process.env.DATABASE_URI || '',
-		},
+	db: mongooseAdapter({
+		url: process.env.DATABASE_URI || '',
 	}),
 	sharp,
 	plugins: [s3()],

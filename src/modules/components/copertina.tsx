@@ -4,10 +4,12 @@ import Image from 'next/image'
 
 import type { Media } from '@/payload-types'
 
+import { getMedia, Relation } from '../utils'
+
 //
 
 interface Props {
-	copertina: Media | number | undefined | null
+	copertina: Relation<Media>
 	className?: ClassValue
 	title?: string
 	overlay?: boolean
@@ -15,11 +17,10 @@ interface Props {
 }
 
 export function Copertina(props: Props) {
-	const { copertina, className, title, overlay = false, children } = props
+	const { className, title, overlay = false, children } = props
 
-	if (!copertina || typeof copertina === 'number') {
-		return null
-	}
+	const copertina = getMedia(props.copertina)
+	if (!copertina) return null
 
 	if (copertina.mimeType?.startsWith('video')) {
 		return null

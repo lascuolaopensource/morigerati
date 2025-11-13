@@ -72,6 +72,7 @@ export interface Config {
     video: Video;
     tracciati: Tracciati;
     itinerari: Itinerari;
+    'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,12 +84,13 @@ export interface Config {
     video: VideoSelect<false> | VideoSelect<true>;
     tracciati: TracciatiSelect<false> | TracciatiSelect<true>;
     itinerari: ItinerariSelect<false> | ItinerariSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {
     home: Home;
@@ -128,7 +130,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -152,7 +154,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -221,7 +223,7 @@ export interface Media {
  * via the `definition` "video".
  */
 export interface Video {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -240,7 +242,7 @@ export interface Video {
  * via the `definition` "tracciati".
  */
 export interface Tracciati {
-  id: number;
+  id: string;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -258,10 +260,10 @@ export interface Tracciati {
  * via the `definition` "itinerari".
  */
 export interface Itinerari {
-  id: number;
+  id: string;
   name: string;
-  gallery?: (number | Media)[] | null;
-  video?: (number | null) | Video;
+  gallery?: (string | Media)[] | null;
+  video?: (string | null) | Video;
   text_content: {
     root: {
       type: string;
@@ -282,35 +284,52 @@ export interface Itinerari {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
+export interface PayloadKv {
+  id: string;
+  key: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: number | Media;
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'video';
-        value: number | Video;
+        value: string | Video;
       } | null)
     | ({
         relationTo: 'tracciati';
-        value: number | Tracciati;
+        value: string | Tracciati;
       } | null)
     | ({
         relationTo: 'itinerari';
-        value: number | Itinerari;
+        value: string | Itinerari;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -320,10 +339,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -343,7 +362,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -502,6 +521,14 @@ export interface ItinerariSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
+export interface PayloadKvSelect<T extends boolean = true> {
+  key?: T;
+  data?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -537,8 +564,8 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "home".
  */
 export interface Home {
-  id: number;
-  cover: number | Media;
+  id: string;
+  cover: string | Media;
   statement: string;
   introduzione: {
     root: {
@@ -555,6 +582,62 @@ export interface Home {
     };
     [k: string]: unknown;
   };
+  sections: {
+    itinerari: {
+      title: string;
+      description: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+    };
+    luoghi: {
+      title: string;
+      description: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+    };
+    residenze: {
+      title: string;
+      description: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -566,6 +649,28 @@ export interface HomeSelect<T extends boolean = true> {
   cover?: T;
   statement?: T;
   introduzione?: T;
+  sections?:
+    | T
+    | {
+        itinerari?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+            };
+        luoghi?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+            };
+        residenze?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

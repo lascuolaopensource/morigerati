@@ -27,35 +27,17 @@ export const Home: GlobalConfig = {
 			label: 'Introduzione',
 			required: true,
 		}),
-		// {
-		// 	...F.media,
-		// 	name: 'cover',
-		// 	label: 'Immagine di copertina',
-		// },
-		// {
-		// 	name: 'title',
-		// 	type: 'text',
-		// 	label: 'Titolo',
-		// 	localized: true,
-		// },
-		// {
-		// 	name: 'testo',
-		// 	type: 'richText',
-		// 	label: 'Testo',
-		// 	localized: true,
-		// 	editor: lexicalEditor({
-		// 		features: () => [
-		// 			ParagraphFeature(),
-		// 			BoldFeature(),
-		// 			ItalicFeature(),
-		// 			UnderlineFeature(),
-		// 			LinkFeature(),
-		// 			InlineToolbarFeature(),
-		// 		],
-		// 	}),
-		// },
-		// F.titleAndTextHome('itinerari'),
-		// F.titleAndTextHome('luoghi'),
-		// F.titleAndTextHome('residenze'),
+		{
+			type: 'group',
+			name: 'sections',
+			label: 'Sezioni',
+			admin: { hideGutter: true },
+			required: true,
+			fields: [
+				F.titleAndDescription('itinerari', 'Itinerari'),
+				F.titleAndDescription('luoghi', 'Luoghi'),
+				F.titleAndDescription('residenze', 'Residenze'),
+			],
+		},
 	],
 }

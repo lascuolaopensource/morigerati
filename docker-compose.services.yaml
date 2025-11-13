@@ -1,17 +1,13 @@
 services:
-  postgres:
-    image: postgres:latest
+  mongodb:
+    image: mongo:latest
     restart: always
     ports:
-      - '5432:5432'
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      - '27017:27017'
     volumes:
-      - pgdata:/var/lib/postgresql
+      - mongodata:/data/db
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER}']
+      test: ['CMD', 'mongo', '--eval', 'db.runCommand("ping").ok']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -35,5 +31,5 @@ services:
       retries: 3
 
 volumes:
-  pgdata:
+  mongodata:
   minio_data:
