@@ -1,6 +1,6 @@
 const sections = ['luoghi', 'itinerari', 'persone', 'residenze', 'default'] as const
 
-type Section = (typeof sections)[number]
+export type Section = (typeof sections)[number]
 
 type SectionDisplayData = {
 	className: string

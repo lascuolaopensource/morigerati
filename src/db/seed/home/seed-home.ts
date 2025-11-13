@@ -19,7 +19,7 @@ export async function seedHome() {
 			data: {
 				alt: 'Copertina',
 			},
-			filePath: path.resolve(dirname, 'cover.gif'),
+			filePath: path.resolve(dirname, 'cover.webp'),
 		})
 
 		await payload.updateGlobal({

@@ -5,15 +5,16 @@ import { cn } from '$/lib/utils'
 
 type Props = {
 	data: SerializedEditorState
+	disableProse?: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
 export function RichText(props: Props) {
-	const { className, ...rest } = props
+	const { className, disableProse = false, ...rest } = props
 
 	return (
 		<RichTextConverter
 			{...rest}
-			className={cn(className, 'prose text-primary prose-strong:text-primary')}
+			className={cn(className, !disableProse && 'prose text-primary prose-strong:text-primary')}
 			// converters={jsxConverter}
 		/>
 	)

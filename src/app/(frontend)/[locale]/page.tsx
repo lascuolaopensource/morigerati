@@ -5,8 +5,9 @@ import { getLocale } from 'next-intl/server'
 
 import { Copertina } from '@/modules/components/copertina'
 import GridOverlay from '@/modules/components/grid-overlay'
-import { PixelBorder } from '@/modules/components/pixel-border'
 import { RichText } from '@/modules/components/richtext'
+
+import { HomeSection } from './_partials/home-section'
 
 //
 
@@ -22,6 +23,8 @@ async function load() {
 
 export default async function Page() {
 	const { db, home } = await load()
+
+	const { itinerari, luoghi, residenze } = home.sections
 
 	// const tracciatiQuery = await db.find({
 	//   collection: 'tracciati',
@@ -53,7 +56,16 @@ export default async function Page() {
 				className="text-center mx-auto py-6 max-w-2xl text-balance"
 			/>
 
-			<PixelBorder className="bg-itinerari" />
+			<HomeSection section="itinerari" title={itinerari.title} text={itinerari.description} />
+
+			<HomeSection
+				section="luoghi"
+				title={luoghi.title}
+				text={luoghi.description}
+				alignment="right"
+			/>
+
+			<HomeSection section="residenze" title={residenze.title} text={residenze.description} />
 
 			{/* <div className="flex flex-col gap-4 items-center py-12 px-4 md:px-8">
         <h2 className="text-3xl text-center">{home.title}</h2>
