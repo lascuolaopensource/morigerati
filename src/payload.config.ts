@@ -6,6 +6,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
+import { Articoli } from '@/db/collections/articoli'
 import { Itinerari } from '@/db/collections/itinerari'
 import { Luoghi } from '@/db/collections/luoghi'
 import { Media } from '@/db/collections/media'
@@ -30,7 +31,7 @@ export default buildConfig({
 		},
 	},
 
-	collections: [Users, Media, Video, Tracciati, Itinerari, Luoghi, Persone, Residenze],
+	collections: [Users, Media, Video, Tracciati, Itinerari, Luoghi, Persone, Residenze, Articoli],
 	globals: [Home],
 
 	secret: process.env.PAYLOAD_SECRET || '',
