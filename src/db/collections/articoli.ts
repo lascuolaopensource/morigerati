@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 
-import { Section } from '@/db/_partials'
+import { F, Section } from '@/db/_partials'
 
 import { CollectionGroup } from '../utils'
 
@@ -8,13 +8,15 @@ import { CollectionGroup } from '../utils'
 
 export const Articoli: CollectionConfig<'articoli'> = {
 	slug: 'articoli',
+
 	labels: {
 		singular: 'Articolo',
 		plural: 'Articoli',
 	},
+
 	admin: {
-		useAsTitle: 'titolo',
-		defaultColumns: ['titolo', 'testo', 'data_pubblicazione'],
+		useAsTitle: F.name.name,
+		defaultColumns: [F.name.name],
 		group: CollectionGroup.Principali,
 	},
 

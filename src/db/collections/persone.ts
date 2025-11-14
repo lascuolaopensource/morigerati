@@ -8,13 +8,14 @@ import { CollectionGroup } from '../utils'
 
 export const Persone: CollectionConfig<'persone'> = {
 	slug: 'persone',
+
 	labels: {
 		singular: 'Persona',
 		plural: 'Persone',
 	},
 
 	admin: {
-		defaultColumns: ['nome', 'testo'],
+		defaultColumns: [F.name.name],
 		useAsTitle: F.name.name,
 		group: CollectionGroup.Principali,
 	},

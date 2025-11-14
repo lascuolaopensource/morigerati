@@ -6,16 +6,20 @@ import { CollectionGroup, imageSizes } from '../utils'
 
 export const Media: CollectionConfig = {
 	slug: 'media',
+
 	labels: {
 		singular: 'Immagine',
 		plural: 'Immagini',
 	},
-	access: {
-		read: () => true,
-	},
+
 	admin: {
 		group: CollectionGroup.Multimedia,
 	},
+
+	access: {
+		read: () => true,
+	},
+
 	fields: [
 		{
 			name: 'alt',
@@ -24,6 +28,7 @@ export const Media: CollectionConfig = {
 			localized: true,
 		},
 	],
+
 	upload: {
 		mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'image/gif'],
 		adminThumbnail: 'thumbnail',
