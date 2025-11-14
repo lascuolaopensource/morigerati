@@ -8,7 +8,9 @@ import {
 import { nanoid } from 'nanoid'
 import {
 	ArrayField,
+	DateField,
 	JoinField,
+	TextFieldSingleValidation,
 	type CollectionSlug,
 	type Field,
 	type GroupField,
@@ -17,13 +19,14 @@ import {
 	type TextField,
 	type UploadField,
 } from 'payload'
+import z from 'zod/v4'
 
 import { capitalizeFirstLetter } from '@/modules/utils'
 import { Itinerari, Luoghi, Media, Persone, User } from '@/payload-types'
 
 import { createUIField } from './utils'
 
-//
+// UI
 
 export function header(text: string) {
 	return createUIField({
@@ -40,6 +43,8 @@ export function divider() {
 		clientProps: {},
 	})
 }
+
+// Upload
 
 export function upload<C extends CollectionSlug>(
 	props: { collection: C } & Omit<UploadField, 'relationTo' | 'type'>,
@@ -61,6 +66,19 @@ export function video(props: Omit<Parameters<typeof upload>[0], 'collection'>): 
 	return upload({ collection: 'video', ...props })
 }
 
+// Rich Text
+
+export function richText(
+	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
+): RichTextField {
+	return {
+		type: 'richText',
+		editor: lexicalEditor(),
+		localized: true,
+		...props,
+	}
+}
+
 export function plainRichText(
 	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
 ): RichTextField {
@@ -74,12 +92,64 @@ export function plainRichText(
 	}
 }
 
+// Pre-baked
+
 export const name: TextField = {
 	type: 'text',
 	label: 'Nome',
 	name: 'name',
 	required: true,
 	localized: true,
+}
+
+export function row(fields: Field[]): RowField {
+	return {
+		type: 'row',
+		fields,
+	}
+}
+
+const urlValidator: TextFieldSingleValidation = (v) => {
+	const parse = z.url().safeParse(v)
+	if (parse.success) return true
+	return parse.error.message
+}
+
+export function url(props: Omit<TextField, 'type'>): TextField {
+	// @ts-expect-error - Slight type mismatch
+	return {
+		type: 'text',
+		hasMany: false,
+		...props,
+		validate: urlValidator,
+	}
+}
+
+export function date(props: Omit<DateField, 'type'>): DateField {
+	return {
+		type: 'date',
+		admin: {
+			date: {
+				displayFormat: 'dd/MM/yyyy',
+			},
+			...props.admin,
+		},
+		...props,
+	}
+}
+
+export function location(): RowField {
+	return row([
+		{ name: 'address', label: 'Indirizzo', type: 'text' },
+		{
+			name: 'coordinates',
+			label: 'Posizione',
+			type: 'point',
+			admin: {
+				description: 'Serve per visualizzare la posizione sulla mappa',
+			},
+		},
+	])
 }
 
 export function titleAndDescription(name: string, label?: string): GroupField {
@@ -104,34 +174,6 @@ export function titleAndDescription(name: string, label?: string): GroupField {
 	}
 }
 
-export function row(fields: Field[]): RowField {
-	return {
-		type: 'row',
-		fields,
-	}
-}
-
-export function url(props: Omit<TextField, 'type' | 'name'> = {}): TextField {
-	// @ts-expect-error - Slight type mismatch
-	return {
-		type: 'text',
-		label: 'URL',
-		...props,
-		name: 'url',
-	}
-}
-
-export function richText(
-	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
-): RichTextField {
-	return {
-		type: 'richText',
-		editor: lexicalEditor(),
-		localized: true,
-		...props,
-	}
-}
-
 export function contatti(): ArrayField {
 	return {
 		name: 'contatti',
@@ -145,7 +187,7 @@ export function contatti(): ArrayField {
 			},
 		},
 		fields: [
-			row([name, url()]),
+			row([name, url({ name: 'url', label: 'URL' })]),
 			row([
 				{ name: 'email', type: 'email' },
 				{ name: 'telefono', type: 'text' },
@@ -154,18 +196,12 @@ export function contatti(): ArrayField {
 	}
 }
 
-export function location(): RowField {
-	return row([
-		{ name: 'address', label: 'Indirizzo', type: 'text' },
-		{
-			name: 'coordinates',
-			label: 'Posizione',
-			type: 'point',
-			admin: {
-				description: 'Serve per visualizzare la posizione sulla mappa',
-			},
-		},
-	])
+export function links(props: Omit<ArrayField, 'type' | 'fields'>): ArrayField {
+	return {
+		type: 'array',
+		fields: [row([name, url({ name: 'url', label: 'URL' })])],
+		...props,
+	}
 }
 
 // Join

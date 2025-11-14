@@ -1,18 +1,23 @@
 import type { CollectionConfig } from 'payload'
 
-import { F, Section } from '@/db/_partials'
+import { F, Section, Tab } from '@/db/_partials'
+
+import { CollectionGroup } from '../utils'
 
 //
 
 export const Residenze: CollectionConfig<'residenze'> = {
 	slug: 'residenze',
+
 	labels: {
 		singular: 'Residenza',
 		plural: 'Residenze',
 	},
+
 	admin: {
-		defaultColumns: ['nome', 'abstract'],
+		defaultColumns: [F.name.name],
 		useAsTitle: F.name.name,
+		group: CollectionGroup.Principali,
 	},
 
 	fields: [
@@ -21,143 +26,82 @@ export const Residenze: CollectionConfig<'residenze'> = {
 			tabs: [
 				{
 					label: 'Dati',
-					fields: [...Section.generale()],
+					fields: [
+						...Section.generale(),
+						F.header('Informazioni tecniche'),
+						F.location(),
+						F.row([
+							F.date({ name: 'start_date', label: 'Data inizio', required: true }),
+							F.date({ name: 'end_date', label: 'Data fine' }),
+						]),
+						F.row([
+							F.date({ name: 'registration_deadline', label: 'Scadenza iscrizioni' }),
+							F.url({ name: 'registration_url', label: 'Link iscrizioni' }),
+						]),
+						{
+							name: 'show_registration_button',
+							type: 'checkbox',
+							label: 'Mostra pulsante iscrizione',
+						},
+					],
 				},
-				// {
-				// 	label: 'Generali',
-				// 	fields: [
-				// 		F.title('Informazioni generali'),
-				// 		F.nome,
 
-				// 		F.divider('divider-X'),
-				// 		{
-				// 			name: 'data_inizio',
-				// 			label: 'Data inizio',
-				// 			type: 'date',
-				// 			admin: {
-				// 				date: {
-				// 					displayFormat: 'dd/MM/yyyy',
-				// 				},
-				// 			},
-				// 			required: true,
-				// 		},
-				// 		{
-				// 			name: 'data_fine',
-				// 			label: 'Data fine',
-				// 			type: 'date',
-				// 			admin: {
-				// 				date: {
-				// 					displayFormat: 'dd/MM/yyyy',
-				// 				},
-				// 			},
-				// 		},
+				{
+					label: 'Testi',
+					fields: [
+						F.plainRichText({ name: 'short_description', label: 'Descrizione breve' }),
+						F.richText({ name: 'description', label: 'Descrizione' }),
+					],
+				},
 
-				// 		F.divider('divider-1'),
-				// 		{
-				// 			name: 'deadline_iscrizione',
-				// 			label: 'Scadenza iscrizioni',
-				// 			type: 'date',
-				// 			admin: {
-				// 				date: {
-				// 					displayFormat: 'dd/MM/yyyy',
-				// 				},
-				// 			},
-				// 		},
-				// 		{
-				// 			name: 'link_iscrizione',
-				// 			label: 'Link iscrizione',
-				// 			type: 'text',
-				// 		},
-				// 		{
-				// 			name: 'mostra_pulsante_iscrizione',
-				// 			type: 'checkbox',
-				// 			label: 'Mostra pulsante iscrizione',
-				// 			defaultValue: false,
-				// 		},
-				// 		F.divider('divider-2'),
-				// 		{
-				// 			name: 'indirizzo',
-				// 			label: 'Indirizzo / luogo',
-				// 			type: 'text',
-				// 		},
-				// 	],
-				// },
+				{
+					label: 'Programma',
+					fields: [
+						{
+							name: 'program',
+							type: 'array',
+							fields: [
+								{
+									name: 'step_name',
+									label: 'Giorno / Momento',
+									type: 'text',
+									localized: true,
+								},
+								F.richText({ name: 'step_description', label: 'Descrizione' }),
+							],
+						},
+					],
+				},
 
-				// /* -- Testi -- */
+				{
+					label: 'Persone coinvolte',
+					fields: [
+						{
+							name: 'people',
+							label: 'Tutor, esperti e collaboratori',
+							type: 'array',
+							fields: [
+								F.row([F.name, F.media({ name: 'foto', label: 'Foto' })]),
+								F.plainRichText({ name: 'bio', label: 'Breve biografia' }),
+								F.links({
+									name: 'projects',
+									label: 'Progetti salient',
+								}),
+								F.links({
+									name: 'organizations',
+									label: 'Organizzazioni',
+								}),
+							],
+						},
+					],
+				},
 
-				// {
-				// 	label: 'Testi',
-				// 	fields: [
-				// 		F.title('Testi'),
-				// 		{
-				// 			...F.testo,
-				// 			name: 'abstract',
-				// 			label: 'Abstract',
-				// 		},
+				{
+					label: 'Racconto risultati',
+					fields: [F.richText({ name: 'story', label: 'Racconto' })],
+				},
 
-				// 		F.divider('divider-4'),
-
-				// 		{
-				// 			...F.testo,
-				// 			name: 'descrizione',
-				// 			label: 'Descrizione',
-				// 		},
-				// 	],
-				// },
-
-				// { label: 'Media', fields: [F.title('Media'), F.media, F.galleria] },
-
-				// { label: 'Programma', fields: [F.programmaArray] },
-
-				// {
-				// 	label: 'Tutor ed esperti',
-				// 	fields: [
-				// 		{
-				// 			name: 'esperti',
-				// 			label: 'Tutor ed esperti',
-				// 			type: 'array',
-
-				// 			fields: [
-				// 				{
-				// 					type: 'row',
-				// 					fields: [
-				// 						{
-				// 							name: 'nome',
-				// 							type: 'text',
-				// 							label: 'Nome',
-				// 						},
-				// 						{
-				// 							...F.media,
-				// 							name: 'foto',
-				// 						},
-				// 					],
-				// 				},
-				// 				{
-				// 					name: 'biografia',
-				// 					type: 'richText',
-				// 					label: 'Biografia',
-				// 					localized: true,
-				// 					editor: lexicalEditor({ features: () => [ParagraphFeature(), BoldFeature()] }),
-				// 				},
-
-				// 				{
-				// 					name: 'progetti',
-				// 					type: 'array',
-				// 					fields: [F.linkConNome],
-				// 				},
-				// 				{
-				// 					name: 'organizzazioni',
-				// 					type: 'array',
-				// 					fields: [F.linkConNome],
-				// 				},
-				// 			],
-				// 		},
-				// 	],
-				// },
-				// {
-				// 	label: 'Link',
-				// 	fields: [...slugField('nome')],
-				// },
+				Tab.multimedia(),
 			],
 		},
 	],

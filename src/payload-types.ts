@@ -499,6 +499,123 @@ export interface Residenze {
    */
   generateSlug?: boolean | null;
   slug: string;
+  address?: string | null;
+  /**
+   * Serve per visualizzare la posizione sulla mappa
+   *
+   * @minItems 2
+   * @maxItems 2
+   */
+  coordinates?: [number, number] | null;
+  start_date: string;
+  end_date?: string | null;
+  registration_deadline?: string | null;
+  registration_url?: string | null;
+  show_registration_button?: boolean | null;
+  short_description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  program?:
+    | {
+        step_name?: string | null;
+        step_description?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  people?:
+    | {
+        name: string;
+        foto?: (string | null) | Media;
+        bio?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        projects?:
+          | {
+              name: string;
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        organizations?:
+          | {
+              name: string;
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  story?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  copertina?: (string | null) | Media;
+  gallery?: (string | Media)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -846,6 +963,47 @@ export interface ResidenzeSelect<T extends boolean = true> {
   name?: T;
   generateSlug?: T;
   slug?: T;
+  address?: T;
+  coordinates?: T;
+  start_date?: T;
+  end_date?: T;
+  registration_deadline?: T;
+  registration_url?: T;
+  show_registration_button?: T;
+  short_description?: T;
+  description?: T;
+  program?:
+    | T
+    | {
+        step_name?: T;
+        step_description?: T;
+        id?: T;
+      };
+  people?:
+    | T
+    | {
+        name?: T;
+        foto?: T;
+        bio?: T;
+        projects?:
+          | T
+          | {
+              name?: T;
+              url?: T;
+              id?: T;
+            };
+        organizations?:
+          | T
+          | {
+              name?: T;
+              url?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  story?: T;
+  copertina?: T;
+  gallery?: T;
   updatedAt?: T;
   createdAt?: T;
 }

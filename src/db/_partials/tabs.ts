@@ -52,6 +52,7 @@ export function servizi(): Tab {
 						required: true,
 					}),
 					F.url({
+						name: 'url',
 						label: 'URL (opzionale)',
 					}),
 				],
