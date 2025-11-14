@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { F } from '@/db/_partials'
+import { F, Section, Tab } from '@/db/_partials'
 
 import { CollectionGroup } from '../utils'
 
@@ -27,9 +27,7 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
 				{
 					label: 'Dati',
 					fields: [
-						F.header('Generale'),
-						F.nameAndSlug(),
-						F.divider(),
+						...Section.generale(),
 						// F.nome,
 						// {
 						//   ...F.posizione,
@@ -61,11 +59,9 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
 						// },
 					],
 				},
-				// F.tabContenuto,
-				// {
-				//   label: 'Link',
-				//   fields: [...slugField('nome')],
-				// },
+				Tab.descrizione(),
+				Tab.servizi(),
+				Tab.multimedia(),
 			],
 		},
 	],
