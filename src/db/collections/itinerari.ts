@@ -35,6 +35,12 @@ export const Itinerari: CollectionConfig = {
 				{
 					label: 'Contenuti collegati',
 					fields: [
+						{
+							name: 'luoghi',
+							type: 'relationship',
+							relationTo: 'luoghi',
+							hasMany: true,
+						},
 						// 		{
 						// 			name: 'luoghi',
 						// 			type: 'relationship',

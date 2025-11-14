@@ -312,6 +312,7 @@ export interface Itinerari {
         id?: string | null;
       }[]
     | null;
+  luoghi?: (string | Luoghi)[] | null;
   gallery?: (string | Media)[] | null;
   video?: (string | null) | Video;
   geolocalized_media?:
@@ -663,6 +664,7 @@ export interface ItinerariSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  luoghi?: T;
   gallery?: T;
   video?: T;
   geolocalized_media?:
