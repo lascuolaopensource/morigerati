@@ -262,9 +262,18 @@ export interface Tracciati {
 export interface Itinerari {
   id: string;
   name: string;
-  gallery?: (string | Media)[] | null;
-  video?: (string | null) | Video;
-  text_content: {
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  length?: number | null;
+  duration?: number | null;
+  elevation?: string | null;
+  type?: ('loop' | 'out_and_back') | null;
+  difficulty?: ('touristic' | 'hiking' | 'expert_hiking') | null;
+  gpx_track?: (string | null) | Tracciati;
+  description: {
     root: {
       type: string;
       children: {
@@ -279,6 +288,41 @@ export interface Itinerari {
     };
     [k: string]: unknown;
   };
+  services?:
+    | {
+        name: string;
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  video?: (string | null) | Video;
+  gallery?: (string | Media)[] | null;
+  geolocalized_media?:
+    | {
+        /**
+         * @minItems 2
+         * @maxItems 2
+         */
+        position: [number, number];
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -513,9 +557,32 @@ export interface TracciatiSelect<T extends boolean = true> {
  */
 export interface ItinerariSelect<T extends boolean = true> {
   name?: T;
-  gallery?: T;
+  generateSlug?: T;
+  slug?: T;
+  length?: T;
+  duration?: T;
+  elevation?: T;
+  type?: T;
+  difficulty?: T;
+  gpx_track?: T;
+  description?: T;
+  services?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        url?: T;
+        id?: T;
+      };
   video?: T;
-  text_content?: T;
+  gallery?: T;
+  geolocalized_media?:
+    | T
+    | {
+        position?: T;
+        image?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import { slugField, type CollectionConfig, type Field } from 'payload'
 
 import * as F from '@/db/fields'
 
@@ -24,149 +24,157 @@ export const Itinerari: CollectionConfig = {
 			tabs: [
 				{
 					label: 'Dati',
-					fields: [F.name],
+					fields: [
+						F.header('Generale'),
+						F.row([
+							F.name,
+							slugField({
+								fieldToUse: F.name.name,
+							}),
+						]),
+
+						F.divider(),
+						...informazioniTecniche(),
+					],
 				},
-				// {
-				// 	label: 'Dati',
-				// 	fields: [
-				// 		F.title('Generale'),
-				// 		F.nome,
 
-				// 		{
-				// 			...F.tracciati,
-				// 			name: 'tracciato_gpx',
-				// 			label: 'Tracciato GPX',
-				// 		},
+				{
+					label: 'Descrizione',
+					fields: [
+						F.richText({
+							label: 'Descrizione',
+							name: 'description',
+							required: true,
+						}),
+					],
+				},
 
-				// 		F.divider('divider-4'),
+				{
+					label: 'Servizi',
+					fields: [
+						{
+							name: 'services',
+							type: 'array',
+							admin: {
+								components: {
+									RowLabel: {
+										path: 'src/db/fields/components/array-row-label.tsx',
+										clientProps: { fieldToUse: F.name.name },
+									},
+								},
+							},
+							fields: [
+								F.name,
+								F.plainRichText({
+									name: 'description',
+									label: 'Descrizione',
+									required: true,
+								}),
+								F.url({
+									label: 'URL (opzionale)',
+								}),
+							],
+						},
+					],
+				},
 
-				// 		F.title('Informazioni tecniche'),
-				// 		{
-				// 			type: 'row',
-				// 			fields: [
-				// 				{
-				// 					name: 'lunghezza',
-				// 					label: 'Lunghezza itinerario (metri)',
-				// 					type: 'number',
-				// 				},
-				// 				{
-				// 					name: 'tempo',
-				// 					label: 'Durata (ore)',
-				// 					type: 'number',
-				// 				},
-				// 				{
-				// 					name: 'dislivello',
-				// 					label: 'Dislivello (metri)',
-				// 					type: 'text',
-				// 				},
-				// 			],
-				// 		},
-				// 		{
-				// 			type: 'row',
-				// 			fields: [
-				// 				{
-				// 					name: 'tipo',
-				// 					type: 'select',
-				// 					admin: {
-				// 						isClearable: true,
-				// 						isSortable: true,
-				// 					},
-				// 					options: [
-				// 						{
-				// 							label: 'Itinerario ad anello',
-				// 							value: 'Itinerario ad anello',
-				// 						},
-				// 						{
-				// 							label: 'Andata e ritorno',
-				// 							value: 'Andata e ritorno',
-				// 						},
-				// 					],
-				// 				},
-				// 				{
-				// 					name: 'difficolta',
-				// 					label: 'Difficoltà',
-				// 					type: 'select',
+				{
+					label: 'Contenuti collegati',
+					fields: [
+						// 		{
+						// 			name: 'luoghi',
+						// 			type: 'relationship',
+						// 			relationTo: Collections.Luoghi,
+						// 			hasMany: true,
+						// 		},
+						// 		{
+						// 			name: 'persone',
+						// 			type: 'relationship',
+						// 			relationTo: Collections.Persone,
+						// 			hasMany: true,
+						// 		},
+					],
+				},
 
-				// 					admin: {
-				// 						isClearable: true,
-				// 					},
-				// 					options: [
-				// 						{
-				// 							label: 'T - Turistico',
-				// 							value: 'T - Turistico',
-				// 						},
-				// 						{
-				// 							label: 'E - Escursionistico',
-				// 							value: 'E - Escursionistico',
-				// 						},
-				// 						{
-				// 							label: 'EE - Escursionisti Esperti',
-				// 							value: 'EE - Escursionisti Esperti',
-				// 						},
-				// 					],
-				// 				},
-				// 			],
-				// 		},
-
-				// 		F.divider('divider-1'),
-
-				// 		{
-				// 			name: 'servizi',
-				// 			type: 'array',
-
-				// 			fields: [
-				// 				{
-				// 					name: 'nome',
-				// 					type: 'text',
-				// 					label: 'Nome',
-				// 					localized: true,
-				// 				},
-				// 				F.link,
-				// 				{
-				// 					name: 'testo',
-				// 					type: 'richText',
-				// 					label: 'Testo',
-				// 					localized: true,
-				// 					editor: lexicalEditor({
-				// 						features: () => [InlineToolbarFeature(), ParagraphFeature(), BoldFeature()],
-				// 					}),
-				// 				},
-				// 			],
-				// 		},
-
-				// 		F.divider('divider-2'),
-
-				// 		F.title('Contenuti collegati'),
-				// 		{
-				// 			name: 'luoghi',
-				// 			type: 'relationship',
-				// 			relationTo: Collections.Luoghi,
-				// 			hasMany: true,
-				// 		},
-				// 		{
-				// 			name: 'persone',
-				// 			type: 'relationship',
-				// 			relationTo: Collections.Persone,
-				// 			hasMany: true,
-				// 		},
-
-				// 		F.divider('divider-3'),
-
-				// 		{
-				// 			name: 'media_geolocalizzati',
-				// 			label: 'Media geolocalizzati',
-				// 			type: 'array',
-
-				// 			fields: [
-				// 				{ name: 'posizione', type: 'point', required: true },
-				// 				{ ...F.media, required: true },
-				// 			],
-				// 		},
-				// 	],
-				// },
-
-				F.tabContenuto({ video: true }),
+				{
+					label: 'Multimedia',
+					fields: [
+						F.video({ name: 'video', label: 'Video' }),
+						F.media({ name: 'gallery', label: 'Galleria', hasMany: true }),
+						{
+							name: 'geolocalized_media',
+							label: 'Media geolocalizzati',
+							type: 'array',
+							fields: [
+								{ name: 'position', type: 'point', required: true },
+								F.media({ name: 'image', label: 'Immagine', required: true }),
+							],
+						},
+					],
+				},
 			],
 		},
 	],
+}
+
+function informazioniTecniche(): Field[] {
+	return [
+		F.header('Informazioni tecniche'),
+		F.row([
+			{
+				name: 'length',
+				label: 'Lunghezza itinerario (metri)',
+				type: 'number',
+			},
+			{
+				name: 'duration',
+				label: 'Durata (ore)',
+				type: 'number',
+			},
+		]),
+		F.row([
+			{
+				name: 'elevation',
+				label: 'Dislivello (metri)',
+				type: 'text',
+			},
+			{
+				name: 'type',
+				label: 'Tipo di itinerario',
+				type: 'select',
+				options: [
+					{
+						label: 'Itinerario ad anello',
+						value: 'loop',
+					},
+					{
+						label: 'Andata e ritorno',
+						value: 'out_and_back',
+					},
+				],
+			},
+		]),
+		F.row([
+			{
+				name: 'difficulty',
+				label: 'Difficoltà',
+				type: 'select',
+				options: [
+					{
+						label: 'T - Turistico',
+						value: 'touristic',
+					},
+					{
+						label: 'E - Escursionistico',
+						value: 'hiking',
+					},
+					{
+						label: 'EE - Escursionisti Esperti',
+						value: 'expert_hiking',
+					},
+				],
+			},
+			F.upload({ name: 'gpx_track', label: 'Tracciato GPX', collection: 'tracciati' }),
+		]),
+	]
 }

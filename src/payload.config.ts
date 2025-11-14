@@ -30,6 +30,7 @@ export default buildConfig({
 			divider: 'src/db/fields/components/divider.tsx',
 			gap: 'src/db/fields/components/gap.tsx',
 			header: 'src/db/fields/components/header.tsx',
+			arrayRowLabel: 'src/db/fields/components/array-row-label.tsx',
 		}),
 	},
 

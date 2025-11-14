@@ -10,7 +10,6 @@ export const Home: GlobalConfig = {
 		read: () => true,
 	},
 	fields: [
-		F.header('Copertina'),
 		F.media({
 			name: 'cover',
 			label: 'Immagine di copertina',

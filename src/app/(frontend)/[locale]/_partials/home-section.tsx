@@ -75,22 +75,3 @@ export async function HomeSection(props: Props) {
 // 		</Link>
 // 	)
 // }
-
-// // Filter function to get only future residenze (not yet ended)
-// const filterFutureResidenze = (residenze: Residenze[]): Residenze[] => {
-// 	const now = new Date()
-// 	return residenze.filter((residenza) => {
-// 		// Use end date if available, otherwise use start date
-// 		const comparisonDate = residenza.data_fine
-// 			? new Date(residenza.data_fine)
-// 			: residenza.data_inizio
-// 				? new Date(residenza.data_inizio)
-// 				: null
-
-// 		// If no date is available, keep it
-// 		if (!comparisonDate) return true
-
-// 		// Only keep residenze that end in the future
-// 		return comparisonDate >= now
-// 	})
-// }

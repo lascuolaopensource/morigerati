@@ -3,6 +3,7 @@ import type {
 	Field,
 	GroupField,
 	RichTextField,
+	RowField,
 	Tab,
 	TextField,
 	UploadField,
@@ -10,6 +11,7 @@ import type {
 
 import {
 	BoldFeature,
+	InlineToolbarFeature,
 	ItalicFeature,
 	lexicalEditor,
 	LinkFeature,
@@ -63,7 +65,9 @@ export function plainRichText(
 ): RichTextField {
 	return {
 		localized: true,
-		editor: lexicalEditor({ features: () => [BoldFeature(), ItalicFeature(), LinkFeature()] }),
+		editor: lexicalEditor({
+			features: () => [BoldFeature(), ItalicFeature(), LinkFeature(), InlineToolbarFeature()],
+		}),
 		...props,
 		type: 'richText',
 	}
@@ -122,6 +126,34 @@ export function titleAndDescription(name: string, label?: string): GroupField {
 				required: true,
 			}),
 		],
+	}
+}
+
+export function row(fields: Field[]): RowField {
+	return {
+		type: 'row',
+		fields,
+	}
+}
+
+export function url(props: Omit<TextField, 'type' | 'name'> = {}): TextField {
+	// @ts-expect-error - Slight type mismatch
+	return {
+		type: 'text',
+		label: 'URL',
+		...props,
+		name: 'url',
+	}
+}
+
+export function richText(
+	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
+): RichTextField {
+	return {
+		type: 'richText',
+		editor: lexicalEditor(),
+		localized: true,
+		...props,
 	}
 }
 
