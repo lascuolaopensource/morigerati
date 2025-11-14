@@ -1,14 +1,12 @@
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 
-import { getDb } from '@/modules/utils/server'
+import { getDb, getPaths } from '@/modules/utils/server'
 
 import home from './home.json'
 
 //
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const { dirname } = getPaths(import.meta.url)
 
 export async function seedHome() {
 	const payload = await getDb()

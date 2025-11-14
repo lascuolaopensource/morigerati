@@ -1,0 +1,355 @@
+{
+	"_id": { "$oid": "68260d1dc67065dd5adb7b64" },
+	"createdAt": { "$date": { "$numberLong": "1747324189484" } },
+	"updatedAt": { "$date": { "$numberLong": "1747324189484" } },
+	"globalType": "chi_siamo",
+	"testo_chi_siamo": {
+		"it": {
+			"root": {
+				"children": [
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "Comunità che riconosce, rigenera, risuona.",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "heading",
+						"version": 1,
+						"tag": "h1"
+					},
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "Infiltrazioni culturali per paesaggi ostinati",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "heading",
+						"version": 1,
+						"tag": "h3"
+					},
+					{
+						"children": [],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "paragraph",
+						"version": 1,
+						"textFormat": { "$numberInt": "1" },
+						"textStyle": ""
+					},
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " è un progetto del Comune di Morigerati, finanziato dal Programma Operativo di Azione e Coesione complementare al PON Cultura e Sviluppo (FESR 2014-2020) e dal Ministero della Cultura, che si propone di creare un ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "sistema integrato di fruizione turistica del territorio di Morigerati",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": ", nel basso Cilento, valorizzando e mettendo in connessione le risorse paesaggistiche dell'area con l'enorme patrimonio immateriale custodito dai suoi abitanti - attraverso una ricchissima ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "programmazione culturale di natura esperienziale",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " immaginata sul modello, consolidato negli anni, delle residenze ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "Transluoghi",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": ".",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "paragraph",
+						"version": 1,
+						"textFormat": { "$numberInt": "1" },
+						"textStyle": ""
+					},
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": "L’",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "Ecomuseo",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " - riconosciuto ufficialmente dalla Regione Campania nel dicembre 2024 - si costituisce, infatti, come un insieme di ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "luoghi, siti e punti di interesse ambientale e culturale",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " presenti sul territorio e legati alle ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "storie di vita",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " di chi vive il paese conservandone la memoria passata e presente - realizzato attraverso ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "interventi di segnaletica e installazioni di land art, un sistema di itinerari turistici, un piano di mobilità sostenibile e il potenziamento degli strumenti digitali",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " messi a disposizione di fruitori e operatori.",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "justify",
+						"indent": 0,
+						"type": "paragraph",
+						"version": 1,
+						"textFormat": { "$numberInt": "0" },
+						"textStyle": ""
+					},
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": "Il ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "processo di co-creazione",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " che ha condotto alla costituzione dell'",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "Ecomuseo",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " - coordinato dal gruppo dei community manager di ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "Transluoghi ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": "- si è esplicato nell'ambito delle ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "residenze artistiche",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " inserite all'interno della ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "programmazione turistica e culturale",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " dell'ente, di cui il soggetto gestore è l'Associazione L@S; ed è stato condiviso dalla comunità locale e dai gruppi esterni di viaggiatori che hanno attraversato Morigerati.",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "paragraph",
+						"version": 1,
+						"textFormat": { "$numberInt": "0" },
+						"textStyle": ""
+					}
+				],
+				"direction": "ltr",
+				"format": "",
+				"indent": 0,
+				"type": "root",
+				"version": 1,
+				"textFormat": { "$numberInt": "1" }
+			}
+		}
+	},
+	"meta": {},
+	"__v": { "$numberInt": "0" }
+}

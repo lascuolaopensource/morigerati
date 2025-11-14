@@ -1,0 +1,283 @@
+{
+	"_id": { "$oid": "68260d29c67065dd5adb7b84" },
+	"createdAt": { "$date": { "$numberLong": "1747324201886" } },
+	"updatedAt": { "$date": { "$numberLong": "1747662431411" } },
+	"globalType": "mobilita_sostenibile",
+	"testo": {
+		"it": {
+			"root": {
+				"children": [
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": "Attraversare il territorio in maniera sostenibile",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "heading",
+						"version": 1,
+						"tag": "h2"
+					},
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": "La strategia degli ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "interventi per la fruizione turistico-culturale del territorio",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " si avvale di ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "nuovi servizi di mobilità sostenibile",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " attraverso l’utilizzo di ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "pulmini, automobili e biciclette (tutti veicoli elettrici)",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": " che garantiscono all’Ecomuseo del Bussento Contemporaneo un funzionamento integrato - grazie alla presenza di un sistema di esplorazione facilitata degli itinerari e delle esperienze ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "(tour con guide e cicloturismo) ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": "e al collegamento alla Stazione Ferroviaria ad Alta Velocità più vicina (Sapri, 30 minuti di distanza).",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "paragraph",
+						"version": 1,
+						"textFormat": { "$numberInt": "0" },
+						"textStyle": ""
+					},
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": "All'interno del comune di Morigerati sono, inoltre, presenti ",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "quattro colonnine per la ricarica elettrica",
+								"type": "text",
+								"version": 1
+							},
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "0" },
+								"mode": "normal",
+								"style": "",
+								"text": ".",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "paragraph",
+						"version": 1,
+						"textFormat": { "$numberInt": "0" },
+						"textStyle": ""
+					},
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "Il parco dei veicoli per la mobilità sostenibile è composto da:",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "heading",
+						"version": 1,
+						"tag": "h5"
+					},
+					{
+						"children": [
+							{
+								"children": [
+									{
+										"detail": { "$numberInt": "0" },
+										"format": { "$numberInt": "0" },
+										"mode": "normal",
+										"style": "",
+										"text": "due pullmini elettrici ad 8 posti (attivi a partire dall'autunno 2025);",
+										"type": "text",
+										"version": 1
+									}
+								],
+								"direction": "ltr",
+								"format": "",
+								"indent": 0,
+								"type": "listitem",
+								"version": 1,
+								"value": { "$numberInt": "1" }
+							},
+							{
+								"children": [
+									{
+										"detail": { "$numberInt": "0" },
+										"format": { "$numberInt": "0" },
+										"mode": "normal",
+										"style": "",
+										"text": "un'auto elettrica a 5 posti (attiva a partire dall'autunno 2025);",
+										"type": "text",
+										"version": 1
+									}
+								],
+								"direction": "ltr",
+								"format": "",
+								"indent": 0,
+								"type": "listitem",
+								"version": 1,
+								"value": { "$numberInt": "2" }
+							},
+							{
+								"children": [
+									{
+										"detail": { "$numberInt": "0" },
+										"format": { "$numberInt": "0" },
+										"mode": "normal",
+										"style": "",
+										"text": "sei bici elettriche differenziate per grandezza ed età dell'utente (attive a partire dalla primavera 2025).",
+										"type": "text",
+										"version": 1
+									}
+								],
+								"direction": "ltr",
+								"format": "",
+								"indent": 0,
+								"type": "listitem",
+								"version": 1,
+								"value": { "$numberInt": "3" }
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "list",
+						"version": 1,
+						"listType": "bullet",
+						"start": { "$numberInt": "1" },
+						"tag": "ul"
+					},
+					{
+						"children": [
+							{
+								"detail": { "$numberInt": "0" },
+								"format": { "$numberInt": "1" },
+								"mode": "normal",
+								"style": "",
+								"text": "I veicoli elettrici potranno essere prenotati attraverso la piattaforma web, nella sezione dedicata agli itinerari.",
+								"type": "text",
+								"version": 1
+							}
+						],
+						"direction": "ltr",
+						"format": "",
+						"indent": 0,
+						"type": "heading",
+						"version": 1,
+						"tag": "h5"
+					}
+				],
+				"direction": "ltr",
+				"format": "",
+				"indent": 0,
+				"type": "root",
+				"version": 1
+			}
+		}
+	},
+	"meta": {},
+	"__v": { "$numberInt": "0" },
+	"copertina": { "$oid": "682b362627359b3311a7ccbc" },
+	"galleria": [
+		{ "$oid": "682b363b27359b3311a7ccdd" },
+		{ "$oid": "682b364d27359b3311a7ccfc" },
+		{ "$oid": "682b365c27359b3311a7cd1b" }
+	]
+}

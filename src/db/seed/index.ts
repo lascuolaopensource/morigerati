@@ -2,14 +2,10 @@
 
 import { getDb } from '@/modules/utils/server'
 
-// import payload from '@/lib/server/payload'
-// import { seedBaseData } from './seed-base'
-// import { seedActivities } from './seed-activities'
-// import { seedVideos } from './seed-videos'
-// import { seedPropostaAttivitaForm } from './seed-forms'
-// import { seedAbout } from './seed-about'
+import { seedChiSiamo } from './chi-siamo/chi-siamo.seed'
 import { seedFooter } from './footer/footer.seed'
 import { seedHome } from './home/home.seed'
+import { seedMobilitaSostenibile } from './mobilita-sostenibile/mobilita.seed'
 import { seedTesti } from './testi/testi.seed'
 
 //
@@ -39,6 +35,8 @@ export async function seedData() {
 		await seedHome()
 		await seedTesti()
 		await seedFooter()
+		await seedMobilitaSostenibile()
+		await seedChiSiamo()
 		// // 1. Seed base data (independent entities)
 		// payload.logger.info('— Seeding base data...')
 		// const { personas, locations, topics, genericForm } = await seedBaseData()
