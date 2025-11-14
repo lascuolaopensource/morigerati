@@ -15,6 +15,7 @@ import { Residenze } from '@/db/collections/residenze'
 import { Tracciati } from '@/db/collections/tracciati'
 import { Users } from '@/db/collections/users'
 import { Video } from '@/db/collections/video'
+import { Testi } from '@/db/globals/esti'
 import { Home } from '@/db/globals/home'
 
 import { getPaths } from './modules/utils/server'
@@ -32,7 +33,7 @@ export default buildConfig({
 	},
 
 	collections: [Users, Media, Video, Tracciati, Itinerari, Luoghi, Persone, Residenze, Articoli],
-	globals: [Home],
+	globals: [Home, Testi],
 
 	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {
