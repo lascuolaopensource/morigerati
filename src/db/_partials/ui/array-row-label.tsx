@@ -2,14 +2,16 @@
 
 import { RowLabel, useRowLabel } from '@payloadcms/ui'
 
-type Props = {
+//
+
+export type ArrayRowLabelProps = {
 	fieldToUse: string
 }
 
-export default function ArrayRowLabel({ fieldToUse }: Props) {
+export default function ArrayRowLabel({ fieldToUse }: ArrayRowLabelProps) {
 	const { data, path } = useRowLabel<{ [key: string]: unknown }>()
 
 	const value = data[fieldToUse]
-	if (typeof value === 'string') return <div>{value}</div>
+	if (typeof value === 'string' && Boolean(value.trim())) return <div>{value}</div>
 	else return <RowLabel path={path} />
 }

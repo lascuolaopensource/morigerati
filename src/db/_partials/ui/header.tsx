@@ -1,4 +1,4 @@
-type HeaderProps = {
+export type HeaderProps = {
 	content: string
 }
 

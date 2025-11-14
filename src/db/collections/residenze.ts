@@ -57,9 +57,9 @@ export const Residenze: CollectionConfig<'residenze'> = {
 				{
 					label: 'Programma',
 					fields: [
-						{
+						F.array({
 							name: 'program',
-							type: 'array',
+							fieldForRowLabel: 'step_name',
 							fields: [
 								{
 									name: 'step_name',
@@ -69,30 +69,30 @@ export const Residenze: CollectionConfig<'residenze'> = {
 								},
 								F.richText({ name: 'step_description', label: 'Descrizione' }),
 							],
-						},
+						}),
 					],
 				},
 
 				{
 					label: 'Persone coinvolte',
 					fields: [
-						{
+						F.array({
 							name: 'people',
 							label: 'Tutor, esperti e collaboratori',
-							type: 'array',
+							fieldForRowLabel: F.name.name,
 							fields: [
 								F.row([F.name, F.media({ name: 'foto', label: 'Foto' })]),
 								F.plainRichText({ name: 'bio', label: 'Breve biografia' }),
 								F.links({
 									name: 'projects',
-									label: 'Progetti salient',
+									label: 'Progetti salienti',
 								}),
 								F.links({
 									name: 'organizations',
 									label: 'Organizzazioni',
 								}),
 							],
-						},
+						}),
 					],
 				},
 

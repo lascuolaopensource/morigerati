@@ -5,7 +5,6 @@ import {
 	lexicalEditor,
 	LinkFeature,
 } from '@payloadcms/richtext-lexical'
-import { nanoid } from 'nanoid'
 import {
 	ArrayField,
 	DateField,
@@ -24,25 +23,8 @@ import z from 'zod/v4'
 import { capitalizeFirstLetter } from '@/modules/utils'
 import { Itinerari, Luoghi, Media, Persone, User } from '@/payload-types'
 
-import { createUIField } from './utils'
-
-// UI
-
-export function header(text: string) {
-	return createUIField({
-		name: `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
-		componentPath: 'src/db/_partials/components/header.tsx#default',
-		clientProps: { content: text },
-	})
-}
-
-export function divider() {
-	return createUIField({
-		name: 'divider-' + nanoid(5),
-		componentPath: 'src/db/_partials/components/divider.tsx#default',
-		clientProps: {},
-	})
-}
+import { arrayRowLabel, divider, header } from './ui'
+export { divider, header }
 
 // Upload
 
@@ -125,6 +107,20 @@ export function url(props: Omit<TextField, 'type'>): TextField {
 	}
 }
 
+export function array(props: Omit<ArrayField, 'type'> & { fieldForRowLabel: string }): ArrayField {
+	return {
+		type: 'array',
+		admin: {
+			...props.admin,
+			components: {
+				...props.admin?.components,
+				RowLabel: arrayRowLabel({ fieldToUse: props.fieldForRowLabel }),
+			},
+		},
+		...props,
+	}
+}
+
 export function date(props: Omit<DateField, 'type'>): DateField {
 	return {
 		type: 'date',
@@ -175,33 +171,25 @@ export function titleAndDescription(name: string, label?: string): GroupField {
 }
 
 export function contatti(): ArrayField {
-	return {
+	return array({
 		name: 'contatti',
-		type: 'array',
-		admin: {
-			components: {
-				RowLabel: {
-					path: 'src/db/_partials/components/array-row-label.tsx',
-					clientProps: { fieldToUse: name.name },
-				},
-			},
-		},
+		fieldForRowLabel: name.name,
 		fields: [
-			row([name, url({ name: 'url', label: 'URL' })]),
+			row([{ ...name, localized: false }, url({ name: 'url', label: 'URL' })]),
 			row([
 				{ name: 'email', type: 'email' },
 				{ name: 'telefono', type: 'text' },
 			]),
 		],
-	}
+	})
 }
 
 export function links(props: Omit<ArrayField, 'type' | 'fields'>): ArrayField {
-	return {
-		type: 'array',
+	return array({
+		fieldForRowLabel: name.name,
 		fields: [row([name, url({ name: 'url', label: 'URL' })])],
 		...props,
-	}
+	})
 }
 
 // Join

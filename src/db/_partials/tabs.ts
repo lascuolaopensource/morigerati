@@ -32,18 +32,10 @@ export function servizi(): Tab {
 	return {
 		label: 'Servizi',
 		fields: [
-			{
+			F.array({
 				name: 'services',
 				label: 'Servizi',
-				type: 'array',
-				admin: {
-					components: {
-						RowLabel: {
-							path: 'src/db/_partials/components/array-row-label.tsx',
-							clientProps: { fieldToUse: F.name.name },
-						},
-					},
-				},
+				fieldForRowLabel: F.name.name,
 				fields: [
 					F.name,
 					F.plainRichText({
@@ -56,7 +48,7 @@ export function servizi(): Tab {
 						label: 'URL (opzionale)',
 					}),
 				],
-			},
+			}),
 		],
 	}
 }

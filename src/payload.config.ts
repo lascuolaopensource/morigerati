@@ -2,11 +2,9 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { it } from '@payloadcms/translations/languages/it'
 import { localization } from '#/i18n'
-import { Record } from 'effect'
 import path from 'path'
-import { buildConfig, type AdminDependencies } from 'payload'
+import { buildConfig } from 'payload'
 import sharp from 'sharp'
-import { fileURLToPath } from 'url'
 
 import { Itinerari } from '@/db/collections/itinerari'
 import { Luoghi } from '@/db/collections/luoghi'
@@ -18,10 +16,11 @@ import { Users } from '@/db/collections/users'
 import { Video } from '@/db/collections/video'
 import { Home } from '@/db/globals/home'
 
+import { getPaths } from './modules/utils/server'
+
 //
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const { dirname } = getPaths(import.meta.url)
 
 export default buildConfig({
 	admin: {
@@ -29,12 +28,6 @@ export default buildConfig({
 		importMap: {
 			baseDir: path.resolve(dirname),
 		},
-		dependencies: components({
-			divider: 'src/db/_partials/components/divider.tsx',
-			gap: 'src/db/_partials/components/gap.tsx',
-			header: 'src/db/_partials/components/header.tsx',
-			arrayRowLabel: 'src/db/_partials/components/array-row-label.tsx',
-		}),
 	},
 
 	collections: [Users, Media, Video, Tracciati, Itinerari, Luoghi, Persone, Residenze],
@@ -80,11 +73,4 @@ function s3() {
 			forcePathStyle: true,
 		},
 	})
-}
-
-function components(items: Record<string, string>): AdminDependencies {
-	return Record.map(items, (item) => ({
-		path: item,
-		type: 'component',
-	}))
 }
