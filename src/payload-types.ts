@@ -72,6 +72,7 @@ export interface Config {
     video: Video;
     tracciati: Tracciati;
     itinerari: Itinerari;
+    luoghi: Luoghi;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     video: VideoSelect<false> | VideoSelect<true>;
     tracciati: TracciatiSelect<false> | TracciatiSelect<true>;
     itinerari: ItinerariSelect<false> | ItinerariSelect<true>;
+    luoghi: LuoghiSelect<false> | LuoghiSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -328,6 +330,21 @@ export interface Itinerari {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "luoghi".
+ */
+export interface Luoghi {
+  id: string;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -369,6 +386,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'itinerari';
         value: string | Itinerari;
+      } | null)
+    | ({
+        relationTo: 'luoghi';
+        value: string | Luoghi;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -583,6 +604,17 @@ export interface ItinerariSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "luoghi_select".
+ */
+export interface LuoghiSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

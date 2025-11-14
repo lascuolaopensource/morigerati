@@ -1,14 +1,3 @@
-import type {
-	CollectionSlug,
-	Field,
-	GroupField,
-	RichTextField,
-	RowField,
-	Tab,
-	TextField,
-	UploadField,
-} from 'payload'
-
 import {
 	BoldFeature,
 	InlineToolbarFeature,
@@ -17,6 +6,17 @@ import {
 	LinkFeature,
 } from '@payloadcms/richtext-lexical'
 import { nanoid } from 'nanoid'
+import {
+	slugField,
+	type CollectionSlug,
+	type Field,
+	type GroupField,
+	type RichTextField,
+	type RowField,
+	type Tab,
+	type TextField,
+	type UploadField,
+} from 'payload'
 
 import { capitalizeFirstLetter } from '@/modules/utils'
 
@@ -84,7 +84,7 @@ export const name: TextField = {
 export function tabContenuto(props: { video?: boolean } = {}): Tab {
 	const fields: Field[] = [
 		header('Immagini e media'),
-		media({ name: 'gallery', label: 'Galleria', hasMany: true }),
+
 		divider(),
 		header('Contenuti testuali'),
 		{
@@ -98,7 +98,7 @@ export function tabContenuto(props: { video?: boolean } = {}): Tab {
 	]
 
 	if (props.video) {
-		fields.splice(2, 0, video({ name: 'video', label: 'Video' }))
+		fields.splice(2, 0)
 	}
 
 	return {
@@ -155,6 +155,15 @@ export function richText(
 		localized: true,
 		...props,
 	}
+}
+
+export function nameAndSlug() {
+	return row([
+		name,
+		slugField({
+			fieldToUse: name.name,
+		}),
+	])
 }
 
 // // Field factory functions

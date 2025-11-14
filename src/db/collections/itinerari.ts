@@ -1,21 +1,23 @@
-import { slugField, type CollectionConfig, type Field } from 'payload'
+import { type CollectionConfig, type Field } from 'payload'
 
 import * as F from '@/db/fields'
+
+import { CollectionGroup } from '../utils'
 
 //
 
 export const Itinerari: CollectionConfig = {
 	slug: 'itinerari',
-	defaultPopulate: {
-		slug: true,
-	},
+
 	labels: {
 		singular: 'Itinerario',
 		plural: 'Itinerari',
 	},
+
 	admin: {
 		defaultColumns: [F.name.name],
 		useAsTitle: F.name.name,
+		group: CollectionGroup.Principali,
 	},
 
 	fields: [
@@ -24,18 +26,7 @@ export const Itinerari: CollectionConfig = {
 			tabs: [
 				{
 					label: 'Dati',
-					fields: [
-						F.header('Generale'),
-						F.row([
-							F.name,
-							slugField({
-								fieldToUse: F.name.name,
-							}),
-						]),
-
-						F.divider(),
-						...informazioniTecniche(),
-					],
+					fields: [F.header('Generale'), F.nameAndSlug(), F.divider(), ...informazioniTecniche()],
 				},
 
 				{

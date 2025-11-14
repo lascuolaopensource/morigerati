@@ -5,6 +5,7 @@ import { ImageSize } from 'payload'
 export enum CollectionGroup {
 	Multimedia = 'Multimedia',
 	Contenuti = 'Contenuti',
+	Principali = 'Principali',
 }
 
 //

@@ -9,6 +9,7 @@ import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import { Itinerari } from '@/db/collections/itinerari'
+import { Luoghi } from '@/db/collections/Luoghi'
 import { Media } from '@/db/collections/media'
 import { Tracciati } from '@/db/collections/tracciati'
 import { Users } from '@/db/collections/users'
@@ -34,7 +35,7 @@ export default buildConfig({
 		}),
 	},
 
-	collections: [Users, Media, Video, Tracciati, Itinerari],
+	collections: [Users, Media, Video, Tracciati, Itinerari, Luoghi],
 	globals: [Home],
 
 	secret: process.env.PAYLOAD_SECRET || '',
