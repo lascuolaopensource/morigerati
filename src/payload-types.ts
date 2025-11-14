@@ -75,6 +75,7 @@ export interface Config {
     luoghi: Luoghi;
     persone: Persone;
     residenze: Residenze;
+    articoli: Articoli;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -97,6 +98,7 @@ export interface Config {
     luoghi: LuoghiSelect<false> | LuoghiSelect<true>;
     persone: PersoneSelect<false> | PersoneSelect<true>;
     residenze: ResidenzeSelect<false> | ResidenzeSelect<true>;
+    articoli: ArticoliSelect<false> | ArticoliSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -621,6 +623,43 @@ export interface Residenze {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articoli".
+ */
+export interface Articoli {
+  id: string;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  subtitle?: string | null;
+  date?: string | null;
+  tags?: ('evento' | 'notizia' | 'reportage')[] | null;
+  Contenuto: {
+    content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+  };
+  copertina?: (string | null) | Media;
+  gallery?: (string | Media)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -674,6 +713,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'residenze';
         value: string | Residenze;
+      } | null)
+    | ({
+        relationTo: 'articoli';
+        value: string | Articoli;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1002,6 +1045,27 @@ export interface ResidenzeSelect<T extends boolean = true> {
         id?: T;
       };
   story?: T;
+  copertina?: T;
+  gallery?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articoli_select".
+ */
+export interface ArticoliSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  subtitle?: T;
+  date?: T;
+  tags?: T;
+  Contenuto?:
+    | T
+    | {
+        content?: T;
+      };
   copertina?: T;
   gallery?: T;
   updatedAt?: T;

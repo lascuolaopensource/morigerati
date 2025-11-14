@@ -4,11 +4,13 @@ import * as F from '@/db/_partials/fields'
 
 //
 
-export const Home: GlobalConfig = {
+export const Home: GlobalConfig<'home'> = {
 	slug: 'home',
+
 	access: {
 		read: () => true,
 	},
+
 	fields: [
 		F.media({
 			name: 'cover',

@@ -20,6 +20,10 @@ export const Itinerari: CollectionConfig = {
 		group: CollectionGroup.Principali,
 	},
 
+	access: {
+		read: () => true,
+	},
+
 	fields: [
 		{
 			type: 'tabs',

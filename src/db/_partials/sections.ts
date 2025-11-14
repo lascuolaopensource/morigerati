@@ -8,7 +8,7 @@ type Section = Field[]
 
 //
 
-export function generale(): Section {
+export function generale(fields: Field[] = []): Section {
 	return [
 		F.header('Generale'),
 		F.row([
@@ -17,6 +17,7 @@ export function generale(): Section {
 				fieldToUse: F.name.name,
 			}),
 		]),
+		...fields,
 		F.divider(),
 	]
 }

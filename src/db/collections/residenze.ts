@@ -20,6 +20,10 @@ export const Residenze: CollectionConfig<'residenze'> = {
 		group: CollectionGroup.Principali,
 	},
 
+	access: {
+		read: () => true,
+	},
+
 	fields: [
 		{
 			type: 'tabs',

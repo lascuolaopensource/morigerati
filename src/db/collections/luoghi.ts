@@ -20,6 +20,10 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
 		group: CollectionGroup.Principali,
 	},
 
+	access: {
+		read: () => true,
+	},
+
 	fields: [
 		{
 			type: 'tabs',

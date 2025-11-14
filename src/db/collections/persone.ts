@@ -20,6 +20,10 @@ export const Persone: CollectionConfig<'persone'> = {
 		group: CollectionGroup.Principali,
 	},
 
+	access: {
+		read: () => true,
+	},
+
 	fields: [
 		{
 			type: 'tabs',

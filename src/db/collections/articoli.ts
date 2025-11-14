@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 
-import { F, Section } from '@/db/_partials'
+import { F, Section, Tab } from '@/db/_partials'
 
 import { CollectionGroup } from '../utils'
 
@@ -20,60 +20,59 @@ export const Articoli: CollectionConfig<'articoli'> = {
 		group: CollectionGroup.Principali,
 	},
 
+	access: {
+		read: () => true,
+	},
+
 	fields: [
 		{
 			type: 'tabs',
 			tabs: [
 				{
 					label: 'Dati',
-					fields: [...Section.generale()],
-				},
-				// {
-				// 	label: 'Contenuto',
-				// 	fields: [
-				// 		F.title('Informazioni generali'),
-				// 		{
-				// 			...F.plainText('titolo'),
-				// 			required: true,
-				// 			localized: true,
-				// 		},
-				// 		F.gap(20, 'gap-1'),
-				// 		F.gap(20, 'gap-2'),
-				// 		{
-				// 			...F.plainText('sottotitolo'),
-				// 			localized: true,
-				// 		},
-				// 		{
-				// 			name: 'tags',
-				// 			type: 'array',
-				// 			label: 'Tags',
-				// 			maxRows: 3,
-				// 			fallback: false,
-				// 			fields: [
-				// 				{
-				// 					name: 'tag',
-				// 					type: 'text',
-				// 					localized: true,
-				// 				},
-				// 			],
-				// 		},
-				// 		{
-				// 			name: 'data_pubblicazione',
-				// 			label: 'Data pubblicazione',
-				// 			type: 'date',
-				// 		},
+					fields: [
+						...Section.generale([
+							{
+								name: 'subtitle',
+								type: 'text',
+								label: 'Sottotitolo',
+								localized: true,
+							},
+						]),
 
-				// 		...F.contenutoFields.map((field: any) => {
-				// 			if (field.name === 'testo_html' || field.name === 'testo') {
-				// 				return {
-				// 					...field,
-				// 					localized: true,
-				// 				}
-				// 			}
-				// 			return field
-				// 		}),
-				// 	],
-				// },
+						F.header('Informazioni generali'),
+						F.row([
+							F.date({ name: 'date', label: 'Data pubblicazione' }),
+							{
+								name: 'tags',
+								label: 'Tags',
+								type: 'select',
+								hasMany: true,
+								options: [
+									{
+										value: 'evento',
+										label: 'Evento',
+									},
+									{
+										value: 'notizia',
+										label: 'Notizia',
+									},
+									{
+										value: 'reportage',
+										label: 'Reportage',
+									},
+								],
+							},
+						]),
+					],
+				},
+
+				{
+					name: 'Contenuto',
+					fields: [F.richText({ name: 'content', label: 'Contenuto', required: true })],
+				},
+
+				Tab.multimedia(),
 			],
 		},
 	],
