@@ -1,30 +1,35 @@
-import * as F from '@/db/_partials/fields'
-import { lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical'
 import type { GlobalConfig, RichTextField } from 'payload'
 import { Globals } from '.'
+import * as F from '@/db/fields'
+import {
+  lexicalEditor,
+  BoldFeature,
+  InlineToolbarFeature,
+  ParagraphFeature,
+} from '@payloadcms/richtext-lexical'
 
 export const Footer: GlobalConfig = {
-	slug: Globals.Footer,
+  slug: Globals.Footer,
 
-	access: { read: () => true },
+  access: { read: () => true },
 
-	fields: [
-		{ ...baseRichText('testo_sinistra'), label: 'Testo a sinistra' },
+  fields: [
+    { ...baseRichText('testo_sinistra'), label: 'Testo a sinistra' },
 
-		{ ...baseRichText('testo_destra'), label: 'Testo a destra' },
+    { ...baseRichText('testo_destra'), label: 'Testo a destra' },
 
-		F.divider('divider-1'),
+    F.divider('divider-1'),
 
-		F.socialNetworkLinks,
-	],
+    F.socialNetworkLinks,
+  ],
 }
 
 function baseRichText(name: string): RichTextField {
-	return {
-		name,
-		type: 'richText',
-		required: true,
-		localized: true,
-		editor: lexicalEditor({ features: () => [ParagraphFeature()] }),
-	}
+  return {
+    name,
+    type: 'richText',
+    required: true,
+    localized: true,
+    editor: lexicalEditor({ features: () => [ParagraphFeature()] }),
+  }
 }

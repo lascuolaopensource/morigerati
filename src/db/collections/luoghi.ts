@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { F, Section, Tab } from '@/db/_partials'
+import * as F from '@/db/fields'
 
 import { CollectionGroup } from '../utils'
 
@@ -27,25 +27,45 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
 				{
 					label: 'Dati',
 					fields: [
-						...Section.generale(),
+						F.header('Generale'),
+						F.nameAndSlug(),
+						F.divider(),
+						// F.nome,
+						// {
+						//   ...F.posizione,
+						// },
 
-						F.header('Informazioni tecniche'),
-						F.row([
-							{ name: 'address', label: 'Indirizzo', type: 'text' },
-							{
-								name: 'coordinates',
-								label: 'Posizione',
-								type: 'point',
-							},
-						]),
-						F.plainRichText({ name: 'timetable', label: 'Orari di attività e date di chiusura' }),
-						F.contatti(),
+						// F.divider('divider-1'),
+						// {
+						//   ...F.servizi,
+						// },
+						// F.divider('divider-2'),
+						// {
+						//   ...F.contatti,
+						// },
+						// F.divider('divider-3'),
+						// F.title('Orari'),
+						// {
+						//   name: 'orari',
+						//   type: 'richText',
+						//   label: 'Orari di attività e date di chiusura',
+						//   localized: true,
+						//   editor: lexicalEditor({
+						//     features: () => [
+						//       InlineToolbarFeature(),
+						//       ParagraphFeature(),
+						//       BoldFeature(),
+						//       InlineToolbarFeature(),
+						//     ],
+						//   }),
+						// },
 					],
 				},
-
-				Tab.descrizione(),
-				Tab.servizi(),
-				Tab.multimedia(),
+				// F.tabContenuto,
+				// {
+				//   label: 'Link',
+				//   fields: [...slugField('nome')],
+				// },
 			],
 		},
 	],

@@ -1,6 +1,6 @@
 import type { GlobalConfig } from 'payload'
 
-import * as F from '@/db/_partials/fields'
+import * as F from '@/db/fields'
 
 //
 

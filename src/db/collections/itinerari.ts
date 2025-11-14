@@ -1,10 +1,11 @@
 import { type CollectionConfig, type Field } from 'payload'
 
-import { F, Section, Tab } from '@/db/_partials'
+import * as F from '@/db/fields'
 
 import { CollectionGroup } from '../utils'
 
 //
+
 export const Itinerari: CollectionConfig = {
 	slug: 'itinerari',
 
@@ -25,11 +26,48 @@ export const Itinerari: CollectionConfig = {
 			tabs: [
 				{
 					label: 'Dati',
-					fields: [...Section.generale(), ...informazioniTecniche()],
+					fields: [F.header('Generale'), F.nameAndSlug(), F.divider(), ...informazioniTecniche()],
 				},
 
-				Tab.descrizione(),
-				Tab.servizi(),
+				{
+					label: 'Descrizione',
+					fields: [
+						F.richText({
+							label: 'Descrizione',
+							name: 'description',
+							required: true,
+						}),
+					],
+				},
+
+				{
+					label: 'Servizi',
+					fields: [
+						{
+							name: 'services',
+							type: 'array',
+							admin: {
+								components: {
+									RowLabel: {
+										path: 'src/db/fields/components/array-row-label.tsx',
+										clientProps: { fieldToUse: F.name.name },
+									},
+								},
+							},
+							fields: [
+								F.name,
+								F.plainRichText({
+									name: 'description',
+									label: 'Descrizione',
+									required: true,
+								}),
+								F.url({
+									label: 'URL (opzionale)',
+								}),
+							],
+						},
+					],
+				},
 
 				{
 					label: 'Contenuti collegati',
@@ -49,18 +87,22 @@ export const Itinerari: CollectionConfig = {
 					],
 				},
 
-				Tab.multimedia([
-					F.video({ name: 'video', label: 'Video' }),
-					{
-						name: 'geolocalized_media',
-						label: 'Media geolocalizzati',
-						type: 'array',
-						fields: [
-							{ name: 'position', type: 'point', required: true },
-							F.media({ name: 'image', label: 'Immagine', required: true }),
-						],
-					},
-				]),
+				{
+					label: 'Multimedia',
+					fields: [
+						F.video({ name: 'video', label: 'Video' }),
+						F.media({ name: 'gallery', label: 'Galleria', hasMany: true }),
+						{
+							name: 'geolocalized_media',
+							label: 'Media geolocalizzati',
+							type: 'array',
+							fields: [
+								{ name: 'position', type: 'point', required: true },
+								F.media({ name: 'image', label: 'Immagine', required: true }),
+							],
+						},
+					],
+				},
 			],
 		},
 	],
