@@ -15,8 +15,8 @@ import { Residenze } from '@/db/collections/residenze'
 import { Tracciati } from '@/db/collections/tracciati'
 import { Users } from '@/db/collections/users'
 import { Video } from '@/db/collections/video'
-import { Testi } from '@/db/globals/esti'
 import { Home } from '@/db/globals/home'
+import { Testi } from '@/db/globals/testi'
 
 import { getPaths } from './modules/utils/server'
 
