@@ -74,6 +74,7 @@ export interface Config {
     itinerari: Itinerari;
     luoghi: Luoghi;
     persone: Persone;
+    residenze: Residenze;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -95,6 +96,7 @@ export interface Config {
     itinerari: ItinerariSelect<false> | ItinerariSelect<true>;
     luoghi: LuoghiSelect<false> | LuoghiSelect<true>;
     persone: PersoneSelect<false> | PersoneSelect<true>;
+    residenze: ResidenzeSelect<false> | ResidenzeSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -487,6 +489,21 @@ export interface Persone {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "residenze".
+ */
+export interface Residenze {
+  id: string;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -536,6 +553,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'persone';
         value: string | Persone;
+      } | null)
+    | ({
+        relationTo: 'residenze';
+        value: string | Residenze;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -814,6 +835,17 @@ export interface PersoneSelect<T extends boolean = true> {
   description?: T;
   copertina?: T;
   gallery?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "residenze_select".
+ */
+export interface ResidenzeSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

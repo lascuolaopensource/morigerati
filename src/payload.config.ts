@@ -12,6 +12,7 @@ import { Itinerari } from '@/db/collections/itinerari'
 import { Luoghi } from '@/db/collections/luoghi'
 import { Media } from '@/db/collections/media'
 import { Persone } from '@/db/collections/persone'
+import { Residenze } from '@/db/collections/residenze'
 import { Tracciati } from '@/db/collections/tracciati'
 import { Users } from '@/db/collections/users'
 import { Video } from '@/db/collections/video'
@@ -36,7 +37,7 @@ export default buildConfig({
 		}),
 	},
 
-	collections: [Users, Media, Video, Tracciati, Itinerari, Luoghi, Persone],
+	collections: [Users, Media, Video, Tracciati, Itinerari, Luoghi, Persone, Residenze],
 	globals: [Home],
 
 	secret: process.env.PAYLOAD_SECRET || '',
