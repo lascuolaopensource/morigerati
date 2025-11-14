@@ -1,32 +1,35 @@
 import { CollectionConfig } from 'payload'
-import { Collections } from '.'
+
+//
 
 export const Account: CollectionConfig = {
-  slug: Collections.Account,
-  labels: {
-    singular: 'Account',
-    plural: 'Accounts',
-  },
-  admin: {
-    useAsTitle: 'nome',
-  },
+	slug: 'account',
 
-  auth: true,
-  access: {
-    read: () => true,
-    admin: () => false,
-  },
+	labels: {
+		singular: 'Account',
+		plural: 'Accounts',
+	},
 
-  fields: [
-    {
-      name: 'nome',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'persona',
-      type: 'relationship',
-      relationTo: Collections.Persone,
-    },
-  ],
+	admin: {
+		useAsTitle: 'nome',
+	},
+
+	access: {
+		read: () => true,
+		admin: () => false,
+	},
+	auth: true,
+
+	fields: [
+		{
+			name: 'nome',
+			type: 'text',
+			required: true,
+		},
+		{
+			name: 'persona',
+			type: 'relationship',
+			relationTo: 'persone',
+		},
+	],
 }

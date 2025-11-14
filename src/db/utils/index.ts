@@ -6,6 +6,7 @@ export enum CollectionGroup {
 	Multimedia = 'Multimedia',
 	Contenuti = 'Contenuti',
 	Principali = 'Principali',
+	Transluoghigram = 'Transluoghigram',
 }
 
 //

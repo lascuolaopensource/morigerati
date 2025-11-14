@@ -13,6 +13,9 @@ import { Media } from '@/db/collections/media'
 import { Persone } from '@/db/collections/persone'
 import { Residenze } from '@/db/collections/residenze'
 import { Tracciati } from '@/db/collections/tracciati'
+import { Account } from '@/db/collections/transluoghigram/account'
+import { Post } from '@/db/collections/transluoghigram/post'
+import { PostMedia } from '@/db/collections/transluoghigram/post-media'
 import { Users } from '@/db/collections/users'
 import { Video } from '@/db/collections/video'
 import { Home } from '@/db/globals/home'
@@ -32,7 +35,20 @@ export default buildConfig({
 		},
 	},
 
-	collections: [Users, Media, Video, Tracciati, Itinerari, Luoghi, Persone, Residenze, Articoli],
+	collections: [
+		Users,
+		Media,
+		Video,
+		Tracciati,
+		Itinerari,
+		Luoghi,
+		Persone,
+		Residenze,
+		Articoli,
+		Post,
+		PostMedia,
+		Account,
+	],
 	globals: [Home, Testi],
 
 	secret: process.env.PAYLOAD_SECRET || '',
