@@ -8,12 +8,12 @@ import { getDb } from '@/modules/utils/server'
 // import { seedVideos } from './seed-videos'
 // import { seedPropostaAttivitaForm } from './seed-forms'
 // import { seedAbout } from './seed-about'
-import { seedHome } from './home/seed-home'
+import { seedFooter } from './footer/footer.seed'
+import { seedHome } from './home/home.seed'
+import { seedTesti } from './testi/testi.seed'
 
-/**
- * Clear all seed data from the database
- * Preserves superadmin users
- */
+//
+
 export async function clearData() {
 	const payload = await getDb()
 
@@ -28,6 +28,8 @@ export async function clearData() {
 	payload.logger.info('Data cleared successfully!')
 }
 
+//
+
 export async function seedData() {
 	const payload = await getDb()
 
@@ -35,6 +37,8 @@ export async function seedData() {
 
 	try {
 		await seedHome()
+		await seedTesti()
+		await seedFooter()
 		// // 1. Seed base data (independent entities)
 		// payload.logger.info('— Seeding base data...')
 		// const { personas, locations, topics, genericForm } = await seedBaseData()
