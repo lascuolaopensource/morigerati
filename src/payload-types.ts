@@ -340,6 +340,36 @@ export interface Luoghi {
    */
   generateSlug?: boolean | null;
   slug: string;
+  address?: string | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  coordinates?: [number, number] | null;
+  timetable?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  contatti?:
+    | {
+        name: string;
+        url?: string | null;
+        email?: string | null;
+        telefono?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   description: {
     root: {
       type: string;
@@ -653,6 +683,18 @@ export interface LuoghiSelect<T extends boolean = true> {
   name?: T;
   generateSlug?: T;
   slug?: T;
+  address?: T;
+  coordinates?: T;
+  timetable?: T;
+  contatti?:
+    | T
+    | {
+        name?: T;
+        url?: T;
+        email?: T;
+        telefono?: T;
+        id?: T;
+      };
   description?: T;
   services?:
     | T

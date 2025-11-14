@@ -28,37 +28,21 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
 					label: 'Dati',
 					fields: [
 						...Section.generale(),
-						// F.nome,
-						// {
-						//   ...F.posizione,
-						// },
 
-						// F.divider('divider-1'),
-						// {
-						//   ...F.servizi,
-						// },
-						// F.divider('divider-2'),
-						// {
-						//   ...F.contatti,
-						// },
-						// F.divider('divider-3'),
-						// F.title('Orari'),
-						// {
-						//   name: 'orari',
-						//   type: 'richText',
-						//   label: 'Orari di attività e date di chiusura',
-						//   localized: true,
-						//   editor: lexicalEditor({
-						//     features: () => [
-						//       InlineToolbarFeature(),
-						//       ParagraphFeature(),
-						//       BoldFeature(),
-						//       InlineToolbarFeature(),
-						//     ],
-						//   }),
-						// },
+						F.header('Informazioni tecniche'),
+						F.row([
+							{ name: 'address', label: 'Indirizzo', type: 'text' },
+							{
+								name: 'coordinates',
+								label: 'Posizione',
+								type: 'point',
+							},
+						]),
+						F.plainRichText({ name: 'timetable', label: 'Orari di attività e date di chiusura' }),
+						F.contatti(),
 					],
 				},
+
 				Tab.descrizione(),
 				Tab.servizi(),
 				Tab.multimedia(),

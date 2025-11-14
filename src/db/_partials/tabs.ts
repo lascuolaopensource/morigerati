@@ -30,6 +30,7 @@ export function servizi(): Tab {
 		fields: [
 			{
 				name: 'services',
+				label: 'Servizi',
 				type: 'array',
 				admin: {
 					components: {

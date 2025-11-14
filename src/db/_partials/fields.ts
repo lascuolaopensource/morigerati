@@ -7,6 +7,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { nanoid } from 'nanoid'
 import {
+	ArrayField,
 	type CollectionSlug,
 	type Field,
 	type GroupField,
@@ -126,6 +127,28 @@ export function richText(
 		editor: lexicalEditor(),
 		localized: true,
 		...props,
+	}
+}
+
+export function contatti(): ArrayField {
+	return {
+		name: 'contatti',
+		type: 'array',
+		admin: {
+			components: {
+				RowLabel: {
+					path: 'src/db/_partials/components/array-row-label.tsx',
+					clientProps: { fieldToUse: name.name },
+				},
+			},
+		},
+		fields: [
+			row([name, url()]),
+			row([
+				{ name: 'email', type: 'email' },
+				{ name: 'telefono', type: 'text' },
+			]),
+		],
 	}
 }
 
