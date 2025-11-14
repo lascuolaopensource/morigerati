@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import * as F from '@/db/fields'
+import * as F from '@/db/_partials'
 
 import { CollectionGroup } from '../utils'
 

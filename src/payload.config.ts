@@ -28,10 +28,10 @@ export default buildConfig({
 			baseDir: path.resolve(dirname),
 		},
 		dependencies: components({
-			divider: 'src/db/fields/components/divider.tsx',
-			gap: 'src/db/fields/components/gap.tsx',
-			header: 'src/db/fields/components/header.tsx',
-			arrayRowLabel: 'src/db/fields/components/array-row-label.tsx',
+			divider: 'src/db/_partials/components/divider.tsx',
+			gap: 'src/db/_partials/components/gap.tsx',
+			header: 'src/db/_partials/components/header.tsx',
+			arrayRowLabel: 'src/db/_partials/components/array-row-label.tsx',
 		}),
 	},
 

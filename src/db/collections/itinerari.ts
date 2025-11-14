@@ -1,6 +1,6 @@
 import { type CollectionConfig, type Field } from 'payload'
 
-import * as F from '@/db/fields'
+import * as F from '@/db/_partials'
 
 import { CollectionGroup } from '../utils'
 
@@ -49,7 +49,7 @@ export const Itinerari: CollectionConfig = {
 							admin: {
 								components: {
 									RowLabel: {
-										path: 'src/db/fields/components/array-row-label.tsx',
+										path: 'src/db/_partials/components/array-row-label.tsx',
 										clientProps: { fieldToUse: F.name.name },
 									},
 								},

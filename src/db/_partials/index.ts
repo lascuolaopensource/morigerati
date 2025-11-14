@@ -27,7 +27,7 @@ import { createUIField } from './utils'
 export function header(text: string) {
 	return createUIField({
 		name: `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
-		componentPath: 'src/db/fields/components/header.tsx#default',
+		componentPath: 'src/db/_partials/components/header.tsx#default',
 		clientProps: { content: text },
 	})
 }
@@ -35,7 +35,7 @@ export function header(text: string) {
 export function divider() {
 	return createUIField({
 		name: 'divider-' + nanoid(5),
-		componentPath: 'src/db/fields/components/divider.tsx#default',
+		componentPath: 'src/db/_partials/components/divider.tsx#default',
 		clientProps: {},
 	})
 }
