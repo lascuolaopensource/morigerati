@@ -1,11 +1,15 @@
 import type { CollectionConfig } from 'payload'
 
-import { imageSizes } from '../../utils'
+import { CollectionGroup, imageSizes } from '../../utils'
 
 //
 
 export const PostMedia = {
 	slug: 'post-media',
+
+	admin: {
+		group: CollectionGroup.Transluoghigram,
+	},
 
 	access: {
 		read: () => true,

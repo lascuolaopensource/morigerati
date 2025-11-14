@@ -1,5 +1,7 @@
 import { CollectionConfig } from 'payload'
 
+import { CollectionGroup } from '@/db/utils'
+
 //
 
 export const Account: CollectionConfig = {
@@ -12,6 +14,7 @@ export const Account: CollectionConfig = {
 
 	admin: {
 		useAsTitle: 'nome',
+		group: CollectionGroup.Transluoghigram,
 	},
 
 	access: {

@@ -18,7 +18,10 @@ import { Post } from '@/db/collections/transluoghigram/post'
 import { PostMedia } from '@/db/collections/transluoghigram/post-media'
 import { Users } from '@/db/collections/users'
 import { Video } from '@/db/collections/video'
+import { ChiSiamo } from '@/db/globals/chi-siamo'
+import { Footer } from '@/db/globals/footer'
 import { Home } from '@/db/globals/home'
+import { MobilitaSostenibile } from '@/db/globals/mobilita-sostenibile'
 import { Testi } from '@/db/globals/testi'
 
 import { getPaths } from './modules/utils/server'
@@ -49,7 +52,7 @@ export default buildConfig({
 		PostMedia,
 		Account,
 	],
-	globals: [Home, Testi],
+	globals: [Home, Testi, Footer, ChiSiamo, MobilitaSostenibile],
 
 	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {

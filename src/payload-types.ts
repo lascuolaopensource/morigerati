@@ -117,10 +117,16 @@ export interface Config {
   globals: {
     home: Home;
     testi: Testi;
+    footer: Footer;
+    'chi-siamo': ChiSiamo;
+    'mobilita-sostenibile': MobilitaSostenibile;
   };
   globalsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
     testi: TestiSelect<false> | TestiSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    'chi-siamo': ChiSiamoSelect<false> | ChiSiamoSelect<true>;
+    'mobilita-sostenibile': MobilitaSostenibileSelect<false> | MobilitaSostenibileSelect<true>;
   };
   locale: 'it' | 'en';
   user:
@@ -697,6 +703,8 @@ export interface Post {
   id: string;
   text: string;
   link?: string | null;
+  media?: (string | null) | PostMedia;
+  owner: string | Account;
   updatedAt: string;
   createdAt: string;
 }
@@ -1236,6 +1244,8 @@ export interface ArticoliSelect<T extends boolean = true> {
 export interface PostSelect<T extends boolean = true> {
   text?: T;
   link?: T;
+  media?: T;
+  owner?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1567,6 +1577,104 @@ export interface Testi {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  text_left?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  text_right?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  social_networks?:
+    | {
+        name: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "chi-siamo".
+ */
+export interface ChiSiamo {
+  id: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  copertina?: (string | null) | Media;
+  gallery?: (string | Media)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mobilita-sostenibile".
+ */
+export interface MobilitaSostenibile {
+  id: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  copertina?: (string | null) | Media;
+  gallery?: (string | Media)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -1634,6 +1742,48 @@ export interface TestiSelect<T extends boolean = true> {
         title?: T;
         description?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  text_left?: T;
+  text_right?: T;
+  social_networks?:
+    | T
+    | {
+        name?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "chi-siamo_select".
+ */
+export interface ChiSiamoSelect<T extends boolean = true> {
+  description?: T;
+  copertina?: T;
+  gallery?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mobilita-sostenibile_select".
+ */
+export interface MobilitaSostenibileSelect<T extends boolean = true> {
+  description?: T;
+  copertina?: T;
+  gallery?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
