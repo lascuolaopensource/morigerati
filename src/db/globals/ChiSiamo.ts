@@ -1,4 +1,4 @@
-import * as F from '@/db/_partials'
+import * as F from '@/db/_partials/fields'
 import type { GlobalConfig } from 'payload'
 import { Globals } from '.'
 

@@ -1,8 +1,8 @@
-import * as F from '@/db/_partials'
+import * as F from '@/db/_partials/fields'
 import { formatSlug } from '@/db/_partials/slug/formatSlug'
 import { CollectionConfig } from 'payload'
 
-import { slugField } from '@/db/_partials'
+import { slugField } from '@/db/_partials/fields'
 import { BoldFeature, lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical'
 
 export const Residenze: CollectionConfig<'residenze'> = {

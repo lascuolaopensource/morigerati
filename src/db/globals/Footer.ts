@@ -1,4 +1,4 @@
-import * as F from '@/db/_partials'
+import * as F from '@/db/_partials/fields'
 import { lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical'
 import type { GlobalConfig, RichTextField } from 'payload'
 import { Globals } from '.'

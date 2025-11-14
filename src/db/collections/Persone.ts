@@ -1,5 +1,5 @@
-import * as F from '@/db/_partials'
-import { slugField } from '@/db/_partials'
+import * as F from '@/db/_partials/fields'
+import { slugField } from '@/db/_partials/fields'
 import { formatSlug } from '@/db/_partials/slug/formatSlug'
 import type { CollectionConfig } from 'payload'
 
