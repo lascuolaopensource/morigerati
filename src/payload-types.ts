@@ -323,6 +323,7 @@ export interface Itinerari {
     | null;
   luoghi?: (string | Luoghi)[] | null;
   persone?: (string | Persone)[] | null;
+  copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
   video?: (string | null) | Video;
   geolocalized_media?:
@@ -425,6 +426,7 @@ export interface Luoghi {
         id?: string | null;
       }[]
     | null;
+  copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
   updatedAt: string;
   createdAt: string;
@@ -478,6 +480,7 @@ export interface Persone {
     };
     [k: string]: unknown;
   };
+  copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
   updatedAt: string;
   createdAt: string;
@@ -740,6 +743,7 @@ export interface ItinerariSelect<T extends boolean = true> {
       };
   luoghi?: T;
   persone?: T;
+  copertina?: T;
   gallery?: T;
   video?: T;
   geolocalized_media?:
@@ -782,6 +786,7 @@ export interface LuoghiSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  copertina?: T;
   gallery?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -807,6 +812,7 @@ export interface PersoneSelect<T extends boolean = true> {
       };
   itinerari?: T;
   description?: T;
+  copertina?: T;
   gallery?: T;
   updatedAt?: T;
   createdAt?: T;
