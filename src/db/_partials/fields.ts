@@ -8,6 +8,7 @@ import {
 import { nanoid } from 'nanoid'
 import {
 	ArrayField,
+	JoinField,
 	type CollectionSlug,
 	type Field,
 	type GroupField,
@@ -18,6 +19,7 @@ import {
 } from 'payload'
 
 import { capitalizeFirstLetter } from '@/modules/utils'
+import { Itinerari, Luoghi, Media, Persone, User } from '@/payload-types'
 
 import { createUIField } from './utils'
 
@@ -149,6 +151,46 @@ export function contatti(): ArrayField {
 				{ name: 'telefono', type: 'text' },
 			]),
 		],
+	}
+}
+
+export function location(): RowField {
+	return row([
+		{ name: 'address', label: 'Indirizzo', type: 'text' },
+		{
+			name: 'coordinates',
+			label: 'Posizione',
+			type: 'point',
+			admin: {
+				description: 'Serve per visualizzare la posizione sulla mappa',
+			},
+		},
+	])
+}
+
+// Join
+
+type Collections = {
+	users: User
+	media: Media
+	itinerari: Itinerari
+	luoghi: Luoghi
+	persone: Persone
+}
+
+type Collection = keyof Collections
+type CollectionField<C extends Collection> = keyof Collections[C]
+
+export function join<C extends Collection>(
+	props: { collection: C; on: CollectionField<C> } & Omit<JoinField, 'collection' | 'on' | 'type'>,
+): JoinField {
+	const { collection, on, ...rest } = props
+	return {
+		...rest,
+		type: 'join',
+		collection,
+		defaultLimit: 0,
+		on: on as string,
 	}
 }
 

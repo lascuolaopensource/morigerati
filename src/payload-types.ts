@@ -73,12 +73,20 @@ export interface Config {
     tracciati: Tracciati;
     itinerari: Itinerari;
     luoghi: Luoghi;
+    persone: Persone;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    luoghi: {
+      itinerari: 'itinerari';
+    };
+    persone: {
+      itinerari: 'itinerari';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -86,6 +94,7 @@ export interface Config {
     tracciati: TracciatiSelect<false> | TracciatiSelect<true>;
     itinerari: ItinerariSelect<false> | ItinerariSelect<true>;
     luoghi: LuoghiSelect<false> | LuoghiSelect<true>;
+    persone: PersoneSelect<false> | PersoneSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -313,6 +322,7 @@ export interface Itinerari {
       }[]
     | null;
   luoghi?: (string | Luoghi)[] | null;
+  persone?: (string | Persone)[] | null;
   gallery?: (string | Media)[] | null;
   video?: (string | null) | Video;
   geolocalized_media?:
@@ -343,6 +353,8 @@ export interface Luoghi {
   slug: string;
   address?: string | null;
   /**
+   * Serve per visualizzare la posizione sulla mappa
+   *
    * @minItems 2
    * @maxItems 2
    */
@@ -371,6 +383,11 @@ export interface Luoghi {
         id?: string | null;
       }[]
     | null;
+  itinerari?: {
+    docs?: (string | Itinerari)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   description: {
     root: {
       type: string;
@@ -408,6 +425,59 @@ export interface Luoghi {
         id?: string | null;
       }[]
     | null;
+  gallery?: (string | Media)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "persone".
+ */
+export interface Persone {
+  id: string;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  address?: string | null;
+  /**
+   * Serve per visualizzare la posizione sulla mappa
+   *
+   * @minItems 2
+   * @maxItems 2
+   */
+  coordinates?: [number, number] | null;
+  contatti?:
+    | {
+        name: string;
+        url?: string | null;
+        email?: string | null;
+        telefono?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  itinerari?: {
+    docs?: (string | Itinerari)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   gallery?: (string | Media)[] | null;
   updatedAt: string;
   createdAt: string;
@@ -459,6 +529,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'luoghi';
         value: string | Luoghi;
+      } | null)
+    | ({
+        relationTo: 'persone';
+        value: string | Persone;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -665,6 +739,7 @@ export interface ItinerariSelect<T extends boolean = true> {
         id?: T;
       };
   luoghi?: T;
+  persone?: T;
   gallery?: T;
   video?: T;
   geolocalized_media?:
@@ -697,6 +772,7 @@ export interface LuoghiSelect<T extends boolean = true> {
         telefono?: T;
         id?: T;
       };
+  itinerari?: T;
   description?: T;
   services?:
     | T
@@ -706,6 +782,31 @@ export interface LuoghiSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  gallery?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "persone_select".
+ */
+export interface PersoneSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  address?: T;
+  coordinates?: T;
+  contatti?:
+    | T
+    | {
+        name?: T;
+        url?: T;
+        email?: T;
+        telefono?: T;
+        id?: T;
+      };
+  itinerari?: T;
+  description?: T;
   gallery?: T;
   updatedAt?: T;
   createdAt?: T;

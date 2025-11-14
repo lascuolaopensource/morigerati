@@ -1,7 +1,10 @@
-import * as F from '@/db/_partials/fields'
-import { slugField } from '@/db/_partials/fields'
-import { formatSlug } from '@/db/_partials/slug/formatSlug'
 import type { CollectionConfig } from 'payload'
+
+import { F, Section, Tab } from '@/db/_partials'
+
+import { CollectionGroup } from '../utils'
+
+//
 
 export const Persone: CollectionConfig<'persone'> = {
 	slug: 'persone',
@@ -9,37 +12,11 @@ export const Persone: CollectionConfig<'persone'> = {
 		singular: 'Persona',
 		plural: 'Persone',
 	},
+
 	admin: {
 		defaultColumns: ['nome', 'testo'],
-		useAsTitle: F.nome.name,
-	},
-
-	hooks: {
-		beforeChange: [
-			async ({ req, data, originalDoc, operation }) => {
-				// For localized fields, ensure the slug is properly updated for each locale
-				if (data.nome && typeof data.nome === 'object') {
-					// Initialize slug object if it doesn't exist
-					if (!data.slug) {
-						data.slug = {}
-					} else if (typeof data.slug === 'string') {
-						// If slug exists as a string, convert to object
-						const defaultSlug = data.slug
-						data.slug = { [req.locale || 'it']: defaultSlug }
-					}
-
-					// Generate slug for each locale in nome
-					Object.entries(data.nome).forEach(([locale, value]) => {
-						if (typeof value === 'string' && value.trim()) {
-							// Only update if nome is not empty
-							data.slug[locale] = formatSlug(value)
-						}
-					})
-				}
-
-				return data
-			},
-		],
+		useAsTitle: F.name.name,
+		group: CollectionGroup.Principali,
 	},
 
 	fields: [
@@ -49,32 +26,17 @@ export const Persone: CollectionConfig<'persone'> = {
 				{
 					label: 'Dati',
 					fields: [
-						F.title('Info generali'),
-						{
-							type: 'row',
-							fields: [
-								F.nome,
-								{
-									name: 'tipologia',
-									type: 'text',
-									localized: true,
-								},
-							],
-						},
-						F.posizione,
-						{
-							name: 'indirizzo',
-							type: 'text',
-						},
-						F.divider('divider-1'),
-						F.contatti,
+						...Section.generale(),
+						F.header('Info generali'),
+						F.location(),
+						F.contatti(),
+						F.divider(),
+						F.header('Itinerari correlati'),
+						F.join({ name: 'itinerari', collection: 'itinerari', on: 'persone' }),
 					],
 				},
-				F.tabContenuto,
-				{
-					label: 'Link',
-					fields: [...slugField('nome')],
-				},
+				Tab.descrizione(),
+				Tab.multimedia(),
 			],
 		},
 	],

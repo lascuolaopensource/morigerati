@@ -41,18 +41,12 @@ export const Itinerari: CollectionConfig = {
 							relationTo: 'luoghi',
 							hasMany: true,
 						},
-						// 		{
-						// 			name: 'luoghi',
-						// 			type: 'relationship',
-						// 			relationTo: Collections.Luoghi,
-						// 			hasMany: true,
-						// 		},
-						// 		{
-						// 			name: 'persone',
-						// 			type: 'relationship',
-						// 			relationTo: Collections.Persone,
-						// 			hasMany: true,
-						// 		},
+						{
+							name: 'persone',
+							type: 'relationship',
+							relationTo: 'persone',
+							hasMany: true,
+						},
 					],
 				},
 
