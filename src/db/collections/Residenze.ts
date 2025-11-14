@@ -1,190 +1,189 @@
-import { CollectionConfig } from 'payload'
-import * as F from '@/db/fields'
+import * as F from '@/db/_partials/fields'
 import { formatSlug } from '@/db/fields/slug/formatSlug'
+import { CollectionConfig } from 'payload'
 
-import { slugField } from '@/db/fields'
-import { BoldFeature, ParagraphFeature } from '@payloadcms/richtext-lexical'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { slugField } from '@/db/_partials/fields'
+import { BoldFeature, lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical'
 
 export const Residenze: CollectionConfig<'residenze'> = {
-  slug: 'residenze',
-  labels: {
-    singular: 'Residenza',
-    plural: 'Residenze',
-  },
-  admin: {
-    defaultColumns: ['nome', 'abstract'],
-    useAsTitle: F.nome.name,
-  },
+	slug: 'residenze',
+	labels: {
+		singular: 'Residenza',
+		plural: 'Residenze',
+	},
+	admin: {
+		defaultColumns: ['nome', 'abstract'],
+		useAsTitle: F.nome.name,
+	},
 
-  hooks: {
-    beforeChange: [
-      async ({ req, data, originalDoc, operation }) => {
-        // For localized fields, ensure the slug is properly updated for each locale
-        if (data.nome && typeof data.nome === 'object') {
-          // Initialize slug object if it doesn't exist
-          if (!data.slug) {
-            data.slug = {}
-          } else if (typeof data.slug === 'string') {
-            // If slug exists as a string, convert to object
-            const defaultSlug = data.slug
-            data.slug = { [req.locale || 'it']: defaultSlug }
-          }
+	hooks: {
+		beforeChange: [
+			async ({ req, data, originalDoc, operation }) => {
+				// For localized fields, ensure the slug is properly updated for each locale
+				if (data.nome && typeof data.nome === 'object') {
+					// Initialize slug object if it doesn't exist
+					if (!data.slug) {
+						data.slug = {}
+					} else if (typeof data.slug === 'string') {
+						// If slug exists as a string, convert to object
+						const defaultSlug = data.slug
+						data.slug = { [req.locale || 'it']: defaultSlug }
+					}
 
-          // Generate slug for each locale in nome
-          Object.entries(data.nome).forEach(([locale, value]) => {
-            if (typeof value === 'string' && value.trim()) {
-              // Only update if nome is not empty
-              data.slug[locale] = formatSlug(value)
-            }
-          })
-        }
+					// Generate slug for each locale in nome
+					Object.entries(data.nome).forEach(([locale, value]) => {
+						if (typeof value === 'string' && value.trim()) {
+							// Only update if nome is not empty
+							data.slug[locale] = formatSlug(value)
+						}
+					})
+				}
 
-        return data
-      },
-    ],
-  },
+				return data
+			},
+		],
+	},
 
-  fields: [
-    {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'Generali',
-          fields: [
-            F.title('Informazioni generali'),
-            F.nome,
+	fields: [
+		{
+			type: 'tabs',
+			tabs: [
+				{
+					label: 'Generali',
+					fields: [
+						F.title('Informazioni generali'),
+						F.nome,
 
-            F.divider('divider-X'),
-            {
-              name: 'data_inizio',
-              label: 'Data inizio',
-              type: 'date',
-              admin: {
-                date: {
-                  displayFormat: 'dd/MM/yyyy',
-                },
-              },
-              required: true,
-            },
-            {
-              name: 'data_fine',
-              label: 'Data fine',
-              type: 'date',
-              admin: {
-                date: {
-                  displayFormat: 'dd/MM/yyyy',
-                },
-              },
-            },
+						F.divider('divider-X'),
+						{
+							name: 'data_inizio',
+							label: 'Data inizio',
+							type: 'date',
+							admin: {
+								date: {
+									displayFormat: 'dd/MM/yyyy',
+								},
+							},
+							required: true,
+						},
+						{
+							name: 'data_fine',
+							label: 'Data fine',
+							type: 'date',
+							admin: {
+								date: {
+									displayFormat: 'dd/MM/yyyy',
+								},
+							},
+						},
 
-            F.divider('divider-1'),
-            {
-              name: 'deadline_iscrizione',
-              label: 'Scadenza iscrizioni',
-              type: 'date',
-              admin: {
-                date: {
-                  displayFormat: 'dd/MM/yyyy',
-                },
-              },
-            },
-            {
-              name: 'link_iscrizione',
-              label: 'Link iscrizione',
-              type: 'text',
-            },
-            {
-              name: 'mostra_pulsante_iscrizione',
-              type: 'checkbox',
-              label: 'Mostra pulsante iscrizione',
-              defaultValue: false,
-            },
-            F.divider('divider-2'),
-            {
-              name: 'indirizzo',
-              label: 'Indirizzo / luogo',
-              type: 'text',
-            },
-          ],
-        },
+						F.divider('divider-1'),
+						{
+							name: 'deadline_iscrizione',
+							label: 'Scadenza iscrizioni',
+							type: 'date',
+							admin: {
+								date: {
+									displayFormat: 'dd/MM/yyyy',
+								},
+							},
+						},
+						{
+							name: 'link_iscrizione',
+							label: 'Link iscrizione',
+							type: 'text',
+						},
+						{
+							name: 'mostra_pulsante_iscrizione',
+							type: 'checkbox',
+							label: 'Mostra pulsante iscrizione',
+							defaultValue: false,
+						},
+						F.divider('divider-2'),
+						{
+							name: 'indirizzo',
+							label: 'Indirizzo / luogo',
+							type: 'text',
+						},
+					],
+				},
 
-        /* -- Testi -- */
+				/* -- Testi -- */
 
-        {
-          label: 'Testi',
-          fields: [
-            F.title('Testi'),
-            {
-              ...F.testo,
-              name: 'abstract',
-              label: 'Abstract',
-            },
+				{
+					label: 'Testi',
+					fields: [
+						F.title('Testi'),
+						{
+							...F.testo,
+							name: 'abstract',
+							label: 'Abstract',
+						},
 
-            F.divider('divider-4'),
+						F.divider('divider-4'),
 
-            {
-              ...F.testo,
-              name: 'descrizione',
-              label: 'Descrizione',
-            },
-          ],
-        },
+						{
+							...F.testo,
+							name: 'descrizione',
+							label: 'Descrizione',
+						},
+					],
+				},
 
-        { label: 'Media', fields: [F.title('Media'), F.media, F.galleria] },
+				{ label: 'Media', fields: [F.title('Media'), F.media, F.galleria] },
 
-        { label: 'Programma', fields: [F.programmaArray] },
+				{ label: 'Programma', fields: [F.programmaArray] },
 
-        {
-          label: 'Tutor ed esperti',
-          fields: [
-            {
-              name: 'esperti',
-              label: 'Tutor ed esperti',
-              type: 'array',
+				{
+					label: 'Tutor ed esperti',
+					fields: [
+						{
+							name: 'esperti',
+							label: 'Tutor ed esperti',
+							type: 'array',
 
-              fields: [
-                {
-                  type: 'row',
-                  fields: [
-                    {
-                      name: 'nome',
-                      type: 'text',
-                      label: 'Nome',
-                    },
-                    {
-                      ...F.media,
-                      name: 'foto',
-                    },
-                  ],
-                },
-                {
-                  name: 'biografia',
-                  type: 'richText',
-                  label: 'Biografia',
-                  localized: true,
-                  editor: lexicalEditor({ features: () => [ParagraphFeature(), BoldFeature()] }),
-                },
+							fields: [
+								{
+									type: 'row',
+									fields: [
+										{
+											name: 'nome',
+											type: 'text',
+											label: 'Nome',
+										},
+										{
+											...F.media,
+											name: 'foto',
+										},
+									],
+								},
+								{
+									name: 'biografia',
+									type: 'richText',
+									label: 'Biografia',
+									localized: true,
+									editor: lexicalEditor({ features: () => [ParagraphFeature(), BoldFeature()] }),
+								},
 
-                {
-                  name: 'progetti',
-                  type: 'array',
-                  fields: [F.linkConNome],
-                },
-                {
-                  name: 'organizzazioni',
-                  type: 'array',
-                  fields: [F.linkConNome],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          label: 'Link',
-          fields: [...slugField('nome')],
-        },
-      ],
-    },
-  ],
+								{
+									name: 'progetti',
+									type: 'array',
+									fields: [F.linkConNome],
+								},
+								{
+									name: 'organizzazioni',
+									type: 'array',
+									fields: [F.linkConNome],
+								},
+							],
+						},
+					],
+				},
+				{
+					label: 'Link',
+					fields: [...slugField('nome')],
+				},
+			],
+		},
+	],
 }

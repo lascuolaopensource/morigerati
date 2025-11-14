@@ -5,40 +5,33 @@ import {
 	lexicalEditor,
 	LinkFeature,
 } from '@payloadcms/richtext-lexical'
-import { nanoid } from 'nanoid'
 import {
-	slugField,
+	ArrayField,
 	type CollectionSlug,
 	type Field,
 	type GroupField,
 	type RichTextField,
 	type RowField,
-	type Tab,
 	type TextField,
 	type UploadField,
 } from 'payload'
 
 import { capitalizeFirstLetter } from '@/modules/utils'
 
-import { createUIField } from './utils'
+import { arrayRowLabel, divider, header } from './components'
+export { divider, header }
 
-//
+// Main
 
-export function header(text: string) {
-	return createUIField({
-		name: `header-${text.toLowerCase().replace(/\s+/g, '-')}`,
-		componentPath: 'src/db/fields/components/header.tsx#default',
-		clientProps: { content: text },
-	})
+export const name: TextField = {
+	type: 'text',
+	label: 'Nome',
+	name: 'name',
+	required: true,
+	localized: true,
 }
 
-export function divider() {
-	return createUIField({
-		name: 'divider-' + nanoid(5),
-		componentPath: 'src/db/fields/components/divider.tsx#default',
-		clientProps: {},
-	})
-}
+// Uploads
 
 export function upload<C extends CollectionSlug>(
 	props: { collection: C } & Omit<UploadField, 'relationTo' | 'type'>,
@@ -60,6 +53,38 @@ export function video(props: Omit<Parameters<typeof upload>[0], 'collection'>): 
 	return upload({ collection: 'video', ...props })
 }
 
+// Misc
+
+export function row(fields: Field[]): RowField {
+	return {
+		type: 'row',
+		fields,
+	}
+}
+
+export function url(props: Omit<TextField, 'type' | 'name'> = {}): TextField {
+	// @ts-expect-error - Slight type mismatch
+	return {
+		type: 'text',
+		label: 'URL',
+		...props,
+		name: 'url',
+	}
+}
+
+// Rich text
+
+export function richText(
+	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
+): RichTextField {
+	return {
+		type: 'richText',
+		editor: lexicalEditor(),
+		localized: true,
+		...props,
+	}
+}
+
 export function plainRichText(
 	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
 ): RichTextField {
@@ -73,39 +98,7 @@ export function plainRichText(
 	}
 }
 
-export const name: TextField = {
-	type: 'text',
-	label: 'Nome',
-	name: 'name',
-	required: true,
-	localized: true,
-}
-
-export function tabContenuto(props: { video?: boolean } = {}): Tab {
-	const fields: Field[] = [
-		header('Immagini e media'),
-
-		divider(),
-		header('Contenuti testuali'),
-		{
-			name: 'text_content',
-			type: 'richText',
-			label: 'Contenuto testuale',
-			localized: true,
-			required: true,
-			editor: lexicalEditor(),
-		},
-	]
-
-	if (props.video) {
-		fields.splice(2, 0)
-	}
-
-	return {
-		label: 'Contenuto',
-		fields: fields,
-	}
-}
+// Groups
 
 export function titleAndDescription(name: string, label?: string): GroupField {
 	return {
@@ -129,161 +122,24 @@ export function titleAndDescription(name: string, label?: string): GroupField {
 	}
 }
 
-export function row(fields: Field[]): RowField {
+export function contatti(): ArrayField {
 	return {
-		type: 'row',
-		fields,
+		name: 'contatti',
+		type: 'array',
+		admin: {
+			components: {
+				RowLabel: arrayRowLabel(name.name),
+			},
+		},
+		fields: [
+			row([name, url()]),
+			row([
+				{ name: 'email', type: 'email' },
+				{ name: 'telefono', type: 'text' },
+			]),
+		],
 	}
 }
-
-export function url(props: Omit<TextField, 'type' | 'name'> = {}): TextField {
-	// @ts-expect-error - Slight type mismatch
-	return {
-		type: 'text',
-		label: 'URL',
-		...props,
-		name: 'url',
-	}
-}
-
-export function richText(
-	props: Omit<RichTextField, 'type' | 'editor' | 'localized'>,
-): RichTextField {
-	return {
-		type: 'richText',
-		editor: lexicalEditor(),
-		localized: true,
-		...props,
-	}
-}
-
-export function nameAndSlug() {
-	return row([
-		name,
-		slugField({
-			fieldToUse: name.name,
-		}),
-	])
-}
-
-// // Field factory functions
-// const createLocalizedField = <T extends Field>(field: T): T => ({
-// 	...field,
-// 	localized: true,
-// })
-
-// const createRequiredField = <T extends Field>(field: T): T => ({
-// 	...field,
-// 	required: true,
-// })
-
-// const createTextField = (name: string, options: Partial<TextField> = {}): TextField =>
-// 	({
-// 		name,
-// 		type: 'text',
-// 		...options,
-// 	}) as TextField
-
-// const createRichTextField = (name: string): RichTextField =>
-// 	({
-// 		name,
-// 		type: 'richText',
-// 	}) as RichTextField
-
-// const createHomeRichTextField = (name: string): RichTextField =>
-// 	({
-// 		name,
-// 		type: 'richText',
-// 		editor: lexicalEditor({
-// 			features: () => [
-// 				ParagraphFeature(),
-// 				BoldFeature(),
-// 				ItalicFeature(),
-// 				UnderlineFeature(),
-// 				InlineToolbarFeature(),
-// 			],
-// 		}),
-// 	}) as RichTextField
-
-// const createRowField = (fields: Field[]): RowField =>
-// 	({
-// 		type: 'row',
-// 		fields,
-// 	}) as RowField
-
-// const createArrayField = (
-// 	name: string,
-// 	fields: Field[],
-// 	options: Partial<ArrayField> = {},
-// ): ArrayField =>
-// 	({
-// 		name,
-// 		type: 'array',
-// 		fields,
-// 		...options,
-// 	}) as ArrayField
-
-// type Overrides = {
-// 	slugOverrides?: Partial<TextField>
-// 	checkboxOverrides?: Partial<CheckboxField>
-// 	localized?: boolean
-// }
-
-// type Slug = (fieldToUse?: string, overrides?: Overrides) => [TextField, CheckboxField]
-
-// export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
-// 	const { slugOverrides, checkboxOverrides, localized = false } = overrides
-
-// 	const checkBoxField: CheckboxField = {
-// 		name: 'slugLock',
-// 		type: 'checkbox',
-// 		defaultValue: true,
-// 		admin: {
-// 			hidden: true,
-// 			position: 'sidebar',
-// 		},
-// 		...checkboxOverrides,
-// 	} as CheckboxField
-
-// 	const slugField: TextField = {
-// 		name: 'slug',
-// 		type: 'text',
-// 		index: true,
-// 		label: 'Slug',
-// 		localized,
-// 		hooks: {
-// 			beforeValidate: [formatSlugHook(fieldToUse)],
-// 		},
-// 		admin: {
-// 			position: 'sidebar',
-// 			...(slugOverrides?.admin || {}),
-// 			components: {
-// 				Field: {
-// 					path: '@/db/fields/slug/SlugComponent#SlugComponent',
-// 					clientProps: {
-// 						fieldToUse,
-// 						checkboxFieldPath: checkBoxField.name,
-// 					},
-// 				},
-// 			},
-// 		},
-// 		...(slugOverrides || {}),
-// 	} as TextField
-
-// 	return [slugField, checkBoxField]
-// }
-
-// export const gap = (size: number, key: string): UIField =>
-// 	createUIField(`gap-${key}`, '@/db/fields/components/gap.tsx', { size })
-
-// export const divider = (key: string): UIField =>
-// 	createUIField(`divider-${key}`, '@/db/fields/components/divider.tsx', {})
-
-// export const nome = createRequiredField(createTextField('nome'))
-
-// export const link = createTextField('link')
-
-// export const testo = createLocalizedField(createRichTextField('testo'))
 
 // export const posizione: PointField = {
 // 	name: 'posizione',

@@ -312,8 +312,8 @@ export interface Itinerari {
         id?: string | null;
       }[]
     | null;
-  video?: (string | null) | Video;
   gallery?: (string | Media)[] | null;
+  video?: (string | null) | Video;
   geolocalized_media?:
     | {
         /**
@@ -340,6 +340,65 @@ export interface Luoghi {
    */
   generateSlug?: boolean | null;
   slug: string;
+  address?: string | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  coordinates?: [number, number] | null;
+  timetable?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  services?:
+    | {
+        name: string;
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  gallery?: (string | Media)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -595,8 +654,8 @@ export interface ItinerariSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
-  video?: T;
   gallery?: T;
+  video?: T;
   geolocalized_media?:
     | T
     | {
@@ -615,6 +674,19 @@ export interface LuoghiSelect<T extends boolean = true> {
   name?: T;
   generateSlug?: T;
   slug?: T;
+  address?: T;
+  coordinates?: T;
+  timetable?: T;
+  description?: T;
+  services?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        url?: T;
+        id?: T;
+      };
+  gallery?: T;
   updatedAt?: T;
   createdAt?: T;
 }
