@@ -6,6 +6,7 @@ import * as F from '@/db/_partials/fields'
 
 export const Home: GlobalConfig<'home'> = {
 	slug: 'home',
+	label: 'Home',
 
 	access: {
 		read: () => true,

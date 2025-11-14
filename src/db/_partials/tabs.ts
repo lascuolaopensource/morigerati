@@ -21,7 +21,7 @@ export function multimedia(fields: Field[] = []): Tab {
 	return {
 		label: 'Multimedia',
 		fields: [
-			F.media({ name: 'copertina', label: 'Immagine di copertina' }),
+			F.copertina(),
 			F.media({ name: 'gallery', label: 'Galleria', hasMany: true }),
 			...fields,
 		],

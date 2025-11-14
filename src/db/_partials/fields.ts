@@ -192,6 +192,12 @@ export function links(props: Omit<ArrayField, 'type' | 'fields'>): ArrayField {
 	})
 }
 
+export function copertina(
+	props: Omit<Parameters<typeof media>[0], 'collection' | 'name'> = {},
+): UploadField {
+	return media({ name: 'copertina', label: 'Immagine di copertina', ...props })
+}
+
 // Join
 
 type Collections = {

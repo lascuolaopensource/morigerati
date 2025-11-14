@@ -6,6 +6,7 @@ import { F } from '@/db/_partials'
 
 export const Testi: GlobalConfig<'testi'> = {
 	slug: 'testi',
+	label: 'Testi',
 
 	access: {
 		read: () => true,
