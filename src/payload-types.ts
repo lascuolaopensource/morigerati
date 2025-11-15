@@ -416,7 +416,7 @@ export interface Luoghi {
     };
     [k: string]: unknown;
   } | null;
-  contatti?:
+  contacts?:
     | {
         name: string;
         url?: string | null;
@@ -492,7 +492,7 @@ export interface Persone {
    * @maxItems 2
    */
   coordinates?: [number, number] | null;
-  contatti?:
+  contacts?:
     | {
         name: string;
         url?: string | null;
@@ -1114,7 +1114,7 @@ export interface LuoghiSelect<T extends boolean = true> {
   address?: T;
   coordinates?: T;
   timetable?: T;
-  contatti?:
+  contacts?:
     | T
     | {
         name?: T;
@@ -1148,7 +1148,7 @@ export interface PersoneSelect<T extends boolean = true> {
   slug?: T;
   address?: T;
   coordinates?: T;
-  contatti?:
+  contacts?:
     | T
     | {
         name?: T;

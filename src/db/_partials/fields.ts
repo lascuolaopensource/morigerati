@@ -91,7 +91,8 @@ export function row(fields: Field[]): RowField {
 	}
 }
 
-const urlValidator: TextFieldSingleValidation = (v) => {
+const urlValidator: TextFieldSingleValidation = (v, ctx) => {
+	if (!ctx.required && !Boolean(v?.trim())) return true
 	const parse = z.url().safeParse(v)
 	if (parse.success) return true
 	return parse.error.message
@@ -172,7 +173,7 @@ export function titleAndDescription(name: string, label?: string): GroupField {
 
 export function contatti(): ArrayField {
 	return array({
-		name: 'contatti',
+		name: 'contacts',
 		fieldForRowLabel: name.name,
 		fields: [
 			row([{ ...name, localized: false }, url({ name: 'url', label: 'URL' })]),

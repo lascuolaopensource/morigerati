@@ -5,6 +5,7 @@ import { getDb } from '@/modules/utils/server'
 import { seedChiSiamo } from './chi-siamo/chi-siamo.seed'
 import { seedFooter } from './footer/footer.seed'
 import { seedHome } from './home/home.seed'
+import { seedLuoghi } from './luoghi/luoghi.seed'
 import { seedMobilitaSostenibile } from './mobilita-sostenibile/mobilita.seed'
 import { seedTesti } from './testi/testi.seed'
 
@@ -37,6 +38,7 @@ export async function seedData() {
 		await seedFooter()
 		await seedMobilitaSostenibile()
 		await seedChiSiamo()
+		await seedLuoghi()
 		// // 1. Seed base data (independent entities)
 		// payload.logger.info('— Seeding base data...')
 		// const { personas, locations, topics, genericForm } = await seedBaseData()
