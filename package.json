@@ -19,7 +19,9 @@
 		"compose:up": "docker-compose -f docker-compose.services.yaml up",
 		"compose:down": "docker-compose -f docker-compose.services.yaml down -v",
 		"db:clear": "pnpm payload run src/db/seed/db-clear.ts",
-		"db:seed": "pnpm payload run src/db/seed/db-seed.ts"
+		"db:seed": "pnpm payload run src/db/seed/db-seed.ts",
+		"social:clear": "pnpm payload run src/db/seed/social/social-clear.ts",
+		"social:seed": "pnpm payload run src/db/seed/social/social-seed.ts"
 	},
 	"dependencies": {
 		"@payloadcms/db-mongodb": "^3.63.0",

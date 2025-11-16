@@ -49,8 +49,11 @@ export const SocialPost: CollectionConfig = {
 							return value
 						} else if (req.user?.collection == 'social-account') {
 							return req.user?.id
+						} else if (req.payloadAPI === 'local') {
+							return value
+						} else {
+							throw new Error('Unexpected error')
 						}
-						throw new Error('Unexpected error')
 					},
 				],
 			},

@@ -81,6 +81,7 @@ function s3() {
 			[Media.slug]: true,
 			[Tracciati.slug]: true,
 			[Video.slug]: true,
+			[SocialMedia.slug]: true,
 		},
 		bucket: process.env.S3_BUCKET!,
 		enabled: true,

@@ -36,13 +36,26 @@ export const Luoghi: CollectionConfig<'luoghi'> = {
 						F.location(),
 						F.plainRichText({ name: 'timetable', label: 'Orari di attività e date di chiusura' }),
 						F.contatti(),
-						F.divider(),
-						F.header('Itinerari correlati'),
+					],
+				},
+
+				Tab.descrizione(),
+				Tab.servizi(),
+
+				{
+					label: 'Contenuti collegati',
+					fields: [
+						{
+							name: 'persone',
+							label: 'Persone',
+							type: 'relationship',
+							relationTo: 'persone',
+							hasMany: true,
+						},
 						F.join({ name: 'itinerari', collection: 'itinerari', on: 'luoghi' }),
 					],
 				},
-				Tab.descrizione(),
-				Tab.servizi(),
+
 				Tab.multimedia(),
 			],
 		},

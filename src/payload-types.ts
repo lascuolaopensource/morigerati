@@ -425,11 +425,6 @@ export interface Luoghi {
         id?: string | null;
       }[]
     | null;
-  itinerari?: {
-    docs?: (string | Itinerari)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
   description: {
     root: {
       type: string;
@@ -467,6 +462,12 @@ export interface Luoghi {
         id?: string | null;
       }[]
     | null;
+  persone?: (string | Persone)[] | null;
+  itinerari?: {
+    docs?: (string | Itinerari)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
   updatedAt: string;
@@ -1121,7 +1122,6 @@ export interface LuoghiSelect<T extends boolean = true> {
         telefono?: T;
         id?: T;
       };
-  itinerari?: T;
   description?: T;
   services?:
     | T
@@ -1131,6 +1131,8 @@ export interface LuoghiSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  persone?: T;
+  itinerari?: T;
   copertina?: T;
   gallery?: T;
   updatedAt?: T;
