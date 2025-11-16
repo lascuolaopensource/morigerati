@@ -64,7 +64,7 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
-    account: AccountAuthOperations;
+    'social-account': SocialAccountAuthOperations;
   };
   blocks: {};
   collections: {
@@ -77,9 +77,9 @@ export interface Config {
     persone: Persone;
     residenze: Residenze;
     articoli: Articoli;
-    post: Post;
-    'post-media': PostMedia;
-    account: Account;
+    'social-post': SocialPost;
+    'social-media': SocialMedia;
+    'social-account': SocialAccount;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -103,9 +103,9 @@ export interface Config {
     persone: PersoneSelect<false> | PersoneSelect<true>;
     residenze: ResidenzeSelect<false> | ResidenzeSelect<true>;
     articoli: ArticoliSelect<false> | ArticoliSelect<true>;
-    post: PostSelect<false> | PostSelect<true>;
-    'post-media': PostMediaSelect<false> | PostMediaSelect<true>;
-    account: AccountSelect<false> | AccountSelect<true>;
+    'social-post': SocialPostSelect<false> | SocialPostSelect<true>;
+    'social-media': SocialMediaSelect<false> | SocialMediaSelect<true>;
+    'social-account': SocialAccountSelect<false> | SocialAccountSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -133,8 +133,8 @@ export interface Config {
     | (User & {
         collection: 'users';
       })
-    | (Account & {
-        collection: 'account';
+    | (SocialAccount & {
+        collection: 'social-account';
       });
   jobs: {
     tasks: unknown;
@@ -159,7 +159,7 @@ export interface UserAuthOperations {
     password: string;
   };
 }
-export interface AccountAuthOperations {
+export interface SocialAccountAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -319,8 +319,8 @@ export interface Itinerari {
    */
   generateSlug?: boolean | null;
   slug: string;
-  length?: number | null;
-  duration?: number | null;
+  length?: string | null;
+  duration?: string | null;
   elevation?: string | null;
   type?: ('loop' | 'out_and_back') | null;
   difficulty?: ('touristic' | 'hiking' | 'expert_hiking') | null;
@@ -672,23 +672,21 @@ export interface Articoli {
   slug: string;
   subtitle?: string | null;
   date?: string | null;
-  tags?: ('evento' | 'notizia' | 'reportage')[] | null;
-  Contenuto: {
-    content: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
+  tags?: ('evento' | 'notizia' | 'reportage' | 'comunicato-stampa')[] | null;
+  contents: {
+    root: {
+      type: string;
+      children: {
+        type: any;
         version: number;
-      };
-      [k: string]: unknown;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
     };
+    [k: string]: unknown;
   };
   copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
@@ -697,22 +695,22 @@ export interface Articoli {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "post".
+ * via the `definition` "social-post".
  */
-export interface Post {
+export interface SocialPost {
   id: string;
-  text: string;
+  text?: string | null;
   link?: string | null;
-  media?: (string | null) | PostMedia;
-  owner: string | Account;
+  media?: (string | null) | SocialMedia;
+  owner: string | SocialAccount;
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "post-media".
+ * via the `definition` "social-media".
  */
-export interface PostMedia {
+export interface SocialMedia {
   id: string;
   updatedAt: string;
   createdAt: string;
@@ -778,11 +776,11 @@ export interface PostMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "account".
+ * via the `definition` "social-account".
  */
-export interface Account {
+export interface SocialAccount {
   id: string;
-  nome: string;
+  name: string;
   persona?: (string | null) | Persone;
   updatedAt: string;
   createdAt: string;
@@ -863,16 +861,16 @@ export interface PayloadLockedDocument {
         value: string | Articoli;
       } | null)
     | ({
-        relationTo: 'post';
-        value: string | Post;
+        relationTo: 'social-post';
+        value: string | SocialPost;
       } | null)
     | ({
-        relationTo: 'post-media';
-        value: string | PostMedia;
+        relationTo: 'social-media';
+        value: string | SocialMedia;
       } | null)
     | ({
-        relationTo: 'account';
-        value: string | Account;
+        relationTo: 'social-account';
+        value: string | SocialAccount;
       } | null);
   globalSlug?: string | null;
   user:
@@ -881,8 +879,8 @@ export interface PayloadLockedDocument {
         value: string | User;
       }
     | {
-        relationTo: 'account';
-        value: string | Account;
+        relationTo: 'social-account';
+        value: string | SocialAccount;
       };
   updatedAt: string;
   createdAt: string;
@@ -899,8 +897,8 @@ export interface PayloadPreference {
         value: string | User;
       }
     | {
-        relationTo: 'account';
-        value: string | Account;
+        relationTo: 'social-account';
+        value: string | SocialAccount;
       };
   key?: string | null;
   value?:
@@ -1227,11 +1225,7 @@ export interface ArticoliSelect<T extends boolean = true> {
   subtitle?: T;
   date?: T;
   tags?: T;
-  Contenuto?:
-    | T
-    | {
-        content?: T;
-      };
+  contents?: T;
   copertina?: T;
   gallery?: T;
   updatedAt?: T;
@@ -1239,9 +1233,9 @@ export interface ArticoliSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "post_select".
+ * via the `definition` "social-post_select".
  */
-export interface PostSelect<T extends boolean = true> {
+export interface SocialPostSelect<T extends boolean = true> {
   text?: T;
   link?: T;
   media?: T;
@@ -1251,9 +1245,9 @@ export interface PostSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "post-media_select".
+ * via the `definition` "social-media_select".
  */
-export interface PostMediaSelect<T extends boolean = true> {
+export interface SocialMediaSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1332,10 +1326,10 @@ export interface PostMediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "account_select".
+ * via the `definition` "social-account_select".
  */
-export interface AccountSelect<T extends boolean = true> {
-  nome?: T;
+export interface SocialAccountSelect<T extends boolean = true> {
+  name?: T;
   persona?: T;
   updatedAt?: T;
   createdAt?: T;

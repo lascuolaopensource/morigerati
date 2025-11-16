@@ -4,8 +4,8 @@ import { CollectionGroup, imageSizes } from '../../utils'
 
 //
 
-export const PostMedia = {
-	slug: 'post-media',
+export const SocialMedia: CollectionConfig = {
+	slug: 'social-media',
 
 	admin: {
 		group: CollectionGroup.Transluoghigram,
@@ -35,4 +35,4 @@ export const PostMedia = {
 	},
 
 	fields: [],
-} satisfies CollectionConfig
+}

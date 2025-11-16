@@ -77,19 +77,19 @@ function informazioniTecniche(): Field[] {
 		F.row([
 			{
 				name: 'length',
-				label: 'Lunghezza itinerario (metri)',
-				type: 'number',
+				label: 'Lunghezza itinerario',
+				type: 'text',
 			},
 			{
 				name: 'duration',
-				label: 'Durata (ore)',
-				type: 'number',
+				label: 'Durata',
+				type: 'text',
 			},
 		]),
 		F.row([
 			{
 				name: 'elevation',
-				label: 'Dislivello (metri)',
+				label: 'Dislivello',
 				type: 'text',
 			},
 			{

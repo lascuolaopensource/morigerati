@@ -4,8 +4,8 @@ import { CollectionGroup } from '@/db/utils'
 
 //
 
-export const Account: CollectionConfig = {
-	slug: 'account',
+export const SocialAccount: CollectionConfig = {
+	slug: 'social-account',
 
 	labels: {
 		singular: 'Account',
@@ -13,7 +13,7 @@ export const Account: CollectionConfig = {
 	},
 
 	admin: {
-		useAsTitle: 'nome',
+		useAsTitle: 'name',
 		group: CollectionGroup.Transluoghigram,
 	},
 
@@ -25,7 +25,7 @@ export const Account: CollectionConfig = {
 
 	fields: [
 		{
-			name: 'nome',
+			name: 'name',
 			type: 'text',
 			required: true,
 		},

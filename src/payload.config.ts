@@ -13,9 +13,9 @@ import { Media } from '@/db/collections/media'
 import { Persone } from '@/db/collections/persone'
 import { Residenze } from '@/db/collections/residenze'
 import { Tracciati } from '@/db/collections/tracciati'
-import { Account } from '@/db/collections/transluoghigram/account'
-import { Post } from '@/db/collections/transluoghigram/post'
-import { PostMedia } from '@/db/collections/transluoghigram/post-media'
+import { SocialAccount } from '@/db/collections/transluoghigram/social-account'
+import { SocialMedia } from '@/db/collections/transluoghigram/social-media'
+import { SocialPost } from '@/db/collections/transluoghigram/social-post'
 import { Users } from '@/db/collections/users'
 import { Video } from '@/db/collections/video'
 import { ChiSiamo } from '@/db/globals/chi-siamo'
@@ -48,9 +48,9 @@ export default buildConfig({
 		Persone,
 		Residenze,
 		Articoli,
-		Post,
-		PostMedia,
-		Account,
+		SocialPost,
+		SocialMedia,
+		SocialAccount,
 	],
 	globals: [Home, Testi, Footer, ChiSiamo, MobilitaSostenibile],
 

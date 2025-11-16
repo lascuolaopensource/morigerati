@@ -5,8 +5,8 @@ import { CollectionGroup } from '@/db/utils'
 
 //
 
-export const Post: CollectionConfig = {
-	slug: 'post',
+export const SocialPost: CollectionConfig = {
+	slug: 'social-post',
 
 	labels: {
 		singular: 'Post',
@@ -27,25 +27,27 @@ export const Post: CollectionConfig = {
 		{
 			name: 'text',
 			type: 'text',
-			required: true,
 		},
+
 		F.url({ name: 'link', label: 'Link' }),
+
 		{
 			name: 'media',
 			type: 'upload',
-			relationTo: 'post-media',
+			relationTo: 'social-media',
 		},
+
 		{
 			name: 'owner',
 			type: 'relationship',
-			relationTo: 'account',
+			relationTo: 'social-account',
 			required: true,
 			hooks: {
 				beforeValidate: [
 					({ value, req }) => {
 						if (value && req.user?.collection == 'users') {
 							return value
-						} else if (req.user?.collection == 'account') {
+						} else if (req.user?.collection == 'social-account') {
 							return req.user?.id
 						}
 						throw new Error('Unexpected error')

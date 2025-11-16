@@ -61,6 +61,10 @@ export const Articoli: CollectionConfig<'articoli'> = {
 										value: 'reportage',
 										label: 'Reportage',
 									},
+									{
+										value: 'comunicato-stampa',
+										label: 'Comunicato stampa',
+									},
 								],
 							},
 						]),
@@ -68,8 +72,8 @@ export const Articoli: CollectionConfig<'articoli'> = {
 				},
 
 				{
-					name: 'Contenuto',
-					fields: [F.richText({ name: 'content', label: 'Contenuto', required: true })],
+					label: 'Contenuto',
+					fields: [F.richText({ name: 'contents', label: 'Contenuto', required: true })],
 				},
 
 				Tab.multimedia(),
