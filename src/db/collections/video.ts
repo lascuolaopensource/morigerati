@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { CollectionGroup } from '../utils'
+import { CollectionGroup, videoMimeTypes } from '../utils'
 
 //
 
@@ -30,7 +30,7 @@ export const Video: CollectionConfig = {
 	],
 
 	upload: {
-		mimeTypes: ['video/mp4', 'video/webm', 'video/ogg'],
+		mimeTypes: videoMimeTypes,
 		staticDir: 'data/video',
 	},
 }

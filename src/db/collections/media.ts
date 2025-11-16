@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { CollectionGroup, imageSizes } from '../utils'
+import { CollectionGroup, imageMimeTypes, imageSizes } from '../utils'
 
 //
 
@@ -30,7 +30,7 @@ export const Media: CollectionConfig = {
 	],
 
 	upload: {
-		mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'image/gif'],
+		mimeTypes: imageMimeTypes,
 		adminThumbnail: 'thumbnail',
 		formatOptions: { format: 'webp' },
 		imageSizes,

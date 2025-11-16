@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { CollectionGroup, imageSizes } from '../../utils'
+import { CollectionGroup, imageMimeTypes, imageSizes, videoMimeTypes } from '../../utils'
 
 //
 
@@ -22,16 +22,8 @@ export const SocialMedia: CollectionConfig = {
 		adminThumbnail: 'thumbnail',
 		imageSizes,
 		formatOptions: { format: 'webp' },
-		mimeTypes: [
-			'image/jpeg',
-			'image/png',
-			'image/webp',
-			'image/svg+xml',
-			'image/gif',
-			'video/mp4',
-			'video/webm',
-		],
-		staticDir: 'data/post-media',
+		mimeTypes: [...imageMimeTypes, ...videoMimeTypes],
+		staticDir: 'data/social-media',
 	},
 
 	fields: [],

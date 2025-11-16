@@ -62,3 +62,15 @@ export const imageSizes: ImageSize[] = [
 		withoutEnlargement: true,
 	},
 ]
+
+//
+
+export const imageMimeTypes = [
+	'image/jpeg',
+	'image/png',
+	'image/webp',
+	'image/svg+xml',
+	'image/gif',
+]
+
+export const videoMimeTypes = ['video/mp4', 'video/webm']
