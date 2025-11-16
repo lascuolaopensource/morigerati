@@ -1,7 +1,5 @@
 import config from '@payload-config'
 import { notFound } from 'next/navigation'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { getPayload, PaginatedDocs, type Payload } from 'payload'
 
 //
@@ -18,26 +16,4 @@ export function getOne<Docs extends PaginatedDocs>(docs: Docs): Docs['docs'][num
 
 export interface PageProps {
 	searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
-}
-
-export function getRecord<T>(data: T | number): T {
-	if (typeof data === 'number') {
-		throw new Error('Data is a number')
-	}
-	return data
-}
-
-export function getRecords<T>(data: (number | T)[] | null | undefined): T[] {
-	return data?.map(getRecord) ?? []
-}
-
-//
-
-export function getPaths(importUrl: string) {
-	const filename = fileURLToPath(importUrl)
-	const dirname = path.dirname(filename)
-	return {
-		dirname,
-		filename,
-	}
 }

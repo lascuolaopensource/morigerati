@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { RowLabelComponent, UIField } from 'payload'
 
-import { getPaths } from '@/modules/utils/server'
+import { getPaths } from '@/modules/utils/node'
 
 import type { ArrayRowLabelProps } from './array-row-label'
 import type { HeaderProps } from './header'

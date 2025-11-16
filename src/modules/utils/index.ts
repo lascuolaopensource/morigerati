@@ -29,13 +29,29 @@ export function getRandomPixel() {
 export const databaseKey = z.string()
 export type DatabaseKey = z.infer<typeof databaseKey>
 
-export type Relation<T> = T | DatabaseKey | null | undefined
+export type Optional<T> = T | null | undefined
 
-export function getRelation<T>(data: Relation<T>): T | undefined {
+export type Relation<T> = T | DatabaseKey
+
+export function getRelation<T>(data: Optional<Relation<T>>): T | undefined {
 	if (!data) return undefined
 	const parsed = databaseKey.safeParse(data)
 	if (!parsed.success) return data as T
 	return undefined
 }
 
+export function getRelations<T>(data: Optional<Relation<T>[]>): T[] {
+	return data?.map(getRelation).filter((t) => t !== undefined) ?? []
+}
+
 export const getMedia = getRelation<Media>
+
+export function getMediaRecords(data: Optional<Relation<Media>[]>): Media[] {
+	return getRelations(data)
+}
+
+//
+
+export function getRandomItem<T>(array: T[] | readonly T[]): T {
+	return array[Math.floor(Math.random() * array.length)]
+}

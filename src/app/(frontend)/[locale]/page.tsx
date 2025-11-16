@@ -1,5 +1,6 @@
 // import Copertina from '#/components/uiElements/copertina'
 // import GridOverlay from '#/components/uiElements/gridOverlay'
+
 import { getDb } from '#/utils/server'
 import { getLocale } from 'next-intl/server'
 
@@ -10,6 +11,8 @@ import { RichText } from '@/modules/components/richtext'
 import { HomeSection } from './_partials/home-section'
 
 //
+
+export const dynamic = 'force-dynamic'
 
 async function load() {
 	const locale = await getLocale()

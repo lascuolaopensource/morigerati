@@ -1,3 +1,5 @@
+import { getRandomItem } from '../utils'
+
 const sections = ['luoghi', 'itinerari', 'persone', 'residenze', 'default'] as const
 
 export type Section = (typeof sections)[number]
@@ -47,4 +49,8 @@ export function isSection(section: string): section is Section {
 export function pathnameToSection(pathname: string): Section {
 	console.log(pathname)
 	return sections.find((section) => pathname.includes(section)) ?? 'default'
+}
+
+export function getRandomDisplayData(): SectionDisplayData {
+	return getSectionDisplayData(getRandomItem(sections.filter((section) => section !== 'default')))
 }

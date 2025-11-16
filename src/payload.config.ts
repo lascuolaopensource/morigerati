@@ -24,7 +24,7 @@ import { Home } from '@/db/globals/home'
 import { MobilitaSostenibile } from '@/db/globals/mobilita-sostenibile'
 import { Testi } from '@/db/globals/testi'
 
-import { getPaths } from './modules/utils/server'
+import { getPaths } from './modules/utils/node'
 
 //
 

@@ -4,12 +4,12 @@ import Image from 'next/image'
 
 import type { Media } from '@/payload-types'
 
-import { getMedia, Relation } from '../utils'
+import { getMedia, Optional, Relation } from '../utils'
 
 //
 
 interface Props {
-	copertina: Relation<Media>
+	copertina: Optional<Relation<Media>>
 	className?: ClassValue
 	title?: string
 	overlay?: boolean
@@ -33,6 +33,7 @@ export function Copertina(props: Props) {
 					src={copertina.url ?? ''}
 					alt={copertina.alt}
 					unoptimized={true}
+					priority={true}
 					fill
 					className="object-cover"
 				/>

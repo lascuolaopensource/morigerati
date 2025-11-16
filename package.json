@@ -52,9 +52,11 @@
 		"postcss": "^8.5.6",
 		"react": "19.1.0",
 		"react-dom": "19.1.0",
+		"react-photo-album": "^3.2.1",
 		"sharp": "0.34.2",
 		"tailwind-merge": "^3.3.1",
 		"tailwindcss": "^4.1.16",
+		"yet-another-react-lightbox": "^3.25.0",
 		"zod": "^4.1.12"
 	},
 	"devDependencies": {
