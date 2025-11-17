@@ -1,3 +1,7 @@
-export default function LuoghiPage() {
-	return <div>LuoghiPage</div>
+import { CollectionGridPage } from '@/modules/components/collection-grid-page'
+
+//
+
+export default async function Page() {
+	return <CollectionGridPage collection="luoghi" />
 }

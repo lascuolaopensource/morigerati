@@ -13,7 +13,7 @@ type Props = {
 	collection: MainCollection
 }
 
-export async function CollectionPage(props: Props) {
+export async function CollectionGridPage(props: Props) {
 	const db = await getDb()
 	const locale = await getLocale()
 
