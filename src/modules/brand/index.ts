@@ -1,8 +1,25 @@
+import { CollectionSlug, DataFromCollectionSlug } from 'payload'
+
 import { getRandomItem } from '../utils'
 
-const sections = ['luoghi', 'itinerari', 'persone', 'residenze', 'default'] as const
+//
 
-export type Section = (typeof sections)[number]
+export const MAIN_COLLECTIONS = [
+	'luoghi',
+	'itinerari',
+	'persone',
+	'residenze',
+] as const satisfies CollectionSlug[]
+
+export type MainCollection = (typeof MAIN_COLLECTIONS)[number]
+
+export type MainCollectionRecord = DataFromCollectionSlug<
+	'itinerari' | 'luoghi' | 'persone' | 'residenze'
+>
+
+//
+
+export type Section = MainCollection | 'default'
 
 type SectionDisplayData = {
 	className: string
@@ -43,14 +60,13 @@ export function getSectionDisplayData(section: Section): SectionDisplayData {
 }
 
 export function isSection(section: string): section is Section {
-	return sections.includes(section as Section)
+	return section === 'default' || MAIN_COLLECTIONS.includes(section as MainCollection)
 }
 
 export function pathnameToSection(pathname: string): Section {
-	console.log(pathname)
-	return sections.find((section) => pathname.includes(section)) ?? 'default'
+	return MAIN_COLLECTIONS.find((section) => pathname.includes(section)) ?? 'default'
 }
 
 export function getRandomDisplayData(): SectionDisplayData {
-	return getSectionDisplayData(getRandomItem(sections.filter((section) => section !== 'default')))
+	return getSectionDisplayData(getRandomItem(MAIN_COLLECTIONS))
 }

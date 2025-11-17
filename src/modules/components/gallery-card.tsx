@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import { RenderImageContext, RenderImageProps } from 'react-photo-album'
 
-import { getRandomPixel } from '@/modules/utils'
-
+import { ImagePlaceholder } from './image-placeholder'
 import { cn } from './shadcn/lib/utils'
 
 //
@@ -12,8 +11,6 @@ export function GalleryCardFactory(options: { className?: string } = {}) {
 		{ alt = '', title, sizes }: RenderImageProps,
 		{ photo, width, height }: RenderImageContext,
 	) {
-		const pixel = getRandomPixel()
-
 		return (
 			<div
 				style={{
@@ -26,10 +23,7 @@ export function GalleryCardFactory(options: { className?: string } = {}) {
 					options.className,
 				)}
 			>
-				<div
-					style={{ backgroundImage: pixel.cssUrl, backgroundSize: '20%' }}
-					className="absolute inset-0 bg-gray-300 animate-pulse"
-				/>
+				<ImagePlaceholder />
 				<Image
 					fill
 					src={photo}

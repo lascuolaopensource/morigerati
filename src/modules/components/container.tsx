@@ -2,7 +2,7 @@ import { cn } from '$/lib/utils'
 import { ClassValue } from 'clsx'
 
 type Props = {
-	children: React.ReactNode
+	children?: React.ReactNode
 	className?: ClassValue
 }
 
