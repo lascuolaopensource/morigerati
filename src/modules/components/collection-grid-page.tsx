@@ -3,9 +3,10 @@ import { getLocale } from 'next-intl/server'
 import { MainCollection } from '@/modules/brand'
 import { getDb } from '@/modules/utils/server'
 
-import { CollectionGrid } from './collection-grid'
+import { CollectionCard } from './collection-card'
 import { CollectionHeading } from './collection-grid-heading'
 import { Container } from './container'
+import { Grid } from './grid'
 
 //
 
@@ -29,7 +30,11 @@ export async function CollectionGridPage(props: Props) {
 			<CollectionHeading collection={props.collection} />
 
 			<Container className="py-12">
-				<CollectionGrid collection={props.collection} items={records.docs} />
+				<Grid>
+					{records.docs.map((record) => (
+						<CollectionCard key={record.id} record={record} collection={props.collection} />
+					))}
+				</Grid>
 			</Container>
 		</>
 	)

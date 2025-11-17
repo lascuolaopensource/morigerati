@@ -87,7 +87,7 @@ function NavbarMenu(props: NavbarMenuProps) {
 
 	return (
 		<Sheet open={isOpen} onOpenChange={setIsOpen}>
-			<SheetTrigger className="lg:hidden p-2 rounded-lg hover:cursor-pointer hover:ring-black hover:ring-2">
+			<SheetTrigger className="lg:hidden p-2 rounded-lg hover:cursor-pointer hover:ring-black hover:bg-white hover:ring-2">
 				<MenuIcon size={20} />
 			</SheetTrigger>
 
@@ -128,7 +128,7 @@ function NavbarLink(props: LinkProps) {
 		<Link
 			href={href}
 			className={cn(
-				'px-2 py-[6px] rounded-lg hover:cursor-pointer hover:ring-black hover:ring-2',
+				'px-2 py-[6px] rounded-lg hover:cursor-pointer hover:ring-black hover:bg-white hover:ring-2',
 				className,
 			)}
 			{...rest}

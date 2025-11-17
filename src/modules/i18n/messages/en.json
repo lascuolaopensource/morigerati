@@ -26,5 +26,11 @@
 			"empty_state": "There are no residencies in the archive",
 			"empty_state_cta": "Browse the calendar!"
 		}
+	},
+	"tags": {
+		"comunicato-stampa": "Press release",
+		"evento": "Event",
+		"notizia": "News",
+		"reportage": "Reportage"
 	}
 }

@@ -1,11 +1,9 @@
 import { ClassValue } from 'clsx'
-import Image from 'next/image'
 
 import { getSectionDisplayData, MainCollection, MainCollectionRecord } from '@/modules/brand'
 import { Link } from '@/modules/i18n'
 
-import { getMedia } from '../utils'
-import { ImagePlaceholder } from './image-placeholder'
+import { MediaWithFallback } from './media-with-fallback'
 import { cn } from './shadcn/lib/utils'
 
 //
@@ -14,13 +12,11 @@ interface Props {
 	collection: MainCollection
 	record: MainCollectionRecord
 	className?: ClassValue
+	content?: (record: MainCollectionRecord) => React.ReactNode
 }
 
 export function CollectionCard(props: Props) {
-	const { collection, record, className } = props
-
-	const cover = getMedia(record.copertina)
-	const coverSmall = cover?.sizes?.small?.url
+	const { collection, record, className, content } = props
 
 	const { className: themeClassName, borderClassName } = getSectionDisplayData(collection)
 
@@ -35,21 +31,23 @@ export function CollectionCard(props: Props) {
 				className,
 			)}
 		>
-			<div className="relative h-[200px] aspect-video rounded-md overflow-hidden">
-				<ImagePlaceholder className="absolute inset-0" />
-				{coverSmall && (
-					<Image
-						src={coverSmall}
-						alt={cover?.alt || ''}
-						fill
-						className="object-cover"
-						priority
-						unoptimized
-					/>
-				)}
-			</div>
-
-			<p className="font-medium p-2 pb-1 pt-2">{record.name}</p>
+			{content ? content(record) : <DefaultContent record={record} />}
 		</Link>
+	)
+}
+
+//
+
+function DefaultContent({ record }: { record: MainCollectionRecord }) {
+	return (
+		<>
+			<MediaWithFallback
+				media={record.copertina}
+				size="small"
+				className="h-200px aspect-video rounded-md"
+				noPlaceholderPulse
+			/>
+			<p className="font-medium p-2 pb-1 pt-2">{record.name}</p>
+		</>
 	)
 }

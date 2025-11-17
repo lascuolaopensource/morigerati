@@ -1,8 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 
+import { CollectionCard } from '@/modules/components/collection-card'
 import { MediaWithFallback } from '@/modules/components/media-with-fallback'
-import { cn } from '@/modules/components/shadcn/lib/utils'
-import { Link } from '@/modules/i18n'
 import { formatDate } from '@/modules/utils'
 import { Residenze } from '@/payload-types'
 
@@ -21,39 +20,38 @@ export default function CardResidenza(props: Props) {
 	const hasDateRange = startDate && endDate && startDate !== endDate
 
 	return (
-		<Link
-			href={`/residenze/${residenza.slug}`}
-			className={cn(
-				'flex flex-col sm:flex-row  items-center gap-4',
-				'bg-residenze p-3 rounded-lg',
-				'hover:scale-105 hover:shadow-lg transition-all duration-300 ',
+		<CollectionCard
+			collection="residenze"
+			record={residenza}
+			content={(_) => (
+				<div className="flex flex-col sm:flex-row items-center gap-4 p-2">
+					<MediaWithFallback
+						media={residenza.copertina}
+						className="w-full h-[200px] sm:size-[120px] shrink-0 rounded-md"
+						size="medium"
+						noPlaceholderPulse
+					/>
+
+					<div>
+						<p className="flex items-center gap-1 text-black mb-1">
+							{hasDateRange ? (
+								<>
+									<span className="font-medium">{startDate}</span>
+									<ArrowRight size={16} className="-translate-y-px" />
+									<span className="font-medium">{endDate}</span>
+								</>
+							) : (
+								<>
+									<span className="font-medium">{startDate}</span>
+								</>
+							)}
+						</p>
+
+						<p className="text-2xl font-semibold text-white mb-2">{residenza.name}</p>
+						<p className="max-w-prose text-sm sm:text-balance">{residenza.short_description}</p>
+					</div>
+				</div>
 			)}
-		>
-			<MediaWithFallback
-				media={residenza.copertina}
-				className="w-full h-[200px] sm:size-[120px] shrink-0 rounded-md"
-				size="medium"
-				noPlaceholderPulse
-			/>
-
-			<div>
-				<p className="flex items-center gap-1 text-black mb-1">
-					{hasDateRange ? (
-						<>
-							<span className="font-medium">{startDate}</span>
-							<ArrowRight size={16} className="-translate-y-px" />
-							<span className="font-medium">{endDate}</span>
-						</>
-					) : (
-						<>
-							<span className="font-medium">{startDate}</span>
-						</>
-					)}
-				</p>
-
-				<p className="text-2xl font-semibold text-white mb-2">{residenza.name}</p>
-				<p className="max-w-prose text-sm sm:text-balance">{residenza.short_description}</p>
-			</div>
-		</Link>
+		/>
 	)
 }

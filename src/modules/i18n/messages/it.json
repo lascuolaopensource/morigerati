@@ -26,5 +26,11 @@
 			"empty_state": "Non ci sono residenze in archivio",
 			"empty_state_cta": "Esplora il programma!"
 		}
+	},
+	"tags": {
+		"comunicato-stampa": "Comunicato stampa",
+		"evento": "Evento",
+		"notizia": "Notizia",
+		"reportage": "Reportage"
 	}
 }

@@ -9,13 +9,12 @@ export const MAIN_COLLECTIONS = [
 	'itinerari',
 	'persone',
 	'residenze',
+	'articoli',
 ] as const satisfies CollectionSlug[]
 
 export type MainCollection = (typeof MAIN_COLLECTIONS)[number]
 
-export type MainCollectionRecord = DataFromCollectionSlug<
-	'itinerari' | 'luoghi' | 'persone' | 'residenze'
->
+export type MainCollectionRecord = DataFromCollectionSlug<MainCollection>
 
 //
 
@@ -47,6 +46,11 @@ const sectionDisplayData: Record<Section, SectionDisplayData> = {
 		className: 'bg-residenze text-black',
 		invertedClassName: 'text-residenze bg-white',
 		borderClassName: 'border-residenze',
+	},
+	articoli: {
+		className: 'bg-articoli text-black',
+		invertedClassName: 'text-articoli bg-white',
+		borderClassName: 'border-articoli',
 	},
 	default: {
 		className: 'bg-white text-black',
