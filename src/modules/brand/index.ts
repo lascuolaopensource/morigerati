@@ -55,8 +55,8 @@ const sectionDisplayData: Record<Section, SectionDisplayData> = {
 	},
 }
 
-export function getSectionDisplayData(section: Section): SectionDisplayData {
-	return sectionDisplayData[section]
+export function getSectionDisplayData(section: Section | undefined): SectionDisplayData {
+	return sectionDisplayData[section ?? 'default']
 }
 
 export function isSection(section: string): section is Section {

@@ -1,5 +1,6 @@
 import type { Link } from '#/i18n'
 
+import { format } from 'date-fns'
 import { ArrowBigDown } from 'lucide-react'
 import { ComponentProps } from 'react'
 import z from 'zod'
@@ -54,4 +55,10 @@ export function getMediaRecords(data: Optional<Relation<Media>[]>): Media[] {
 
 export function getRandomItem<T>(array: T[] | readonly T[]): T {
 	return array[Math.floor(Math.random() * array.length)]
+}
+
+//
+
+export function formatDate(date: string | Date): string {
+	return format(date, 'dd/MM/yyyy')
 }

@@ -53,7 +53,12 @@ export const Residenze: CollectionConfig<'residenze'> = {
 				{
 					label: 'Testi',
 					fields: [
-						F.plainRichText({ name: 'short_description', label: 'Descrizione breve' }),
+						{
+							name: 'short_description',
+							label: 'Descrizione breve',
+							type: 'textarea',
+							required: true,
+						},
 						F.richText({ name: 'description', label: 'Descrizione' }),
 					],
 				},

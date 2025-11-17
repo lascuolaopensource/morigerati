@@ -552,21 +552,7 @@ export interface Residenze {
   registration_deadline?: string | null;
   registration_url?: string | null;
   show_registration_button?: boolean | null;
-  short_description?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  short_description: string;
   description?: {
     root: {
       type: string;
