@@ -44,10 +44,9 @@ export const Articoli: CollectionConfig<'articoli'> = {
 						F.row([
 							F.date({ name: 'date', label: 'Data pubblicazione' }),
 							{
-								name: 'tags',
-								label: 'Tags',
+								name: 'tag',
+								label: 'Tag',
 								type: 'select',
-								hasMany: true,
 								options: [
 									{
 										value: 'evento',

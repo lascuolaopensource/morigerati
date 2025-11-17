@@ -56,11 +56,14 @@ async function CardArticolo(props: CardArticoloProps) {
 				<div className="flex flex-col gap-2 p-2">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-1">
-							{articolo.tags?.map((tag) => (
-								<p key={tag} className="text-xs bg-black text-white px-2 py-1 rounded-full">
-									{t(tag)}
+							{articolo.tag && (
+								<p
+									key={articolo.tag}
+									className="text-xs bg-black text-white px-2 py-1 rounded-full"
+								>
+									{t(articolo.tag)}
 								</p>
-							))}
+							)}
 						</div>
 						{articolo.date && <p className="text-right font-medium">{formatDate(articolo.date)}</p>}
 					</div>

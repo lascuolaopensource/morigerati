@@ -659,7 +659,7 @@ export interface Articoli {
   slug: string;
   subtitle?: string | null;
   date?: string | null;
-  tags?: ('evento' | 'notizia' | 'reportage' | 'comunicato-stampa')[] | null;
+  tag?: ('evento' | 'notizia' | 'reportage' | 'comunicato-stampa') | null;
   contents: {
     root: {
       type: string;
@@ -1212,7 +1212,7 @@ export interface ArticoliSelect<T extends boolean = true> {
   slug?: T;
   subtitle?: T;
   date?: T;
-  tags?: T;
+  tag?: T;
   contents?: T;
   copertina?: T;
   gallery?: T;
