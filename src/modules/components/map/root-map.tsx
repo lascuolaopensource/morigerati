@@ -4,15 +4,14 @@ import type { LatLngExpression } from 'leaflet'
 
 import 'leaflet-defaulticon-compatibility'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
+import 'leaflet-gpx'
 import 'leaflet/dist/leaflet.css'
+// Must come afterwards
 import { MapContainer, TileLayer } from 'react-leaflet'
 
-// import 'leaflet-defaulticon-compatibility'
-// import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
-// // import 'leaflet-gpx'
-// import 'leaflet/dist/leaflet.css'
-// import { MapContainer, TileLayer } from 'react-leaflet'
 import { coordinateMorigerati } from '@/modules/info'
+
+import { GpxTracks } from './gpx-tracks'
 
 //
 
@@ -20,6 +19,7 @@ export type MapProps = {
 	initialPosition?: LatLngExpression
 	initialZoom?: number
 	children?: React.ReactNode
+	gpxTracks?: string[]
 }
 
 export function RootMap(props: MapProps) {
@@ -27,6 +27,7 @@ export function RootMap(props: MapProps) {
 		initialPosition = coordinateMorigerati as LatLngExpression,
 		initialZoom = 13,
 		children,
+		gpxTracks = [],
 	} = props
 
 	return (
@@ -41,6 +42,7 @@ export function RootMap(props: MapProps) {
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			{children}
+			<GpxTracks urls={gpxTracks} />
 		</MapContainer>
 	)
 }
