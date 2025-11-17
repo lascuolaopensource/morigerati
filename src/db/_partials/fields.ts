@@ -149,7 +149,7 @@ export function location(): RowField {
 	])
 }
 
-export function titleAndDescription(name: string, label?: string): GroupField {
+export function titleAndDescription(name: string, label?: string, fields?: Field[]): GroupField {
 	return {
 		name,
 		type: 'group',
@@ -167,6 +167,7 @@ export function titleAndDescription(name: string, label?: string): GroupField {
 				label: 'Descrizione',
 				required: true,
 			}),
+			...(fields ?? []),
 		],
 	}
 }

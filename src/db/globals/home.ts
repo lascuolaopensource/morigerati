@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'payload'
+import type { CollectionSlug, GlobalConfig, RelationshipField } from 'payload'
 
 import * as F from '@/db/_partials/fields'
 
@@ -37,9 +37,21 @@ export const Home: GlobalConfig<'home'> = {
 			required: true,
 			fields: [
 				F.titleAndDescription('itinerari', 'Itinerari'),
-				F.titleAndDescription('luoghi', 'Luoghi'),
-				F.titleAndDescription('residenze', 'Residenze'),
+				F.titleAndDescription('luoghi', 'Luoghi', [homeRelationship('luoghi')]),
+				F.titleAndDescription('residenze', 'Residenze', [homeRelationship('residenze')]),
 			],
 		},
 	],
+}
+
+function homeRelationship(collection: CollectionSlug): RelationshipField {
+	return {
+		name: 'items',
+		type: 'relationship',
+		relationTo: collection,
+		hasMany: true,
+		minRows: 2,
+		maxRows: 2,
+		required: true,
+	}
 }

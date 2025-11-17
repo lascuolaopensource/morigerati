@@ -1435,6 +1435,7 @@ export interface Home {
         };
         [k: string]: unknown;
       };
+      items: (string | Luoghi)[];
     };
     residenze: {
       title: string;
@@ -1453,6 +1454,7 @@ export interface Home {
         };
         [k: string]: unknown;
       };
+      items: (string | Residenze)[];
     };
   };
   updatedAt?: string | null;
@@ -1677,12 +1679,14 @@ export interface HomeSelect<T extends boolean = true> {
           | {
               title?: T;
               description?: T;
+              items?: T;
             };
         residenze?:
           | T
           | {
               title?: T;
               description?: T;
+              items?: T;
             };
       };
   updatedAt?: T;

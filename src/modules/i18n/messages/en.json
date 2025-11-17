@@ -32,5 +32,10 @@
 		"evento": "Event",
 		"notizia": "News",
 		"reportage": "Reportage"
+	},
+	"homeButtons": {
+		"itinerari": "Discover all itineraries",
+		"luoghi": "Discover all places",
+		"residenze": "View the program"
 	}
 }

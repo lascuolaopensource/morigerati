@@ -7,25 +7,23 @@ import { getLocale } from 'next-intl/server'
 import { Copertina } from '@/modules/components/copertina'
 import GridOverlay from '@/modules/components/grid-overlay'
 import { RichText } from '@/modules/components/richtext'
+import { getRelations } from '@/modules/utils'
 
 import { HomeSection } from './_partials/home-section'
+import { RecordsDisplay } from './_partials/records-display'
 
 //
 
 export const dynamic = 'force-dynamic'
 
-async function load() {
+export default async function Page() {
 	const locale = await getLocale()
 	const db = await getDb()
+
 	const home = await db.findGlobal({
 		slug: 'home',
 		locale: locale,
 	})
-	return { db, home }
-}
-
-export default async function Page() {
-	const { db, home } = await load()
 
 	const { itinerari, luoghi, residenze } = home.sections
 
@@ -66,9 +64,16 @@ export default async function Page() {
 				title={luoghi.title}
 				text={luoghi.description}
 				alignment="right"
-			/>
+			>
+				<RecordsDisplay collection="luoghi" records={getRelations(home.sections.luoghi.items)} />
+			</HomeSection>
 
-			<HomeSection section="residenze" title={residenze.title} text={residenze.description} />
+			<HomeSection section="residenze" title={residenze.title} text={residenze.description}>
+				<RecordsDisplay
+					collection="residenze"
+					records={getRelations(home.sections.residenze.items)}
+				/>
+			</HomeSection>
 
 			{/* <div className="flex flex-col gap-4 items-center py-12 px-4 md:px-8">
         <h2 className="text-3xl text-center">{home.title}</h2>
