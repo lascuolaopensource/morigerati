@@ -52,7 +52,7 @@ export async function HomeSection(props: Props) {
 					<ViewAllButton collection={section} />
 				</div>
 
-				{children && <div className="grow px-4 md:px-8 basis-1">{children}</div>}
+				{children && <div className="grow px-4 md:px-8 basis-1 w-full md:w-auto">{children}</div>}
 			</section>
 		</>
 	)

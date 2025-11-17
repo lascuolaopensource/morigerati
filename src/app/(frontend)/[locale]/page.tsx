@@ -6,6 +6,7 @@ import { getLocale } from 'next-intl/server'
 
 import { Copertina } from '@/modules/components/copertina'
 import GridOverlay from '@/modules/components/grid-overlay'
+import { Map } from '@/modules/components/map/map'
 import { RichText } from '@/modules/components/richtext'
 import { getRelations } from '@/modules/utils'
 
@@ -57,7 +58,9 @@ export default async function Page() {
 				className="text-center mx-auto py-6 max-w-2xl text-balance"
 			/>
 
-			<HomeSection section="itinerari" title={itinerari.title} text={itinerari.description} />
+			<HomeSection section="itinerari" title={itinerari.title} text={itinerari.description}>
+				<Map />
+			</HomeSection>
 
 			<HomeSection
 				section="luoghi"
