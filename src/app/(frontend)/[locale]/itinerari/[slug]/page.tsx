@@ -3,16 +3,19 @@ import { notFound } from 'next/navigation'
 
 import { Button } from '@/modules/components/button'
 import { CollectionPageHeading } from '@/modules/components/collection-page-heading'
+import { Container } from '@/modules/components/container'
 import { Copertina } from '@/modules/components/copertina'
 import { Map } from '@/modules/components/map/map'
+import { RichText } from '@/modules/components/richtext'
+import { ServicesSection } from '@/modules/components/services-section'
 import { getMediaRecords, getRelation } from '@/modules/utils'
 import { getDb } from '@/modules/utils/server'
 
 import { ItinerarioDetailCards } from './_partials'
 
-export const dynamic = 'force-dynamic'
-
 //
+
+export const dynamic = 'force-dynamic'
 
 interface PageProps {
 	params: Promise<{
@@ -68,26 +71,12 @@ export default async function Itinerario(pageProps: PageProps) {
 				<ItinerarioDetailCards itinerario={itinerario} />
 			</CollectionPageHeading>
 
-			{/* <DetailPageHeading
-        title={itinerario.nome}
-        collection="itinerari"
-        backButton={{
-          href: '/itinerari',
-          message: messages.backButton.itinerari,
-        }}
-        mapProps={{
-          gpxUrl: getTracciatoUrl(itinerario?.tracciato_gpx),
-          showGpxDownload: true,
-        }}
-      >
-        <ItinerarioDetailsCard
-          lunghezza={itinerario.lunghezza}
-          tempo={itinerario.tempo}
-          dislivello={itinerario.dislivello}
-          difficolta={itinerario.difficolta}
-          tipo={itinerario.tipo}
-        />
-      </DetailPageHeading>
+			<Container className="max-w-prose space-y-8">
+				<RichText data={itinerario.description} className="prose-h1:text-itinerari" />
+				<ServicesSection services={itinerario.services} collection="itinerari" />
+			</Container>
+
+			{/*
 
       <Container className="max-w-prose space-y-8">
         {itinerario?.Video && (

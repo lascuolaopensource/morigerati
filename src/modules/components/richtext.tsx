@@ -3,6 +3,8 @@ import { RichText as RichTextConverter } from '@payloadcms/richtext-lexical/reac
 import { cn } from '$/lib/utils'
 // import { jsxConverter } from '@/components/RichText/converters'
 
+//
+
 type Props = {
 	data: SerializedEditorState
 	disableProse?: boolean
@@ -14,7 +16,7 @@ export function RichText(props: Props) {
 	return (
 		<RichTextConverter
 			{...rest}
-			className={cn(className, !disableProse && 'prose text-primary prose-strong:text-primary')}
+			className={cn(!disableProse && 'prose text-primary prose-strong:text-primary', className)}
 			// converters={jsxConverter}
 		/>
 	)

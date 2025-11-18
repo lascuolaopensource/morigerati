@@ -1,6 +1,7 @@
 {
 	"common": {
-		"menu": "Menu"
+		"menu": "Menu",
+		"services": "Servizi"
 	},
 	"navigation": {
 		"home": "Home",
