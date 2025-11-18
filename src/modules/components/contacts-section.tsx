@@ -5,37 +5,44 @@ import { useTranslations } from 'next-intl'
 
 import { Luoghi, Persone } from '@/payload-types'
 
+import { MainCollection } from '../brand'
+import { InfoSection } from './info-section'
 import { cn } from './shadcn/lib/utils'
 
 //
 
-type Contacts = NonNullable<Luoghi['contacts']> | NonNullable<Persone['contacts']>
-type Contact = Contacts[number]
+type Contacts = Luoghi['contacts'] | Persone['contacts']
 
 type Props = {
 	contacts: Contacts
 	className?: ClassValue
+	collection: MainCollection
 }
 
-export function ContactList(props: Props) {
-	const { contacts, className } = props
+export function ContactsSection(props: Props) {
+	const { contacts, className, collection } = props
+
+	const t = useTranslations('common')
 	const classes = cn('space-y-4', className)
 
-	if (contacts.length === 0) return null
-	console.log(contacts)
+	if (!contacts || contacts.length === 0) return null
 
 	return (
-		<ul className={classes}>
-			{contacts.map((contact, index) => (
-				<li key={index}>
-					<ContactCard contact={contact} />
-				</li>
-			))}
-		</ul>
+		<InfoSection collection={collection} title={t('contacts')} className={classes}>
+			<ul className={classes}>
+				{contacts.map((contact, index) => (
+					<li key={index}>
+						<ContactCard contact={contact} />
+					</li>
+				))}
+			</ul>
+		</InfoSection>
 	)
 }
 
 //
+
+type Contact = NonNullable<Contacts>[number]
 
 function ContactCard({ contact }: { contact: Contact }) {
 	const t = useTranslations('common')

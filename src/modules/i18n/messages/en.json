@@ -64,5 +64,8 @@
 	},
 	"luoghi": {
 		"backButton": "All places"
+	},
+	"persone": {
+		"backButton": "All people"
 	}
 }

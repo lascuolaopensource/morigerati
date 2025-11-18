@@ -7,7 +7,7 @@ import { ArrowLeft } from 'lucide-react'
 
 export function BackButton(props: LinkProps) {
 	const { children, className, ...rest } = props
-	const classes = cn('hover:underline font-bold flex items-center gap-1', className)
+	const classes = cn('hover:underline font-bold flex items-center gap-1 w-fit', className)
 
 	return (
 		<Link {...rest} className={classes} aria-label="back button">

@@ -8,7 +8,7 @@ import { ServicesSection } from '#/components/services-section'
 import { getRecordBySlug, getSlug, PageWithSlugProps } from '#/utils/server'
 import { getTranslations } from 'next-intl/server'
 
-import { ContactList } from '@/modules/components/contacts'
+import { ContactsSection } from '@/modules/components/contacts-section'
 import { InfoSection } from '@/modules/components/info-section'
 import { Luoghi } from '@/payload-types'
 
@@ -63,15 +63,7 @@ async function LuogoInfoSection(props: { luogo: Luoghi }) {
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-			{hasContacts && (
-				<InfoSection
-					collection="luoghi"
-					title={t('contacts')}
-					className={{ 'col-span-2': !luogo.timetable }}
-				>
-					<ContactList contacts={luogo.contacts ?? []} />
-				</InfoSection>
-			)}
+			<ContactsSection contacts={luogo.contacts} collection="luoghi" />
 
 			<InfoSection
 				collection="luoghi"
