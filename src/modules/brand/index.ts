@@ -29,32 +29,32 @@ type SectionDisplayData = {
 const sectionDisplayData: Record<Section, SectionDisplayData> = {
 	luoghi: {
 		className: 'bg-luoghi text-black',
-		invertedClassName: 'text-luoghi bg-white',
+		invertedClassName: 'text-luoghi',
 		borderClassName: 'border-luoghi',
 	},
 	itinerari: {
 		className: 'bg-itinerari text-black',
-		invertedClassName: 'text-itinerari bg-white',
+		invertedClassName: 'text-itinerari',
 		borderClassName: 'border-itinerari',
 	},
 	persone: {
 		className: 'bg-persone text-black',
-		invertedClassName: 'text-persone bg-white',
+		invertedClassName: 'text-persone',
 		borderClassName: 'border-persone',
 	},
 	residenze: {
 		className: 'bg-residenze text-black',
-		invertedClassName: 'text-residenze bg-white',
+		invertedClassName: 'text-residenze',
 		borderClassName: 'border-residenze',
 	},
 	articoli: {
 		className: 'bg-articoli text-black',
-		invertedClassName: 'text-articoli bg-white',
+		invertedClassName: 'text-articoli',
 		borderClassName: 'border-articoli',
 	},
 	default: {
 		className: 'bg-white text-black',
-		invertedClassName: 'text-black bg-white',
+		invertedClassName: 'text-black',
 		borderClassName: 'border-black',
 	},
 }

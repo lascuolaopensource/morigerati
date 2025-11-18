@@ -37,5 +37,23 @@
 		"itinerari": "Scopri tutti gli itinerari",
 		"luoghi": "Scopri tutti i luoghi",
 		"residenze": "Consulta il programma"
+	},
+	"itineraries": {
+		"backButton": "Tutti gli itinerari",
+		"download_gpx": "Scarica il tracciato GPX",
+		"difficulty": {
+			"label": "Difficoltà",
+			"touristic": "T - Turistico",
+			"hiking": "E - Escursionistico",
+			"expert_hiking": "EE - Escursionisti Esperti"
+		},
+		"type": {
+			"label": "Tipo di itinerario",
+			"loop": "Itinerario ad anello",
+			"out_and_back": "Andata e ritorno"
+		},
+		"length": "Lunghezza",
+		"duration": "Durata",
+		"elevation": "Dislivello"
 	}
 }

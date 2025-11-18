@@ -37,5 +37,23 @@
 		"itinerari": "Discover all itineraries",
 		"luoghi": "Discover all places",
 		"residenze": "View the program"
+	},
+	"itineraries": {
+		"backButton": "All itineraries",
+		"download_gpx": "Download the GPX track",
+		"difficulty": {
+			"label": "Difficulty",
+			"touristic": "T - Touristic",
+			"hiking": "E - Hiking",
+			"expert_hiking": "EE - Expert Hikers"
+		},
+		"type": {
+			"label": "Type of itinerary",
+			"loop": "Loop trail",
+			"out_and_back": "Out and back"
+		},
+		"length": "Length",
+		"duration": "Duration",
+		"elevation": "Elevation"
 	}
 }

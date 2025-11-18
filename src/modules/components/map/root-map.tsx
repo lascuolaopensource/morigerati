@@ -19,7 +19,7 @@ export type MapProps = {
 	initialPosition?: LatLngExpression
 	initialZoom?: number
 	children?: React.ReactNode
-	gpxTracks?: string[]
+	gpxTracks?: (string | null | undefined)[]
 }
 
 export function RootMap(props: MapProps) {
@@ -35,14 +35,14 @@ export function RootMap(props: MapProps) {
 			center={initialPosition}
 			zoom={initialZoom}
 			scrollWheelZoom={false}
-			className="h-full w-full"
+			className="h-full w-full z-0"
 		>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			{children}
-			<GpxTracks urls={gpxTracks} />
+			<GpxTracks urls={gpxTracks.filter((u) => typeof u === 'string')} />
 		</MapContainer>
 	)
 }
