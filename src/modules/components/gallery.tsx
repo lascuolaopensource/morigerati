@@ -10,6 +10,7 @@ import { z } from 'zod'
 
 import { Media } from '@/payload-types'
 
+import { getSectionDisplayData, type MainCollection } from '../brand'
 import { getMediaRecords, Optional, Relation } from '../utils'
 import { Container } from './container'
 import { GalleryCardFactory } from './gallery-card'
@@ -24,15 +25,15 @@ interface Props {
 	cardClassName?: string
 	hidePixelBorder?: boolean
 	children?: React.ReactNode
+	collection?: MainCollection
 }
 
 export function Gallery(props: Props) {
-	const { items, className, cardClassName, hidePixelBorder = false, children } = props
+	const { items, className, cardClassName, hidePixelBorder = false, children, collection } = props
 
 	const [index, setIndex] = useState(-1)
 
 	// TODO - Handle placeholder (use thumbnailURL)
-
 	const photos: Photo[] = getMediaRecords(items)
 		.map((item) => ({
 			src: item.url,
@@ -41,14 +42,19 @@ export function Gallery(props: Props) {
 		}))
 		.filter(isPhoto)
 
-	if (photos.length === 0) return null
+	if (photos.length === 0 && !children) return null
+
+	let collectionClassName = ''
+	if (collection) {
+		collectionClassName = getSectionDisplayData(collection).className
+	}
 
 	return (
 		<>
-			{!hidePixelBorder && <PixelBorder className={cn('w-full', className)} />}
+			{!hidePixelBorder && <PixelBorder className={cn('w-full', collectionClassName, className)} />}
 
-			<div className={cn(className)}>
-				<Container>
+			<div className={cn(collectionClassName, className)}>
+				<Container className="space-y-6">
 					{children}
 
 					<RowsPhotoAlbum

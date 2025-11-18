@@ -5,10 +5,12 @@ import { Button } from '@/modules/components/button'
 import { CollectionPageHeading } from '@/modules/components/collection-page-heading'
 import { Container } from '@/modules/components/container'
 import { Copertina } from '@/modules/components/copertina'
+import { Gallery } from '@/modules/components/gallery'
 import { Map } from '@/modules/components/map/map'
 import { RichText } from '@/modules/components/richtext'
 import { ServicesSection } from '@/modules/components/services-section'
-import { getMediaRecords, getRelation } from '@/modules/utils'
+import { Video } from '@/modules/components/video'
+import { getRelation } from '@/modules/utils'
 import { getDb } from '@/modules/utils/server'
 
 import { ItinerarioDetailCards } from './_partials'
@@ -39,7 +41,6 @@ export default async function Itinerario(pageProps: PageProps) {
 	const itinerario = itinerari.at(0)
 	if (!itinerario) notFound()
 
-	const gallery = getMediaRecords(itinerario.gallery)
 	const gpxTrack = getRelation(itinerario.gpx_track)?.url
 
 	return (
@@ -72,47 +73,19 @@ export default async function Itinerario(pageProps: PageProps) {
 			</CollectionPageHeading>
 
 			<Container className="max-w-prose space-y-8">
+				<Video video={itinerario.video} />
 				<RichText data={itinerario.description} className="prose-h1:text-itinerari" />
 				<ServicesSection services={itinerario.services} collection="itinerari" />
 			</Container>
 
-			{/*
-
-      <Container className="max-w-prose space-y-8">
-        {itinerario?.Video && (
-          <div className="rounded-md overflow-hidden">
-            <MediaViewer media={itinerario.Video as Media} />
-          </div>
-        )}
-
-        <RichText data={itinerario.testo as SerializedEditorState} className="prose md:prose-lg" />
-
-        <ServiziSection servizi={itinerario.servizi} collection="itinerari" />
-
-
-      </Container>
-
-      <div>
-        <PixelBorder className="bg-itinerariColor" />
-        <div className="bg-itinerariColor">
-          <Container className="space-y-6">
-            <p className="text-center text-3xl font-bold text-white">Scopri il percorso!</p>
-            <div className="h-[600px]">
-              <DynamicMappa
-                initialPosition={position}
-                initialZoom={14}
-                gpxUrl={getTracciatoUrl(itinerario.tracciato_gpx)}
-                localizedMedia={itinerario.media_geolocalizzati}
-              />
-            </div>
-
-            {galleryItems.length > 0 && <Galleria items={galleryItems} />}
-          </Container>
-        </div>
-      </div> */}
+			<Gallery items={itinerario.gallery} collection="itinerari">
+				<Map gpxTracks={[gpxTrack]}></Map>
+			</Gallery>
 		</>
 	)
 }
+
+// TODO - Add media geolocalizzati
 
 //   {/* TODO - Review this section */}
 //   {/* Content below the two columns */}
