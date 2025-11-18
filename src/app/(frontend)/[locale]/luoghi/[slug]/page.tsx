@@ -1,18 +1,12 @@
 import { getTranslations } from 'next-intl/server'
 
-import { Button } from '@/modules/components/button'
 import { CollectionPageHeading } from '@/modules/components/collection-page-heading'
 import { Container } from '@/modules/components/container'
 import { Copertina } from '@/modules/components/copertina'
 import { Gallery } from '@/modules/components/gallery'
-import { Map } from '@/modules/components/map/map'
 import { RichText } from '@/modules/components/richtext'
 import { ServicesSection } from '@/modules/components/services-section'
-import { Video } from '@/modules/components/video'
-import { getRelation } from '@/modules/utils'
 import { getRecordBySlug, getSlug, PageWithSlugProps } from '@/modules/utils/server'
-
-import { ItinerarioDetailCards } from './_partials'
 
 //
 
@@ -20,50 +14,43 @@ export const dynamic = 'force-dynamic'
 
 export default async function Itinerario(pageProps: PageWithSlugProps) {
 	const slug = await getSlug(pageProps)
-	const { record: itinerario } = await getRecordBySlug('itinerari', slug)
+	const { record: luogo } = await getRecordBySlug('luoghi', slug)
 
-	const t = await getTranslations('itineraries')
-
-	const gpxTrack = getRelation(itinerario.gpx_track)?.url
+	const t = await getTranslations('luoghi')
 
 	return (
 		<>
-			<Copertina copertina={itinerario.copertina} collection="itinerari" />
+			<Copertina copertina={luogo.copertina} collection="luoghi" />
 
 			<CollectionPageHeading
-				collection="itinerari"
-				title={itinerario.name}
+				collection="luoghi"
+				title={luogo.name}
 				backButton={{
-					href: '/itinerari',
+					href: '/luoghi',
 					children: t('backButton'),
 				}}
-				rightContent={
-					<Map gpxTracks={[gpxTrack]}>
-						<div className="absolute bottom-0 right-0 p-2 px-4 w-full">
-							<Button
-								href={gpxTrack ?? ''}
-								download
-								target="_blank"
-								className="bg-black text-white w-full"
-							>
-								{t('download_gpx')}
-							</Button>
-						</div>
-					</Map>
-				}
-			>
-				<ItinerarioDetailCards itinerario={itinerario} />
-			</CollectionPageHeading>
+				// rightContent={
+				// 	<Map gpxTracks={[gpxTrack]}>
+				// 		<div className="absolute bottom-0 right-0 p-2 px-4 w-full">
+				// 			<Button
+				// 				href={gpxTrack ?? ''}
+				// 				download
+				// 				target="_blank"
+				// 				className="bg-black text-white w-full"
+				// 			>
+				// 				{t('download_gpx')}
+				// 			</Button>
+				// 		</div>
+				// 	</Map>
+				// }
+			/>
 
 			<Container className="max-w-prose space-y-8">
-				<Video video={itinerario.video} />
-				<RichText data={itinerario.description} className="prose-h1:text-itinerari" />
-				<ServicesSection services={itinerario.services} collection="itinerari" />
+				<RichText data={luogo.description} className="prose-h1:text-luoghi" />
+				<ServicesSection services={luogo.services} collection="luoghi" />
 			</Container>
 
-			<Gallery items={itinerario.gallery} collection="itinerari">
-				<Map gpxTracks={[gpxTrack]}></Map>
-			</Gallery>
+			<Gallery items={luogo.gallery} collection="luoghi" />
 		</>
 	)
 }

@@ -1,10 +1,11 @@
 import { cn } from '$/lib/utils'
 import { ClassValue } from 'clsx'
-import Image from 'next/image'
 
 import type { Media } from '@/payload-types'
 
-import { getMedia, Optional, Relation } from '../utils'
+import { getSectionDisplayData, MainCollection } from '../brand'
+import { Optional, Relation } from '../utils'
+import { MediaWithFallback } from './media-with-fallback'
 
 //
 
@@ -14,21 +15,24 @@ interface Props {
 	title?: string
 	overlay?: boolean
 	children?: React.ReactNode
+	collection?: MainCollection
 }
 
 export function Copertina(props: Props) {
-	const { className, title, overlay = false, children } = props
+	const { copertina, className, title, overlay = false, children, collection } = props
 
-	const copertina = getMedia(props.copertina)
-	if (!copertina) return null
-
-	if (copertina.mimeType?.startsWith('video')) {
-		return null
+	let collectionClass = ''
+	if (collection) {
+		collectionClass = getSectionDisplayData(collection).className
 	}
 
 	return (
-		<div className="relative">
-			<div className={cn('relative h-[70vh] max-h-[800px]', className)}>
+		<div className={cn('relative', collectionClass)}>
+			<MediaWithFallback
+				media={copertina}
+				className={cn('relative h-[70vh] max-h-[800px]', className)}
+			/>
+			{/* <div className={cn('relative h-[70vh] max-h-[800px]', className)}>
 				<Image
 					src={copertina.url ?? ''}
 					alt={copertina.alt}
@@ -37,7 +41,7 @@ export function Copertina(props: Props) {
 					fill
 					className="object-cover"
 				/>
-			</div>
+			</div> */}
 
 			{overlay && <div className="absolute inset-0 bg-black opacity-30" />}
 

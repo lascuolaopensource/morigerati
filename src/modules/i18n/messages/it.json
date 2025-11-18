@@ -56,5 +56,8 @@
 		"length": "Lunghezza",
 		"duration": "Durata",
 		"elevation": "Dislivello"
+	},
+	"luoghi": {
+		"backButton": "Tutti i luoghi"
 	}
 }

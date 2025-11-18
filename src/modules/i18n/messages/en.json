@@ -56,5 +56,8 @@
 		"length": "Length",
 		"duration": "Duration",
 		"elevation": "Elevation"
+	},
+	"luoghi": {
+		"backButton": "All places"
 	}
 }
