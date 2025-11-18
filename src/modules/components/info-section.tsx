@@ -11,13 +11,15 @@ import { cn } from './shadcn/lib/utils'
 type Props = {
 	children?: React.ReactNode
 	title: string
-	text?: SerializedEditorState
+	text?: SerializedEditorState | null
 	className?: ClassValue
 	collection: MainCollection
 }
 
 export function InfoSection(props: Props) {
 	const { children, title, text, className, collection } = props
+
+	if (!children && !text) return null
 
 	return (
 		<div className={cn('space-y-4', className)}>

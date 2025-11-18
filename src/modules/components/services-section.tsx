@@ -24,12 +24,10 @@ export async function ServicesSection(props: Props) {
 	if (!services || services.length === 0) return null
 
 	return (
-		<div className="max-w-prose space-y-2">
-			<InfoSection collection={collection} title={t('services')}>
-				{services.map((service) => (
-					<ServiceCard key={service.id} service={service} className={classes} />
-				))}
-			</InfoSection>
-		</div>
+		<InfoSection collection={collection} title={t('services')}>
+			{services.map((service) => (
+				<ServiceCard key={service.id} service={service} className={classes} />
+			))}
+		</InfoSection>
 	)
 }

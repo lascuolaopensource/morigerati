@@ -7,7 +7,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-gpx'
 import 'leaflet/dist/leaflet.css'
 // Must come afterwards
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 
 import { coordinateMorigerati } from '@/modules/info'
 
@@ -20,6 +20,7 @@ export type MapProps = {
 	initialZoom?: number
 	children?: React.ReactNode
 	gpxTracks?: (string | null | undefined)[]
+	showInitialPosition?: boolean
 }
 
 export function RootMap(props: MapProps) {
@@ -27,7 +28,8 @@ export function RootMap(props: MapProps) {
 		initialPosition = coordinateMorigerati as LatLngExpression,
 		initialZoom = 13,
 		children,
-		gpxTracks = [],
+		gpxTracks,
+		showInitialPosition = false,
 	} = props
 
 	return (
@@ -42,7 +44,8 @@ export function RootMap(props: MapProps) {
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			{children}
-			<GpxTracks urls={gpxTracks.filter((u) => typeof u === 'string')} />
+			{gpxTracks && <GpxTracks urls={gpxTracks.filter((u) => typeof u === 'string')} />}
+			{showInitialPosition && <Marker position={initialPosition} />}
 		</MapContainer>
 	)
 }

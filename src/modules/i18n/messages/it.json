@@ -1,7 +1,12 @@
 {
 	"common": {
 		"menu": "Menu",
-		"services": "Servizi"
+		"services": "Servizi",
+		"contacts": "Contatti",
+		"opening_hours": "Orari di apertura",
+		"phone": "Telefono",
+		"email": "Email",
+		"link": "Link"
 	},
 	"navigation": {
 		"home": "Home",

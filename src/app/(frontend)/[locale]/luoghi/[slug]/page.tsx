@@ -1,12 +1,16 @@
+import { CollectionPageHeading } from '#/components/collection-page-heading'
+import { Container } from '#/components/container'
+import { Copertina } from '#/components/copertina'
+import { Gallery } from '#/components/gallery'
+import { Map } from '#/components/map/map'
+import { RichText } from '#/components/richtext'
+import { ServicesSection } from '#/components/services-section'
+import { getRecordBySlug, getSlug, PageWithSlugProps } from '#/utils/server'
 import { getTranslations } from 'next-intl/server'
 
-import { CollectionPageHeading } from '@/modules/components/collection-page-heading'
-import { Container } from '@/modules/components/container'
-import { Copertina } from '@/modules/components/copertina'
-import { Gallery } from '@/modules/components/gallery'
-import { RichText } from '@/modules/components/richtext'
-import { ServicesSection } from '@/modules/components/services-section'
-import { getRecordBySlug, getSlug, PageWithSlugProps } from '@/modules/utils/server'
+import { ContactList } from '@/modules/components/contacts'
+import { InfoSection } from '@/modules/components/info-section'
+import { Luoghi } from '@/payload-types'
 
 //
 
@@ -29,25 +33,17 @@ export default async function Itinerario(pageProps: PageWithSlugProps) {
 					href: '/luoghi',
 					children: t('backButton'),
 				}}
-				// rightContent={
-				// 	<Map gpxTracks={[gpxTrack]}>
-				// 		<div className="absolute bottom-0 right-0 p-2 px-4 w-full">
-				// 			<Button
-				// 				href={gpxTrack ?? ''}
-				// 				download
-				// 				target="_blank"
-				// 				className="bg-black text-white w-full"
-				// 			>
-				// 				{t('download_gpx')}
-				// 			</Button>
-				// 		</div>
-				// 	</Map>
-				// }
+				rightContent={
+					luogo.coordinates ? (
+						<Map initialPosition={luogo.coordinates} showInitialPosition initialZoom={15} />
+					) : null
+				}
 			/>
 
 			<Container className="max-w-prose space-y-8">
 				<RichText data={luogo.description} className="prose-h1:text-luoghi" />
 				<ServicesSection services={luogo.services} collection="luoghi" />
+				<LuogoInfoSection luogo={luogo} />
 			</Container>
 
 			<Gallery items={luogo.gallery} collection="luoghi" />
@@ -55,22 +51,34 @@ export default async function Itinerario(pageProps: PageWithSlugProps) {
 	)
 }
 
-// TODO - Add media geolocalizzati
+// TODO - Add related itinerari and people
 
-//   {/* TODO - Review this section */}
-//   {/* Content below the two columns */}
-//   {/* <div className="">
-//   {itinerario?.persone && itinerario?.persone.length > 0 && (
-//     <div className="">
-//       <h2 className="font-bold text-xl text-center pb-4">{peopleTitle}</h2>
-//       <CardGrid items={itinerario?.persone as Persone[]} category="persone" singleRow />
-//     </div>
-//   )}
+//
 
-//   {itinerario?.luoghi && itinerario?.luoghi.length > 0 && (
-//     <div className="">
-//       <h2 className="font-bold pt-4 text-xl text-center pb-4">{placesTitle}</h2>
-//       <CardGrid items={itinerario?.luoghi as Luoghi[]} category="luoghi" singleRow />
-//     </div>
-//   )}
-// </div> */}
+async function LuogoInfoSection(props: { luogo: Luoghi }) {
+	const { luogo } = props
+	const t = await getTranslations('common')
+
+	const hasContacts = luogo.contacts && luogo.contacts.length > 0
+
+	return (
+		<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+			{hasContacts && (
+				<InfoSection
+					collection="luoghi"
+					title={t('contacts')}
+					className={{ 'col-span-2': !luogo.timetable }}
+				>
+					<ContactList contacts={luogo.contacts ?? []} />
+				</InfoSection>
+			)}
+
+			<InfoSection
+				collection="luoghi"
+				title={t('opening_hours')}
+				text={luogo.timetable}
+				className={{ 'col-span-2': !hasContacts }}
+			/>
+		</div>
+	)
+}
