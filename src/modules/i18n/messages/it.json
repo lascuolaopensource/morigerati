@@ -6,7 +6,9 @@
 		"opening_hours": "Orari di apertura",
 		"phone": "Telefono",
 		"email": "Email",
-		"link": "Link"
+		"link": "Link",
+		"show_more": "Mostra di più",
+		"show_less": "Chiudi"
 	},
 	"navigation": {
 		"home": "Home",
@@ -23,6 +25,8 @@
 		"backButton": "Tutte le residenze",
 		"description": "La residenza",
 		"program": "Programma",
+		"people": "Le persone",
+		"story": "Il racconto",
 		"programma": {
 			"title": "📆 Programma delle residenze",
 			"link": "Vai all'archivio",
@@ -34,7 +38,14 @@
 			"link": "Vai al programma",
 			"empty_state": "Non ci sono residenze in archivio",
 			"empty_state_cta": "Esplora il programma!"
-		}
+		},
+		"states": {
+			"temporarily-closed": "Le iscrizioni sono chiuse al momento, controlla questa pagina per aggiornamenti!",
+			"enrollments-open": "Le iscrizioni sono aperte, iscriviti subito!",
+			"enrollments-closed": "Iscrizioni chiuse :("
+		},
+		"you_have_time_until": "Hai tempo fino al {date}!",
+		"enroll": "Iscriviti!"
 	},
 	"tags": {
 		"comunicato-stampa": "Comunicato stampa",

@@ -84,27 +84,11 @@ export const name: TextField = {
 	localized: true,
 }
 
-export function row(fields: Field[]): RowField {
+export function row(fields: Field[], options: Omit<RowField, 'type' | 'fields'> = {}): RowField {
 	return {
 		type: 'row',
 		fields,
-	}
-}
-
-const urlValidator: TextFieldSingleValidation = (v, ctx) => {
-	if (!ctx.required && !Boolean(v?.trim())) return true
-	const parse = z.url().safeParse(v)
-	if (parse.success) return true
-	return parse.error.message
-}
-
-export function url(props: Omit<TextField, 'type'>): TextField {
-	// @ts-expect-error - Slight type mismatch
-	return {
-		type: 'text',
-		hasMany: false,
-		...props,
-		validate: urlValidator,
+		...options,
 	}
 }
 
@@ -186,11 +170,14 @@ export function contatti(): ArrayField {
 	})
 }
 
-export function links(props: Omit<ArrayField, 'type' | 'fields'>): ArrayField {
+export function links(
+	props: Omit<ArrayField, 'type' | 'fields'> & { localizedName?: boolean },
+): ArrayField {
+	const { localizedName = name.localized, ...rest } = props
 	return array({
 		fieldForRowLabel: name.name,
-		fields: [row([name, url({ name: 'url', label: 'URL' })])],
-		...props,
+		fields: [row([{ ...name, localized: localizedName }, url({ name: 'url', label: 'URL' })])],
+		...rest,
 	})
 }
 
@@ -198,6 +185,34 @@ export function copertina(
 	props: Omit<Parameters<typeof media>[0], 'collection' | 'name'> = {},
 ): UploadField {
 	return media({ name: 'copertina', label: 'Immagine di copertina', ...props })
+}
+
+// URL
+
+const urlValidator: TextFieldSingleValidation = (v, ctx) => {
+	if (!ctx.required && !Boolean(v?.trim())) return true
+	const parse = z.url().safeParse(v)
+	if (parse.success) return true
+	return parse.error.message
+}
+
+type BaseUrlProps = Omit<TextField, 'type' | 'hasMany' | 'maxRows' | 'minRows' | 'validate'>
+type UrlProps = BaseUrlProps & { validate?: TextFieldSingleValidation }
+
+export function url(props: UrlProps): TextField {
+	const validate: TextFieldSingleValidation = (value, ctx) => {
+		const res = urlValidator(value, ctx)
+		if (res !== true) return res
+		return props.validate?.(value, ctx) ?? true
+	}
+	return {
+		...props,
+		type: 'text',
+		hasMany: false as const,
+		maxRows: undefined,
+		minRows: undefined,
+		validate,
+	}
 }
 
 // Join

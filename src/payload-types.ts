@@ -549,9 +549,10 @@ export interface Residenze {
   coordinates?: [number, number] | null;
   start_date: string;
   end_date?: string | null;
+  has_registration?: boolean | null;
   registration_deadline?: string | null;
   registration_url?: string | null;
-  show_registration_button?: boolean | null;
+  registration_open?: boolean | null;
   short_description: string;
   description?: {
     root: {
@@ -593,6 +594,7 @@ export interface Residenze {
     | {
         name: string;
         foto?: (string | null) | Media;
+        role?: string | null;
         bio?: {
           root: {
             type: string;
@@ -608,13 +610,6 @@ export interface Residenze {
           };
           [k: string]: unknown;
         } | null;
-        projects?:
-          | {
-              name: string;
-              url?: string | null;
-              id?: string | null;
-            }[]
-          | null;
         organizations?:
           | {
               name: string;
@@ -1162,9 +1157,10 @@ export interface ResidenzeSelect<T extends boolean = true> {
   coordinates?: T;
   start_date?: T;
   end_date?: T;
+  has_registration?: T;
   registration_deadline?: T;
   registration_url?: T;
-  show_registration_button?: T;
+  registration_open?: T;
   short_description?: T;
   description?: T;
   program?:
@@ -1179,14 +1175,8 @@ export interface ResidenzeSelect<T extends boolean = true> {
     | {
         name?: T;
         foto?: T;
+        role?: T;
         bio?: T;
-        projects?:
-          | T
-          | {
-              name?: T;
-              url?: T;
-              id?: T;
-            };
         organizations?:
           | T
           | {

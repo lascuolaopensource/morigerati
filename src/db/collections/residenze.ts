@@ -1,4 +1,6 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, Field } from 'payload'
+
+import type { Residenze as ResidenzaType } from '@/payload-types'
 
 import { F, Section, Tab } from '@/db/_partials'
 
@@ -32,21 +34,15 @@ export const Residenze: CollectionConfig<'residenze'> = {
 					label: 'Dati',
 					fields: [
 						...Section.generale(),
+
 						F.header('Informazioni tecniche'),
 						F.location(),
 						F.row([
 							F.date({ name: 'start_date', label: 'Data inizio', required: true }),
 							F.date({ name: 'end_date', label: 'Data fine' }),
 						]),
-						F.row([
-							F.date({ name: 'registration_deadline', label: 'Scadenza iscrizioni' }),
-							F.url({ name: 'registration_url', label: 'Link iscrizioni' }),
-						]),
-						{
-							name: 'show_registration_button',
-							type: 'checkbox',
-							label: 'Mostra pulsante iscrizione',
-						},
+
+						...enrollmentsSection(),
 					],
 				},
 
@@ -91,14 +87,17 @@ export const Residenze: CollectionConfig<'residenze'> = {
 							fieldForRowLabel: F.name.name,
 							fields: [
 								F.row([F.name, F.media({ name: 'foto', label: 'Foto' })]),
+								{
+									name: 'role',
+									label: 'Ruolo',
+									type: 'text',
+									localized: true,
+								},
 								F.plainRichText({ name: 'bio', label: 'Breve biografia' }),
-								F.links({
-									name: 'projects',
-									label: 'Progetti salienti',
-								}),
 								F.links({
 									name: 'organizations',
 									label: 'Organizzazioni',
+									localizedName: false,
 								}),
 							],
 						}),
@@ -114,4 +113,47 @@ export const Residenze: CollectionConfig<'residenze'> = {
 			],
 		},
 	],
+}
+
+function enrollmentsSection(): Field[] {
+	return [
+		{ name: 'has_registration', type: 'checkbox', label: 'Ci si può iscrivere' },
+
+		{
+			label: 'Iscrizioni',
+			type: 'group',
+			admin: {
+				hideGutter: true,
+				condition: (_: unknown, siblingData: Partial<ResidenzaType>) =>
+					Boolean(siblingData.has_registration),
+			},
+			fields: [
+				F.row([
+					F.date({
+						name: 'registration_deadline',
+						label: 'Scadenza iscrizioni',
+						validate: (value, ctx) => {
+							const residenza: Partial<ResidenzaType> = ctx.siblingData
+							if (residenza.has_registration && !value) return 'La scadenza è obbligatoria'
+							else return true
+						},
+					}),
+					F.url({
+						name: 'registration_url',
+						label: 'Link iscrizioni',
+						validate: (value, ctx) => {
+							const residenza: Partial<ResidenzaType> = ctx.siblingData
+							if (residenza.has_registration && !value) return 'Il link è obbligatorio'
+							else return true
+						},
+					}),
+				]),
+				{
+					name: 'registration_open',
+					type: 'checkbox',
+					label: 'Iscrizioni aperte',
+				},
+			],
+		},
+	]
 }

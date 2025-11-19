@@ -6,7 +6,9 @@
 		"opening_hours": "Opening Hours",
 		"phone": "Phone",
 		"email": "Email",
-		"link": "Link"
+		"link": "Link",
+		"show_more": "Show more",
+		"show_less": "Show less"
 	},
 	"navigation": {
 		"home": "Home",
@@ -23,6 +25,8 @@
 		"backButton": "All residences",
 		"description": "The residence",
 		"program": "Program",
+		"people": "The people",
+		"story": "Story",
 		"programma": {
 			"title": "📆 Residency Calendar",
 			"link": "Go to archive",
@@ -34,7 +38,14 @@
 			"link": "Go to calendar",
 			"empty_state": "There are no residencies in the archive",
 			"empty_state_cta": "Browse the calendar!"
-		}
+		},
+		"states": {
+			"temporarily-closed": "Enrollments are temporarily closed, check this page for updates!",
+			"enrollments-open": "Enrollments are open, enroll now!",
+			"enrollments-closed": "Enrollments closed :("
+		},
+		"you_have_time_until": "You have time until {date}!",
+		"enroll": "Enroll!"
 	},
 	"tags": {
 		"comunicato-stampa": "Press release",
