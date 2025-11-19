@@ -15,6 +15,7 @@ export function RichText(props: Props) {
 
 	return (
 		<RichTextConverter
+			disableTextAlign
 			{...rest}
 			className={cn(!disableProse && 'prose text-primary prose-strong:text-primary', className)}
 			// converters={jsxConverter}

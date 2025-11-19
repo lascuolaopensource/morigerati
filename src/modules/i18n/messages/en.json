@@ -20,6 +20,9 @@
 		"feed": "Transluoghigram 📷"
 	},
 	"residenze": {
+		"backButton": "All residences",
+		"description": "The residence",
+		"program": "Program",
 		"programma": {
 			"title": "📆 Residency Calendar",
 			"link": "Go to archive",
