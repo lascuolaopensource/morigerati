@@ -33,3 +33,19 @@
 .group-field__header {
 	margin-bottom: 2rem;
 }
+
+// SEO
+
+#field-meta > div > div.render-fields.render-fields--margins-small > div {
+	margin-bottom: 4rem !important;
+}
+
+#field-meta
+	> div
+	> div.render-fields.render-fields--margins-small
+	> div:last-child
+	> div:last-child {
+	display: flex;
+	flex-flow: column nowrap;
+	gap: 1rem;
+}

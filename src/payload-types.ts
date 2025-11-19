@@ -378,6 +378,14 @@ export interface Itinerari {
         id?: string | null;
       }[]
     | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -470,6 +478,14 @@ export interface Luoghi {
   };
   copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -524,6 +540,14 @@ export interface Persone {
   };
   copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -637,6 +661,14 @@ export interface Residenze {
   } | null;
   copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -672,6 +704,14 @@ export interface Articoli {
   };
   copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1080,6 +1120,13 @@ export interface ItinerariSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1116,6 +1163,13 @@ export interface LuoghiSelect<T extends boolean = true> {
   itinerari?: T;
   copertina?: T;
   gallery?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1142,6 +1196,13 @@ export interface PersoneSelect<T extends boolean = true> {
   description?: T;
   copertina?: T;
   gallery?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1189,6 +1250,13 @@ export interface ResidenzeSelect<T extends boolean = true> {
   story?: T;
   copertina?: T;
   gallery?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1206,6 +1274,13 @@ export interface ArticoliSelect<T extends boolean = true> {
   contents?: T;
   copertina?: T;
   gallery?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1447,6 +1522,14 @@ export interface Home {
       items: (string | Residenze)[];
     };
   };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1618,6 +1701,14 @@ export interface ChiSiamo {
   };
   copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1644,6 +1735,14 @@ export interface MobilitaSostenibile {
   };
   copertina?: (string | null) | Media;
   gallery?: (string | Media)[] | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1678,6 +1777,13 @@ export interface HomeSelect<T extends boolean = true> {
               description?: T;
               items?: T;
             };
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1748,6 +1854,13 @@ export interface ChiSiamoSelect<T extends boolean = true> {
   description?: T;
   copertina?: T;
   gallery?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1760,6 +1873,13 @@ export interface MobilitaSostenibileSelect<T extends boolean = true> {
   description?: T;
   copertina?: T;
   gallery?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
