@@ -3,9 +3,18 @@
 import { Link } from '#/i18n'
 import { useState } from 'react'
 
+import { cn } from './shadcn/lib/utils'
+
 //
 
-export function NavbarLogo() {
+type Props = {
+	className?: string
+	textClassName?: string
+}
+
+export function Logo(props: Props) {
+	const { className, textClassName } = props
+
 	const [letters, setLetters] = useState('xA')
 	const [logoInterval, setLogoInterval] = useState<NodeJS.Timeout>()
 
@@ -26,7 +35,7 @@ export function NavbarLogo() {
 	return (
 		<Link href="/" className="block">
 			<div
-				className="w-[250px] text-black"
+				className={cn('w-[250px]', className)}
 				onMouseEnter={startInterval}
 				onMouseLeave={stopInterval}
 			>
@@ -38,19 +47,19 @@ export function NavbarLogo() {
 					</defs>
 					<text
 						y="90"
-						className="text-[85px] font-transluoghi-pixels"
+						className={cn('text-[85px] font-transluoghi-pixels', textClassName)}
 						clipPath="url(#logo-letters-clip)"
 					>
 						{letters}
 					</text>
 
-					<text className="font-semibold text-[25px]" x="275" y="30">
+					<text className={cn('font-semibold text-[25px]', textClassName)} x="275" y="30">
 						Transluoghi
 					</text>
-					<text className="text-[25px]" x="550" y="60" textAnchor="end">
+					<text className={cn('text-[25px]', textClassName)} x="550" y="60" textAnchor="end">
 						Ecomuseo del Bussento
 					</text>
-					<text className="text-[25px]" x="550" y="90" textAnchor="end">
+					<text className={cn('text-[25px]', textClassName)} x="550" y="90" textAnchor="end">
 						Contemporaneo
 					</text>
 				</svg>

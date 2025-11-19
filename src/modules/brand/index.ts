@@ -53,8 +53,8 @@ const sectionDisplayData: Record<Section, SectionDisplayData> = {
 		borderClassName: 'border-articoli',
 	},
 	default: {
-		className: 'bg-white text-black',
-		invertedClassName: 'text-black',
+		className: 'bg-black text-white fill-white',
+		invertedClassName: 'text-black fill-black',
 		borderClassName: 'border-black',
 	},
 }

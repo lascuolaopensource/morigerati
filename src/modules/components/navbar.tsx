@@ -11,7 +11,7 @@ import { MenuIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { NavbarLogo } from './navbar-logo'
+import { Logo } from './logo'
 
 //
 
@@ -53,9 +53,9 @@ export function Navbar() {
 	const classes = getSectionDisplayData(pathnameToSection(pathname))
 
 	return (
-		<nav className={cn('z-50 transition-all', classes.className)} role="navigation">
+		<nav className={cn('z-50 transition-all sticky top-0', classes.className)} role="navigation">
 			<div className="flex justify-between items-center max-w-7xl py-1 pb-[6px] px-3 mx-auto">
-				<NavbarLogo />
+				<Logo textClassName={classes.className} />
 
 				<div className="flex items-center">
 					<LocaleSwitcher />
@@ -87,15 +87,15 @@ function NavbarMenu(props: NavbarMenuProps) {
 
 	return (
 		<Sheet open={isOpen} onOpenChange={setIsOpen}>
-			<SheetTrigger className="lg:hidden p-2 rounded-lg hover:cursor-pointer hover:ring-black hover:bg-white hover:ring-2">
+			<SheetTrigger className="lg:hidden p-2 rounded-lg hover:cursor-pointer hover:bg-white hover:text-black hover:ring-2">
 				<MenuIcon size={20} />
 			</SheetTrigger>
 
 			<SheetContent
 				side="top"
 				className={cn(
-					'h-screen border-b-black transition-colors [&_button]:cursor-pointer',
-					'[&_button]:hover:ring-black [&_button]:hover:ring-2 [&_button]:p-2',
+					'h-screen border-b-white transition-colors [&_button]:cursor-pointer',
+					'[&_button]:bg-white [&_button]:hover:ring-2 [&_button]:p-2',
 					'[&_button]:rounded-lg [&_button]:text-black',
 					className,
 				)}
@@ -128,7 +128,7 @@ function NavbarLink(props: LinkProps) {
 		<Link
 			href={href}
 			className={cn(
-				'px-2 py-[6px] rounded-lg hover:cursor-pointer hover:ring-black hover:bg-white hover:ring-2',
+				'px-2 py-[6px] rounded-lg hover:cursor-pointer hover:bg-white hover:text-black',
 				className,
 			)}
 			{...rest}

@@ -7,15 +7,11 @@ import './styles.css'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
+import { Footer } from '@/modules/components/footer'
 import { Navbar } from '@/modules/components/navbar'
 import { hasLocale } from '@/modules/i18n'
 
 //
-
-// export const metadata = {
-//   description: 'A blank template using Payload in a Next.js app.',
-//   title: 'Payload Blank Template',
-// }
 
 type Props = {
 	children: React.ReactNode
@@ -34,6 +30,7 @@ export default async function RootLayout(props: Props) {
 				<NextIntlClientProvider>
 					<Navbar />
 					<main>{children}</main>
+					<Footer />
 				</NextIntlClientProvider>
 			</body>
 		</html>

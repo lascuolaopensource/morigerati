@@ -30,7 +30,7 @@ export function LocaleSwitcher() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className="cursor-pointer">
-				<Button variant="ghost" className="hover:ring-black hover:ring-2 flex items-center gap-1">
+				<Button variant="ghost" className="flex items-center gap-1">
 					<span className="translate-y-0.5">{currentLocaleLabel}</span>
 					<ChevronDown />
 				</Button>

@@ -4,5 +4,7 @@
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll.eslint"],
 	"eslint.validate": ["javascript", "typescript", "typescriptreact"],
-	"editor.formatOnSave": true
+	"editor.formatOnSave": true,
+	"tailwindCSS.classAttributes": ["className", "textClassName"],
+	"tailwindCSS.classFunctions": ["cn"]
 }
