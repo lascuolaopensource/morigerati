@@ -1,10 +1,11 @@
-# Optimized Dockerfile with standalone output
-# 3-stage build: deps -> builder -> runner
+# To use this Dockerfile, you have to set `output: 'standalone'` in your next.config.mjs file.
+# From https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 
 FROM node:22.17.0-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
@@ -16,6 +17,7 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
+
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -46,25 +48,7 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy package files first (needed for installing dependencies)
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/pnpm-lock.yaml* ./pnpm-lock.yaml*
-COPY --from=builder /app/yarn.lock* ./yarn.lock*
-COPY --from=builder /app/package-lock.json* ./package-lock.json*
-
-# Install production dependencies for running migrations
-RUN corepack enable pnpm
-RUN \
-  if [ -f yarn.lock ]; then yarn install --production --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci --only=production; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile --prod; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
-# Set ownership for node_modules (will be done as root before switching to nextjs)
-RUN chown -R nextjs:nodejs /app/node_modules || true
-
-# Copy public folder
+# Remove this line if you do not have this folder
 COPY --from=builder /app/public ./public
 
 # Set the correct permission for prerender cache
@@ -76,21 +60,12 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy source files needed for migrations (payload.config.ts and dependencies)
-COPY --from=builder --chown=nextjs:nodejs /app/src ./src
-COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./next.config.mjs
-COPY --from=builder --chown=nextjs:nodejs /app/tsconfig.json ./tsconfig.json
-
-# Copy entrypoint script
-COPY --chown=nextjs:nodejs docker-entrypoint.sh /app/docker-entrypoint.sh
-RUN chmod +x /app/docker-entrypoint.sh
-
 USER nextjs
 
 EXPOSE 3000
 
 ENV PORT 3000
 
-# Use entrypoint to run migrations before starting the app
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
-CMD ["node", "server.js"]
+# server.js is created by next build from the standalone output
+# https://nextjs.org/docs/pages/api-reference/next-config-js/output
+CMD HOSTNAME="0.0.0.0" node server.js

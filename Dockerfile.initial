@@ -1,5 +1,6 @@
-# Optimized Dockerfile with standalone output
-# 3-stage build: deps -> builder -> runner
+# Initial deployment Dockerfile
+# This version includes db:seed for the first deploy
+# After first deploy, switch to Dockerfile (optimized version)
 
 FROM node:22.17.0-alpine AS base
 
@@ -35,7 +36,7 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# Production image, copy all the files and run next
+# Production image
 FROM base AS runner
 WORKDIR /app
 
@@ -46,44 +47,25 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy package files first (needed for installing dependencies)
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/pnpm-lock.yaml* ./pnpm-lock.yaml*
-COPY --from=builder /app/yarn.lock* ./yarn.lock*
-COPY --from=builder /app/package-lock.json* ./package-lock.json*
-
-# Install production dependencies for running migrations
-RUN corepack enable pnpm
-RUN \
-  if [ -f yarn.lock ]; then yarn install --production --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci --only=production; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile --prod; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
-# Set ownership for node_modules (will be done as root before switching to nextjs)
-RUN chown -R nextjs:nodejs /app/node_modules || true
-
 # Copy public folder
 COPY --from=builder /app/public ./public
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
+# Copy built application
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-# Copy source files needed for migrations (payload.config.ts and dependencies)
+# Copy source files needed for migrations and seeding
 COPY --from=builder --chown=nextjs:nodejs /app/src ./src
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
+COPY --from=builder --chown=nextjs:nodejs /app/pnpm-lock.yaml* ./pnpm-lock.yaml*
 COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./next.config.mjs
 COPY --from=builder --chown=nextjs:nodejs /app/tsconfig.json ./tsconfig.json
 
-# Copy entrypoint script
-COPY --chown=nextjs:nodejs docker-entrypoint.sh /app/docker-entrypoint.sh
-RUN chmod +x /app/docker-entrypoint.sh
+# Install production dependencies for running migrations
+RUN corepack enable pnpm
+COPY --from=deps /app/node_modules ./node_modules
+
+# Set the correct permission for prerender cache
+RUN chown -R nextjs:nodejs /app
 
 USER nextjs
 
@@ -91,6 +73,7 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-# Use entrypoint to run migrations before starting the app
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
-CMD ["node", "server.js"]
+# Run seed (ONLY for first deploy - remove this line after first deploy)
+# Then run migrations, then start the app
+CMD sh -c "corepack enable pnpm && pnpm db:seed && pnpm payload migrate && pnpm start"
+

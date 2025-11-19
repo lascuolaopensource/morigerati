@@ -27,7 +27,7 @@ export function getRandomPixel() {
 
 //
 
-export const databaseKey = z.string()
+export const databaseKey = z.number()
 export type DatabaseKey = z.infer<typeof databaseKey>
 
 export type Optional<T> = T | null | undefined
