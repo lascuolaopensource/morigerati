@@ -1,0 +1,2625 @@
+[
+	{
+		"_id": "68260c6ac67065dd5adb7a73",
+		"createdAt": "2025-05-15T15:46:50.529Z",
+		"updatedAt": "2025-05-19T13:44:04.724Z",
+		"titolo": {
+			"it": "Inaugura a Morigerati la sede di TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo"
+		},
+		"tags": ["comunicato-stampa"],
+		"data_pubblicazione": "2025-02-16T12:00:00.000Z",
+		"testo": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Si accinge ad aprire finalmente le sue porte al pubblico, i prossimi ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "8 e 9 marzo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", la sede di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Transluoghi ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "- il primo ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Ecomuseo del Bussento Contemporaneo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " frutto di un progetto del Comune di Morigerati, finanziato dal Programma Operativo di Azione e Coesione complementare al PON Cultura e Sviluppo (FESR 2014-2020) e dal Ministero della Cultura.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "L’",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Ecomuseo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - riconosciuto ufficialmente anche dalla Regione Campania lo scorso dicembre - si configura come ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "un sistema integrato di fruizione turistica del Comune di Morigerati",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", progettato per valorizzare e mettere in connessione le risorse paesaggistiche e ambientali del territorio con l'enorme patrimonio immateriale custodito dai suoi abitanti, attraverso una ricchissima programmazione culturale di natura esperienziale - immaginata sul modello, consolidato negli anni, delle residenze ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Transluoghi",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ".",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "L’",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Ecomuseo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " si costituisce, infatti, come un insieme di luoghi e siti, itinerari e punti di interesse presenti sul territorio e collegati alle storie di vita di chi abita il paese conservandone la memoria passata e presente - realizzato attraverso ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "interventi di segnaletica e installazioni di land art, un sistema di itinerari turistici e culturali, un piano di mobilità sostenibile e il potenziamento degli strumenti digitali",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " messi a disposizione di fruitori e operatori.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Il ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "processo di co-creazione",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " che ha condotto alla costituzione dell'",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Ecomuseo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - coordinato dal gruppo dei community manager di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Transluoghi ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "- si è esplicato nell'ambito delle residenze artistiche inserite all'interno dell'offerta turistica e culturale dell'ente, ed è stato condiviso dalla comunità locale e dai gruppi esterni di viaggiatori che hanno attraversato Morigerati.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "I prossimi ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "8 e 9 marzo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", a partire dalla nuova sede allestita nell’",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Antico Frantoio",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " del Comune, sarà dunque possibile visitarne gli spazi e fruire dell’",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "exhibit crossmediale ecomuseale",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - progettato per raccontare luoghi, itinerari e persone - nell’ambito della cerimonia ufficiale di inaugurazione, di cui verranno presto svelati tutti i dettagli.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1
+				}
+			}
+		},
+		"slug": "inaugura-a-morigerati-la-sede-di-transluoghi---ecomuseo-del-bussento-contemporaneo",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0,
+		"copertina": "682b359227359b3311a7cbff"
+	},
+	{
+		"_id": "68260c85c67065dd5adb7a92",
+		"createdAt": "2025-05-15T15:47:17.688Z",
+		"updatedAt": "2025-05-15T15:47:17.688Z",
+		"titolo": {
+			"it": "L'Ecomuseo accoglie"
+		},
+		"sottotitolo": {
+			"it": "Svelato il programma dell'inaugurazione della sede di TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo"
+		},
+		"tags": ["comunicato-stampa"],
+		"data_pubblicazione": "2025-03-03T12:00:00.000Z",
+		"testo": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Si terrà i prossimi ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "8 e 9 marzo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", presso gli spazi ristrutturati dell'",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Antico Frantoio",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", l'",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "inaugurazione della nuova sede di Transluoghi - Ecomuseo del Bussento Contemporaneo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ": il sistema integrato di fruizione turistica e culturale del paese, frutto di un progetto del Comune di Morigerati finanziato dal Programma Operativo di Azione e Coesione complementare al PON Cultura e Sviluppo (FESR 2014-2020) e dal Ministero della Cultura.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Transluoghi",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " si accinge, così, ad accogliere i primi visitatori del ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "percorso di esposizione multimediale",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " allestito nell’Antico Frantoio e realizzato per dare voce alle storie di vita della comunità locale, coinvolta fin dall'inizio nel processo di co-creazione dell’Ecomuseo, oltre che per permettere ai fruitori di sperimentare una prima immersione nel paesaggio culturale e ambientale del territorio.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Di seguito il programma dell'evento",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", gratuito e aperto a tutti e tutte.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "-",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": null,
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“L'ECOMUSEO ACCOGLIE”",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Inaugurazione della sede di Transluoghi - Ecomuseo del Bussento Contemporaneo",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "SABATO 8 MARZO",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "dalle ore 17:00 alle ore 19:30",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "presso l'Antico Frantoio di Morigerati, al piano inferiore della biglietteria dell’Oasi WWF “Grotte del Bussento”, in via Censimento:",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "inaugurazione della sede, talk con i promotori e i protagonisti del progetto e tour dell'esposizione multimediale:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " racconto del processo di ristrutturazione e funzionalizzazione dell'Antico Frantoio, degli interventi di allestimento e del percorso di exhibit crossmediale; presentazione del sistema di mobilità sostenibile, degli itinerari ambientali e culturali, e della piattaforma web dell'Ecomuseo.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "list",
+							"version": 1,
+							"listType": "bullet",
+							"start": 1,
+							"tag": "ul"
+						},
+						{
+							"children": [],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Interverranno al talk i rappresentanti dell'amministrazione comunale, il team di progettazione e costruzione dell'exhibit ecomuseale, degli itinerari culturali e della piattaforma web, le guide dell'Ecomuseo e alcuni degli abitanti protagonisti dei contenuti audio-video che costituiscono una parte fondamentale dell'esposizione:",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "Comune di Morigerati:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " Guido Florenzano, ",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "sindaco ",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "e Teodora Vallone, ",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "vicesindaca",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": ";",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 1
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "progettista della ristrutturazione dell’Antico Frantoio e del sistema di mobilità sostenibile dell’Ecomuseo: ",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Michele Gatto, ",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "architetto",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": ";",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 2
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "team di progettazione dell’allestimento multimediale dell’Antico Frantoio: ",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Liviano Mariella (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "project manager e progettista culturale",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Daniele De Stefano (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "curatore, sociologo, documentarista e responsabile delle installazioni audio-video dell’Ecomuseo",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Ilaria Spagnuolo (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "designer",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Simona Quagliano (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "architetta",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Giancarlo Guadagno (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "designer",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": ");",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 3
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "responsabile della realizzazione della piattaforma web dell’Ecomuseo:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " Rosa Lo Monte (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "communication manager e content creator",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": ");",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 4
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "abitanti e voci dell’Ecomuseo:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " Demetria Barra (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "Oasi WWF “Grotte del Bussento”",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Elfriede Caiafa (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "Museo Etnografico di Morigerati",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Eugenio Cioffi (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "imprenditore agricolo, azienda “Murikè”",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Vittoria Marsica e Lorenzo Bruno (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "imprenditori agricoli, azienda “Radici”",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Nicolangelo Marsicani (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "imprenditore agricolo, aienda “Marsicani”",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Caterina Perazzo (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "imprenditrice agricola, azienda “Terra Madre”",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Giovanni Cammarano e Pietro Granato (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "imprenditori agricoli, azienda “Cellito”",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Fausto Florenzano (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "Palazzo Baronale",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "), Arnaldo Iudici (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "ricercatore ambientale",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": ") e Miriam Simoni (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "ricercatrice ambientale)",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": ", Francesco Maurano (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "speleologo, Tetide APS",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": ")",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 5
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "Guide dell’Ecomuseo:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " Angelika Bartholomäi, Serafina Tripodi",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 6
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "Modera:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " Marianna Vallone (",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "giornalista",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": ").",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 7
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "list",
+							"version": 1,
+							"listType": "bullet",
+							"start": 1,
+							"tag": "ul"
+						},
+						{
+							"children": [],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "A seguire, aperitivo.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "DOMENICA 9 MARZO",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "dalle ore 10:00 alle ore 13:00",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "appuntamento all’Antico Frantoio:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " apertura della sede dell'Ecomuseo per le visite guidate;",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 1
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "appuntamento in Piazza Piano alla Porta: ",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "apertura delle strutture di ospitalità del Comune di Morigerati (Palazzo Don Carlo, B&B Terra Madre, Casa da Zia Gina, Agriturismo Murikè).",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 2
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "list",
+							"version": 1,
+							"listType": "bullet",
+							"start": 1,
+							"tag": "ul"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "“",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "L'Ecomuseo accoglie",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "” è organizzato in collaborazione con la Pro Loco di Morigerati e Sicilì, ed è inserito nel programma culturale di residenze dell'Ecomuseo, gestito dall'Associazione L@S.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1
+				}
+			}
+		},
+		"slug": "lecomuseo-accoglie-svelato-il-programma-dellinaugurazione-della-sede-di-transluoghi---ecomuseo-del-bussento-contemporaneo",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0
+	},
+	{
+		"_id": "68260cbac67065dd5adb7ab7",
+		"createdAt": "2025-05-15T15:48:10.368Z",
+		"updatedAt": "2025-05-15T15:48:10.368Z",
+		"titolo": {
+			"it": "Land art, preparazione a design per la campagna e ad un film documentario"
+		},
+		"sottotitolo": {
+			"it": "Continua la programmazione culturale di TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo"
+		},
+		"tags": ["comunicato-stampa"],
+		"testo": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Dopo avere aperto le porte al pubblico, lo scorso 8 marzo, della sua esposizione multimediale - allestita presso l’Antico Frantoio di Morigerati - l’",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Ecomuseo Transluoghi",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " continua il processo di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "co-creazione del patrimonio territoriale",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " che lo ha visto nascere organizzando, sempre in stretta collaborazione con la comunità locale, una serie di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "nuove residenze artistiche",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - che si aggiungono alla ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "già avviata programmazione culturale",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " dell’ente e che si svolgeranno in paese ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "dal 22 al 27 aprile 2025",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ".",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Due residenze di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Land Art e Arte Pubblica”",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", gestite dall’Associazione Zap!, finalizzate alla realizzazione di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "5 opere di land art e arte pubblica",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", volte a valorizzare e implementare l’offerta culturale del territorio - riscoprendo la natura e il paesaggio quali strumenti e supporti dell’arte, in grado di suscitare nei fruitori non solo contemplazione, ma anche e soprattutto riflessione.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Saranno in residenza gli artisti ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Luigi Coppola",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " (agroecologo e promotore di progetti di arte pubblica), ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "DEM ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "(artista che spazia dal wallpainting, all’illustrazione, alla pittura su tela), ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Gomez ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "(pittore e muralista di origini venezuelane), ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Massimo Ferrara",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " (ingegnere del suono), ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Ilaria Spagnuolo e Giancarlo Guadagno",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " (designer e architetto dell’Ecomuseo Transluoghi).",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Una residenza di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Preparazione a Design per la Campagna”",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - gestita dall’Associazione L@S e curata dalla designer ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Ilaria Spagnuolo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " e dall’architetto ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Giancarlo Guadagno",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - che si tradurrà in una serie di incontri e sopralluoghi presso le aziende del territorio per conoscerne le realtà e i sistemi produttivi, finalizzati alla progettazione di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "dispositivi ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "in grado di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "accorciare le distanze tra produttori e consumatori",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", in un’ottica ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "sociale e sostenibile",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ".",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Tre residenze di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Preparazione al Film”",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - gestite dall’Associazione Zap! e curate dal sociologo, regista e documentarista ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Daniele G. De Stefano",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - tese alla stesura del soggetto e della sceneggiatura preliminari alla realizzazione del ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "film documentario",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " prodotto da Transluoghi - Ecomuseo del Bussento Contemporaneo.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1
+				}
+			}
+		},
+		"slug": "land-art-preparazione-a-design-per-la-campagna-e-ad-un-film-documentario-continua-la-programmazione-culturale-di-transluoghi---ecomuseo-del-bussento-contemporaneo",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0
+	},
+	{
+		"_id": "68260cccc67065dd5adb7ad6",
+		"createdAt": "2025-05-15T15:48:28.654Z",
+		"updatedAt": "2025-05-15T15:48:28.654Z",
+		"titolo": {
+			"it": "5 opere di land art e arte pubblica"
+		},
+		"sottotitolo": {
+			"it": "Un nuovo itinerario per l’Ecomuseo Transluoghi"
+		},
+		"tags": ["comunicato-stampa"],
+		"data_pubblicazione": "2025-05-01T12:00:00.000Z",
+		"testo": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "È stato inaugurato, a chiusura di un nuovo ciclo di residenze artistiche, l’",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "itinerario di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 3,
+									"mode": "normal",
+									"style": "",
+									"text": "land art",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": " e arte pubblica dell’Ecomuseo Transluoghi",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ": un ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "percorso di 5 opere",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " distribuite lungo il territorio di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Morigerati ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "- tra gli spazi dell’Antico Frantoio, del Ponte Medievale, della Ferriera e lungo i vicoli che conducono all’Oasi WWF “Grotte del Bussento” - e ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "realizzate da altrettanti artisti in dialogo con il paesaggio",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " culturale e naturale dell’area, e con gli attraversamenti umani che lo arricchiscono continuamente di nuovi significati.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Il tempo delle Ginestre | Morigerati 2038”",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura dell’artista ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "Luigi Coppola",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Fruibile presso gli spazi dell’Antico Frantoio e lungo le strade del paese che conducono all’Oasi WWF “Grotte del Bussento” (via Granatelli)",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 2,
+									"mode": "normal",
+									"style": "",
+									"text": "L’opera è una narrazione visiva che apre un orizzonte immaginativo del paese in un tempo futuro. Nel 2038, a seguito del continuo spopolamento, gli abitanti di Morigerati ripetono il gesto fatto dai loro concittadini 50 anni prima: lo sciopero della fame. Questa volta la volontà è fare di tutto per non scomparire e la proposta più importante è la creazione di una “Scuola di Economie Territoriali” che mette in circolo idee e avvia e ripristina filiere economiche virtuose. Nelle pitture 5 scorci di Morigerati diventano nuovo teatro di azione sociale. Accompagnano questa visione diverse piante scelte come simbolo di una nuova alleanza, come le ginestre, che danno il titolo all’opera, simbolo di coraggio e di resistenza estrema di fronte a un destino inevitabile.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Lycoperdon”",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura dell’artista ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "DEM",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Installata presso gli spazi della Ferriera di Morigerati",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 2,
+									"mode": "normal",
+									"style": "",
+									"text": "Analizzando il termine transluogo - trans, “oltre, attraverso”, e luogo, inteso come spazio fisico o simbolico - sono emerse immagini legate al passaggio tra mondi, all’attraversare soglie, grotte e acque sotterranee che collegano il sopra e il sotto del paesaggio. Ho pensato anche ai flussi migratori, visti come movimenti umani che da secoli si intrecciano, generando nuove connessioni. Da qui l’idea di un fungo gigante realizzato con rami intrecciati, il cui micelio simbolico colleghi gli elementi del territorio. Lo studio della flora arbustiva locale e la raccolta consapevole delle piante hanno condotto alla definizione di forma, luogo e dimensioni dell’opera. L’intento è restituire un segno che rappresenti simbolicamente e materialmente Morigerati, attraverso la sua natura, la sua storia e il rapporto vitale con chi lo attraversa.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Tinea”",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura dell’artista ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "Luis Gomez de Teran",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Installata presso il ponte medievale di Morigerati",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 2,
+									"mode": "normal",
+									"style": "",
+									"text": "Siate voi farfalle, dipinte dai colori dell’alba e della primavera, sorvolate voi fiori d’oro e specchi d’argento regalando alle coppie l’illusione della felicità. Io che di notte sono il vostro fratello, finito sotto un ponte inseguendo una fiamma che ha nutrito il mio disperato bisogno di luce. Io, stupida falena convinta per un momento d’essere migliore di Icaro.",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 2,
+									"mode": "normal",
+									"style": "",
+									"text": "Convinta per un momento d’essere migliore di voi.",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 2,
+									"mode": "normal",
+									"style": "",
+									"text": "Convinta per un momento che non ci fosse più differenza.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Alta Veglia”",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura degli artisti ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "Giancarlo Guadagno e Ilaria Spagnuolo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Installata presso gli spazi della Ferriera di Morigerati",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 2,
+									"mode": "normal",
+									"style": "",
+									"text": "Innalzata tra alberi e silenzi, questa struttura si erge come una piccola torre di osservazione immersa nel paesaggio naturale. Interamente autocostruita con il legno, scelto per dialogare in modo armonioso con l’ambiente circostante, l’opera si presenta come una presenza leggera e rispettosa del luogo che la ospita. Aperta verso il cielo, accoglie lo sguardo e l’aria, diventando spazio di contemplazione e ascolto. L’architettura è rivestita da teli leggeri, realizzati con  la tecnica della cianotipia botanica: foglie, rami, e altri frammenti raccolti nei dintorni hanno lasciato la loro impronta blu, come memorie vegetali impresse dalla luce. Ogni telo è un frammento del luogo, restituito in forma poetica e sospesa. Dalla sommità, a qualche metro dal suolo, si apre una vista sul fiume e sulla vegetazione circostante. Di giorno, l’opera invita a seguire il movimento dell’acqua e il mutare della luce tra le fronde; di notte, diventa un punto privilegiato per osservare le stelle, in un dialogo silenzioso tra terra e cielo.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“SPORE - pratiche di ascolto per un’ecologia diffusa”",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura dell’artista ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "Massimo Ferrara",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Fruibile lungo le strade di Morigerati tramite l’utilizzo di smartphone e cuffie auricolari",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 2,
+									"mode": "normal",
+									"style": "",
+									"text": "Un’opera di Sound Art, una pratica di ascolto immersivo che si muove nello spazio come un organismo poroso. Non è orientarsi o interpretare: è stare dentro. Non guida, non insegna. Sospende. Il paesaggio sonoro che si esplora è composto da tre ambienti: Antropofonia - il rumore della presenza: i suoni dell’attività umana. Non sono rumori ma testimonianze. Motori, passi, voci, strutture, frizioni: l’umano si fa suono, si fa sistema. Ascoltarle per riconoscere la propria incidenza sul mondo, riconoscersi co-autori del paesaggio. Biofonia - il ritmo dell’altro vivente: insetti, uccelli, animali, vegetali. L’ascolto qui è simbiosi, è permeabilità e richiede attenzione sottile. Un invito a decentrarsi, a percepirsi come un corpo tra altri corpi, tutti agenti, tutti rispondenti. Geofonia - il corpo del mondo: i suoni non biologici: vento, acqua, pietra, elettricità. Qui si fa esperienza del paesaggio come materia attiva, corpo che suona, vibra e partecipa. È come sintonizzarsi con una memoria più antica, più lenta. “Spore” propone un’esperienza dove l’ascolto diventa strumento di relazione ecologica, di consapevolezza sensoriale e politica.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Il percorso rientra nel sistema dei ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "sette itinerari tematici, pedonali e ciclabili, dell’Ecomuseo Transluoghi",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - immaginati per attraversare e scoprire i luoghi e le persone di Morigerati sotto vari sguardi e punti di osservazione, valorizzando e raccontando così tutte le sfaccettature di cui il territorio si compone.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1
+				}
+			}
+		},
+		"slug": "5-opere-di-land-art-e-arte-pubblica-un-nuovo-itinerario-per-lecomuseo-transluoghi",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0
+	}
+]

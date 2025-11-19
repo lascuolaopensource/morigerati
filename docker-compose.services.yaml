@@ -1,13 +1,19 @@
 services:
-  mongodb:
-    image: mongo:latest
+  postgres:
+    build:
+      context: ./docker/postgres
+      dockerfile: Dockerfile
     restart: always
     ports:
-      - '27017:27017'
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-morigerati}
     volumes:
-      - mongodata:/data/db
+      - pgdata:/var/lib/postgresql
     healthcheck:
-      test: ['CMD', 'mongo', '--eval', 'db.runCommand("ping").ok']
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER:-postgres}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -31,5 +37,5 @@ services:
       retries: 3
 
 volumes:
-  mongodata:
+  pgdata:
   minio_data:

@@ -112,7 +112,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   globals: {
     home: Home;
@@ -182,7 +182,7 @@ export interface SocialAccountAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -206,7 +206,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -275,7 +275,7 @@ export interface Media {
  * via the `definition` "video".
  */
 export interface Video {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -294,7 +294,7 @@ export interface Video {
  * via the `definition` "tracciati".
  */
 export interface Tracciati {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -312,7 +312,7 @@ export interface Tracciati {
  * via the `definition` "itinerari".
  */
 export interface Itinerari {
-  id: string;
+  id: number;
   name: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -324,7 +324,7 @@ export interface Itinerari {
   elevation?: string | null;
   type?: ('loop' | 'out_and_back') | null;
   difficulty?: ('touristic' | 'hiking' | 'expert_hiking') | null;
-  gpx_track?: (string | null) | Tracciati;
+  gpx_track?: (number | null) | Tracciati;
   description: {
     root: {
       type: string;
@@ -362,11 +362,11 @@ export interface Itinerari {
         id?: string | null;
       }[]
     | null;
-  luoghi?: (string | Luoghi)[] | null;
-  persone?: (string | Persone)[] | null;
-  copertina?: (string | null) | Media;
-  gallery?: (string | Media)[] | null;
-  video?: (string | null) | Video;
+  luoghi?: (number | Luoghi)[] | null;
+  persone?: (number | Persone)[] | null;
+  copertina?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
+  video?: (number | null) | Video;
   geolocalized_media?:
     | {
         /**
@@ -374,7 +374,7 @@ export interface Itinerari {
          * @maxItems 2
          */
         position: [number, number];
-        image: string | Media;
+        image: number | Media;
         id?: string | null;
       }[]
     | null;
@@ -384,7 +384,7 @@ export interface Itinerari {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -394,7 +394,7 @@ export interface Itinerari {
  * via the `definition` "luoghi".
  */
 export interface Luoghi {
-  id: string;
+  id: number;
   name: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -470,21 +470,21 @@ export interface Luoghi {
         id?: string | null;
       }[]
     | null;
-  persone?: (string | Persone)[] | null;
+  persone?: (number | Persone)[] | null;
   itinerari?: {
-    docs?: (string | Itinerari)[];
+    docs?: (number | Itinerari)[];
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  copertina?: (string | null) | Media;
-  gallery?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -494,7 +494,7 @@ export interface Luoghi {
  * via the `definition` "persone".
  */
 export interface Persone {
-  id: string;
+  id: number;
   name: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -519,7 +519,7 @@ export interface Persone {
       }[]
     | null;
   itinerari?: {
-    docs?: (string | Itinerari)[];
+    docs?: (number | Itinerari)[];
     hasNextPage?: boolean;
     totalDocs?: number;
   };
@@ -538,15 +538,15 @@ export interface Persone {
     };
     [k: string]: unknown;
   };
-  copertina?: (string | null) | Media;
-  gallery?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -556,7 +556,7 @@ export interface Persone {
  * via the `definition` "residenze".
  */
 export interface Residenze {
-  id: string;
+  id: number;
   name: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -617,7 +617,7 @@ export interface Residenze {
   people?:
     | {
         name: string;
-        foto?: (string | null) | Media;
+        foto?: (number | null) | Media;
         role?: string | null;
         bio?: {
           root: {
@@ -659,15 +659,15 @@ export interface Residenze {
     };
     [k: string]: unknown;
   } | null;
-  copertina?: (string | null) | Media;
-  gallery?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -677,7 +677,7 @@ export interface Residenze {
  * via the `definition` "articoli".
  */
 export interface Articoli {
-  id: string;
+  id: number;
   name: string;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -702,15 +702,15 @@ export interface Articoli {
     };
     [k: string]: unknown;
   };
-  copertina?: (string | null) | Media;
-  gallery?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -720,11 +720,11 @@ export interface Articoli {
  * via the `definition` "social-post".
  */
 export interface SocialPost {
-  id: string;
+  id: number;
   text?: string | null;
   link?: string | null;
-  media?: (string | null) | SocialMedia;
-  owner: string | SocialAccount;
+  media?: (number | null) | SocialMedia;
+  owner: number | SocialAccount;
   updatedAt: string;
   createdAt: string;
 }
@@ -733,7 +733,7 @@ export interface SocialPost {
  * via the `definition` "social-media".
  */
 export interface SocialMedia {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -801,9 +801,9 @@ export interface SocialMedia {
  * via the `definition` "social-account".
  */
 export interface SocialAccount {
-  id: string;
+  id: number;
   name: string;
-  persona?: (string | null) | Persone;
+  persona?: (number | null) | Persone;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -827,7 +827,7 @@ export interface SocialAccount {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -844,65 +844,65 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'video';
-        value: string | Video;
+        value: number | Video;
       } | null)
     | ({
         relationTo: 'tracciati';
-        value: string | Tracciati;
+        value: number | Tracciati;
       } | null)
     | ({
         relationTo: 'itinerari';
-        value: string | Itinerari;
+        value: number | Itinerari;
       } | null)
     | ({
         relationTo: 'luoghi';
-        value: string | Luoghi;
+        value: number | Luoghi;
       } | null)
     | ({
         relationTo: 'persone';
-        value: string | Persone;
+        value: number | Persone;
       } | null)
     | ({
         relationTo: 'residenze';
-        value: string | Residenze;
+        value: number | Residenze;
       } | null)
     | ({
         relationTo: 'articoli';
-        value: string | Articoli;
+        value: number | Articoli;
       } | null)
     | ({
         relationTo: 'social-post';
-        value: string | SocialPost;
+        value: number | SocialPost;
       } | null)
     | ({
         relationTo: 'social-media';
-        value: string | SocialMedia;
+        value: number | SocialMedia;
       } | null)
     | ({
         relationTo: 'social-account';
-        value: string | SocialAccount;
+        value: number | SocialAccount;
       } | null);
   globalSlug?: string | null;
   user:
     | {
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       }
     | {
         relationTo: 'social-account';
-        value: string | SocialAccount;
+        value: number | SocialAccount;
       };
   updatedAt: string;
   createdAt: string;
@@ -912,15 +912,15 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user:
     | {
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       }
     | {
         relationTo: 'social-account';
-        value: string | SocialAccount;
+        value: number | SocialAccount;
       };
   key?: string | null;
   value?:
@@ -940,7 +940,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -1446,8 +1446,8 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "home".
  */
 export interface Home {
-  id: string;
-  cover: string | Media;
+  id: number;
+  cover: number | Media;
   statement: string;
   introduzione: {
     root: {
@@ -1500,7 +1500,7 @@ export interface Home {
         };
         [k: string]: unknown;
       };
-      items: (string | Luoghi)[];
+      items: (number | Luoghi)[];
     };
     residenze: {
       title: string;
@@ -1519,7 +1519,7 @@ export interface Home {
         };
         [k: string]: unknown;
       };
-      items: (string | Residenze)[];
+      items: (number | Residenze)[];
     };
   };
   meta?: {
@@ -1528,7 +1528,7 @@ export interface Home {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1538,7 +1538,7 @@ export interface Home {
  * via the `definition` "testi".
  */
 export interface Testi {
-  id: string;
+  id: number;
   luoghi: {
     title: string;
     description: {
@@ -1637,7 +1637,7 @@ export interface Testi {
  * via the `definition` "footer".
  */
 export interface Footer {
-  id: string;
+  id: number;
   text_left?: {
     root: {
       type: string;
@@ -1683,7 +1683,7 @@ export interface Footer {
  * via the `definition` "chi-siamo".
  */
 export interface ChiSiamo {
-  id: string;
+  id: number;
   description: {
     root: {
       type: string;
@@ -1699,15 +1699,15 @@ export interface ChiSiamo {
     };
     [k: string]: unknown;
   };
-  copertina?: (string | null) | Media;
-  gallery?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1717,7 +1717,7 @@ export interface ChiSiamo {
  * via the `definition` "mobilita-sostenibile".
  */
 export interface MobilitaSostenibile {
-  id: string;
+  id: number;
   description: {
     root: {
       type: string;
@@ -1733,15 +1733,15 @@ export interface MobilitaSostenibile {
     };
     [k: string]: unknown;
   };
-  copertina?: (string | null) | Media;
-  gallery?: (string | Media)[] | null;
+  copertina?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (number | null) | Media;
   };
   updatedAt?: string | null;
   createdAt?: string | null;

@@ -1,0 +1,4645 @@
+[
+	{
+		"_id": "682607e3c67065dd5adb7488",
+		"createdAt": "2025-05-15T15:27:31.417Z",
+		"updatedAt": "2025-06-05T13:07:49.023Z",
+		"nome": "Residenza - Identità grafica e visiva dell'Ecomuseo",
+		"data_inizio": "2025-06-28T12:00:00.000Z",
+		"data_fine": "2024-06-30T12:00:00.000Z",
+		"indirizzo": "Morigerati",
+		"mostra_dettagli": true,
+		"mostra_pulsante_iscrizione": true,
+		"abstract": "Una residenza di riscrittura collettiva e rappresentazione del territorio che passa attraverso le storie di vita, i sogni e le visioni dei suoi abitanti.",
+		"descrizione": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "TRANSLUOGHI | Ecomuseo del Bussento Contemporaneo - un progetto del Comune di Morigerati finanziato dal Programma Operativo di Azione e Coesione complementare al PON «Cultura e Sviluppo» (FESR) 2014-2020 e dal Ministero della Cultura - inaugura la sua ricchissima programmazione culturale, in collaborazione con La Scuola Open Source di Bari, con le prime due residenze artistiche sul territorio, volte a determinare l’identità grafica e visiva di questo grande distretto turistico in via di formazione.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Grafici, artisti, designer e illustratori sono stati invitati a Morigerati, dal 30 maggio al 2 giugno 2024, per prendere parte ad una quattro-giorni residenziale che - servendosi dell’intreccio tra discipline e metodologie differenti, sotto la guida di esperti esterni sensibili alla materia - ha lavorato in collaborazione con la comunità locale alla definizione di un’immagine grafica coordinata in grado di rappresentare la realtà complessa e stratificata dell’Ecomuseo.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Le residenze si sono articolate in momenti di esplorazione e indagine sul campo, fasi di rielaborazione individuale e collettiva, e di restituzione del lavoro svolto alla comunità, generando un sistema dinamico di segni e simboli, attraverso l’unità base e versatile del pixel, che rappresenta simbolicamente gli elementi del paesaggio locale vivente, sia ambientale e culturale. ",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1
+				}
+			}
+		},
+		"programma": [
+			{
+				"programma": {
+					"it": "Giovedì 30 Maggio "
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 1,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 13,00-15,00",
+													"type": "text",
+													"version": 1
+												},
+												{
+													"type": "linebreak",
+													"version": 1
+												},
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Arrivo dei partecipanti e check-in ",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"textFormat": 1,
+											"value": 1
+										},
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 1,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 15,30-20,00",
+													"type": "text",
+													"version": 1
+												},
+												{
+													"type": "linebreak",
+													"version": 1
+												},
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Introduzione all’Ecomuseo. Presentazione dei lavori e delle residenze, degli esperti e dei partecipanti Esplorazione del territorio e del patrimonio ambientale e culturale - lungo gli itinerari dell’Ecomuseo.  Fasi di rielaborazione individuale e collettiva.   ",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"textFormat": 1,
+											"value": 2
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "list",
+									"version": 1,
+									"textFormat": 1,
+									"listType": "bullet",
+									"start": 1,
+									"tag": "ul"
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1,
+							"textFormat": 1
+						}
+					}
+				},
+				"id": "682607bd2fac5ae0f87dd8aa"
+			},
+			{
+				"programma": {
+					"it": "Venerdì 31 Maggio  "
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 1,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 09,00-13,00",
+													"type": "text",
+													"version": 1
+												},
+												{
+													"type": "linebreak",
+													"version": 1
+												},
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Presentazione Casi studio identità grafica e visiva Ecomusei  Criteri, linee guida e approcci alla progettazione dell’identità visiva. ",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"textFormat": 1,
+											"value": 1
+										},
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 1,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 15,30-20,00",
+													"type": "text",
+													"version": 1
+												},
+												{
+													"type": "linebreak",
+													"version": 1
+												},
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Brainstorming, lavori in gruppo su archetipi e parole chiave.  Primi schizzi di identità visiva. Fasi di rielaborazione individuale e collettiva.   ",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"textFormat": 1,
+											"value": 2
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "list",
+									"version": 1,
+									"textFormat": 1,
+									"listType": "bullet",
+									"start": 1,
+									"tag": "ul"
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1,
+							"textFormat": 1
+						}
+					}
+				},
+				"id": "682607c52fac5ae0f87dd8ab"
+			},
+			{
+				"programma": {
+					"it": "Sabato 1 Giugno "
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 1,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 09,00-20,00",
+													"type": "text",
+													"version": 1
+												},
+												{
+													"type": "linebreak",
+													"version": 1
+												},
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Progettazione grafica: disegno di elementi grafici, lettering, scelta dei colori.   ",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"textFormat": 1,
+											"value": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "list",
+									"version": 1,
+									"textFormat": 1,
+									"listType": "bullet",
+									"start": 1,
+									"tag": "ul"
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1,
+							"textFormat": 1
+						}
+					}
+				},
+				"id": "682607d02fac5ae0f87dd8ac"
+			},
+			{
+				"programma": {
+					"it": "Domenica 2 Giugno "
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 1,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 09,00-15,00",
+													"type": "text",
+													"version": 1
+												},
+												{
+													"type": "linebreak",
+													"version": 1
+												},
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Finitura della progettazione grafica: disegno di elementi grafici, lettering, scelta dei colori. ",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"textFormat": 1,
+											"value": 1
+										},
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 1,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 15,00-16,00",
+													"type": "text",
+													"version": 1
+												},
+												{
+													"type": "linebreak",
+													"version": 1
+												},
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Presentazione pubblica dei lavori",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"textFormat": 1,
+											"value": 2
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "list",
+									"version": 1,
+									"textFormat": 1,
+									"listType": "bullet",
+									"start": 1,
+									"tag": "ul"
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1,
+							"textFormat": 1
+						}
+					}
+				},
+				"id": "682607da2fac5ae0f87dd8ad"
+			}
+		],
+		"esperti": [
+			{
+				"nome": "Roberto Ciarambino",
+				"foto": "682a3cc16edbd00b4493f3ba",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Laureato in Disegno Industriale (Università Vanvitelli Napoli) e specializzato in Comunicazioni Visive e Multimediali (IUAV Venezia), è co-fondatore di 17studio, dove lavora come Art Director e Graphic Designer, e di ORME Sharing & Research, di cui è anche Creative Director. Dal 2016 è Responsabile della Comunicazione di ShowDesk e da Febbraio 2020 è socio de La Scuola Open Source. Dal 2003 gira la penisola a ritmo di boom bap con Ganjafarm Cru.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [
+					{
+						"nome": "La Scuola Open Source",
+						"link": "https://www.lascuolaopensource.xyz/",
+						"id": "6826080f2fac5ae0f87dd8af"
+					}
+				],
+				"id": "682608002fac5ae0f87dd8ae"
+			},
+			{
+				"nome": "Silvia Zotti",
+				"foto": "682a3ce76edbd00b4493f3dd",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Laureata in Storia presso la Federico II di Napoli e in Storia dell’Arte all’Alma Mater di Bologna, si occupa di contenuti editoriali, iconografia e copywriting. Nel 2015 decide di trasferirsi da Milano a Bari e di prendere parte al nascente progetto La Scuola Open Source, dedicandosi alla comunicazione della cooperativa e curando lo storytelling dei laboratori XYZ. Ama cesellare i contenuti, di qualsiasi tipo essi siano.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [
+					{
+						"nome": "La Scuola Open Source",
+						"link": "https://www.lascuolaopensource.xyz/",
+						"id": "682608442fac5ae0f87dd8b1"
+					}
+				],
+				"id": "682608382fac5ae0f87dd8b0"
+			},
+			{
+				"nome": "Alberto Guerra",
+				"foto": "682a3d0a6edbd00b4493f400",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Laureato in Design presso UNIRSM Design (San Marino) e successivamente ottenuto il Master of Arts in Interaction Design presso SUPSI (Mendrisio, Svizzera). È co-fondatore di typebreak, una realtà dedicata alla progettazione di caratteri tipografici con la quale ha fatto esperienza nel disegno tipografico e ha avuto la possibilità di fare da lecturer e docente di workshop presso alcune università come UNIRSM Design (San Marino), SAAD UNICAM (Camerino) e IUAV (Venezia), oltre che in altri laboratori dedicati al type design e alla comunicazione visiva. Tramite le numerose esperienze e collaborazioni professionali ha allargato la propria attività da designer in diversi ambiti della progettazione, dedicandosi a progetti di design editoriale, branding, web design, UX/UI e interaction design. Socio de La Scuola Open Source e attualmente di base a Bari e lavora come designer presso FF3300.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [
+					{
+						"nome": "La Scuola Open Source",
+						"link": "https://www.lascuolaopensource.xyz/",
+						"id": "6826086d2fac5ae0f87dd8b4"
+					}
+				],
+				"id": "682608602fac5ae0f87dd8b2"
+			}
+		],
+		"slug": "residenza---identit-grafica-e-visiva-dellecomuseo",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0,
+		"copertina": "682a3c506edbd00b4493f354",
+		"galleria": ["682a3c7a6edbd00b4493f37a", "682a3c8c6edbd00b4493f395"],
+		"link_iscrizione": "https://asdas.com",
+		"deadline_iscrizione": "2025-06-03T12:00:00.000Z"
+	},
+	{
+		"_id": "6826089fc67065dd5adb758f",
+		"createdAt": "2025-05-15T15:30:39.077Z",
+		"updatedAt": "2025-05-31T09:13:27.834Z",
+		"nome": "Sistema di itinerari culturali dell'Ecomuseo",
+		"data_inizio": "2024-07-10T12:00:00.000Z",
+		"data_fine": "2024-07-14T12:00:00.000Z",
+		"indirizzo": "Morigerati",
+		"mostra_dettagli": true,
+		"mostra_pulsante_iscrizione": false,
+		"programma": [
+			{
+				"programma": {
+					"it": "Mercoledì 10 luglio"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 13:00-15:00 > arrivo dei partecipanti e check-in.",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"value": 1
+										},
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 15:30-20:00 > introduzione a TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo Presentazione dei lavori e delle residenze, degli esperti e dei partecipanti. Casi ispirazionali e casi studio - Cammini Bizantini, Cammino di San Nilo, Sentiero Valle della Lontra. Criteri, linee guida e approcci alla progettazione degli itinerari. Momenti di rielaborazione individuale e collettiva.",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"value": 2
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "list",
+									"version": 1,
+									"listType": "bullet",
+									"start": 1,
+									"tag": "ul"
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"id": "682608b12fac5ae0f87dd8b5"
+			},
+			{
+				"programma": {
+					"it": "Giovedì 11 luglio"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 09:00-13:00 > esplorazione del territorio e del patrimonio ambientale e culturale locale lungo gli itinerari dell’Ecomuseo.",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"value": 1
+										},
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Apprendimento delle tecniche di fissaggio e montaggio dei supporti di segnaletica e di manutenzione dei sentieri. Ore 15:30-20:00 > esplorazione del territorio e del patrimonio ambientale e culturale locale lungo gli itinerari dell’Ecomuseo. Apprendimento delle tecniche di fissaggio e montaggio dei supporti di segnaletica e di manutenzione dei sentieri. Suddivisione in gruppi e squadre di lavoro. Momenti di rielaborazione individuale e collettiva.",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"value": 2
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "list",
+									"version": 1,
+									"listType": "bullet",
+									"start": 1,
+									"tag": "ul"
+								},
+								{
+									"children": [],
+									"direction": "ltr",
+									"format": "start",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"id": "683ac0cf7693037f889de8bb"
+			},
+			{
+				"programma": {
+					"it": "Venerdì 12 luglio"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 09:00-20:00 (con pausa pranzo) > esplorazione del territorio e del patrimonio ambientale e culturale locale lungo gli itinerari dell’Ecomuseo.",
+													"type": "text",
+													"version": 1
+												},
+												{
+													"type": "linebreak",
+													"version": 1
+												},
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Suddivisione in gruppi e squadre di lavoro con attrezzi,  pannelli e cartelli per l’installazione fisica della segnaletica lungo gli itinerari dell’Ecomuseo. Momenti di rielaborazione individuale e collettiva.",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"value": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "list",
+									"version": 1,
+									"listType": "bullet",
+									"start": 1,
+									"tag": "ul"
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"id": "683ac0c37693037f889de8b9"
+			},
+			{
+				"programma": {
+					"it": "Sabato 13 luglio"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 09:00-20:00 (con pausa pranzo) > suddivisione in gruppi e squadre di lavoro con attrezzi,  pannelli e cartelli per l’installazione fisica della segnaletica lungo gli itinerari dell’Ecomuseo.",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"value": 1
+										},
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Momenti di rielaborazione individuale e collettiva.",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"value": 2
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "list",
+									"version": 1,
+									"listType": "bullet",
+									"start": 1,
+									"tag": "ul"
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"id": "683ac0b67693037f889de8b7"
+			},
+			{
+				"programma": {
+					"it": "Domenica 14 luglio"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 09:00-13:00 > suddivisione in gruppi e squadre di lavoro con attrezzi,  pannelli e cartelli per l’installazione fisica della segnaletica lungo gli itinerari dell’Ecomuseo.",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"value": 1
+										},
+										{
+											"children": [
+												{
+													"detail": 0,
+													"format": 0,
+													"mode": "normal",
+													"style": "",
+													"text": "Ore 15:00-16:00 > inaugurazione del sistema di itinerari culturali e ambientali di TRANSLUOGHI - Ecomuseo del Bussento contemporaneo. Saluti e check-out.",
+													"type": "text",
+													"version": 1
+												}
+											],
+											"direction": "ltr",
+											"format": "",
+											"indent": 0,
+											"type": "listitem",
+											"version": 1,
+											"value": 2
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "list",
+									"version": 1,
+									"listType": "bullet",
+									"start": 1,
+									"tag": "ul"
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"id": "683ac0a77693037f889de8b5"
+			}
+		],
+		"esperti": [
+			{
+				"nome": "SETTIMIO RIENZO",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "45 anni. Si laurea a Napoli nel 2003 presso l’università Orientale in Scienze Internazionali e Diplomatiche, indirizzo Politiche di Sviluppo con una tesi sulla protezione internazionale dei rifugiati dopo un internship alla Sede dell’ONU a Ginevra e dopo aver frequentato l’University of Glasgow in Scozia attraverso il Programma Erasmus. Nel 2004 completa un Master sulla cooperazione internazionale e vince una borsa di studio per un tirocinio in Argentina e subito dopo parte per il Guatemala all’interno del Servizio Civile Internazionale “Progetto Caschi Bianchi” con la Caritas Italiana. Nel 2009 rientra nel Vallo di Diano e comincia a lavorare nell’ euro progettazione. È l’ideatore del progetto di mobilità lenta Cammini Bizantini, che si propone di valorizzare le aree interne dell’Appennino Lucano. È direttore tecnico di agenzia di viaggi, esperto di itinerari di turismo responsabile ed autore della guida “Cammino di San Nilo” edita da Terre di Mezzo. Da Ottobre 2022 lavora come funzionario amministrativo presso la Comunità Montana Vallo di Diano ed è il coordinatore dei progetti sul turismo nell’ambito della Strategia delle Aree Interne (SNAI).",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682608c62fac5ae0f87dd8b6"
+			},
+			{
+				"nome": "ROBERTO SIMONI",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Nato a Salerno nel 1972. Si diploma in Arti Grafiche e Fotografia e studia Scienze della Comunicazione a Salerno. Dopo circa venti anni di esperienza da fotografo professionista a Monaco di Baviera decide di ritornare in Cilento, terra delle sue radici e sogni. Partecipa anche come tutor a Transluoghi nella sezione Fotografia e Paesaggio. Escursionista esperto insieme a Miriam Simoni, Arnaldo Iudici e Settimio Rienzo crea il progetto “Valle della Lontra” e sostiene con il suo archivio fotografico il progetto “Cammini Bizantini”.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682608d32fac5ae0f87dd8b7"
+			}
+		],
+		"slug": "residenze---sistema-di-itinerari-culturali-dellecomuseo",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0,
+		"abstract": "Come attraversare e far attraversare un territorio?",
+		"descrizione": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "LE RESIDENZE",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h3"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Le residenze sono finalizzate alla progettazione di un ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "sistema di itinerari fisici",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - strettamente connessi al sistema di fruizione virtuale dell’Ecomuseo - culturali e ambientali, che possano accompagnare il viaggiatore esterno alla scoperta del patrimonio materiale e immateriale del Comune di Morigerati e di questo grande distretto turistico in via di formazione.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Camminatori, escursionisti, guide, progettisti culturali e di itinerari, paesaggisti, designer e architetti sono invitati a ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Morigerati",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "dal 10 al 14 luglio",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " 2024, per prendere parte ad una cinque-giorni residenziale in cui - grazie all’intreccio tra discipline e metodologie differenti, sotto la guida di esperti del settore - si immergeranno nel percorso di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "progettazione e co-creazione del sistema di itinerari tematici, culturali e ambientali, dell’Ecomuseo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " e contribuiranno in modo diretto all’",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "installazione della segnaletica",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ".",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "COME SI PROGETTA UN ITINERARIO?",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h3"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Le residenze si articoleranno in una prima fase teorica, ispirazionale e di analisi di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "casi studio",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " alla presenza di progettisti e fondatori - tra cui i ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 9,
+											"mode": "normal",
+											"style": "",
+											"text": "Cammini Bizantini",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "link",
+									"version": 3,
+									"fields": {
+										"linkType": "custom",
+										"newTab": false,
+										"url": "http://camminibizantini.com/"
+									},
+									"id": "67ca0d057f585dbdf4097660"
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", il ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 9,
+											"mode": "normal",
+											"style": "",
+											"text": "Cammino di San Nilo",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "link",
+									"version": 3,
+									"fields": {
+										"linkType": "custom",
+										"newTab": false,
+										"url": "http://camminibizantini.com/cammino-di-san-nilo/"
+									},
+									"id": "67ca0d057f585dbdf4097661"
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " e il ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Sentiero Valle della Lontra",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - in cui verranno approfonditi i criteri, le linee guida e gli approcci alla progettazione degli itinerari, anche attraverso momenti di esplorazione del territorio e del patrimonio ambientale e culturale locale.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 9,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "COME SI REALIZZA UN ITINERARIO?",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h3"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "La seconda parte delle residenze prevede un’immersione pratica negli itinerari di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", a partire dall’apprendimento delle tecniche di fissaggio e montaggio di supporti e insegne e di manutenzione dei sentieri, fino alla suddivisione in gruppi e squadre con attrezzi, pannelli e cartelli per l’installazione fisica della segnaletica, che culminerà con l’inaugurazione del nuovo sistema di fruizione turistica e culturale del territorio.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1,
+					"textFormat": 1
+				}
+			}
+		}
+	},
+	{
+		"_id": "68260902c67065dd5adb760e",
+		"createdAt": "2025-05-15T15:32:18.590Z",
+		"updatedAt": "2025-05-31T09:14:21.675Z",
+		"nome": "Narrazione territoriale e videomaking per l'Ecomuseo",
+		"data_inizio": "2024-07-10T12:00:00.000Z",
+		"data_fine": "2024-07-15T12:00:00.000Z",
+		"indirizzo": "Morigerati",
+		"mostra_dettagli": true,
+		"mostra_pulsante_iscrizione": false,
+		"programma": [
+			{
+				"programma": {
+					"it": "PROGRAMMA DELLA PRE-RESIDENZA"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "Mercoledì 10 luglio",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 14:30-15:00 > benvenuto e presentazione generale.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "A seguire > prima esplorazione fisica di Morigerati.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 16:00-18:30 > ritorno in sede - LA NOTIZIA È SOTTO I TUOI OCCHI! Lo sguardo del giornalista come interprete della realtà - con Marianna Vallone, giornalista, ufficio stampa di TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo e Direttrice del Giornale del Cilento.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "LE REGOLE DEL GIORNALISMO - laboratorio di scrittura.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 18:30-20:00 > COME UTILIZZARE IL MEZZO AUDIOVIDEO PER LA NARRAZIONE TERRITORIALE - con Daniele De Stefano, videomaker, sociologo e responsabile video di TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "LA TECNICA FOTOGRAFICA: utilizzo degli elementi compositivi, inquadrature, movimenti della macchina da presa.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Presentazione dell’attrezzatura a disposizione dell’Ecomuseo.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "Giovedì 11 luglio",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 09:30-11:30 > l’Oasi WWF “Grotte del Bussento”: convivere con l’acqua e i suoi elementi - raccolta di testimonianze dirette.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 12:00-14:00 > nuove idee per potenziare il racconto promozionale e le strategie comunicative dell’ente.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 14:00-15:00 > pausa pranzo.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 15:00-16:00 > visita al Museo Etnografico di Morigerati con Elfride Caiafa.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 16:30-18:00 > attività laboratoriale: una narrativa contemporanea per il Museo Etnografico di Morigerati.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 18:00-20:00 > giornalismo e ",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 2,
+											"mode": "normal",
+											"style": "",
+											"text": "placetelling ",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "digitale: progettare, pianificare, realizzare e distribuire i contenuti editoriali (un focus su social media e piattaforme web) - con Marianna Vallone e Rosa Lo Monte, content creator, social media manager e responsabile della comunicazione per TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1,
+							"textFormat": 1
+						}
+					}
+				},
+				"id": "682609112fac5ae0f87dd8b8"
+			},
+			{
+				"programma": {
+					"it": "PROGRAMMA DELLA RESIDENZA"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "Venerdì 12 luglio",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 13:00 > arrivo dei partecipanti.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 14:00-15:20 > sistemazione + pranzo collettivo.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 15:30 > esplorazione di Morigerati e location scouting.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 18:00-19:30 > de-brief con i tutor, presentazione del progetto TRANSLUOGHI, allineamento su immaginario, mood board e filmica da creare.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 19:30-20:30 > prime immagini di copertura.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 20:30-21:00 > cena.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 21:30-22:15 > punto organizzativo: riunione in plenaria e suddivisione del lavoro.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "Sabato 13 luglio",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 07:30-09:00 > colazione.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 9:00-12:30/13:00 > intervista 1 + immagini di copertura.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 13:00-14:00 > pranzo.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 14:30/15:00-19:00 > intervista 2 + immagini di copertura.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 19:00-20:00 > eventuali recuperi.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 20:00-21:00 > rientro in ostello + scarico dati (media center).",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 21:00-22:00 > cena.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "Domenica 14 luglio",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 07:30-09:00 > colazione.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 09:00-10:00 > briefing con tutte le troupe.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 09:00-12:30/13:00 > intervista 3 + immagini di copertura.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 13:00-14:00 > pranzo.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 14:30/15:00-19:00 > intervista 4 + immagini di copertura.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 19:00-20:00 > eventuali recuperi.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 20:00-21:00 > rientro in ostello + scarico dati (media center).",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 21:00-22:00 > cena.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "Lunedì 15 luglio",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 07:30-09:00 > colazione.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 9:00-12:30/13:00 > intervista 5 + immagini di copertura.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 13:00-14:00 > pranzo.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 14:30/15:00-19:00 > intervista 6 + immagini di copertura.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 19:00-20:00 > eventuali recuperi.",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 20:00-21:00 > rientro in ostello + scarico dati (media center).",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ore 21:00-22:00 > cena.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "justify",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1,
+							"textFormat": 1
+						}
+					}
+				},
+				"id": "6826091a2fac5ae0f87dd8b9"
+			}
+		],
+		"esperti": [
+			{
+				"nome": "MARIANNA VALLONE",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Marianna Vallone è una giornalista attiva nel campo dell'informazione dal 2009. Dopo una formazione umanistica, ha iniziato a collaborare con il Giornale del Cilento, di cui è direttore responsabile dal 2017. Collabora da anni con il quotidiano La Città di Salerno, scrivendo di cultura e spettacolo, e con le Guide di Repubblica. Ha anche contribuito alla rivista mensile Cucina a Sud. Ha svolto attività di ufficio stampa per i Comuni di Morigerati e Tortorella, così come per diversi eventi sul territorio. Si occupa della comunicazione di tre aziende locali.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682609292fac5ae0f87dd8ba"
+			},
+			{
+				"nome": "DANIELE DE STEFANO",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Ha completato gli studi in Sociologia presso il Dipartimento di Scienze Sociali di Napoli con una specializzazione in Politiche Sociali e del Territorio. Si forma come facilitatore nei processi bottom-up di rigenerazione urbana ed ha esperienza decennale di attivismo nei movimenti sociali urbani, come antropologo urbano e analista delle politiche urbane e territoriali. Autore di documentari a sfondo sociale e ambientale, dal 2008 al 2018 ha collaborato con cooperative sociali napoletane e organizzazioni non profit nel campo delle migrazioni e come formatore per adolescenti per la realizzazione di progetti multimediali per facilitare la trasmissione di nuove pratiche comunitarie e di integrazione. Ha collaborato per diversi anni con l'emittente televisiva Insu^TV con la quale ha realizzato documentari, reportage e video inchieste nel napoletano e nell'Africa orientale. Nel 2016, insieme ad altri colleghi, fonda Recollocal - Piattaforma di rigenerazione urbana dal basso - con cui darà vita al progetto \"Transluoghi\" residenza artistico-formativa nelle aree interne del Cilento. Nel 2017 studia cinema e direzione della fotografia a Napoli presso l'ASCI Cinema di Napoli. Dal 2016 lavora come Dop Freelance in progetti visivi come regista, montatore, cameraman e dop in collaborazione con privati, enti, associazioni e produzioni cinematografiche. Nel 2019 ha curato la promozione visuale di alcuni progetti per Matera 2019 Capitale della Cultura come “La nave degli Incanti” di Gommalacca Teatro. Nel 2020 lavora alla creazione dell’Ecomuseo del Bussento a Morigerati (SA) orientale come coordinatore e art director. Nel 2020 è regista del cortometraggio “Bardo” per il progetto Sud e Magia del Lucania Film Festival. Nel 2021 è tra i coordinatori dell’Ecomuseo Urbano Diffuso di Scampia per il progetto Quartieri dell’Innovazione promosso dal Comune di Napoli e finanziato dai fondi Europei. Nel 2021 ha diretto e fotografato il cortometraggio “Fino al mare” girato a San Giovanni a Teduccio. Dal 2021 è insegnante di MdP (macchina da presa) presso la Rea Academy di Napoli per il corso di cinematografia. Attualmente sta lavorando a due documentari sulla pesca artigianale “Devozione” e “La Baia” prodotti da Pelagics - cooperativa di pescatori.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682609312fac5ae0f87dd8bb"
+			},
+			{
+				"nome": "WALTER MOLFESE",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Walter Molfese nasce nel 1989 in Basilicata. Dopo una formazione tecnica e scientifica decide di dedicarsi al documentario naturalistico e al racconto in Timelapse di alcuni parchi nazionali e regionali lucani e non solo. E’ il co-fondatore di Italia Senza Tempo, progetto che mirava alla valorizzazione di paesaggi poco antropizzati, collaborando con APT di varie regioni italiane. Dal 2016 apre uno studio all’interno del Deposito Zero Studios a Forlì, dove insieme ad altre realtà fonda Live Zero, un format musicale, collaborando con i maggiori talenti di spicco della musica italiana. Nello stesso periodo continua a realizzare documentari e spot pubblicitari lavorando con molte agenzie del territorio nazionale, e storie sportive grazie al supporto di brand importanti come The North Face. Attualmente è impegnato nella lavorazione di diversi prodotti sportivi e pubblicitari.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "6826093d2fac5ae0f87dd8bc"
+			},
+			{
+				"nome": "LUCA MANUNZA",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Luca Manunza si è laureato nel 2009 in Scienze della Comunicazione “Documentario e Reportage Socio-antropologico” presso l’Università degli Studi Suor Orsola Benincasa di Napoli. Ha conseguito il titolo di Dottore di Ricerca in Sociologia presso l’Università di Genova (2014). Dal 2005 collabora con il Dipartimento di Sociologia dell’Università Suor Orsola Benincasa, con il Dipartimento di Urbanistica dell’Università Federico II di Napoli. Membro di ricerca dell’URiT (Unità di Ricerca sulle Topografie Sociali), è membro del comitato di redazione della rivista Cartografie Sociali (rivista biennale di sociologia peer-reviewed). Si occupa di controllo sociale, social movement , migrazioni e trasformazioni urbane.Ha lavorato per emittenti italiane e straniere, come regista freelance e operatore in italia e all’estero. È membro del collettivo INSU^TV (televisione pirata indipendente napoletana) per cui ha realizzato numerosi documentari tra cui Rosarno. Il tempo delle Arance, con cui ha vinto il premio Visioni Italiane come miglior documentario. Dal 2018 lavora come line producer e operatore di ripresa per la produzione cinematografica sarda TERRA DE PUNT SRL. Dal 2020 scrive e collabora per la rivista QcodeMagazine.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682609462fac5ae0f87dd8bd"
+			},
+			{
+				"nome": "MASSIMO FERRARA",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Dopo la laurea in Ingegneria Aerospaziale focalizza i suoi studi nel vasto mondo dell’ audio rivolgendo il suo orecchio alle più estreme manipolazioni del suono digitale. Si occupa principalmente di Interaction Design e Sintesi del Suono. Adora smontare, riprogettare e prototipare sistemi sonori nello stile DIY. É parte attiva del progetto d’ interazione Audio-Video etali.de, e del collettivo lostdogz krw con i quali ha all’ attivo diverse pubblicazioni dal 2019 ad oggi.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682609512fac5ae0f87dd8be"
+			}
+		],
+		"slug": "residenza---narrazione-territoriale-e-videomaking-per-lecomuseo",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0,
+		"abstract": "Un'esperienza immersiva nel patrimonio culturale e ambientale di Morigerati, per un racconto visuale dell'Ecomuseo, attraverso le voci dei suoi abitanti.",
+		"descrizione": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Come si racconta un territorio?",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h3"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "LA PRE-RESIDENZA",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h4"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Come impostare la strategia di marketing e comunicazione digitale di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "TRANSLUOGHI - Ecomuseo del Bussento Contemporaneo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", coinvolgendo la stampa e gli storyteller locali?",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "LA RESIDENZA",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h4"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "La residenza è finalizzata alla creazione dei primi contenuti audio-video destinati a circolare nelle varie interfacce fisiche e virtuali dell’Ecomuseo, e immaginati per raccontarne il contesto antropico e naturalistico; le peculiarità dei paesaggi e le storie di vita di quegli abitanti che, in questo lembo di terra delle aree interne del basso Cilento, vivono, lavorano e si configurano quali testimoni privilegiati dell’immenso patrimonio materiale e immateriale locale.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "GLI OUTPUT",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h5"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Le produzioni a cui lavoreremo - formando una troupe di ricerca e creazione visiva, guidati da quattro esperti esterni - consisteranno in brevi biopic di questi attori fondamentali del territorio, anima viva dell’Ecomuseo, che fungeranno da singoli tasselli di un mosaico più grande: espressione vera della pluralità di voci, sogni e desideri di cui il distretto turistico e culturale di TRANSLUOGHI si compone.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "CHI CERCHIAMO",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h5"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "A tal fine, siamo alla ricerca di:",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "VIDEOMAKER:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " con buona preparazione tecnica e uso artistico del mezzo audio-video, che affianchino gli esperti esterni nella realizzazione di brevi documentari e biopic, e che possano configurarsi come secondi operatori camera, macchinisti e/o eventuali ruoli fondamentali di supporto tecnico-artistico;",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 1
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "FONICI:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " che aiutino a raccogliere le testimonianze dirette dei nostri protagonisti, catturando anche l’ambiente, l’atmosfera e il contesto particolare in cui sono immerse le loro storie;",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 2
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "RICERCATORI:",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": " antropologi e sociologi che vogliano cimentarsi nella raccolta di queste storie di vita, favorendo l’emersione di temi legati all’identità espressa e inespressa del territorio.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"textFormat": 1,
+									"value": 3
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "list",
+							"version": 1,
+							"listType": "bullet",
+							"start": 1,
+							"tag": "ul"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "TROUPE PREVISTE A FINE CALL",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h6"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "3 troupe + 1 gruppo autonomo",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "COMPOSIZIONE DELLE TROUPE",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h6"
+						},
+						{
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Cam A (esperto esterno)",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"value": 1
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Cam B",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"value": 2
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Fonico",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"value": 3
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Macchinista/ Elettricista",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"value": 4
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Operatore beyond the scene (bts) + foto",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "listitem",
+									"version": 1,
+									"value": 5
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "list",
+							"version": 1,
+							"listType": "bullet",
+							"start": 1,
+							"tag": "ul"
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1,
+					"textFormat": 1
+				}
+			}
+		}
+	},
+	{
+		"_id": "6826097ec67065dd5adb76cf",
+		"createdAt": "2025-05-15T15:34:22.624Z",
+		"updatedAt": "2025-05-15T15:35:50.082Z",
+		"nome": "Residenze - Land Art e Arte Pubblica",
+		"data_inizio": "2025-04-22T12:00:00.000Z",
+		"data_fine": "2025-04-27T12:00:00.000Z",
+		"deadline_iscrizione": "2025-04-15T12:00:00.000Z",
+		"indirizzo": "Morigerati",
+		"mostra_dettagli": true,
+		"mostra_pulsante_iscrizione": false,
+		"programma": [
+			{
+				"programma": {
+					"it": "PROGRAMMA IN COSTRUZIONE"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "22 aprile",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Arrivo degli artisti",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Visita del centro storico e della sede dell’Ecomuseo",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Organizzazione dei cantieri",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "23 - 24 - 25 - 26 aprile",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Costruzione delle opere intervallata da serate di proiezioni/talk",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "27 aprile",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Inaugurazione delle opere e saluti finali",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1,
+							"textFormat": 1
+						}
+					}
+				},
+				"id": "6826098c2fac5ae0f87dd8bf"
+			}
+		],
+		"esperti": [
+			{
+				"nome": "Luigi Coppola",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Luigi Coppola è artista, agroecologo e promotore di progetti partecipativi di arte pubblica. La sua pratica artistica è accomunata da un relazione innovativa ai beni comuni attraverso delle azioni capaci di attivare potenziali e immaginari collettivi. Attualmente senior researcher al Center for Arts Design and Social Research of Boston (USA) è dal 2013 parte del collettivo di azione rurale di Casa delle Agriculture con base a Castiglione d'Otranto (Lecce).  L’azione trasformativa passa da detriti, scarti e abbandoni: Coppola lavora ai margini confrontandosi tanto con l’estrazione inveterata di risorse e di persone quanto con lo sfruttamento intensivo di territori. Il lavoro dell’artista si dispiega attraverso performance, opere pittoriche, azioni simboliche, sculture ambientali e sociali - ma il baricentro della sua pratica è nel superamento delle norme codificate dei luoghi artistici istituzionali: meno importanza assume l’autorialità dell’artista in virtù del dispiegarsi del corpo collettivo e la temporalità dell’opera si fa estesa. Coppola ha sviluppato progetti di arte pubblica, performance e mostre in molti contesti internazionali come 7th Biennale Lubumbaschi (RD Congo), 2022;  5th Istanbul Design Biennale, 2020; Matera Capitale Cultura 2019;  Fondazione Merz Torino, 2018;  BAK Utrecht, 2018; Kunsthaus Graz, 2017; Quadriennale Roma, 2017.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "6826099a2fac5ae0f87dd8c0"
+			},
+			{
+				"nome": "DEM",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "DEM, come un moderno alchimista, crea personaggi bizzarri, creature surreali, abitanti di uno strato impercettibile della realtà umana. Multiforme ed ironico, le sue opere che spaziano dal wallpainting, all'illustrazione, alla pittura su tela, si arricchiscono di un linguaggio simbolico che invita ad elaborare un proprio codice d'accesso per questo mondo enigmatico ed arcano. L'avvicinamento a tematiche antropologiche e legate alla natura stimolano l'artista a una costante sperimentazione, giunta negli ultimi anni alla produzione di un film e alla creazione d'installazioni composte esclusivamente da materiali naturali. Oltre alla produzione nelle fabbriche abbandonate e nei boschi, scelti come sfondo ideale per i suoi lavori, DEM vanta varie pubblicazioni ed esperienze espositive, come la personale alla Oro Gallery di Goteborg e la partecipazione alla mostre Street Art, Sweet Art al PAC di Milano, Nomadaz alla Scion Installation di Los Angeles e CCTV all'Apostrophe Gallery di Hong Kong.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682609a72fac5ae0f87dd8c1"
+			},
+			{
+				"nome": "Gomez",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Luis Gomez de Teran, conosciuto anche come Gomez, è nato a Caracas nel 1980. Ha vissuto a Londra, Berlino e Roma, dove attualmente risiede. La sua arte è profondamente simbolica e trae la sua principale ispirazione dai pittori barocchi. I suoi dipinti hanno un'anima leggendaria, profondamente influenzata dalla mitologia, dalla religione e dalla spiritualità. Si concentra sulla natura umana, sulla materia dei corpi e sulle forme dello spirito, nei momenti di bellezza e decadenza, quando le anime si rivelano, il male emerge dalla bellezza e il bene scaturisce dall'oscurità. La sua tecnica precisa mira alla simmetria e alla luce, utilizzando intensi contrasti di piacere e terrore, forza e debolezza, vincitori e vinti, memoria e oblio, libertà e schiavitù. Regole e anarchia. Vita e morte. Gomez è un pittore e scultore autodidatta, opera in aree urbane e ambienti naturali, per musei, collezionisti privati, gallerie e marchi. Le sue opere utilizzano una varietà di supporti, dai muri alle tele, vetro, cemento, specchi, ferro o legno. Ha creato opere in molti paesi del mondo, in Italia, Inghilterra, Germania, Spagna, India, Tunisia, Thailandia, Singapore, Georgia e innumerevoli piccoli paesi, dove l'arte pubblica è ancora in grado di avere un profondo impatto sociale sulla popolazione locale. Gomez ha partecipato a diverse mostre collettive in tutta Europa; a giugno 2016 ha avuto la sua prima mostra personale, \"Nox Omnibus Lucet\", alla galleria Varsi di Roma, seguita da un'esposizione personale a Bruxelles, con la galleria Montoro12, una seconda a Roma con la galleria Philobiblon e la sua prima mostra ibrida di pittura e scultura nel 2019 presso il MUSMA, il museo della scultura contemporanea di Matera. A settembre/ottobre 2021 ha realizzato la prima mostra non autorizzata e diffusa in Italia, un viaggio solitario attraverso le venti regioni italiane, producendo e installando venti opere in luoghi abbandonati e abitati, e attualmente sta lavorando a un libro e a un documentario su questa esperienza, che ha fuso il linguaggio dell'arte pubblica con l'esplorazione urbana.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682609b32fac5ae0f87dd8c2"
+			},
+			{
+				"nome": "Giancarlo Guadagno e Ilaria Spagnuolo",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Giancarlo Guadagno e Ilaria Spagnuolo, rispettivamente architetto e designer, uniscono le loro forze nel 2016 per dare vita a un laboratorio creativo che esplora il confine tra arte, architettura e ambiente, progettando delle opere di arte pubblica che mettono in relazione estetica, natura e sostenibilità.  La loro collaborazione si distingue per un'approfondita ricerca sui materiali, privilegiando quelli a basso impatto ambientale. Ogni progetto è un'opportunità per raccontare storie locali attraverso installazioni che dialogano con il contesto urbano e naturale, opere che invitano le comunità a riflettere sulla propria relazione con l’ambiente.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682609c32fac5ae0f87dd8c3"
+			},
+			{
+				"nome": "Massimo Ferrara",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Massimo Ferrara è un Ingegnere del Suono con base in Cilento. Vive l'ascolto come esperienza consapevole e partecipata, cercando di intersecare la dimensione sociale con quella percettiva. Appassionato di sistemi complessi e intra-connessi, sperimenta al confine tra tecnologia e percezione individuandone una matrice comune che si adagia nell’ ambiente circostante. La sua ricerca si concentra prevalentemente sulla prototipazione digitale per il sound design, dando vita a paesaggi sonori innovativi che trasformano lo spazio in esperienza. É parte attiva del progetto d’ interazione Audio-Video etali.de e del collettivo lostdogz_krw con i quali ha all’ attivo diverse pubblicazioni dal 2019 ad oggi.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "682609cf2fac5ae0f87dd8c4"
+			}
+		],
+		"slug": "residenze---land-art-e-arte-pubblica",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0,
+		"abstract": "Cinque opere di Land Art e Arte Pubblica per valorizzare e implementare l'offerta culturale del territorio.",
+		"descrizione": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Realizzazione di ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "5 opere di land art e arte pubblica",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ", volte a valorizzare e implementare l’offerta culturale del territorio - riscoprendo la natura e il paesaggio quali strumenti e supporti dell’arte, in grado di suscitare nei fruitori ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "non solo contemplazione, ma anche e soprattutto riflessione",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ".",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Le residenze sono gestite dall’Associazione Zap!",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Il tempo delle Ginestre | Morigerati 2038”",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h3"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura dell’artista ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "Luigi Coppola",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h4"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Fruibile presso gli spazi dell’Antico Frantoio e lungo le strade del paese che conducono all’Oasi WWF “Grotte del Bussento” (via Granatelli)",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h5"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "L’opera è una narrazione visiva che apre un orizzonte immaginativo del paese in un tempo futuro. Nel 2038, a seguito del continuo spopolamento, gli abitanti di Morigerati ripetono il gesto fatto dai loro concittadini 50 anni prima: lo sciopero della fame. Questa volta la volontà è fare di tutto per non scomparire e la proposta più importante è la creazione di una “Scuola di Economie Territoriali” che mette in circolo idee e avvia e ripristina filiere economiche virtuose. Nelle pitture 5 scorci di Morigerati diventano nuovo teatro di azione sociale. Accompagnano questa visione diverse piante scelte come simbolo di una nuova alleanza, come le ginestre, che danno il titolo all’opera, simbolo di coraggio e di resistenza estrema di fronte a un destino inevitabile.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Lycoperdon”",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h3"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura dell’artista ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "DEM",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h4"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Installata presso gli spazi della Ferriera di Morigerati",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h5"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Analizzando il termine transluogo - trans, “oltre, attraverso”, e luogo, inteso come spazio fisico o simbolico - sono emerse immagini legate al passaggio tra mondi, all’attraversare soglie, grotte e acque sotterranee che collegano il sopra e il sotto del paesaggio. Ho pensato anche ai flussi migratori, visti come movimenti umani che da secoli si intrecciano, generando nuove connessioni. Da qui l’idea di un fungo gigante realizzato con rami intrecciati, il cui micelio simbolico colleghi gli elementi del territorio. Lo studio della flora arbustiva locale e la raccolta consapevole delle piante hanno condotto alla definizione di forma, luogo e dimensioni dell’opera. L’intento è restituire un segno che rappresenti simbolicamente e materialmente Morigerati, attraverso la sua natura, la sua storia e il rapporto vitale con chi lo attraversa.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Tinea”",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h3"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura dell’artista ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "Luis Gomez de Teran",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h4"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Installata presso il ponte medievale di Morigerati",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h5"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Siate voi farfalle, dipinte dai colori dell’alba e della primavera, sorvolate voi fiori d’oro e specchi d’argento regalando alle coppie l’illusione della felicità. Io che di notte sono il vostro fratello, finito sotto un ponte inseguendo una fiamma che ha nutrito il mio disperato bisogno di luce. Io, stupida falena convinta per un momento d’essere migliore di Icaro.",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Convinta per un momento d’essere migliore di voi.",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Convinta per un momento che non ci fosse più differenza.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“Alta Veglia”",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h3"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura degli artisti ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "Giancarlo Guadagno e Ilaria Spagnuolo",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h4"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Installata presso gli spazi della Ferriera di Morigerati",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h5"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Innalzata tra alberi e silenzi, questa struttura si erge come una piccola torre di osservazione immersa nel paesaggio naturale. Interamente autocostruita con il legno, scelto per dialogare in modo armonioso con l’ambiente circostante, l’opera si presenta come una presenza leggera e rispettosa del luogo che la ospita. Aperta verso il cielo, accoglie lo sguardo e l’aria, diventando spazio di contemplazione e ascolto. L’architettura è rivestita da teli leggeri, realizzati con  la tecnica della cianotipia botanica: foglie, rami, e altri frammenti raccolti nei dintorni hanno lasciato la loro impronta blu, come memorie vegetali impresse dalla luce. Ogni telo è un frammento del luogo, restituito in forma poetica e sospesa. Dalla sommità, a qualche metro dal suolo, si apre una vista sul fiume e sulla vegetazione circostante. Di giorno, l’opera invita a seguire il movimento dell’acqua e il mutare della luce tra le fronde; di notte, diventa un punto privilegiato per osservare le stelle, in un dialogo silenzioso tra terra e cielo.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "“SPORE - pratiche di ascolto per un’ecologia diffusa”",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h3"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 8,
+									"mode": "normal",
+									"style": "",
+									"text": "Opera a cura dell’artista ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 9,
+									"mode": "normal",
+									"style": "",
+									"text": "Massimo Ferrara",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h4"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Fruibile lungo le strade di Morigerati tramite l’utilizzo di smartphone e cuffie auricolari",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "heading",
+							"version": 1,
+							"tag": "h5"
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Un’opera di Sound Art, una pratica di ascolto immersivo che si muove nello spazio come un organismo poroso. Non è orientarsi o interpretare: è stare dentro. Non guida, non insegna. Sospende. Il paesaggio sonoro che si esplora è composto da tre ambienti: Antropofonia - il rumore della presenza: i suoni dell’attività umana. Non sono rumori ma testimonianze. Motori, passi, voci, strutture, frizioni: l’umano si fa suono, si fa sistema. Ascoltarle per riconoscere la propria incidenza sul mondo, riconoscersi co-autori del paesaggio. Biofonia - il ritmo dell’altro vivente: insetti, uccelli, animali, vegetali. L’ascolto qui è simbiosi, è permeabilità e richiede attenzione sottile. Un invito a decentrarsi, a percepirsi come un corpo tra altri corpi, tutti agenti, tutti rispondenti. Geofonia - il corpo del mondo: i suoni non biologici: vento, acqua, pietra, elettricità. Qui si fa esperienza del paesaggio come materia attiva, corpo che suona, vibra e partecipa. È come sintonizzarsi con una memoria più antica, più lenta. “Spore” propone un’esperienza dove l’ascolto diventa strumento di relazione ecologica, di consapevolezza sensoriale e politica.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1
+				}
+			}
+		}
+	},
+	{
+		"_id": "68260a09c67065dd5adb77b1",
+		"createdAt": "2025-05-15T15:36:41.157Z",
+		"updatedAt": "2025-05-31T09:14:59.695Z",
+		"nome": "Preparazione a \"Design per la Campagna\"",
+		"data_inizio": "2025-04-22T12:00:00.000Z",
+		"data_fine": "2025-04-27T12:00:00.000Z",
+		"deadline_iscrizione": "2025-04-15T12:00:00.000Z",
+		"indirizzo": "Morigerati",
+		"mostra_dettagli": true,
+		"mostra_pulsante_iscrizione": false,
+		"programma": [
+			{
+				"programma": {
+					"it": "PROGRAMMA DELLA RESIDENZA"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "22 aprile",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Arrivo dei partecipanti",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Visita alla sede dell’Ecomuseo e al Museo Etnografico",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "23 - 24 aprile",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Incontri e sopralluoghi presso i produttori locali",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "25 - 26 aprile",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Co-progettazione dei dispositivi",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								},
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 1,
+											"mode": "normal",
+											"style": "",
+											"text": "27 aprile",
+											"type": "text",
+											"version": 1
+										},
+										{
+											"type": "linebreak",
+											"version": 1
+										},
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Presentazione dei dispositivi progettati e saluti finali",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 1,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1,
+							"textFormat": 1
+						}
+					}
+				},
+				"id": "68260a152fac5ae0f87dd8c5"
+			}
+		],
+		"esperti": [
+			{
+				"nome": "Giancarlo Guadagno e Ilaria Spagnuolo",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Giancarlo Guadagno e Ilaria Spagnuolo, rispettivamente architetto e designer, uniscono le loro forze nel 2016 per dare vita a un laboratorio creativo che esplora il confine tra arte, architettura e ambiente, progettando delle opere di arte pubblica che mettono in relazione estetica, natura e sostenibilità.  La loro collaborazione si distingue per un'approfondita ricerca sui materiali, privilegiando quelli a basso impatto ambientale. Ogni progetto è un'opportunità per raccontare storie locali attraverso installazioni che dialogano con il contesto urbano e naturale, opere che invitano le comunità a riflettere sulla propria relazione con l’ambiente.",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "68260a222fac5ae0f87dd8c6"
+			}
+		],
+		"slug": "residenza---preparazione-a-design-per-la-campagna",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0,
+		"abstract": "Incontri e sopralluoghi presso le aziende del territorio.",
+		"descrizione": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Incontri e sopralluoghi presso le aziende del territorio",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " per conoscerne le realtà e i sistemi produttivi - finalizzati alla ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "progettazione di dispositivi",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " che possano accorciare le distanze tra produttori e consumatori, in un’",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "ottica sociale e sostenibile",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": ".",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "A cura di",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Giancarlo Guadagno e Ilaria Spagnuolo",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - designer e architetto dell’Ecomuseo Transluoghi.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "La residenza è gestita dall’Associazione L@S.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1,
+					"textFormat": 1
+				}
+			}
+		}
+	},
+	{
+		"_id": "68260a4fc67065dd5adb7823",
+		"createdAt": "2025-05-15T15:37:51.807Z",
+		"updatedAt": "2025-06-05T07:32:15.506Z",
+		"nome": "Preparazione al Film Documentario",
+		"data_inizio": "2025-05-26T12:00:00.000Z",
+		"data_fine": "2025-04-30T12:00:00.000Z",
+		"deadline_iscrizione": "2025-04-15T12:00:00.000Z",
+		"indirizzo": "Morigerati",
+		"mostra_dettagli": true,
+		"mostra_pulsante_iscrizione": false,
+		"programma": [],
+		"esperti": [],
+		"slug": "residenze---preparazione-al-film-documentario",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0,
+		"abstract": "Stesura del soggetto e della sceneggiatura del film prodotto dall'Ecomuseo.",
+		"descrizione": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Stesura del soggetto e della sceneggiatura",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " preliminari alla realizzazione del ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "film documentario",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " prodotto da Transluoghi - Ecomuseo del Bussento Contemporaneo.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "A cura di",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"type": "linebreak",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Daniele G. De Stefano",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": " - sociologo, regista e documentarista.",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Le residenze sono gestite dall’Associazione Zap!",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "justify",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1,
+					"textFormat": 1
+				}
+			}
+		}
+	},
+	{
+		"_id": "68260a78c67065dd5adb7862",
+		"createdAt": "2025-05-15T15:38:32.710Z",
+		"updatedAt": "2025-06-05T07:31:58.049Z",
+		"nome": "Urban Game | Kids edition",
+		"data_inizio": "2025-05-26T12:00:00.000Z",
+		"data_fine": "2025-05-28T12:00:00.000Z",
+		"deadline_iscrizione": "2025-05-04T12:00:00.000Z",
+		"indirizzo": "Morigerati",
+		"mostra_dettagli": true,
+		"mostra_pulsante_iscrizione": false,
+		"programma": [
+			{
+				"programma": {
+					"it": "9 MAGGIO | dalle 16:30 alle 19:30"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "SCOPRIAMO GLI ANIMALI E LE PIANTE del territorio insieme allo zoologo e guida naturalistica Arnaldo Iudici",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"id": "683ac03f7693037f889de8af"
+			},
+			{
+				"programma": {
+					"it": "10 MAGGIO | dalle 16:00 alle 19:00"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "I GIOCHI DELL'ECOMUSEO: completa l'album di figurine che ti regaleremo visitando insieme a noi i luoghi e le persone del paese",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "start",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"id": "683ac0477693037f889de8b1"
+			},
+			{
+				"programma": {
+					"it": "11 MAGGIO | dalle 10:00 alle 12:30"
+				},
+				"testo": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "ARTE IN PIAZZA: porta a casa un piccolo capolavoro realizzato da te",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"id": "683ac0547693037f889de8b3"
+			}
+		],
+		"esperti": [
+			{
+				"nome": "Arnaldo Iudici",
+				"biografia": {
+					"it": {
+						"root": {
+							"children": [
+								{
+									"children": [
+										{
+											"detail": 0,
+											"format": 0,
+											"mode": "normal",
+											"style": "",
+											"text": "Zoologo e guida naturalistica, ricercatore del progetto \"Valle della Lontra\".",
+											"type": "text",
+											"version": 1
+										}
+									],
+									"direction": "ltr",
+									"format": "",
+									"indent": 0,
+									"type": "paragraph",
+									"version": 1,
+									"textFormat": 0,
+									"textStyle": ""
+								}
+							],
+							"direction": "ltr",
+							"format": "",
+							"indent": 0,
+							"type": "root",
+							"version": 1
+						}
+					}
+				},
+				"progetti": [],
+				"organizzazioni": [],
+				"id": "68260a932fac5ae0f87dd8c8"
+			}
+		],
+		"slug": "residenza---urban-game--kids-edition",
+		"slugLock": true,
+		"meta": {},
+		"__v": 0,
+		"abstract": "Sperimentiamo insieme i giochi creati dall'Ecomuseo Transluoghi per conoscere meglio il patrimonio materiale e immateriale di Morigerati!",
+		"descrizione": {
+			"it": {
+				"root": {
+					"children": [
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "A TUTT* I BAMBINI E LE BAMBINE:",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "dal ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "9 ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "all'",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "11 maggio",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "VENITE A GIOCARE CON NOI!",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 1,
+							"textStyle": ""
+						},
+						{
+							"children": [
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "Sperimentiamo insieme i ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "giochi ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "creati dall'",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 1,
+									"mode": "normal",
+									"style": "",
+									"text": "Ecomuseo Transluoghi ",
+									"type": "text",
+									"version": 1
+								},
+								{
+									"detail": 0,
+									"format": 0,
+									"mode": "normal",
+									"style": "",
+									"text": "per conoscere meglio il patrimonio materiale e immateriale di Morigerati!",
+									"type": "text",
+									"version": 1
+								}
+							],
+							"direction": "ltr",
+							"format": "start",
+							"indent": 0,
+							"type": "paragraph",
+							"version": 1,
+							"textFormat": 0,
+							"textStyle": ""
+						}
+					],
+					"direction": "ltr",
+					"format": "",
+					"indent": 0,
+					"type": "root",
+					"version": 1,
+					"textFormat": 1
+				}
+			}
+		}
+	}
+]
