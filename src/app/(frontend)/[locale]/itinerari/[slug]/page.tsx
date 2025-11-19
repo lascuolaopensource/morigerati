@@ -9,6 +9,7 @@ import { Map } from '@/modules/components/map/map'
 import { RichText } from '@/modules/components/richtext'
 import { ServicesSection } from '@/modules/components/services-section'
 import { Video } from '@/modules/components/video'
+import { generateCollectionMetadataFactory } from '@/modules/seo'
 import { getRelation } from '@/modules/utils'
 import { getRecordBySlug, getSlug, PageWithSlugProps } from '@/modules/utils/server'
 
@@ -17,6 +18,8 @@ import { ItinerarioDetailCards } from './_partials'
 //
 
 export const dynamic = 'force-dynamic'
+
+export const generateMetadata = generateCollectionMetadataFactory('itinerari')
 
 export default async function Itinerario(pageProps: PageWithSlugProps) {
 	const slug = await getSlug(pageProps)

@@ -8,10 +8,13 @@ import { getRecordBySlug, getSlug, PageWithSlugProps } from '#/utils/server'
 import { getTranslations } from 'next-intl/server'
 
 import { ContactsSection } from '@/modules/components/contacts-section'
+import { generateCollectionMetadataFactory } from '@/modules/seo'
 
 //
 
 export const dynamic = 'force-dynamic'
+
+export const generateMetadata = generateCollectionMetadataFactory('persone')
 
 export default async function Persona(pageProps: PageWithSlugProps) {
 	const slug = await getSlug(pageProps)

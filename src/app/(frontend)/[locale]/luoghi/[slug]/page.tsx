@@ -10,11 +10,14 @@ import { getTranslations } from 'next-intl/server'
 
 import { ContactsSection } from '@/modules/components/contacts-section'
 import { InfoSection } from '@/modules/components/info-section'
+import { generateCollectionMetadataFactory } from '@/modules/seo'
 import { Luoghi } from '@/payload-types'
 
 //
 
 export const dynamic = 'force-dynamic'
+
+export const generateMetadata = generateCollectionMetadataFactory('luoghi')
 
 export default async function Itinerario(pageProps: PageWithSlugProps) {
 	const slug = await getSlug(pageProps)

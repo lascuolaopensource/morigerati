@@ -5,6 +5,7 @@ import { Copertina } from '@/modules/components/copertina'
 import GridOverlay from '@/modules/components/grid-overlay'
 import { Map } from '@/modules/components/map/map'
 import { RichText } from '@/modules/components/richtext'
+import { generateGlobalMetadataFactory } from '@/modules/seo'
 import { getRelation, getRelations } from '@/modules/utils'
 
 import { HomeSection } from './_partials/home-section'
@@ -13,6 +14,10 @@ import { RecordsDisplay } from './_partials/records-display'
 //
 
 export const dynamic = 'force-dynamic'
+
+export const generateMetadata = generateGlobalMetadataFactory('home')
+
+//
 
 export default async function Page() {
 	const locale = await getLocale()

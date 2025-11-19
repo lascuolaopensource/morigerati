@@ -8,6 +8,7 @@ import { Gallery } from '@/modules/components/gallery'
 import { InfoSection } from '@/modules/components/info-section'
 import { RichText } from '@/modules/components/richtext'
 import { T } from '@/modules/components/t'
+import { generateCollectionMetadataFactory } from '@/modules/seo'
 import { formatDate } from '@/modules/utils'
 import { getRecordBySlug, getSlug, PageWithSlugProps } from '@/modules/utils/server'
 
@@ -18,6 +19,8 @@ import { ProgrammaSection } from './_partials/programma-section'
 //
 
 export const dynamic = 'force-dynamic'
+
+export const generateMetadata = generateCollectionMetadataFactory('residenze')
 
 export default async function ResidenzaSlug(props: PageWithSlugProps) {
 	const slug = await getSlug(props)
