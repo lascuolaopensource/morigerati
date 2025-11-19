@@ -81,5 +81,8 @@
 	},
 	"persone": {
 		"backButton": "All people"
+	},
+	"articoli": {
+		"backButton": "All articles"
 	}
 }

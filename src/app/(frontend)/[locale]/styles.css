@@ -134,3 +134,35 @@
 	--font-transluoghi-pixels: var(--font-transluoghi-pixels);
 	--font-sans: var(--font-transinstrument);
 }
+
+/* Collection colors */
+
+.default {
+	--cc-main: black;
+	--cc-main-foreground: white;
+}
+
+.itinerari {
+	--cc-main: var(--color-itinerari);
+	--cc-main-foreground: var(--color-itinerari-dark);
+}
+
+.luoghi {
+	--cc-main: var(--color-luoghi);
+	--cc-main-foreground: var(--color-luoghi-dark);
+}
+
+.persone {
+	--cc-main: var(--color-persone);
+	--cc-main-foreground: var(--color-persone-dark);
+}
+
+.residenze {
+	--cc-main: var(--color-residenze);
+	--cc-main-foreground: var(--color-residenze-dark);
+}
+
+.articoli {
+	--cc-main: var(--color-articoli);
+	--cc-main-foreground: var(--color-articoli-dark);
+}
