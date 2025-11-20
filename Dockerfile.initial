@@ -75,5 +75,5 @@ ENV PORT 3000
 
 # Run seed (ONLY for first deploy - remove this line after first deploy)
 # Then run migrations, then start the app
-CMD sh -c "corepack enable pnpm && pnpm db:seed && pnpm payload migrate && pnpm start"
+CMD sh -c "corepack enable pnpm && pnpm payload migrate && pnpm db:seed && pnpm start"
 
