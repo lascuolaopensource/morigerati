@@ -1,3 +1,4 @@
+import { T } from '@/modules/components/t'
 import { getRelation } from '@/modules/utils'
 import { getDb } from '@/modules/utils/server'
 
@@ -16,6 +17,7 @@ export default async function Page() {
 
 	return (
 		<div>
+			<T tag="h1">Transluoghigram</T>
 			<ul className="space-y-2">
 				{posts.docs.map((post) => (
 					<li key={post.id}>

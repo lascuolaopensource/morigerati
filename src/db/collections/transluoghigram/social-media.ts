@@ -4,7 +4,7 @@ import { CollectionGroup, imageMimeTypes, imageSizes, videoMimeTypes } from '../
 
 //
 
-export const SocialMedia: CollectionConfig = {
+export const SocialMedia = {
 	slug: 'social-media',
 
 	admin: {
@@ -27,4 +27,4 @@ export const SocialMedia: CollectionConfig = {
 	},
 
 	fields: [],
-}
+} satisfies CollectionConfig
