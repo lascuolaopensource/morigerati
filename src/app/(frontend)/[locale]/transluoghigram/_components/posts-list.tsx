@@ -5,6 +5,7 @@ import useInfiniteScroll from 'react-infinite-scroll-hook'
 
 import type { SocialPost } from '@/payload-types'
 
+import { PixelBorder } from '@/modules/components/pixel-border'
 import { getRelation } from '@/modules/utils'
 
 import { useLoadItems } from '../_hooks'
@@ -37,22 +38,21 @@ export function PostsList(props: PostsListProps) {
 
 	return (
 		<>
-			<ul className="space-y-2">
+			<ul>
 				{items.map((post) => (
 					<li key={post.id}>
 						<Post post={post} owner={getRelation(post.owner)?.name ?? 'TR'} />
+						<PixelBorder className="bg-white" />
 					</li>
 				))}
 			</ul>
 
 			{(loading || hasNextPage) && (
-				<div ref={sentryRef} className="flex justify-center py-4">
-					{loading && (
-						<p className="text-gray-500 flex items-center gap-2">
-							<Loader2Icon className="size-4 animate-spin" />
-							<span>Loading...</span>
-						</p>
-					)}
+				<div ref={sentryRef} className="flex justify-center py-4 text-black bg-white">
+					<p className="flex items-center gap-2">
+						<Loader2Icon className="size-4 animate-spin" />
+						<span>Loading...</span>
+					</p>
 				</div>
 			)}
 

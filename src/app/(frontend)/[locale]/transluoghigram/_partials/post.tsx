@@ -22,7 +22,7 @@ export function Post(props: PostProps) {
 	const isImage = imageMimeTypes.includes(media?.mimeType ?? '')
 
 	return (
-		<div className={cn('border rounded-md', size === 'sm' ? 'p-3 space-y-3' : 'p-4 space-y-4')}>
+		<div className={cn('bg-white', size === 'sm' ? 'p-3 space-y-3' : 'p-4 space-y-4')}>
 			<div className=" flex items-center justify-between gap-2">
 				<div className="flex items-center gap-2">
 					<div
