@@ -1,7 +1,7 @@
-import { localization } from '#/i18n'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { it } from '@payloadcms/translations/languages/it'
+import { localization } from '#/i18n'
 import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'

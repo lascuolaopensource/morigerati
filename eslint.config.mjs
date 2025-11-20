@@ -32,19 +32,20 @@ const eslintConfig = [
 		},
 	},
 	{
-		ignores: ['.next/'],
+		ignores: [
+			'.next/',
+			'src/app/(payload)/',
+			'src/modules/components/shadcn/',
+			'src/db/seed/',
+			'src/db/migrations/',
+		],
 	},
 	{
 		plugins: {
 			perfectionist,
 		},
 		rules: {
-			'perfectionist/sort-imports': [
-				'error',
-				{
-					ignorePaths: ['.next/', 'src/app/(payload)/', 'src/modules/components/shadcn/'],
-				},
-			],
+			'perfectionist/sort-imports': 'error',
 		},
 	},
 ]
