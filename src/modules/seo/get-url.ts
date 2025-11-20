@@ -1,3 +1,3 @@
 export function getServerSideURL() {
-	return process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+	return process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'
 }
