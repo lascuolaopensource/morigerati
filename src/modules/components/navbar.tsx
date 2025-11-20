@@ -48,6 +48,10 @@ export function Navbar() {
 			href: '/articoli',
 			title: t('navigation.articles'),
 		},
+		{
+			href: '/transluoghigram',
+			title: t('navigation.feed'),
+		},
 	]
 
 	const classes = getSectionDisplayData(pathnameToSection(pathname))

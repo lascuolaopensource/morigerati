@@ -1,5 +1,6 @@
 'use client'
 
+import { Loader2Icon } from 'lucide-react'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 
 import type { SocialPost } from '@/payload-types'
@@ -46,7 +47,12 @@ export function PostsList(props: PostsListProps) {
 
 			{(loading || hasNextPage) && (
 				<div ref={sentryRef} className="flex justify-center py-4">
-					{loading && <span className="text-gray-500">Loading...</span>}
+					{loading && (
+						<p className="text-gray-500 flex items-center gap-2">
+							<Loader2Icon className="size-4 animate-spin" />
+							<span>Loading...</span>
+						</p>
+					)}
 				</div>
 			)}
 
