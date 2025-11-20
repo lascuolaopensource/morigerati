@@ -1,11 +1,10 @@
 import { ClassValue } from 'clsx'
-import Image, { ImageProps } from 'next/image'
+import { ImageProps } from 'next/image'
 
 import { Media } from '@/payload-types'
 
 import { getRelation, Optional, Relation } from '../utils'
-import { ImagePlaceholder } from './image-placeholder'
-import { cn } from './shadcn/lib/utils'
+import { ImageWithFallback } from './image-with-fallback'
 
 //
 
@@ -23,15 +22,16 @@ export function MediaWithFallback(props: Props) {
 	const { className, noPlaceholderPulse, media, size = 'medium', alt, ...restProps } = props
 
 	const record = getRelation(media)
-	const src = record?.sizes?.[size]?.url
+	const src = record?.sizes?.[size]?.url ?? undefined
 	const actualAlt = alt ?? record?.alt
 
 	return (
-		<div className={cn('relative overflow-hidden', className)}>
-			<ImagePlaceholder noPulse={noPlaceholderPulse} />
-			{src && (
-				<Image src={src} alt={actualAlt ?? ''} fill {...restProps} className="object-cover" />
-			)}
-		</div>
+		<ImageWithFallback
+			src={src}
+			alt={actualAlt}
+			className={className}
+			noPlaceholderPulse={noPlaceholderPulse}
+			{...restProps}
+		/>
 	)
 }
