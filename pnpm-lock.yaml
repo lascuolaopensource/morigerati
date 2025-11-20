@@ -26,6 +26,9 @@ importers:
       '@payloadcms/richtext-lexical':
         specifier: 3.64.0
         version: 3.64.0(@faceless-ui/modal@3.0.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@faceless-ui/scroll-info@2.0.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@payloadcms/next@3.64.0(@types/react@19.1.8)(graphql@16.12.0)(monaco-editor@0.54.0)(next@15.4.7(@babel/core@7.28.5)(@playwright/test@1.54.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.64.0(graphql@16.12.0)(typescript@5.7.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.7.3))(@types/react@19.1.8)(monaco-editor@0.54.0)(next@15.4.7(@babel/core@7.28.5)(@playwright/test@1.54.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.64.0(graphql@16.12.0)(typescript@5.7.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.7.3)(yjs@13.6.27)
+      '@payloadcms/sdk':
+        specifier: ^3.64.0
+        version: 3.64.0(graphql@16.12.0)(typescript@5.7.3)
       '@payloadcms/storage-s3':
         specifier: 3.64.0
         version: 3.64.0(@types/react@19.1.8)(monaco-editor@0.54.0)(next@15.4.7(@babel/core@7.28.5)(@playwright/test@1.54.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.64.0(graphql@16.12.0)(typescript@5.7.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.7.3)
@@ -122,6 +125,9 @@ importers:
       react-dom:
         specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
+      react-infinite-scroll-hook:
+        specifier: ^6.0.1
+        version: 6.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-leaflet:
         specifier: ^5.0.0
         version: 5.0.0(leaflet@1.9.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1519,6 +1525,9 @@ packages:
       payload: 3.64.0
       react: ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
       react-dom: ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
+
+  '@payloadcms/sdk@3.64.0':
+    resolution: {integrity: sha512-g0IBmBbu0/39YIzalYj62Lk+2zWyDY8CwH3rWLhyTZJ9qugo99a+fgbew6T053T3dKPcRDnLNsIFsUiPX7ocVw==}
 
   '@payloadcms/storage-s3@3.64.0':
     resolution: {integrity: sha512-1ho618AWTSxtkOvKv2XTfo2WJXnuNdYIQ7L3jCzpwEDf1ASLg1/5Ml3wP1xvb+sp96GcHCu9Rzq4b6WBnLc3dQ==}
@@ -4691,6 +4700,18 @@ packages:
     peerDependencies:
       react: '>=16.13.1'
 
+  react-infinite-scroll-hook@6.0.1:
+    resolution: {integrity: sha512-5FtJnor4Zyd3uafHCzOlXFCuhFJ2ZzLm3d9XTKbvAN6A/SH+XNFo5IOFk/T1hV5AYy+vOZYoXeH4jkufFB2JVA==}
+    peerDependencies:
+      react: '>=19'
+      react-dom: '>=19'
+
+  react-intersection-observer-hook@4.0.1:
+    resolution: {integrity: sha512-iAic1y/ne0hHjtll6XFFGaq0CWNtukYOA3NXef5yT8TdsA8KdQJ8Ey5CcVWzXKIE9IOU+K9Z40+LXDqBPBdCqw==}
+    peerDependencies:
+      react: '>=19'
+      react-dom: '>=19'
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -7325,6 +7346,17 @@ snapshots:
       - supports-color
       - typescript
       - yjs
+
+  '@payloadcms/sdk@3.64.0(graphql@16.12.0)(typescript@5.7.3)':
+    dependencies:
+      payload: 3.64.0(graphql@16.12.0)(typescript@5.7.3)
+      qs-esm: 7.0.2
+      ts-essentials: 10.0.3(typescript@5.7.3)
+    transitivePeerDependencies:
+      - bufferutil
+      - graphql
+      - typescript
+      - utf-8-validate
 
   '@payloadcms/storage-s3@3.64.0(@types/react@19.1.8)(monaco-editor@0.54.0)(next@15.4.7(@babel/core@7.28.5)(@playwright/test@1.54.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.64.0(graphql@16.12.0)(typescript@5.7.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.7.3)':
     dependencies:
@@ -10826,6 +10858,17 @@ snapshots:
   react-image-crop@10.1.8(react@19.1.0):
     dependencies:
       react: 19.1.0
+
+  react-infinite-scroll-hook@6.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      react-intersection-observer-hook: 4.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+
+  react-intersection-observer-hook@4.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   react-is@16.13.1: {}
 

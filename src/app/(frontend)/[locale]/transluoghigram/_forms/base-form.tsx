@@ -6,6 +6,8 @@ import { AlertCircleIcon, Loader2Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useActionState, useEffect } from 'react'
 
+import { cn } from '@/modules/components/shadcn/lib/utils'
+
 import { FormAction } from './types'
 
 //
@@ -16,6 +18,7 @@ export type BaseFormProps = {
 	submitButton: React.ReactNode
 	onSuccess?: () => void
 	preventRefreshOnSuccess?: boolean
+	className?: string
 }
 
 export function BaseForm(props: BaseFormProps) {
@@ -25,6 +28,7 @@ export function BaseForm(props: BaseFormProps) {
 		submitButton,
 		onSuccess,
 		preventRefreshOnSuccess = false,
+		className,
 	} = props
 
 	const [state, action, pending] = useActionState(actionFn, undefined)
@@ -38,7 +42,7 @@ export function BaseForm(props: BaseFormProps) {
 	}, [state, onSuccess, preventRefreshOnSuccess, router])
 
 	return (
-		<form action={action} className="flex flex-col gap-6 w-full">
+		<form action={action} className={cn('flex flex-col gap-6 w-full', className)}>
 			{children}
 
 			{state?.type === 'error' && (

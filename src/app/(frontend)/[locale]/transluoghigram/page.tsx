@@ -1,30 +1,25 @@
 import { T } from '@/modules/components/t'
-import { getRelation } from '@/modules/utils'
 import { getDb } from '@/modules/utils/server'
 
-import { Post } from './_partials/post'
+import { PostsList } from './_components/posts-list'
 
 //
 
 export default async function Page() {
 	const db = await getDb()
 
+	// Fetch initial page for SSR
 	const posts = await db.find({
 		collection: 'social-post',
 		sort: '-createdAt',
 		depth: 2,
+		limit: 10,
 	})
 
 	return (
-		<div>
+		<div className="space-y-6">
 			<T tag="h1">Transluoghigram</T>
-			<ul className="space-y-2">
-				{posts.docs.map((post) => (
-					<li key={post.id}>
-						<Post post={post} owner={getRelation(post.owner)?.name ?? 'TR'} />
-					</li>
-				))}
-			</ul>
+			<PostsList initialData={posts.docs} />
 		</div>
 	)
 }
