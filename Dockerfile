@@ -3,19 +3,17 @@
 
 FROM node:22.17.0-alpine AS base
 
+# Make pnpm available in all subsequent stages
+RUN corepack enable pnpm
+
 # Install dependencies only when needed
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+# Install dependencies with pnpm
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -28,12 +26,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+RUN pnpm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -46,23 +39,8 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy package files first (needed for installing dependencies)
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/pnpm-lock.yaml* ./pnpm-lock.yaml*
-COPY --from=builder /app/yarn.lock* ./yarn.lock*
-COPY --from=builder /app/package-lock.json* ./package-lock.json*
-
-# Install production dependencies for running migrations
-RUN corepack enable pnpm
-RUN \
-  if [ -f yarn.lock ]; then yarn install --production --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci --only=production; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile --prod; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
-# Set ownership for node_modules (will be done as root before switching to nextjs)
-RUN chown -R nextjs:nodejs /app/node_modules || true
+# Copy runtime dependencies from the builder image
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 
 # Copy public folder
 COPY --from=builder /app/public ./public
