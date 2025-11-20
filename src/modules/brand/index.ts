@@ -69,7 +69,7 @@ export function isSection(section: string): section is Section {
 
 export function pathnameToSection(pathname: string): Section {
 	return (
-		MAIN_COLLECTIONS.find((section) => pathname.split('/').at(1)?.includes(section)) ?? 'default'
+		MAIN_COLLECTIONS.find((section) => pathname.split('/').at(1)?.startsWith(section)) ?? 'default'
 	)
 }
 

@@ -26,10 +26,10 @@ export default async function RootLayout(props: Props) {
 
 	return (
 		<html lang="en" className={cn(transluoghiPixelsFont.variable, transinstrumentFont.variable)}>
-			<body>
+			<body className="min-h-screen flex flex-col">
 				<NextIntlClientProvider>
 					<Navbar />
-					<main>{children}</main>
+					<main className="flex-1">{children}</main>
 					<Footer />
 				</NextIntlClientProvider>
 			</body>

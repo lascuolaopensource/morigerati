@@ -1,6 +1,7 @@
 import { Video as VideoType } from '@/payload-types'
 
 import { getRelation, Optional, Relation } from '../utils'
+import { VideoPlayer } from './video-player'
 
 //
 
@@ -14,13 +15,5 @@ export function Video(props: Props) {
 	const record = getRelation(video)
 	if (!record || !record.url) return null
 
-	return (
-		<video
-			className="w-full rounded-md overflow-hidden border-2 border-black"
-			playsInline
-			controls={true}
-		>
-			<source src={record.url} />
-		</video>
-	)
+	return <VideoPlayer url={record.url} />
 }
