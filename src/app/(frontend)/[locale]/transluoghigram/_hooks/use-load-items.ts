@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import type { SocialPost } from '@/payload-types'
 
@@ -38,18 +38,37 @@ export function useLoadItems(options: UseLoadItemsOptions = {}): UseLoadItemsRet
 	const [page, setPage] = useState(startingPage)
 	const [initialLoad, setInitialLoad] = useState(!initialData)
 
-	const loadMore = useCallback(async () => {
-		// Guard against concurrent requests and no more pages
-		if (loading || !hasNextPage) return
+	// Store values in refs to avoid recreating loadMore callback
+	const loadingRef = useRef(loading)
+	const hasNextPageRef = useRef(hasNextPage)
+	const pageRef = useRef(page)
+	const optionsRef = useRef({ limit, sort, depth })
 
+	// Keep refs in sync with state
+	useEffect(() => {
+		loadingRef.current = loading
+		hasNextPageRef.current = hasNextPage
+		pageRef.current = page
+		optionsRef.current = { limit, sort, depth }
+	}, [loading, hasNextPage, page, limit, sort, depth])
+
+	// loadMore is now stable - never changes! (empty dependency array)
+	const loadMore = useCallback(async () => {
+		// Read from refs instead of state to get latest values
+		if (loadingRef.current || !hasNextPageRef.current) return
+
+		loadingRef.current = true
 		setLoading(true)
 		setError(null)
 
 		try {
+			const currentPage = pageRef.current
+			const { limit, sort, depth } = optionsRef.current
+
 			const response = await sdk.find({
 				collection: 'social-post',
 				limit,
-				page,
+				page: currentPage,
 				sort,
 				depth,
 			})
@@ -60,21 +79,31 @@ export function useLoadItems(options: UseLoadItemsOptions = {}): UseLoadItemsRet
 				const newItems = response.docs.filter((item) => !existingIds.has(item.id))
 				return [...prevItems, ...newItems]
 			})
-			setHasNextPage(response.hasNextPage ?? false)
-			setPage((prevPage) => prevPage + 1)
+
+			const nextPage = response.hasNextPage ?? false
+			hasNextPageRef.current = nextPage
+			setHasNextPage(nextPage)
+
+			setPage((prevPage) => {
+				const newPage = prevPage + 1
+				pageRef.current = newPage
+				return newPage
+			})
 		} catch (err) {
 			setError(err instanceof Error ? err : new Error('Unknown error'))
 		} finally {
+			loadingRef.current = false
 			setLoading(false)
 		}
-	}, [loading, hasNextPage, page, depth, limit, sort])
+	}, [])
 
 	useEffect(() => {
 		if (initialLoad) {
 			loadMore()
 			setInitialLoad(false)
 		}
-	}, [initialLoad, loadMore])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [initialLoad])
 
 	return {
 		loading,
