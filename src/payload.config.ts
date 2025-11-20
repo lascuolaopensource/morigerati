@@ -63,8 +63,8 @@ export default buildConfig({
 		pool: {
 			connectionString: process.env.DATABASE_URI || '',
 		},
-		// push: false,
-		// migrationDir: path.resolve(dirname, 'db/migrations'),
+		push: false,
+		migrationDir: path.resolve(dirname, 'db/migrations'),
 	}),
 	sharp,
 	plugins: [s3(), seo()],
