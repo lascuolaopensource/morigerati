@@ -70,5 +70,5 @@ EXPOSE 3000
 ENV PORT 3000
 
 # Use entrypoint to run migrations before starting the app
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
+# ENTRYPOINT ["/app/docker-entrypoint.sh"]
 CMD ["node", "server.js"]
