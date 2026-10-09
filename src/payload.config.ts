@@ -23,6 +23,7 @@ import { Footer } from '@/db/globals/footer'
 import { Home } from '@/db/globals/home'
 import { MobilitaSostenibile } from '@/db/globals/mobilita-sostenibile'
 import { Testi } from '@/db/globals/testi'
+import { migrations } from '@/db/migrations'
 
 import { seo } from './modules/seo'
 import { getPaths } from './modules/utils/node'
@@ -65,6 +66,8 @@ export default buildConfig({
 		},
 		push: false,
 		migrationDir: path.resolve(dirname, 'db/migrations'),
+		// Run pending migrations on boot in production (Coolify / Docker).
+		prodMigrations: migrations,
 	}),
 	sharp,
 	plugins: [s3(), seo()],
