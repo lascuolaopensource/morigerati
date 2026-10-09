@@ -24,6 +24,9 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
+# Coolify: set build-time env SKIP_TYPECHECK=1 to skip tsc/eslint (faster test deploys)
+ARG SKIP_TYPECHECK=0
+ENV SKIP_TYPECHECK=$SKIP_TYPECHECK
 RUN pnpm run build
 
 # Production image: Next standalone + static assets
