@@ -49,9 +49,9 @@ export function Button(props: Props) {
 	// next-intl Link prefixes the locale onto relative hrefs ("/api/..." → "/it/api/..."),
 	// which breaks file downloads and other non-page API routes.
 	if (rest.download != null || isFileOrApiHref(rest.href)) {
-		const { href, ...anchorRest } = rest
+		const href = typeof rest.href === 'string' ? rest.href : undefined
 		return (
-			<a className={classes} href={typeof href === 'string' ? href : undefined} {...anchorRest}>
+			<a className={classes} href={href} download={rest.download} target={rest.target} rel={rest.rel}>
 				{content}
 			</a>
 		)
