@@ -1,4 +1,5 @@
 import * as L from 'leaflet'
+import 'leaflet-gpx'
 import { useMap } from 'react-leaflet'
 
 //
@@ -10,7 +11,7 @@ type Props = {
 export function GpxTracks(props: Props) {
 	const { urls } = props
 	const map = useMap()
-	addGpxTracksToMap(urls, map)
+	if (urls.length > 0) addGpxTracksToMap(urls, map)
 	return null
 }
 
@@ -25,8 +26,14 @@ type LoadGpxTrackOptions = {
 
 function resolveGpxTrack(props: LoadGpxTrackOptions): Promise<L.GPX> {
 	const { url, layerGroup, options, onClick = () => {} } = props
+	// leaflet-gpx assigns the constructor to the global Leaflet object.
+	// Turbopack's `import * as L` snapshot does not include that later property.
+	const GPX = (window.L as typeof L | undefined)?.GPX
+	if (typeof GPX !== 'function') {
+		return Promise.reject(new TypeError('L.GPX is not a constructor'))
+	}
 	return new Promise((resolve) => {
-		new L.GPX(url, options)
+		new GPX(url, options)
 			.on('loaded', (e) => {
 				resolve(e.target as L.GPX)
 			})
