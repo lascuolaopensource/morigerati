@@ -17,6 +17,11 @@ type Props = ComponentProps<typeof Link> & {
 	hideArrow?: boolean
 }
 
+function isFileOrApiHref(href: Props['href']): boolean {
+	if (typeof href !== 'string') return false
+	return href.startsWith('/api/') || href.startsWith('http://') || href.startsWith('https://')
+}
+
 export function Button(props: Props) {
 	const { children, className, color, size = 'md', hideArrow = false, ...rest } = props
 	const { className: themeClassName } = getSectionDisplayData(color)
@@ -34,10 +39,27 @@ export function Button(props: Props) {
 		className,
 	)
 
-	return (
-		<Link className={classes} {...rest}>
+	const content = (
+		<>
 			{children}
 			{!hideArrow && <ArrowRight size={16} />}
+		</>
+	)
+
+	// next-intl Link prefixes the locale onto relative hrefs ("/api/..." → "/it/api/..."),
+	// which breaks file downloads and other non-page API routes.
+	if (rest.download != null || isFileOrApiHref(rest.href)) {
+		const { href, ...anchorRest } = rest
+		return (
+			<a className={classes} href={typeof href === 'string' ? href : undefined} {...anchorRest}>
+				{content}
+			</a>
+		)
+	}
+
+	return (
+		<Link className={classes} {...rest}>
+			{content}
 		</Link>
 	)
 }
