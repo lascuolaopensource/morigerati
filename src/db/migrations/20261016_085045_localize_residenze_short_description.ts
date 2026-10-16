@@ -1,5 +1,10 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
+/**
+ * Schema change from `payload migrate:create`.
+ * Data copy steps added so existing residenze keep their short_description
+ * (plain ADD ... NOT NULL would fail or wipe values on a populated DB).
+ */
 export async function up({ db }: MigrateUpArgs): Promise<void> {
 	await db.execute(sql`
 		ALTER TABLE "residenze_locales" ADD COLUMN "short_description" varchar;
