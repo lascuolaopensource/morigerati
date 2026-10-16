@@ -130,13 +130,10 @@ export interface Config {
     'mobilita-sostenibile': MobilitaSostenibileSelect<false> | MobilitaSostenibileSelect<true>;
   };
   locale: 'it' | 'en';
-  user:
-    | (User & {
-        collection: 'users';
-      })
-    | (SocialAccount & {
-        collection: 'social-account';
-      });
+  widgets: {
+    collections: CollectionsWidget;
+  };
+  user: User | SocialAccount;
   jobs: {
     tasks: unknown;
     workflows: unknown;
@@ -191,6 +188,7 @@ export interface User {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   sessions?:
@@ -201,6 +199,7 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -209,6 +208,7 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -278,6 +278,7 @@ export interface Media {
 export interface Video {
   id: number;
   alt: string;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -296,6 +297,7 @@ export interface Video {
  */
 export interface Tracciati {
   id: number;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -735,6 +737,7 @@ export interface SocialPost {
  */
 export interface SocialMedia {
   id: number;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -812,6 +815,7 @@ export interface SocialAccount {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   sessions?:
@@ -822,6 +826,7 @@ export interface SocialAccount {
       }[]
     | null;
   password?: string | null;
+  collection: 'social-account';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -959,6 +964,7 @@ export interface UsersSelect<T extends boolean = true> {
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
+  resetPasswordRequestedAt?: T;
   loginAttempts?: T;
   lockUntil?: T;
   sessions?:
@@ -975,6 +981,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1057,6 +1064,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface VideoSelect<T extends boolean = true> {
   alt?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1074,6 +1082,7 @@ export interface VideoSelect<T extends boolean = true> {
  * via the `definition` "tracciati_select".
  */
 export interface TracciatiSelect<T extends boolean = true> {
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1302,6 +1311,7 @@ export interface SocialPostSelect<T extends boolean = true> {
  * via the `definition` "social-media_select".
  */
 export interface SocialMediaSelect<T extends boolean = true> {
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1392,6 +1402,7 @@ export interface SocialAccountSelect<T extends boolean = true> {
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
+  resetPasswordRequestedAt?: T;
   loginAttempts?: T;
   lockUntil?: T;
   sessions?:
@@ -1884,6 +1895,16 @@ export interface MobilitaSostenibileSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "collections_widget".
+ */
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

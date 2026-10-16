@@ -6,12 +6,9 @@ const skipTypecheck = process.env.SKIP_TYPECHECK === '1'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	output: 'standalone', // Uncomment for optimized Dockerfile
-	// Set SKIP_TYPECHECK=1 at build time (Coolify build env) to skip tsc/eslint during `next build`.
+	// Set SKIP_TYPECHECK=1 at build time (Coolify build env) to skip tsc during `next build`.
 	typescript: {
 		ignoreBuildErrors: skipTypecheck,
-	},
-	eslint: {
-		ignoreDuringBuilds: skipTypecheck,
 	},
 	webpack: (webpackConfig) => {
 		webpackConfig.resolve.extensionAlias = {
@@ -21,6 +18,12 @@ const nextConfig = {
 		}
 
 		return webpackConfig
+	},
+	// Leaflet's default-icon CSS uses the webpack `~` prefix, which Turbopack does not resolve.
+	turbopack: {
+		resolveAlias: {
+			'~*': '*',
+		},
 	},
 }
 
